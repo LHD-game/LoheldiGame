@@ -15,5 +15,4 @@ public class CardGameStartButton : MonoBehaviour
         CardGameManager.GameStart = true;
         WelcomePanel.SetActive(false);
     }
-
 }

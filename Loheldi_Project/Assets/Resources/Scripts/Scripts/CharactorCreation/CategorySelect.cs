@@ -22,12 +22,12 @@ public class CategorySelect : MonoBehaviour
 
     void Start()
     {
-        Buttons1 = Skin.transform.FindChild("Buttons").gameObject;
-        Buttons2 = Eye.transform.FindChild("Buttons").gameObject;
-        Buttons3 = Mouth.transform.FindChild("Buttons").gameObject;
-        Buttons4 = Hair.transform.FindChild("Buttons").gameObject;
-        Buttons5 = H_Color.transform.FindChild("Buttons").gameObject;
-        Buttons6 = Accessory.transform.FindChild("Buttons").gameObject;
+        Buttons1 = Skin.transform.Find("Buttons").gameObject;
+        Buttons2 = Eye.transform.Find("Buttons").gameObject;
+        Buttons3 = Mouth.transform.Find("Buttons").gameObject;
+        Buttons4 = Hair.transform.Find("Buttons").gameObject;
+        Buttons5 = H_Color.transform.Find("Buttons").gameObject;
+        Buttons6 = Accessory.transform.Find("Buttons").gameObject;
         PositionReset();
 
         Category = 6;

@@ -230,7 +230,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.9835481, b: 0.9386792, a: 1}
+  m_Color: {r: 0.6132076, g: 0.5590263, b: 0.46511215, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -512,8 +512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e18ff78b865ae043ae3e04230fa4dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerBool: 0
 --- !u!850595691 &1543923676
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1087,14 +1085,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardList:
-  - {fileID: 6299826136024434794, guid: 04dbf366d73a3be4f894f06c011e2429, type: 3}
-  - {fileID: 6294825678006342751, guid: f3116d5801841cf408e324c8562f0c22, type: 3}
-  - {fileID: 5661214406466621796, guid: bbb8246fdbfe6ec4eb9f009d1d138fd3, type: 3}
-  - {fileID: 6060784333668782370, guid: f687c05867735e542828152ef2a863b6, type: 3}
-  - {fileID: 5181872162629245909, guid: 43dd7598d402cd347bea066d55298f68, type: 3}
-  - {fileID: 7974976949646806466, guid: 54062090bd10d924c8547e24c186c391, type: 3}
-  - {fileID: 1648320980988704424, guid: 4b092bf5d11357c4fa2bf521e5ee5ec4, type: 3}
-  - {fileID: 489165299959798885, guid: a17349bb95a9194418a6b777adda9ff2, type: 3}
+  - {fileID: 7965422788600620847, guid: 1a13ea4c69ecfad4f899d1646cb689c3, type: 3}
+  - {fileID: 9180477271026696960, guid: f776f4a551768714fa5c4c5636c9f271, type: 3}
+  - {fileID: 892780986717608313, guid: 0775cb9108b39da439c06d233bd3634a, type: 3}
+  - {fileID: 550671151971724340, guid: 58c2467ee7359f6438ba7ea69f2d6b44, type: 3}
+  - {fileID: 723423255203190131, guid: a1c989733540cbf44afebe81bce5500b, type: 3}
+  - {fileID: 2422149304021191854, guid: 8a1b489939016a44fb9a826a38f8ef89, type: 3}
+  - {fileID: 7405623309684254488, guid: 486e47ddbe5763c44a107325c5f81cce, type: 3}
+  - {fileID: 1892981192816857480, guid: f1562cf2766f80243a4ca7ea1c64f5ea, type: 3}
   - {fileID: 3195716360712532393, guid: abd5d06bd263ade438bee14f2f818122, type: 3}
   - {fileID: 257786760565805758, guid: 1b74ef30df520ff43ac1a222be813d2d, type: 3}
   - {fileID: 3387667016089397254, guid: 0028fc31d90d6ca42a4491ec45539a4f, type: 3}
@@ -1104,7 +1102,6 @@ MonoBehaviour:
   EndText: {fileID: 266946193}
   EndButton: {fileID: 1514606920}
   WelcomePanel: {fileID: 2890970586258874216}
-  Rule: {fileID: 0}
   timeText: {fileID: 1603852391}
 --- !u!1 &2100031874
 GameObject:
@@ -1983,7 +1980,6 @@ GameObject:
   - component: {fileID: 2890970586483451715}
   - component: {fileID: 2890970586483451714}
   - component: {fileID: 2890970586483451717}
-  - component: {fileID: 2890970586483451720}
   m_Layer: 5
   m_Name: HelpBtn
   m_TagString: Untagged
@@ -1991,21 +1987,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2890970586483451720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2890970586483451719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160f986b8272848409fa8d69d0e0afb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Title: {fileID: 0}
-  Rule: {fileID: 0}
-  StartButton: {fileID: 0}
 --- !u!222 &2890970586627972792
 CanvasRenderer:
   m_ObjectHideFlags: 0

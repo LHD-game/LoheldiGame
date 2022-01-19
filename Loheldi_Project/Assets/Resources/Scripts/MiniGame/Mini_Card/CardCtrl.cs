@@ -15,9 +15,12 @@ public class CardCtrl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && CardGameManager.state == CardGameManager.STATE.IDLE)
+        if (CardGameManager.state == CardGameManager.STATE.IDLE)
         {
-            CheckCard();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                CheckCard();
+            }
         }
     }
 

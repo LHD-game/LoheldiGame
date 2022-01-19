@@ -21,8 +21,6 @@ public class CardGameManager : MonoBehaviour
     public GameObject EndButton;
 
     public GameObject WelcomePanel;
-    public GameObject Rule;
-
 
     int cardCnt;
     int flipCnt = 0;
@@ -60,6 +58,7 @@ public class CardGameManager : MonoBehaviour
                     StartCoroutine(StageClear());
                     break;
                 case STATE.WAIT:
+                    Timer -= Time.deltaTime;
                     break;
                 case STATE.FAIL:
                     StageFail();
@@ -67,16 +66,30 @@ public class CardGameManager : MonoBehaviour
                 case STATE.IDLE:
                     Timer -= Time.deltaTime;
                     break;
-
             }
-            if (Timer <= 60f)
+            if (stageNum == 3)
             {
-                timeText.text = string.Format("시간: {0:N2}", Timer);
+                if (Timer <= 50f)
+                {
+                    timeText.text = string.Format("시간: {0:N2}", Timer);
+                }
+                else
+                {
+                    int a = 50;
+                    timeText.text = "시간: " + a;
+                }
             }
             else
             {
-                int a = 60;
-                timeText.text = "시간: " + a;
+                if (Timer <= 60f)
+                {
+                    timeText.text = string.Format("시간: {0:N2}", Timer);
+                }
+                else
+                {
+                    int a = 60;
+                    timeText.text = "시간: " + a;
+                }
             }
             if (Timer <= 0)
             {
@@ -86,7 +99,6 @@ public class CardGameManager : MonoBehaviour
         else
         {
             WelcomePanel.SetActive(true);
-
         }
     }
 
@@ -100,13 +112,12 @@ public class CardGameManager : MonoBehaviour
             state = STATE.IDLE;
             return;
         }
-        if (LastCard.gameObject.tag != OpenCard.gameObject.tag)
+        else if (LastCard.gameObject.tag != OpenCard.gameObject.tag)
         {
             StartCoroutine(CloseTwoCards());
-            state = STATE.IDLE;
             return;
         }
-        if (LastCard.gameObject.tag == OpenCard.gameObject.tag)
+        else if (LastCard.gameObject.tag == OpenCard.gameObject.tag)
         {
             flipCnt = flipCnt + 2;
 
@@ -118,6 +129,8 @@ public class CardGameManager : MonoBehaviour
                 state = STATE.CLEAR;
                 return;
             }
+            LastCard = null;
+            OpenCard = null;
         }
         LastCard = null;
         state = STATE.IDLE;
@@ -138,6 +151,7 @@ public class CardGameManager : MonoBehaviour
             TempCardList.Add(CardList[3]);
             TempCardList.Add(CardList[3]);
             cardCnt = 8;
+            Timer = 64f;
         }
         else if (stageNum == 2)
         {
@@ -158,6 +172,7 @@ public class CardGameManager : MonoBehaviour
             TempCardList.Add(CardList[7]);
             TempCardList.Add(CardList[7]);
             cardCnt = 16;
+            Timer = 64f;
         }
         else if (stageNum == 3)
         {
@@ -177,17 +192,17 @@ public class CardGameManager : MonoBehaviour
             TempCardList.Add(CardList[6]);
             TempCardList.Add(CardList[7]);
             TempCardList.Add(CardList[7]);
-            TempCardList.Add(CardList[8]);
-            TempCardList.Add(CardList[8]);
-            TempCardList.Add(CardList[9]);
-            TempCardList.Add(CardList[9]);
-            TempCardList.Add(CardList[10]);
-            TempCardList.Add(CardList[10]);
-            TempCardList.Add(CardList[11]);
-            TempCardList.Add(CardList[11]);
-            cardCnt = 24;
+            //TempCardList.Add(CardList[8]);
+            //TempCardList.Add(CardList[8]);
+            //TempCardList.Add(CardList[9]);
+            //TempCardList.Add(CardList[9]);
+            //TempCardList.Add(CardList[10]);
+            //TempCardList.Add(CardList[10]);
+            //TempCardList.Add(CardList[11]);
+            //TempCardList.Add(CardList[11]);
+            cardCnt = 16;//24;
+            Timer = 54f;
         }
-        Timer = 64f;
         StartCoroutine(MakeStage());
     }
     void Clear()
@@ -202,6 +217,10 @@ public class CardGameManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         LastCard.SendMessage("CloseCard", SendMessageOptions.DontRequireReceiver);
         OpenCard.SendMessage("CloseCard", SendMessageOptions.DontRequireReceiver);
+
+        LastCard = null;
+        OpenCard = null;
+        state = STATE.IDLE;
     }
     IEnumerator StageClear()
     {
@@ -229,8 +248,8 @@ public class CardGameManager : MonoBehaviour
     {
         state = STATE.WAIT;
 
-        float sx = 0;
-        float sz = 0;
+        float sx = -2.05f;
+        float sz = 3.32f;
         ShuffleCard();
         SetCardPos(out sx, out sz);
 
@@ -250,14 +269,14 @@ public class CardGameManager : MonoBehaviour
                     case '*':
 
                         GameObject Tempcard = Instantiate(TempCardList[n - 1]);
-                        Tempcard.transform.position = new Vector3(x, 4.5f, sz);
+                        Tempcard.transform.position = new Vector3(x, 4.84f, sz);
                         AllCard.Add(Tempcard);
 
-                        x++;
+                        x = x + 1.35f;
                         n++;
                         break;
                     case '.':
-                        x++;
+                        x = x + 1.35f;
                         break;
                 }
 
@@ -266,7 +285,7 @@ public class CardGameManager : MonoBehaviour
                     yield return new WaitForSeconds(0.03f);
                 }
             }
-            sz--;
+            sz = sz - 2.13f;
         }
         for (int k = 0; k != cardCnt; k++)
         {
@@ -282,8 +301,8 @@ public class CardGameManager : MonoBehaviour
 
     void SetCardPos(out float sx, out float sz)
     {
-        float x = 0;
-        float z = 0;
+        float x = -2.05f;
+        float z = 3.32f;
         string[] str = SetStage.stage[stageNum - 1];
 
         for (int i = 0; i < str.Length; i++)
@@ -303,8 +322,16 @@ public class CardGameManager : MonoBehaviour
             }
             z = z + 0.5f;
         }
-        sx = (x - 1) / 2 - 4;
-        sz = (z - 1) / 2;
+        if (stageNum == 1)
+        {
+            sx = -1.45f;
+            sz = 2.13f;
+        }
+        else
+        {
+            sx = -2.05f;
+            sz = 3.32f;
+        }
     }
     
     void ShuffleCard()

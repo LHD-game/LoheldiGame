@@ -59,6 +59,7 @@ public class CardGameManager : MonoBehaviour
                 case STATE.HIT:     //카드 눌렀을 때
                     CheckCard();
                     break;
+                    break;
                 case STATE.CLEAR:   //한 스테이지 클리어
                     StartCoroutine(StageClear());
                     break;

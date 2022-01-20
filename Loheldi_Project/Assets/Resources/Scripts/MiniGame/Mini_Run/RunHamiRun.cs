@@ -10,8 +10,7 @@ public class RunHamiRun : MonoBehaviour
     {
         if (RunCountDown.CountEnd == true)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * 10);
-            Marker.transform.Translate(Vector3.left * Time.deltaTime * 1.7f);
+            transform.Translate(Vector3.forward * Time.deltaTime * 100);
         }
     }
 }

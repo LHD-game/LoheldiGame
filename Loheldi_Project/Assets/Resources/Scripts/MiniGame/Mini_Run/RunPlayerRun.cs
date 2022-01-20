@@ -5,18 +5,13 @@ using UnityEngine.EventSystems;
 
 public class RunPlayerRun : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject Marker;
-
-
+    public Rigidbody player;
 
     public void PlayerRun()
     {
         if (RunCountDown.CountEnd == true)
         {
-            player.gameObject.transform.Translate(new Vector3(0, 0, 300));
-            Marker.transform.Translate(new Vector3(-50f, 0, 0));
-
+            player.AddRelativeForce(Vector3.forward * 600f);
         }
     }
 }

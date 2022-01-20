@@ -10,8 +10,7 @@ public class RunHimchanRun : MonoBehaviour
     {
         if (RunCountDown.CountEnd == true)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * 20);
-            Marker.transform.Translate(Vector3.left * Time.deltaTime * 3.4f);
+            transform.Translate(Vector3.forward * Time.deltaTime * 200);
         }
     }
 }

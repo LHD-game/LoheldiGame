@@ -10,8 +10,7 @@ public class RunNariRun : MonoBehaviour
     {
         if (RunCountDown.CountEnd == true)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * 14);
-            Marker.transform.Translate(Vector3.left * Time.deltaTime * 2.38f);
+            transform.Translate(Vector3.forward * Time.deltaTime * 140);
         }
     }
 }

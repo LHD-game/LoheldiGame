@@ -10,6 +10,10 @@ public class RunGameManager : MonoBehaviour
     public Transform NPC2;
     public Transform NPC3;
     public Transform Player;
+    private float NPCz;
+    private float Playerz;
+
+    public Rigidbody player;
 
     public Transform NMarker;
     public Transform PMarker;
@@ -34,57 +38,66 @@ public class RunGameManager : MonoBehaviour
         if (difficulty == 1)
         {
             NPC1.gameObject.SetActive(true);
-            if (NPC1.position.z >= 857)
+            if (NPC1.position.z >= 3000)
             {
                 NPC1.gameObject.GetComponent<RunHamiRun>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
-            if (Player.position.z >= 857)
+            else if(Player.position.z >= 3000)
             {
                 NPC1.gameObject.GetComponent<RunHamiRun>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Win_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
+            NPCz = NPC1.position.z;
         }
         if (difficulty == 2)
         {
             NPC2.gameObject.SetActive(true);
-            if (NPC2.position.z >= 857)
+            if (NPC2.position.z >= 3000)
             {
                 NPC2.gameObject.GetComponent<RunNariRun>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
-            if (Player.position.z >= 857)
+            else if(Player.position.z >= 3000)
             {
                 NPC2.gameObject.GetComponent<RunNariRun>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Win_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
+            NPCz = NPC2.position.z;
         }
         if (difficulty == 3)
         {
             NPC3.gameObject.SetActive(true);
-            if (NPC3.position.z >= 857)
+            if (NPC3.position.z >= 3000)
             {
                 NPC3.gameObject.GetComponent<RunHimchanRun>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
-            if (Player.position.z >= 857)
+            else if (Player.position.z >= 3000)
             {
                 NPC3.gameObject.GetComponent<RunHimchanRun>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Win_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
+            NPCz = NPC3.position.z;
         }
+        Playerz = Player.position.z;
+
+        PMarker.localPosition = new Vector3(Playerz - 1600, 125, 0);
+        NMarker.localPosition = new Vector3(NPCz - 1600, 125, 0);
+
+        player.velocity = player.velocity / 1.0085f;
     }
 
     public void Reset()
@@ -116,5 +129,7 @@ public class RunGameManager : MonoBehaviour
         NPC1.gameObject.GetComponent<RunHamiRun>().enabled = true;
         NPC2.gameObject.GetComponent<RunNariRun>().enabled = true;
         NPC3.gameObject.GetComponent<RunHimchanRun>().enabled = true;
+
+        player.velocity = new Vector3(0, 0, 0);
     }
 }

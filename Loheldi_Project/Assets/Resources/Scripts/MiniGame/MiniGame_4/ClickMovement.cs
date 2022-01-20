@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickMovement : MonoBehaviour
 {
-    private Camera camera;
+    private new Camera camera;
     private bool isMove;
     private Vector3 destination;
     private void Awake()

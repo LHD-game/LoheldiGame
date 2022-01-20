@@ -8,16 +8,20 @@ using UnityEngine.UI;
 
 public class CardGameManager : MonoBehaviour
 {
-    public List<GameObject> CardList = new List<GameObject>();
-    public List<GameObject> TempCardList = new List<GameObject>();
-    private List<GameObject> MixCardList = new List<GameObject>();
-    private List<GameObject> AllCard = new List<GameObject>();
+    GameObject[] cards;     //카드를 프리펩에서 저장
+    GameObject[] cardsMix;  //cards 배열에서 섞은 것을 저장
+    int[] level = { 0, 4, 6, 8 };      //레벨 별 카드 종류 개수
+    float[] timerLen = { 0f, 64f, 64f, 54f };
+    public static float timer;
+    //public List<GameObject> CardList = new List<GameObject>();
+    //public List<GameObject> TempCardList = new List<GameObject>();
+    //private List<GameObject> MixCardList = new List<GameObject>();
+    private List<GameObject> AllCard = new List<GameObject>();    //생성된 카드 오브젝트
 
     public static GameObject OpenCard;
     public static GameObject LastCard;
     public static bool GameStart;
-    public GameObject FndText;
-    public GameObject EndText;
+
 
     public Slider TimeSlider;
 
@@ -28,8 +32,6 @@ public class CardGameManager : MonoBehaviour
     int flipCnt = 0;
 
     static public int stageNum = 1;
-    int stageCount = 3;
-    public static float Timer = 64f;
     public Text timeText;
 
     int a;
@@ -42,7 +44,7 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {
-        Reset();
+        Welcome();
     }
 
     void Update()
@@ -52,7 +54,7 @@ public class CardGameManager : MonoBehaviour
             switch (state)
             {
                 case STATE.START:   //게임 시작
-                    SetUp();
+                    CardSet();
                     break;
                 case STATE.HIT:     //카드 눌렀을 때
                     CheckCard();
@@ -61,56 +63,83 @@ public class CardGameManager : MonoBehaviour
                     StartCoroutine(StageClear());
                     break;
                 case STATE.WAIT:    //카드를 열고 기다리는 상태
-                    Timer -= Time.deltaTime;
+                    timer -= Time.deltaTime;
                     break;
                 case STATE.FAIL:    //시간이 다 되어 게임오버
                     StageFail();
                     break;
                 case STATE.IDLE:    //기본 상태
-                    Timer -= Time.deltaTime;
+                    timer -= Time.deltaTime;
                     break;
             }
-            if (stageNum == 3)
+
+            if (stageNum < 4)
             {
-                if (Timer <= 50f)
+                if (timer <= timerLen[stageNum])
                 {
-                    timeText.text = string.Format("시간: {0:N0}", Timer);
+                    timeText.text = string.Format("시간: {0:N0}", timer);
                 }
                 else
                 {
-                    a = 50;
+                    a = (int)timerLen[stageNum] - 4;
                     timeText.text = "시간: " + a;
                 }
-            }
-            else
-            {
-                if (Timer <= 60f)
+
+                if (timer <= 0)
                 {
-                    timeText.text = string.Format("시간: {0:N0}", Timer);
+                    state = STATE.FAIL;
                 }
-                else
-                {
-                    a = 60;
-                    timeText.text = "시간: " + a;
-                }
+                TimeSlider.maxValue = a;
+                TimeSlider.value = timer;
             }
-            if (Timer <= 0)
-            {
-                state = STATE.FAIL;
-            }
-            TimeSlider.maxValue = a;
-            TimeSlider.value = Timer;
+            
         }
     }
 
-    public void Reset()
+    public void Welcome()   //게임 초기화 함수
     {
         state = STATE.START;
         GameStart = false;
         a = 0;
+        cards = Resources.LoadAll<GameObject>("Prefebs/Cards/");    //카드들을 전부 저장한다.
+        stageNum = 1;   //스테이지 1로 초기화
 
         WelcomePanel.SetActive(true);
         GameOverPanel.SetActive(false);
+
+    }
+
+    void CardSet()  // 스테이지 카드 섞어서 배열에 저장
+    {
+        AllCard.Clear();
+
+        int arrLen = level[stageNum]; //스테이지에 배치될 카드 종류 개수
+        cardCnt = arrLen * 2;   //스테이지에 배치될 카드의 총 개수
+        timer = timerLen[stageNum];
+        GameObject[] arrTmp = new GameObject[cardCnt]; //한 카드 당 두 장씩 저장하게 될 것이므로
+        Debug.Log("arrTmp: " + arrTmp.Length);
+        for(int i = 0; i < arrLen; i++)
+        {
+            for (int j = 0; j<2; j++)
+            {
+                while (true)
+                {
+                    int rand = Random.Range(0, arrTmp.Length);
+                    if(arrTmp[rand] == null)    //arrTmp[rand]에 값이 없을 경우, card[i]를 넣는다. 이를 두 번 반복하여 같은 카드가 두 개 저장되도록.
+                    {
+                        arrTmp[rand] = cards[i];
+                        Debug.Log("arrTmp: " + rand + ", card[i]: " + cards[i]);
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        cardsMix = new GameObject[arrTmp.Length];   //배열 길이 초기화
+        cardsMix = arrTmp; //섞인 카드를 cardsMix 배열에 넣는다.
+
+        StartCoroutine(MakeStage());
     }
 
     void CheckCard()
@@ -146,81 +175,12 @@ public class CardGameManager : MonoBehaviour
         LastCard = null;
         state = STATE.IDLE;
     }
-    void SetUp()
-    {
-        TempCardList.Clear();
-        AllCard.Clear();
-
-        if (stageNum == 1)
-        {
-            TempCardList.Add(CardList[0]);
-            TempCardList.Add(CardList[0]);
-            TempCardList.Add(CardList[1]);
-            TempCardList.Add(CardList[1]);
-            TempCardList.Add(CardList[2]);
-            TempCardList.Add(CardList[2]);
-            TempCardList.Add(CardList[3]);
-            TempCardList.Add(CardList[3]);
-            cardCnt = 8;
-            Timer = 64f;
-        }
-        else if (stageNum == 2)
-        {
-            TempCardList.Add(CardList[0]);
-            TempCardList.Add(CardList[0]);
-            TempCardList.Add(CardList[1]);
-            TempCardList.Add(CardList[1]);
-            TempCardList.Add(CardList[2]);
-            TempCardList.Add(CardList[2]);
-            TempCardList.Add(CardList[3]);
-            TempCardList.Add(CardList[3]);
-            TempCardList.Add(CardList[4]);
-            TempCardList.Add(CardList[4]);
-            TempCardList.Add(CardList[5]);
-            TempCardList.Add(CardList[5]);
-            //TempCardList.Add(CardList[6]);
-            //TempCardList.Add(CardList[6]);
-            //TempCardList.Add(CardList[7]);
-            //TempCardList.Add(CardList[7]);
-            cardCnt = 12;
-            Timer = 64f;
-        }
-        else if (stageNum == 3)
-        {
-            TempCardList.Add(CardList[0]);
-            TempCardList.Add(CardList[0]);
-            TempCardList.Add(CardList[1]);
-            TempCardList.Add(CardList[1]);
-            TempCardList.Add(CardList[2]);
-            TempCardList.Add(CardList[2]);
-            TempCardList.Add(CardList[3]);
-            TempCardList.Add(CardList[3]);
-            TempCardList.Add(CardList[4]);
-            TempCardList.Add(CardList[4]);
-            TempCardList.Add(CardList[5]);
-            TempCardList.Add(CardList[5]);
-            TempCardList.Add(CardList[6]);
-            TempCardList.Add(CardList[6]);
-            TempCardList.Add(CardList[7]);
-            TempCardList.Add(CardList[7]);
-            //TempCardList.Add(CardList[8]);
-            //TempCardList.Add(CardList[8]);
-            //TempCardList.Add(CardList[9]);
-            //TempCardList.Add(CardList[9]);
-            //TempCardList.Add(CardList[10]);
-            //TempCardList.Add(CardList[10]);
-            //TempCardList.Add(CardList[11]);
-            //TempCardList.Add(CardList[11]);
-            cardCnt = 16;//24;
-            Timer = 54f;
-        }
-        StartCoroutine(MakeStage());
-    }
+    
     void Clear()
     {
-        EndText.SetActive(true);
         GameOverPanel.SetActive(true);
         Time.timeScale = 0;
+        GameStart = false;
     }
 
     IEnumerator CloseTwoCards()
@@ -237,7 +197,7 @@ public class CardGameManager : MonoBehaviour
     {
         state = STATE.WAIT;
 
-        ++stageNum;
+        stageNum++;
         flipCnt = 0;
 
         yield return new WaitForSeconds(1);
@@ -250,10 +210,8 @@ public class CardGameManager : MonoBehaviour
     }
     void StageFail()
     {
-
-        FndText.SetActive(true);
+        GameStart = false;
         GameOverPanel.SetActive(true);
-        Time.timeScale = 0;
     }
     IEnumerator MakeStage()
     {
@@ -261,8 +219,8 @@ public class CardGameManager : MonoBehaviour
 
         float sx = -2.05f;
         float sz = 3.32f;
-        ShuffleCard();
-        SetCardPos(out sx, out sz);
+
+        SetCardPos(out sx, out sz); //카드 위치 설정 함수
 
         int n = 1;
 
@@ -279,9 +237,9 @@ public class CardGameManager : MonoBehaviour
                 {
                     case '*':
 
-                        GameObject Tempcard = Instantiate(TempCardList[n - 1]);
+                        GameObject Tempcard = Instantiate(cardsMix[n-1]);
                         Tempcard.transform.position = new Vector3(x, 4.84f, sz);
-                        AllCard.Add(Tempcard);
+                        AllCard.Add(Tempcard);  //세팅된 카드 오브젝트를 AllCard에 저장
 
                         x = x + 1.35f;
                         n++;
@@ -314,7 +272,7 @@ public class CardGameManager : MonoBehaviour
     {
         float x = -2.05f;
         float z = 3.32f;
-        string[] str = SetStage.stage[stageNum - 1];
+        string[] str = SetStage.stage[stageNum-1];
 
         for (int i = 0; i < str.Length; i++)
         {
@@ -343,17 +301,5 @@ public class CardGameManager : MonoBehaviour
             sx = -2.05f;
             sz = 3.32f;
         }
-    }
-    
-    void ShuffleCard()
-    {
-        int count = TempCardList.Count;
-        for (int i = 0; i < count; i++)
-        {
-            int rand = Random.Range(0, TempCardList.Count);
-            MixCardList.Add(TempCardList[rand]);
-            TempCardList.RemoveAt(rand);
-        }
-        TempCardList = MixCardList;
     }
 }

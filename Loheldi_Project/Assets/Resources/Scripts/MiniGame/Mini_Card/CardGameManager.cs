@@ -18,11 +18,11 @@ public class CardGameManager : MonoBehaviour
     public static bool GameStart;
     public GameObject FndText;
     public GameObject EndText;
-    public GameObject EndButton;
 
     public Slider TimeSlider;
 
     public GameObject WelcomePanel;
+    public GameObject GameOverPanel;
 
     int cardCnt;
     int flipCnt = 0;
@@ -34,7 +34,7 @@ public class CardGameManager : MonoBehaviour
 
     int a;
 
-    public enum STATE
+    public enum STATE   //현재 게임 상태 저장
     {
         START, HIT, WAIT, IDLE, CLEAR, FAIL
     };
@@ -42,9 +42,7 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {
-        state = STATE.START;
-        GameStart = false;
-        a = 0;
+        Reset();
     }
 
     void Update()
@@ -53,22 +51,22 @@ public class CardGameManager : MonoBehaviour
         {
             switch (state)
             {
-                case STATE.START:
+                case STATE.START:   //게임 시작
                     SetUp();
                     break;
-                case STATE.HIT:
+                case STATE.HIT:     //카드 눌렀을 때
                     CheckCard();
                     break;
-                case STATE.CLEAR:
+                case STATE.CLEAR:   //한 스테이지 클리어
                     StartCoroutine(StageClear());
                     break;
-                case STATE.WAIT:
+                case STATE.WAIT:    //카드를 열고 기다리는 상태
                     Timer -= Time.deltaTime;
                     break;
-                case STATE.FAIL:
+                case STATE.FAIL:    //시간이 다 되어 게임오버
                     StageFail();
                     break;
-                case STATE.IDLE:
+                case STATE.IDLE:    //기본 상태
                     Timer -= Time.deltaTime;
                     break;
             }
@@ -103,10 +101,16 @@ public class CardGameManager : MonoBehaviour
             TimeSlider.maxValue = a;
             TimeSlider.value = Timer;
         }
-        else
-        {
-            WelcomePanel.SetActive(true);
-        }
+    }
+
+    public void Reset()
+    {
+        state = STATE.START;
+        GameStart = false;
+        a = 0;
+
+        WelcomePanel.SetActive(true);
+        GameOverPanel.SetActive(false);
     }
 
     void CheckCard()
@@ -174,11 +178,11 @@ public class CardGameManager : MonoBehaviour
             TempCardList.Add(CardList[4]);
             TempCardList.Add(CardList[5]);
             TempCardList.Add(CardList[5]);
-            TempCardList.Add(CardList[6]);
-            TempCardList.Add(CardList[6]);
-            TempCardList.Add(CardList[7]);
-            TempCardList.Add(CardList[7]);
-            cardCnt = 16;
+            //TempCardList.Add(CardList[6]);
+            //TempCardList.Add(CardList[6]);
+            //TempCardList.Add(CardList[7]);
+            //TempCardList.Add(CardList[7]);
+            cardCnt = 12;
             Timer = 64f;
         }
         else if (stageNum == 3)
@@ -215,7 +219,7 @@ public class CardGameManager : MonoBehaviour
     void Clear()
     {
         EndText.SetActive(true);
-        EndButton.SetActive(true);
+        GameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -248,7 +252,7 @@ public class CardGameManager : MonoBehaviour
     {
 
         FndText.SetActive(true);
-        EndButton.SetActive(true);
+        GameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
     IEnumerator MakeStage()

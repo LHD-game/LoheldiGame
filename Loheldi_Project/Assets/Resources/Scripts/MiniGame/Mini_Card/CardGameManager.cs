@@ -20,6 +20,8 @@ public class CardGameManager : MonoBehaviour
     public GameObject EndText;
     public GameObject EndButton;
 
+    public Slider TimeSlider;
+
     public GameObject WelcomePanel;
 
     int cardCnt;
@@ -29,6 +31,8 @@ public class CardGameManager : MonoBehaviour
     int stageCount = 3;
     public static float Timer = 64f;
     public Text timeText;
+
+    int a;
 
     public enum STATE
     {
@@ -40,6 +44,7 @@ public class CardGameManager : MonoBehaviour
     {
         state = STATE.START;
         GameStart = false;
+        a = 0;
     }
 
     void Update()
@@ -71,11 +76,11 @@ public class CardGameManager : MonoBehaviour
             {
                 if (Timer <= 50f)
                 {
-                    timeText.text = string.Format("시간: {0:N2}", Timer);
+                    timeText.text = string.Format("시간: {0:N0}", Timer);
                 }
                 else
                 {
-                    int a = 50;
+                    a = 50;
                     timeText.text = "시간: " + a;
                 }
             }
@@ -83,11 +88,11 @@ public class CardGameManager : MonoBehaviour
             {
                 if (Timer <= 60f)
                 {
-                    timeText.text = string.Format("시간: {0:N2}", Timer);
+                    timeText.text = string.Format("시간: {0:N0}", Timer);
                 }
                 else
                 {
-                    int a = 60;
+                    a = 60;
                     timeText.text = "시간: " + a;
                 }
             }
@@ -95,6 +100,8 @@ public class CardGameManager : MonoBehaviour
             {
                 state = STATE.FAIL;
             }
+            TimeSlider.maxValue = a;
+            TimeSlider.value = Timer;
         }
         else
         {

@@ -14,8 +14,8 @@ public class RunPlayerRun : MonoBehaviour
     {
         if (RunCountDown.CountEnd == true)
         {
-            player.gameObject.transform.Translate(new Vector3(0, 0, 3));
-            Marker.transform.Translate(new Vector3(-0.5f, 0, 0));
+            player.gameObject.transform.Translate(new Vector3(0, 0, 300));
+            Marker.transform.Translate(new Vector3(-50f, 0, 0));
 
         }
     }

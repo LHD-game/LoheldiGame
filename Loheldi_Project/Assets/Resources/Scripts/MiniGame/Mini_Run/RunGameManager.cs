@@ -25,7 +25,7 @@ public class RunGameManager : MonoBehaviour
     
     void Start()
     {
-        markerPos = NMarker.position;
+        markerPos = NMarker.localPosition;
         Reset();
 
     }
@@ -98,8 +98,8 @@ public class RunGameManager : MonoBehaviour
         NPC2.position = startNpos;
         NPC3.position = startNpos;
 
-        NMarker.position = markerPos;
-        PMarker.position = markerPos;
+        NMarker.localPosition = markerPos;
+        PMarker.localPosition = markerPos;
 
         NPC1.gameObject.SetActive(false);
         NPC2.gameObject.SetActive(false);
@@ -112,5 +112,9 @@ public class RunGameManager : MonoBehaviour
 
         GameOverPanel.SetActive(false);
         WelcomePanel.SetActive(true);
+
+        NPC1.gameObject.GetComponent<RunHamiRun>().enabled = true;
+        NPC2.gameObject.GetComponent<RunNariRun>().enabled = true;
+        NPC3.gameObject.GetComponent<RunHimchanRun>().enabled = true;
     }
 }

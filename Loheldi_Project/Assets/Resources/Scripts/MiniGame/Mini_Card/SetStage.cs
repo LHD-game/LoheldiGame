@@ -16,10 +16,10 @@ public class SetStage : MonoBehaviour
             },
             new string[]
             {
-                " ****. ",
-                " ****. ",
-                " ****. ",
-                " ****. ",
+                " .***. ",
+                " .***. ",
+                " .***. ",
+                " .***. ",
                 " ..... "
             },
             new string[]

@@ -146,11 +146,12 @@ public class ServerManager : MonoBehaviour
         }
         
         else Error(BRO.GetErrorCode(), "UserFunc");
-        Gamemanager.instance.login = true;
+        
     }
     
-// 동기 방식 로그아웃
-public void LogOut()
+
+    // 동기 방식 로그아웃
+    public void LogOut()
     {
         Backend.BMember.Logout();
         ID.text = PW.text = "";
@@ -234,8 +235,6 @@ public void LogOut()
         }
         else Error(bro.GetErrorCode(), "gameData");
 
-        Gamemanager.instance.ID = "ID: " + ID;
-        Gamemanager.instance.PW = "PW: " + PW;
     }
     // 에러 코드 확인
     void Error(string errorCode, string type)

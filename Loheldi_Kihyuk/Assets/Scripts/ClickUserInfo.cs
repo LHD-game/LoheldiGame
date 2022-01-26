@@ -14,6 +14,9 @@ public class ClickUserInfo : MonoBehaviour
     [Header("User Info")]
     public InputField Nickname;
     public InputField email;
+
+    public int Login;
+    public GameObject GameManagerObject;
         
     public void ChangeUserInfo()
     {

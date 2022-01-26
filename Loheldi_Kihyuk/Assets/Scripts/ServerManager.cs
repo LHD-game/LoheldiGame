@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class ServerManager : MonoBehaviour
 {
     [Header("Login & Register")]
-    public InputField ID;
-    
+    public InputField ID;    
     public InputField PW;
     public Text CheckID;
     public Text CheckNick;
@@ -18,6 +17,7 @@ public class ServerManager : MonoBehaviour
     public InputField email;
     public Text userNick;
     public Text userID;
+    public Text userPW;
 
     BackendReturnObject bro = new BackendReturnObject();
     bool isSuccess = false;
@@ -29,6 +29,13 @@ public class ServerManager : MonoBehaviour
         {"pw", "" },
         {"email", "" }
     };
+    /*private void Awake()
+    {
+        //DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
+        
+    }*/
+
     void Start()
     {
         // 초기화
@@ -39,7 +46,7 @@ public class ServerManager : MonoBehaviour
             if (Backend.IsInitialized)
             {
                 print("뒤끝 초기화 성공");
-
+                
                 // example
                 // 버전체크 -> 업데이트
             }
@@ -48,7 +55,9 @@ public class ServerManager : MonoBehaviour
             {
                 print("뒤끝 초기화 실패");
             }
+            
         });
+        
     }
     // 동기방식 회원가입
     public void Register()
@@ -123,28 +132,8 @@ public class ServerManager : MonoBehaviour
             Debug.Log(inDate);
         }
     }
-    public void getUserData()
-    {
+    
         
-        Where where = new Where();
-        where.Equal("id", ID.text);
-        where.Equal("pw", PW.text);
-        //where.Equal("email", email.text);
-        var bro = Backend.GameData.Get("user", where);
-        if (bro.IsSuccess())
-        {
-            /*JsonData jsonData = bro.GetReturnValuetoJSON();
-            string id = jsonData["id"][0].ToString();
-            string pw = jsonData["pw"][0].ToString();
-            string email = jsonData["email"][0].ToString();*/
-
-            print("ID:" + ID.text);
-            print("PW:" + PW.text);
-            //print("Email:" + email.text);
-        }
-        else Error(bro.GetErrorCode(), "gameData");
-    }
-
     // 동기방식 로그인
     public void Login()
     {
@@ -160,8 +149,9 @@ public class ServerManager : MonoBehaviour
         
     }
     
-// 동기 방식 로그아웃
-public void LogOut()
+
+    // 동기 방식 로그아웃
+    public void LogOut()
     {
         Backend.BMember.Logout();
         ID.text = PW.text = "";
@@ -220,6 +210,31 @@ public void LogOut()
         BackendReturnObject BRO = Backend.BMember.UpdateCustomEmail(email.text);
 
         if (BRO.IsSuccess()) print("동기 방식 이메일 등록 완료");
+    }
+
+    public void getUserData()
+    {
+
+        Where where = new Where();
+        where.Equal("id", ID.text);
+        where.Equal("pw", PW.text);
+        //where.Equal("email", email.text);
+        var bro = Backend.GameData.Get("user", where);
+        if (bro.IsSuccess())
+        {
+            /*JsonData jsonData = bro.GetReturnValuetoJSON();
+            string id = jsonData["id"][0].ToString();
+            string pw = jsonData["pw"][0].ToString();
+            string email = jsonData["email"][0].ToString();*/
+
+            /*print("ID:" + userID.text);
+            print("PW:" + userPW.text);*/
+            userID.text = "ID:" + ID.text;
+            userPW.text = "PW:" + PW.text;
+            //print("Email:" + email.text);
+        }
+        else Error(bro.GetErrorCode(), "gameData");
+
     }
     // 에러 코드 확인
     void Error(string errorCode, string type)
@@ -356,7 +371,8 @@ public void LogOut()
 
             isSuccess = false;
             bro.Clear();*/
-        }
+        
+    }
     }
 
 

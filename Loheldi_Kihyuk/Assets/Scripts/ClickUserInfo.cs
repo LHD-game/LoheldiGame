@@ -8,30 +8,44 @@ using UnityEngine.UI;
 public class ClickUserInfo : MonoBehaviour
 {
     [Header("Login & Register")]
-    public Text ID;
-    public Text PW;    
+    public InputField ID;
+    public InputField PW;
+    public Text userID;
+    public Text userPW;
 
     [Header("User Info")]
     public InputField Nickname;
     public InputField email;
-
-    public int Login;
-    public GameObject GameManagerObject;
         
     public void ChangeUserInfo()
     {
         SceneManager.LoadScene("UserInfoScene");
         
     }
-    
+    public void Login()
+    {
+        BackendReturnObject BRO = Backend.BMember.CustomLogin(ID.text, PW.text);
+
+        if (BRO.IsSuccess())
+        {
+            print("동기방식 로그인 성공");
+
+        }
+
+        else Error(BRO.GetErrorCode(), "UserFunc");
+
+    }
+
     public void getUserData()
     {
-
         Where where = new Where();
-        where.Equal("id", ID.text);
-        where.Equal("pw", PW.text);
-        //where.Equal("email", email.text);
+        
         var bro = Backend.GameData.Get("user", where);
+        where.Equal("id", userID);
+        where.Equal("pw", userPW);
+
+        //where.Equal("email", email.text);
+
         if (bro.IsSuccess())
         {
             /*JsonData jsonData = bro.GetReturnValuetoJSON();
@@ -39,8 +53,8 @@ public class ClickUserInfo : MonoBehaviour
             string pw = jsonData["pw"][0].ToString();
             string email = jsonData["email"][0].ToString();*/
 
-            ID.text = "ID:" + ID;
-            PW.text = "PW:" + PW; 
+            userID.text = "ID:" + userID.text;
+            userPW.text = "PW:" + userPW.text; 
             //print("Email:" + email.text);
         }
         else Error(bro.GetErrorCode(), "gameData");
@@ -59,7 +73,7 @@ public class ClickUserInfo : MonoBehaviour
     {
         if (errorCode == "DuplicatedParameterException")
         {
-            if (type == "UserFunc") ID.text = "중복된 사용자 아이디 입니다.";
+            if (type == "UserFunc") userID.text = "중복된 사용자 아이디 입니다.";
             else if (type == "UserNickname") print("중복된 닉네임 입니다.");
             else if (type == "Friend") print("이미 요청되었거나 친구입니다.");
         }

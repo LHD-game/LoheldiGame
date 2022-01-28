@@ -19,9 +19,9 @@ public class ServerManager : MonoBehaviour
     public Text userID;
     public Text userPW;
 
-    BackendReturnObject bro = new BackendReturnObject();
+    /*BackendReturnObject bro = new BackendReturnObject();
     bool isSuccess = false;
-    private string errorCode;
+    */private string errorCode;
 
     Dictionary<string, string> user = new Dictionary<string, string>
     {
@@ -38,25 +38,7 @@ public class ServerManager : MonoBehaviour
 
     void Start()
     {
-        // 초기화
-        // [.net4][il2cpp] 사용 시 필수 사용
-        Backend.Initialize(() =>
-        {
-            // 초기화 성공한 경우 실행
-            if (Backend.IsInitialized)
-            {
-                print("뒤끝 초기화 성공");
-                
-                // example
-                // 버전체크 -> 업데이트
-            }
-            // 초기화 실패한 경우 실행
-            else
-            {
-                print("뒤끝 초기화 실패");
-            }
-            
-        });
+        
         
     }
     // 동기방식 회원가입

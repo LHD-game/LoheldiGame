@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(CreateFoodRoutine());
         StartCoroutine(CreateFoodRoutine());
         WelcomePanel.SetActive(false);
+        Timer.instance.StartTimer();
     }
 
 
@@ -115,11 +116,13 @@ public class GameManager : MonoBehaviour
         if (!pauseTrigger)  //게임 일시정지
         {
             pauseTrigger = true;
+            Timer.instance.PauseTimer();
             PausePanel.SetActive(true);
         }
         else    //게임 재개
         {
             pauseTrigger = false;   //트리거 끄기
+            Timer.instance.PauseTimer();
             PausePanel.SetActive(false);    //일시정지 패널 비활성화
         }
         

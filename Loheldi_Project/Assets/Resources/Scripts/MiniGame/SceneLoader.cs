@@ -21,4 +21,8 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Game_Running");
     }
+    public void GotoToothGame()
+    {
+        SceneManager.LoadScene("Game_Tooth");
+    }
 }

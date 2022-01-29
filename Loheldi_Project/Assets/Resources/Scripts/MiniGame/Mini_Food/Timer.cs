@@ -18,7 +18,6 @@ public class Timer : MonoBehaviour
         }
     }
 
-    private float time_start = 0;
     private float time_current;
     private float time_current_tmp;
     private bool isRun = false;
@@ -38,8 +37,8 @@ public class Timer : MonoBehaviour
 
     private void CheckTimer()
     {
-        time_current = Time.time - time_start;
-        timeTxt.text = $"{time_current:N2}";
+        time_current += Time.deltaTime;
+        timeTxt.text = $"{time_current:N1}";
         if (GameManager.instance.ReturnLife() <= 0)
         {
             EndTimer();
@@ -48,7 +47,7 @@ public class Timer : MonoBehaviour
     }
     public void EndTimer()
     {
-        timeTxt.text = $"{time_current:N2}";
+        timeTxt.text = $"{time_current:N1}";
         isRun = false;
     }
 
@@ -56,10 +55,9 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         gLevel = 0;
-        time_start = Time.time;
         time_current = 0;
         time_current_tmp = 0;
-        timeTxt.text = $"{time_current:N2}";
+        timeTxt.text = $"{time_current:N1}";
         isRun = true;
         isPause = false;
         Time.timeScale = 1f;

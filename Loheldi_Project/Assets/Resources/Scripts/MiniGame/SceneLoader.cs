@@ -21,4 +21,8 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Game_Running");
     }
+    public void GotoMainGame()
+    {
+        SceneManager.LoadScene("GameMove");
+    }
 }

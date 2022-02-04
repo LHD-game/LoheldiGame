@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        highScoreTxt.text = "최고점수: " + highScore;
         Welcome();
     }
 
@@ -158,7 +159,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     randpos = Camera.main.ViewportToWorldPoint(randpos);
-                    randpos.y = 7.0f;
+                    randpos.y = 15.0f;
                     randpos.z = 0.0f;
                     int randFood = Random.Range(0, foods.Length);
                     Instantiate(foods[randFood], randpos, Quaternion.Euler(0, 0, 0));

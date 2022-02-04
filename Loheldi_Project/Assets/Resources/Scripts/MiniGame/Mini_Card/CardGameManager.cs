@@ -19,7 +19,6 @@ public class CardGameManager : MonoBehaviour
     public static GameObject LastCard;
     public static bool GameStart;
 
-    public Slider TimeSlider;
     private bool isPause = false; //true일때 pause 상태
 
     public GameObject WelcomePanel;
@@ -89,8 +88,7 @@ public class CardGameManager : MonoBehaviour
                 {
                     state = STATE.FAIL;
                 }
-                TimeSlider.maxValue = a;
-                TimeSlider.value = timer;
+
             }
             
         }

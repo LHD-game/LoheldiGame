@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 13233144}
   - component: {fileID: 13233143}
   - component: {fileID: 13233142}
-  - component: {fileID: 13233141}
   m_Layer: 5
   m_Name: CardBtn
   m_TagString: Untagged
@@ -163,18 +162,6 @@ RectTransform:
   m_AnchoredPosition: {x: 500, y: 250}
   m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &13233141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13233139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4f13be47f5d124685c322ea9587774, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &13233142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +314,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 99d1ad5a0a5bdaa489820583984fefef, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
@@ -406,7 +393,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 99d1ad5a0a5bdaa489820583984fefef, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
@@ -505,9 +492,8 @@ GameObject:
   - component: {fileID: 453007741}
   - component: {fileID: 453007740}
   - component: {fileID: 453007739}
-  - component: {fileID: 453007738}
   m_Layer: 5
-  m_Name: 4
+  m_Name: ToothBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -533,18 +519,6 @@ RectTransform:
   m_AnchoredPosition: {x: 500, y: -250}
   m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &453007738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453007736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73d0a156d4237741a29cffaa459c645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &453007739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -588,7 +562,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 453007740}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 724714024}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: GotoToothGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &453007740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,7 +1031,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 99d1ad5a0a5bdaa489820583984fefef, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
@@ -1183,7 +1169,6 @@ GameObject:
   - component: {fileID: 1617419160}
   - component: {fileID: 1617419159}
   - component: {fileID: 1617419158}
-  - component: {fileID: 1617419157}
   m_Layer: 5
   m_Name: RunningBtn
   m_TagString: Untagged
@@ -1211,18 +1196,6 @@ RectTransform:
   m_AnchoredPosition: {x: -500, y: -250}
   m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1617419157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617419155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5cc91f302dfbf04683dd032b338734d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1617419158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,7 +1502,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 99d1ad5a0a5bdaa489820583984fefef, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0

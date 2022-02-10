@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        highScoreTxt.text = "최고점수: " + highScore;
         Welcome();
     }
 
@@ -89,6 +90,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(CreateFoodRoutine());
         StartCoroutine(CreateFoodRoutine());
         WelcomePanel.SetActive(false);
+        Timer.instance.StartTimer();
     }
 
 
@@ -115,11 +117,13 @@ public class GameManager : MonoBehaviour
         if (!pauseTrigger)  //게임 일시정지
         {
             pauseTrigger = true;
+            Timer.instance.PauseTimer();
             PausePanel.SetActive(true);
         }
         else    //게임 재개
         {
             pauseTrigger = false;   //트리거 끄기
+            Timer.instance.PauseTimer();
             PausePanel.SetActive(false);    //일시정지 패널 비활성화
         }
         
@@ -155,7 +159,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     randpos = Camera.main.ViewportToWorldPoint(randpos);
-                    randpos.y = 7.0f;
+                    randpos.y = 15.0f;
                     randpos.z = 0.0f;
                     int randFood = Random.Range(0, foods.Length);
                     Instantiate(foods[randFood], randpos, Quaternion.Euler(0, 0, 0));

@@ -11,15 +11,13 @@ public class CardGameManager : MonoBehaviour
     GameObject[] cards;     //카드를 프리펩에서 저장
     GameObject[] cardsMix;  //cards 배열에서 섞은 것을 저장
     int[] level = { 0, 4, 6, 8 };      //레벨 별 카드 종류 개수
-    float[] timerLen = { 0f, 64f, 64f, 54f };
-    public static float timer;
+    
     private List<GameObject> AllCard = new List<GameObject>();    //생성된 카드 오브젝트
 
     public static GameObject OpenCard;
     public static GameObject LastCard;
     public static bool GameStart;
 
-    public Slider TimeSlider;
     private bool isPause = false; //true일때 pause 상태
 
     public GameObject WelcomePanel;
@@ -32,7 +30,6 @@ public class CardGameManager : MonoBehaviour
     static public int stageNum = 1;
     [SerializeField]
     private Text stageTxt;
-    public Text timeText;
 
     int a;
 
@@ -55,6 +52,7 @@ public class CardGameManager : MonoBehaviour
             {
                 case STATE.START:   //게임 시작
                     CardSet();
+                    
                     break;
                 case STATE.HIT:     //카드 눌렀을 때
                     CheckCard();
@@ -63,34 +61,22 @@ public class CardGameManager : MonoBehaviour
                     StartCoroutine(StageClear());
                     break;
                 case STATE.WAIT:    //카드를 열고 기다리는 상태
-                    timer -= Time.deltaTime;
+                    Card_TimeSlider.instance.TimeDel();
                     break;
                 case STATE.FAIL:    //시간이 다 되어 게임오버
                     StageFail();
                     break;
                 case STATE.IDLE:    //기본 상태
-                    timer -= Time.deltaTime;
+                    Card_TimeSlider.instance.TimeDel();
                     break;
             }
 
             if (stageNum < 4)
             {
-                if (timer <= timerLen[stageNum])
-                {
-                    timeText.text = string.Format("시간: {0:N0}", timer);
-                }
-                else
-                {
-                    a = (int)timerLen[stageNum] - 4;
-                    timeText.text = "시간: " + a;
-                }
-
-                if (timer <= 0)
+                if (Card_TimeSlider.nowTime <= 0)
                 {
                     state = STATE.FAIL;
                 }
-                TimeSlider.maxValue = a;
-                TimeSlider.value = timer;
             }
             
         }
@@ -104,7 +90,7 @@ public class CardGameManager : MonoBehaviour
         a = 0;
         cards = Resources.LoadAll<GameObject>("Prefebs/Cards/");    //카드들을 전부 저장한다.
         stageNum = 1;   //스테이지 1로 초기화
-        timer = timerLen[stageNum];
+        Card_TimeSlider.instance.TimeInit();
 
         WelcomePanel.SetActive(true);
         GameOverPanel.SetActive(false);
@@ -121,7 +107,7 @@ public class CardGameManager : MonoBehaviour
 
         int arrLen = level[stageNum]; //스테이지에 배치될 카드 종류 개수
         cardCnt = arrLen * 2;   //스테이지에 배치될 카드의 총 개수
-        timer = timerLen[stageNum];
+        Card_TimeSlider.instance.TimeAdd();   //10초 증가
         GameObject[] arrTmp = new GameObject[cardCnt]; //한 카드 당 두 장씩 저장하게 될 것이므로
         Debug.Log("arrTmp: " + arrTmp.Length);
         for(int i = 0; i < arrLen; i++)

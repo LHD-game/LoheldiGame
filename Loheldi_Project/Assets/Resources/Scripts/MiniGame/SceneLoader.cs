@@ -21,8 +21,8 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Game_Running");
     }
-    public void GotoMainGame()
+    public void GotoToothGame()
     {
-        SceneManager.LoadScene("GameMove");
+        SceneManager.LoadScene("Game_Tooth");
     }
 }

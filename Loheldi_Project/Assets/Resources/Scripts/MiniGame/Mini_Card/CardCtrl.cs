@@ -44,6 +44,7 @@ public class CardCtrl : MonoBehaviour
         if (isOpen) return;
         isOpen = true;
         anim.Play("CardFlipAnimation");
+        CardFX.instance.TrunCardFX(this.gameObject);    //fx
         CardGameManager.state = CardGameManager.STATE.HIT;
         CardGameManager.OpenCard = this.gameObject;
 
@@ -65,6 +66,11 @@ public class CardCtrl : MonoBehaviour
     IEnumerator DestroyCard()
     {
         yield return new WaitForSeconds(1);
-        Destroy(this.gameObject);
+        if(this.gameObject != null)
+        {
+            CardFX.instance.DisCardFX(this.transform.position); //fx
+            Destroy(this.gameObject);
+        }
+        
     }
 }

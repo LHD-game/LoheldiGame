@@ -22,12 +22,6 @@ public class CardFX : MonoBehaviour
     [SerializeField]
     private ParticleSystem disCardPs;
 
-
-    void Start()
-    {
-
-    }
-
     public void TrunCardFX(GameObject go)    //card turning FX
     {
         ParticleSystem newfx = Instantiate(turnCardPs);

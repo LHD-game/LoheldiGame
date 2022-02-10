@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NHP_Tree_LP_D1_01
-  m_Shader: {fileID: 4800000, guid: 456879bc4c5cf2042b35700e494bdf0b, type: 3}
-  m_ShaderKeywords: _ENABLEHORIZONTALMOVEMENT_ON _ENABLEMAINBENDING_ON
+  m_Shader: {fileID: 4800000, guid: 59b73456e03e64048b69d7b3c20b38c9, type: 3}
+  m_ShaderKeywords: _ENABLEHORIZONTALMOVEMENT_ON _ENABLEMAINBENDING_ON _WINDQUALITY_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,6 +19,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ExtraTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 82b66ffd8f6978c44a3d60fd789fe71d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -31,11 +39,21 @@ Material:
         m_Texture: {fileID: 2800000, guid: 4dbeb0599a039d44084c0fbf55466352, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _PatternTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubsurfaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _BillboardKwToggle: 0
+    - _BillboardShadowFade: 0.5
     - _DBHorizontalAmplitude: 2
     - _DBHorizontalFrequency: 1
     - _DBHorizontalMaxDistance: 2
@@ -52,6 +70,8 @@ Material:
     - _EnableMainBending: 1
     - _EnableVerticalBending: 0
     - _EnableVerticalMovement: 0
+    - _Glossiness: 0.5
+    - _HueVariationKwToggle: 0
     - _MBAmplitude: 4
     - _MBAmplitudeOffset: 2
     - _MBDefaultBending: 0
@@ -62,6 +82,7 @@ Material:
     - _MBPhase: 1
     - _MBWindBlend: 0
     - _MBWindDir: 181
+    - _MBWindDirBlend: 0
     - _MBWindDirFrequency: 1
     - _MBWindDirOffset: 26
     - _MBWindDirOffsetFrequency: 1
@@ -71,10 +92,17 @@ Material:
     - _MBWindDirection: 0
     - _MBWindDirectionOffset: 0
     - _Metallic: 0
+    - _NormalMapKwToggle: 0
     - _Smoothness: 0
+    - _SubsurfaceIndirect: 0.25
+    - _SubsurfaceKwToggle: 0
+    - _TwoSided: 2
     - _UnitScale: 20
+    - _WindQuality: 0
     - __dirty: 0
     m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _HueVariationColor: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _MBBendDirChangeSpeed: {r: 0.08, g: 0.1, b: 0, a: 0}
     - _MBNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
     - _MBPhaseShiftNoiseTiling: {r: 4, g: 4, b: 0, a: 0}
@@ -86,3 +114,7 @@ Material:
     - _MBWorldNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
     - _NoisePannerSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
     - _NoiseTextureTilling: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor2: {r: 0, g: 0, b: 0, a: 1}
+    - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

@@ -10,7 +10,7 @@ public class CardGameManager : MonoBehaviour
 {
     GameObject[] cards;     //카드를 프리펩에서 저장
     GameObject[] cardsMix;  //cards 배열에서 섞은 것을 저장
-    int[] level = { 0, 4, 5, 6, 8 };      //레벨 별 카드 종류 개수
+    int[] level = { 0, 4, 6, 8 };      //레벨 별 카드 종류 개수
     
     private List<GameObject> AllCard = new List<GameObject>();    //생성된 카드 오브젝트
 
@@ -71,12 +71,13 @@ public class CardGameManager : MonoBehaviour
                     break;
             }
 
-            //시간이 0이 되면 게임 오버
-            if (Card_TimeSlider.nowTime <= 0)
+            if (stageNum < 4)
             {
-                state = STATE.FAIL;
+                if (Card_TimeSlider.nowTime <= 0)
+                {
+                    state = STATE.FAIL;
+                }
             }
-            
             
         }
     }
@@ -103,16 +104,8 @@ public class CardGameManager : MonoBehaviour
         AllCard.Clear();
 
         StageText();
-        int arrLen;
-        if (stageNum <= 4)//스테이지에 배치될 카드 종류 개수
-        {
-            arrLen = level[stageNum];
-        }
-        else    //4단계부터는 3단계와 동일하게
-        {
-            arrLen = level[4];
-        }
-         
+
+        int arrLen = level[stageNum]; //스테이지에 배치될 카드 종류 개수
         cardCnt = arrLen * 2;   //스테이지에 배치될 카드의 총 개수
         Card_TimeSlider.instance.TimeAdd();   //10초 증가
         GameObject[] arrTmp = new GameObject[cardCnt]; //한 카드 당 두 장씩 저장하게 될 것이므로
@@ -196,6 +189,11 @@ public class CardGameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         state = STATE.START;
+        if (stageNum == 4)
+        {
+            Clear();
+            state = STATE.WAIT;
+        }
     }
 
     void Clear()
@@ -213,28 +211,14 @@ public class CardGameManager : MonoBehaviour
     {
         state = STATE.WAIT;
 
-        float sx = -1.2f;
-        float sz = 4.2f;
-        if(stageNum >= 3)
-        {
-            sz = 3.3f;
-        }
-        if(stageNum >= 4)
-        {
-            sx = -2.0f;
-        }
+        float sx = -2.05f;
+        float sz = 3.32f;
+
+        SetCardPos(out sx, out sz); //카드 위치 설정 함수
 
         int n = 1;
 
-        string[] str;
-        if (stageNum <= 4)
-        {
-            str = SetStage.stage[stageNum - 1];
-        }
-        else
-        {
-            str = SetStage.stage[3];
-        }
+        string[] str = SetStage.stage[stageNum - 1];
         foreach (string t in str)
         {
             char[] ch = t.Trim().ToCharArray();
@@ -278,6 +262,40 @@ public class CardGameManager : MonoBehaviour
         state = STATE.IDLE;
     }
 
+    void SetCardPos(out float sx, out float sz)
+    {
+        float x = -2.05f;
+        float z = 3.32f;
+        string[] str = SetStage.stage[stageNum-1];
+
+        for (int i = 0; i < str.Length; i++)
+        {
+            string t = str[i].Trim();
+            x = 0;
+
+            for (int j = 0; j < t.Length; j++)
+            {
+                switch (t[j])
+                {
+                    case '.':
+                    case '*':
+                        x++;
+                        break;
+                }
+            }
+            z = z + 0.5f;
+        }
+        if (stageNum == 1)
+        {
+            sx = -1.45f;
+            sz = 2.13f;
+        }
+        else
+        {
+            sx = -2.05f;
+            sz = 3.32f;
+        }
+    }
 
     private void StageText()
     {

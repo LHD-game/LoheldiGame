@@ -87,7 +87,7 @@ public class ToothGameManager : MonoBehaviour
         BlackCount = 0;
         timerTxt.text = "";
 
-        Player.transform.position = new Vector3(0f, 5.5f, 14f);
+        Player.transform.position = new Vector3(0f, 0f, 20f);
 
         BlackToothArr();
         ToothCountDown.instance.ResetTimer();

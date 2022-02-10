@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NHP_Tree_LP_A1_01
-  m_Shader: {fileID: 4800000, guid: 456879bc4c5cf2042b35700e494bdf0b, type: 3}
+  m_Shader: {fileID: 10704, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ENABLEHORIZONTALBENDING_ON _ENABLEHORIZONTALMOVEMENT_ON _ENABLEMAINBENDING_ON
     _ENABLEVERTICALBENDING_ON _ENABLEVERTICALMOVEMENT_ON
   m_LightmapFlags: 4
@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 82b66ffd8f6978c44a3d60fd789fe71d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -32,6 +36,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: f55a7ba0496960f42a83ee7d64320fac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _PatternTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture0:
         m_Texture: {fileID: 2800000, guid: 512fa11ad89d84543ad8d6c8d9cb6743, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -41,6 +49,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AO: 2.4
+    - _BaseLight: 0.35
     - _DBHorizontalAmplitude: 2
     - _DBHorizontalFrequency: 1.1
     - _DBHorizontalMaxDistance: 2
@@ -66,9 +76,10 @@ Material:
     - _MBMaxHeight: 8
     - _MBPhase: 1
     - _MBWindBlend: 0
-    - _MBWindDir: 224
+    - _MBWindDir: 111
+    - _MBWindDirBlend: 0
     - _MBWindDirFrequency: 0.2
-    - _MBWindDirOffset: 53
+    - _MBWindDirOffset: 46
     - _MBWindDirOffsetFrequency: 1
     - _MBWindDirOffsetPhase: 1
     - _MBWindDirPhase: 1
@@ -77,6 +88,7 @@ Material:
     - _MBWindDirectionOffset: 20
     - _Metallic: 0
     - _Smoothness: 0
+    - _SquashAmount: 1
     - _TransAmbient: 0.243
     - _TransDirect: 0.5
     - _TransNormalDistortion: 0.1
@@ -86,6 +98,7 @@ Material:
     - _UnitScale: 20
     - __dirty: 0
     m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _MBBendDirChangeSpeed: {r: 0.08, g: 0.1, b: 0, a: 0}
     - _MBNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
     - _MBPhaseShiftNoiseTiling: {r: 5, g: 4, b: 0, a: 0}
@@ -100,5 +113,10 @@ Material:
     - _NoiseTexturePannerSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
     - _NoiseTextureTilling: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseTillingStaticXYAnimatedZW: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor2: {r: 0, g: 0, b: 0, a: 1}
     - _StaticNoiseXYAnimatedNoiseZW: {r: 1, g: 1, b: 1, a: 1}
     - _TranlucencyColor: {r: 0.3244946, g: 0.3301887, b: 0.3068263, a: 1}
+    - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

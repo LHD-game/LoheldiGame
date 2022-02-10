@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NHP_Tree_LP_D1_01
-  m_Shader: {fileID: 4800000, guid: 456879bc4c5cf2042b35700e494bdf0b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 59b73456e03e64048b69d7b3c20b38c9, type: 3}
   m_ShaderKeywords: _ENABLEHORIZONTALMOVEMENT_ON _ENABLEMAINBENDING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -29,6 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NoiseTexture:
         m_Texture: {fileID: 2800000, guid: 4dbeb0599a039d44084c0fbf55466352, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PatternTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -62,6 +66,7 @@ Material:
     - _MBPhase: 1
     - _MBWindBlend: 0
     - _MBWindDir: 181
+    - _MBWindDirBlend: 0
     - _MBWindDirFrequency: 1
     - _MBWindDirOffset: 26
     - _MBWindDirOffsetFrequency: 1
@@ -86,3 +91,6 @@ Material:
     - _MBWorldNoiseTiling: {r: 1, g: 1, b: 0, a: 0}
     - _NoisePannerSpeed: {r: 0.05, g: 0.03, b: 0, a: 0}
     - _NoiseTextureTilling: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor1: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor2: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

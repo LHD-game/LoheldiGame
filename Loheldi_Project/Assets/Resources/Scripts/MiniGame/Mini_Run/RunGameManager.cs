@@ -6,7 +6,7 @@ public class RunGameManager : MonoBehaviour
 {
     public static int difficulty = 0;
 
-    public Transform[] NPC = new Transform[4];  //none, hami, nari, himchan 순서대로
+    public Transform[] NPC = new Transform[3];  //hami, nari, himchan 순서대로
     public Transform Player;
     private float NPCz;
     private float Playerz;
@@ -38,35 +38,29 @@ public class RunGameManager : MonoBehaviour
     private Transform nowNPC;
     void Update()
     {
-
-        if (difficulty != 0)
+        nowNPC = NPC[difficulty];
+        nowNPC.gameObject.SetActive(true);
+        if(nowNPC.position.z >= 3000)
         {
-            nowNPC = NPC[difficulty];
-            nowNPC.gameObject.SetActive(true);
-
-
-            if (nowNPC.position.z >= 3000)
-            {
-                nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
-                RunBtnPanel.SetActive(false);
-                Lose_txt.gameObject.SetActive(true);
-                GameOverPanel.SetActive(true);
-            }
-            else if (Player.position.z >= 3000)
-            {
-                nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
-                RunBtnPanel.SetActive(false);
-                Win_txt.gameObject.SetActive(true);
-                GameOverPanel.SetActive(true);
-            }
-            NPCz = nowNPC.position.z;
-            Playerz = Player.position.z;
-
-            PMarker.localPosition = new Vector3(Playerz - 1600, 125, 0);
-            NMarker.localPosition = new Vector3(NPCz - 1600, 125, 0);
-
-            player.velocity = player.velocity / 1.0085f;
+            nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
+            RunBtnPanel.SetActive(false);
+            Lose_txt.gameObject.SetActive(true);
+            GameOverPanel.SetActive(true);
         }
+        else if (Player.position.z >= 3000)
+        {
+            nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
+            RunBtnPanel.SetActive(false);
+            Win_txt.gameObject.SetActive(true);
+            GameOverPanel.SetActive(true);
+        }
+        NPCz = nowNPC.position.z;
+        Playerz = Player.position.z;
+
+        PMarker.localPosition = new Vector3(Playerz - 1600, 125, 0);
+        NMarker.localPosition = new Vector3(NPCz - 1600, 125, 0);
+
+        player.velocity = player.velocity / 1.0085f;
     }
 
     public void Reset()
@@ -76,16 +70,16 @@ public class RunGameManager : MonoBehaviour
         Vector3 startNpos = new Vector3(0.0f, 0.0f, 0.0f);
 
         Player.position = startPpos;
+        NPC[0].position = startNpos;
         NPC[1].position = startNpos;
         NPC[2].position = startNpos;
-        NPC[3].position = startNpos;
 
         NMarker.localPosition = markerPos;
         PMarker.localPosition = markerPos;
 
+        NPC[0].gameObject.SetActive(false);
         NPC[1].gameObject.SetActive(false);
         NPC[2].gameObject.SetActive(false);
-        NPC[3].gameObject.SetActive(false);
 
         difficulty = 0;
         isPause = false;
@@ -97,9 +91,9 @@ public class RunGameManager : MonoBehaviour
         WelcomePanel.SetActive(true);
         PausePanel.SetActive(false);
 
+        NPC[0].gameObject.GetComponent<RunNPC>().enabled = true;
         NPC[1].gameObject.GetComponent<RunNPC>().enabled = true;
         NPC[2].gameObject.GetComponent<RunNPC>().enabled = true;
-        NPC[3].gameObject.GetComponent<RunNPC>().enabled = true;
 
         player.velocity = new Vector3(0, 0, 0);
     }

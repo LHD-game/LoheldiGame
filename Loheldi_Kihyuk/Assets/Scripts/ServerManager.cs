@@ -236,7 +236,7 @@ public class ServerManager : MonoBehaviour
         if (BRO.IsSuccess()) print("동기 방식 이메일 등록 완료");
     }
 
-    public void getUserData()
+    /*public void getUserData()
     {
 
         Where where = new Where();
@@ -257,15 +257,15 @@ public class ServerManager : MonoBehaviour
             //string email = jsonData["email"][0].ToString();
 
 
-            /*print("ID:" + userID.text);
-            print("PW:" + userPW.text);*/
+            *//*print("ID:" + userID.text);
+            print("PW:" + userPW.text);*//*
             userID.text = "ID:" + ID.text;
             userPW.text = "PW:" + PW.text;
             //userEmail.text = "email:" + email;
         }
         else Error(bro.GetErrorCode(), "gameData");
 
-    }
+    }*/
     public void Save()
     {
         PlayerPrefs.SetString("ID", ID.text);
@@ -305,56 +305,7 @@ public class ServerManager : MonoBehaviour
         }
     }
 
-    /*public void OnClickInsertData()
-    {
-
-        int Level = Random.Range(0, 99);
-        double Coin = Random.Range(0, 99999);
-
-        // Param은 뒤끝 서버와 통신을 할 떄 넘겨주는 파라미터 클래스 입니다. 
-        Param param = new Param();
-        param.Add("lv", Level);
-        param.Add("coin", Coin);
-
-
-        // 값을 Dictionary 로 사용하기
-        Dictionary<string, int> equipment = new Dictionary<string, int>
-        {
-            { "weapon", 123 },
-            { "armor", 111 },
-            { "helmet", 1345 }
-        };
-
-        param.Add("equipItem", equipment);
-
-        BackendReturnObject BRO = Backend.GameInfo.Insert("game", param);
-
-        if (BRO.IsSuccess())
-        {
-            Debug.Log("indate : " + BRO.GetInDate());
-        }
-        else
-        {
-            switch (BRO.GetStatusCode())
-            {
-                case "404":
-                    Debug.Log("존재하지 않는 tableName인 경우");
-                    break;
-
-                case "412":
-                    Debug.Log("비활성화 된 tableName인 경우");
-                    break;
-
-                case "413":
-                    Debug.Log("하나의 row( column들의 집합 )이 400KB를 넘는 경우");
-                    break;
-
-                default:
-                    Debug.Log("서버 공통 에러 발생: " + BRO.GetMessage());
-                    break;
-            }
-        }
-    }*/
+    
     void CheckError(BackendReturnObject BRO)
     {
         switch (BRO.GetStatusCode())

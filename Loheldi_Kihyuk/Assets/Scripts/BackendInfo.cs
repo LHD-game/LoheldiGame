@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using LitJson;
+using System;
 
 public class BackendInfo : MonoBehaviour
 {
     Dictionary<string, string> charset = new Dictionary<string, string>
         {
-            { "Level", "1" },
+            { "Level" , "1" },
             { "Coin", "2000"},
             { "Exp", "150" }
         }; 

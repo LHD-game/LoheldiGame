@@ -634,6 +634,7 @@ GameObject:
   - component: {fileID: 87408838}
   - component: {fileID: 87408840}
   - component: {fileID: 87408839}
+  - component: {fileID: 87408841}
   m_Layer: 5
   m_Name: SignupPanel
   m_TagString: Untagged
@@ -705,6 +706,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87408837}
   m_CullTransparentMesh: 1
+--- !u!114 &87408841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87408837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3a791d937af1e4b96b891e440f27ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: {fileID: 1032993233}
+  InputID: {fileID: 748809157}
+  InputPW: {fileID: 1568249391}
+  InputEmail: {fileID: 194115650}
+  CheckID: {fileID: 1830367915}
 --- !u!1 &181137423
 GameObject:
   m_ObjectHideFlags: 0
@@ -4447,6 +4465,7 @@ GameObject:
   - component: {fileID: 1615637968}
   - component: {fileID: 1615637970}
   - component: {fileID: 1615637969}
+  - component: {fileID: 1615637971}
   m_Layer: 5
   m_Name: LoginPanel
   m_TagString: Untagged
@@ -4517,6 +4536,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615637967}
   m_CullTransparentMesh: 1
+--- !u!114 &1615637971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615637967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3a791d937af1e4b96b891e440f27ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputName: {fileID: 0}
+  InputID: {fileID: 2060474215}
+  InputPW: {fileID: 1761054239}
+  InputEmail: {fileID: 0}
+  CheckID: {fileID: 0}
 --- !u!1 &1623812213
 GameObject:
   m_ObjectHideFlags: 0
@@ -4599,7 +4635,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1623812216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1615637971}
+        m_TargetAssemblyTypeName: Register, Assembly-CSharp
+        m_MethodName: Login
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1623812216
 MonoBehaviour:
   m_ObjectHideFlags: 0

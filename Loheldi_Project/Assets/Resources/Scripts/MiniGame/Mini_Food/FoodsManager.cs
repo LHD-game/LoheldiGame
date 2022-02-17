@@ -63,10 +63,12 @@ public class FoodsManager : MonoBehaviour
         if (rb.gameObject.tag == "GoodFood")
         {
             GameManager.instance.ScoreCnt();
+            FoodFX.instance.GoodFoodFX();
         }
         else
         {
             GameManager.instance.LifeCnt();
+            FoodFX.instance.BadFoodFX();
         }
     }
 

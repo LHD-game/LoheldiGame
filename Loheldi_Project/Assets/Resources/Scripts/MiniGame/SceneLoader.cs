@@ -25,4 +25,12 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Game_Tooth");
     }
+    public void GotoGameMove()
+    {
+        SceneManager.LoadScene("GameMove");
+    }
+    public void GotoComditionWindow()
+    {
+        SceneManager.LoadScene("CharacterCondition");
+    }
 }

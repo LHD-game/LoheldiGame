@@ -7,14 +7,15 @@ public class MainGameManager : MonoBehaviour
 {
     public int money;
     public int level;
-    public int conditionLevel;
+    public int conditionLevel; //상태창 레벨
     public static int exp;
-    float expPersent;
     float Maxexp;
 
     public Text moneyText;
-    public Text levelText; 
-    public Text conditionLevelText;
+    public Text levelText;
+    public Text expBarleftText;                    //필요한 경험치량
+    public Text expBarrightText;                  //현재 경험치량
+    public Text conditionLevelText;            //상태창 레벨
     public Slider slider;
     public Slider conditionSlider;
 
@@ -29,16 +30,17 @@ public class MainGameManager : MonoBehaviour
     void Update()
     {
         moneyText.text = money.ToString();
+        expBarleftText.text = exp.ToString("F0");              //설명설명
+        expBarrightText.text = Maxexp.ToString("F0");                  //설명설명설명
         levelText.text = level.ToString();
         conditionLevelText.text = level.ToString();
 
         slider.maxValue = Maxexp;
         conditionSlider.maxValue = Maxexp;
-        expPersent = exp / Maxexp;
-        slider.value = expPersent * 100;
-        conditionSlider.value = expPersent * 100;
+        slider.value = exp;
+        conditionSlider.value = slider.value;
 
-        if (slider.value >= Maxexp)
+        if (exp >= Maxexp)
         {
             LevelUp();
         }

@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    //Login
+    public void GotoUserInfo()
+    {
+        SceneManager.LoadScene("UserInfo");
+    }
+
+
+    //Mini Game
     public void GotoLobby()
     {
         SceneManager.LoadScene("Game_Lobby");
@@ -25,6 +33,8 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Game_Tooth");
     }
+
+
     public void GotoGameMove()
     {
         SceneManager.LoadScene("GameMove");

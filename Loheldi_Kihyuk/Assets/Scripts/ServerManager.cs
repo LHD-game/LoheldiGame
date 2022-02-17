@@ -47,7 +47,7 @@ public class ServerManager : MonoBehaviour
     public void Register()
     {
         
-        BackendReturnObject BRO = Backend.BMember.CustomSignUp(ID.text, PW.text, email.text);
+        BackendReturnObject BRO = Backend.BMember.CustomSignUp(ID.text, PW.text);
         Param param = new Param();
         param.Add("id", ID.text);
         param.Add("pw", PW.text);

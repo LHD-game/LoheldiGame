@@ -29,6 +29,7 @@ public class UIButton : MonoBehaviour
             {
                 Playerrb.AddForce(transform.up * 15000);
                 OnLand = false;
+                MainGameManager.exp = MainGameManager.exp + 100;
             }
         }
     }

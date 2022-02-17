@@ -14,7 +14,7 @@ public class VirtualJoystick : MonoBehaviour
     private float Radius;
     private bool MoveFlag;
 
-    public Animator Animation;
+    //public Animator Animation;
 
     void Start()
     {
@@ -65,6 +65,6 @@ public class VirtualJoystick : MonoBehaviour
         JoyVec = Vector3.zero;
         MoveFlag = false;
         Playerrb.velocity = new Vector3(0, 0, 0);
-        Animation.SetBool("IsWalk", false);
+        //Animation.SetBool("IsWalk", false);
     }
 }

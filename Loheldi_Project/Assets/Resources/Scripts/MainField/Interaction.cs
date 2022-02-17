@@ -5,28 +5,29 @@ using UnityEngine.UI;
 
 public class Interaction : MonoBehaviour
 {
-    public Text text;
-    public bool NearNPC = false;
+    public Text text;                               //점프버튼에 글자를 선언
+    public bool NearNPC = false;                    //NPC근처에 있는지 확인하는 함수 선언
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)             //다른 콜리더와 부딛혔을때
     {
-        if (NearNPC)
-        {
-            text.text = "대화";
-        }
-        else
-        {
-            text.text = "점프";
-        }
-
-        if (other.gameObject.tag == "NPC")
+        if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
         {
             NearNPC = true;
+            text.text = "대화";
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
     {
-        NearNPC = false;
+
+    }
+
+    void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때
+    {
+        if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
+        {
+            NearNPC = false;
+            text.text = "점프";
+        }
     }
 }

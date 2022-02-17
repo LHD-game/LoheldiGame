@@ -40,7 +40,20 @@ public class Register : MonoBehaviour
         else CheckID.text = "중복된 아이디 입니다.";
 
     }
-    
+    public void Login()
+    {
+        BackendReturnObject BRO = Backend.BMember.CustomLogin(InputID.text, InputPW.text);
+
+        if (BRO.IsSuccess())
+        {
+            print("동기방식 로그인 성공");
+
+        }
+
+        else Error(BRO.GetErrorCode(), "UserFunc");
+
+    }
+
     public void CreateEmail()
     {
         BackendReturnObject BRO = Backend.BMember.UpdateCustomEmail(InputEmail.text);

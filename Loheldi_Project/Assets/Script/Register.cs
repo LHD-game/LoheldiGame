@@ -15,7 +15,14 @@ public class Register : MonoBehaviour
     public Text CheckID;
     //public Text CheckNick;
 
+    [Header("User Info")]
+
+    public Text userNick;
+    public Text userID;
+    public Text userPW;
+    public Text userEmail;
     public void UserRegister()
+
     {
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
         Param param = new Param();
@@ -60,6 +67,21 @@ public class Register : MonoBehaviour
       
         if (BRO.IsSuccess()) print("동기 방식 이메일 등록 완료");
                
+    }
+    public void Save()
+    {
+        PlayerPrefs.SetString("ID", InputID.text);
+        PlayerPrefs.SetString("PW", InputPW.text);
+        PlayerPrefs.SetString("Email", InputEmail.text);
+    }
+    public void Road()
+    {
+        if (PlayerPrefs.HasKey("ID"))
+        {
+            userID.text = PlayerPrefs.GetString("ID");
+            userPW.text = PlayerPrefs.GetString("PW").ToString();
+            userEmail.text = PlayerPrefs.GetString("Email").ToString();
+        }
     }
     // Start is called before the first frame update
     void Start()

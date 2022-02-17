@@ -9,15 +9,17 @@ public class ServerManager : MonoBehaviour
     [Header("Login & Register")]
     public InputField ID;    
     public InputField PW;
+    public InputField Nickname;
+    public InputField email;
     public Text CheckID;
     public Text CheckNick;
 
     [Header("User Info")]
-    public InputField Nickname;
-    public InputField email;
+    
     public Text userNick;
     public Text userID;
     public Text userPW;
+    public Text userEmail;
 
     /*BackendReturnObject bro = new BackendReturnObject();
     bool isSuccess = false;
@@ -25,7 +27,7 @@ public class ServerManager : MonoBehaviour
 
     Dictionary<string, string> user = new Dictionary<string, string>
     {
-        {"id", "" },
+        {"id", ""},
         {"pw", "" },
         {"email", "" }
     };
@@ -49,12 +51,16 @@ public class ServerManager : MonoBehaviour
         Param param = new Param();
         param.Add("id", ID.text);
         param.Add("pw", PW.text);
+        param.Add("email", email.text);
         
+                
         var bro = Backend.GameData.Insert("user", param);
+        
         if (bro.IsSuccess())
         {
             print("동기 방식 데이터 입력 성공");
         }
+       
         else Error(bro.GetErrorCode(), "gamedata");
         
         
@@ -73,24 +79,26 @@ public class ServerManager : MonoBehaviour
         if (bro.IsSuccess())
         {
             bro.GetReturnValuetoJSON();
-            bool I = user.TryGetValue("id", out string testValue);
+            bool I = user.TryGetValue("id", out string id);
             {
-                print("ID:" + testValue);
+                print("ID:" + id);
             };
-            bool P = user.TryGetValue("pw", out string testValue2);
+            var P = user.TryGetValue("pw", out var pw);
             {
-                print("PW:" + testValue2);
+                print("PW:" + pw);
             };
-            bool E = user.TryGetValue("email", out string testValue3);
+            var E = user.TryGetValue("email", out var email);
             {
-                print("Email:" + testValue3);
+                print("Email:" + email);
             };
             /* print($"level: {charset.TryGetValue("Level", out string testValue)}"){
                  Debug.Log("level: " + testValue);
              };*/
             /* print($"coin: {charset}"[1]);
              print($"exp: {charset}"[2]);*/
-
+            print(I);
+            print(P);
+            print(E);
         }
 
         else
@@ -100,6 +108,7 @@ public class ServerManager : MonoBehaviour
         }
         if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
         {
+            
             // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
             // 데이터가 존재하는지 확인
             // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
@@ -114,6 +123,34 @@ public class ServerManager : MonoBehaviour
             Debug.Log(inDate);
         }
     }
+    /*public void checkInfo2()
+    {
+        var bro = Backend.GameData.Get("user", new Where(), 10);
+        if (bro.IsSuccess() == false)
+        {
+            // 요청 실패 처리
+            Debug.Log(bro);
+            return;
+        }
+        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            print("ID:" + "id");
+            print("PW:" + "pw");
+            print("Email:" + "email");
+            // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
+            // 데이터가 존재하는지 확인
+            // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
+            Debug.Log(bro);
+            return;
+        }
+
+        // 검색한 데이터의 모든 row의 inDate 값 확인
+        for (int i = 0; i < bro.Rows().Count; ++i)
+        {
+            var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
+            Debug.Log(inDate);
+        }
+    }*/
     
         
     // 동기방식 로그인
@@ -183,8 +220,13 @@ public class ServerManager : MonoBehaviour
                         "\ninDate : " + returnJson["inDate"].ToString() +
                         "\nsubscriptionType : " + returnJson["subscriptionType"].ToString() +
                         "\nemailForFindPassword : " + returnJson["emailForFindPassword"];
+        /*userEmail.text = "email : " + returnJson["email"] +
+                        "\ninDate : " + returnJson["inDate"].ToString() +
+                        "\nsubscriptionType : " + returnJson["subscriptionType"].ToString() +
+                        "\nemailForFindPassword : " + returnJson["emailForFindPassword"];*/
+
         /*userID.text = "ID : " + returnJson["id"].ToString();*/
-                      
+
     }
     // 동기 방식 이메일 등록
     public void UpdateEmail()
@@ -194,29 +236,50 @@ public class ServerManager : MonoBehaviour
         if (BRO.IsSuccess()) print("동기 방식 이메일 등록 완료");
     }
 
-    public void getUserData()
+    /*public void getUserData()
     {
 
         Where where = new Where();
         where.Equal("id", ID.text);
         where.Equal("pw", PW.text);
-        //where.Equal("email", email.text);
+        //where.Equal("email", email);
+
         var bro = Backend.GameData.Get("user", where);
+        //where.Equal("email", userEmail.text);
+        
+        
         if (bro.IsSuccess())
         {
-            /*JsonData jsonData = bro.GetReturnValuetoJSON();
-            string id = jsonData["id"][0].ToString();
-            string pw = jsonData["pw"][0].ToString();
-            string email = jsonData["email"][0].ToString();*/
+            JsonData jsonData = bro.GetReturnValuetoJSON();
+            
+            //string id = jsonData["id"][0].ToString();
+            //string pw = jsonData["pw"][0].ToString();
+            //string email = jsonData["email"][0].ToString();
 
-            /*print("ID:" + userID.text);
-            print("PW:" + userPW.text);*/
+
+            *//*print("ID:" + userID.text);
+            print("PW:" + userPW.text);*//*
             userID.text = "ID:" + ID.text;
             userPW.text = "PW:" + PW.text;
-            //print("Email:" + email.text);
+            //userEmail.text = "email:" + email;
         }
         else Error(bro.GetErrorCode(), "gameData");
 
+    }*/
+    public void Save()
+    {
+        PlayerPrefs.SetString("ID", ID.text);
+        PlayerPrefs.SetString("PW", PW.text);
+        PlayerPrefs.SetString("email", email.text);
+    }
+    public void Road()
+    {
+        if(PlayerPrefs.HasKey("ID"))
+        {
+            userID.text = PlayerPrefs.GetString("ID");
+            userPW.text = PlayerPrefs.GetString("PW").ToString();
+            userEmail.text = PlayerPrefs.GetString("email").ToString();
+        }
     }
     // 에러 코드 확인
     void Error(string errorCode, string type)
@@ -242,56 +305,7 @@ public class ServerManager : MonoBehaviour
         }
     }
 
-    /*public void OnClickInsertData()
-    {
-
-        int Level = Random.Range(0, 99);
-        double Coin = Random.Range(0, 99999);
-
-        // Param은 뒤끝 서버와 통신을 할 떄 넘겨주는 파라미터 클래스 입니다. 
-        Param param = new Param();
-        param.Add("lv", Level);
-        param.Add("coin", Coin);
-
-
-        // 값을 Dictionary 로 사용하기
-        Dictionary<string, int> equipment = new Dictionary<string, int>
-        {
-            { "weapon", 123 },
-            { "armor", 111 },
-            { "helmet", 1345 }
-        };
-
-        param.Add("equipItem", equipment);
-
-        BackendReturnObject BRO = Backend.GameInfo.Insert("game", param);
-
-        if (BRO.IsSuccess())
-        {
-            Debug.Log("indate : " + BRO.GetInDate());
-        }
-        else
-        {
-            switch (BRO.GetStatusCode())
-            {
-                case "404":
-                    Debug.Log("존재하지 않는 tableName인 경우");
-                    break;
-
-                case "412":
-                    Debug.Log("비활성화 된 tableName인 경우");
-                    break;
-
-                case "413":
-                    Debug.Log("하나의 row( column들의 집합 )이 400KB를 넘는 경우");
-                    break;
-
-                default:
-                    Debug.Log("서버 공통 에러 발생: " + BRO.GetMessage());
-                    break;
-            }
-        }
-    }*/
+    
     void CheckError(BackendReturnObject BRO)
     {
         switch (BRO.GetStatusCode())

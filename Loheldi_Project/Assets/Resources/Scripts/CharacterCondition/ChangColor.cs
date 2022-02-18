@@ -5,24 +5,25 @@ using UnityEngine;
 public class ChangColor : MonoBehaviour
 {
     public GameObject Target;
-    private bool state;
     private int active;
 
 
     // Update is called once per frame
     void Update()
     {
-        active = GameObject.Find("EventSystem").GetComponent<MainGameManager>().level;
+        //MainGameManager activeBring = GameObject.Find("EventSystem").GetComponent<MainGameManager>();
+        //active = GameObject.Find("EventSystem").GetComponent<MainGameManager>().level;
+        active = MainGameManager.level;
         if (active == 5)
         {
             Active();
         }
-        
     }
 
     public void Active()
     {
         Target.SetActive(false);
-
     }
+
+   
 }

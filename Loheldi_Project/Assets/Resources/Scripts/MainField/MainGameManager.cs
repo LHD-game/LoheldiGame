@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MainGameManager : MonoBehaviour
 {
     public int money;
-    public int level;
+    public static int level;
     public int conditionLevel; //상태창 레벨
     public static int exp;
     float Maxexp;
@@ -33,12 +33,12 @@ public class MainGameManager : MonoBehaviour
         expBarleftText.text = exp.ToString("F0");              //설명설명
         expBarrightText.text = Maxexp.ToString("F0");                  //설명설명설명
         levelText.text = level.ToString();
-        conditionLevelText.text = level.ToString();
+
 
         slider.maxValue = Maxexp;
         conditionSlider.maxValue = Maxexp;
         slider.value = exp;
-        conditionSlider.value = slider.value;
+        conditionSlider.value = exp;
 
         if (exp >= Maxexp)
         {

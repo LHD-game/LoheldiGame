@@ -8,7 +8,7 @@ public class MainGameManager : MonoBehaviour
     public int money;
     public static int level;
     public int conditionLevel; //상태창 레벨
-    public static int exp;
+    public static float exp;
     float Maxexp;
 
     public Text moneyText;
@@ -51,7 +51,7 @@ public class MainGameManager : MonoBehaviour
     {
         conditionSlider.value = 0;
         slider.value = 0;
-        exp = 0;
+        exp = exp - Maxexp;
         Maxexp = Maxexp * 1.2f;
         level++;
         conditionLevel++;

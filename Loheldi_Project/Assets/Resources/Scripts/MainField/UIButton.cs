@@ -8,9 +8,9 @@ public class UIButton : MonoBehaviour
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언
-    public GameObject ConditionWindow;    //Map선언
-    public Text conditionLevelText;       //으아아아아
+    public GameObject ConditionWindow;                //Map선언
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
+    public Text conditionLevelText;            //상태창 레벨
 
     public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
@@ -60,7 +60,7 @@ public class UIButton : MonoBehaviour
             ConditionWindow.SetActive(false);
             conditionWindow = false;
         }
-        else                                                            //상태창이 닫혀있다면
+        else                                                //상태창이 닫혀있다면
         {
             ConditionWindow.SetActive(true);
             conditionWindow = true;

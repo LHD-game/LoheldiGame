@@ -10,9 +10,9 @@ public class Register : MonoBehaviour
     public InputField InputName;
     public InputField InputID;
     public InputField InputPW;
-    //public InputField Nickname;
+    public InputField InputPW2;
     public InputField InputEmail;
-    public InputField InputAge;
+    //public InputField InputAge;
     public Text CheckID;
     public Text CheckEmail;
     //public Text CheckNick;
@@ -23,8 +23,38 @@ public class Register : MonoBehaviour
     public Text userID;
     public Text userPW;
     public Text userEmail;
-    public void UserRegister()
 
+    // 정규식 체크 변수
+    bool nameOK = false;
+    bool idOK = false;
+    bool pwOK = false;
+    bool repwOK = false;
+    bool emailOK = false;
+    public static bool allOK = false;
+
+    public void Signup()
+    {
+        //정규식 만족 체크
+        SignupCheck sc = new SignupCheck();
+        nameOK = sc.ChkName(InputName.text);
+        idOK = sc.ChkID(InputID.text);
+        pwOK = sc.ChkPW(InputPW.text);
+        repwOK = sc.RePW(InputPW.text, InputPW2.text);
+        emailOK = sc.ChkEmail(InputEmail.text);
+
+        if(nameOK && idOK && pwOK && repwOK && emailOK) //정규식을 모두 만족하면, 서버에 정보 저장
+        {
+            allOK = true;
+            UserRegister();
+        }
+        else
+        {
+            allOK = false;
+          //nameok = false면
+        }
+    }
+
+    private void UserRegister()  //유저 정보 id, pw 서버에 저장
     {
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
        
@@ -34,17 +64,18 @@ public class Register : MonoBehaviour
             print("동기방식 회원가입 성공");
         }
         else CheckID.text = "중복된 아이디 입니다.";
-        
+
+        UserInfoDB();
     }
 
-    public void UserInfoDB()
+    private void UserInfoDB()    //회원 정보를 user 테이블에 저장(pw, email 보기 위함)
     {
         Param param = new Param();
         param.Add("id", InputID.text);
         param.Add("pw", InputPW.text);
         param.Add("name", InputName.text);
         param.Add("email", InputEmail.text);
-        param.Add("age", InputAge.text);
+        //param.Add("age", InputAge.text);
 
         var bro = Backend.GameData.Insert("user", param);
 
@@ -79,14 +110,14 @@ public class Register : MonoBehaviour
         else CheckEmail.text = "중복된 이메일 주소입니다.";
                
     }
-    public void Save()
+/*    public void Save()    //로컬에 저장
     {
         PlayerPrefs.SetString("Name", InputName.text);
         PlayerPrefs.SetString("ID", InputID.text);
         PlayerPrefs.SetString("PW", InputPW.text);
         PlayerPrefs.SetString("Email", InputEmail.text);
-        PlayerPrefs.SetString("Age", InputAge.text);
-    }
+        //PlayerPrefs.SetString("Age", InputAge.text);
+    }*/
     /*public void Load()
     {
         if (PlayerPrefs.HasKey("ID"))

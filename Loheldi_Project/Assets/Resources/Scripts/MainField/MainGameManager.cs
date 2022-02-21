@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public Slider conditionSlider;
-float Maxexp;
+public class MainGameManager : MonoBehaviour
+{
+    public int money;
+    public int level;
+    public int conditionLevel; //상태창 레벨
+    public static int exp;
+    float Maxexp;
 
     public Text moneyText;
     public Text levelText;
@@ -13,7 +18,6 @@ float Maxexp;
     public Text conditionLevelText;            //상태창 레벨
     public Slider slider;
     public Slider conditionSlider;
-
     void Start()
     {
         conditionLevel = 1;
@@ -21,30 +25,24 @@ float Maxexp;
         Maxexp = 100;
         exp = 0;
     }
-
     void Update()
     {
         moneyText.text = money.ToString();
         expBarleftText.text = exp.ToString("F0");              //설명설명
         expBarrightText.text = Maxexp.ToString("F0");                  //설명설명설명
-    {
-        moneyText.text = money.ToString();
         levelText.text = level.ToString();
         conditionLevelText.text = level.ToString();
 
         slider.maxValue = Maxexp;
         conditionSlider.maxValue = Maxexp;
-        expPersent = exp / Maxexp;
-        slider.value = expPersent * 100;
-        conditionSlider.value = expPersent * 100;
+        slider.value = exp;
+        conditionSlider.value = slider.value;
 
-        if (slider.value >= Maxexp)
+        if (exp >= Maxexp)
         {
             LevelUp();
         }
     }
-
-
     void LevelUp()
     {
         conditionSlider.value = 0;

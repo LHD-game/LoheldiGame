@@ -6,15 +6,13 @@ using UnityEngine.UI;
 public class MainGameManager : MonoBehaviour
 {
     public int money;
-    public int level;
+    public static int level;
     public int conditionLevel;
-    public static int exp;
-    float expPersent;
+    public static float exp;
     float Maxexp;
 
     public Text moneyText;
     public Text levelText; 
-    public Text conditionLevelText;
     public Slider slider;
     public Slider conditionSlider;
 
@@ -30,13 +28,11 @@ public class MainGameManager : MonoBehaviour
     {
         moneyText.text = money.ToString();
         levelText.text = level.ToString();
-        conditionLevelText.text = level.ToString();
 
         slider.maxValue = Maxexp;
         conditionSlider.maxValue = Maxexp;
-        expPersent = exp / Maxexp;
-        slider.value = expPersent * 100;
-        conditionSlider.value = expPersent * 100;
+        slider.value = exp;
+        conditionSlider.value = exp;
 
         if (slider.value >= Maxexp)
         {
@@ -49,7 +45,7 @@ public class MainGameManager : MonoBehaviour
     {
         conditionSlider.value = 0;
         slider.value = 0;
-        exp = 0;
+        exp = exp - Maxexp;
         Maxexp = Maxexp * 1.2f;
         level++;
         conditionLevel++;

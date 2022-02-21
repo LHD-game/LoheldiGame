@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIButton : MonoBehaviour
 {
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언
-    public GameObject ConditionWindow;                //Map선언
+    public GameObject ConditionWindow;    //Map선언
+    public Text conditionLevelText;       //으아아아아
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
 
     public GameObject ShopMok;             // 목공방
@@ -53,15 +55,16 @@ public class UIButton : MonoBehaviour
 
     public void ConditionButton()                 //상태창버튼
     {
-        if (conditionWindow)                                            //지도가 열려있다면
+        if (conditionWindow)                                            //상태창이 열려있다면
         {
             ConditionWindow.SetActive(false);
             conditionWindow = false;
         }
-        else                                                //지도가 닫혀있다면
+        else                                                            //상태창이 닫혀있다면
         {
             ConditionWindow.SetActive(true);
             conditionWindow = true;
+            conditionLevelText.text = MainGameManager.level.ToString();
         }
     }
 }

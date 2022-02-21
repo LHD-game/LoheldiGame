@@ -12,7 +12,9 @@ public class Register : MonoBehaviour
     public InputField InputPW;
     //public InputField Nickname;
     public InputField InputEmail;
+    public InputField InputAge;
     public Text CheckID;
+    public Text CheckEmail;
     //public Text CheckNick;
 
     [Header("User Info")]
@@ -25,11 +27,24 @@ public class Register : MonoBehaviour
 
     {
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
+       
+
+        if (BRO.IsSuccess())
+        {
+            print("동기방식 회원가입 성공");
+        }
+        else CheckID.text = "중복된 아이디 입니다.";
+        
+    }
+
+    public void UserInfoDB()
+    {
         Param param = new Param();
         param.Add("id", InputID.text);
         param.Add("pw", InputPW.text);
         param.Add("name", InputName.text);
         param.Add("email", InputEmail.text);
+        param.Add("age", InputAge.text);
 
         var bro = Backend.GameData.Insert("user", param);
 
@@ -39,14 +54,9 @@ public class Register : MonoBehaviour
         }
 
         else Error(bro.GetErrorCode(), "gamedata");
-
-        if (BRO.IsSuccess())
-        {
-            print("동기방식 회원가입 성공");
-        }
-        else CheckID.text = "중복된 아이디 입니다.";
-
     }
+
+    
     public void Login()
     {
         BackendReturnObject BRO = Backend.BMember.CustomLogin(InputID.text, InputPW.text);
@@ -64,17 +74,20 @@ public class Register : MonoBehaviour
     public void CreateEmail()
     {
         BackendReturnObject BRO = Backend.BMember.UpdateCustomEmail(InputEmail.text);
-      
+
         if (BRO.IsSuccess()) print("동기 방식 이메일 등록 완료");
+        else CheckEmail.text = "중복된 이메일 주소입니다.";
                
     }
     public void Save()
     {
+        PlayerPrefs.SetString("Name", InputName.text);
         PlayerPrefs.SetString("ID", InputID.text);
         PlayerPrefs.SetString("PW", InputPW.text);
         PlayerPrefs.SetString("Email", InputEmail.text);
+        PlayerPrefs.SetString("Age", InputAge.text);
     }
-    public void Road()
+    /*public void Load()
     {
         if (PlayerPrefs.HasKey("ID"))
         {
@@ -82,7 +95,9 @@ public class Register : MonoBehaviour
             userPW.text = PlayerPrefs.GetString("PW").ToString();
             userEmail.text = PlayerPrefs.GetString("Email").ToString();
         }
-    }
+    }*/
+
+     
     // Start is called before the first frame update
     void Start()
     {

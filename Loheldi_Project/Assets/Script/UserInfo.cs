@@ -11,7 +11,7 @@ public class UserInfo : MonoBehaviour
     public Text userID;
     public Text userPW;
     public Text userEmail;
-    public void Road()
+    public void Load()
     {
         if (PlayerPrefs.HasKey("ID"))
         {
@@ -23,7 +23,7 @@ public class UserInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Road();
+        Load();
         
     }
 

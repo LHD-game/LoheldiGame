@@ -65,6 +65,7 @@ public class UIButton : MonoBehaviour
             ConditionWindow.SetActive(true);
             conditionWindow = true;
             conditionLevelText.text = MainGameManager.level.ToString();
+            ChangColor.myh();
         }
     }
 }

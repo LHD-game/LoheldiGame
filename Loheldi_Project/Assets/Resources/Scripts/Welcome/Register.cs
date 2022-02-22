@@ -36,11 +36,55 @@ public class Register : MonoBehaviour
     {
         //정규식 만족 체크
         SignupCheck sc = new SignupCheck();
-        nameOK = sc.ChkName(InputName.text);
-        idOK = sc.ChkID(InputID.text);
-        pwOK = sc.ChkPW(InputPW.text);
-        repwOK = sc.RePW(InputPW.text, InputPW2.text);
-        emailOK = sc.ChkEmail(InputEmail.text);
+        //name check
+        if (string.IsNullOrEmpty(InputName.text)){  //null일 경우, 빈 값 넣음
+            nameOK = sc.ChkName();
+        }
+        else
+        {
+            nameOK = sc.ChkName(InputName.text);
+        }
+
+        //id check
+        if (string.IsNullOrEmpty(InputID.text))
+        {
+            idOK = sc.ChkID();
+        }
+        else
+        {
+            idOK = sc.ChkID(InputID.text);
+        }
+
+        //password check
+        if (string.IsNullOrEmpty(InputPW.text))
+        {
+            pwOK = sc.ChkPW();
+        }
+        else
+        {
+            pwOK = sc.ChkPW(InputPW.text);
+        }
+
+        //re password check
+        if (string.IsNullOrEmpty(InputPW2.text))
+        {
+            repwOK = sc.RePW();
+        }
+        else
+        {
+            repwOK = sc.RePW(InputPW.text, InputPW2.text);
+        }
+
+        //email check
+        if (string.IsNullOrEmpty(InputEmail.text))
+        {
+            emailOK = sc.ChkEmail();
+        }
+        else
+        {
+            emailOK = sc.ChkEmail(InputEmail.text);
+        }
+
 
         if(nameOK && idOK && pwOK && repwOK && emailOK) //정규식을 모두 만족하면, 서버에 정보 저장
         {

@@ -1,0 +1,123 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Text.RegularExpressions;
+
+public class SignupCheck
+{
+    public bool ChkName(string uName)   //ÀÌ¸§ 2~6ÀÚ ÀÌ³» ÇÑ±Û/¿µ¾î, °ø¹é ¹ÌÆ÷ÇÔ
+    {
+        Regex regex = new Regex(@"[a-zA-Z°¡-ÆR]{2,6}$"); //ÀÌ¸§ Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ÇÑ±Û 2~6ÀÚ °¡´É
+        bool isCorrect = true; //ÇÑ±Û, ¿µ¾î·Î¸¸ ÀÌ·ç¾îÁü+°ø¹é ¹ÌÆ÷ÇÔÀÏ ½Ã true
+
+        if ((regex.IsMatch(uName)))    //Á¤±Ô½Ä ºÒÀÏÄ¡ ½Ã
+        {
+            Debug.Log("ÀÌ¸§ÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            isCorrect = true;
+        }
+        else
+        {
+            Debug.Log("ÀÌ¸§ÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            isCorrect = false;
+        }
+
+        return isCorrect;
+    }
+
+    public bool ChkID(string uID)     //ID 5~20ÀÚ ÀÌ³» ¿µ¾î, ¼ýÀÚ
+    {
+        Regex regex = new Regex(@"[a-zA-Z0-9]{5,20}$"); //ID Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ¼ýÀÚ 5~20ÀÚ ÀÌ³» °¡´É
+        bool isCorrect = true; //Á¤±Ô½Ä ¸¸Á· ½Ã, true
+
+        if ((regex.IsMatch(uID)))    //Á¤±Ô½Ä ºÒÀÏÄ¡ ½Ã
+        {
+            Debug.Log("ID°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            isCorrect = true;
+        }
+        else
+        {
+            Debug.Log("ID°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            isCorrect = false;
+        }
+        return isCorrect;
+    }
+
+    public bool ChkPW(string uPW)     //ºñ¹Ð¹øÈ£ 20ÀÚ ÀÌ³» ¿µ¾î+¼ýÀÚ+Æ¯¼ö¹®ÀÚ Á¶ÇÕ
+    {
+        bool isCorrect = true; //Á¤±Ô½Ä ¸¸Á· ½Ã, true
+
+        //¼ýÀÚ1ÀÌ»ó, ¿µ¹®1ÀÌ»ó, Æ¯¼ö¹®ÀÚ1ÀÌ»ó
+        Regex regex = new Regex(@"^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$", RegexOptions.IgnorePatternWhitespace);
+
+        if (uPW.Length >= 5 && uPW.Length <= 20)
+        {
+            if (regex.IsMatch(uPW))
+            {
+                isCorrect = true;
+                Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            }
+            else
+            {
+                isCorrect = false;
+                Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.2");
+            }
+        }
+        else
+        {
+            isCorrect = false;
+            Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.1");
+        }
+
+        return isCorrect;
+    }
+
+    public bool RePW(string PW, string rePW)      //ºñ¹Ð¹øÈ£ Áßº¹ È®ÀÎ
+    {
+        bool isCorrect = true;
+        if (PW.Equals(rePW))
+        {
+            isCorrect = true;
+            Debug.Log("pw°¡ ÀÏÄ¡ÇÕ´Ï´Ù.");
+        }
+        else
+        {
+            isCorrect = false;
+            Debug.Log("pw°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+        }
+
+        return isCorrect;
+    }
+
+    public bool ChkEmail(string uEmail)  //e-mail ¾ç½Ä È®ÀÎ
+    {
+        Regex regex = new Regex(@"[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,20}.[a-zA-Z]{1,5}$"); //ÀÌ¸ÞÀÏ Á¤±Ô½Ä
+        bool isCorrect = true; //Á¤±Ô½Ä ¸¸Á· ½Ã, true
+
+        if ((regex.IsMatch(uEmail)))    //Á¤±Ô½Ä ºÒÀÏÄ¡ ½Ã
+        {
+            Debug.Log("emailÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            isCorrect = true;
+        }
+        else
+        {
+            Debug.Log("emailÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            isCorrect = false;
+        }
+        return isCorrect;
+
+    }
+
+    /*
+//Áßº¹ È®ÀÎ ID, Email
+
+public bool ExistID()   
+{
+
+}
+
+public bool ExistEmail()
+{
+
+}*/
+
+}

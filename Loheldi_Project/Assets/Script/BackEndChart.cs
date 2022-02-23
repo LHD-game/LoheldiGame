@@ -10,6 +10,7 @@ public class BackEndChart : MonoBehaviour
     [Header("Gold")]
     public Text usergold;
     public Text itemgold;
+    private int itemnum;
 
     Dictionary<string, int> super = new Dictionary<string, int>
     {
@@ -17,7 +18,6 @@ public class BackEndChart : MonoBehaviour
         {"blueberry", 3},
         {"pumpkin", 3}
     };
-
     
     public void OnClickGetChartAndSave()
     {
@@ -71,7 +71,38 @@ public class BackEndChart : MonoBehaviour
         Debug.Log(chartJson["name"][0]);
     }*/
 
-    public void OnClickGetChartContents()
+    public void GetChartContents()
+    {
+        var BRO = Backend.Chart.GetChartContents("41919");
+        
+        if (ShopCategorySelect.Category == 1)
+        {
+            itemnum = (ShopCategorySelect.Page - 1) * 6 + ShopCategorySelect.buttonnum + 14;
+        }
+        if (ShopCategorySelect.Category == 2)
+        {
+            itemnum = (ShopCategorySelect.Page - 1) * 6 + ShopCategorySelect.buttonnum + 28;
+        }
+        if (ShopCategorySelect.Category == 3)
+        {
+            itemnum = (ShopCategorySelect.Page - 1) * 6 + ShopCategorySelect.buttonnum + 40;
+        }
+        if (ShopCategorySelect.Category == 4)
+        {
+            itemnum = (ShopCategorySelect.Page - 1) * 6 + ShopCategorySelect.buttonnum + 51;
+        }
+        if (BRO.IsSuccess())
+        {
+            JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
+            Debug.Log("itemCode:" + rows[itemnum]["itemCode"][0]);
+            Debug.Log("name:" + rows[itemnum]["name"][0]);
+            Debug.Log("price:" + rows[itemnum]["price"][0]);
+            Debug.Log("itemType:" + rows[itemnum]["itemType"][0]);
+        }
+
+    }
+
+    /*public void OnClickGetChartContents()
     {
         BackendReturnObject BRO = Backend.Chart.GetChartContents("41766");
 
@@ -81,7 +112,7 @@ public class BackEndChart : MonoBehaviour
             Debug.Log("아이템 이름: " + rows[2]["name"][0]);
             itemgold.text = ("가격:"+ rows[2]["price"][0]);
 
-            /*itemgold.text = (string)rows[2]["price"][0];*/
+            *//*itemgold.text = (string)rows[2]["price"][0];*//*
         }
         else
         {
@@ -97,7 +128,7 @@ public class BackEndChart : MonoBehaviour
                     break;
             }
         }
-    }
+    }*/
 
     public void Shopping()
     {
@@ -130,11 +161,11 @@ public class BackEndChart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var bro = Backend.GameData.Get("Item", new Where(), 10);
+        /*var bro = Backend.GameData.Get("Item", new Where(), 10);
         foreach(int Value in super.Values)
         {
-            /*itemgold.text = */
-        }
+            *//*itemgold.text = *//*
+        }*/
         
     }
 

@@ -5,16 +5,30 @@ using System.Text.RegularExpressions;
 
 public class SignupCheck : MonoBehaviour
 {
+    private static SignupCheck _instance;
+    public static SignupCheck instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SignupCheck>();
+            }
+            return _instance;
+        }
+    }
+
     [SerializeField]
     private Transform[] ErrorLine = new Transform[5]; //순서대로 이름, ID, PW, 재입력PW, 이메일
 
     public void Start()
     {
-        for (int i = 0; i < ErrorLine.Length; i++)  // 1, 3, 5, 7, 9
+        for (int i = 0; i < ErrorLine.Length; i++)
         {
             ErrorLine[i].gameObject.SetActive(false);
         }
-        //Debug.Log(ErrorLine[1]);  //오브젝트 인지O
+        Debug.Log(ErrorLine.Length);  //오브젝트 인지O
+        Debug.Log(ErrorLine[1]);  //오브젝트 인지O
     }
 
 
@@ -27,14 +41,14 @@ public class SignupCheck : MonoBehaviour
         if ((regex.IsMatch(uName)))    //정규식 일치 시
         {
             Debug.Log("이름이 양식과 일치합니다.");
-            ErrorLine[1].gameObject.SetActive(false);
+            ErrorLine[0].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("이름이 양식과 일치하지 않습니다.");
-            //Debug.Log(ErrorLine[1]);  //오브젝트 인지X
-            ErrorLine[1].gameObject.SetActive(true);
+            Debug.Log(ErrorLine[1]);  //오브젝트 인지X
+            ErrorLine[0].gameObject.SetActive(true);
             isCorrect = false;
         }
 
@@ -49,13 +63,13 @@ public class SignupCheck : MonoBehaviour
         if ((regex.IsMatch(uID)))    //정규식 불일치 시
         {
             Debug.Log("ID가 양식과 일치합니다.");
-            ErrorLine[3].gameObject.SetActive(false);
+            ErrorLine[1].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("ID가 양식과 일치하지 않습니다.");
-            ErrorLine[3].gameObject.SetActive(true);
+            ErrorLine[1].gameObject.SetActive(true);
             isCorrect = false;
         }
         return isCorrect;
@@ -72,20 +86,21 @@ public class SignupCheck : MonoBehaviour
         {
             if (regex.IsMatch(uPW))
             {
-                ErrorLine[5].gameObject.SetActive(false);
+                ErrorLine[2].gameObject.SetActive(false);
                 isCorrect = true;
                 Debug.Log("PW가 양식과 일치합니다.");
+                Debug.Log(ErrorLine[5]);
             }
             else
             {
-                ErrorLine[5].gameObject.SetActive(true);
+                ErrorLine[2].gameObject.SetActive(true);
                 isCorrect = false;
                 Debug.Log("PW가 양식과 일치하지 않습니다.(정규식 불만족)");
             }
         }
         else
         {
-            ErrorLine[5].gameObject.SetActive(true);
+            ErrorLine[2].gameObject.SetActive(true);
             isCorrect = false;
             Debug.Log("PW가 양식과 일치하지 않습니다.(자릿수 불일치)");
         }
@@ -98,15 +113,13 @@ public class SignupCheck : MonoBehaviour
         bool isCorrect = true;
         if (PW.Equals(rePW))
         {
-            ErrorLine[5].gameObject.SetActive(false);
-            ErrorLine[7].gameObject.SetActive(false);
+            ErrorLine[3].gameObject.SetActive(false);
             isCorrect = true;
             Debug.Log("pw가 일치합니다.");
         }
         else
         {
-            ErrorLine[5].gameObject.SetActive(true);
-            ErrorLine[7].gameObject.SetActive(true);
+            ErrorLine[3].gameObject.SetActive(true);
             isCorrect = false;
             Debug.Log("pw가 일치하지 않습니다.");
         }
@@ -122,13 +135,13 @@ public class SignupCheck : MonoBehaviour
         if ((regex.IsMatch(uEmail)))    //정규식 불일치 시
         {
             Debug.Log("email이 양식과 일치합니다.");
-            ErrorLine[9].gameObject.SetActive(false);
+            ErrorLine[4].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("email이 양식과 일치하지 않습니다.");
-            ErrorLine[9].gameObject.SetActive(true);
+            ErrorLine[4].gameObject.SetActive(true);
             isCorrect = false;
         }
         return isCorrect;

@@ -35,54 +35,54 @@ public class Register : MonoBehaviour
     public void Signup()
     {
         //정규식 만족 체크
-        SignupCheck sc = new SignupCheck();
+        
         //name check
         if (string.IsNullOrEmpty(InputName.text)){  //null일 경우, 빈 값 넣음
-            nameOK = sc.ChkName();
+            nameOK = SignupCheck.instance.ChkName();
         }
         else
         {
-            nameOK = sc.ChkName(InputName.text);
+            nameOK = SignupCheck.instance.ChkName(InputName.text);
         }
 
         //id check
         if (string.IsNullOrEmpty(InputID.text))
         {
-            idOK = sc.ChkID();
+            idOK = SignupCheck.instance.ChkID();
         }
         else
         {
-            idOK = sc.ChkID(InputID.text);
+            idOK = SignupCheck.instance.ChkID(InputID.text);
         }
 
         //password check
         if (string.IsNullOrEmpty(InputPW.text))
         {
-            pwOK = sc.ChkPW();
+            pwOK = SignupCheck.instance.ChkPW();
         }
         else
         {
-            pwOK = sc.ChkPW(InputPW.text);
+            pwOK = SignupCheck.instance.ChkPW(InputPW.text);
         }
 
         //re password check
         if (string.IsNullOrEmpty(InputPW2.text))
         {
-            repwOK = sc.RePW();
+            repwOK = SignupCheck.instance.RePW();
         }
         else
         {
-            repwOK = sc.RePW(InputPW.text, InputPW2.text);
+            repwOK = SignupCheck.instance.RePW(InputPW.text, InputPW2.text);
         }
 
         //email check
         if (string.IsNullOrEmpty(InputEmail.text))
         {
-            emailOK = sc.ChkEmail();
+            emailOK = SignupCheck.instance.ChkEmail();
         }
         else
         {
-            emailOK = sc.ChkEmail(InputEmail.text);
+            emailOK = SignupCheck.instance.ChkEmail(InputEmail.text);
         }
 
 

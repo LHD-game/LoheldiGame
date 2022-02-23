@@ -23,7 +23,7 @@ public class UIButton : MonoBehaviour
 
         while (ChangColor.h < 2)
         {
-            ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/");
+            ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/");
             ChangColor.h++;
         }
 

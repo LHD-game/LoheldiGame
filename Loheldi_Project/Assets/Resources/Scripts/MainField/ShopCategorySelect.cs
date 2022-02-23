@@ -17,9 +17,10 @@ public class ShopCategorySelect : MonoBehaviour
     private GameObject Buttons6;
     private Text PriceTxt;
 
-    private int Category;
-    private int Page;
+    public static int Category;
+    public static int Page;
     private int Price;
+    public static int buttonnum;
 
     void Start()
     {
@@ -169,7 +170,7 @@ public class ShopCategorySelect : MonoBehaviour
                 ButtonTxt.text = "Űġ L";
             }
         }
-        else if (Category == 5)
+        /*else if (Category == 5)
         {
             if (Page == 1)
             {
@@ -201,7 +202,7 @@ public class ShopCategorySelect : MonoBehaviour
                 ButtonTxt = Buttons6.transform.Find("Text").GetComponent<Text>();
                 ButtonTxt.text = "Ŭ���� L";
             }
-        }
+        }*/
     }
 
     public void Cate1()
@@ -237,5 +238,29 @@ public class ShopCategorySelect : MonoBehaviour
     public void PageR()
     {
         Page = 2;
+    }
+    public void Button1()
+    {
+        buttonnum = 0;
+    }
+    public void Button2()
+    {
+        buttonnum = 1;
+    }
+    public void Button3()
+    {
+        buttonnum = 2;
+    }
+    public void Button4()
+    {
+        buttonnum = 3;
+    }
+    public void Button5()
+    {
+        buttonnum = 4;
+    }
+    public void Button6()
+    {
+        buttonnum = 5;
     }
 }

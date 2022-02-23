@@ -1,29 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChangColor : MonoBehaviour
 {
-    public GameObject Target;
-    private int active;
+    public static bool color;
+    public static int k;
+    public static int h;
+    public static int l;
 
+    public static GameObject[] badge;
+    public static Sprite[] badgeList;
+    static  Image spriteR;
 
-    // Update is called once per frame
-    void Update()
+    void start()
     {
-        //MainGameManager activeBring = GameObject.Find("EventSystem").GetComponent<MainGameManager>();
-        //active = GameObject.Find("EventSystem").GetComponent<MainGameManager>().level;
-        active = MainGameManager.level;
-        if (active == 5)
+        h = 0;
+        color = false;
+    }
+    // Update is called once per frame
+
+    public static void PopUp()
+    {
+        spriteR = badge[k].GetComponent<Image>();
+        if (color)
         {
-            Active();
+            spriteR.sprite = badgeList[l] ;
+            color = false;
         }
     }
-
-    public void Active()
-    {
-        Target.SetActive(false);
-    }
-
-   
 }
+

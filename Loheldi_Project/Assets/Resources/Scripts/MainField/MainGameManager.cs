@@ -7,7 +7,6 @@ public class MainGameManager : MonoBehaviour
 {
     public int money;
     public static int level;
-    public int conditionLevel; //상태창 레벨
     public static float exp;
     float Maxexp;
 
@@ -15,13 +14,11 @@ public class MainGameManager : MonoBehaviour
     public Text levelText;
     public Text expBarleftText;                    //필요한 경험치량
     public Text expBarrightText;                  //현재 경험치량
-    public Text conditionLevelText;            //상태창 레벨
     public Slider slider;
     public Slider conditionSlider;
 
     void Start()
     {
-        conditionLevel = 1;
         level = 1;
         Maxexp = 100;
         exp = 0;
@@ -54,6 +51,5 @@ public class MainGameManager : MonoBehaviour
         exp = exp - Maxexp;
         Maxexp = Maxexp * 1.2f;
         level++;
-        conditionLevel++;
     }
 }

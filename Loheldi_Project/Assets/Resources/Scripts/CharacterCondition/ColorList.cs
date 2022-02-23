@@ -51,7 +51,7 @@ public class ColorList : MonoBehaviour
     {
         ChangColor.color = true;
         ChangColor.k = 1;
-        ChangColor.l = 0;
+        ChangColor.l = 1;
         ChangColor.PopUp();
     }
 
@@ -59,7 +59,7 @@ public class ColorList : MonoBehaviour
     {
         ChangColor.color = true;
         ChangColor.k = 2;
-        ChangColor.l = 0;
+        ChangColor.l = 2;
         ChangColor.PopUp();
     }
 
@@ -67,7 +67,7 @@ public class ColorList : MonoBehaviour
     {
         ChangColor.color = true;
         ChangColor.k = 3;
-        ChangColor.l = 0;
+        ChangColor.l = 3;
         ChangColor.PopUp();
     }
 

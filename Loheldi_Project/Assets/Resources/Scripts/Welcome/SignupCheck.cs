@@ -3,28 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
 
-public class SignupCheck
+public class SignupCheck : MonoBehaviour
 {
-    public bool ChkName(string uName)   //ÀÌ¸§ 2~6ÀÚ ÀÌ³» ÇÑ±Û/¿µ¾î, °ø¹é ¹ÌÆ÷ÇÔ
+    [SerializeField]
+    private Transform[] ErrorLine = new Transform[5]; //¼ø¼­´ë·Î ÀÌ¸§, ID, PW, ÀçÀÔ·ÂPW, ÀÌ¸ŞÀÏ
+
+    public void Start()
+    {
+        for (int i = 0; i < ErrorLine.Length; i++)  // 1, 3, 5, 7, 9
+        {
+            ErrorLine[i].gameObject.SetActive(false);
+        }
+        //Debug.Log(ErrorLine[1]);  //¿ÀºêÁ§Æ® ÀÎÁöO
+    }
+
+
+
+    public bool ChkName(string uName = "")   //ÀÌ¸§ 2~6ÀÚ ÀÌ³» ÇÑ±Û/¿µ¾î, °ø¹é ¹ÌÆ÷ÇÔ
     {
         Regex regex = new Regex(@"[a-zA-Z°¡-ÆR]{2,6}$"); //ÀÌ¸§ Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ÇÑ±Û 2~6ÀÚ °¡´É
         bool isCorrect = true; //ÇÑ±Û, ¿µ¾î·Î¸¸ ÀÌ·ç¾îÁü+°ø¹é ¹ÌÆ÷ÇÔÀÏ ½Ã true
 
-        if ((regex.IsMatch(uName)))    //Á¤±Ô½Ä ºÒÀÏÄ¡ ½Ã
+        if ((regex.IsMatch(uName)))    //Á¤±Ô½Ä ÀÏÄ¡ ½Ã
         {
             Debug.Log("ÀÌ¸§ÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            ErrorLine[1].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("ÀÌ¸§ÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            //Debug.Log(ErrorLine[1]);  //¿ÀºêÁ§Æ® ÀÎÁöX
+            ErrorLine[1].gameObject.SetActive(true);
             isCorrect = false;
         }
 
         return isCorrect;
     }
 
-    public bool ChkID(string uID)     //ID 5~20ÀÚ ÀÌ³» ¿µ¾î, ¼ıÀÚ
+    public bool ChkID(string uID = "")     //ID 5~20ÀÚ ÀÌ³» ¿µ¾î, ¼ıÀÚ
     {
         Regex regex = new Regex(@"[a-zA-Z0-9]{5,20}$"); //ID Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ¼ıÀÚ 5~20ÀÚ ÀÌ³» °¡´É
         bool isCorrect = true; //Á¤±Ô½Ä ¸¸Á· ½Ã, true
@@ -32,17 +49,19 @@ public class SignupCheck
         if ((regex.IsMatch(uID)))    //Á¤±Ô½Ä ºÒÀÏÄ¡ ½Ã
         {
             Debug.Log("ID°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            ErrorLine[3].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("ID°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            ErrorLine[3].gameObject.SetActive(true);
             isCorrect = false;
         }
         return isCorrect;
     }
 
-    public bool ChkPW(string uPW)     //ºñ¹Ğ¹øÈ£ 20ÀÚ ÀÌ³» ¿µ¾î+¼ıÀÚ+Æ¯¼ö¹®ÀÚ Á¶ÇÕ
+    public bool ChkPW(string uPW = "")     //ºñ¹Ğ¹øÈ£ 20ÀÚ ÀÌ³» ¿µ¾î+¼ıÀÚ+Æ¯¼ö¹®ÀÚ Á¶ÇÕ
     {
         bool isCorrect = true; //Á¤±Ô½Ä ¸¸Á· ½Ã, true
 
@@ -53,34 +72,41 @@ public class SignupCheck
         {
             if (regex.IsMatch(uPW))
             {
+                ErrorLine[5].gameObject.SetActive(false);
                 isCorrect = true;
                 Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
             }
             else
             {
+                ErrorLine[5].gameObject.SetActive(true);
                 isCorrect = false;
-                Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.2");
+                Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.(Á¤±Ô½Ä ºÒ¸¸Á·)");
             }
         }
         else
         {
+            ErrorLine[5].gameObject.SetActive(true);
             isCorrect = false;
-            Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.1");
+            Debug.Log("PW°¡ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.(ÀÚ¸´¼ö ºÒÀÏÄ¡)");
         }
 
         return isCorrect;
     }
 
-    public bool RePW(string PW, string rePW)      //ºñ¹Ğ¹øÈ£ Áßº¹ È®ÀÎ
+    public bool RePW(string PW = "", string rePW = "")      //ºñ¹Ğ¹øÈ£ Áßº¹ È®ÀÎ
     {
         bool isCorrect = true;
         if (PW.Equals(rePW))
         {
+            ErrorLine[5].gameObject.SetActive(false);
+            ErrorLine[7].gameObject.SetActive(false);
             isCorrect = true;
             Debug.Log("pw°¡ ÀÏÄ¡ÇÕ´Ï´Ù.");
         }
         else
         {
+            ErrorLine[5].gameObject.SetActive(true);
+            ErrorLine[7].gameObject.SetActive(true);
             isCorrect = false;
             Debug.Log("pw°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
         }
@@ -88,7 +114,7 @@ public class SignupCheck
         return isCorrect;
     }
 
-    public bool ChkEmail(string uEmail)  //e-mail ¾ç½Ä È®ÀÎ
+    public bool ChkEmail(string uEmail = "")  //e-mail ¾ç½Ä È®ÀÎ
     {
         Regex regex = new Regex(@"[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,20}.[a-zA-Z]{1,5}$"); //ÀÌ¸ŞÀÏ Á¤±Ô½Ä
         bool isCorrect = true; //Á¤±Ô½Ä ¸¸Á· ½Ã, true
@@ -96,11 +122,13 @@ public class SignupCheck
         if ((regex.IsMatch(uEmail)))    //Á¤±Ô½Ä ºÒÀÏÄ¡ ½Ã
         {
             Debug.Log("emailÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÕ´Ï´Ù.");
+            ErrorLine[9].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("emailÀÌ ¾ç½Ä°ú ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+            ErrorLine[9].gameObject.SetActive(true);
             isCorrect = false;
         }
         return isCorrect;

@@ -14,7 +14,22 @@ public class UIButton : MonoBehaviour
 
     public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
-    bool conditionWindow;      //상태창이 열려있는지 확인
+   public static bool conditionWindow;      //상태창이 열려있는지 확인
+
+
+    private void Awake()
+    {
+        ChangColor.badge = GameObject.FindGameObjectsWithTag("badge");
+
+        while (ChangColor.h < 2)
+        {
+            ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/");
+            ChangColor.h++;
+        }
+
+        ConditionWindow.SetActive(false);
+        conditionWindow = false;
+    }
 
     void Start()
     {
@@ -53,7 +68,7 @@ public class UIButton : MonoBehaviour
         }
     }
 
-    public void ConditionButton()                 //상태창버튼
+    public  void ConditionButton()                 //상태창버튼
     {
         if (conditionWindow)                                            //상태창이 열려있다면
         {

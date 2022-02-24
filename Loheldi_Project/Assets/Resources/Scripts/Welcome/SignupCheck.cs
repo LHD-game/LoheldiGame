@@ -20,12 +20,15 @@ public class SignupCheck : MonoBehaviour
 
     [SerializeField]
     private Transform[] ErrorLine = new Transform[5]; //순서대로 이름, ID, PW, 재입력PW, 이메일
+    [SerializeField]
+    private Transform[] ErrorTxt = new Transform[5];    //오류 문구 배열
 
     public void Start()
     {
         for (int i = 0; i < ErrorLine.Length; i++)
         {
             ErrorLine[i].gameObject.SetActive(false);
+            ErrorTxt[i].gameObject.SetActive(false);
         }
         Debug.Log(ErrorLine.Length);  //오브젝트 인지O
         Debug.Log(ErrorLine[1]);  //오브젝트 인지O
@@ -42,6 +45,7 @@ public class SignupCheck : MonoBehaviour
         {
             Debug.Log("이름이 양식과 일치합니다.");
             ErrorLine[0].gameObject.SetActive(false);
+            ErrorTxt[0].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
@@ -49,6 +53,7 @@ public class SignupCheck : MonoBehaviour
             Debug.Log("이름이 양식과 일치하지 않습니다.");
             Debug.Log(ErrorLine[1]);  //오브젝트 인지X
             ErrorLine[0].gameObject.SetActive(true);
+            ErrorTxt[0].gameObject.SetActive(true);
             isCorrect = false;
         }
 
@@ -64,12 +69,14 @@ public class SignupCheck : MonoBehaviour
         {
             Debug.Log("ID가 양식과 일치합니다.");
             ErrorLine[1].gameObject.SetActive(false);
+            ErrorTxt[1].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("ID가 양식과 일치하지 않습니다.");
             ErrorLine[1].gameObject.SetActive(true);
+            ErrorTxt[1].gameObject.SetActive(true);
             isCorrect = false;
         }
         return isCorrect;
@@ -87,13 +94,14 @@ public class SignupCheck : MonoBehaviour
             if (regex.IsMatch(uPW))
             {
                 ErrorLine[2].gameObject.SetActive(false);
+                ErrorTxt[2].gameObject.SetActive(false);
                 isCorrect = true;
                 Debug.Log("PW가 양식과 일치합니다.");
-                Debug.Log(ErrorLine[5]);
             }
             else
             {
                 ErrorLine[2].gameObject.SetActive(true);
+                ErrorTxt[2].gameObject.SetActive(true);
                 isCorrect = false;
                 Debug.Log("PW가 양식과 일치하지 않습니다.(정규식 불만족)");
             }
@@ -101,6 +109,7 @@ public class SignupCheck : MonoBehaviour
         else
         {
             ErrorLine[2].gameObject.SetActive(true);
+            ErrorTxt[2].gameObject.SetActive(true);
             isCorrect = false;
             Debug.Log("PW가 양식과 일치하지 않습니다.(자릿수 불일치)");
         }
@@ -114,12 +123,14 @@ public class SignupCheck : MonoBehaviour
         if (PW.Equals(rePW))
         {
             ErrorLine[3].gameObject.SetActive(false);
+            ErrorTxt[3].gameObject.SetActive(false);
             isCorrect = true;
             Debug.Log("pw가 일치합니다.");
         }
         else
         {
             ErrorLine[3].gameObject.SetActive(true);
+            ErrorTxt[3].gameObject.SetActive(true);
             isCorrect = false;
             Debug.Log("pw가 일치하지 않습니다.");
         }
@@ -136,12 +147,14 @@ public class SignupCheck : MonoBehaviour
         {
             Debug.Log("email이 양식과 일치합니다.");
             ErrorLine[4].gameObject.SetActive(false);
+            ErrorTxt[4].gameObject.SetActive(false);
             isCorrect = true;
         }
         else
         {
             Debug.Log("email이 양식과 일치하지 않습니다.");
             ErrorLine[4].gameObject.SetActive(true);
+            ErrorTxt[4].gameObject.SetActive(true);
             isCorrect = false;
         }
         return isCorrect;

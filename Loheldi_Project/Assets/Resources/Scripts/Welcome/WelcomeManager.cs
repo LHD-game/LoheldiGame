@@ -71,6 +71,11 @@ public class WelcomeManager : MonoBehaviour
 
             isSSPopup = !isSSPopup;       //false -> true, true -> false
             SignupSucPanel.SetActive(isSSPopup);
+            Register.allOK = false;
+        }
+        else
+        {
+            SignupSucPanel.SetActive(false);
         }
     }
 

@@ -861,6 +861,12 @@ MonoBehaviour:
   - {fileID: 341908785}
   - {fileID: 271741149}
   - {fileID: 2100382594}
+  ErrorTxt:
+  - {fileID: 787521486829834507}
+  - {fileID: 48720360}
+  - {fileID: 1868741883}
+  - {fileID: 1519127453}
+  - {fileID: 686762524}
 --- !u!114 &87408843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,9 +1023,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: ID
       objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502566, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_ContentType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502566, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_KeyboardType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502566, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1416204469163502567, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502584, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_Name
+      value: InputID
       objectReference: {fileID: 0}
     - target: {fileID: 1416204470459410310, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_Text
@@ -1116,6 +1138,10 @@ PrefabInstance:
     - target: {fileID: 6329049601301775897, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702350383391847886, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_Name
+      value: RedID
       objectReference: {fileID: 0}
     - target: {fileID: 8873737462627482822, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_RootOrder
@@ -2428,7 +2454,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4956162340424770954, guid: 6011afdbcff021247a0b3e6b61b822f0, type: 3}
       propertyPath: m_Name
-      value: ErrorTxt
+      value: EmailErrorTxt
       objectReference: {fileID: 0}
     - target: {fileID: 6574855640435461303, guid: 6011afdbcff021247a0b3e6b61b822f0, type: 3}
       propertyPath: m_Text
@@ -2526,6 +2552,138 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7693745491401942632, guid: 6011afdbcff021247a0b3e6b61b822f0, type: 3}
   m_PrefabInstance: {fileID: 686762523}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &751570326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 751570327}
+  - component: {fileID: 751570330}
+  - component: {fileID: 751570329}
+  - component: {fileID: 751570328}
+  m_Layer: 5
+  m_Name: CloseBtn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &751570327
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751570326}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1713891959}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -20, y: -20}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &751570328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751570326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 751570329}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1177320855}
+        m_TargetAssemblyTypeName: WelcomeManager, Assembly-CSharp
+        m_MethodName: SignUPSucPopup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &751570329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751570326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: afc6c78d00e52814ca90c40fbc711956, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &751570330
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751570326}
+  m_CullTransparentMesh: 1
 --- !u!1 &781474018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,7 +3189,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1177320855}
         m_TargetAssemblyTypeName: WelcomeManager, Assembly-CSharp
-        m_MethodName: SignUpPopup
+        m_MethodName: SignUPSucPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3958,7 +4116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1416204470838986368, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_Text
-      value: "\uBE44\uBC00\uBC88\uD638"
+      value: "\uBE44\uBC00\uBC88\uD638 \uC7AC\uC785\uB825"
       objectReference: {fileID: 0}
     - target: {fileID: 4318438049007910218, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_Pivot.x
@@ -5223,6 +5381,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2002934448}
+  - {fileID: 751570327}
   m_Father: {fileID: 1180009871}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5423,9 +5582,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Email
       objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502566, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_ContentType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502566, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_KeyboardType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502566, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1416204469163502567, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416204469163502584, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
+      propertyPath: m_Name
+      value: InputEmail
       objectReference: {fileID: 0}
     - target: {fileID: 1416204470459410310, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
       propertyPath: m_Text
@@ -5952,7 +6127,7 @@ MonoBehaviour:
     m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 8
+    m_MinSize: 5
     m_MaxSize: 80
     m_Alignment: 4
     m_AlignByGeometry: 0

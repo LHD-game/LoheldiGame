@@ -65,7 +65,8 @@ public class ToothGameManager : MonoBehaviour
             timerTxt.text = $"{timer:N2}";
             if (timer < 0)
             {
-                timerTxt.text = $"0";
+                timer = 0;
+                GameOver();
             }
         }
     }
@@ -128,7 +129,7 @@ public class ToothGameManager : MonoBehaviour
             for (int i = 0; i < bTNum[difficulty];) //난이도별로 한 번에 나오는 blackTooth의 갯수가 다르게
             {
                 rNum = Random.Range(1, 20);
-                if (timer <= 0 || BlackCount >= 13)
+                if (BlackCount >= 13)
                 {
                     GameOver();
                     break;

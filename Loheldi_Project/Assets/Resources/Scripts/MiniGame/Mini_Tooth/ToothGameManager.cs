@@ -63,6 +63,10 @@ public class ToothGameManager : MonoBehaviour
         {
             timer -= Time.deltaTime;
             timerTxt.text = $"{timer:N2}";
+            if (timer < 0)
+            {
+                timerTxt.text = $"0";
+            }
         }
     }
 
@@ -86,6 +90,8 @@ public class ToothGameManager : MonoBehaviour
         isPause = false;
         BlackCount = 0;
         timerTxt.text = "";
+        WinText.SetActive(false);
+        falseText.SetActive(false);
 
         Player.transform.position = new Vector3(0f, 5.5f, 14f);
 
@@ -121,14 +127,15 @@ public class ToothGameManager : MonoBehaviour
         {
             for (int i = 0; i < bTNum[difficulty];) //난이도별로 한 번에 나오는 blackTooth의 갯수가 다르게
             {
-                rNum = Random.Range(1, 14);
-                if (BlackCount >= 13)
-                {
-                    break;
-                }
+                rNum = Random.Range(1, 20);
                 if (timer <= 0 || BlackCount >= 13)
                 {
                     GameOver();
+                    break;
+                }
+
+                if (BlackCount >= 13)
+                {
                     break;
                 }
 
@@ -154,24 +161,24 @@ public class ToothGameManager : MonoBehaviour
 
     }
 
-    public void GameOver()
-    {
-        isRun = false;
-        GameOverPanel.SetActive(true);
-        CancelInvoke("BoxRandom");
-        if (timer <= 0)  //승리 조건
-        {      
-            WinText.SetActive(true);
-        }
-        else if(BlackCount >= 13)   //패배 조건
-        {
-            falseText.SetActive(true);
-        }
-        else
-        {
-            Welcome();
-        }
-        //그 외의 경우: 일시정지에서 처음으로 돌아가기 선택
+     public void GameOver()
+     {
+         isRun = false;
+         GameOverPanel.SetActive(true);
+         CancelInvoke("BoxRandom");
+         if (timer <= 0)  //승리 조건
+         {
+             WinText.SetActive(true);
+         }
+         else if(BlackCount >= 13)   //패배 조건
+         {
+             falseText.SetActive(true);
+         }
+         else
+         {
+             Welcome();
+         }
+         //그 외의 경우: 일시정지에서 처음으로 돌아가기 선택
 
-    }
+     }
 }

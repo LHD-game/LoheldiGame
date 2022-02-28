@@ -21,13 +21,16 @@ public class SignupCheck : MonoBehaviour
     [SerializeField]
     private Transform[] ErrorLine = new Transform[5]; //순서대로 이름, ID, PW, 재입력PW, 이메일
     [SerializeField]
-    private Transform[] ErrorTxt = new Transform[5];    //오류 문구 배열
+    private Transform[] ErrorTxt = new Transform[7];    //오류 문구 배열, 중복id, 중복 email 포함
 
     public void Start()
     {
         for (int i = 0; i < ErrorLine.Length; i++)
         {
-            ErrorLine[i].gameObject.SetActive(false);
+            ErrorLine[i].gameObject.SetActive(false);      
+        }
+        for(int i = 0; i< ErrorTxt.Length; i++)
+        {
             ErrorTxt[i].gameObject.SetActive(false);
         }
         Debug.Log(ErrorLine.Length);  //오브젝트 인지O
@@ -161,17 +164,30 @@ public class SignupCheck : MonoBehaviour
 
     }
 
-    /*
-//중복 확인 ID, Email
 
-public bool ExistID()   
-{
+//이미 존재하는 ID, Email popup
 
-}
+    public void ExistID(bool isExist)   
+    {
+        if (isExist)
+        {
+            Debug.Log("사용 가능한 id 입니다.");
+            ErrorTxt[5].gameObject.SetActive(false);
+            ErrorLine[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("이미 존재하는 id 입니다.");
+            ErrorTxt[5].gameObject.SetActive(true);
+            ErrorLine[1].gameObject.SetActive(true);
+            
+        }
+        
+    }
 
-public bool ExistEmail()
-{
-
-}*/
+    public void ExistEmail()
+    {
+        ErrorTxt[6].gameObject.SetActive(true);
+    }
 
 }

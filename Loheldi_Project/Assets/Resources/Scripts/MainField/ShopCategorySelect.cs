@@ -9,7 +9,7 @@ public class ShopCategorySelect : MonoBehaviour
     private Text ButtonTxt;
 
 
-    private GameObject Buttons1;
+    public static GameObject Buttons1;
     private GameObject Buttons2;
     private GameObject Buttons3;
     private GameObject Buttons4;
@@ -43,11 +43,11 @@ public class ShopCategorySelect : MonoBehaviour
             if (Page == 1)
             {
                 ButtonTxt = Buttons1.transform.Find("Text").GetComponent<Text>();
-                ButtonTxt.text = "A";
+                
                 ButtonTxt = Buttons2.transform.Find("Text").GetComponent<Text>();
-                ButtonTxt.text = "B";
+                
                 ButtonTxt = Buttons3.transform.Find("Text").GetComponent<Text>();
-                ButtonTxt.text = "C";
+                
                 ButtonTxt = Buttons4.transform.Find("Text").GetComponent<Text>();
                 ButtonTxt.text = "D";
                 ButtonTxt = Buttons5.transform.Find("Text").GetComponent<Text>();

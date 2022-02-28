@@ -94,7 +94,7 @@ public class ToothGameManager : MonoBehaviour
         WinText.SetActive(false);
         falseText.SetActive(false);
 
-        Player.transform.position = new Vector3(0f, 5.5f, 14f);
+        Player.transform.position = new Vector3(0f, 2.5f, 10f);
 
         BlackToothArr();
         ToothCountDown.instance.ResetTimer();

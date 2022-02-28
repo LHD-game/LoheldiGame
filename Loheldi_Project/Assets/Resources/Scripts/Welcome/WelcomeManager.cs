@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WelcomeManager : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class WelcomeManager : MonoBehaviour
 
     public void SignUPSucPopup()
     {
-        if (Register.allOK) //모두 정규식 만족 시
+        if (Register.allOK && Register.idDupChk) //모두 정규식 만족 시
         {
             SignupPanel.SetActive(false);   //회원가입 창 비활성화
             WelcomePanel.SetActive(true);   //초기화면 활성화
@@ -73,10 +74,11 @@ public class WelcomeManager : MonoBehaviour
             SignupSucPanel.SetActive(isSSPopup);
             Register.allOK = false;
         }
-        else
-        {
-            SignupSucPanel.SetActive(false);
-        }
+    }
+
+    public void Restart()   //회원가입 완료 후 재시작
+    {
+        SceneManager.LoadScene("Scenes/Welcome");
     }
 
     //로그인 여부 판별 함수

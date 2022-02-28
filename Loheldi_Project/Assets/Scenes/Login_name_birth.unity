@@ -437,7 +437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB2C9\uB124\uC784\uC744 \uC785\uB825\uD558\uC138\uC694"
+  m_Text: "\uB2C9\uB124\uC784(\uC601\uC5B4)\uC744 \uC785\uB825\uD558\uC138\uC694"
 --- !u!222 &108044249
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2341,7 +2341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &484297031
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4263,10 +4263,10 @@ RectTransform:
   m_Father: {fileID: 810766254}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -600, y: -400}
+  m_SizeDelta: {x: 2222, y: 1065.4316}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1104699323
 MonoBehaviour:
@@ -4289,7 +4289,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 6cf8e7494cbe8b44795a498eccf637ae, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4828,9 +4828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03905e7fb9596a14d821fbe9838c4051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Error: {fileID: 128068926}
-  Id: {fileID: 170450077}
-  Passward: {fileID: 2023161921}
 --- !u!4 &1301166316
 Transform:
   m_ObjectHideFlags: 0
@@ -5339,18 +5336,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 484297030}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &1351856224
 GameObject:
   m_ObjectHideFlags: 0
@@ -5421,7 +5406,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB2C9\uB124\uC784\uC744 \uC785\uB825\uD558\uC138\uC694"
+  m_Text: "\uB2C9\uB124\uC784(\uC601\uC5B4)\uC744 \uC785\uB825\uD558\uC138\uC694"
 --- !u!222 &1351856227
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5603,7 +5588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1434699700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7419,10 +7404,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1301166315}
-        m_TargetAssemblyTypeName: ErrorMessage, Assembly-CSharp
-        m_MethodName: ErrorActive
-        m_Mode: 1
+      - m_Target: {fileID: 1434699699}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7430,6 +7415,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 484297030}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1878500350
 GameObject:

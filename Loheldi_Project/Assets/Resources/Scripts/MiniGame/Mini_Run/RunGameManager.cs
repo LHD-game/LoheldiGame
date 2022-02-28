@@ -45,14 +45,14 @@ public class RunGameManager : MonoBehaviour
             nowNPC.gameObject.SetActive(true);
 
 
-            if (nowNPC.position.z >= 3000)
+            if (nowNPC.position.z >= 4000)
             {
                 nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
-            else if (Player.position.z >= 3000)
+            else if (Player.position.z >= 4000)
             {
                 nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
                 RunBtnPanel.SetActive(false);
@@ -62,8 +62,8 @@ public class RunGameManager : MonoBehaviour
             NPCz = nowNPC.position.z;
             Playerz = Player.position.z;
 
-            PMarker.localPosition = new Vector3(Playerz - 1600, 125, 0);
-            NMarker.localPosition = new Vector3(NPCz - 1600, 125, 0);
+            PMarker.localPosition = new Vector3(Playerz - 1500, 125, 0);
+            NMarker.localPosition = new Vector3(NPCz - 1500, 125, 0);
 
             player.velocity = player.velocity / 1.0085f;
         }

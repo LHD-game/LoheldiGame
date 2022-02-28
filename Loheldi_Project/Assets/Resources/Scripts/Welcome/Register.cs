@@ -13,16 +13,8 @@ public class Register : MonoBehaviour
     public InputField InputPW2;
     public InputField InputEmail;
     //public InputField InputAge;
-    public Text CheckID;
-    public Text CheckEmail;
-    //public Text CheckNick;
 
-    [Header("User Info")]
 
-    public Text userNick;
-    public Text userID;
-    public Text userPW;
-    public Text userEmail;
 
     // 정규식 체크 변수
     bool nameOK = false;
@@ -32,10 +24,13 @@ public class Register : MonoBehaviour
     bool emailOK = false;
     public static bool allOK = false;
 
-    public void Signup()
+    //중복 체크 변수
+    public static bool idDupChk = false; //id중복
+    bool emailDup = false;  //email 중복
+
+
+    public void Signup() //정규식 만족 체크 함수
     {
-        //정규식 만족 체크
-        
         //name check
         if (string.IsNullOrEmpty(InputName.text)){  //null일 경우, 빈 값 넣음
             nameOK = SignupCheck.instance.ChkName();
@@ -86,7 +81,7 @@ public class Register : MonoBehaviour
         }
 
 
-        if(nameOK && idOK && pwOK && repwOK && emailOK) //정규식을 모두 만족하면, 서버에 정보 저장
+        if (nameOK && idOK && pwOK && repwOK && emailOK) //정규식을 모두 만족하면, 서버에 정보 저장
         {
             allOK = true;
             UserRegister();
@@ -98,30 +93,38 @@ public class Register : MonoBehaviour
         }
     }
 
-    private void UserRegister()  //유저 정보 id, pw 서버에 저장
+    private void UserRegister()  //유저 정보 id, pw, nickname, email 서버에 저장
     {
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
+
        
+
+        ShowStatus(BRO);
 
         if (BRO.IsSuccess())
         {
             print("동기방식 회원가입 성공");
+            Backend.BMember.CreateNickname(InputName.text); //닉네임(이름) 저장
+            Backend.BMember.UpdateCustomEmail(InputEmail.text); //비밀번호 찾기 용 이메일 저장
+            UserInfoDB();
         }
-        else CheckID.text = "중복된 아이디 입니다.";
 
-        UserInfoDB();
+
+        
     }
 
-    private void UserInfoDB()    //회원 정보를 user 테이블에 저장(pw, email 보기 위함)
+
+    private void UserInfoDB()    //회원 정보를 user 테이블에 저장
     {
         Param param = new Param();
         param.Add("id", InputID.text);
-        param.Add("pw", InputPW.text);
+        //param.Add("pw", InputPW.text);
         param.Add("name", InputName.text);
-        param.Add("email", InputEmail.text);
+        //param.Add("email", InputEmail.text);
         //param.Add("age", InputAge.text);
 
         var bro = Backend.GameData.Insert("user", param);
+
 
         if (bro.IsSuccess())
         {
@@ -131,7 +134,32 @@ public class Register : MonoBehaviour
         else Error(bro.GetErrorCode(), "gamedata");
     }
 
-    
+    //id 중복 체크
+    public void ShowStatus(BackendReturnObject backendReturn)
+    {
+        int statusCode = int.Parse(backendReturn.GetStatusCode());
+
+        switch (statusCode)
+        {
+            case 201:   //회원가입 성공
+                SignupCheck.instance.ExistID(true);
+                idDupChk = true;
+                break;
+
+            case 409:   // 이미 존재하는 id
+                SignupCheck.instance.ExistID(false);
+                idDupChk = false;
+                break;
+
+            case 401:   //프로젝트 상태가 '점검'일 경우
+                Debug.Log("점검");
+                break;
+            default:
+                break;
+        }
+    }
+
+
     public void Login()
     {
         BackendReturnObject BRO = Backend.BMember.CustomLogin(InputID.text, InputPW.text);
@@ -146,14 +174,7 @@ public class Register : MonoBehaviour
 
     }
 
-    public void CreateEmail()
-    {
-        BackendReturnObject BRO = Backend.BMember.UpdateCustomEmail(InputEmail.text);
 
-        if (BRO.IsSuccess()) print("동기 방식 이메일 등록 완료");
-        else CheckEmail.text = "중복된 이메일 주소입니다.";
-               
-    }
 /*    public void Save()    //로컬에 저장
     {
         PlayerPrefs.SetString("Name", InputName.text);
@@ -173,17 +194,6 @@ public class Register : MonoBehaviour
     }*/
 
      
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void Error(string errorCode, string type)
     {
         if (errorCode == "DuplicatedParameterException")

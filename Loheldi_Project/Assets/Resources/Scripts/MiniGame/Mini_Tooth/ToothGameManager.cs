@@ -165,6 +165,7 @@ public class ToothGameManager : MonoBehaviour
      public void GameOver()
      {
          isRun = false;
+        isPause = true; //종료 후 캐릭터 못움직이게하기
          GameOverPanel.SetActive(true);
          CancelInvoke("BoxRandom");
          if (timer <= 0)  //승리 조건

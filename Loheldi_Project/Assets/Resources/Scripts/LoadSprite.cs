@@ -5,22 +5,22 @@ using UnityEngine.UI;
 
 public class LoadSprite : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-    public GameObject imageObj;
-    public Sprite[] sprites;
-    public Image image;
-    
-        
+    public static SpriteRenderer spriteRenderer;
+    public static GameObject imageObj;
+            
     // Start is called before the first frame update
     void Start()
     {
-        
-        sprites = Resources.LoadAll<Sprite>("Sprites/Image");
+        ShopCategorySelect.mokitem = GameObject.FindGameObjectsWithTag("mokitem");
+
+        ShopCategorySelect.itemList = Resources.LoadAll<Sprite>("Sprites/Image");
+
+        /*sprites = Resources.LoadAll<Sprite>("Sprites/Image");
         if (sprites == null) Debug.Log("null");
         for (int i = 0; i < sprites.Length; i++)
         {
             Debug.Log(sprites[i].name);
-        }
+        }*/
         /*Sprite image = null;
         Image = Resources.LoadAll<Sprite>("Sprites/Image");
         if (Image == null) Debug.Log("null");
@@ -34,20 +34,26 @@ public class LoadSprite : MonoBehaviour
         ItemImage.ItemList = Resources.LoadAll<Sprite>("Sprites/Image");*/
         /*imageObj = GameObject.FindGameObjectWithTag("mokitem");
         image = imageObj.GetComponent<Image>();*/
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprites[0];
-
+        /*spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sprites[0];*/
+        /*SpriteRenderer spriteR = gameObject.GetComponent<SpriteRenderer>();
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Image");
+        spriteR.sprite = sprites[0];*/
+    }
+    private void Awake()
+    {
+        
     }
     
 
-    public void OnClickBox1()
-    {
-        print("클릭");
-        foreach (var t in sprites)
-        {
-            Debug.Log(t);
-        }
-    }
+    /* public void OnClickBox1()
+     {
+         print("클릭");
+         foreach (var t in sprites)
+         {
+             Debug.Log(t);
+         }
+     }*/
 
     // Update is called once per frame
     void Update()

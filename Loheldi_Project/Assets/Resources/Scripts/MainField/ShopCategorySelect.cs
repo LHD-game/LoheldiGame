@@ -7,7 +7,8 @@ public class ShopCategorySelect : MonoBehaviour
 {
     public GameObject Buttons;
     private Text ButtonTxt;
-
+    public static int k;
+    public static int l;
 
     public static GameObject Buttons1;
     private GameObject Buttons2;
@@ -21,6 +22,17 @@ public class ShopCategorySelect : MonoBehaviour
     public static int Page;
     private int Price;
     public static int buttonnum;
+    public static GameObject[] mokitem;
+    public static Sprite[] itemList;
+    static Image mokimage;
+    public static void PopUp()
+    {
+        mokimage = mokitem[k].GetComponent<Image>();
+
+        mokimage.sprite = itemList[l];
+           
+        
+    }
 
     void Start()
     {

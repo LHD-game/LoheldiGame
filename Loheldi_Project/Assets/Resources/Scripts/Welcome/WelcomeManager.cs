@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BackEnd;
 
 public class WelcomeManager : MonoBehaviour
 {
@@ -40,10 +41,15 @@ public class WelcomeManager : MonoBehaviour
     // 화면 터치 시, 로그인 여부를 판별하여 로그인하지 않은 경우 welcomePanel 활성화
     public void WelcomePop()
     {
-        if (!isLogin)
+        if (!isLogin)   //자동로그인x
         {
             StartBtn.SetActive(false);
             WelcomePanel.SetActive(true);
+        }
+        else    //자동로그인o
+        {
+            BackendReturnObject BRO = Backend.BMember.CustomLogin(PlayerPrefs.GetString("ID"), PlayerPrefs.GetString("PW"));
+            SceneLoader.instance.GotoGameMove();
         }
 
     }
@@ -84,6 +90,17 @@ public class WelcomeManager : MonoBehaviour
     //로그인 여부 판별 함수
     void LoginChk()
     {
+        if (PlayerPrefs.HasKey("ID"))
+        {
+            if (PlayerPrefs.HasKey("PW"))
+            {
+                isLogin = true;
+            }
+        }
+        else
+        {
+            isLogin = false;
+        }
 
     }
 }

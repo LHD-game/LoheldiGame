@@ -5,10 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private static SceneLoader _instance;
+    public static SceneLoader instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SceneLoader>();
+            }
+            return _instance;
+        }
+    }
     //Login
     public void GotoUserInfo()
     {
         SceneManager.LoadScene("UserInfo");
+    }
+    public void GotoGameMove()
+    {
+        SceneManager.LoadScene("GameMove");
     }
 
 
@@ -35,10 +51,7 @@ public class SceneLoader : MonoBehaviour
     }
 
 
-    public void GotoGameMove()
-    {
-        SceneManager.LoadScene("GameMove");
-    }
+
     public void GotoComditionWindow()
     {
         SceneManager.LoadScene("CharacterCondition");

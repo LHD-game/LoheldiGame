@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Register : MonoBehaviour
 {
+    //---signup---
     [Header("Login & Register")]
     public InputField InputName;
     public InputField InputID;
@@ -13,8 +14,6 @@ public class Register : MonoBehaviour
     public InputField InputPW2;
     public InputField InputEmail;
     //public InputField InputAge;
-
-
 
     // 정규식 체크 변수
     bool nameOK = false;
@@ -28,6 +27,29 @@ public class Register : MonoBehaviour
     public static bool idDupChk = false; //id중복
     bool emailDup = false;  //email 중복
 
+    //---login---
+    [SerializeField]
+    private InputField InputLID;
+    [SerializeField]
+    private InputField InputLPW;
+    public Transform ErrorLine;
+    public Transform ErrorTxt;    //로그인 실패 문구
+    public GameObject AutoBtn;  //자동로그인 버튼
+    private bool isAutoChk;
+
+    //---find id/pw---
+    [SerializeField]
+    private InputField InputFID_Email;
+    [SerializeField]
+    private InputField InputFPW_Email;
+    [SerializeField]
+    private InputField InputFPW_ID;
+
+    public void Start()
+    {
+        ErrorLine.gameObject.SetActive(false);
+        ErrorTxt.gameObject.SetActive(false);
+    }
 
     public void Signup() //정규식 만족 체크 함수
     {
@@ -160,29 +182,52 @@ public class Register : MonoBehaviour
     }
 
 
-    public void Login()
+    public void Login() //로그인시 실행되는 메소드
     {
-        BackendReturnObject BRO = Backend.BMember.CustomLogin(InputID.text, InputPW.text);
+        BackendReturnObject BRO = Backend.BMember.CustomLogin(InputLID.text, InputLPW.text);
 
         if (BRO.IsSuccess())
         {
-            print("동기방식 로그인 성공");
-
+            ErrorLine.gameObject.SetActive(false);
+            ErrorTxt.gameObject.SetActive(false);
+            //자동로그인 함수 실행
+            AutoLogin();
+            Debug.Log("동기방식 로그인 성공");
+            SceneLoader.instance.GotoGameMove();
         }
 
-        else Error(BRO.GetErrorCode(), "UserFunc");
-
+        else
+        {
+            ErrorLine.gameObject.SetActive(true);
+            ErrorTxt.gameObject.SetActive(true);
+            Error(BRO.GetErrorCode(), "UserFunc");
+        }
     }
 
 
-/*    public void Save()    //로컬에 저장
+    public void AutoLogin()    //로컬에 저장해둔다
     {
-        PlayerPrefs.SetString("Name", InputName.text);
-        PlayerPrefs.SetString("ID", InputID.text);
-        PlayerPrefs.SetString("PW", InputPW.text);
-        PlayerPrefs.SetString("Email", InputEmail.text);
-        //PlayerPrefs.SetString("Age", InputAge.text);
-    }*/
+        isAutoChk = AutoBtn.GetComponent<Toggle>().isOn;
+        if (isAutoChk)  //자동로그인 체크 시
+        {
+            PlayerPrefs.SetString("ID", InputID.text);
+            PlayerPrefs.SetString("PW", InputPW.text);
+        }
+
+    }
+
+    public void FindID()    //아이디 찾기
+    {
+        string uEmail = InputFID_Email.text;
+        Backend.BMember.FindCustomID(uEmail);
+    }
+
+    public void InitPW()    //비밀번호 초기화
+    {
+        string uID = InputFPW_ID.text;
+        string uEmail = InputFPW_Email.text;
+        Backend.BMember.ResetPassword(uID, uEmail);
+    }
     /*public void Load()
     {
         if (PlayerPrefs.HasKey("ID"))
@@ -193,7 +238,7 @@ public class Register : MonoBehaviour
         }
     }*/
 
-     
+
     void Error(string errorCode, string type)
     {
         if (errorCode == "DuplicatedParameterException")

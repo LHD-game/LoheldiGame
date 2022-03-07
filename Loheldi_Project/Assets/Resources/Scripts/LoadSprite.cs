@@ -5,29 +5,28 @@ using UnityEngine.UI;
 
 public class LoadSprite : MonoBehaviour
 {
-    public static SpriteRenderer spriteRenderer;
-    public static GameObject imageObj;
-            
+    public GameObject imageObj;
+    public Image myImage;
+   /* Sprite[] sprites;
+    public GameObject pushImage;
+    public GameObject pullImage;
+    static Image itemImage;*/
+
     // Start is called before the first frame update
     void Start()
     {
-        ShopCategorySelect.mokitem = GameObject.FindGameObjectsWithTag("mokitem");
+        imageObj = GameObject.FindGameObjectWithTag("mokview");
+        myImage = imageObj.GetComponent<Image>();
+        
+        /*ShopCategorySelect.mokitem = GameObject.FindGameObjectsWithTag("mokitem");
 
-        ShopCategorySelect.itemList = Resources.LoadAll<Sprite>("Sprites/Image");
+        ShopCategorySelect.itemList = Resources.LoadAll<Sprite>("Sprites/Image");*/
 
         /*sprites = Resources.LoadAll<Sprite>("Sprites/Image");
-        if (sprites == null) Debug.Log("null");
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            Debug.Log(sprites[i].name);
-        }*/
+        */
         /*Sprite image = null;
         Image = Resources.LoadAll<Sprite>("Sprites/Image");
-        if (Image == null) Debug.Log("null");
-        for (int i = 0; i < Image.Length; i++)
-        {
-            Debug.Log(Image[i].name);
-        }
+        
         image = Resources.Load("Sprites/Image", typeof(Sprite)) as Sprite;
         ShopCategorySelect.Buttons1.GetComponent<SpriteRenderer>().sprite = image;*/
         /*ItemImage.Item = GameObject.FindGameObjectsWithTag("Item");
@@ -40,11 +39,38 @@ public class LoadSprite : MonoBehaviour
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/Image");
         spriteR.sprite = sprites[0];*/
     }
-    private void Awake()
+    void Awake()
     {
         
     }
+
+    public void clickChangeImage()
+    {
+        Func();
+    }
+    /*public void clickImage()
+    {
+        sprites = Resources.LoadAll<Sprite>("Sprites/Image");
+
+        GameObject imageObj = GameObject.Find("Button");
+        itemImage = pushImage.GetComponent<Image>();
+
+
+
     
+
+
+    }*/
+
+    void Func()
+    {
+        myImage.sprite = Resources.Load<Sprite>("Sprites/Image");
+        /*if (myImage.sprite == null) Debug.Log("null");
+        for (int i = 0; i < myImage.sprite.Length; i++)
+        {
+            Debug.Log(myImage.name);
+        }*/
+    }
 
     /* public void OnClickBox1()
      {
@@ -58,7 +84,9 @@ public class LoadSprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Func();
+        
+        
+        
     }
     /*void Func()
     {

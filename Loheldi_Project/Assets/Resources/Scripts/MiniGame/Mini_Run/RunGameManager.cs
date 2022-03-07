@@ -32,13 +32,11 @@ public class RunGameManager : MonoBehaviour
     {
         markerPos = NMarker.localPosition;
         Reset();
-
     }
 
     private Transform nowNPC;
     void Update()
     {
-
         if (difficulty != 0)
         {
             nowNPC = NPC[difficulty];
@@ -62,8 +60,10 @@ public class RunGameManager : MonoBehaviour
             NPCz = nowNPC.position.z;
             Playerz = Player.position.z;
 
-            PMarker.localPosition = new Vector3(Playerz - 1500, 125, 0);
-            NMarker.localPosition = new Vector3(NPCz - 1500, 125, 0);
+
+
+            PMarker.localPosition = new Vector3(Playerz / 4000 * 2560 - 1365, 180, 0);      // 플레이어 위치 / 트랙길이 * 미터라인 길이 - 1370
+            NMarker.localPosition = new Vector3(NPCz / 4000 * 2560 - 1365, 180, 0);         //  플레이어 위치에 백분률  * 미터기 길이   + 위치조정
 
             player.velocity = player.velocity / 1.0085f;
         }

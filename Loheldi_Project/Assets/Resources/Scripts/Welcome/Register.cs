@@ -220,6 +220,8 @@ public class Register : MonoBehaviour
     {
         string uEmail = InputFID_Email.text;
         Backend.BMember.FindCustomID(uEmail);
+        Debug.Log("발송 완료");
+        //todo: 발송 완 팝업
     }
 
     public void InitPW()    //비밀번호 초기화
@@ -227,6 +229,7 @@ public class Register : MonoBehaviour
         string uID = InputFPW_ID.text;
         string uEmail = InputFPW_Email.text;
         Backend.BMember.ResetPassword(uID, uEmail);
+        //todo: 발송 완 팝업
     }
     /*public void Load()
     {

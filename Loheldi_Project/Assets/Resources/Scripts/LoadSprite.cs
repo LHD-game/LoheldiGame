@@ -64,7 +64,7 @@ public class LoadSprite : MonoBehaviour
 
     void Func()
     {
-        myImage.sprite = Resources.Load<Sprite>("Sprites/Image");
+        myImage.sprite = Resources.Load<Sprite>("Sprites/Image/test1");
         /*if (myImage.sprite == null) Debug.Log("null");
         for (int i = 0; i < myImage.sprite.Length; i++)
         {

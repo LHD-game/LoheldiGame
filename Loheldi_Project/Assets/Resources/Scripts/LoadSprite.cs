@@ -48,23 +48,10 @@ public class LoadSprite : MonoBehaviour
     {
         Func();
     }
-    /*public void clickImage()
-    {
-        sprites = Resources.LoadAll<Sprite>("Sprites/Image");
-
-        GameObject imageObj = GameObject.Find("Button");
-        itemImage = pushImage.GetComponent<Image>();
-
-
-
     
-
-
-    }*/
-
     void Func()
     {
-        myImage.sprite = Resources.Load<Sprite>("Sprites/Image");
+        myImage.sprite = Resources.Load<Sprite>("Sprites/Image/test1");
         /*if (myImage.sprite == null) Debug.Log("null");
         for (int i = 0; i < myImage.sprite.Length; i++)
         {

@@ -11,7 +11,8 @@ public class RunPlayerRun : MonoBehaviour
     {
         if (RunCountDown.CountEnd == true)
         {
-            player.AddRelativeForce(Vector3.forward * 10000f);   //600f
+            player.AddRelativeForce(Vector3.forward * 2000f);   //600f
+            runFX.instance. RunningFX(this.gameObject);
         }
     }
 }

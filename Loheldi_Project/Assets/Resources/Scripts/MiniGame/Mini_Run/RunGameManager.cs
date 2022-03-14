@@ -28,6 +28,7 @@ public class RunGameManager : MonoBehaviour
     private Vector3 markerPos;
 
     public Transform EndLine;
+    public Transform EndBlock;
     public static int Goll;  //골지점
     public static bool isPause = false;
     
@@ -140,11 +141,13 @@ public class RunGameManager : MonoBehaviour
         {
             Goll = 5000;
             EndLine.position = new Vector3(50, -409, 4998);
+            EndBlock.position = new Vector3(50, -409,5144);
         }
         else
         {
             Goll = 4300;
             EndLine.position = new Vector3(50, 0, 4298);
+            EndBlock.position = new Vector3(50, 0, 4440);
         }
     }
 }

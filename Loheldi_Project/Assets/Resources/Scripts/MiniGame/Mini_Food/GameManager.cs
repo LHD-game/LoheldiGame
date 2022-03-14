@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static object cInstance { get; internal set; }
+
     GameObject[] foods;
     GameObject[] lifes;
     int score = 0;
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     private bool stopTrigger = false;   //true일 동안 게임 동작
     private bool pauseTrigger = false;  //true일 경우 일시정지
+    
 
     private void Start()
     {

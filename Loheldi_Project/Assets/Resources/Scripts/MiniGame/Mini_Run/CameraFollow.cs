@@ -17,7 +17,8 @@ public class CameraFollow : MonoBehaviour
     {
         if (target.position.z >= 62.9)
         {
-            tr.position = new Vector3(tr.position.x, tr.position.y, target.position.z + 50);
+            transform.position = target.position + new Vector3(192, 103, 82);
+            //tr.position = new Vector3(tr.position.x, tr.position.y, target.position.z + 50);
         }
     }
     public void CameraReset()

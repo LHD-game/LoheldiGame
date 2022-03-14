@@ -66,6 +66,7 @@ public class ToothGameManager : MonoBehaviour
             if (timer < 0)
             {
                 timer = 0;
+                timerTxt.text = $"{timer:N2}";
                 GameOver();
             }
         }

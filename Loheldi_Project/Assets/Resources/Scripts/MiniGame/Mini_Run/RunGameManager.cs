@@ -7,10 +7,11 @@ public class RunGameManager : MonoBehaviour
     public static int difficulty = 0;
 
     public Transform[] NPC = new Transform[4];  //none, hami, nari, himchan 순서대로
+    public Transform[] MAP = new Transform[4];  //들판, 바다, 하늘 순서대로
+    
     public Transform Player;
     private float NPCz;
     private float Playerz;
-
     public Rigidbody player;
 
     public Transform NMarker;
@@ -26,15 +27,19 @@ public class RunGameManager : MonoBehaviour
 
     private Vector3 markerPos;
 
+    public Transform EndLine;
+    public static int Goll;  //골지점
     public static bool isPause = false;
     
     void Start()
     {
         markerPos = NMarker.localPosition;
         Reset();
+        MAP[0].gameObject.SetActive(true);
     }
 
     private Transform nowNPC;
+    private Transform nowMAP;
     void Update()
     {
         if (difficulty != 0)
@@ -42,15 +47,21 @@ public class RunGameManager : MonoBehaviour
             nowNPC = NPC[difficulty];
             nowNPC.gameObject.SetActive(true);
 
+            MAP[0].gameObject.SetActive(false);
+            nowMAP = MAP[difficulty];
+            nowMAP.gameObject.SetActive(true);
 
-            if (nowNPC.position.z >= 4000)
+            EndMove();
+
+
+            if (nowNPC.position.z >= Goll)
             {
                 nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
             }
-            else if (Player.position.z >= 4000)
+            else if (Player.position.z >= Goll)
             {
                 nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
                 RunBtnPanel.SetActive(false);
@@ -62,8 +73,8 @@ public class RunGameManager : MonoBehaviour
 
 
 
-            PMarker.localPosition = new Vector3(Playerz / 4000 * 2560 - 1365, 180, 0);      // 플레이어 위치 / 트랙길이 * 미터라인 길이 - 1370
-            NMarker.localPosition = new Vector3(NPCz / 4000 * 2560 - 1365, 180, 0);         //  플레이어 위치에 백분률  * 미터기 길이   + 위치조정
+            PMarker.localPosition = new Vector3(Playerz / Goll * 2560 - 1365, 180, 0);      // 플레이어 위치 / 트랙길이 * 미터라인 길이 - 1370
+            NMarker.localPosition = new Vector3(NPCz / Goll * 2560 - 1365, 180, 0);         //  플레이어 위치에 백분률  * 미터기 길이   + 위치조정
 
             player.velocity = player.velocity / 1.0085f;
         }
@@ -86,6 +97,11 @@ public class RunGameManager : MonoBehaviour
         NPC[1].gameObject.SetActive(false);
         NPC[2].gameObject.SetActive(false);
         NPC[3].gameObject.SetActive(false);
+
+        MAP[1].gameObject.SetActive(false);
+        MAP[2].gameObject.SetActive(false);
+        MAP[3].gameObject.SetActive(false);
+        MAP[0].gameObject.SetActive(true);
 
         difficulty = 0;
         isPause = false;
@@ -116,5 +132,19 @@ public class RunGameManager : MonoBehaviour
             PausePanel.SetActive(false);
         }
         
+    }
+
+    public void EndMove()
+    {
+        if (difficulty == 3)
+        {
+            Goll = 5000;
+            EndLine.position = new Vector3(50, -409, 4998);
+        }
+        else
+        {
+            Goll = 4300;
+            EndLine.position = new Vector3(50, 0, 4298);
+        }
     }
 }

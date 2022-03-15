@@ -8,7 +8,7 @@ public class gravity : MonoBehaviour
     public GameObject block2;
     public GameObject block3;
     public GameObject block4;
-    float forceGravity = 300f;
+    float forceGravity = 2000f;
     Rigidbody Prigid;
 
     private bool gravityTF = false;

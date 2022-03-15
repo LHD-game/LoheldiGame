@@ -8,7 +8,7 @@ public class RunNPC : MonoBehaviour
     public Transform upup;
     private float[] NPCSpeed = { 0, 100, 140, 200 };
     private bool up = false;
-
+    int fxnum=0; //npc이펙트 적당히 뜨게하기 용
     void FixedUpdate()
     {
         if (RunCountDown.CountEnd && !RunGameManager.isPause)
@@ -16,13 +16,32 @@ public class RunNPC : MonoBehaviour
             if (up)
             {
                 transform.position = Vector3.MoveTowards(transform.position, upup.position, NPCSpeed[RunGameManager.difficulty] * Time.deltaTime);
-                runFX.instance.RunningFX(this.gameObject);
+
+                if (fxnum == 10)
+                {
+                    runFX.instance.RunningFX(this.gameObject);
+                    fxnum = 0;
+                }
+                else
+                {
+                    fxnum += 1;
+                }
             }
 
             else
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * NPCSpeed[RunGameManager.difficulty]);
-                runFX.instance.RunningFX(this.gameObject);
+
+                if (fxnum == 10)
+                {
+                    //runShFX_EffectHandler.shakeCamera = false;
+                    runFX.instance.RunningFX(this.gameObject);
+                    fxnum = 0;
+                }
+                else
+                {
+                    fxnum += 1;
+                }
             }
         }
     }

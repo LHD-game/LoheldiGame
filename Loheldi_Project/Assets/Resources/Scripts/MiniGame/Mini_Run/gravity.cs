@@ -28,8 +28,6 @@ public class gravity : MonoBehaviour
     }
     void OnTriggerEnter (Collider other)
     {
-        Debug.Log("jugu");
-
         if (other.gameObject == block1)
         {
             gravityTF =true;
@@ -69,7 +67,6 @@ public class gravity : MonoBehaviour
     }
     public void gravityControll()
     {
-        Debug.Log("ม฿ทย -98.1");
         Prigid.AddForce(Vector3.down * forceGravity);
     }
  }

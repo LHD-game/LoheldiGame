@@ -26,6 +26,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("GameMove");
     }
+    public void GotoCreateAcc()
+    {
+        SceneManager.LoadScene("CreateAcc");
+    }
 
 
     //Mini Game

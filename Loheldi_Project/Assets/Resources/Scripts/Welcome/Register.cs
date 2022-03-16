@@ -1,6 +1,5 @@
 using BackEnd;
-using LitJson;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -193,7 +192,16 @@ public class Register : MonoBehaviour
             //자동로그인 함수 실행
             AutoLogin();
             Debug.Log("동기방식 로그인 성공");
-            SceneLoader.instance.GotoGameMove();
+            if (AccChk())   //계정 정보 만들어져 있으면, 필드로
+            {
+                SceneLoader.instance.GotoGameMove();
+                
+            }
+            else    //없으면 계정 정보 생성
+            {
+                SceneLoader.instance.GotoCreateAcc();
+            }
+            
         }
 
         else
@@ -202,6 +210,49 @@ public class Register : MonoBehaviour
             ErrorTxt.gameObject.SetActive(true);
             Error(BRO.GetErrorCode(), "UserFunc");
         }
+    }
+
+    //계정 정보 존재 여부 체크 메소드
+    private bool AccChk()
+    {
+        bool isOK = false;
+        string owner_inDate = Backend.UserInDate;
+        Where where = new Where();
+        where.Equal("owner_inDate", owner_inDate);
+        BackendReturnObject bro = Backend.GameData.Get("ACC_INFO", where);
+        //BackendReturnObject bro = Backend.GameData.GetMyData("USER_INFO", owner_inDate);
+        if (bro.IsSuccess())
+        {
+            //GetGameInfo(bro.GetReturnValuetoJSON());
+            var json = bro.GetReturnValuetoJSON();
+            
+            try
+            {
+                var playerJson = json["rows"][0];
+                ParsingJSON pj = new ParsingJSON();
+                AccInfo data = pj.ParseBackendData<AccInfo>(playerJson);
+                Debug.Log(data.NICKNAME);
+                if (data.NICKNAME.Equals(null))
+                {
+                    isOK = false;
+                }
+                else
+                {
+                    isOK = true;
+                }
+                
+            }
+            catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
+            {
+                Debug.Log(ex);
+                isOK = false;
+            }
+        }
+        else
+        {
+            Debug.Log("조회 실패");
+        }
+        return isOK;
     }
 
 

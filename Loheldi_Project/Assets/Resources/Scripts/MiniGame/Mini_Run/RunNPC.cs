@@ -16,11 +16,13 @@ public class RunNPC : MonoBehaviour
             if (up)
             {
                 transform.position = Vector3.MoveTowards(transform.position, upup.position, NPCSpeed[RunGameManager.difficulty] * Time.deltaTime);
+                runFX.instance.RunningFX(this.gameObject);
             }
 
             else
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * NPCSpeed[RunGameManager.difficulty]);
+                runFX.instance.RunningFX(this.gameObject);
             }
         }
     }

@@ -39,10 +39,11 @@ public class Inventory : MonoBehaviour
     private Inventory mInventory;
     private Item mItem;
     public Text uName;
+    private int mTotalPrice;
 
-    public bool AddItem(Item item, int count)
+   /* public bool AddItem(Item item, int count)
     {
-        if(mListSpace.Count >= mSpace)
+        if(mListSpace.Count >= mSpaces)
         {
             return false;
         }
@@ -73,7 +74,7 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
-    }
+    }*/
     public void RemoveItem(Item item)
     {
         mListSpace.Remove(item);
@@ -140,10 +141,10 @@ public class Inventory : MonoBehaviour
     {
         mItem = item;
 
-        uName.text = mItem.mName;
+        uName.text = mItem.name;
     }
 
-    public void ClickBuy()
+    /*public void ClickBuy()
     {
         Inventory inventory = GameManager.cInstance.cInventory;
 
@@ -160,13 +161,18 @@ public class Inventory : MonoBehaviour
         }
 
         ClickBuyCancel();
+    }*/
+
+    public void ClickBuyCancel()
+    {
+
     }
     // Start is called before the first frame update
     void Start()
     {
         mSlot = cSlot.GetComponentsInChildren<InventorySlot>();
 
-        mInventory = GameManager.cInstance.cInventory;
+        /*mInventory = GameManager.cInstance.cInventory;*/
         mInventory.wasItemChanged += UpdateInventory;
         mInventory.wasGoldChanged += UpdateGold;
     }

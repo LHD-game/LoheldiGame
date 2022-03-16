@@ -150,26 +150,26 @@ public class Button : MonoBehaviour
 
     private void MA()
     {
-        player.GetComponent<MeshRenderer>().materials[5].color = Color.cyan;
+        player.GetComponent<MeshRenderer>().materials[6].color = Color.cyan;
     }
     private void MB()
     {
-        player.GetComponent<MeshRenderer>().materials[5].color = Color.red;
+        player.GetComponent<MeshRenderer>().materials[6].color = Color.red;
     }
     private void MC()
     {
-        player.GetComponent<MeshRenderer>().materials[5].color = Color.green;
+        player.GetComponent<MeshRenderer>().materials[6].color = Color.green;
     }
     private void MD()
     {
-        player.GetComponent<MeshRenderer>().materials[5].color = Color.yellow;
+        player.GetComponent<MeshRenderer>().materials[6].color = Color.yellow;
     }
     private void ME()
     {
-        player.GetComponent<MeshRenderer>().materials[5].color = Color.grey;
+        player.GetComponent<MeshRenderer>().materials[6].color = Color.grey;
     }
     private void MF()
     {
-        player.GetComponent<MeshRenderer>().materials[5].color = Color.black;
+        player.GetComponent<MeshRenderer>().materials[6].color = Color.black;
     }
 }

@@ -8,14 +8,15 @@ public class RotationButton : MonoBehaviour
 
     public void Left()
     {
-        player.transform.Rotate(new Vector3(0f, 0f, -30f));
+        player.transform.Rotate(new Vector3(0f, -30f, 0f));
     }
     public void Right()
     {
-        player.transform.Rotate(new Vector3(0f, 0f, 30f));
+        player.transform.Rotate(new Vector3(0f, 30f, 0f));
     }
     public void Reset()
     {
-        player.transform.rotation = Quaternion.Euler(-90f, 0f, 60f);
+        player.transform.rotation = Quaternion.Euler(0f, -120f, 0f);
+        player.GetComponent<MeshRenderer>().materials[0] = Resources.Load<Material>("player\\Material.010");
     }
 }

@@ -5,7 +5,17 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     public GameObject player;
+    public static GameObject body;
+    public static GameObject head;
+    public static GameObject hair;
     public Material[] material;
+
+    public void Start()
+    {
+        body = player.gameObject.transform.GetChild(0).gameObject; //하이라키에 player의 자식을 각각 지정
+        head = player.gameObject.transform.GetChild(1).gameObject;
+        hair = player.gameObject.transform.GetChild(2).gameObject;
+    }
 
     public void A()
     {
@@ -20,6 +30,14 @@ public class Button : MonoBehaviour
         else if (CategorySelect.Category == 2)
         {
             MA();
+        }
+        else if (CategorySelect.Category == 3)
+        {
+            HA();
+        }
+        else if (CategorySelect.Category == 4)
+        {
+            HCA();
         }
     }
     public void B()
@@ -36,6 +54,14 @@ public class Button : MonoBehaviour
         {
             MB();
         }
+        else if (CategorySelect.Category == 3)
+        {
+            HB();
+        }
+        else if (CategorySelect.Category == 4)
+        {
+            HCB();
+        }
     }
     public void C()
     {
@@ -50,6 +76,10 @@ public class Button : MonoBehaviour
         else if (CategorySelect.Category == 2)
         {
             MC();
+        }
+        else if (CategorySelect.Category == 4)
+        {
+            HCC();
         }
     }
     public void D()
@@ -66,6 +96,10 @@ public class Button : MonoBehaviour
         {
             MD();
         }
+        else if (CategorySelect.Category == 4)
+        {
+            HCD();
+        }
     }
     public void E()
     {
@@ -80,6 +114,10 @@ public class Button : MonoBehaviour
         else if (CategorySelect.Category == 2)
         {
             ME();
+        }
+        else if (CategorySelect.Category == 4)
+        {
+            HCE();
         }
     }
     public void F()
@@ -96,80 +134,130 @@ public class Button : MonoBehaviour
         {
             MF();
         }
+        else if (CategorySelect.Category == 4)
+        {
+            HCF();
+        }
     }
 
-    private void SA()
+    private void SA()           //피부
     {
-        player.GetComponent<MeshRenderer>().materials[0].color = Color.cyan;
+        body.GetComponent<MeshRenderer>().materials[2].color = new Color(255 / 255f, 237 / 255f, 227 / 255f);
+        head.GetComponent<MeshRenderer>().materials[0].color = new Color(255 / 255f, 237 / 255f, 227 / 255f);
+        head.GetComponent<MeshRenderer>().materials[1].color = new Color(255 / 255f, 210 / 255f, 179 / 255f);
     }
     private void SB()
     {
-        player.GetComponent<MeshRenderer>().materials[0].color = Color.red;
+        body.GetComponent<MeshRenderer>().materials[2].color = new Color(255 / 255f, 210 / 255f, 179 / 255f);
+        head.GetComponent<MeshRenderer>().materials[0].color = new Color(255 / 255f, 210 / 255f, 179 / 255f);
+        head.GetComponent<MeshRenderer>().materials[1].color = new Color(231 / 255f, 145 / 255f, 134 / 255f);
     }
     private void SC()
     {
-        player.GetComponent<MeshRenderer>().materials[0].color = Color.green;
+        body.GetComponent<MeshRenderer>().materials[2].color = new Color(255 / 255f, 183 / 255f, 131 / 255f);
+        head.GetComponent<MeshRenderer>().materials[0].color = new Color(255 / 255f, 183 / 255f, 131 / 255f);
+        head.GetComponent<MeshRenderer>().materials[1].color = new Color(207 / 255f, 80 / 255f, 89 / 255f);
     }
     private void SD()
     {
-        player.GetComponent<MeshRenderer>().materials[0].color = Color.yellow;
+        body.GetComponent<MeshRenderer>().materials[2].color = new Color(255 / 255f, 156 / 255f, 83 / 255f);
+        head.GetComponent<MeshRenderer>().materials[0].color = new Color(255 / 255f, 156 / 255f, 83 / 255f);
+        head.GetComponent<MeshRenderer>().materials[1].color = new Color(183 / 255f, 15 / 255f, 44 / 255f);
     }
     private void SE()
     {
-        player.GetComponent<MeshRenderer>().materials[0].color = Color.grey;
+        body.GetComponent<MeshRenderer>().materials[2].color = new Color(255 / 255f, 129 / 255f, 35 / 255f);
+        head.GetComponent<MeshRenderer>().materials[0].color = new Color(255 / 255f, 129 / 255f, 35 / 255f);
+        head.GetComponent<MeshRenderer>().materials[1].color = new Color(159 / 255f, 0 / 255f, 0 / 255f);
     }
     private void SF()
     {
-        player.GetComponent<MeshRenderer>().materials[0].color = Color.black;
+        body.GetComponent<MeshRenderer>().materials[2].color = new Color(255 / 255f, 102 / 255f, 0 / 255f);
+        head.GetComponent<MeshRenderer>().materials[0].color = new Color(255 / 255f, 102 / 255f, 0 / 255f);
+        head.GetComponent<MeshRenderer>().materials[1].color = new Color(135 / 255f, 0 / 255f, 0 / 255f);
     }
 
-    private void EA()
+    private void EA()           //눈
     {
-        player.GetComponent<MeshRenderer>().materials[4].color = Color.cyan;
+        head.GetComponent<MeshRenderer>().materials[4].color = new Color(120 / 255f, 190 / 255f, 255 / 255f);
     }
     private void EB()
     {
-        player.GetComponent<MeshRenderer>().materials[4].color = Color.red;
+        head.GetComponent<MeshRenderer>().materials[4].color = Color.red;
     }
     private void EC()
     {
-        player.GetComponent<MeshRenderer>().materials[4].color = Color.green;
+        head.GetComponent<MeshRenderer>().materials[4].color = new Color(42 / 255f, 138 / 255f, 52 / 255f);
     }
     private void ED()
     {
-        player.GetComponent<MeshRenderer>().materials[4].color = Color.yellow;
+        head.GetComponent<MeshRenderer>().materials[4].color = Color.yellow;
     }
     private void EE()
     {
-        player.GetComponent<MeshRenderer>().materials[4].color = Color.grey;
+        head.GetComponent<MeshRenderer>().materials[4].color = Color.grey;
     }
     private void EF()
     {
-        player.GetComponent<MeshRenderer>().materials[4].color = Color.black;
+        head.GetComponent<MeshRenderer>().materials[4].color = Color.black;
     }
 
-    private void MA()
+    private void MA()           //입
     {
-        player.GetComponent<MeshRenderer>().materials[6].color = Color.cyan;
+        head.GetComponent<MeshRenderer>().materials[6].color = Color.cyan;
     }
     private void MB()
     {
-        player.GetComponent<MeshRenderer>().materials[6].color = Color.red;
+        head.GetComponent<MeshRenderer>().materials[6].color = new Color(231 / 255f, 81 / 255f, 90 / 255f);
     }
     private void MC()
     {
-        player.GetComponent<MeshRenderer>().materials[6].color = Color.green;
+        head.GetComponent<MeshRenderer>().materials[6].color = Color.green;
     }
     private void MD()
     {
-        player.GetComponent<MeshRenderer>().materials[6].color = Color.yellow;
+        head.GetComponent<MeshRenderer>().materials[6].color = Color.yellow;
     }
     private void ME()
     {
-        player.GetComponent<MeshRenderer>().materials[6].color = Color.grey;
+        head.GetComponent<MeshRenderer>().materials[6].color = Color.grey;
     }
     private void MF()
     {
-        player.GetComponent<MeshRenderer>().materials[6].color = Color.black;
+        head.GetComponent<MeshRenderer>().materials[6].color = Color.black;
+    }
+
+    private void HA()           //머리카락(머리 모양)
+    {
+        hair.SetActive(true);
+    }
+    private void HB()
+    {
+        hair.SetActive(false);
+    }
+
+    private void HCA()           //머리 색
+    {
+        hair.GetComponent<MeshRenderer>().materials[0].color = Color.cyan;
+    }
+    private void HCB()
+    {
+        hair.GetComponent<MeshRenderer>().materials[0].color = Color.red;
+    }
+    private void HCC()
+    {
+        hair.GetComponent<MeshRenderer>().materials[0].color = Color.green;
+    }
+    private void HCD()
+    {
+        hair.GetComponent<MeshRenderer>().materials[0].color = Color.yellow;
+    }
+    private void HCE()
+    {
+        hair.GetComponent<MeshRenderer>().materials[0].color = Color.grey;
+    }
+    private void HCF()
+    {
+        hair.GetComponent<MeshRenderer>().materials[0].color = Color.black;
     }
 }

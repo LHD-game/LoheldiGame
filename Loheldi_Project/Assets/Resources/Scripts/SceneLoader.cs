@@ -30,6 +30,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("CreateAcc");
     }
+    public void GotoPlayerCustom()
+    {
+        SceneManager.LoadScene("PlayerCustom");
+    }
 
 
     //Mini Game

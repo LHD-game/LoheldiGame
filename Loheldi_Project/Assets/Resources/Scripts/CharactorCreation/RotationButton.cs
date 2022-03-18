@@ -16,7 +16,7 @@ public class RotationButton : MonoBehaviour
     }
     public void Reset()
     {
-        player.transform.rotation = Quaternion.Euler(0f, -120f, 0f);
+        player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         Button.SA();
         Button.EC();
         Button.MB();

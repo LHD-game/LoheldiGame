@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
-    private int mGold = 0;
+    /*private int mGold = 0;
     private int gold = 0;
     public int Gold { get; set; }
     private int mSpaces = 40;
@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
     public Text uName;
     private int mTotalPrice;
 
-   /* public bool AddItem(Item item, int count)
+   *//* public bool AddItem(Item item, int count)
     {
         if(mListSpace.Count >= mSpaces)
         {
@@ -74,7 +74,7 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
-    }*/
+    }*//*
     public void RemoveItem(Item item)
     {
         mListSpace.Remove(item);
@@ -144,7 +144,7 @@ public class Inventory : MonoBehaviour
         uName.text = mItem.name;
     }
 
-    /*public void ClickBuy()
+    *//*public void ClickBuy()
     {
         Inventory inventory = GameManager.cInstance.cInventory;
 
@@ -161,7 +161,7 @@ public class Inventory : MonoBehaviour
         }
 
         ClickBuyCancel();
-    }*/
+    }*//*
 
     public void ClickBuyCancel()
     {
@@ -172,7 +172,7 @@ public class Inventory : MonoBehaviour
     {
         mSlot = cSlot.GetComponentsInChildren<InventorySlot>();
 
-        /*mInventory = GameManager.cInstance.cInventory;*/
+        *//*mInventory = GameManager.cInstance.cInventory;*//*
         mInventory.wasItemChanged += UpdateInventory;
         mInventory.wasGoldChanged += UpdateGold;
     }
@@ -202,14 +202,80 @@ public class Inventory : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame*/
+    public static bool invectoryActivated = false;  // 인벤토리 활성화 여부. true가 되면 카메라 움직임과 다른 입력을 막을 것이다.
+
+    [SerializeField]
+    private GameObject go_InventoryBase; // Inventory_Base 이미지
+    [SerializeField]
+    private GameObject go_SlotsParent;  // Slot들의 부모인 Grid Setting 
+
+    private Slot[] slots;  // 슬롯들 배열
+
+    void Start()
+    {
+        slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+    }
+
     void Update()
     {
-        
+        TryOpenInventory();
     }
+
+    private void TryOpenInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            invectoryActivated = !invectoryActivated;
+
+            if (invectoryActivated)
+                OpenInventory();
+            else
+                CloseInventory();
+
+        }
+    }
+
+    private void OpenInventory()
+    {
+        go_InventoryBase.SetActive(true);
+    }
+
+    private void CloseInventory()
+    {
+        go_InventoryBase.SetActive(false);
+    }
+
+    public void AcquireItem(Item _item, int _count = 1)
+    {
+        if (Item.ItemType.Equipment != _item.itemType)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].item != null)  // null 이라면 slots[i].item.itemName 할 때 런타임 에러 나서
+                {
+                    if (slots[i].item.itemName == _item.itemName)
+                    {
+                        slots[i].SetSlotCount(_count);
+                        return;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+            {
+                slots[i].AddItem(_item, _count);
+                return;
+            }
+        }
+    }
+    
 }
 
-public class InventorySlot
+/*public class InventorySlot
 {
     internal void AddItem(Item item)
     {
@@ -220,4 +286,4 @@ public class InventorySlot
     {
         throw new NotImplementedException();
     }
-}
+}*/

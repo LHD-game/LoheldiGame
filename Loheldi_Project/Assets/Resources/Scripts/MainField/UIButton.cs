@@ -8,12 +8,14 @@ public class UIButton : MonoBehaviour
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언
+    public GameObject Inv;
     public GameObject ConditionWindow;                //Map선언
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public Text conditionLevelText;            //상태창 레벨
 
     public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
+    bool inv;
    public static bool conditionWindow;      //상태창이 열려있는지 확인
 
 
@@ -64,6 +66,20 @@ public class UIButton : MonoBehaviour
         else                                                //지도가 닫혀있다면
         {
             Map.SetActive(true);
+            map = true;
+        }
+    }
+
+    public void InvButton()
+    {
+        if (inv)
+        {
+            Inv.SetActive(false);
+            map = false;
+        }
+        else
+        {
+            Inv.SetActive(true);
             map = true;
         }
     }

@@ -1,3 +1,5 @@
+//CreateAcc Scene에서 계정 정보를 저장하기 위한 스크립트
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +37,7 @@ public class NewAccSave : MonoBehaviour
 
     private void Update()
     {
-        //입력 확인용 임시 결과 출력
+        //입력 확인용 결과 출력
         if (ResultField.activeSelf)
         {
             nick.text = "닉네임: " + uNickName;
@@ -103,7 +105,7 @@ public class NewAccSave : MonoBehaviour
         go.SetActive(false);
     }
 
-    //todo: 서버에 닉네임과 생년월일을 저장하는 메소드
+    //최종적으로 서버에 닉네임과 생년월일을 저장하는 메소드
     public void AccSave()
     {
         Param param = new Param();
@@ -116,11 +118,13 @@ public class NewAccSave : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("계정 정보 설정 완료!");
-            SceneLoader.instance.GotoGameMove();
+            //SceneLoader.instance.GotoGameMove();
+            SceneLoader.instance.GotoPlayerCustom();    //캐릭터 커스터마이징 씬으로 이동
         }
         else
         {
             Debug.Log("계정 정보 설정 실패!");
+            //todo: 오류 문의 안내 문구 띄우기
         }
     }
 }

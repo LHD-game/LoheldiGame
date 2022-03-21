@@ -1,5 +1,6 @@
 using BackEnd;
 using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 public class BackEndChart : MonoBehaviour
 {
     [Header("Gold")]
-    public Text usergold;
+    public int usergold;
     public Text itemgold;
     private int itemnum;
 
@@ -73,6 +74,8 @@ public class BackEndChart : MonoBehaviour
 
     public void GetChartContents()
     {
+        Param param = new Param();
+        Param updateParam = new Param();
         var BRO = Backend.Chart.GetChartContents("41919");
         
         if (ShopCategorySelect.Category == 1)
@@ -98,8 +101,20 @@ public class BackEndChart : MonoBehaviour
             Debug.Log("name:" + rows[itemnum]["name"][0]);
             Debug.Log("price:" + rows[itemnum]["price"][0]);
             Debug.Log("itemType:" + rows[itemnum]["itemType"][0]);
-        }
 
+            param.Add("item", rows[itemnum]["name"]);
+            param.Add("price", rows[itemnum]["price"][0]);
+            Backend.GameData.Insert("INVENTORY", param);
+
+            updateParam.AddCalculation("price", GameInfoOperator.subtraction, usergold - int.Parse((string)rows[itemnum]["price"][0]));
+
+            Where where = new Where();
+            where.Equal("price", "95");
+
+            Backend.GameData.UpdateWithCalculation("INVENTORY", where, updateParam);
+
+        }
+        
     }
 
     /*public void OnClickGetChartContents()

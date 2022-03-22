@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -162,3 +162,4 @@ public class CategorySelect : MonoBehaviour
         H_Color.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites\\fieldUI\\CustomizingNSelectTab") as Sprite;
     }
 }
+*/

@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -255,4 +255,4 @@ public class Button : MonoBehaviour
     {
         hair.GetComponent<MeshRenderer>().materials[0].color = new Color(240 / 255f, 128 / 255f, 128 / 255f);
     }
-}
+}*/

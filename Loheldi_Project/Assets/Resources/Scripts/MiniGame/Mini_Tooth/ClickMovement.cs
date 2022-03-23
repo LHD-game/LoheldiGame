@@ -20,15 +20,16 @@ public class ClickMovement : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
                 {
-                    SetDestination(hit.point);
+                    SetDestination(hit.transform.gameObject);
                 }
             }
             Move();
         }
     }
-    private void SetDestination(Vector3 dest)
+    private void SetDestination(GameObject gameobject)
     {
-        destination = dest;
+        Transform ChildObject = gameobject.transform.GetChild(0);
+        destination = ChildObject.position;   //이빨에 자식 오브젝트인 MovePosition을 목적지로 지정
         isMove = true;
     }
     private void Move()

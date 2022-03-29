@@ -31,7 +31,7 @@ public class VirtualJoystick : MonoBehaviour
     {
         if (MoveFlag)
         {
-            Playerrb.AddRelativeForce(Vector3.forward * 600f);
+            Playerrb.AddRelativeForce(Vector3.forward * 1300f);
 
             if (Playerrb.velocity.magnitude > 8f)
             {

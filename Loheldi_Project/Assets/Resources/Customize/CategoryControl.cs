@@ -10,13 +10,15 @@ public class CategoryControl : MonoBehaviour
     //category
     [SerializeField]
     private GameObject c_skin;
+    [SerializeField]
     private GameObject c_eyes;
     private GameObject c_mouth;
     private GameObject c_hair;
 
     
     List<Dictionary<string, object>> skin_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
-    List<object> eyes_Dialog;
+    List<Dictionary<string, object>> eyes_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
+
 
     enum ColumnName
     {
@@ -39,22 +41,33 @@ public class CategoryControl : MonoBehaviour
 
         for (int i = 0; i < d_dialog.Count; i++)
         {
-            if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))
+            if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))  //if it's skin
             {
                 initSkin(d_dialog[i]);
             }
+            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes)) //if it's eyes
+            {
+                initEyes(d_dialog[i]);
+            }
         }
         MakeCategory(c_skin, skin_Dialog);
+        MakeCategory(c_eyes, eyes_Dialog);
 
     }
 
+    //---init list---//
     //skin item만 모아보기
     void initSkin(Dictionary<string, object> d) 
     {
         skin_Dialog.Add(d);
     }
+    //Eyes item만 모아보기
+    void initEyes(Dictionary<string, object> d)
+    {
+        eyes_Dialog.Add(d);
+    }
 
-    //make category item list on game
+    //make category item list on game//
     void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)   
     {
         itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ItemBtn");

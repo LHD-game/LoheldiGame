@@ -13,6 +13,7 @@ public class CommonField
 
     //DB model name
     public static string m_skin = "Skin";
+    public static string m_eyes = "Eyes";
 
     //custom DB
     static List<Dictionary<string, object>> data_dialog; 

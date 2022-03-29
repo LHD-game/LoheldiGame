@@ -58,16 +58,7 @@ public class UIButton : MonoBehaviour
 
     public void MapButton()                 //지도버튼
     {
-        if (map)                                            //지도가 열려있다면
-        {
-            Map.SetActive(false);
-            map = false;
-        }
-        else                                                //지도가 닫혀있다면
-        {
-            Map.SetActive(true);
-            map = true;
-        }
+        Map.SetActive(true);
     }
 
     public void InvButton()

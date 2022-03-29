@@ -14,8 +14,8 @@ public class CategoryControl : MonoBehaviour
     private GameObject c_mouth;
     private GameObject c_hair;
 
-    public static List<Dictionary<string, object>> data_dialog; //custom DB
-    List<Dictionary<string, object>> skin_Dialog = new List<Dictionary<string, object>>();   //���ʷ� cid, name, model, meterial, texture
+    
+    List<Dictionary<string, object>> skin_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<object> eyes_Dialog;
 
     enum ColumnName
@@ -27,27 +27,21 @@ public class CategoryControl : MonoBehaviour
         Texture
     }
 
-    //DB colmn name
-    string nCID = "CID";
-    string nName = "Name";
-    string nModel = "Model";
-    string nMeterial = "Meterial";
-    string nTexture = "Texture";
 
-    //DB model name
-    string m_skin = "Skin";
 
 
     void Start()
     {
-        data_dialog = CSVReader.Read("Customize/CustomDB");    //DB parse
+        CommonField.SetDataDialog(CSVReader.Read("Customize/CustomDB"));    //DB parse
 
-        for(int i = 0; i < data_dialog.Count; i++)
+        List<Dictionary<string, object>> d_dialog = new List<Dictionary<string, object>>();
+        d_dialog = CommonField.GetDataDialog();
+
+        for (int i = 0; i < d_dialog.Count; i++)
         {
-            
-            if (data_dialog[i][nModel].ToString().Equals(m_skin))
+            if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))
             {
-                initSkin(data_dialog[i]);
+                initSkin(d_dialog[i]);
             }
         }
         MakeCategory(c_skin, skin_Dialog);
@@ -74,13 +68,13 @@ public class CategoryControl : MonoBehaviour
             //change catalog box img
             GameObject item_img= child.transform.Find("ItemImage").gameObject;
             Image img = item_img.GetComponent<Image>();
-            img.sprite = Resources.Load<Sprite>("Customize/Catalog_Images/"+ dialog[i][nName] + "_catalog");
-            print(dialog[i][nName]);
+            img.sprite = Resources.Load<Sprite>("Customize/Catalog_Images/"+ dialog[i][CommonField.nName] + "_catalog");
+            print(dialog[i][CommonField.nName]);
 
             //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
             GameObject item_name = child.transform.Find("ItemName").gameObject;
             Text txt = item_name.GetComponent<Text>();
-            txt.text = dialog[i][nName].ToString();
+            txt.text = dialog[i][CommonField.nName].ToString();
         }
     }
 

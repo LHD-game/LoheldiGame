@@ -9,7 +9,11 @@ public class Load_Inventory : MonoBehaviour
     private int itemnum;
     public void GetMyItem()
     {
-        
+       /* Where where = new Where();
+        where.Equal("item", "옷장");*/
+        /*where.BeginsWith("item", "옷장");
+        where.BeginsWith("item", "세면대");*/
+
         var bro = Backend.GameData.GetMyData("INVENTORY", new Where(), 10);
         
         if (bro.IsSuccess() == false)
@@ -29,7 +33,11 @@ public class Load_Inventory : MonoBehaviour
         {
             var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
             Debug.Log(inDate);
-        }
+        } /*이거는 유저 개인 모든 데이터 조회하는 indate 코드*/
+        
+        /*string item = bro.Rows()[0]["item"]["S"].ToString();
+        Debug.Log(item);*/
+        
 
 
 

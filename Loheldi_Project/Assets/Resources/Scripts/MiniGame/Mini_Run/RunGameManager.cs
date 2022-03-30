@@ -117,6 +117,7 @@ public class RunGameManager : MonoBehaviour
         GameOverPanel.SetActive(false);
         WelcomePanel.SetActive(true);
         PausePanel.SetActive(false);
+        RunBtnPanel.SetActive(false);
 
         NPC[1].gameObject.GetComponent<RunNPC>().enabled = true;
         NPC[2].gameObject.GetComponent<RunNPC>().enabled = true;

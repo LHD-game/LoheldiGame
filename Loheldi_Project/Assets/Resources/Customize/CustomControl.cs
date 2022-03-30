@@ -7,10 +7,12 @@ public class CustomControl : MonoBehaviour
 {
     Texture tSkin;
     Texture tEyes;
+    Texture tMouth;
 
     //player's material
     public Material p_mSkin;
     public Material p_mEyes;
+    public Material p_mMouth;
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +28,16 @@ public class CustomControl : MonoBehaviour
 
     void nowCustom()    //현재 커스텀을 DB에서 받아옴, NowSettings에 저장
     {
-        NowSettings.u_skin_texture = "1";   //!임시 세팅!
-        NowSettings.u_eyes_texture = "1";   //!임시 세팅!
+        NowSettings.u_skin_name = "skin1";   //!임시 세팅!
+        NowSettings.u_skin_texture = NowSettings.u_skin_name+"_texture";   //!임시 세팅!
+        NowSettings.u_eyes_name = "eyes1";   //!임시 세팅!
+        NowSettings.u_eyes_texture = NowSettings.u_skin_name+"_"+ NowSettings.u_eyes_name + "_texture";   //!임시 세팅!
+        NowSettings.u_mouth_name = "mouth1";   //!임시 세팅!
+        NowSettings.u_mouth_texture = NowSettings.u_skin_name+"_"+ NowSettings.u_mouth_name + "_texture";   //!임시 세팅!
 
         tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
         tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
+        tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
     }
 
     public void SelectCustom(GameObject go) //커스텀 아이템 선택 시 실행 메소드
@@ -48,11 +55,20 @@ public class CustomControl : MonoBehaviour
             {
                 if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))//그게 skin이면
                 {
+                    NowSettings.u_skin_name = d_dialog[i][CommonField.nName].ToString();
                     NowSettings.u_skin_texture = d_dialog[i][CommonField.nTexture].ToString();
+                    NowSettings.u_eyes_texture = NowSettings.u_skin_name + "_" + NowSettings.u_eyes_name + "_texture";
+                    NowSettings.u_mouth_texture = NowSettings.u_skin_name + "_" + NowSettings.u_mouth_name + "_texture";
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes))//그게 skin이면
+                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes))
                 {
-                    NowSettings.u_eyes_texture = d_dialog[i][CommonField.nTexture].ToString();
+                    NowSettings.u_eyes_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_eyes_texture = NowSettings.u_skin_name + "_" + d_dialog[i][CommonField.nTexture].ToString();
+                }
+                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth))
+                {
+                    NowSettings.u_mouth_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_mouth_texture = NowSettings.u_skin_name + "_" + d_dialog[i][CommonField.nTexture].ToString();
                 }
 
             }
@@ -66,8 +82,10 @@ public class CustomControl : MonoBehaviour
     {
         tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
         tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
-        print(p_mSkin);
+        tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
+
         p_mSkin.SetTexture("_MainTex", tSkin);    //_MainTex: Material의 Albedo texture입니다. 
         p_mEyes.SetTexture("_MainTex", tEyes);     
+        p_mMouth.SetTexture("_MainTex", tMouth);     
     }
 }

@@ -21,8 +21,8 @@ public class CategorySelect : MonoBehaviour
     {
         SkinPanel.SetActive(true);
         EyesPanel.SetActive(false);
-        //MouthPanel.SetActive(false);
-        //HairPanel.SetActive(false);
+        MouthPanel.SetActive(false);
+        HairPanel.SetActive(false);
 
     }
 
@@ -30,12 +30,32 @@ public class CategorySelect : MonoBehaviour
     {
         SkinPanel.SetActive(true);
         EyesPanel.SetActive(false);
+        MouthPanel.SetActive(false);
+        HairPanel.SetActive(false);
     }
 
     public void PopEyes()
     {
         SkinPanel.SetActive(false);
         EyesPanel.SetActive(true);
+        MouthPanel.SetActive(false);
+        HairPanel.SetActive(false);
+    }
+
+    public void PopMouth()
+    {
+        SkinPanel.SetActive(false);
+        EyesPanel.SetActive(false);
+        MouthPanel.SetActive(true);
+        HairPanel.SetActive(false);
+    }
+
+    public void PopHair()
+    {
+        SkinPanel.SetActive(false);
+        EyesPanel.SetActive(false);
+        MouthPanel.SetActive(false);
+        HairPanel.SetActive(true);
     }
 
     /*    public void skin()

@@ -31,15 +31,17 @@ public class RunGameManager : MonoBehaviour
     public Transform EndBlock;
     public static int Goll;  //골지점
     public static bool isPause = false;
+    RunPlayerRun Nownpc;
     
     void Start()
     {
         markerPos = NMarker.localPosition;
         Reset();
         MAP[0].gameObject.SetActive(true);
+        Nownpc = GameObject.Find("Player").GetComponent<RunPlayerRun>();
     }
 
-    private Transform nowNPC;
+    public Transform nowNPC;
     private Transform nowMAP;
     void Update()
     {
@@ -51,6 +53,8 @@ public class RunGameManager : MonoBehaviour
             MAP[0].gameObject.SetActive(false);
             nowMAP = MAP[difficulty];
             nowMAP.gameObject.SetActive(true);
+
+            Nownpc.NPC_ = nowNPC;
 
             EndMove();
 

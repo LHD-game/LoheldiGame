@@ -16,7 +16,10 @@ public class RotationButton : MonoBehaviour
     }
     public void Reset()
     {
-        player.transform.rotation = Quaternion.Euler(0f, -120f, 0f);
-        player.GetComponent<MeshRenderer>().materials[0] = Resources.Load<Material>("player\\Material.010");
+        player.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+/*        Button.SA();
+        Button.EC();
+        Button.MB();
+        Button.HCA();*/
     }
 }

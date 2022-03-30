@@ -45,7 +45,7 @@ public class NewAccSave : MonoBehaviour
 
     public void SaveNickName()  //´Ð³×ÀÓ ÀÔ·Â ÈÄ ¹öÆ°À» ´­·¶À» °æ¿ì ½ÇÇà
     {
-        Regex regex = new Regex(@"[a-zA-Z°¡-ÆR]{2,8}$"); //´Ð³×ÀÓ Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ÇÑ±Û 2~8ÀÚ °¡´É
+        Regex regex = new Regex(@"[a-zA-Z°¡-ÆR0-9]{2,8}$"); //´Ð³×ÀÓ Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ÇÑ±Û 2~8ÀÚ °¡´É
 
         if ((regex.IsMatch(InputNickName.text))) //Á¤±Ô½Ä ÀÏÄ¡½Ã,
         {
@@ -104,5 +104,23 @@ public class NewAccSave : MonoBehaviour
     }
 
     //todo: ¼­¹ö¿¡ ´Ð³×ÀÓ°ú »ý³â¿ùÀÏÀ» ÀúÀåÇÏ´Â ¸Þ¼Òµå
+    public void AccSave()
+    {
+        Param param = new Param();
+        param.Add("BIRTH", uBirth);
+        param.Add("NICKNAME", uNickName);
 
+
+        var bro = Backend.GameData.Insert("ACC_INFO", param);
+
+        if (bro.IsSuccess())
+        {
+            Debug.Log("°èÁ¤ Á¤º¸ ¼³Á¤ ¿Ï·á!");
+            SceneLoader.instance.GotoGameMove();
+        }
+        else
+        {
+            Debug.Log("°èÁ¤ Á¤º¸ ¼³Á¤ ½ÇÆÐ!");
+        }
+    }
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class LoadSprite2 : MonoBehaviour
 {
-    public static Sprite sprites;
-    /*public void ResourceLoad()
+    Sprite[] sprite;
+    public void LoadSprite()
     {
-        string PATH = "Sprites/Image";
-        sprites = Resources.Load(PATH, typeof(Sprite)) as Sprite;
-        ShopCategorySelect.Buttons1 = LoadSprite.imageObj;
-    }*/
-    // Start is called before the first frame update
+        sprite = Resources.LoadAll<Sprite>("Sprites/Image");
+        if (sprite == null) Debug.Log("null");
+        for (int i = 0; i < sprite.Length; i++)
+        {
+            //들어간 배열 수 만큼 반복하여 이름 콘솔 창에 띄움;
+            Debug.Log(sprite[i].name);
+        }
+    }
     void Start()
     {
         

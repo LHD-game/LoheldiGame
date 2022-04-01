@@ -20,7 +20,7 @@ public class runFX : MonoBehaviour
     [SerializeField]
     private ParticleSystem runningPs;
 
-    public void RunningFX(GameObject go)    //card turning FX
+    public void RunningFX(GameObject go)    //running dust FX
     {
         ParticleSystem newfx = Instantiate(runningPs);
         newfx.transform.position = go.transform.position;

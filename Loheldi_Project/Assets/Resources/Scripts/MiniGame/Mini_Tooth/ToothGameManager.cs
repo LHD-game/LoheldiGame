@@ -136,27 +136,22 @@ public class ToothGameManager : MonoBehaviour
                     break;
                 }
 
-                if (BlackCount >= 13)
-                {
-                    break;
-                }
-
                 else
                 {
                     if (blackTooth[rNum].gameObject.activeSelf == true)    //해당 blackTooth가 이미 활성화되어있는 경우
                     {
                         continue;
                     }
-                    else if (blackTooth[rNum].gameObject.tag != "BTooth")   //Tag가 BTooth가 아닌경우(MovePosition인 경우)
-                    {
-                        continue;
-                    }
+                    //else if (blackTooth[rNum].gameObject.tag != "BTooth")   //Tag가 BTooth가 아닌경우(MovePosition인 경우)
+                    //{
+                    //    continue;
+                    //}
                     else
                     {
                         i++;
                         BlackCount++;
                         blackTooth[rNum].gameObject.SetActive(true);
-                        //Debug.Log("BlackTooth[]: " + blackTooth[rNum].gameObject);
+                        Debug.Log("BlackTooth[]: " + blackTooth[rNum].gameObject);
                     }
                 }
 

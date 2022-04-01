@@ -10,7 +10,7 @@ public class Load_Inventory : MonoBehaviour
     public void GetMyItem()
     {
        /* Where where = new Where();
-        where.Equal("item", "옷장");*/
+        where.Equal("item", "옷장");  컬럼값 불러와보려고 시도한 흔적*/
         /*where.BeginsWith("item", "옷장");
         where.BeginsWith("item", "세면대");*/
 
@@ -31,9 +31,9 @@ public class Load_Inventory : MonoBehaviour
         }
         for (int i = 0; i < bro.Rows().Count; ++i)
         {
-            var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
+            var inDate = bro.Rows()[i]["itemCode"]["S"].ToString();
             Debug.Log(inDate);
-        } /*이거는 유저 개인 모든 데이터 조회하는 indate 코드*/
+        } /*이거는 유저 개인 모든 데이터 조회하는 itemCode 코드 int 형식은 잘 불러와지는데 string으로 불러오고 싶으면 json 한번 더 써야할듯.*/
         
         /*string item = bro.Rows()[0]["item"]["S"].ToString();
         Debug.Log(item);*/

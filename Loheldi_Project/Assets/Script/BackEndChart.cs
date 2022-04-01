@@ -13,14 +13,14 @@ public class BackEndChart : MonoBehaviour
     public Text itemgold;
     private int itemnum;
 
-    Dictionary<string, int> super = new Dictionary<string, int>
+    /*Dictionary<string, int> super = new Dictionary<string, int>
     {
         {"potato", 3},
         {"blueberry", 3},
         {"pumpkin", 3}
-    };
+    };*/
     
-    public void OnClickGetChartAndSave()
+    /*public void OnClickGetChartAndSave()
     {
         var BRO = Backend.Chart.GetOneChartAndSave("41766");
 
@@ -29,7 +29,7 @@ public class BackEndChart : MonoBehaviour
             Debug.Log("불러오기 완료");
             Debug.Log(BRO);
 
-            /*JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
+            *//*JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
             string ChartName, ChartContents;
 
             for (int i = 0; i < rows.Count; i++)
@@ -41,15 +41,15 @@ public class BackEndChart : MonoBehaviour
                 Debug.Log(string.Format("{0}\n{1}", ChartName, ChartContents));
 
                 GetPlayerPrefs(ChartName);
-            }*/
+            }*//*
         }
         else
         {
             Debug.Log("서버 공통 에러 발생: " + BRO.GetMessage());
         }
-    }
+    }*/
 
-    public void SaveItem()
+    /*public void SaveItem()
     {
         
         Param param = new Param();
@@ -60,7 +60,7 @@ public class BackEndChart : MonoBehaviour
         {
             print("정보입력 성공");
         }
-    }
+    }*/
 
     // 클라이언트에 저장된 정보를 불러오기
     /*void GetPlayerPrefs(string chartName)
@@ -93,25 +93,26 @@ public class BackEndChart : MonoBehaviour
         if (ShopCategorySelect.Category == 4)
         {
             itemnum = (ShopCategorySelect.Page - 1) * 6 + ShopCategorySelect.buttonnum + 51;
-        }
+        } // 버튼 넘버에 따라서 차트 뽑아오기 (1~73번)
         if (BRO.IsSuccess())
         {
             JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
             Debug.Log("itemCode:" + rows[itemnum]["itemCode"][0]);
             Debug.Log("name:" + rows[itemnum]["name"][0]);
             Debug.Log("price:" + rows[itemnum]["price"][0]);
-            Debug.Log("itemType:" + rows[itemnum]["itemType"][0]);
+            Debug.Log("itemType:" + rows[itemnum]["itemType"][0]); // 차트에 있는 컬럼 값 받아오기
 
+            param.Add("itemCode", rows[itemnum]["itemCode"][0]);
             param.Add("item", rows[itemnum]["name"]);
-            param.Add("price", rows[itemnum]["price"][0]);
+            param.Add("price", rows[itemnum]["price"][0]); // 인벤토리 테이블에 구매한 아이템 정보 삽입
             Backend.GameData.Insert("INVENTORY", param);
 
-            updateParam.AddCalculation("price", GameInfoOperator.subtraction, usergold - int.Parse((string)rows[itemnum]["price"][0]));
+            /*updateParam.AddCalculation("price", GameInfoOperator.subtraction, usergold - int.Parse((string)rows[itemnum]["price"][0]));*/
 
-            Where where = new Where();
+            /*Where where = new Where();
             where.Equal("price", "95");
 
-            Backend.GameData.UpdateWithCalculation("INVENTORY", where, updateParam);
+            Backend.GameData.UpdateWithCalculation("INVENTORY", where, updateParam);*/
 
         }
         
@@ -145,7 +146,7 @@ public class BackEndChart : MonoBehaviour
         }
     }*/
 
-    public void Shopping()
+    /*public void Shopping()
     {
         BackendReturnObject BRO = Backend.Chart.GetChartContents("41766");
 
@@ -154,7 +155,7 @@ public class BackEndChart : MonoBehaviour
             JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
             itemgold.text = ("가격:" + rows[2]["price"][0]);
 
-            /*itemgold.text = (string)rows[2]["price"][0];*/
+            *//*itemgold.text = (string)rows[2]["price"][0];*//*
         }
         else
         {
@@ -171,7 +172,7 @@ public class BackEndChart : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()

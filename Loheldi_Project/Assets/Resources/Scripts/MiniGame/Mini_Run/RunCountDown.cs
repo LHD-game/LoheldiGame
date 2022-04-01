@@ -24,7 +24,7 @@ public class RunCountDown : MonoBehaviour
         DifficultyPanel.gameObject.SetActive(false);
         RunBtnPanel.SetActive(true);
 
-        InvokeRepeating("NumAppear", 0f, 1f);    
+        InvokeRepeating("NumAppear", 0f, 1f);
     }
 
     private void NumAppear()
@@ -55,11 +55,13 @@ public class RunCountDown : MonoBehaviour
 
     public void ResetTimer()
     {
+        timer = 3;
         CountEnd = false;
         Num_1.SetActive(false);
         Num_2.SetActive(false);
         Num_3.SetActive(false);
-        timer = 3;
+        CancelInvoke("NumAppear");
+        
     }
 
 }

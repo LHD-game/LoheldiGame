@@ -119,17 +119,19 @@ public class ToothGameManager : MonoBehaviour
         timer = timerLen[difficulty];   //난이도 선택 시 난이도에 따른 시간을 timer 변수에 저장.
         isRun = true;
         InvokeRepeating("BoxRandom", repeatLen[difficulty], repeatLen[difficulty]);
-        Debug.Log("GameStart()");
+        //Debug.Log("GameStart()");
     }
 
     void BoxRandom()
     {
-        Debug.Log("BoxRandom()");
+        //Debug.Log("BoxRandom()");
         if (!isPause)
         {
             for (int i = 0; i < bTNum[difficulty];) //난이도별로 한 번에 나오는 blackTooth의 갯수가 다르게
             {
-                rNum = Random.Range(1, 20);
+                rNum = Random.Range(1, 41);
+                Debug.Log(rNum);
+    
                 if (BlackCount >= 13)
                 {
                     GameOver();

@@ -142,10 +142,10 @@ public class ToothGameManager : MonoBehaviour
                     {
                         continue;
                     }
-                    //else if (blackTooth[rNum].gameObject.tag != "BTooth")   //Tag가 BTooth가 아닌경우(MovePosition인 경우)
-                    //{
-                    //    continue;
-                    //}
+                    else if (blackTooth[rNum].gameObject.tag != "BTooth")   //Tag가 BTooth가 아닌경우(MovePosition인 경우)
+                    {
+                        continue;
+                    }
                     else
                     {
                         i++;

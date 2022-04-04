@@ -1594,6 +1594,7 @@ GameObject:
   - component: {fileID: 1287264571}
   - component: {fileID: 1287264570}
   - component: {fileID: 1287264573}
+  - component: {fileID: 1287264574}
   m_Layer: 5
   m_Name: SaveBtn
   m_TagString: Untagged
@@ -1677,6 +1678,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1287264574}
+        m_TargetAssemblyTypeName: CategoryControl, Assembly-CSharp
+        m_MethodName: NowCustom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1287264571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1727,6 +1740,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdb9eaf59649b24bb18a602fbf09bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1287264574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287264568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28337679caa69d44a8172e15521258c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c_skin: {fileID: 1223595100}
+  c_eyes: {fileID: 1404453763}
+  c_mouth: {fileID: 112816355}
+  c_hair: {fileID: 1536488620}
 --- !u!1 &1321324711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2294,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1536488620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5559293495730624846, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+  m_PrefabInstance: {fileID: 1607305900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1587092177 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6653426005932863580, guid: 4e175717c02a8f74d91c180b85593321, type: 3}

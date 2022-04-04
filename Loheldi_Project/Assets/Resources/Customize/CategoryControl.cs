@@ -12,12 +12,14 @@ public class CategoryControl : MonoBehaviour
     private GameObject c_skin;
     [SerializeField]
     private GameObject c_eyes;
+    [SerializeField]
     private GameObject c_mouth;
     private GameObject c_hair;
 
     
     List<Dictionary<string, object>> skin_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> eyes_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
+    List<Dictionary<string, object>> mouth_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
 
 
     enum ColumnName
@@ -49,9 +51,14 @@ public class CategoryControl : MonoBehaviour
             {
                 initEyes(d_dialog[i]);
             }
+            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth)) //if it's eyes
+            {
+                initMouth(d_dialog[i]);
+            }
         }
         MakeCategory(c_skin, skin_Dialog);
         MakeCategory(c_eyes, eyes_Dialog);
+        MakeCategory(c_mouth, mouth_Dialog);
 
     }
 
@@ -65,6 +72,11 @@ public class CategoryControl : MonoBehaviour
     void initEyes(Dictionary<string, object> d)
     {
         eyes_Dialog.Add(d);
+    }
+    //Mouth item만 모아보기
+    void initMouth(Dictionary<string, object> d)
+    {
+        mouth_Dialog.Add(d);
     }
 
     //make category item list on game//

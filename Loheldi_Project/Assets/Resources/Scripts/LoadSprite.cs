@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LoadSprite : MonoBehaviour
 {
-    public GameObject imageObj1;
+    public GameObject imageObj1; //상점 버튼 6개
     public GameObject imageObj2;
     public GameObject imageObj3;
     public GameObject imageObj4;
@@ -83,7 +83,7 @@ public class LoadSprite : MonoBehaviour
     {
         imageObj1 = GameObject.FindGameObjectWithTag("mokview");
         myImage1 = imageObj1.GetComponent<Image>();
-        myImage1.sprite = Resources.Load<Sprite>("Sprites/Image/Bed");
+        myImage1.sprite = Resources.Load<Sprite>("Sprites/Image/Bed"); //사진 강제로 입혀놔서 PurchaseItemImage 오브젝트에 띄울수있게끔 해놨음. 
         
         /*if (myImage.sprite == null) Debug.Log("null");
         for (int i = 0; i < myImage.sprite.Length; i++)
@@ -107,19 +107,19 @@ public class LoadSprite : MonoBehaviour
     {
         imageObj4 = GameObject.FindGameObjectWithTag("mokview");
         myImage4 = imageObj4.GetComponent<Image>();
-        myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/test2");
+        myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/side_table");
     }
     void Func5()
     {
         imageObj5 = GameObject.FindGameObjectWithTag("mokview");
         myImage5 = imageObj5.GetComponent<Image>();
-        myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/test2");
+        myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/sink");
     }
     void Func6()
     {
         imageObj6 = GameObject.FindGameObjectWithTag("mokview");
         myImage6 = imageObj6.GetComponent<Image>();
-        myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/test2");
+        myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/cubboard");
     }
 
 

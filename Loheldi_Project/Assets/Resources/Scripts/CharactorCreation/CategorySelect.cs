@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BackEnd;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,6 +59,7 @@ public class CategorySelect : MonoBehaviour
         HairPanel.SetActive(true);
     }
 
+    
     /*    public void skin()
         {
             resetColor();

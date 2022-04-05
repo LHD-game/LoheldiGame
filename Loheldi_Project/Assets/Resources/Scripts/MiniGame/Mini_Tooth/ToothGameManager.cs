@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,6 +56,8 @@ public class ToothGameManager : MonoBehaviour
     {
         //자식오브젝트들을 전부 배열에 저장한다.
         blackTooth = blackToothP.gameObject.GetComponentsInChildren<Transform>();
+        blackTooth = blackTooth.Where(child => child.tag == "BTooth").ToArray();
+
         Welcome();
     }
 
@@ -130,7 +133,7 @@ public class ToothGameManager : MonoBehaviour
         {
             for (int i = 0; i < bTNum[difficulty];) //난이도별로 한 번에 나오는 blackTooth의 갯수가 다르게
             {
-                rNum = Random.Range(1, 41);
+                rNum = Random.Range(0, 20);
                 Debug.Log(rNum);
     
                 if (BlackCount >= 13)
@@ -155,7 +158,7 @@ public class ToothGameManager : MonoBehaviour
                         BlackCount++;
                         blackTooth[rNum].gameObject.SetActive(true);
 
-                        Instantiate(Germ, blackTooth[rNum].gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+                        //Instantiate(Germ, blackTooth[rNum].gameObject.transform.position, Quaternion.Euler(0, 0, 0));
                         Debug.Log("BlackTooth[]: " + blackTooth[rNum].gameObject);
                     }
                 }

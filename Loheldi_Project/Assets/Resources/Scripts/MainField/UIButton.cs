@@ -21,7 +21,7 @@ public class UIButton : MonoBehaviour
 
     private void Awake()
     {
-        ConditionWindow.SetActive(true);
+        ConditionWindow.SetActive(true); //상태창 열기
         ChangColor.badge = GameObject.FindGameObjectsWithTag("badge");
 
         while (ChangColor.h < 2)
@@ -30,7 +30,7 @@ public class UIButton : MonoBehaviour
             ChangColor.h++;
         }
 
-        ConditionWindow.SetActive(false);
+        ConditionWindow.SetActive(false);//상태창 닫기
         conditionWindow = false;
     }
 

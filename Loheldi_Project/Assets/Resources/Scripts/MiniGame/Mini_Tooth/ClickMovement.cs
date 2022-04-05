@@ -38,10 +38,13 @@ public class ClickMovement : MonoBehaviour
         {
             if (Vector3.Distance(destination, transform.position) <= 0.1f)
             {
-                isMove = false; return;
+                isMove = false;
             }
-            var dir = destination - transform.position;
-            transform.position += dir.normalized * Time.deltaTime * 100f;
+            else
+            {
+                var dir = destination - transform.position;
+                transform.position += dir.normalized * Time.deltaTime * 100f;
+            }
         }
     }
 }

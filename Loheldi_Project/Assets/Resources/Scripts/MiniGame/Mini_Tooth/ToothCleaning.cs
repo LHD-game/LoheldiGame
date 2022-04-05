@@ -7,7 +7,6 @@ public class ToothCleaning : MonoBehaviour
     int TouchCount = 0;
     private bool pause = ToothGameManager.isPause;
 
-
     private void OnMouseDown()
     {
         if (!ToothGameManager.isPause) // 종료 후 검은 이빨 상호작용X
@@ -21,6 +20,5 @@ public class ToothCleaning : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
         }
-        
     }
 }

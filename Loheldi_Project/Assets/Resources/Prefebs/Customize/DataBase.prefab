@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1372775149787328370}
-  - component: {fileID: 1372775149787328369}
   - component: {fileID: 7398970004689261070}
+  - component: {fileID: 879062457832839129}
   m_Layer: 0
   m_Name: DataBase
   m_TagString: Untagged
@@ -32,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1372775149787328369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372775149787328371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28337679caa69d44a8172e15521258c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  c_skin: {fileID: 0}
 --- !u!114 &7398970004689261070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,4 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9ecde0108cf4b4f89a41787d7e3512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSkin: {fileID: 2100000, guid: 4989d1806829a6f4ba745d06009ff718, type: 2}
+  p_mSkin: {fileID: 0}
+  p_mEyes: {fileID: 0}
+  p_mMouth: {fileID: 0}
+  p_Eyes: {fileID: 0}
+--- !u!114 &879062457832839129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372775149787328371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28337679caa69d44a8172e15521258c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c_skin: {fileID: 0}
+  c_eyes: {fileID: 0}
+  c_mouth: {fileID: 0}
+  c_hair: {fileID: 0}

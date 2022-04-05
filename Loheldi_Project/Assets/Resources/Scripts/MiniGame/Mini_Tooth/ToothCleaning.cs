@@ -17,6 +17,7 @@ public class ToothCleaning : MonoBehaviour
                 ToothGameManager.BlackCount--;
                 TouchCount = 0;
                 //Debug.Log("this:" + this.gameObject);
+
                 this.gameObject.SetActive(false);
             }
         }

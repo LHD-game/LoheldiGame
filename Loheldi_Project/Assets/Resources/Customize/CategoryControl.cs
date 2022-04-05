@@ -1,3 +1,4 @@
+using BackEnd;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class CategoryControl : MonoBehaviour
     private GameObject c_eyes;
     [SerializeField]
     private GameObject c_mouth;
+    [SerializeField]
     private GameObject c_hair;
 
     
@@ -60,6 +62,16 @@ public class CategoryControl : MonoBehaviour
         MakeCategory(c_eyes, eyes_Dialog);
         MakeCategory(c_mouth, mouth_Dialog);
 
+    }
+    public void NowCustom()
+    {
+        Param param = new Param();
+        param.Add("Skin", skin_Dialog);
+        param.Add("Eye", eyes_Dialog);
+        param.Add("Mouth", mouth_Dialog);
+        /*param.Add("Hair", c_hair);*/
+
+        Backend.GameData.Insert("USER_CUSTOM", param);
     }
 
     //---init list---//

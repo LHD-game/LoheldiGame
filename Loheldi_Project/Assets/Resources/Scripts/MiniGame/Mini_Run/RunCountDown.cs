@@ -8,6 +8,7 @@ public class RunCountDown : MonoBehaviour
     public GameObject DifficultyPanel;
     public GameObject RunBtnPanel;
 
+    public GameObject Num;
     public GameObject Num_1;
     public GameObject Num_2;
     public GameObject Num_3;
@@ -31,21 +32,26 @@ public class RunCountDown : MonoBehaviour
     {
         if(timer == 3)
         {
-            Num_3.SetActive(true);
+            Num.SetActive(true);
         }
         else if(timer == 2)
         {
-            Num_3.SetActive(false);
-            Num_2.SetActive(true);
+            Num_3.SetActive(true);
         }
         else if (timer == 1)
         {
-            Num_2.SetActive(false);
-            Num_1.SetActive(true);
+            Num_2.SetActive(true);
         }
         else if (timer == 0)
         {
+            Num_1.SetActive(true);
+        }
+        else if(timer == -1)
+        {
+            Num.SetActive(false);
             Num_1.SetActive(false);
+            Num_2.SetActive(false);
+            Num_3.SetActive(false);
             CountEnd = true;
             CancelInvoke("NumAppear");
         }
@@ -57,6 +63,7 @@ public class RunCountDown : MonoBehaviour
     {
         timer = 3;
         CountEnd = false;
+        Num.SetActive(false);
         Num_1.SetActive(false);
         Num_2.SetActive(false);
         Num_3.SetActive(false);

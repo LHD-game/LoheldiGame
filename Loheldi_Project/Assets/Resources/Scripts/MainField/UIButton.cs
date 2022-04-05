@@ -21,6 +21,7 @@ public class UIButton : MonoBehaviour
 
     private void Awake()
     {
+        ConditionWindow.SetActive(true);
         ChangColor.badge = GameObject.FindGameObjectsWithTag("badge");
 
         while (ChangColor.h < 2)

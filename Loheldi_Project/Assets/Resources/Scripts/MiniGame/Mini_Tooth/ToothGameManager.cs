@@ -41,6 +41,7 @@ public class ToothGameManager : MonoBehaviour
 
     public static int BlackCount = 0;
 
+    public GameObject Germ;
     public GameObject WinText;
     public GameObject falseText;
 
@@ -153,6 +154,8 @@ public class ToothGameManager : MonoBehaviour
                         i++;
                         BlackCount++;
                         blackTooth[rNum].gameObject.SetActive(true);
+
+                        Instantiate(Germ, blackTooth[rNum].gameObject.transform.position, Quaternion.Euler(0, 0, 0));
                         Debug.Log("BlackTooth[]: " + blackTooth[rNum].gameObject);
                     }
                 }

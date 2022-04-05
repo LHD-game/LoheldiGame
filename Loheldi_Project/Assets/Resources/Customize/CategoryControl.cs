@@ -24,19 +24,9 @@ public class CategoryControl : MonoBehaviour
     List<Dictionary<string, object>> mouth_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
 
 
-    enum ColumnName
-    {
-        CID,
-        Name,
-        Model,
-        Meterial,
-        Texture
-    }
 
 
-
-
-    void Start()
+    private void Start()
     {
         CommonField.SetDataDialog(CSVReader.Read("Customize/CustomDB"));    //DB parse
 
@@ -53,7 +43,7 @@ public class CategoryControl : MonoBehaviour
             {
                 initEyes(d_dialog[i]);
             }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth)) //if it's eyes
+            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth)) 
             {
                 initMouth(d_dialog[i]);
             }
@@ -69,7 +59,7 @@ public class CategoryControl : MonoBehaviour
         param.Add("Skin", skin_Dialog);
         param.Add("Eye", eyes_Dialog);
         param.Add("Mouth", mouth_Dialog);
-        /*param.Add("Hair", c_hair);*/
+        //param.Add("Hair", c_hair);
 
         Backend.GameData.Insert("USER_CUSTOM", param);
     }

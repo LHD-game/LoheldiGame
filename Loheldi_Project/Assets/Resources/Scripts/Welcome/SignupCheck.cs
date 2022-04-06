@@ -27,9 +27,9 @@ public class SignupCheck : MonoBehaviour
     {
         for (int i = 0; i < ErrorLine.Length; i++)
         {
-            ErrorLine[i].gameObject.SetActive(false);      
+            ErrorLine[i].gameObject.SetActive(false);
         }
-        for(int i = 0; i< ErrorTxt.Length; i++)
+        for (int i = 0; i < ErrorTxt.Length; i++)
         {
             ErrorTxt[i].gameObject.SetActive(false);
         }
@@ -65,7 +65,7 @@ public class SignupCheck : MonoBehaviour
 
     public bool ChkID(string uID = "")     //ID 5~20자 이내 영어, 숫자
     {
-        Regex regex = new Regex(@"[a-zA-Z0-9]{5,20}$"); //ID 정규식. 영대소문자, 숫자 5~20자 이내 가능
+        Regex regex = new Regex(@"[a-zA-Z0-9]{3,8}$"); //ID 정규식. 영대소문자, 숫자 0~8자 이내 가능
         bool isCorrect = true; //정규식 만족 시, true
 
         if ((regex.IsMatch(uID)))    //정규식 불일치 시
@@ -92,7 +92,7 @@ public class SignupCheck : MonoBehaviour
         //숫자1이상, 영문1이상, 특수문자1이상
         Regex regex = new Regex(@"^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$", RegexOptions.IgnorePatternWhitespace);
 
-        if (uPW.Length >= 5 && uPW.Length <= 20)
+        if (uPW.Length >= 6 && uPW.Length <= 10)
         {
             if (regex.IsMatch(uPW))
             {
@@ -107,7 +107,9 @@ public class SignupCheck : MonoBehaviour
                 ErrorTxt[2].gameObject.SetActive(true);
                 isCorrect = false;
                 Debug.Log("PW가 양식과 일치하지 않습니다.(정규식 불만족)");
+                
             }
+
         }
         else
         {
@@ -116,13 +118,15 @@ public class SignupCheck : MonoBehaviour
             isCorrect = false;
             Debug.Log("PW가 양식과 일치하지 않습니다.(자릿수 불일치)");
         }
-
         return isCorrect;
     }
+        
+    
 
     public bool RePW(string PW = "", string rePW = "")      //비밀번호 중복 확인
     {
         bool isCorrect = true;
+
         if (PW.Equals(rePW))
         {
             ErrorLine[3].gameObject.SetActive(false);
@@ -143,7 +147,7 @@ public class SignupCheck : MonoBehaviour
 
     public bool ChkEmail(string uEmail = "")  //e-mail 양식 확인
     {
-        Regex regex = new Regex(@"[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,20}.[a-zA-Z]{1,5}$"); //이메일 정규식
+        Regex regex = new Regex(@"[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,20}\.[a-zA-Z]{1,5}$"); //이메일 정규식
         bool isCorrect = true; //정규식 만족 시, true
 
         if ((regex.IsMatch(uEmail)))    //정규식 불일치 시
@@ -153,6 +157,7 @@ public class SignupCheck : MonoBehaviour
             ErrorTxt[4].gameObject.SetActive(false);
             isCorrect = true;
         }
+        
         else
         {
             Debug.Log("email이 양식과 일치하지 않습니다.");

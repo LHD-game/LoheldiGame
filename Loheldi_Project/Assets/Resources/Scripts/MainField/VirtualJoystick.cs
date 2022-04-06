@@ -29,13 +29,13 @@ public class VirtualJoystick : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (MoveFlag)
+        if (MoveFlag)  //Player가 움직이고 있다면
         {
-            Playerrb.AddRelativeForce(Vector3.forward * 1300f);
+            Playerrb.AddRelativeForce(Vector3.forward * 3000f);  //앞 방향으로 밀기 (방향 * 힘)
 
             if (Playerrb.velocity.magnitude > 8f)
             {
-                Playerrb.velocity = Playerrb.velocity.normalized * 8f;
+                Playerrb.velocity = Playerrb.velocity.normalized * 10f;  //최대 속도
             }
         }
     }

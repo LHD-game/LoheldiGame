@@ -128,6 +128,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5559293495730624846, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
   m_PrefabInstance: {fileID: 687733654}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &131514114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+  m_PrefabInstance: {fileID: 687733654}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &287634566
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +290,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &560012721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+  m_PrefabInstance: {fileID: 5559293494532984082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &569123539
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,10 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0433d371c87286469b6170cdaf336ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkinPanel: {fileID: 1067873641}
-  EyesPanel: {fileID: 934685171}
-  MouthPanel: {fileID: 687733656}
-  HairPanel: {fileID: 1607305902}
+  SkinPanel: {fileID: 560012721}
+  EyesPanel: {fileID: 2066499289}
+  MouthPanel: {fileID: 131514114}
+  HairPanel: {fileID: 1333610132}
 --- !u!114 &569123542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +377,14 @@ PrefabInstance:
     - target: {fileID: 5559293494173091674, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 569123541}
+    - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PopMouth
       objectReference: {fileID: 0}
     - target: {fileID: 5559293494811506808, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_Pivot.x
@@ -493,11 +511,6 @@ PrefabInstance:
 --- !u!224 &687733655 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5559293494811506808, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
-  m_PrefabInstance: {fileID: 687733654}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &687733656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
   m_PrefabInstance: {fileID: 687733654}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &786591298
@@ -801,11 +814,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &934685171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
-  m_PrefabInstance: {fileID: 1404453761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949778629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1007,11 +1015,6 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5226829351895454099, guid: bff58d340eabe44488569ef227b388bd, type: 3}
   m_PrefabInstance: {fileID: 1013584754}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1067873641 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
-  m_PrefabInstance: {fileID: 5559293494532984082}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &1067873642 stripped
 RectTransform:
@@ -1590,7 +1593,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1372775150700057456}
         m_TargetAssemblyTypeName: CategoryControl, Assembly-CSharp
-        m_MethodName: NowCustom
+        m_MethodName: NowCustom2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1733,6 +1736,11 @@ CanvasRenderer:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8856154078009883126, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
   m_PrefabInstance: {fileID: 1232971378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1333610132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+  m_PrefabInstance: {fileID: 1607305900}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1362530793 stripped
 GameObject:
@@ -2222,6 +2230,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -600
       objectReference: {fileID: 0}
+    - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 569123541}
+    - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PopHair
+      objectReference: {fileID: 0}
     - target: {fileID: 5559293494811506808, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -2331,11 +2347,6 @@ PrefabInstance:
 --- !u!224 &1607305901 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5559293494811506808, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
-  m_PrefabInstance: {fileID: 1607305900}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1607305902 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
   m_PrefabInstance: {fileID: 1607305900}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1624146696
@@ -3110,6 +3121,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5226829351895454099, guid: bff58d340eabe44488569ef227b388bd, type: 3}
   m_PrefabInstance: {fileID: 2054151270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2066499289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5559293494811506811, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
+  m_PrefabInstance: {fileID: 1404453761}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2107277675
 PrefabInstance:

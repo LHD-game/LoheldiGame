@@ -1,4 +1,5 @@
 using BackEnd;
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,12 @@ using UnityEngine.UI;
 
 public class CategoryControl : MonoBehaviour
 {
+    public GameObject SkinPanel;
+    public GameObject EyesPanel;
+    public GameObject MouthPanel;
+    public GameObject HairPanel;
     GameObject itemBtn;
-
+    private int itemnum;
     //category
     [SerializeField]
     private GameObject c_skin;
@@ -53,7 +58,43 @@ public class CategoryControl : MonoBehaviour
         MakeCategory(c_mouth, mouth_Dialog);
 
     }
-    public void NowCustom()
+
+    public void NowCustom2()
+    {
+        var bro = Backend.Chart.GetChartContents("45823");
+        Param param = new Param();
+        if (SkinPanel)
+        {
+            itemnum = 5;
+        }
+        if (EyesPanel)
+        {
+            itemnum = 8;
+        }
+        if (MouthPanel)
+        {
+            itemnum = 11;
+        }
+
+        if (bro.IsSuccess())
+        {
+            JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+            Debug.Log("Name:" + rows[itemnum]["Name"][0]);
+            Debug.Log("Model:" + rows[itemnum]["Model"][0]);
+            Debug.Log("Meterial:" + rows[itemnum]["Meterial"][0]);
+            Debug.Log("Texture:" + rows[itemnum]["Texture"][0]);
+
+            param.Add("Name1", rows[itemnum = 5]["Name"][0]);
+            param.Add("Name2", rows[itemnum = 8]["Name"][0]);
+            param.Add("Name3", rows[itemnum = 10]["Name"][0]);
+            /*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
+            param.Add("Meterial", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Meterial"][0][0][0]);
+            param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*/
+            Backend.GameData.Insert("USER_CUSTOM", param);
+        }
+        
+    }
+    /*public void NowCustom()
     {
         Param param = new Param();
         param.Add("Skin", skin_Dialog);
@@ -62,7 +103,7 @@ public class CategoryControl : MonoBehaviour
         //param.Add("Hair", c_hair);
 
         Backend.GameData.Insert("USER_CUSTOM", param);
-    }
+    }*/
 
     //---init list---//
     //skin item만 모아보기

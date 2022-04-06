@@ -95,13 +95,14 @@ public class CustomControl : MonoBehaviour
         if (part.Equals("eyes"))
         {
             NowSettings.u_eyes_color = color;
-            NowSettings.u_eyes_texture = NowSettings.u_eyes_name + "_" + NowSettings.u_eyes_color;
+            NowSettings.u_eyes_texture = NowSettings.u_eyes_name + "_texture_" + NowSettings.u_eyes_color;
+            //print("지금 눈"+NowSettings.u_eyes_texture);
         }
         else if (part.Equals("mouth"))
         {
             //todo
         }
-        
+        //PlayerLook(); <- 넣게되면 UnassignedReferenceException 오류가 발생합니다;; 오직 update() 에서만 작동됩니다.
     }
 
     private void PlayerLook()   //외관 커스텀 업데이트
@@ -113,12 +114,14 @@ public class CustomControl : MonoBehaviour
         meEyes = Resources.Load<Mesh>(("Customize/" + NowSettings.u_eyes_name + "_mesh"));
         meMouth = Resources.Load<Mesh>(("Customize/" + NowSettings.u_mouth_name + "_mesh"));
 
+
+
         p_mSkin.SetTexture("_MainTex", tSkin);    //_MainTex: Material의 Albedo texture입니다. 
         p_mEyes.SetTexture("_MainTex", tEyes);     
         p_mMouth.SetTexture("_MainTex", tMouth);
 
         MeshFilter e_mesh = p_Eyes.GetComponent<MeshFilter>();  //눈 메시 변경(모델링)
-        MeshFilter m_mesh = p_Mouth.GetComponent<MeshFilter>();  //눈 메시 변경(모델링)
+        MeshFilter m_mesh = p_Mouth.GetComponent<MeshFilter>();  //입 메시 변경(모델링)
         e_mesh.sharedMesh = meEyes;
         m_mesh.sharedMesh = meMouth;
     }

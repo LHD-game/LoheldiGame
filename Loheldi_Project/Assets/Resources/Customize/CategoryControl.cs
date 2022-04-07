@@ -13,6 +13,7 @@ public class CategoryControl : MonoBehaviour
     public GameObject HairPanel;
     GameObject itemBtn;
     private int itemnum;
+    
     //category
     [SerializeField]
     private GameObject c_skin;
@@ -23,7 +24,9 @@ public class CategoryControl : MonoBehaviour
     [SerializeField]
     private GameObject c_hair;
 
-    
+    public int Category;
+    public int buttonnum;
+
     List<Dictionary<string, object>> skin_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> eyes_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> mouth_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
@@ -63,36 +66,72 @@ public class CategoryControl : MonoBehaviour
     {
         var bro = Backend.Chart.GetChartContents("45823");
         Param param = new Param();
-        if (SkinPanel)
+        if (Category == 1)
         {
-            itemnum = 5;
+            itemnum = (Category) * 5 + buttonnum + 4;
         }
-        if (EyesPanel)
+        if (Category == 2)
         {
-            itemnum = 8;
+            itemnum = (Category) * 5 + buttonnum + 9;
         }
-        if (MouthPanel)
+        if (Category == 3)
         {
-            itemnum = 11;
+            itemnum = (Category) * 5 + buttonnum + 14; 
         }
 
         if (bro.IsSuccess())
         {
             JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-            Debug.Log("Name:" + rows[itemnum]["Name"][0]);
-            Debug.Log("Model:" + rows[itemnum]["Model"][0]);
-            Debug.Log("Meterial:" + rows[itemnum]["Meterial"][0]);
-            Debug.Log("Texture:" + rows[itemnum]["Texture"][0]);
-
-            param.Add("Name1", rows[itemnum = 5]["Name"][0]);
-            param.Add("Name2", rows[itemnum = 8]["Name"][0]);
-            param.Add("Name3", rows[itemnum = 10]["Name"][0]);
+            
+            param.Add("Skin", rows[itemnum]["Name"][0]);
+            param.Add("Eyes", rows[itemnum]["Name"][0]);
+            param.Add("Mouth", rows[itemnum]["Name"][0]);
             /*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
             param.Add("Meterial", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Meterial"][0][0][0]);
             param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*/
             Backend.GameData.Insert("USER_CUSTOM", param);
         }
         
+    }
+    public void Cate_Skin()
+    {
+        Category = 1;
+        
+    }
+    public void Cate_Eyes()
+    {
+        Category = 2;
+        
+    }
+    public void Cate_Mouth()
+    {
+        Category = 3;
+        
+    }
+    public void Cate_Hair()
+    {
+        Category = 4;
+        
+    }
+    public void btn1()
+    {
+        buttonnum = 1;
+    }
+    public void btn2()
+    {
+        buttonnum = 2;
+    }
+    public void btn3()
+    {
+        buttonnum = 3;
+    }
+    public void btn4()
+    {
+        buttonnum = 4;
+    }
+    public void btn5()
+    {
+        buttonnum = 5;
     }
     /*public void NowCustom()
     {

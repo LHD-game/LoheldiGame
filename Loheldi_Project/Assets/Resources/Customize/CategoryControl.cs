@@ -64,19 +64,20 @@ public class CategoryControl : MonoBehaviour
 
     public void NowCustom2()
     {
-        var bro = Backend.Chart.GetChartContents("45823");
         Param param = new Param();
+        var bro = Backend.Chart.GetChartContents("45823");
+        
         if (Category == 1)
         {
-            itemnum = (Category) * 5 + buttonnum + 4;
+            itemnum = buttonnum + 4;
         }
         if (Category == 2)
         {
-            itemnum = (Category) * 5 + buttonnum + 9;
+            itemnum =  buttonnum + 9;
         }
         if (Category == 3)
         {
-            itemnum = (Category) * 5 + buttonnum + 14; 
+            itemnum =  buttonnum + 14; 
         }
 
         if (bro.IsSuccess())

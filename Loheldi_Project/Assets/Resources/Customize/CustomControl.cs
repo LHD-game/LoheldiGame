@@ -1,3 +1,5 @@
+using BackEnd;
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +21,7 @@ public class CustomControl : MonoBehaviour
 
     public GameObject p_Eyes;
     public GameObject p_Mouth;
+    Param param = new Param();
     //public GameObject p_Eyes;
 
     // Start is called before the first frame update
@@ -52,6 +55,8 @@ public class CustomControl : MonoBehaviour
     {
         //해당 커스텀의 itemname 가져오고, 
         string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
+        string itemName2 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
+        string itemName3 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
         //print(itemName + "메소드 실행 성공.");
 
         //data_dialog에서 아이템 row 찾기. 
@@ -79,18 +84,39 @@ public class CustomControl : MonoBehaviour
 
             }
         }
-
-        //해당 아이템 row 찾으면, 해당하는 texture등으로 변경해준다.
         
-    }
+        {
+            param.Add("Skin", itemName);
+            param.Add("Eyes", itemName2);
+            param.Add("Mouth", itemName3);
+            /*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
+            param.Add("Meterial", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Meterial"][0][0][0]);
+            param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*/
+            Backend.GameData.Insert("USER_CUSTOM", param);
+        }
+        //해당 아이템 row 찾으면, 해당하는 texture등으로 변경해준다.
 
+    }
+    /*public void SelectCustom2(GameObject go)
+    {
+        string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
+        param.Add("Eyes", itemName);
+        Backend.GameData.Insert("USER_CUSTOM", param);
+    }
+    public void SelectCustom3(GameObject go)
+    {
+        string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
+        param.Add("Mouth", itemName);
+        Backend.GameData.Insert("USER_CUSTOM", param);
+    }*/
     public void SelectColor(GameObject go)   //색 이름, 변경할 파츠
     {
         string color = go.transform.Find("ColorTxt").gameObject.GetComponent<Text>().text;
         string part = go.transform.Find("part").gameObject.GetComponent<Text>().text;
-
+        
         print(color);
         print(part);
+        
 
         if (part.Equals("eyes"))
         {
@@ -104,6 +130,14 @@ public class CustomControl : MonoBehaviour
         }
         //PlayerLook(); <- 넣게되면 UnassignedReferenceException 오류가 발생합니다;; 오직 update() 에서만 작동됩니다.
     }
+
+    /*public void ConfirmColor(GameObject go)
+    {
+        *//*string color = go.transform.Find("ColorTxt").gameObject.GetComponent<Text>().text;*//*
+        string part = go.transform.Find("part").gameObject.GetComponent<Text>().text;
+
+        
+    }*/
 
     private void PlayerLook()   //외관 커스텀 업데이트
     {

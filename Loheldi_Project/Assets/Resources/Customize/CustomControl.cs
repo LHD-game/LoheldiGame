@@ -21,7 +21,7 @@ public class CustomControl : MonoBehaviour
 
     public GameObject p_Eyes;
     public GameObject p_Mouth;
-    Param param = new Param();
+    /*Param param = new Param();*/
     //public GameObject p_Eyes;
 
     // Start is called before the first frame update
@@ -55,8 +55,8 @@ public class CustomControl : MonoBehaviour
     {
         //해당 커스텀의 itemname 가져오고, 
         string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
-        string itemName2 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
-        string itemName3 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
+        /*string itemName2 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
+        string itemName3 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;*/
         //print(itemName + "메소드 실행 성공.");
 
         //data_dialog에서 아이템 row 찾기. 
@@ -85,15 +85,15 @@ public class CustomControl : MonoBehaviour
             }
         }
         
-        {
+        /*{
             param.Add("Skin", itemName);
             param.Add("Eyes", itemName2);
             param.Add("Mouth", itemName3);
-            /*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
+            *//*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
             param.Add("Meterial", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Meterial"][0][0][0]);
-            param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*/
+            param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*//*
             Backend.GameData.Insert("USER_CUSTOM", param);
-        }
+        }*/
         //해당 아이템 row 찾으면, 해당하는 texture등으로 변경해준다.
 
     }

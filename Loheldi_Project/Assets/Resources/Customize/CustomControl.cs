@@ -10,17 +10,21 @@ public class CustomControl : MonoBehaviour
     Texture tSkin;
     Texture tEyes;
     Texture tMouth;
+    Texture tHair;
 
     Mesh meEyes;
     Mesh meMouth;
+    Mesh meHair;
 
     //player's material
     public Material p_mSkin;
     public Material p_mEyes;
     public Material p_mMouth;
+    public Material p_mHair;
 
     public GameObject p_Eyes;
     public GameObject p_Mouth;
+    public GameObject p_Hair;
     /*Param param = new Param();*/
     //public GameObject p_Eyes;
 
@@ -45,10 +49,14 @@ public class CustomControl : MonoBehaviour
         NowSettings.u_eyes_texture =  NowSettings.u_eyes_name + "_texture_" + NowSettings.u_eyes_color;   //!임시 세팅!
         NowSettings.u_mouth_name = "mouthI";   //!임시 세팅!
         NowSettings.u_mouth_texture = "mouth1_texture";   //!임시 세팅!
+        NowSettings.u_hair_name = "hair1";
+        NowSettings.u_hair_color = "black";
+        NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;   //!임시 세팅!
 
         tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
         tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
         tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
+        tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
     }
 
     public void SelectCustom(GameObject go) //커스텀 아이템 선택 시 실행 메소드
@@ -80,6 +88,11 @@ public class CustomControl : MonoBehaviour
                 {
                     NowSettings.u_mouth_name = d_dialog[i][CommonField.nName].ToString();
                     NowSettings.u_mouth_texture = d_dialog[i][CommonField.nTexture].ToString();
+                }
+                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_hair))    //그게 hair이면,
+                {
+                    NowSettings.u_hair_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_hair_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_hair_color;
                 }
 
             }
@@ -128,6 +141,12 @@ public class CustomControl : MonoBehaviour
         {
             //todo
         }
+        else if (part.Equals("hair"))
+        {
+            NowSettings.u_hair_color = color;
+            NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
+            print("지금 눈"+NowSettings.u_hair_texture);
+        }
         //PlayerLook(); <- 넣게되면 UnassignedReferenceException 오류가 발생합니다;; 오직 update() 에서만 작동됩니다.
     }
 
@@ -144,19 +163,24 @@ public class CustomControl : MonoBehaviour
         tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
         tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
         tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
+        tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
 
         meEyes = Resources.Load<Mesh>(("Customize/" + NowSettings.u_eyes_name + "_mesh"));
         meMouth = Resources.Load<Mesh>(("Customize/" + NowSettings.u_mouth_name + "_mesh"));
+        meHair = Resources.Load<Mesh>(("Customize/" + NowSettings.u_hair_name + "_mesh"));
 
 
 
         p_mSkin.SetTexture("_MainTex", tSkin);    //_MainTex: Material의 Albedo texture입니다. 
         p_mEyes.SetTexture("_MainTex", tEyes);     
         p_mMouth.SetTexture("_MainTex", tMouth);
+        p_mHair.SetTexture("_MainTex", tHair);
 
         MeshFilter e_mesh = p_Eyes.GetComponent<MeshFilter>();  //눈 메시 변경(모델링)
         MeshFilter m_mesh = p_Mouth.GetComponent<MeshFilter>();  //입 메시 변경(모델링)
+        MeshFilter h_mesh = p_Hair.GetComponent<MeshFilter>();  //머리 메시 변경(모델링)
         e_mesh.sharedMesh = meEyes;
         m_mesh.sharedMesh = meMouth;
+        h_mesh.sharedMesh = meHair;
     }
 }

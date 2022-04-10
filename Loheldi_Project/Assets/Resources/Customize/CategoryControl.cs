@@ -7,10 +7,7 @@ using UnityEngine.UI;
 
 public class CategoryControl : MonoBehaviour
 {
-    public GameObject SkinPanel;
-    public GameObject EyesPanel;
-    public GameObject MouthPanel;
-    public GameObject HairPanel;
+
     GameObject itemBtn;
     private int itemnum;
     
@@ -30,6 +27,7 @@ public class CategoryControl : MonoBehaviour
     List<Dictionary<string, object>> skin_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> eyes_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> mouth_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
+    List<Dictionary<string, object>> hair_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
 
 
     
@@ -70,10 +68,15 @@ public class CategoryControl : MonoBehaviour
             {
                 initMouth(d_dialog[i]);
             }
+            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_hair))
+            {
+                initHair(d_dialog[i]);
+            }
         }
         MakeCategory(c_skin, skin_Dialog);
         MakeCategory(c_eyes, eyes_Dialog);
         MakeCategory(c_mouth, mouth_Dialog);
+        MakeCategory(c_hair, hair_Dialog);
 
     }
 
@@ -125,13 +128,13 @@ public class CategoryControl : MonoBehaviour
                 print(str);
                 param.Add("eyes", B_custom[str]);
             }
-            if (buttonnum == 1)
+            if (buttonnum == 2)
             {
                 string str = "Eyes2";
                 print(str);
                 param.Add("eyes", B_custom[str]);
             }
-            if (buttonnum == 1)
+            if (buttonnum == 3)
             {
                 string str = "Eyes3";
                 print(str);
@@ -262,6 +265,11 @@ public class CategoryControl : MonoBehaviour
     void initMouth(Dictionary<string, object> d)
     {
         mouth_Dialog.Add(d);
+    }
+    //Hair item만 모으기
+    void initHair(Dictionary<string, object> d)
+    {
+        hair_Dialog.Add(d);
     }
 
     //make category item list on game//

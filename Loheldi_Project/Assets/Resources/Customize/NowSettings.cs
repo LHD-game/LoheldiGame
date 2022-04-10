@@ -13,4 +13,6 @@ public class NowSettings
     public static string u_mouth_name { get; set; }
     public static string u_mouth_texture { get; set; }
     public static string u_hair_name { get; set; }
+    public static string u_hair_color { get; set; }
+    public static string u_hair_texture { get; set; }
 }

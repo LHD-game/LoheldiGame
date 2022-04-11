@@ -28,25 +28,7 @@ public class CategoryControl : MonoBehaviour
     List<Dictionary<string, object>> eyes_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> mouth_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
     List<Dictionary<string, object>> hair_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
-
-
     
-    Dictionary<string, string> B_custom = new Dictionary<string, string>
-    {
-        {"Skin1", "skin1" },
-        {"Skin2", "skin2" },
-        {"Skin3", "skin3" },
-        {"Skin4", "skin4" },
-        {"Skin5", "skin5" },
-        {"Eyes1", "eyes1" },
-        {"Eyes2", "eyes2" },
-        {"Eyes3", "eyes3" },
-        {"MouthI", "mouthi" },
-        {"MouthD", "mouthd" },
-        {"MouthW", "mouthw" },
-    };
-
-
     private void Start()
     {
         CommonField.SetDataDialog(CSVReader.Read("Customize/CustomDB"));    //DB parse
@@ -80,123 +62,16 @@ public class CategoryControl : MonoBehaviour
 
     }
 
-    public void NowCustom2()
+    
+    public void NowCustom()
     {
-        
-        
-        if (Category == 1)
-        {
-            if (buttonnum == 1)
-            {
-                string str = "skin1";
-                print(str);
-                param.Add("skin", B_custom[str]);
-            }
-            else if (buttonnum == 2)
-            {
-                B_custom.TryGetValue("Skin2", out string skin);
-                print(skin);
-                param.Add("skin", skin);
-            }
-            else if (buttonnum == 3)
-            {
-                B_custom.TryGetValue("Skin3", out string skin);
-                print(skin);
-                param.Add("skin", skin);
-            }
-            else if (buttonnum == 4)
-            {
-                B_custom.TryGetValue("Skin4", out string skin);
-                print(skin);
-                param.Add("skin", skin);
-            }
-            else if (buttonnum == 5)
-            {
-                B_custom.TryGetValue("Skin5", out string skin);
-                print(skin);
-                param.Add("skin", skin);
-            }
-            
-
-            
-        }
-        if(Category == 2)
-        {
-            if (buttonnum == 1)
-            {
-                string str = "Eyes1";
-                print(str);
-                param.Add("eyes", B_custom[str]);
-            }
-            if (buttonnum == 2)
-            {
-                string str = "Eyes2";
-                print(str);
-                param.Add("eyes", B_custom[str]);
-            }
-            if (buttonnum == 3)
-            {
-                string str = "Eyes3";
-                print(str);
-                param.Add("eyes", B_custom[str]);
-            }
-        }
-        if(Category == 3)
-        {
-            if (buttonnum == 1)
-            {
-                B_custom.TryGetValue("MouthI", out string mouth);
-                print(mouth);
-                param.Add("mouth", mouth);
-            }
-            if (buttonnum == 2)
-            {
-                B_custom.TryGetValue("MouthD", out string mouth);
-                print(mouth);
-                param.Add("mouth", mouth);
-            }
-            if (buttonnum == 3)
-            {
-                B_custom.TryGetValue("MouthW", out string mouth);
-                print(mouth);
-                param.Add("mouth", mouth);
-            }
-        }
-
+        Param param = new Param();
+        param.Add("Skin", NowSettings.u_skin_name);
+        param.Add("Eyes", NowSettings.u_eyes_name);
+        param.Add("Mouth", NowSettings.u_mouth_name);
 
         Backend.GameData.Insert("USER_CUSTOM", param);
-
-
-        /*var bro = Backend.Chart.GetChartContents("45823");
-        
-        if (Category == 1)
-        {
-            itemnum = buttonnum + 4;
-        }
-        if (Category == 2)
-        {
-            itemnum =  buttonnum + 9;
-        }
-        if (Category == 3)
-        {
-            itemnum =  buttonnum + 14; 
-        }
-
-        if (bro.IsSuccess())
-        {
-            JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-            
-            param.Add("Skin", rows[itemnum]["Name"][0]);
-            param.Add("Eyes", rows[itemnum]["Name"][0]);
-            param.Add("Mouth", rows[itemnum]["Name"][0]);
-            *//*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
-            param.Add("Meterial", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Meterial"][0][0][0]);
-            param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*//*
-            Backend.GameData.Insert("USER_CUSTOM", param);
-        }*/
-
     }
-    
         
     
     public void Cate_Skin()

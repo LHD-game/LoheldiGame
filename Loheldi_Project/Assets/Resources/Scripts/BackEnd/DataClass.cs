@@ -12,3 +12,13 @@ public class AccInfo
     public string NICKNAME;
     public DateTime BIRTH;
 }
+
+//상점 아이템 정보
+public class StoreItem
+{
+    public string itemCode;
+    public string name;
+    public string price;
+    public string itemTheme;
+    public string itemType;
+}

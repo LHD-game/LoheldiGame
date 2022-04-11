@@ -63,8 +63,7 @@ public class CustomControl : MonoBehaviour
     {
         //해당 커스텀의 itemname 가져오고, 
         string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
-        /*string itemName2 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
-        string itemName3 = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;*/
+        
         //print(itemName + "메소드 실행 성공.");
 
         //data_dialog에서 아이템 row 찾기. 

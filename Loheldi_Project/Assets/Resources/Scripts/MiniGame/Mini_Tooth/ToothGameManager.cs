@@ -133,7 +133,7 @@ public class ToothGameManager : MonoBehaviour
         {
             for (int i = 0; i < bTNum[difficulty];) //난이도별로 한 번에 나오는 blackTooth의 갯수가 다르게
             {
-                rNum = Random.Range(0, 20);
+                rNum = Random.Range(0, 28);
                 Debug.Log(rNum);
     
                 if (BlackCount >= 13)

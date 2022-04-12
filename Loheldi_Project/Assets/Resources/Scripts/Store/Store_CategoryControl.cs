@@ -2,6 +2,7 @@ using BackEnd;
 using LitJson;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,46 +19,25 @@ public class Store_CategoryControl : MonoBehaviour
     [SerializeField]
     private GameObject c_hair;
 
-
+    List<Dictionary<string, object>> woodItem = new List<Dictionary<string, object>>();
+    List<Dictionary<string, object>> modernItem = new List<Dictionary<string, object>>();
+    List<Dictionary<string, object>> kitschItem = new List<Dictionary<string, object>>();
+    List<Dictionary<string, object>> classicItem = new List<Dictionary<string, object>>();
+    List<Dictionary<string, object>> wallpaperItem = new List<Dictionary<string, object>>();
+    //ListDictionary woodItem
 
     private void Start()
     {
         PopGaguStore();
-        /*CommonField.SetDataDialog(CSVReader.Read("Customize/CustomDB"));    //DB parse
-
-        List<Dictionary<string, object>> d_dialog = new List<Dictionary<string, object>>();
-        d_dialog = CommonField.GetDataDialog();
-
-        for (int i = 0; i < d_dialog.Count; i++)
-        {
-            if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))  //if it's skin
-            {
-                initSkin(d_dialog[i]);
-            }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes)) //if it's eyes
-            {
-                initEyes(d_dialog[i]);
-            }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth)) 
-            {
-                initMouth(d_dialog[i]);
-            }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_hair))
-            {
-                initHair(d_dialog[i]);
-            }
-        }*/
     }
 
     public void PopGaguStore()
     {
-        GetChartContents("41919");
+        GetChartContents("46292");
     }
 
     void GetChartContents(string chartNum)  //서버 상의 차트를 불러와 저장
     {
-        Param param = new Param();
-        Param updateParam = new Param();
         var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.
         
         JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
@@ -66,7 +46,44 @@ public class Store_CategoryControl : MonoBehaviour
         {
             StoreItem data = pj.ParseBackendData<StoreItem>(rows[i]);
             print(data.itemCode);
-            //todo: 아이템 테마에 따라 다른 리스트에 저장.
+            print(data.itemTheme);
+
+            int w = 0, m = 0, k = 0, c = 0, wa = 0;
+
+            //아이템 테마에 따라 다른 리스트에 저장.
+
+            if (data.itemTheme.Equals("wood"))
+            {
+                w++;
+                print(w);
+                initItem(woodItem[w], data); //오류 발생 구간. 해결 필요.
+            }
+            else if (data.itemTheme.Equals("modern"))
+            {
+                m++;
+                initItem(modernItem[m], data);
+            }
+            else if (data.itemTheme.Equals("kitsch"))
+            {
+                k++;
+                initItem(kitschItem[k], data);
+            }
+            else if (data.itemTheme.Equals("classic"))
+            {
+                c++;
+                initItem(classicItem[c], data);
+            }
+            else if (data.itemTheme.Equals("wallpaper"))
+            {
+                wa++;
+                initItem(wallpaperItem[wa], data);
+            }
+
+            print(w);
+            print(m);
+            print(k);
+            print(c);
+            print(wa);
         }
         
         
@@ -74,26 +91,17 @@ public class Store_CategoryControl : MonoBehaviour
     }
 
     //---init list---//
-    //skin item만 모아보기
-    void initSkin(Dictionary<string, object> d) 
+    //itemTheme 별로 모아서 저장
+    void initItem(Dictionary<string, object> item, StoreItem data) 
     {
-        //skin_Dialog.Add(d);
+        print("initItem");
+        item.Add("itemCode", data.itemCode);
+        item.Add("name", data.name);
+        item.Add("price", data.price);
+        item.Add("itemTheme", data.itemTheme);
+        item.Add("itemType", data.itemTheme);
     }
-    //Eyes item만 모아보기
-    void initEyes(Dictionary<string, object> d)
-    {
-       // eyes_Dialog.Add(d);
-    }
-    //Mouth item만 모아보기
-    void initMouth(Dictionary<string, object> d)
-    {
-        //mouth_Dialog.Add(d);
-    }
-    //Hair item만 모으기
-    void initHair(Dictionary<string, object> d)
-    {
-       // hair_Dialog.Add(d);
-    }
+
 
     //make category item list on game//
     void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)   

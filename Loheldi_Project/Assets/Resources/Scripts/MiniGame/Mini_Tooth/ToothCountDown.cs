@@ -71,5 +71,6 @@ public class ToothCountDown : MonoBehaviour
         Num_2.SetActive(false);
         Num_3.SetActive(false);
         timer = 3;
+        CancelInvoke("NumAppear");
     }
 }

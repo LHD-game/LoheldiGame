@@ -8,6 +8,8 @@ public class LodingTxt : MonoBehaviour
 {
     public Text Txt;
     public Text name;
+    public GameObject Arrow;
+    public GameObject block;
     //private string[] TxtValue;
     int j;
     public GameObject Chat;
@@ -30,6 +32,7 @@ public class LodingTxt : MonoBehaviour
         if (j == data_Dialog.Count)
         {
             Chat.SetActive(false);
+            Arrow.SetActive(false);
             Txt.text = " ";
             name.text = " ";
         }
@@ -38,6 +41,8 @@ public class LodingTxt : MonoBehaviour
             LoadTxt = data_Dialog[j]["dialog"].ToString();
             name.text = data_Dialog[j]["name"].ToString();
             StartCoroutine(_typing());
+            Arrow.SetActive(false);
+            block.SetActive(true);
 
         }
 
@@ -50,23 +55,10 @@ public class LodingTxt : MonoBehaviour
         {
             Txt.text = LoadTxt.Substring(0, i);
             yield return new WaitForSeconds(0.05f);
+            block.SetActive(false);
+            Arrow.SetActive(true);
         }
         j++;
     }
-    /*public void FirstQuest(string filePath)
-    {
-        
-        string[] _value = new string[];
-        string value = "";
-
-        FileInfo fileInfo = new FileInfo(filePath);
-
-        if (fileInfo.Exists)
-        {
-            StreamReader reader = new StreamReader(filePath);
-            value = reader.ReadToEnd(); //파일 처음부터 끝까지 읽기
-            reader.Close();
-        }
-    }*/
 }
 

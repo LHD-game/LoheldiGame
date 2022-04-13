@@ -195,7 +195,7 @@ public class Register : MonoBehaviour
             if (AccChk())   //계정 정보 만들어져 있으면, 필드로
             {
                 /*SceneLoader.instance.GotoGameMove();*/
-                SceneLoader.instance.GotoPlayerCustom();
+                SceneLoader.instance.GotoGameMove();
 
 
             }

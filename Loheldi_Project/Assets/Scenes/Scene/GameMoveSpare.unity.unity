@@ -11466,7 +11466,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597d157ae152f34408bd9344d76de961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   Player: {fileID: 346132018}
+=======
+  Player: {fileID: 0}
+>>>>>>> ea74d2d2f033730c2115c3610aad1597f2de6dec
   Camera: {fileID: 952829601}
   vec3: {x: 0, y: 0, z: 0}
   SmoothTime: 0.3
@@ -14280,6 +14284,7 @@ GameObject:
   - component: {fileID: 1099433552}
   - component: {fileID: 1099433551}
   - component: {fileID: 1099433550}
+  - component: {fileID: 1099433554}
   m_Layer: 5
   m_Name: Mail
   m_TagString: Untagged
@@ -14366,9 +14371,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: JumpButton, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1099433554}
+        m_TargetAssemblyTypeName: ReceivePost, Assembly-CSharp
+        m_MethodName: ClickMail
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14416,6 +14421,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099433548}
   m_CullTransparentMesh: 1
+--- !u!114 &1099433554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099433548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1845a339fffc214cb4de1116128fd0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1103383361
 GameObject:
   m_ObjectHideFlags: 1
@@ -22208,6 +22225,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e46d2393531446428690b5a5f21645d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+  m_Material: {fileID: 0}
+  m_OutputDisplay: 0
+  m_InputLayers:
+  - m_LayerName: BaseLayer
+    m_OutputTarget: 0
+    m_ClearDepth: 0
+    m_ClearAlpha: 1
+    m_OutputRenderer: {fileID: 0}
+    m_Type: 0
+    m_Camera: {fileID: 0}
+    m_InputVideo: {fileID: 0}
+    m_InputTexture: {fileID: 0}
+    m_BackgroundFit: 0
+    m_ResolutionScale: 1
+    m_ColorBufferFormat: 48
+    m_OverrideAntialiasing: 0
+    m_Antialiasing: 0
+    m_OverrideClearMode: 0
+    m_ClearMode: 1
+    m_OverrideCullingMask: 0
+    m_CullingMask:
+      serializedVersion: 2
+      m_Bits: 0
+    m_OverrideVolumeMask: 0
+    m_VolumeMask:
+      serializedVersion: 2
+      m_Bits: 0
+    m_LayerPositionInStack: 0
+    m_InputFilters: []
+    m_AOVBitmask: 0
+    m_AOVRenderTargets: []
+    m_RenderTarget: {fileID: 0}
+    m_ClearsBackGround: 0
+    m_Show: 1
+    m_LayerCamera: {fileID: 0}
+    m_AlphaMin: 0
+    m_AlphaMax: 1
+  - m_LayerName: New SubLayer
+    m_OutputTarget: 1
+    m_ClearDepth: 1
+    m_ClearAlpha: 1
+    m_OutputRenderer: {fileID: 0}
+    m_Type: 0
+    m_Camera: {fileID: 952829600}
+    m_InputVideo: {fileID: 0}
+    m_InputTexture: {fileID: 0}
+    m_BackgroundFit: 0
+    m_ResolutionScale: 1
+    m_ColorBufferFormat: 48
+    m_OverrideAntialiasing: 0
+    m_Antialiasing: 0
+    m_OverrideClearMode: 0
+    m_ClearMode: 1
+    m_OverrideCullingMask: 0
+    m_CullingMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    m_OverrideVolumeMask: 0
+    m_VolumeMask:
+      serializedVersion: 2
+      m_Bits: 0
+    m_LayerPositionInStack: 0
+    m_InputFilters: []
+    m_AOVBitmask: 0
+    m_AOVRenderTargets: []
+    m_RenderTarget: {fileID: 0}
+    m_ClearsBackGround: 0
+    m_Show: 1
+    m_LayerCamera: {fileID: 952829600}
+    m_AlphaMin: 0
+    m_AlphaMax: 1
+  m_Shader: {fileID: -6465566751694194690, guid: 44072fb94ae13a64383688fce747e6ae, type: 3}
+  m_CompositionProfile: {fileID: 11400000, guid: b168ee5f4d275dc45b6bcf813388c12b, type: 2}
+  m_OutputCamera: {fileID: 0}
+>>>>>>> ea74d2d2f033730c2115c3610aad1597f2de6dec
 --- !u!4 &1748601376
 Transform:
   m_ObjectHideFlags: 1

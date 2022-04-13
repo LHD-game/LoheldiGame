@@ -22,3 +22,8 @@ public class StoreItem
     public string itemTheme;
     public string itemType;
 }
+public class CustomItem
+{
+    public string ItemCode;
+    public string ItemName;
+}

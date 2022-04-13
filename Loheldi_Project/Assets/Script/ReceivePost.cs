@@ -27,12 +27,14 @@ public class ReceivePost : MonoBehaviour
         for(int i = 0; i < json.Count; i++)
         {
 
-            UPostItem postItem = new UPostItem();
+            /*UPostItem postItem = new UPostItem();
             postItem.content = json[i]["content"].ToString();
             postItem.title = json[i]["title"].ToString();
 
             postItemList.Add(postItem);
-            Debug.Log(postItem);
+            Debug.Log(postItemList.Count);*/
+            string title = json[i]["title"][0].ToString();
+            Debug.Log(title);
         }
         
 

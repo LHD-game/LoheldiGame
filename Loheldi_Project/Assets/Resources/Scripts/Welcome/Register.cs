@@ -258,7 +258,7 @@ public class Register : MonoBehaviour
     }
 
 
-    public void AutoLogin()    //로컬에 저장해둔다
+    public void AutoLogin()    //로컬에 저장해둔다 --> 변경필요! todo
     {
         isAutoChk = AutoBtn.GetComponent<Toggle>().isOn;
         if (isAutoChk)  //자동로그인 체크 시

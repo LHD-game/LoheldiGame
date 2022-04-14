@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1802907, g: 0.22573434, b: 0.30694622, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1315,7 +1315,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TempObject: {fileID: 0}
   BedPosition: {fileID: 2120235846}
-  bedmesh: {fileID: 0}
 --- !u!114 &219778282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6996,7 +6995,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5133638281854061016, guid: 014f49ffbf8be3e49afd0ded96e871ac, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 014f49ffbf8be3e49afd0ded96e871ac, type: 3}
 --- !u!1001 &1732103432
 PrefabInstance:
@@ -7706,29 +7705,11 @@ Transform:
   m_Father: {fileID: 1835484824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1953534818 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2793576602860258744, guid: 014f49ffbf8be3e49afd0ded96e871ac, type: 3}
-  m_PrefabInstance: {fileID: 1717104401}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1953534819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3282868706931400450, guid: 014f49ffbf8be3e49afd0ded96e871ac, type: 3}
   m_PrefabInstance: {fileID: 1717104401}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1953534820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953534818}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0882531, y: 1.0227811, z: 2.0102067}
-  m_Center: {x: 2.1658233e-22, y: 0.51139057, z: -0.00024801493}
 --- !u!1001 &1966217543
 PrefabInstance:
   m_ObjectHideFlags: 0

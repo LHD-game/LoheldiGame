@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5673344068327972033}
   - component: {fileID: 8724633332166234980}
   - component: {fileID: 6841223486356973486}
-  - component: {fileID: 2377229344097458064}
+  - component: {fileID: -1276840861796151336}
   m_Layer: 0
   m_Name: Sunbed_02
-  m_TagString: Untagged
+  m_TagString: ChangeableFurniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,6 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,8 +81,9 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2377229344097458064
-MeshCollider:
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-1276840861796151336
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8224680949513231327, guid: 889c4ff739e034045a905f4651d978f8, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.6711099, y: 0.81469136, z: 1.2728678}
+  m_Center: {x: -0.0000009685755, y: 0.40734562, z: -0.19905174}

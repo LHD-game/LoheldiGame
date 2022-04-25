@@ -104,12 +104,10 @@ public class LodingTxt : MonoBehaviour
             if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))
             {
                 QuizeTIme();
-                Debug.Log("ƒ˚¡Ó≈Ω");
             }
             else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))
             {
                 ChatTime();
-                Debug.Log("ƒ˚¡Ó≤Ù§º");
             }
 
             LoadTxt = data_Dialog[j]["dialog"].ToString();
@@ -120,7 +118,6 @@ public class LodingTxt : MonoBehaviour
             if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))
             {
                 j--;
-                Debug.Log("º±≈√¡ˆ");
 
                 QuizeButton1.text = data_Dialog[j + 1]["select1"].ToString();
                 QuizeButton2.text = data_Dialog[j + 1]["select2"].ToString();

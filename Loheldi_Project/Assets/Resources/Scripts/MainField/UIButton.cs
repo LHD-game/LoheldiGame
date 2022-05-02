@@ -16,7 +16,9 @@ public class UIButton : MonoBehaviour
     public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
     bool inv;
-   public static bool conditionWindow;      //상태창이 열려있는지 확인
+    public static bool conditionWindow;      //상태창이 열려있는지 확인
+    public FlieChoice Chat;
+    public Interaction npcName;
 
 
     private void Awake()
@@ -38,13 +40,19 @@ public class UIButton : MonoBehaviour
     {
         map = false;
         conditionWindow = false;
+        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        npcName = GameObject.Find("Player").GetComponent<Interaction>();
     }
 
     public void JumpButton()                //점프버튼
     {
-        if (Player.GetComponent<Interaction>().NearNPC)     //NPC주변에 있다면
+        if (npcName.NearNPC)     //NPC주변에 있다면
         {
-            ShopMok.SetActive(true);
+            if(npcName.NameNPC.Equals("tiger"))
+            {
+                Chat.Tiger();
+            }
+            //ShopMok.SetActive(true);
         }
         else                                                //NPC주변에 있지 않다면
         {

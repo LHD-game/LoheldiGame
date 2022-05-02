@@ -7,10 +7,12 @@ public class FlieChoice : MonoBehaviour
 {
     public LodingTxt chat;
 
-    public void test()
+    private void Awake()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-
+    }
+    public void test()
+    {
         chat.Num = "1";
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
@@ -18,10 +20,17 @@ public class FlieChoice : MonoBehaviour
 
     public void test2()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-
         chat.Num = "2";
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
+    }
+
+    public void Tiger()
+    {
+        chat.Num = "1";
+        chat.NPCButton = 2;
+        chat.FileAdress = "Scripts/Quest/DialogNPC";
+        chat.NewChat();
+        chat.Buttons();
     }
 }

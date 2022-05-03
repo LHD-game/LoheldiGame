@@ -1679,19 +1679,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 65278155}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 226409736}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: GotoLobby
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &65278155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,6 +2837,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a86725e37cb71e841a896b6cabe1700c, type: 3}
   m_PrefabInstance: {fileID: 430311455}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &164002643
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164002640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &168025625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,17 +3924,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225076836}
   m_CullTransparentMesh: 1
---- !u!114 &226409736 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 767330600701609285, guid: c9a0e4623ad0d6b469a20caf7739e65e, type: 3}
-  m_PrefabInstance: {fileID: 1295784417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 578b710da1d68754099b1cff73735d2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &233569798
 GameObject:
   m_ObjectHideFlags: 0
@@ -6802,6 +6792,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1455677, y: 7.643037, z: 3.5972886}
   m_Center: {x: -0.02523899, y: 3.8325095, z: 0.028243303}
+--- !u!135 &452849960
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452849957}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &480076350
 GameObject:
   m_ObjectHideFlags: 0
@@ -7502,13 +7505,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 493797124}
-        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
-        m_MethodName: Click
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: ExitBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2049765515}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7803,13 +7806,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1469353265}
-        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
-        m_MethodName: MapButton
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: EnterBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1124921486}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10294,13 +10297,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1469353265}
-        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
-        m_MethodName: ConditionButton
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: EnterBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1990132256}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10534,13 +10537,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 769793092}
-        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
-        m_MethodName: Click
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: ExitBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1580944324}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11187,6 +11190,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 822bd8a3acb267e4987c24f605eed202, type: 3}
   m_PrefabInstance: {fileID: 1368339014}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &805923771
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805923768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &825287906
 GameObject:
   m_ObjectHideFlags: 0
@@ -12753,6 +12769,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37a5a7b7bf28d1b4288cbd34ae44c879, type: 3}
   m_PrefabInstance: {fileID: 1483453492}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &941223010
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941223007}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &942510841
 GameObject:
   m_ObjectHideFlags: 1
@@ -16526,6 +16555,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8899033, y: 4.821446, z: 3.1007373}
   m_Center: {x: -0.15814376, y: 2.4999025, z: -0.010563612}
+--- !u!135 &1088401892
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088401889}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1099433548
 GameObject:
   m_ObjectHideFlags: 0
@@ -16841,7 +16883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110026186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17920,6 +17962,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.2948925, y: 5.1059866, z: 3.7886338}
   m_Center: {x: 0.25869322, y: 2.0529933, z: 0.13818741}
+--- !u!135 &1194850192
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194850189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1197901406
 GameObject:
   m_ObjectHideFlags: 0
@@ -20562,6 +20617,7 @@ GameObject:
   - component: {fileID: 1469353265}
   - component: {fileID: 1469353266}
   - component: {fileID: 1469353267}
+  - component: {fileID: 1469353268}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -20691,6 +20747,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f24a2d2c146f87f48847cd40d1a06670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1469353268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469353259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ca87a2ce353114ab32af0b39e9ebea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1475661753
@@ -20869,29 +20937,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1469353265}
-        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
-        m_MethodName: InvButton
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: EnterBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1580944324}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1580944324}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1478873066
 MonoBehaviour:
@@ -21663,13 +21719,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1469353265}
-        m_TargetAssemblyTypeName: UIButton, Assembly-CSharp
-        m_MethodName: ConditionButton
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: ExitBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1990132256}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -24048,6 +24104,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b26c5b5f85f0f9c40bd0c0e4b902f0e0, type: 3}
   m_PrefabInstance: {fileID: 335207170}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1662409687
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662409684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1665671189
 GameObject:
   m_ObjectHideFlags: 0
@@ -25513,7 +25582,6 @@ GameObject:
   - component: {fileID: 1743620731}
   - component: {fileID: 1743620730}
   - component: {fileID: 1743620729}
-  - component: {fileID: 1743620728}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -25540,18 +25608,6 @@ RectTransform:
   m_AnchoredPosition: {x: 936, y: 510}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1743620728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743620726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ca87a2ce353114ab32af0b39e9ebea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1743620729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25596,13 +25652,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1743620728}
-        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
-        m_MethodName: Click
-        m_Mode: 1
+      - m_Target: {fileID: 1469353268}
+        m_TargetAssemblyTypeName: Enter_Exit, Assembly-CSharp
+        m_MethodName: ExitBtn
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1124921486}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -29014,6 +29070,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.9424427, y: 4.693691, z: 2.7112796}
   m_Center: {x: -0.11723018, y: 2.6863701, z: 0.08907819}
+--- !u!135 &2059202470
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059202467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8.601822
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2061816192
 GameObject:
   m_ObjectHideFlags: 0
@@ -31640,9 +31709,10 @@ MonoBehaviour:
   QuizName: {fileID: 933826308313773888}
   chatTxt: {fileID: 933826306523695716}
   QuizTxt: {fileID: 933826307634606238}
-  QuizButton1: {fileID: 933826307751950059}
-  QuizButton2: {fileID: 933826306515901959}
-  QuizButton3: {fileID: 933826307800867365}
+  QuizButton:
+  - {fileID: 933826307751950059}
+  - {fileID: 933826306515901959}
+  - {fileID: 933826307800867365}
   SelecButton:
   - {fileID: 489983787}
   - {fileID: 1038701346}
@@ -31656,7 +31726,7 @@ MonoBehaviour:
   - {fileID: 200955444}
   - {fileID: 965377508}
   Button: {fileID: 933826308475888395}
-  NPCButtons: {fileID: 0}
+  NPCButtons: {fileID: 1110026185}
   OImage: {fileID: 933826308566110535}
   XImage: {fileID: 933826306561095830}
   Arrow: {fileID: 960898961904934707}
@@ -32008,7 +32078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &933826307602191696
 GameObject:
   m_ObjectHideFlags: 0
@@ -33958,7 +34028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8407032498379569339}
   m_Layer: 0
-  m_Name: gaza
+  m_Name: ChatWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

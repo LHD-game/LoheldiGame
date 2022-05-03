@@ -12,9 +12,7 @@ public class LodingTxt : MonoBehaviour
     public Text QuizName;
     public Text chatTxt;
     public Text QuizTxt;
-    public Text QuizButton1;
-    public Text QuizButton2;
-    public Text QuizButton3;
+    public Text[] QuizButton=new Text[3];
 
     public GameObject[] SelecButton=new GameObject[5];
     public Text[] SelecButtonTxt = new Text[5];
@@ -115,11 +113,7 @@ public class LodingTxt : MonoBehaviour
     {
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
-            chatCanvus.SetActive(false);
-            ChatWin.SetActive(false);
-            QuizeWin.SetActive(false);
-            Arrow.SetActive(false);
-            Name.text = " ";
+            ChatEnd();
         }
         else
         {
@@ -138,34 +132,36 @@ public class LodingTxt : MonoBehaviour
             StartCoroutine(_typing());
             Arrow.SetActive(false);
             block.SetActive(true);
-            if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //퀴즈 선택지
+            /*if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //퀴즈 선택지
             {
                 j--;
-
-                QuizButton1.text = data_Dialog[j + 1]["select"+1].ToString();
-                QuizButton2.text = data_Dialog[j + 1]["select"+2].ToString();
-                QuizButton3.text = data_Dialog[j + 1]["select3"].ToString();
+                for (int i = 0; i < NPCButton; i++)
+                {
+                    QuizButton[i].text = data_Dialog[j + 1]["select"+(i+1)].ToString();
+                    string selecNumber = "select" + (i + 1).ToString();
+                }
                 Button.SetActive(true);
-            }
+            }*/
         }
         j++;
     }
-    /*public void LineNPC()
-    {
-        Debug.Log("LineNPC()");
-        chatCanvus.SetActive(true);
-        ChatTime();
-        block.SetActive(true);
-        StartCoroutine(_typing());
-    }*/
 
-    public void Buttons()      //npc대화 상호작용 버튼 수
+    public void ChatEnd() //리셋
     {
-        //NPCButtons.SetActive(true);
+        chatCanvus.SetActive(false);
+        ChatWin.SetActive(false);
+        QuizeWin.SetActive(false);
+        Arrow.SetActive(false);
+        NPCButtons.SetActive(false);
+        Name.text = " ";
+    }
+
+    public void Buttons()      //npc대화 상호작용 선택지 수
+    {
+        NPCButtons.SetActive(true);
         for (int i= 0; i < NPCButton;i++)
         {
             string selecNumber = "select"+(i+1).ToString();
-            Debug.Log("i는"+i+" j는"+j);
             SelecButton[i].SetActive(true);
             SelecButtonTxt[i].text = data_Dialog[j-1][selecNumber].ToString();
         }
@@ -187,22 +183,6 @@ public class LodingTxt : MonoBehaviour
         QuizeWin.SetActive(false);
     }
 
-    /*public void bye()
-    {
-        block.SetActive(true);
-        LoadTxt = "안녕!";
-        StartCoroutine(_typing());
-
-    }
-    public void finish()
-    {
-        chatCanvus.SetActive(false);
-        ChatWin.SetActive(false);
-        QuizeWin.SetActive(false);
-        Arrow.SetActive(false);
-        Name.text = " ";
-    }*/
-
     IEnumerator _typing()  //타이핑 효과
     {
         Txt.text = " ";
@@ -212,8 +192,21 @@ public class LodingTxt : MonoBehaviour
             Txt.text = LoadTxt.Substring(0, i);
             yield return new WaitForSeconds(0.05f);
         }
-        block.SetActive(false);
+        
         //Arrow.SetActive(true);
+
+        if (data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))  //선택지
+        {
+            j--;
+            for (int i = 0;i<QuizButton.Length; i++)
+            {
+                QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
+                //string selecNumber = "select" + (i + 1).ToString();
+            }
+            Button.SetActive(true);
+        }
+
+        block.SetActive(false);
     }
 }
 

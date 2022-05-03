@@ -17,6 +17,7 @@ public class UIButton : MonoBehaviour
     bool map;                              //지도가 열려있는지 확인
     bool inv;
     public static bool conditionWindow;      //상태창이 열려있는지 확인
+
     public FlieChoice Chat;
     public Interaction npcName;
 
@@ -48,9 +49,41 @@ public class UIButton : MonoBehaviour
     {
         if (npcName.NearNPC)     //NPC주변에 있다면
         {
-            if(npcName.NameNPC.Equals("tiger"))
+            if(npcName.NameNPC.Equals("tiger"))  //NPC이름이 이거면
             {
-                Chat.Tiger();
+                Chat.tiger();
+            }
+            else if (npcName.NameNPC.Equals("cat"))  //NPC이름이 이거면
+            {
+                Chat.cat();
+            }
+            else if (npcName.NameNPC.Equals("chick"))  //NPC이름이 이거면
+            {
+                Chat.chick();
+            }
+            else if (npcName.NameNPC.Equals("rabbit"))  //NPC이름이 이거면
+            {
+                Chat.rabbit();
+            }
+            else if (npcName.NameNPC.Equals("squirrel"))  //NPC이름이 이거면
+            {
+                Chat.squirrel();
+            }
+            else if (npcName.NameNPC.Equals("goat"))  //NPC이름이 이거면
+            {
+                Chat.goat();
+            }
+            else if (npcName.NameNPC.Equals("fox2"))  //NPC이름이 이거면
+            {
+                Chat.fox2();
+            }
+            else if (npcName.NameNPC.Equals("fox1"))  //NPC이름이 이거면
+            {
+                Chat.fox1();
+            }
+            else if (npcName.NameNPC.Equals("dog"))  //NPC이름이 이거면
+            {
+                Chat.dog();
             }
             //ShopMok.SetActive(true);
         }
@@ -65,7 +98,7 @@ public class UIButton : MonoBehaviour
         }
     }
 
-    public void MapButton()                 //지도버튼
+    /*public void MapButton()                 //지도버튼
     {
         Map.SetActive(true);
     }
@@ -97,5 +130,5 @@ public class UIButton : MonoBehaviour
             conditionWindow = true;
             conditionLevelText.text = MainGameManager.level.ToString();
         }
-    }
+    }*/
 }

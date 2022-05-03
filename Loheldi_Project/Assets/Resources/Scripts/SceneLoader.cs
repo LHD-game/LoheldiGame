@@ -24,7 +24,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoGameMove()
     {
-        SceneManager.LoadScene("GameMove");
+        SceneManager.LoadScene("MainField");
     }
     public void GotoCreateAcc()
     {

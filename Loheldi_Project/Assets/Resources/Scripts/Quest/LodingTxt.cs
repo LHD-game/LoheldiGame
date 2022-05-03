@@ -35,8 +35,30 @@ public class LodingTxt : MonoBehaviour
     public string FileAdress;//= "Scripts/Quest/Dialog";
     public string Num;//스크립트 번호
     int j;//data_Dialog 줄갯수
+    static int h;
+    public static int k; //npc
+    public int l;
     string Answer;//누른 버튼 인식
 
+    public static GameObject[] CCImage; //캐릭터 이미지
+    public static Sprite[] CCImageList;
+    static Image spriteR;
+
+
+    private void Awake()
+    {
+        ChatWin.SetActive(true);
+        QuizeWin.SetActive(true);
+        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
+        
+        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
+
+
+        ChatWin.SetActive(false);
+        QuizeWin.SetActive(false);
+        Debug.Log(CCImage.Length);
+
+    }
     public void NewChat()
     {
         data_Dialog = CSVReader.Read(FileAdress);
@@ -111,6 +133,9 @@ public class LodingTxt : MonoBehaviour
 
     public void Line()  //줄넘김
     {
+        spriteR = CCImage[k].GetComponent<Image>();
+        spriteR.sprite = CCImageList[l];
+
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
             ChatEnd();
@@ -169,6 +194,7 @@ public class LodingTxt : MonoBehaviour
 
     public void QuizeTIme()
     {
+        k = 1;
         Txt = QuizTxt;
         Name=QuizName;
         ChatWin.SetActive(false);
@@ -177,6 +203,7 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatTime()
     {
+        k = 0;
         Txt = chatTxt;
         Name=chatName;
         ChatWin.SetActive(true);
@@ -185,6 +212,7 @@ public class LodingTxt : MonoBehaviour
 
     IEnumerator _typing()  //타이핑 효과
     {
+        
         Txt.text = " ";
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < LoadTxt.Length + 1; i++)

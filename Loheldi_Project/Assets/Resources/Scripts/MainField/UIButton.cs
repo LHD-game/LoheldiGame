@@ -25,13 +25,9 @@ public class UIButton : MonoBehaviour
     private void Awake()
     {
         ConditionWindow.SetActive(true); //상태창 열기
-        ChangColor.badge = GameObject.FindGameObjectsWithTag("badge");
+        ChangColor.badge = GameObject.FindGameObjectsWithTag("badge"); //뱃지 태그 저장
 
-        while (ChangColor.h < 2)
-        {
-            ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/");
-            ChangColor.h++;
-        }
+        ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/"); //이미지 경로
 
         ConditionWindow.SetActive(false);//상태창 닫기
         conditionWindow = false;

@@ -58,7 +58,7 @@ public class WelcomeManager : MonoBehaviour
         else    //자동로그인o
         {
             BackendReturnObject BRO = Backend.BMember.CustomLogin(PlayerPrefs.GetString("ID"), PlayerPrefs.GetString("PW"));
-            SceneLoader.instance.GotoGameMove();
+            SceneLoader.instance.GotoMainField();
         }
 
     }

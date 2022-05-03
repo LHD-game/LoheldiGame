@@ -7,16 +7,18 @@ using UnityEngine.UI;
 public class LodingTxt : MonoBehaviour
 {
     private Text Txt;
-    private Text Name;
+    public Text Name;
     public Text chatName;
     public Text QuizName;
     public Text chatTxt;
     public Text QuizTxt;
-    public Text QuizButton1;
-    public Text QuizButton2;
-    public Text QuizButton3;
+    public Text[] QuizButton=new Text[3];
+
+    public GameObject[] SelecButton=new GameObject[5];
+    public Text[] SelecButtonTxt = new Text[5];
 
     public GameObject Button;
+    public GameObject NPCButtons;
     public GameObject OImage;
     public GameObject XImage;
 
@@ -26,17 +28,39 @@ public class LodingTxt : MonoBehaviour
     public GameObject QuizeWin;
     public GameObject chatCanvus;
 
-    string LoadTxt;
+    public int NPCButton = 0;
+    public string LoadTxt;
 
     List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
     public string FileAdress;//= "Scripts/Quest/Dialog";
     public string Num;//스크립트 번호
     int j;//data_Dialog 줄갯수
-    string i;//누른 버튼 인식
+    static int h;
+    public static int k; //npc
+    public int l;
+    string Answer;//누른 버튼 인식
 
+    public static GameObject[] CCImage; //캐릭터 이미지
+    public static Sprite[] CCImageList;
+    static Image spriteR;
+
+
+    private void Awake()
+    {
+        ChatWin.SetActive(true);
+        QuizeWin.SetActive(true);
+        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
+        
+        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
+
+
+        ChatWin.SetActive(false);
+        QuizeWin.SetActive(false);
+        Debug.Log(CCImage.Length);
+
+    }
     public void NewChat()
     {
-        Debug.Log(Num);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k=0;k<= data_Dialog.Count;k++)
         {
@@ -53,41 +77,26 @@ public class LodingTxt : MonoBehaviour
                 continue;
             }
         }
-        /*if(data_Dialog[j]["scriptNumber"].ToString().Equals(Num))
-        {
-            j = 0;
-            data_Dialog = CSVReader.Read(FileAdress);
-            chatCanvus.SetActive(true);
-            ChatTime();
-        }
-        else
-        {
-            
-        }
-        j = 0;
-        data_Dialog = CSVReader.Read(FileAdress);
-        chatCanvus.SetActive(true);
-        ChatTime();*/
     }
 
     public void Answer1()
     {
-        i = "1";
+        Answer = "1";
         QuizeAnswer();
     }
     public void Answer2()
     {
-        i = "2";
+        Answer = "2";
         QuizeAnswer();
     }
     public void Answer3()
     {
-        i = "3";
+        Answer = "3";
         QuizeAnswer();
     }
     public void QuizeAnswer()
     {
-        if (i==data_Dialog[j]["answer"].ToString())
+        if (data_Dialog[j]["answer"].ToString().Equals(Answer))
         {
             O();
             Line();
@@ -124,73 +133,108 @@ public class LodingTxt : MonoBehaviour
 
     public void Line()  //줄넘김
     {
-        if (data_Dialog[j]["scriptType"].ToString().Equals("end"))
+        spriteR = CCImage[k].GetComponent<Image>();
+        spriteR.sprite = CCImageList[l];
+
+        if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
-            chatCanvus.SetActive(false);
-            ChatWin.SetActive(false);
-            QuizeWin.SetActive(false);
-            Arrow.SetActive(false);
-            Txt.text = " ";
-            Name.text = " ";
+            ChatEnd();
         }
         else
         {
-            if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))
+            if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
             {
                 QuizeTIme();
             }
-            else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))
+            else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //퀴즈끝
             {
                 ChatTime();
             }
 
-            Debug.Log(j);
+            Debug.Log("j="+j);
             LoadTxt = data_Dialog[j]["dialog"].ToString();
             Name.text = data_Dialog[j]["name"].ToString();
             StartCoroutine(_typing());
             Arrow.SetActive(false);
             block.SetActive(true);
-            if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))
+            /*if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //퀴즈 선택지
             {
                 j--;
-
-                QuizButton1.text = data_Dialog[j + 1]["select1"].ToString();
-                QuizButton2.text = data_Dialog[j + 1]["select2"].ToString();
-                QuizButton3.text = data_Dialog[j + 1]["select3"].ToString();
+                for (int i = 0; i < NPCButton; i++)
+                {
+                    QuizButton[i].text = data_Dialog[j + 1]["select"+(i+1)].ToString();
+                    string selecNumber = "select" + (i + 1).ToString();
+                }
                 Button.SetActive(true);
-            }
+            }*/
         }
         j++;
     }
 
+    public void ChatEnd() //리셋
+    {
+        chatCanvus.SetActive(false);
+        ChatWin.SetActive(false);
+        QuizeWin.SetActive(false);
+        Arrow.SetActive(false);
+        NPCButtons.SetActive(false);
+        Name.text = " ";
+    }
+
+    public void Buttons()      //npc대화 상호작용 선택지 수
+    {
+        NPCButtons.SetActive(true);
+        for (int i= 0; i < NPCButton;i++)
+        {
+            string selecNumber = "select"+(i+1).ToString();
+            SelecButton[i].SetActive(true);
+            SelecButtonTxt[i].text = data_Dialog[j-1][selecNumber].ToString();
+        }
+    }
+
     public void QuizeTIme()
     {
+        k = 1;
         Txt = QuizTxt;
         Name=QuizName;
-        Txt.text = " ";
         ChatWin.SetActive(false);
         QuizeWin.SetActive(true);
     }
 
     public void ChatTime()
     {
+        k = 0;
         Txt = chatTxt;
         Name=chatName;
-        Txt.text = " ";
         ChatWin.SetActive(true);
         QuizeWin.SetActive(false);
     }
 
     IEnumerator _typing()  //타이핑 효과
     {
+        
+        Txt.text = " ";
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < LoadTxt.Length + 1; i++)
         {
             Txt.text = LoadTxt.Substring(0, i);
             yield return new WaitForSeconds(0.05f);
         }
-        block.SetActive(false);
+        
         //Arrow.SetActive(true);
+
+        if (data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))  //선택지
+        {
+            j--;
+            for (int i = 0;i<QuizButton.Length; i++)
+            {
+                QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
+                //string selecNumber = "select" + (i + 1).ToString();
+            }
+            Button.SetActive(true);
+        }
+
+        block.SetActive(false);
     }
 }
 

@@ -7,7 +7,6 @@ public class ChangColor : MonoBehaviour
 {
     public static bool color;
     public static int k;
-    public static int h;
     public static int l;
 
     public static GameObject[] badge;
@@ -16,7 +15,6 @@ public class ChangColor : MonoBehaviour
 
     void start()
     {
-        h = 0;
         color = false;
     }
     // Update is called once per frame
@@ -31,4 +29,3 @@ public class ChangColor : MonoBehaviour
         }
     }
 }
-

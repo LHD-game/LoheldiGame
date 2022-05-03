@@ -8,36 +8,50 @@ public class Interaction : MonoBehaviour
     public Text text;                               //점프버튼에 글자를 선언
     public bool NearNPC = false;                    //NPC근처에 있는지 확인하는 함수 선언
     public string NameNPC;
-
-
-    /*private void OnControllerColloderHit(ControllerColliderHit hit) 
-    {
-        if (hit.collider.gameObject.name == "Nari")
-        {
-            Debug.Log("나리");
-        }
-
-        if (hit.collider.gameObject.name == "Nari")
-        {
-            Debug.Log("나리");
-        }
-    }*/
+    
 
     void OnTriggerEnter(Collider other)             //다른 콜리더와 부딛혔을때
     {
         if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
         {
             NearNPC = true;
-            //text.text = "대화";
-            Debug.Log("대화");
+            text.text = "대화";
 
-            if (other.gameObject.name == "Nari")
+            if (other.gameObject.name == "tiger")
             {
-                Debug.Log("나리");
+                NameNPC = "tiger";
             }
-            else if (other.gameObject.name == "Nani")
+            else if (other.gameObject.name == "cat")
             {
-                Debug.Log("나니");
+                NameNPC = "cat";
+            }
+            else if (other.gameObject.name == "chick")
+            {
+                NameNPC = "chick";
+            }
+            else if (other.gameObject.name == "rabbit")
+            {
+                NameNPC = "rabbit";
+            }
+            else if (other.gameObject.name == "squirrel")
+            {
+                NameNPC = "squirrel";
+            }
+            else if (other.gameObject.name == "goat")
+            {
+                NameNPC = "goat";
+            }
+            else if (other.gameObject.name == "fox2")
+            {
+                NameNPC = "fox2";
+            }
+            else if (other.gameObject.name == "fox1")
+            {
+                NameNPC = "fox1";
+            }
+            else if (other.gameObject.name == "dog")
+            {
+                NameNPC = "dog";
             }
         }
     }
@@ -52,8 +66,7 @@ public class Interaction : MonoBehaviour
         if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
         {
             NearNPC = false;
-            //text.text = "점프";
-            Debug.Log("점프");
+            text.text = "점프";
         }
     }
 }

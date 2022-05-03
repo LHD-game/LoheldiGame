@@ -22,10 +22,15 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("UserInfo");
     }
-    public void GotoGameMove()
+    public void GotoMainField()
     {
         SceneManager.LoadScene("MainField");
     }
+    public void GotoGameMove()  // 테스트 용 - 이민진 5/3
+    {
+        SceneManager.LoadScene("GameMove");
+    }
+
     public void GotoCreateAcc()
     {
         SceneManager.LoadScene("CreateAcc");

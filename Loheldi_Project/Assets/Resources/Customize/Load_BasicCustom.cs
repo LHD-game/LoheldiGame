@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class Load_BasicCustom : MonoBehaviour
 {
-    
-    
-    
+        
     // Start is called before the first frame update
     void Start()
     {
-        BackendReturnObject BRO = Backend.Chart.GetChartContents("46285");
+        /*BackendReturnObject BRO = Backend.Chart.GetChartContents("46285");
 
         if (BRO.IsSuccess())
         {
@@ -25,12 +23,12 @@ public class Load_BasicCustom : MonoBehaviour
                 
                 //param.Add("Model:" + rows[i]["Model"][0]);
             }
-        }
+        }*/
     }
 
     public void SaveBasicCustom()
     {
-        BackendReturnObject BRO = Backend.Chart.GetChartContents("46285");
+        BackendReturnObject BRO = Backend.Chart.GetChartContents("45823");
         if (BRO.IsSuccess())
         {         
             Param updateParam = new Param();

@@ -33,7 +33,7 @@ public class ReceivePost : MonoBehaviour
 
             postItemList.Add(postItem);
             Debug.Log(postItemList.Count);*/
-            string title = json[i]["title"][0].ToString();
+            string title = json[0]["inDate"].ToString();
             Debug.Log(title);
         }
         

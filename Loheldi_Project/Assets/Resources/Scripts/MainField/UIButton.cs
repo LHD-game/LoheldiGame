@@ -38,7 +38,9 @@ public class UIButton : MonoBehaviour
     {
         map = false;
         conditionWindow = false;
+        GoHouse();
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        
     }
 
     public void GoHouse()

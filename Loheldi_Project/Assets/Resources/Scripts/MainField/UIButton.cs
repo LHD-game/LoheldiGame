@@ -37,7 +37,7 @@ public class UIButton : MonoBehaviour
     {
         map = false;
         conditionWindow = false;
-        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        //Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         npcName = GameObject.Find("Player").GetComponent<Interaction>();
     }
 

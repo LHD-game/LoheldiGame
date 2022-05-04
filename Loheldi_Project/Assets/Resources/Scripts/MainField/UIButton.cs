@@ -38,7 +38,7 @@ public class UIButton : MonoBehaviour
         map = false;
         conditionWindow = false;
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        //Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
     }
 
     public void JumpButton()                //점프버튼

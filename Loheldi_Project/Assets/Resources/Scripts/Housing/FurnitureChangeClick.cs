@@ -13,7 +13,7 @@ public class FurnitureChangeClick : MonoBehaviour
     private RaycastHit hit;
     public static string CurrentFurniture = "None";
 
-    private bool housing=false;
+    public bool housing=false;
 
     void Update()
     {

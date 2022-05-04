@@ -19,12 +19,12 @@ public class Interaction : MonoBehaviour
             text.text = "대화";
             NameNPC = other.gameObject.name.ToString();
         }
-        else if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 NPC라면
+        /*else if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 NPC라면
         {
             Door = true;
             text.text = "들어가기";
             NameNPC = other.gameObject.name.ToString();
-        }
+        }*/
         else if (other.gameObject.name == "ExitDoor")
         {
             Door = true;
@@ -35,7 +35,12 @@ public class Interaction : MonoBehaviour
 
     void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
     {
-
+        if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 NPC라면
+        {
+            Door = true;
+            text.text = "들어가기";
+            NameNPC = other.gameObject.name.ToString();
+        }
     }
 
     void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때

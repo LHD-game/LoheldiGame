@@ -24,9 +24,9 @@ public class StoreItem
 }
 public class CustomItem
 {
-    public string CID;
-    public string Name;
+    public string ICode;
+    public string IName;
     public string Model;
-    public string Meterial;
+    public string Material;
     public string Texture;
 }

@@ -343,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 4300000, guid: 71e065825ee96c94098f99fe6c84e6d3, type: 2}
     - target: {fileID: 5075700830378204139, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5075700830378204139, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,8 +454,8 @@ GameObject:
   m_Component:
   - component: {fileID: 569123543}
   - component: {fileID: 569123542}
-  - component: {fileID: 569123541}
   - component: {fileID: 569123540}
+  - component: {fileID: 569123541}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -516,7 +516,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &575302092
 GameObject:
@@ -631,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 569123541}
+      objectReference: {fileID: 0}
     - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1129,18 +1129,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CategoryControl, Assembly-CSharp
-        m_MethodName: Cate_Mouth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &786591301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,7 +1341,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &957210137 stripped
 GameObject:
@@ -1562,18 +1550,6 @@ MonoBehaviour:
       - m_Target: {fileID: 569123541}
         m_TargetAssemblyTypeName: CategorySelect, Assembly-CSharp
         m_MethodName: PopHair
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CategoryControl, Assembly-CSharp
-        m_MethodName: Cate_Hair
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1861,7 +1837,6 @@ GameObject:
   - component: {fileID: 1287264571}
   - component: {fileID: 1287264570}
   - component: {fileID: 1287264573}
-  - component: {fileID: 1287264574}
   m_Layer: 5
   m_Name: SaveBtn
   m_TagString: Untagged
@@ -1957,18 +1932,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1287264574}
-        m_TargetAssemblyTypeName: Load_BasicCustom, Assembly-CSharp
-        m_MethodName: SaveBasicCustom
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1287264571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2017,18 +1980,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fdb9eaf59649b24bb18a602fbf09bb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1287264574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1287264568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28b80e0f867f70042b6a27e48e6c0e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1321324711
@@ -2251,7 +2202,7 @@ PrefabInstance:
     - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 569123541}
+      objectReference: {fileID: 0}
     - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2862,7 +2813,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1536488620 stripped
 GameObject:
@@ -2900,7 +2851,7 @@ PrefabInstance:
     - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 569123541}
+      objectReference: {fileID: 0}
     - target: {fileID: 5559293494173091675, guid: b5477b7c729c407429f6fe195897fcf4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PopHair
@@ -3379,7 +3330,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694041633
 GameObject:
@@ -3480,7 +3431,7 @@ RectTransform:
   - {fileID: 687733655}
   - {fileID: 1607305901}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3716,18 +3667,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CategoryControl, Assembly-CSharp
-        m_MethodName: Cate_Eyes
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1931764345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3852,18 +3791,6 @@ MonoBehaviour:
       - m_Target: {fileID: 569123541}
         m_TargetAssemblyTypeName: CategorySelect, Assembly-CSharp
         m_MethodName: PopSkin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1997534462}
-        m_TargetAssemblyTypeName: CategoryControl, Assembly-CSharp
-        m_MethodName: Cate_Skin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4368,7 +4295,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 43.716, y: 31.885, z: -9.147}
 --- !u!1001 &1372775150700057455
 PrefabInstance:
@@ -4423,7 +4350,7 @@ PrefabInstance:
       objectReference: {fileID: 112816355}
     - target: {fileID: 1372775149787328370, guid: a202551465312c84094307c518e6b60f, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1372775149787328370, guid: a202551465312c84094307c518e6b60f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4737,7 +4664,7 @@ Transform:
   - {fileID: 1729452802030804759}
   - {fileID: 1729452802888810302}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1729452802888810301
 GameObject:

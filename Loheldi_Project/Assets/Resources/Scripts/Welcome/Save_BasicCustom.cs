@@ -4,11 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Save_BasicCustom
+public class Save_BasicCustom
 {
     public static void SaveBasicCustom()
     {
-        BackendReturnObject BRO = Backend.Chart.GetChartContents("48417");
+        string BasicCSV = "48461";
+
+        BackendReturnObject BRO = Backend.Chart.GetChartContents(BasicCSV);
         if (BRO.IsSuccess())
         {
             JsonData rows = BRO.GetReturnValuetoJSON()["rows"];

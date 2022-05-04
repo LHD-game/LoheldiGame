@@ -40,6 +40,16 @@ public class ReceivePost : MonoBehaviour
 
 
     }
+    public void ReceiveMail()
+    {
+        PostType type = PostType.Admin;
+        BackendReturnObject bro = Backend.UPost.GetPostList(type);
+        JsonData json = bro.GetReturnValuetoJSON()["postList"];
+
+        string recentPostIndate = json[0]["inDate"].ToString();
+
+        Backend.UPost.ReceivePostItem(type, recentPostIndate);
+    }
 
     // Update is called once per frame
     void Update()

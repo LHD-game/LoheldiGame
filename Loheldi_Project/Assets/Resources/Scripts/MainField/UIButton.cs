@@ -20,7 +20,6 @@ public class UIButton : MonoBehaviour
 
     public FlieChoice Chat;
     public Interaction Inter;
-    private SceneLoader Scene;
 
 
     private void Awake()
@@ -38,15 +37,8 @@ public class UIButton : MonoBehaviour
     {
         map = false;
         conditionWindow = false;
-        GoHouse();
-        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
-        
-    }
-
-    public void GoHouse()
-    {
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        Scene = GameObject.Find("HousingSystem").GetComponent<SceneLoader>();
+        //Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
     }
 
     public void JumpButton()                //점프버튼
@@ -95,12 +87,11 @@ public class UIButton : MonoBehaviour
         {
             if (Inter.NameNPC.Equals("InDoor"))
             {
-                GoHouse();
-                Scene.GotoHouse();
+                SceneLoader.instance.GotoHouse();
             }
                 
             else if (Inter.NameNPC.Equals("ExitDoor"))
-                Scene.GotoMainField();
+                SceneLoader.instance.GotoMainField();
             Inter.Door = false;
         }
         else                                                //NPC주변에 있지 않다면

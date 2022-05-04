@@ -14,7 +14,7 @@ public class Register : MonoBehaviour
     public InputField InputEmail;
     //public InputField InputAge;
 
-    // Á¤±Ô½Ä Ã¼Å© º¯¼ö
+    // ì •ê·œì‹ ì²´í¬ ë³€ìˆ˜
     bool nameOK = false;
     bool idOK = false;
     bool pwOK = false;
@@ -22,9 +22,9 @@ public class Register : MonoBehaviour
     bool emailOK = false;
     public static bool allOK = false;
 
-    //Áßº¹ Ã¼Å© º¯¼ö
-    public static bool idDupChk = false; //idÁßº¹
-    bool emailDup = false;  //email Áßº¹
+    //ì¤‘ë³µ ì²´í¬ ë³€ìˆ˜
+    public static bool idDupChk = false; //idì¤‘ë³µ
+    bool emailDup = false;  //email ì¤‘ë³µ
 
     //---login---
     [SerializeField]
@@ -32,8 +32,8 @@ public class Register : MonoBehaviour
     [SerializeField]
     private InputField InputLPW;
     public Transform ErrorLine;
-    public Transform ErrorTxt;    //·Î±×ÀÎ ½ÇÆĞ ¹®±¸
-    public GameObject AutoBtn;  //ÀÚµ¿·Î±×ÀÎ ¹öÆ°
+    public Transform ErrorTxt;    //ë¡œê·¸ì¸ ì‹¤íŒ¨ ë¬¸êµ¬
+    public GameObject AutoBtn;  //ìë™ë¡œê·¸ì¸ ë²„íŠ¼
     private bool isAutoChk;
 
     //---find id/pw---
@@ -50,10 +50,10 @@ public class Register : MonoBehaviour
         ErrorTxt.gameObject.SetActive(false);
     }
 
-    public void Signup() //Á¤±Ô½Ä ¸¸Á· Ã¼Å© ÇÔ¼ö
+    public void Signup() //ì •ê·œì‹ ë§Œì¡± ì²´í¬ í•¨ìˆ˜
     {
         //name check
-        if (string.IsNullOrEmpty(InputName.text)){  //nullÀÏ °æ¿ì, ºó °ª ³ÖÀ½
+        if (string.IsNullOrEmpty(InputName.text)){  //nullì¼ ê²½ìš°, ë¹ˆ ê°’ ë„£ìŒ
             nameOK = SignupCheck.instance.ChkName();
         }
         else
@@ -102,7 +102,7 @@ public class Register : MonoBehaviour
         }
 
 
-        if (nameOK && idOK && pwOK && repwOK && emailOK) //Á¤±Ô½ÄÀ» ¸ğµÎ ¸¸Á·ÇÏ¸é, ¼­¹ö¿¡ Á¤º¸ ÀúÀå
+        if (nameOK && idOK && pwOK && repwOK && emailOK) //ì •ê·œì‹ì„ ëª¨ë‘ ë§Œì¡±í•˜ë©´, ì„œë²„ì— ì •ë³´ ì €ì¥
         {
             allOK = true;
             UserRegister();
@@ -110,11 +110,11 @@ public class Register : MonoBehaviour
         else
         {
             allOK = false;
-          //nameok = false¸é
+          //nameok = falseë©´
         }
     }
 
-    private void UserRegister()  //À¯Àú Á¤º¸ id, pw, nickname, email ¼­¹ö¿¡ ÀúÀå
+    private void UserRegister()  //ìœ ì € ì •ë³´ id, pw, nickname, email ì„œë²„ì— ì €ì¥
     {
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
 
@@ -124,9 +124,9 @@ public class Register : MonoBehaviour
 
         if (BRO.IsSuccess())
         {
-            print("µ¿±â¹æ½Ä È¸¿ø°¡ÀÔ ¼º°ø");
-            Backend.BMember.CreateNickname(InputName.text); //´Ğ³×ÀÓ(ÀÌ¸§) ÀúÀå
-            Backend.BMember.UpdateCustomEmail(InputEmail.text); //ºñ¹Ğ¹øÈ£ Ã£±â ¿ë ÀÌ¸ŞÀÏ ÀúÀå
+            print("ë™ê¸°ë°©ì‹ íšŒì›ê°€ì… ì„±ê³µ");
+            Backend.BMember.CreateNickname(InputName.text); //ë‹‰ë„¤ì„(ì´ë¦„) ì €ì¥
+            Backend.BMember.UpdateCustomEmail(InputEmail.text); //ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ìš© ì´ë©”ì¼ ì €ì¥
             UserInfoDB();
         }
 
@@ -135,7 +135,7 @@ public class Register : MonoBehaviour
     }
 
 
-    private void UserInfoDB()    //È¸¿ø Á¤º¸¸¦ user Å×ÀÌºí¿¡ ÀúÀå
+    private void UserInfoDB()    //íšŒì› ì •ë³´ë¥¼ user í…Œì´ë¸”ì— ì €ì¥
     {
         Param param = new Param();
         param.Add("id", InputID.text);
@@ -149,31 +149,31 @@ public class Register : MonoBehaviour
 
         if (bro.IsSuccess())
         {
-            print("µ¿±â ¹æ½Ä µ¥ÀÌÅÍ ÀÔ·Â ¼º°ø");
+            print("ë™ê¸° ë°©ì‹ ë°ì´í„° ì…ë ¥ ì„±ê³µ");
         }
 
         else Error(bro.GetErrorCode(), "gamedata");
     }
 
-    //id Áßº¹ Ã¼Å©
+    //id ì¤‘ë³µ ì²´í¬
     public void ShowStatus(BackendReturnObject backendReturn)
     {
         int statusCode = int.Parse(backendReturn.GetStatusCode());
 
         switch (statusCode)
         {
-            case 201:   //È¸¿ø°¡ÀÔ ¼º°ø
+            case 201:   //íšŒì›ê°€ì… ì„±ê³µ
                 SignupCheck.instance.ExistID(true);
                 idDupChk = true;
                 break;
 
-            case 409:   // ÀÌ¹Ì Á¸ÀçÇÏ´Â id
+            case 409:   // ì´ë¯¸ ì¡´ì¬í•˜ëŠ” id
                 SignupCheck.instance.ExistID(false);
                 idDupChk = false;
                 break;
 
-            case 401:   //ÇÁ·ÎÁ§Æ® »óÅÂ°¡ 'Á¡°Ë'ÀÏ °æ¿ì
-                Debug.Log("Á¡°Ë");
+            case 401:   //í”„ë¡œì íŠ¸ ìƒíƒœê°€ 'ì ê²€'ì¼ ê²½ìš°
+                Debug.Log("ì ê²€");
                 break;
             default:
                 break;
@@ -181,7 +181,7 @@ public class Register : MonoBehaviour
     }
 
 
-    public void Login() //·Î±×ÀÎ½Ã ½ÇÇàµÇ´Â ¸Ş¼Òµå
+    public void Login() //ë¡œê·¸ì¸ì‹œ ì‹¤í–‰ë˜ëŠ” ë©”ì†Œë“œ
     {
         BackendReturnObject BRO = Backend.BMember.CustomLogin(InputLID.text, InputLPW.text);
 
@@ -189,17 +189,19 @@ public class Register : MonoBehaviour
         {
             ErrorLine.gameObject.SetActive(false);
             ErrorTxt.gameObject.SetActive(false);
-            //ÀÚµ¿·Î±×ÀÎ ÇÔ¼ö ½ÇÇà
+            //ìë™ë¡œê·¸ì¸ í•¨ìˆ˜ ì‹¤í–‰
             AutoLogin();
-            Debug.Log("µ¿±â¹æ½Ä ·Î±×ÀÎ ¼º°ø");
-            if (AccChk())   //°èÁ¤ Á¤º¸ ¸¸µé¾îÁ® ÀÖÀ¸¸é, ÇÊµå·Î
+            Debug.Log("ë™ê¸°ë°©ì‹ ë¡œê·¸ì¸ ì„±ê³µ");
+            if (AccChk())   //ê³„ì • ì •ë³´ ë§Œë“¤ì–´ì ¸ ìˆìœ¼ë©´, í•„ë“œë¡œ
             {
+
                 SceneLoader.instance.GotoGameMove();
                 //SceneLoader.instance.GotoMainField();
 
 
+
             }
-            else    //¾øÀ¸¸é °èÁ¤ Á¤º¸ »ı¼º
+            else    //ì—†ìœ¼ë©´ ê³„ì • ì •ë³´ ìƒì„±
             {
                 SceneLoader.instance.GotoCreateAcc();
             }
@@ -214,7 +216,7 @@ public class Register : MonoBehaviour
         }
     }
 
-    //°èÁ¤ Á¤º¸ Á¸Àç ¿©ºÎ Ã¼Å© ¸Ş¼Òµå
+    //ê³„ì • ì •ë³´ ì¡´ì¬ ì—¬ë¶€ ì²´í¬ ë©”ì†Œë“œ
     private bool AccChk()
     {
         bool isOK = false;
@@ -244,7 +246,7 @@ public class Register : MonoBehaviour
                 }
                 
             }
-            catch (Exception ex) //Á¶È¸¿¡´Â ¼º°øÇßÀ¸³ª, ÇØ´ç °ªÀÌ ¾øÀ½(NullPointException)
+            catch (Exception ex) //ì¡°íšŒì—ëŠ” ì„±ê³µí–ˆìœ¼ë‚˜, í•´ë‹¹ ê°’ì´ ì—†ìŒ(NullPointException)
             {
                 Debug.Log(ex);
                 isOK = false;
@@ -252,16 +254,16 @@ public class Register : MonoBehaviour
         }
         else
         {
-            Debug.Log("Á¶È¸ ½ÇÆĞ");
+            Debug.Log("ì¡°íšŒ ì‹¤íŒ¨");
         }
         return isOK;
     }
 
 
-    public void AutoLogin()    //·ÎÄÃ¿¡ ÀúÀåÇØµĞ´Ù --> º¯°æÇÊ¿ä! todo
+    public void AutoLogin()    //ë¡œì»¬ì— ì €ì¥í•´ë‘”ë‹¤ --> ë³€ê²½í•„ìš”! todo
     {
         isAutoChk = AutoBtn.GetComponent<Toggle>().isOn;
-        if (isAutoChk)  //ÀÚµ¿·Î±×ÀÎ Ã¼Å© ½Ã
+        if (isAutoChk)  //ìë™ë¡œê·¸ì¸ ì²´í¬ ì‹œ
         {
             PlayerPrefs.SetString("ID", InputID.text);
             PlayerPrefs.SetString("PW", InputPW.text);
@@ -269,20 +271,20 @@ public class Register : MonoBehaviour
 
     }
 
-    public void FindID()    //¾ÆÀÌµğ Ã£±â
+    public void FindID()    //ì•„ì´ë”” ì°¾ê¸°
     {
         string uEmail = InputFID_Email.text;
         Backend.BMember.FindCustomID(uEmail);
-        Debug.Log("¹ß¼Û ¿Ï·á");
-        //todo: ¹ß¼Û ¿Ï ÆË¾÷
+        Debug.Log("ë°œì†¡ ì™„ë£Œ");
+        //todo: ë°œì†¡ ì™„ íŒì—…
     }
 
-    public void InitPW()    //ºñ¹Ğ¹øÈ£ ÃÊ±âÈ­
+    public void InitPW()    //ë¹„ë°€ë²ˆí˜¸ ì´ˆê¸°í™”
     {
         string uID = InputFPW_ID.text;
         string uEmail = InputFPW_Email.text;
         Backend.BMember.ResetPassword(uID, uEmail);
-        //todo: ¹ß¼Û ¿Ï ÆË¾÷
+        //todo: ë°œì†¡ ì™„ íŒì—…
     }
     /*public void Load()
     {
@@ -299,22 +301,22 @@ public class Register : MonoBehaviour
     {
         if (errorCode == "DuplicatedParameterException")
         {
-            if (type == "UserFunc") print("Áßº¹µÈ »ç¿ëÀÚ ¾ÆÀÌµğ ÀÔ´Ï´Ù.");
-            else if (type == "UserNickname") print("Áßº¹µÈ ´Ğ³×ÀÓ ÀÔ´Ï´Ù.");
-            else if (type == "Friend") print("ÀÌ¹Ì ¿äÃ»µÇ¾ú°Å³ª Ä£±¸ÀÔ´Ï´Ù.");
+            if (type == "UserFunc") print("ì¤‘ë³µëœ ì‚¬ìš©ì ì•„ì´ë”” ì…ë‹ˆë‹¤.");
+            else if (type == "UserNickname") print("ì¤‘ë³µëœ ë‹‰ë„¤ì„ ì…ë‹ˆë‹¤.");
+            else if (type == "Friend") print("ì´ë¯¸ ìš”ì²­ë˜ì—ˆê±°ë‚˜ ì¹œêµ¬ì…ë‹ˆë‹¤.");
         }
         else if (errorCode == "BadUnauthorizedException")
         {
-            if (type == "UserFunc") print("Àß¸øµÈ »ç¿ëÀÚ ¾ÆÀÌµğ È¤Àº ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù.");
-            else if (type == "Message") print("Àß¸øµÈ ´Ğ³×ÀÓÀÔ´Ï´Ù.");
+            if (type == "UserFunc") print("ì˜ëª»ëœ ì‚¬ìš©ì ì•„ì´ë”” í˜¹ì€ ë¹„ë°€ë²ˆí˜¸ ì…ë‹ˆë‹¤.");
+            else if (type == "Message") print("ì˜ëª»ëœ ë‹‰ë„¤ì„ì…ë‹ˆë‹¤.");
         }
         else if (errorCode == "UndefinedParameterException")
         {
-            if (type == "UserNickname") print("´Ğ³×ÀÓÀ» ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+            if (type == "UserNickname") print("ë‹‰ë„¤ì„ì„ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
         }
         else if (errorCode == "BadParameterException")
         {
-            if (type == "UserNickname") print("´Ğ³×ÀÓ ¾Õ/µÚ °ø¹éÀÌ ÀÖ°Å³ª 20ÀÚ ÀÌ»óÀÔ´Ï´Ù.");
+            if (type == "UserNickname") print("ë‹‰ë„¤ì„ ì•/ë’¤ ê³µë°±ì´ ìˆê±°ë‚˜ 20ì ì´ìƒì…ë‹ˆë‹¤.");
         }
     }
 }

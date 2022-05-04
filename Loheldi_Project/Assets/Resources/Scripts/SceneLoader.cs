@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private VirtualJoystick joystic;
     private static SceneLoader _instance;
     public static SceneLoader instance
     {
@@ -24,6 +25,9 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoMainField()
     {
+        joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
+        joystic.speed1 = 8f;
+        joystic.speed2 = 10f;
         SceneManager.LoadScene("MainField");
     }
     public void GotoGameMove()  // 테스트 용 - 이민진 5/3
@@ -63,10 +67,16 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Game_Tooth");
     }
 
-
-
     public void GotoComditionWindow()
     {
         SceneManager.LoadScene("CharacterCondition");
+    }
+
+    public void GotoHouse()
+    {
+        joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
+        joystic.speed1 = 2f;
+        joystic.speed2 = 3f;
+        SceneManager.LoadScene("Housing");
     }
 }

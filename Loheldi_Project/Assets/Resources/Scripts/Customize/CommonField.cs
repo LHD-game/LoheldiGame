@@ -18,11 +18,19 @@ public class CommonField
     public static string m_hair = "Hair";
 
     //custom DB
-    static List<Dictionary<string, object>> data_dialog; 
+    static List<Dictionary<string, object>> data_dialog = new List<Dictionary<string, object>>();
+    static int cnt = 0;
 
-    public static void SetDataDialog(List<Dictionary<string, object>> list)
+    public static void SetDataDialog(CustomItem data)
     {
-        data_dialog = list;
+        data_dialog.Add(new Dictionary<string, object>());
+
+        data_dialog[cnt].Add("ICode", data.ICode);
+        data_dialog[cnt].Add("IName", data.IName);
+        data_dialog[cnt].Add("Model", data.Model);
+        data_dialog[cnt].Add("Material", data.Material);
+        data_dialog[cnt].Add("Texture", data.Texture);
+        cnt++;
     }
     public static List<Dictionary<string, object>> GetDataDialog()
     {

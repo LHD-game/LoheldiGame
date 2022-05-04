@@ -31,31 +31,6 @@ public class CategoryControl : MonoBehaviour
     
     private void Start()
     {
-        /*CommonField.SetDataDialog(CSVReader.Read("Customize/CustomDB"));    //DB parse
-
-        List<Dictionary<string, object>> d_dialog = new List<Dictionary<string, object>>();
-        d_dialog = CommonField.GetDataDialog();
-
-        for (int i = 0; i < d_dialog.Count; i++)
-        {
-            if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))  //if it's skin
-            {
-                initSkin(d_dialog[i]);
-            }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes)) //if it's eyes
-            {
-                initEyes(d_dialog[i]);
-            }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth)) 
-            {
-                initMouth(d_dialog[i]);
-            }
-            else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_hair))
-            {
-                initHair(d_dialog[i]);
-            }
-        }*/
-
         var bro = Backend.GameData.GetMyData("ACC_CUSTOM", new Where(), 100);
         if (bro.IsSuccess() == false)
         {
@@ -73,10 +48,42 @@ public class CategoryControl : MonoBehaviour
 
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        for (int i = 0; i < bro.Rows().Count; ++i)
+        int s = 0, e = 0, m = 0, h = 0;
+        for (int i = rows.Count-1 ; i >= 0 ; i--)
         {
-            string i_code = bro.Rows()[i]["ICode"]["S"].ToString();
-            Debug.Log(i_code);
+            CustomItem data = new CustomItem();
+            data.ICode = bro.Rows()[i]["ICode"]["S"].ToString();
+            data.IName = bro.Rows()[i]["IName"]["S"].ToString();
+            data.Model = bro.Rows()[i]["Model"]["S"].ToString();
+            data.Material = bro.Rows()[i]["Material"]["S"].ToString();
+            data.Texture = bro.Rows()[i]["Texture"]["S"].ToString();
+
+            CommonField.SetDataDialog(data);
+
+            if (data.Model.Equals("Skin"))
+            {
+                skin_Dialog.Add(new Dictionary<string, object>());
+                initCustomItem(skin_Dialog[s], data);
+                s++;
+            }
+            else if (data.Model.Equals("Eyes"))
+            {
+                eyes_Dialog.Add(new Dictionary<string, object>());
+                initCustomItem(eyes_Dialog[e], data);
+                e++;
+            }
+            else if (data.Model.Equals("Mouth"))
+            {
+                mouth_Dialog.Add(new Dictionary<string, object>());
+                initCustomItem(mouth_Dialog[m], data);
+                m++;
+            }
+            else if (data.Model.Equals("Hair"))
+            {
+                hair_Dialog.Add(new Dictionary<string, object>());
+                initCustomItem(hair_Dialog[h], data);
+                h++;
+            }
         }
 
         MakeCategory(c_skin, skin_Dialog);
@@ -96,39 +103,20 @@ public class CategoryControl : MonoBehaviour
 
         Backend.GameData.Insert("USER_CUSTOM", param);
     }
-        
-    /*public void NowCustom()
-    {
-        Param param = new Param();
-        param.Add("Skin", skin_Dialog);
-        param.Add("Eye", eyes_Dialog);
-        param.Add("Mouth", mouth_Dialog);
-        //param.Add("Hair", c_hair);
-
-        Backend.GameData.Insert("USER_CUSTOM", param);
-    }*/
 
     //---init list---//
     //skin item만 모아보기
-    void initSkin(Dictionary<string, object> d) 
+    void initCustomItem(Dictionary<string, object> item, CustomItem data) 
     {
-        skin_Dialog.Add(d);
+        print("initCustomItem");
+        print(data.ICode);
+        item.Add("ICode",data.ICode);
+        item.Add("IName", data.IName);
+        item.Add("Model", data.Model);
+        item.Add("Material", data.Material);
+        item.Add("Texture", data.Texture);
     }
-    //Eyes item만 모아보기
-    void initEyes(Dictionary<string, object> d)
-    {
-        eyes_Dialog.Add(d);
-    }
-    //Mouth item만 모아보기
-    void initMouth(Dictionary<string, object> d)
-    {
-        mouth_Dialog.Add(d);
-    }
-    //Hair item만 모으기
-    void initHair(Dictionary<string, object> d)
-    {
-        hair_Dialog.Add(d);
-    }
+
 
     //make category item list on game//
     void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)   

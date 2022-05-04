@@ -51,8 +51,6 @@ public class Store_CategoryControl : MonoBehaviour
         for (int i = 0; i < rows.Count; i++)
         {
             StoreItem data = pj.ParseBackendData<StoreItem>(rows[i]);
-            print(data.itemCode);
-            print(data.itemTheme);
 
             //아이템 테마에 따라 다른 리스트에 저장.
 
@@ -109,7 +107,7 @@ public class Store_CategoryControl : MonoBehaviour
         item.Add("name", data.name);
         item.Add("price", data.price);
         item.Add("itemTheme", data.itemTheme);
-        item.Add("itemType", data.itemTheme);
+        item.Add("itemType", data.itemType);
     }
 
 

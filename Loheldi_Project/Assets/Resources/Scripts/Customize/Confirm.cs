@@ -8,7 +8,7 @@ public class Confirm : MonoBehaviour
 {
     public void ConfirmClick()
     {
-        SceneManager.LoadScene("GameMove");
+        SceneManager.LoadScene("MainField");
     }
     
 }

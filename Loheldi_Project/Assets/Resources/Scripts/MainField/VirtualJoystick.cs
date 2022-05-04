@@ -8,6 +8,8 @@ public class VirtualJoystick : MonoBehaviour
     public Transform Player;
     public Rigidbody Playerrb;
     public Transform Stick;
+    public float speed1 = 8f;
+    public float speed2 = 10f;
 
     private Vector3 StickFirstPos;
     private Vector3 JoyVec;
@@ -18,7 +20,7 @@ public class VirtualJoystick : MonoBehaviour
 
     void Start()
     {
-        Radius = GetComponent<RectTransform>().sizeDelta.y * 0.5f;
+        Radius = GetComponent<RectTransform>().sizeDelta.y * 3f;
         StickFirstPos = Stick.transform.position;
 
         float Can = transform.parent.GetComponent<RectTransform>().localScale.x;
@@ -33,9 +35,9 @@ public class VirtualJoystick : MonoBehaviour
         {
             Playerrb.AddRelativeForce(Vector3.forward * 3000f);  //앞 방향으로 밀기 (방향 * 힘)
 
-            if (Playerrb.velocity.magnitude > 8f)
+            if (Playerrb.velocity.magnitude > speed1)
             {
-                Playerrb.velocity = Playerrb.velocity.normalized * 10f;  //최대 속도
+                Playerrb.velocity = Playerrb.velocity.normalized * speed2;  //최대 속도
             }
         }
     }

@@ -19,7 +19,8 @@ public class UIButton : MonoBehaviour
     public static bool conditionWindow;      //상태창이 열려있는지 확인
 
     public FlieChoice Chat;
-    public Interaction npcName;
+    public Interaction Inter;
+    private SceneLoader Scene;
 
 
     private void Awake()
@@ -38,50 +39,67 @@ public class UIButton : MonoBehaviour
         map = false;
         conditionWindow = false;
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
-        npcName = GameObject.Find("Player").GetComponent<Interaction>();
+    }
+
+    public void GoHouse()
+    {
+        Inter = GameObject.Find("Player").GetComponent<Interaction>();
+        Scene = GameObject.Find("HousingSystem").GetComponent<SceneLoader>();
     }
 
     public void JumpButton()                //점프버튼
     {
-        if (npcName.NearNPC)     //NPC주변에 있다면
+        if (Inter.NearNPC)     //NPC주변에 있다면
         {
-            if(npcName.NameNPC.Equals("tiger"))  //NPC이름이 이거면
+            if(Inter.NameNPC.Equals("tiger"))  //NPC이름이 이거면
             {
                 Chat.tiger();
             }
-            else if (npcName.NameNPC.Equals("cat"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("cat"))  //NPC이름이 이거면
             {
                 Chat.cat();
             }
-            else if (npcName.NameNPC.Equals("chick"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("chick"))  //NPC이름이 이거면
             {
                 Chat.chick();
             }
-            else if (npcName.NameNPC.Equals("rabbit"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("rabbit"))  //NPC이름이 이거면
             {
                 Chat.rabbit();
             }
-            else if (npcName.NameNPC.Equals("squirrel"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("squirrel"))  //NPC이름이 이거면
             {
                 Chat.squirrel();
             }
-            else if (npcName.NameNPC.Equals("goat"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("goat"))  //NPC이름이 이거면
             {
                 Chat.goat();
             }
-            else if (npcName.NameNPC.Equals("fox2"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("fox2"))  //NPC이름이 이거면
             {
                 Chat.fox2();
             }
-            else if (npcName.NameNPC.Equals("fox1"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("fox1"))  //NPC이름이 이거면
             {
                 Chat.fox1();
             }
-            else if (npcName.NameNPC.Equals("dog"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("dog"))  //NPC이름이 이거면
             {
                 Chat.dog();
             }
             //ShopMok.SetActive(true);
+        }
+        else if (Inter.Door)
+        {
+            if (Inter.NameNPC.Equals("InDoor"))
+            {
+                GoHouse();
+                Scene.GotoHouse();
+            }
+                
+            else if (Inter.NameNPC.Equals("ExitDoor"))
+                Scene.GotoMainField();
+            Inter.Door = false;
         }
         else                                                //NPC주변에 있지 않다면
         {

@@ -49,13 +49,14 @@ public class LodingTxt : MonoBehaviour
     {
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
-        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
-        
-        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
+        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
+
+        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
+        Debug.Log(CCImageList.Length);
         Debug.Log(CCImage.Length);
 
     }

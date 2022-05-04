@@ -16,43 +16,7 @@ public class Interaction : MonoBehaviour
         {
             NearNPC = true;
             text.text = "¥Î»≠";
-
-            if (other.gameObject.name == "tiger")
-            {
-                NameNPC = "tiger";
-            }
-            else if (other.gameObject.name == "cat")
-            {
-                NameNPC = "cat";
-            }
-            else if (other.gameObject.name == "chick")
-            {
-                NameNPC = "chick";
-            }
-            else if (other.gameObject.name == "rabbit")
-            {
-                NameNPC = "rabbit";
-            }
-            else if (other.gameObject.name == "squirrel")
-            {
-                NameNPC = "squirrel";
-            }
-            else if (other.gameObject.name == "goat")
-            {
-                NameNPC = "goat";
-            }
-            else if (other.gameObject.name == "fox2")
-            {
-                NameNPC = "fox2";
-            }
-            else if (other.gameObject.name == "fox1")
-            {
-                NameNPC = "fox1";
-            }
-            else if (other.gameObject.name == "dog")
-            {
-                NameNPC = "dog";
-            }
+            NameNPC = other.gameObject.name.ToString();
         }
     }
 

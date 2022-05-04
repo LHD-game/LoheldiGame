@@ -50,14 +50,14 @@ public class LodingTxt : MonoBehaviour
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
 
-        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
+        //CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
 
-        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
+        //CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
-        Debug.Log(CCImageList.Length);
-        Debug.Log(CCImage.Length);
+        //Debug.Log(CCImageList.Length);
+        //Debug.Log(CCImage.Length);
 
     }
     public void NewChat()
@@ -134,8 +134,8 @@ public class LodingTxt : MonoBehaviour
 
     public void Line()  //줄넘김
     {
-        spriteR = CCImage[k].GetComponent<Image>();
-        spriteR.sprite = CCImageList[l];
+        //spriteR = CCImage[k].GetComponent<Image>();
+        //spriteR.sprite = CCImageList[l];
 
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {

@@ -25,9 +25,9 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoMainField()
     {
-        joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
+        /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
         joystic.speed1 = 8f;
-        joystic.speed2 = 10f;
+        joystic.speed2 = 10f;*/
         SceneManager.LoadScene("MainField");
     }
     public void GotoGameMove()  // 테스트 용 - 이민진 5/3
@@ -74,9 +74,9 @@ public class SceneLoader : MonoBehaviour
 
     public void GotoHouse()
     {
-        joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
+        /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
         joystic.speed1 = 2f;
-        joystic.speed2 = 3f;
+        joystic.speed2 = 3f;*/
         SceneManager.LoadScene("Housing");
     }
 }

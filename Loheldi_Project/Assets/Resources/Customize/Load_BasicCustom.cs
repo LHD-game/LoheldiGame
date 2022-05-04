@@ -10,11 +10,7 @@ public class Load_BasicCustom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //<<<<<<< HEAD
         /*BackendReturnObject BRO = Backend.Chart.GetChartContents("46285");
-=======
-/*        BackendReturnObject BRO = Backend.Chart.GetChartContents("46285");
->>>>>>> 017404a2b2539e18db8209fd9bc27d44161d217e
 
         if (BRO.IsSuccess())
         {

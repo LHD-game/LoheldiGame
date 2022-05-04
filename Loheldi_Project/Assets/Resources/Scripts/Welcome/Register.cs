@@ -194,8 +194,8 @@ public class Register : MonoBehaviour
             Debug.Log("동기방식 로그인 성공");
             if (AccChk())   //계정 정보 만들어져 있으면, 필드로
             {
-                //SceneLoader.instance.GotoGameMove();
-                SceneLoader.instance.GotoPlayerCustom();
+                SceneLoader.instance.GotoGameMove();
+                //SceneLoader.instance.GotoMainField();
 
 
             }

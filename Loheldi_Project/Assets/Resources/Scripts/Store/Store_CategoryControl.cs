@@ -29,10 +29,6 @@ public class Store_CategoryControl : MonoBehaviour
 
     GameObject itemBtn;
 
-    private void Start()
-    {
-        
-    }
 
     public void PopGaguStore()
     {

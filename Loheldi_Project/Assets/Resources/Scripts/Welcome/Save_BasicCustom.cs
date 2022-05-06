@@ -27,6 +27,21 @@ public class Save_BasicCustom
 
                 Backend.GameData.Insert("ACC_CUSTOM", param);   //객체를 서버에 업로드
             }
+            PlayerCustomInit();
         } 
+    }
+
+    static void PlayerCustomInit()  //유저의 초기 커스터마이징 정보를 서버에 저장
+    {
+        Param param = new Param();
+        param.Add("Skin", "skin1");
+        param.Add("Eyes", "eyes1");
+        param.Add("EColor", "gray");
+        param.Add("Mouth", "mouthI");
+        param.Add("Hair", "hair1");
+        param.Add("HColor", "black");
+
+        Backend.GameData.Insert("USER_CUSTOM", param);
+        Debug.Log("PlayerCustomInit");
     }
 }

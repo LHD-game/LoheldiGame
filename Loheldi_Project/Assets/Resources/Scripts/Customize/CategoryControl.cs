@@ -94,15 +94,7 @@ public class CategoryControl : MonoBehaviour
     }
 
     
-    public void NowCustom()
-    {
-        Param param = new Param();
-        param.Add("Skin", NowSettings.u_skin_name);
-        param.Add("Eyes", NowSettings.u_eyes_name);
-        param.Add("Mouth", NowSettings.u_mouth_name);
 
-        Backend.GameData.Insert("USER_CUSTOM", param);
-    }
 
     //---init list---//
     //skin item만 모아보기

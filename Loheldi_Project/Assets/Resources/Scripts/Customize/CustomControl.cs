@@ -40,24 +40,106 @@ public class CustomControl : MonoBehaviour
         PlayerLook();   // 처음에는 SelectCustom() 끝에 붙였는데, 왜인지 그렇게하면 material 인식을 못한다...
     }
 
-    void nowCustom()    //현재 커스텀을 DB에서 받아옴, NowSettings에 저장
+    void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
-        NowSettings.u_skin_name = "skin1";   //!임시 세팅!
-        NowSettings.u_skin_texture = NowSettings.u_skin_name+"_texture";   //!임시 세팅!
-        NowSettings.u_eyes_name = "eyes1";   //!임시 세팅!
-        NowSettings.u_eyes_color = "gray";   //!임시 세팅!
-        NowSettings.u_eyes_texture =  NowSettings.u_eyes_name + "_texture_" + NowSettings.u_eyes_color;   //!임시 세팅!
-        NowSettings.u_mouth_name = "mouthI";   //!임시 세팅!
-        NowSettings.u_mouth_texture = "mouth1_texture";   //!임시 세팅!
-        NowSettings.u_hair_name = "hair1";
-        NowSettings.u_hair_color = "black";
-        NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;   //!임시 세팅!
+        var bro = Backend.GameData.GetMyData("USER_CUSTOM", new Where());
+
+        if (bro.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+            return;
+        }
+        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
+            // 데이터가 존재하는지 확인
+            // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
+            Debug.Log("요청 성공했지만 테이블에 row가 하나도 없음");
+            return;
+        }
+        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+
+        PreviousSettings.u_skin_name = rows[0]["Skin"]["S"].ToString();
+        PreviousSettings.u_eyes_name = rows[0]["Eyes"]["S"].ToString();
+        PreviousSettings.u_eyes_color = rows[0]["EColor"]["S"].ToString();
+        PreviousSettings.u_mouth_name = rows[0]["Mouth"]["S"].ToString();
+        PreviousSettings.u_hair_name = rows[0]["Hair"]["S"].ToString();
+        PreviousSettings.u_hair_color = rows[0]["HColor"]["S"].ToString();
+
+        Debug.Log("previous settings" + PreviousSettings.u_skin_name);
+
+        ResetCustom();
+    }
+
+    public void ResetCustom()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
+    {
+        NowSettings.u_skin_name = PreviousSettings.u_skin_name;
+        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_name);
+        NowSettings.u_eyes_name = PreviousSettings.u_eyes_name;
+        NowSettings.u_eyes_color = PreviousSettings.u_eyes_color;
+        NowSettings.u_eyes_texture = NowSettings.u_eyes_name + "_texture_" + NowSettings.u_eyes_color;
+        NowSettings.u_mouth_name = PreviousSettings.u_mouth_name;
+        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_name);
+        NowSettings.u_hair_name = PreviousSettings.u_hair_name;
+        NowSettings.u_hair_color = PreviousSettings.u_hair_color;
+        NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
 
         tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
         tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
-        tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
+        //tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
         tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
     }
+
+    public void SaveCustom()    //현재 커스터마이징을 서버에 저장
+    {
+        Param param = new Param();
+        param.Add("Skin", NowSettings.u_skin_name);
+        param.Add("Eyes", NowSettings.u_eyes_name);
+        param.Add("EColor", NowSettings.u_eyes_color);
+        param.Add("Mouth", NowSettings.u_mouth_name);
+        param.Add("Hair", NowSettings.u_hair_name);
+        param.Add("HColor", NowSettings.u_hair_color);
+
+        //유저 현재 착장 저장된 row 검색
+        var bro = Backend.GameData.Get("USER_CUSTOM", new Where());
+        string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+        //해당 row의 값을 update
+        Backend.GameData.UpdateV2("USER_CUSTOM", rowIndate, Backend.UserInDate, param);
+        print("SaveCustom");
+
+        SceneLoader.instance.GotoMainField();
+    }
+
+    //서버 보유 아이템 목록에서 아이템의 Texture 조회 메소드
+    string FindTexture(string item_name)
+    {
+        Where where = new Where();
+        where.Equal("IName", item_name);
+
+        var bro = Backend.GameData.GetMyData("ACC_CUSTOM", where);
+
+        if (bro.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+            return null;
+        }
+        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
+            // 데이터가 존재하는지 확인
+            // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
+            Debug.Log("요청 성공했지만 테이블에 row가 하나도 없음");
+            return null;
+        }
+        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+        string item_texture = rows[0]["Texture"]["S"].ToString();
+
+        Debug.Log("FindTexture: " + item_texture);
+
+        return item_texture;
+    }
+
 
     public void SelectCustom(GameObject go) //커스텀 아이템 선택 시 실행 메소드
     {
@@ -96,31 +178,8 @@ public class CustomControl : MonoBehaviour
 
             }
         }
-        
-        /*{
-            param.Add("Skin", itemName);
-            param.Add("Eyes", itemName2);
-            param.Add("Mouth", itemName3);
-            *//*param.Add("Model", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Model"][0][0][0]);
-            param.Add("Meterial", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Meterial"][0][0][0]);
-            param.Add("Texture", rows[itemnum = 1][itemnum = 2][itemnum = 3]["Texture"][0][0][0]);*//*
-            Backend.GameData.Insert("USER_CUSTOM", param);
-        }*/
-        //해당 아이템 row 찾으면, 해당하는 texture등으로 변경해준다.
+    }
 
-    }
-    /*public void SelectCustom2(GameObject go)
-    {
-        string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
-        param.Add("Eyes", itemName);
-        Backend.GameData.Insert("USER_CUSTOM", param);
-    }
-    public void SelectCustom3(GameObject go)
-    {
-        string itemName = go.transform.Find("ItemName").gameObject.GetComponent<Text>().text;
-        param.Add("Mouth", itemName);
-        Backend.GameData.Insert("USER_CUSTOM", param);
-    }*/
     public void SelectColor(GameObject go)   //색 이름, 변경할 파츠
     {
         string color = go.transform.Find("ColorTxt").gameObject.GetComponent<Text>().text;
@@ -148,14 +207,6 @@ public class CustomControl : MonoBehaviour
         }
         //PlayerLook(); <- 넣게되면 UnassignedReferenceException 오류가 발생합니다;; 오직 update() 에서만 작동됩니다.
     }
-
-    /*public void ConfirmColor(GameObject go)
-    {
-        *//*string color = go.transform.Find("ColorTxt").gameObject.GetComponent<Text>().text;*//*
-        string part = go.transform.Find("part").gameObject.GetComponent<Text>().text;
-
-        
-    }*/
 
     private void PlayerLook()   //외관 커스텀 업데이트
     {

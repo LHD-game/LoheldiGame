@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 public class FlieChoice : MonoBehaviour
 {
     public LodingTxt chat;
+    // l=뜨는 이미지 번호(스크립트 대화)  n이랑l이랑 합칠 수 있나요(전 모르겠어요)
+    //n=뜨는 이미지 번호(기본대화)
+    //h=이미지 넣을 곳 번호
 
     private void Awake()
     {

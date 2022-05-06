@@ -7,9 +7,9 @@ public class ChangeMode : MonoBehaviour
     public GameObject ExitButton;
     public GameObject Canvas1;
     public GameObject Canvas2;
-    public GameObject Player;
+    public GameObject Player;/*
     public Camera HousingCamera;
-    public Camera followCamera;
+    public Camera followCamera;*/
 
     private FurnitureChangeClick HousingMode;
 
@@ -20,9 +20,9 @@ public class ChangeMode : MonoBehaviour
         Canvas1.SetActive(true);
         Canvas2.SetActive(false);
         Player.SetActive(false);
-        HousingMode.housing = true;
+        HousingMode.housing = true;/*
         followCamera.enabled = false;
-        HousingCamera.enabled = true;
+        HousingCamera.enabled = true;*/
     }
     public void ExitHousing()
     {
@@ -31,8 +31,8 @@ public class ChangeMode : MonoBehaviour
         Canvas1.SetActive(false);
         Canvas2.SetActive(true);
         Player.SetActive(true);
-        HousingMode.housing = false;
+        HousingMode.housing = false;/*
         followCamera.enabled = true;
-        HousingCamera.enabled = false;
+        HousingCamera.enabled = false;*/
     }
 }

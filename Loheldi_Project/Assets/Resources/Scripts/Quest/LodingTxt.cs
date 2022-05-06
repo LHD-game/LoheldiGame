@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using System;
 
 public class LodingTxt : MonoBehaviour
 {
@@ -35,14 +36,17 @@ public class LodingTxt : MonoBehaviour
     public string FileAdress;//= "Scripts/Quest/Dialog";
     public string Num;//스크립트 번호
     int j;//data_Dialog 줄갯수
-    static int h;
+    private int h;  //이미지 넣을 번호
+    private int n;  //뜨는 이미지 번호(스크립트 상)
     public static int k; //npc
-    public int l;
+    public int l; //뜨는 이미지 번호(기본 대화)
     string Answer;//누른 버튼 인식
 
     public static GameObject[] CCImage; //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
+
+    UIButton JumpButtons;
 
 
     private void Awake()
@@ -50,14 +54,14 @@ public class LodingTxt : MonoBehaviour
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
 
-        //CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
-
-        //CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
+        JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
+        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
+        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
-        //Debug.Log(CCImageList.Length);
-        //Debug.Log(CCImage.Length);
+        Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
+        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);
 
     }
     public void NewChat()
@@ -134,8 +138,10 @@ public class LodingTxt : MonoBehaviour
 
     public void Line()  //줄넘김
     {
-        //spriteR = CCImage[k].GetComponent<Image>();
-        //spriteR.sprite = CCImageList[l];
+        h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
+        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
+        spriteR = CCImage[0].GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
+        spriteR.sprite = CCImageList[l];
 
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
@@ -158,7 +164,7 @@ public class LodingTxt : MonoBehaviour
             StartCoroutine(_typing());
             Arrow.SetActive(false);
             block.SetActive(true);
-            /*if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //퀴즈 선택지
+            /*if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //퀴즈 선택지/ 이거 아래로 내려감 이건 흔적
             {
                 j--;
                 for (int i = 0; i < NPCButton; i++)
@@ -174,6 +180,7 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatEnd() //리셋
     {
+        JumpButtons.JumpButtons.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);

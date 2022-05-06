@@ -9,16 +9,17 @@ public class UIButton : MonoBehaviour
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언
     public GameObject Inv;
-    public GameObject ConditionWindow;                //Map선언
+    public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public Text conditionLevelText;            //상태창 레벨
+    public GameObject JumpButtons;
 
-    public GameObject ShopMok;             // 목공방
+    //public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
     bool inv;
     public static bool conditionWindow;      //상태창이 열려있는지 확인
 
-    public FlieChoice Chat;
+    private FlieChoice Chat;
     public Interaction Inter;
 
 
@@ -36,16 +37,16 @@ public class UIButton : MonoBehaviour
     void Start()
     {
         map = false;
-        conditionWindow = false;
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        //Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
     }
 
     public void JumpButton()                //점프버튼
     {
         if (Inter.NearNPC)     //NPC주변에 있다면
         {
-            if(Inter.NameNPC.Equals("tiger"))  //NPC이름이 이거면
+            JumpButtons.SetActive(false);
+            if (Inter.NameNPC.Equals("tiger"))  //NPC이름이 이거면
             {
                 Chat.tiger();
             }

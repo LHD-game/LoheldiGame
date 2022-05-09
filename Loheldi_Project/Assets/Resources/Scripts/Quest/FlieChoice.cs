@@ -44,7 +44,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 2;
         chat.Num = "2";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -54,7 +54,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 3;
         chat.Num = "3";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -64,7 +64,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 4;
         chat.Num = "4";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -74,7 +74,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 5;
         chat.Num = "5";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -84,7 +84,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 6;
         chat.Num = "6";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -94,7 +94,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 7;
         chat.Num = "7";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -104,7 +104,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 8;
         chat.Num = "8";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();
@@ -114,7 +114,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 0;
         chat.Num = "9";
-        chat.NPCButton = 2;
+        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();

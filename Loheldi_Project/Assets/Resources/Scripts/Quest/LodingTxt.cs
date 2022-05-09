@@ -59,9 +59,9 @@ public class LodingTxt : MonoBehaviour
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         ChatWin.SetActive(false);
-        QuizeWin.SetActive(false);
+        QuizeWin.SetActive(false);/*
         Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
-        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);
+        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);*/
 
     }
     public void NewChat()

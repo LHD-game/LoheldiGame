@@ -66,6 +66,7 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
+        JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k=0;k<= data_Dialog.Count;k++)
         {

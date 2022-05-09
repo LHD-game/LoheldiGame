@@ -196,7 +196,8 @@ public class Register : MonoBehaviour
             {
 
                 //SceneLoader.instance.GotoGameMove();
-                SceneLoader.instance.GotoMainField();
+                //SceneLoader.instance.GotoMainField();
+                SceneLoader.instance.GotoMail();
 
 
 

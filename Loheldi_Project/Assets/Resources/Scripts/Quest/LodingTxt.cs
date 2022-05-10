@@ -47,10 +47,11 @@ public class LodingTxt : MonoBehaviour
     static Image spriteR;
 
     UIButton JumpButtons;
-
+    //Interaction Inter;
 
     private void Awake()
     {
+        //Inter = GameObject.Find("Player").GetComponent<Interaction>();
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
 
@@ -188,6 +189,12 @@ public class LodingTxt : MonoBehaviour
         Arrow.SetActive(false);
         NPCButtons.SetActive(false);
         Name.text = " ";
+        for (int i = 0; i < NPCButton; i++)
+        {
+            string selecNumber = "select" + (i + 1).ToString();
+            SelecButton[i].SetActive(false);
+            SelecButtonTxt[i].text = data_Dialog[j - 1][selecNumber].ToString();
+        }
     }
 
     public void Buttons()      //npc대화 상호작용 선택지 수

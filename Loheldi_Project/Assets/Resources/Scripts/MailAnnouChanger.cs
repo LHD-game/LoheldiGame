@@ -7,11 +7,6 @@ public class MailAnnouChanger : MonoBehaviour
     public GameObject MailPost;
     public GameObject Announcement;
 
-    public void Update()
-    {
-        Debug.Log(this.gameObject.name);
-    }
-
     public void change()
     {
         if (this.gameObject.name == "AnnouButton")

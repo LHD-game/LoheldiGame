@@ -24,10 +24,10 @@ public class Interaction : MonoBehaviour
             change.changeCamera();
         }
     }
-    private void Start()
+    /*private void Start()
     {
         change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
-    }
+    }*/
 
     void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
     {
@@ -39,6 +39,7 @@ public class Interaction : MonoBehaviour
         }
         else if (other.gameObject.name == "ExitDoor")
         {
+            change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
             Door = true;
             text.text = "나가기";
             NameNPC = other.gameObject.name.ToString();

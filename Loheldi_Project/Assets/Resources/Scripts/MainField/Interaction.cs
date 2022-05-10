@@ -10,7 +10,7 @@ public class Interaction : MonoBehaviour
     public string NameNPC;
     public bool Door;
 
-
+    private ChangeMode change;
     void OnTriggerEnter(Collider other)             //다른 콜리더와 부딛혔을때
     {
         if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
@@ -19,18 +19,14 @@ public class Interaction : MonoBehaviour
             text.text = "대화";
             NameNPC = other.gameObject.name.ToString();
         }
-        /*else if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 NPC라면
+        if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
         {
-            Door = true;
-            text.text = "들어가기";
-            NameNPC = other.gameObject.name.ToString();
-        }*/
-        /*else if (other.gameObject.name == "ExitDoor")
-        {
-            Door = true;
-            text.text = "나가기";
-            NameNPC = other.gameObject.name.ToString();
-        }*/
+            change.changeCamera();
+        }
+    }
+    private void Start()
+    {
+        change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
     }
 
     void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
@@ -56,6 +52,10 @@ public class Interaction : MonoBehaviour
             NearNPC = false;
             text.text = "점프";
             NameNPC = " ";
+        }
+        if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
+        {
+            change.changeCamera();
         }
     }
 }

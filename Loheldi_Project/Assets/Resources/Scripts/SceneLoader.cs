@@ -79,4 +79,8 @@ public class SceneLoader : MonoBehaviour
         joystic.speed2 = 3f;*/
         SceneManager.LoadScene("Housing");
     }
+    public void GotoMail()
+    {
+        SceneManager.LoadScene("Mail");
+    }
 }

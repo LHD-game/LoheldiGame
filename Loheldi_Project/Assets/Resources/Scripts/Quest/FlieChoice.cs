@@ -94,7 +94,7 @@ public class FlieChoice : MonoBehaviour
     {
         chat.l = 7;
         chat.Num = "7";
-        chat.NPCButton = 1;
+        chat.NPCButton = 2;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
         chat.NewChat();
         chat.Buttons();

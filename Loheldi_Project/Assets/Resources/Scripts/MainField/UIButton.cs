@@ -46,39 +46,39 @@ public class UIButton : MonoBehaviour
         if (Inter.NearNPC)     //NPC주변에 있다면
         {
             JumpButtons.SetActive(false);
-            if (Inter.NameNPC.Equals("tiger"))  //NPC이름이 이거면
+            if (Inter.NameNPC.Equals("Himchan"))  //NPC이름이 이거면
             {
                 Chat.tiger();
             }
-            else if (Inter.NameNPC.Equals("cat"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Markatman"))  //NPC이름이 이거면
             {
                 Chat.cat();
             }
-            else if (Inter.NameNPC.Equals("chick"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Hami"))  //NPC이름이 이거면
             {
                 Chat.chick();
             }
-            else if (Inter.NameNPC.Equals("rabbit"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Suho"))  //NPC이름이 이거면
             {
                 Chat.rabbit();
             }
-            else if (Inter.NameNPC.Equals("squirrel"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Nari"))  //NPC이름이 이거면
             {
                 Chat.squirrel();
             }
-            else if (Inter.NameNPC.Equals("goat"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Mei"))  //NPC이름이 이거면
             {
                 Chat.goat();
             }
-            else if (Inter.NameNPC.Equals("fox2"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Yomi"))  //NPC이름이 이거면
             {
                 Chat.fox2();
             }
-            else if (Inter.NameNPC.Equals("fox1"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Yeomi"))  //NPC이름이 이거면
             {
                 Chat.fox1();
             }
-            else if (Inter.NameNPC.Equals("dog"))  //NPC이름이 이거면
+            else if (Inter.NameNPC.Equals("Mu"))  //NPC이름이 이거면
             {
                 Chat.dog();
             }
@@ -104,6 +104,47 @@ public class UIButton : MonoBehaviour
                 MainGameManager.exp = MainGameManager.exp + 100;
             }
         }
+    }
+
+
+    public void NPCButtonUI()
+    {
+        if (Inter.NameNPC.Equals("Himchan"))  //NPC이름이 이거면
+        {
+            SceneLoader.instance.GotoLobby();
+        }
+        else if (Inter.NameNPC.Equals("Yomi"))  //NPC이름이 이거면
+        {
+            SceneLoader.instance.GotoPlayerCustom();
+        }
+        /*else if (Inter.NameNPC.Equals("Hami"))  //NPC이름이 이거면
+        {
+            Chat.chick();
+        }
+        else if (Inter.NameNPC.Equals("Suho"))  //NPC이름이 이거면
+        {
+            Chat.rabbit();
+        }
+        else if (Inter.NameNPC.Equals("Nari"))  //NPC이름이 이거면
+        {
+            Chat.squirrel();
+        }
+        else if (Inter.NameNPC.Equals("Mei"))  //NPC이름이 이거면
+        {
+            Chat.goat();
+        }
+        else if (Inter.NameNPC.Equals("Markatman"))  //NPC이름이 이거면
+        {
+            Chat.fox2();
+        }
+        else if (Inter.NameNPC.Equals("Yeomi"))  //NPC이름이 이거면
+        {
+            Chat.fox1();
+        }
+        else if (Inter.NameNPC.Equals("Mu"))  //NPC이름이 이거면
+        {
+            Chat.dog();
+        }*/
     }
 
     /*public void MapButton()                 //지도버튼

@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 1701297580994259705}
   - component: {fileID: 1701297580994259704}
   - component: {fileID: 5461052779744064180}
+  - component: {fileID: 5579439140277405422}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -779,6 +780,25 @@ CapsuleCollider:
   m_Height: 5.791768
   m_Direction: 1
   m_Center: {x: -0.012474805, y: 2.7765589, z: 0.039017648}
+--- !u!114 &5579439140277405422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653426005932863580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9246f1dc8b918c49be0f422d6de5e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_mSkin: {fileID: 2100000, guid: 4989d1806829a6f4ba745d06009ff718, type: 2}
+  p_mEyes: {fileID: 2100000, guid: dfbe865ce120e0b448084e8bb799e633, type: 2}
+  p_mMouth: {fileID: 2100000, guid: 19e3e57e915adf346a620f8bd5a463fa, type: 2}
+  p_mHair: {fileID: 2100000, guid: dc5d4b07dad55b545924e257e9f1cc0e, type: 2}
+  p_Eyes: {fileID: 7527524397073563710}
+  p_Mouth: {fileID: 8343095137345657762}
+  p_Hair: {fileID: 6643739390540365972}
 --- !u!1 &7527524397073563710
 GameObject:
   m_ObjectHideFlags: 0

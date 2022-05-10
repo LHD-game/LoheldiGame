@@ -20,7 +20,7 @@ public class VirtualJoystick : MonoBehaviour
 
     void Start()
     {
-        Radius = GetComponent<RectTransform>().sizeDelta.y * 3f;
+        Radius = GetComponent<RectTransform>().sizeDelta.y* 1.5f;
         StickFirstPos = Stick.transform.position;
 
         float Can = transform.parent.GetComponent<RectTransform>().localScale.x;

@@ -26,6 +26,8 @@ public class PlayerCustom : MonoBehaviour
     public GameObject p_Mouth;
     public GameObject p_Hair;
 
+    protected static bool newAcc = false;
+
     protected void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
         var bro = Backend.GameData.GetMyData("USER_CUSTOM", new Where());
@@ -35,12 +37,11 @@ public class PlayerCustom : MonoBehaviour
             Debug.Log("요청 실패");
             return;
         }
-        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)  // 기본 커마 아이템이 없을 경우
         {
-            // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
-            // 데이터가 존재하는지 확인
-            // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
-            Debug.Log("요청 성공했지만 테이블에 row가 하나도 없음");
+            newAcc = true;  // 이 계정은 새 계정입니다.
+            Save_BasicCustom.SaveBasicCustom(); //기본 커스텀 아이템 저장
+            nowCustom();//재실행
             return;
         }
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
@@ -95,6 +96,8 @@ public class PlayerCustom : MonoBehaviour
         MeshFilter e_mesh = p_Eyes.GetComponent<MeshFilter>();  //눈 메시 변경(모델링)
         MeshFilter m_mesh = p_Mouth.GetComponent<MeshFilter>();  //입 메시 변경(모델링)
         MeshFilter h_mesh = p_Hair.GetComponent<MeshFilter>();  //머리 메시 변경(모델링)
+        //SkinnedMeshRenderer e_mesh = p_Eyes.GetComponent<SkinnedMeshRenderer>();
+        //SkinnedMeshRenderer h_mesh = p_Hair.GetComponent<SkinnedMeshRenderer>();
         e_mesh.sharedMesh = meEyes;
         m_mesh.sharedMesh = meMouth;
         h_mesh.sharedMesh = meHair;

@@ -118,7 +118,8 @@ public class NewAccSave : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("계정 정보 설정 완료!");
-            Save_BasicCustom.SaveBasicCustom(); //기본 커스텀 아이템 저장
+            
+            Save_BasicCustom.SaveBasicClothes(); //기본 의상 아이템 저장
             //SceneLoader.instance.GotoGameMove();
             SceneLoader.instance.GotoPlayerCustom();    //캐릭터 커스터마이징 씬으로 이동
         }

@@ -54,6 +54,11 @@ public class CustomControl : PlayerCustom
         }
     }
 
+    public void imsisave()
+    {
+        SceneLoader.instance.GotoMainField();
+    }
+
 
     public void SelectCustom(GameObject go) //커스텀 아이템 선택 시 실행 메소드
     {

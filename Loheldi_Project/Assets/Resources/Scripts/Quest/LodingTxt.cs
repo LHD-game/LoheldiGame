@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LodingTxt : MonoBehaviour
 {
@@ -51,23 +52,26 @@ public class LodingTxt : MonoBehaviour
 
     private void Awake()
     {
-        //Inter = GameObject.Find("Player").GetComponent<Interaction>();
+        //Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
-
-        JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
+        if (SceneManager.GetActiveScene().name == "MainField")
+            JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
         CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         ChatWin.SetActive(false);
-        QuizeWin.SetActive(false);/*
+        QuizeWin.SetActive(false);
         Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
-        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);*/
+        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);
 
     }
     public void NewChat()
     {
-        JumpButtons.JumpButtons.SetActive(false);
+        //h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
+        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
+        if (SceneManager.GetActiveScene().name == "MainField")
+            JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k=0;k<= data_Dialog.Count;k++)
         {
@@ -140,9 +144,11 @@ public class LodingTxt : MonoBehaviour
 
     public void Line()  //줄넘김
     {
-        h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
-        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
+        /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
+        n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
         spriteR = CCImage[0].GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
+        l = Int32.Parse(data_Dialog[j]["image"].ToString());
+        Debug.Log("이미지번호="+l);
         spriteR.sprite = CCImageList[l];
 
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
@@ -182,7 +188,8 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatEnd() //리셋
     {
-        JumpButtons.JumpButtons.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "MainField")
+            JumpButtons.JumpButtons.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);

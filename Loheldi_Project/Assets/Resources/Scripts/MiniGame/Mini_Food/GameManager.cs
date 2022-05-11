@@ -165,8 +165,10 @@ public class GameManager : MonoBehaviour
                     randpos.y = 15.0f;
                     randpos.z = 0.0f;
                     int randFood = Random.Range(0, foods.Length);
-                    Instantiate(foods[randFood], randpos, Quaternion.Euler(0, 0, 0));
+                    GameObject Tempfood =  Instantiate(foods[randFood], randpos, Quaternion.Euler(0, 0, 0));
                     //나타날 오브젝트, 좌표값, 회전안함
+
+                    Tempfood.transform.GetComponent<CardCtrl>().SoundManager = this.gameObject;
 
                     break;
                 }

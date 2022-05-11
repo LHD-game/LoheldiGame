@@ -43,6 +43,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("PlayerCustom");
     }
+    public void GotoPlayerCloset()
+    {
+        SceneManager.LoadScene("PlayerCloset");
+    }
 
 
     //Mini Game

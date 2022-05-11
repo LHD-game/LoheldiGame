@@ -38,7 +38,20 @@ public class CustomControl : PlayerCustom
         Backend.GameData.UpdateV2("USER_CUSTOM", rowIndate, Backend.UserInDate, param);
         print("SaveCustom");
 
-        SceneLoader.instance.GotoMainField();
+        NextScene();
+    }
+
+    void NextScene()
+    {
+        Debug.Log(newAcc);
+        if (newAcc)
+        {
+            SceneLoader.instance.GotoPlayerCloset();
+        }
+        else
+        {
+            SceneLoader.instance.GotoMainField();
+        }
     }
 
 

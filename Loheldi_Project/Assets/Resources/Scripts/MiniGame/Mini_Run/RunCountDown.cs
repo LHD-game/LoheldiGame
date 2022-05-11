@@ -35,17 +35,16 @@ public class RunCountDown : MonoBehaviour
         if(timer == 3)
         {
             Num.SetActive(true);
-            SoundManager.GetComponent<SoundEffect>().Sound("Count");
         }
         else if(timer == 2)
         {
             Num_3.SetActive(true);
-            SoundManager.GetComponent<SoundEffect>().Sound("Count");
+            SoundManager.GetComponent<SoundEffect>().Sound("CountFinish");
         }
         else if (timer == 1)
         {
             Num_2.SetActive(true);
-            SoundManager.GetComponent<SoundEffect>().Sound("Count");
+            SoundManager.GetComponent<SoundEffect>().Sound("CountFinish");
         }
         else if (timer == 0)
         {
@@ -59,6 +58,7 @@ public class RunCountDown : MonoBehaviour
             Num_2.SetActive(false);
             Num_3.SetActive(false);
             CountEnd = true;
+            SoundManager.GetComponent<SoundEffect>().Sound("Count");
             CancelInvoke("NumAppear");
         }
         timer--;

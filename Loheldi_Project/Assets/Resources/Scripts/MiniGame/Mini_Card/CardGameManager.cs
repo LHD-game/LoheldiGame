@@ -248,6 +248,7 @@ public class CardGameManager : MonoBehaviour
                     case '*':
 
                         GameObject Tempcard = Instantiate(cardsMix[n-1]);
+                        Tempcard.transform.GetComponent<CardCtrl>().SoundManager = this.gameObject;
                         Tempcard.transform.position = new Vector3(x, 1f, sz);
                         AllCard.Add(Tempcard);  //세팅된 카드 오브젝트를 AllCard에 저장
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FoodsManager : MonoBehaviour
 {
     private static FoodsManager _instance;
+    public GameObject SoundManager;
     public static FoodsManager instance
     {
         get
@@ -67,6 +68,7 @@ public class FoodsManager : MonoBehaviour
         }
         else
         {
+            SoundManager.GetComponent<SoundEffect>().Sound("Vomit");
             GameManager.instance.LifeCnt();
             FoodFX.instance.BadFoodFX();
         }

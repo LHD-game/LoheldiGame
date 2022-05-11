@@ -17,6 +17,8 @@ public class MainGameManager : MonoBehaviour
     public Slider slider;
     public Slider conditionSlider;
 
+    public GameObject SoundManager;
+
     void Start()
     {
         level = 1;
@@ -39,6 +41,7 @@ public class MainGameManager : MonoBehaviour
 
         if (exp >= Maxexp)
         {
+            SoundManager.GetComponent<SoundEffect>().Sound("LevelUp");
             LevelUp();
         }
     }

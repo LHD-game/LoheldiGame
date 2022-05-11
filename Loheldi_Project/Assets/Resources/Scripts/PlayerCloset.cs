@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCustom : MonoBehaviour
+public class PlayerCloset : MonoBehaviour
 {
     protected Texture tSkin;
     protected Texture tEyes;
@@ -26,11 +26,10 @@ public class PlayerCustom : MonoBehaviour
     public GameObject p_Mouth;
     public GameObject p_Hair;
 
-    protected static bool newAcc = false;
 
-    protected void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
+    protected void nowClothes()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
-        var bro = Backend.GameData.GetMyData("USER_CUSTOM", new Where());
+        var bro = Backend.GameData.GetMyData("USER_CLOTHES", new Where());
 
         if (bro.IsSuccess() == false)
         {
@@ -39,24 +38,23 @@ public class PlayerCustom : MonoBehaviour
         }
         if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)  // 기본 커마 아이템이 없을 경우
         {
-            newAcc = true;  // 이 계정은 새 계정입니다.
-            Save_BasicCustom.SaveBasicCustom(); //기본 커스텀 아이템 저장
-            nowCustom();//재실행
+            Save_BasicCustom.SaveBasicClothes(); //기본 의상 아이템 저장
+            nowClothes();//재실행
             return;
         }
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        PreviousSettings.u_skin_name = rows[0]["Skin"]["S"].ToString();
+/*        PreviousSettings.u_skin_name = rows[0]["Skin"]["S"].ToString();
         PreviousSettings.u_eyes_name = rows[0]["Eyes"]["S"].ToString();
         PreviousSettings.u_eyes_color = rows[0]["EColor"]["S"].ToString();
         PreviousSettings.u_mouth_name = rows[0]["Mouth"]["S"].ToString();
         PreviousSettings.u_hair_name = rows[0]["Hair"]["S"].ToString();
         PreviousSettings.u_hair_color = rows[0]["HColor"]["S"].ToString();
 
-        Debug.Log("previous settings" + PreviousSettings.u_skin_name);
+        Debug.Log("previous settings" + PreviousSettings.u_skin_name);*/
     }
 
-    public void ResetCustom()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
+    public void ResetClothes()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
     {
         NowSettings.u_skin_name = PreviousSettings.u_skin_name;
         NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_name);

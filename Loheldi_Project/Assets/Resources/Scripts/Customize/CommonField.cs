@@ -17,6 +17,11 @@ public class CommonField
     public static string m_mouth = "Mouth";
     public static string m_hair = "Hair";
 
+    public static string m_upper = "Upper";
+    public static string m_lower = "Lower";
+    public static string m_socks = "Socks";
+    public static string m_shoes = "Shoes";
+
     //custom DB
     static List<Dictionary<string, object>> data_dialog = new List<Dictionary<string, object>>();
     static int cnt = 0;
@@ -35,6 +40,11 @@ public class CommonField
     public static List<Dictionary<string, object>> GetDataDialog()
     {
         return data_dialog;
+    }
+
+    public static void ResetCnt()
+    {
+        cnt = 0;
     }
 
 

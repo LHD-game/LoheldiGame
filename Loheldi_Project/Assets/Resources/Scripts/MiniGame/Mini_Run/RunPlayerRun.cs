@@ -17,6 +17,8 @@ public class RunPlayerRun : MonoBehaviour
     private float warntime = 1.0f;
     private float nexttime = 0.0f;
 
+    public GameObject SoundManager;
+
     void Update()
     {
         if (RunCountDown.CountEnd == true)
@@ -42,6 +44,19 @@ public class RunPlayerRun : MonoBehaviour
 
             player.AddRelativeForce(Vector3.forward * 2000f);   //600f
             runFX.instance. RunningFX(this.gameObject);
+
+            if (RunGameManager.difficulty == 1)
+            {
+                SoundManager.GetComponent<SoundEffect>().Sound("FootSteps1");
+            }
+            else if (RunGameManager.difficulty == 2)
+            {
+                SoundManager.GetComponent<SoundEffect>().Sound("FootSteps2");
+            }
+            else if (RunGameManager.difficulty == 3)
+            {
+                SoundManager.GetComponent<SoundEffect>().Sound("FootSteps3");
+            }
 
         }
     }

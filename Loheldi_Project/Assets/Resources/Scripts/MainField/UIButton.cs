@@ -22,6 +22,7 @@ public class UIButton : MonoBehaviour
     private FlieChoice Chat;
     public Interaction Inter;
 
+    public GameObject SoundManager;
 
     private void Awake()
     {
@@ -88,6 +89,7 @@ public class UIButton : MonoBehaviour
         {
             if (Inter.NameNPC.Equals("InDoor"))
             {
+                SoundManager.GetComponent<SoundEffect>().Sound("OpenDoor");
                 SceneLoader.instance.GotoHouse();
             }
                 
@@ -99,6 +101,7 @@ public class UIButton : MonoBehaviour
         {
             if (OnLand)                                         //Player가 바닥에 있다면
             {
+                SoundManager.GetComponent<SoundEffect>().Sound("Jump");
                 Playerrb.AddForce(transform.up * 15000);
                 OnLand = false;
                 MainGameManager.exp = MainGameManager.exp + 100;

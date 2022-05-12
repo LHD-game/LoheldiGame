@@ -241,7 +241,7 @@ public class LodingTxt : MonoBehaviour
         for (int i = 0; i < LoadTxt.Length + 1; i++)
         {
             Txt.text = LoadTxt.Substring(0, i);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.01f);
         }
         
         //Arrow.SetActive(true);

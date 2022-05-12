@@ -62,7 +62,7 @@ public class PlayerCustom : MonoBehaviour
         NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_name);
         NowSettings.u_eyes_name = PreviousSettings.u_eyes_name;
         NowSettings.u_eyes_color = PreviousSettings.u_eyes_color;
-        NowSettings.u_eyes_texture = NowSettings.u_eyes_name + "_texture_" + NowSettings.u_eyes_color;
+        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) + "_" + NowSettings.u_eyes_color;
         NowSettings.u_mouth_name = PreviousSettings.u_mouth_name;
         NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_name);
         NowSettings.u_hair_name = PreviousSettings.u_hair_name;
@@ -71,7 +71,7 @@ public class PlayerCustom : MonoBehaviour
 
         tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
         tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
-        //tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
+        tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
         tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
     }
 
@@ -82,9 +82,9 @@ public class PlayerCustom : MonoBehaviour
         tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
         tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
 
-        meEyes = Resources.Load<Mesh>(("Customize/" + NowSettings.u_eyes_name + "_mesh"));
-        meMouth = Resources.Load<Mesh>(("Customize/" + NowSettings.u_mouth_name + "_mesh"));
-        meHair = Resources.Load<Mesh>(("Customize/" + NowSettings.u_hair_name + "_mesh"));
+        meEyes = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_eyes_name + "_mesh"));
+        meMouth = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_mouth_name + "_mesh"));
+        meHair = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_hair_name + "_mesh"));
 
 
 
@@ -93,11 +93,13 @@ public class PlayerCustom : MonoBehaviour
         p_mMouth.SetTexture("_MainTex", tMouth);
         p_mHair.SetTexture("_MainTex", tHair);
 
-        MeshFilter e_mesh = p_Eyes.GetComponent<MeshFilter>();  //눈 메시 변경(모델링)
-        MeshFilter m_mesh = p_Mouth.GetComponent<MeshFilter>();  //입 메시 변경(모델링)
-        MeshFilter h_mesh = p_Hair.GetComponent<MeshFilter>();  //머리 메시 변경(모델링)
-        //SkinnedMeshRenderer e_mesh = p_Eyes.GetComponent<SkinnedMeshRenderer>();
-        //SkinnedMeshRenderer h_mesh = p_Hair.GetComponent<SkinnedMeshRenderer>();
+        //MeshFilter e_mesh = p_Eyes.GetComponent<MeshFilter>();  //눈 메시 변경(모델링)
+        //MeshFilter m_mesh = p_Mouth.GetComponent<MeshFilter>();  //입 메시 변경(모델링)
+        //MeshFilter h_mesh = p_Hair.GetComponent<MeshFilter>();  //머리 메시 변경(모델링)
+        SkinnedMeshRenderer e_mesh = p_Eyes.GetComponent<SkinnedMeshRenderer>();
+        SkinnedMeshRenderer m_mesh = p_Mouth.GetComponent<SkinnedMeshRenderer>();
+        SkinnedMeshRenderer h_mesh = p_Hair.GetComponent<SkinnedMeshRenderer>();
+
         e_mesh.sharedMesh = meEyes;
         m_mesh.sharedMesh = meMouth;
         h_mesh.sharedMesh = meHair;

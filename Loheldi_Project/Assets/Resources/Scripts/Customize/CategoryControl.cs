@@ -22,7 +22,7 @@ public class CategoryControl : MonoBehaviour
     protected void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)
     {
         itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ItemBtn");
-        print(dialog.Count);
+        Debug.Log(dialog.Count);
         for (int i = 0; i < dialog.Count; i++)
         {
             //create caltalog box
@@ -33,7 +33,6 @@ public class CategoryControl : MonoBehaviour
             GameObject item_img = child.transform.Find("ItemImage").gameObject;
             Image img = item_img.GetComponent<Image>();
             img.sprite = Resources.Load<Sprite>("Customize/Catalog_Images/" + dialog[i][CommonField.nName] + "_catalog");
-            print(dialog[i][CommonField.nName]);
 
             //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
             GameObject item_name = child.transform.Find("ItemName").gameObject;

@@ -111,7 +111,7 @@ public class CustomControl : PlayerCustom
         if (part.Equals("eyes"))
         {
             NowSettings.u_eyes_color = color;
-            NowSettings.u_eyes_texture = NowSettings.u_eyes_name + "_texture_" + NowSettings.u_eyes_color;
+            NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) +"_"+ NowSettings.u_eyes_color;
             //print("지금 눈"+NowSettings.u_eyes_texture);
         }
         else if (part.Equals("mouth"))
@@ -122,7 +122,6 @@ public class CustomControl : PlayerCustom
         {
             NowSettings.u_hair_color = color;
             NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
-            print("지금 눈"+NowSettings.u_hair_texture);
         }
         //PlayerLook(); <- 넣게되면 UnassignedReferenceException 오류가 발생합니다;; 오직 update() 에서만 작동됩니다.
     }

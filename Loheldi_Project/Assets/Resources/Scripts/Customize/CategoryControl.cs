@@ -19,9 +19,17 @@ public class CategoryControl : MonoBehaviour
     }
 
     //make category item list on game//
-    protected void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)
+    protected void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog, string scene = "Custom")
     {
-        itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ItemBtn");
+        if (scene.Equals("Custom")) //커스텀 씬일 경우
+        {
+            itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ItemBtn");
+        }
+        else if(scene.Equals("Closet")) //의상 변경 씬일 경우
+        {
+            itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ClosetItemBtn");
+        }
+        
         Debug.Log(dialog.Count);
         for (int i = 0; i < dialog.Count; i++)
         {

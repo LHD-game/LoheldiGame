@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1372775149787328370}
   - component: {fileID: 7398970004689261070}
   - component: {fileID: 879062457832839129}
+  - component: {fileID: 57426681934923263}
+  - component: {fileID: 9046573216346237962}
   m_Layer: 0
   m_Name: DataBase
   m_TagString: Untagged
@@ -67,5 +69,36 @@ MonoBehaviour:
   c_eyes: {fileID: 0}
   c_mouth: {fileID: 0}
   c_hair: {fileID: 0}
-  Category: 0
-  buttonnum: 0
+--- !u!114 &57426681934923263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372775149787328371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac5564625b220d439096c86851f6d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_mUpper: {fileID: 0}
+  p_mLower: {fileID: 0}
+  p_mSocks: {fileID: 0}
+  p_mShoes: {fileID: 0}
+  p_Lower: {fileID: 0}
+--- !u!114 &9046573216346237962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372775149787328371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31b880de9522994687bc128c7b68468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c_upper: {fileID: 0}
+  c_lower: {fileID: 0}
+  c_socks: {fileID: 0}
+  c_shoes: {fileID: 0}

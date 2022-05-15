@@ -15,12 +15,12 @@ public class CustomControl : PlayerCustom
 
     public void SaveCustom()    //현재 커스터마이징을 서버에 저장
     {
-        PreviousSettings.u_skin_name = NowSettings.u_skin_name;
+/*        PreviousSettings.u_skin_name = NowSettings.u_skin_name;
         PreviousSettings.u_eyes_name = NowSettings.u_eyes_name;
         PreviousSettings.u_eyes_color = NowSettings.u_eyes_color;
         PreviousSettings.u_mouth_name = NowSettings.u_mouth_name;
         PreviousSettings.u_hair_name = NowSettings.u_hair_name;
-        PreviousSettings.u_hair_color = NowSettings.u_hair_color;
+        PreviousSettings.u_hair_color = NowSettings.u_hair_color;*/
 
         Param param = new Param();
         param.Add("Skin", NowSettings.u_skin_name);
@@ -77,22 +77,22 @@ public class CustomControl : PlayerCustom
                 if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))//그게 skin이면
                 {
                     NowSettings.u_skin_name = d_dialog[i][CommonField.nName].ToString();
-                    NowSettings.u_skin_texture = d_dialog[i][CommonField.nTexture].ToString();
+                    //NowSettings.u_skin_texture = d_dialog[i][CommonField.nTexture].ToString();
                 }
                 else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes))
                 {
                     NowSettings.u_eyes_name = d_dialog[i][CommonField.nName].ToString();
-                    NowSettings.u_eyes_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_eyes_color;
+                    //NowSettings.u_eyes_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_eyes_color;
                 }
                 else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth))    //그게 입이면,
                 {
                     NowSettings.u_mouth_name = d_dialog[i][CommonField.nName].ToString();
-                    NowSettings.u_mouth_texture = d_dialog[i][CommonField.nTexture].ToString();
+                    //NowSettings.u_mouth_texture = d_dialog[i][CommonField.nTexture].ToString();
                 }
                 else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_hair))    //그게 hair이면,
                 {
                     NowSettings.u_hair_name = d_dialog[i][CommonField.nName].ToString();
-                    NowSettings.u_hair_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_hair_color;
+                    //NowSettings.u_hair_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_hair_color;
                 }
 
             }
@@ -111,8 +111,7 @@ public class CustomControl : PlayerCustom
         if (part.Equals("eyes"))
         {
             NowSettings.u_eyes_color = color;
-            NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) +"_"+ NowSettings.u_eyes_color;
-            //print("지금 눈"+NowSettings.u_eyes_texture);
+            //NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) +"_"+ NowSettings.u_eyes_color;
         }
         else if (part.Equals("mouth"))
         {
@@ -121,7 +120,7 @@ public class CustomControl : PlayerCustom
         else if (part.Equals("hair"))
         {
             NowSettings.u_hair_color = color;
-            NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
+            //NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
         }
         //PlayerLook(); <- 넣게되면 UnassignedReferenceException 오류가 발생합니다;; 오직 update() 에서만 작동됩니다.
     }

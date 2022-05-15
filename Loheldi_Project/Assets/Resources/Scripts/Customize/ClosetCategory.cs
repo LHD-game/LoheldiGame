@@ -83,10 +83,12 @@ public class ClosetCategory : CategoryControl
             }
         }
 
-        MakeCategory(c_upper, upper_Dialog);
-        MakeCategory(c_lower, lower_Dialog);
-        MakeCategory(c_socks, socks_Dialog);
-        MakeCategory(c_shoes, shoes_Dialog);
+        string scene = "Closet";
+
+        MakeCategory(c_upper, upper_Dialog, scene);
+        MakeCategory(c_lower, lower_Dialog, scene);
+        MakeCategory(c_socks, socks_Dialog, scene);
+        MakeCategory(c_shoes, shoes_Dialog, scene);
 
     }
 

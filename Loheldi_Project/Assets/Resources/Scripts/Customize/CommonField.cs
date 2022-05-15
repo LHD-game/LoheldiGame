@@ -7,6 +7,7 @@ public class CommonField
     //DB colmn name
     public static string nCID = "ICode";
     public static string nName = "IName";
+    public static string nKorName = "KorName";
     public static string nModel = "Model";
     public static string nMeterial = "Meterial";
     public static string nTexture = "Texture";

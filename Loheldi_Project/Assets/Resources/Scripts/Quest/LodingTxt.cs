@@ -8,9 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class LodingTxt : MonoBehaviour
 {
-    public Transform Player;
-    public Transform Nari;
-
     private Text Txt;
     public Text Name;
     public Text chatName;
@@ -22,15 +19,13 @@ public class LodingTxt : MonoBehaviour
     public GameObject[] SelecButton=new GameObject[5];
     public Text[] SelecButtonTxt = new Text[5];
 
-    public GameObject Main_UI;
     public GameObject Button;
     public GameObject NPCButtons;
     public GameObject OImage;
     public GameObject XImage;
 
     public GameObject Arrow;
-    public GameObject block;        //넘김방지 맨앞 블럭
-    public Color color;
+    public GameObject block; //넘김방지 맨앞 블럭
     public GameObject ChatWin;
     public GameObject QuizeWin;
     public GameObject chatCanvus;
@@ -38,61 +33,37 @@ public class LodingTxt : MonoBehaviour
     public int NPCButton = 0;
     public string LoadTxt;
 
-    public List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
-    public string FileAdress;                // 스크립트 파일 위치
-    public string cuttoonFileAdress;         // 컷툰 파일 위치
+    List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
+    public string FileAdress;//= "Scripts/Quest/Dialog";
+    public string Num;//스크립트 번호
+    int j;//data_Dialog 줄갯수
+    private int h;  //이미지 넣을 번호
+    private int n;  //뜨는 이미지 번호(스크립트 상)
+    public static int k; //npc
+    public int l; //뜨는 이미지 번호(기본 대화)
+    string Answer;//누른 버튼 인식
 
-    public string Num;                       //스크립트 번호
-    public int j;                                  //data_Dialog 줄갯수
-    public int c=0;                              //컷툰 이미지 번호
-    int m;                                  //카메라 무빙
-    int o=0;                                  //m서포터
-    private int h;                          //이미지 넣을 번호
-    private int n;                          //뜨는 이미지 번호(스크립트 상)
-    public static int k;                    //npc
-    public int l;                            //뜨는 이미지 번호(기본 대화)
-    public int tutoi;                            //튜토리얼 하이라이트 이미지용
-    string Answer;               //누른 버튼 인식
-
-    public bool tutoFinish=false;
-    public bool tuto=false;
-    public static GameObject[] CCImage;     //캐릭터 이미지
+    public static GameObject[] CCImage; //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
 
-    public GameObject cuttoon;        //컷툰 이미지
-    public Sprite[] cuttoonImageList;
-    static Image cuttoonspriteR;
-
-    public Fadeln fade_in_out;
     UIButton JumpButtons;
-    tutorial tu;
     //Interaction Inter;
 
     private void Awake()
     {
         //Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
-        color = block.GetComponent<Image>().color;
-        cuttoon.SetActive(true);
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
-        //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
-        JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-        fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
-        tu = GameObject.Find("chatManager").GetComponent<tutorial>();
-
+        if (SceneManager.GetActiveScene().name == "MainField")
+            JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
         CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
-        cuttoon = GameObject.Find("Cutton");
-        cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
-
-        cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
-        /*
         Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
-        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);*/
+        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);
 
     }
     public void NewChat()
@@ -100,7 +71,7 @@ public class LodingTxt : MonoBehaviour
         //h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
         //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
         if (SceneManager.GetActiveScene().name == "MainField")
-        JumpButtons.JumpButtons.SetActive(false);
+            JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k=0;k<= data_Dialog.Count;k++)
         {
@@ -119,124 +90,67 @@ public class LodingTxt : MonoBehaviour
         }
     }
 
-    public void changeMoment()  //플레이어 이동, 카메라 무브
+    public void Answer1()
     {
-        //int n;
-
-        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_")));   //나중에_를-로 바꿔야 함
-        //Debug.Log("n=" + n);
-        //o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_")+1));
-        
-
-        //Debug.Log("o=" +o);
-        //Debug.Log("m=" +m);
-        if(o!=m)
-        {
-            if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (n == 0))
-            {
-                switch (o)
-                {
-                    case 4:
-                        Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 5:
-                        Player.transform.position = new Vector3(-93.97f, 11.60f, 140.38f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 6:
-                        Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 7:
-                        Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 8:
-                        Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 9:
-                        Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 10:
-                        Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 11:
-                        Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 12:
-                        Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        m = o;
-        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
-
-        
+        Answer = "1";
+        QuizeAnswer();
     }
+    public void Answer2()
+    {
+        Answer = "2";
+        QuizeAnswer();
+    }
+    public void Answer3()
+    {
+        Answer = "3";
+        QuizeAnswer();
+    }
+    public void QuizeAnswer()
+    {
+        if (data_Dialog[j]["answer"].ToString().Equals(Answer))
+        {
+            O();
+            Line();
+        }
+
+        else
+        {
+            X();
+        }
+    }
+    public void O()//정답 골랐을 때
+    {
+        block.SetActive(true);
+        OImage.SetActive(true);
+        Button.SetActive(false);
+        j++;
+
+    }
+    public void X()//틀린 정답 골랐을 때
+    {
+        block.SetActive(true);
+        XImage.SetActive(true);
+        Button.SetActive(false);
+        LoadTxt= "다시 생각해보자!";
+        StartCoroutine(_typing());
+
+    }
+
+    public void Xback()//X이미지 버튼
+    {
+        XImage.SetActive(false);
+        Button.SetActive(true);
+    }
+
     public void Line()  //줄넘김
     {
-        //튜토리얼 스크립트 이어가는 애
-        Debug.Log("튜툐:"+tuto);
-        Debug.Log("튜툐피니:"+tutoFinish);
-        if (tuto && tutoFinish)
-        {
-            chatCanvus.SetActive(true);
-            color.a = 0;
-            block.GetComponent<Image>().color = color;
-            tuto = false;
-            tutoFinish = false;
-            if (tutoi == 6)
-                j = 33;
-            if (tutoi == 12)
-            {
-                Main_UI.SetActive(true);
-                j = 80;
-            }
-            tutoi = 0;
-        }
-        else if (tutoi == 5)
-        {
-            chatCanvus.SetActive(true);
-            ++j;
-        }
-
-        if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
-            Main_UI.SetActive(false);
         /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
         n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
         spriteR = CCImage[0].GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
         l = Int32.Parse(data_Dialog[j]["image"].ToString());
-        //Debug.Log("이미지번호="+l);
+        Debug.Log("이미지번호="+l);
         spriteR.sprite = CCImageList[l];
-        //Debug.Log("밖:" +data_Dialog[j]["cuttoon"].ToString());
-        if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
-        {
-            Cuttoon();
-            ChatWin.SetActive(false);
-            Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
-        }
-        else
-        {
-            //Debug.Log("그냥실행");
-            cuttoon.SetActive(false);
-            scriptLine();
-        }
-    }
 
-    
-    public void scriptLine()  //스크립트 띄우는 거
-    {
-        if (ChatWin.activeSelf == false)
-            ChatWin.SetActive(true);
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
             ChatEnd();
@@ -252,38 +166,36 @@ public class LodingTxt : MonoBehaviour
                 ChatTime();
             }
 
-            Debug.Log("j=" + j);
+            Debug.Log("j="+j);
             LoadTxt = data_Dialog[j]["dialog"].ToString();
             Name.text = data_Dialog[j]["name"].ToString();
             StartCoroutine(_typing());
             Arrow.SetActive(false);
             block.SetActive(true);
+            /*if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //퀴즈 선택지/ 이거 아래로 내려감 이건 흔적
+            {
+                j--;
+                for (int i = 0; i < NPCButton; i++)
+                {
+                    QuizButton[i].text = data_Dialog[j + 1]["select"+(i+1)].ToString();
+                    string selecNumber = "select" + (i + 1).ToString();
+                }
+                Button.SetActive(true);
+            }*/
         }
-
         j++;
-    }
-
-    public void Cuttoon()
-    {
-        c= Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
-        cuttoon.SetActive(true);
-        //Debug.Log("컷툰갯수=" + cuttoonImageList.Length);
-        cuttoonspriteR = cuttoon.GetComponent<Image>();
-        cuttoonspriteR.sprite = cuttoonImageList[c];
-        
     }
 
     public void ChatEnd() //리셋
     {
         if (SceneManager.GetActiveScene().name == "MainField")
-        JumpButtons.JumpButtons.SetActive(true);
+            JumpButtons.JumpButtons.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
         Arrow.SetActive(false);
         NPCButtons.SetActive(false);
         Name.text = " ";
-        c = 0;
         for (int i = 0; i < NPCButton; i++)
         {
             string selecNumber = "select" + (i + 1).ToString();
@@ -329,7 +241,7 @@ public class LodingTxt : MonoBehaviour
         for (int i = 0; i < LoadTxt.Length + 1; i++)
         {
             Txt.text = LoadTxt.Substring(0, i);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.05f);
         }
         
         //Arrow.SetActive(true);
@@ -344,95 +256,8 @@ public class LodingTxt : MonoBehaviour
             }
             Button.SetActive(true);
         }
+
         block.SetActive(false);
-
-        if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
-        {
-            Debug.Log("튜토리얼 실핻ㅇ");
-            block.SetActive(true);
-            //tuto = true;
-            /*if (!tuto)
-            {
-                Debug.Log("tuto0만들기");
-                tutoi = 0;
-            }*/
-
-            Invoke("Tutorial_", 2f);
-            
-        }
     }
-    void Tutorial_()
-    {
-        tu.Tutorial();
-        tuto = true;
-    }
-
-    public void Answer1()
-    {
-        Answer = "1";
-        QuizeAnswer();
-    }
-    public void Answer2()
-    {
-        Answer = "2";
-        QuizeAnswer();
-    }
-    public void Answer3()
-    {
-        Answer = "3";
-        QuizeAnswer();
-    }
-    public void QuizeAnswer()
-    {
-        if (data_Dialog[j]["answer"].ToString().Equals(Answer))
-        {
-            O();
-            Line();
-        }
-
-        else
-        {
-            X();
-        }
-    }
-
-    public void O()//정답 골랐을 때
-    {
-        block.SetActive(true);
-        OImage.SetActive(true);
-        Button.SetActive(false);
-        j++;
-
-    }
-    public void X()//틀린 정답 골랐을 때
-    {
-        block.SetActive(true);
-        XImage.SetActive(true);
-        Button.SetActive(false);
-        LoadTxt = "다시 생각해보자!";
-        StartCoroutine(_typing());
-
-    }
-
-    public void Xback()//X이미지 버튼
-    {
-        XImage.SetActive(false);
-        Button.SetActive(true);
-    }
-
-    /*private static DateTime Delay(int MS)
-    {
-        DateTime ThisMoment = DateTime.Now;
-        TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
-        DateTime AfterWards = ThisMoment.Add(duration);
-
-        while (AfterWards >= ThisMoment)
-        {
-            System.Windows.Forms.Application.DoEvents();
-            ThisMoment = DateTime.Now;
-        }
-
-        return DateTime.Now;
-    }*/
 }
 

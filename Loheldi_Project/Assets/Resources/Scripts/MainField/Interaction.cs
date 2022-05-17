@@ -21,14 +21,17 @@ public class Interaction : MonoBehaviour
         }
         if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
         {
-            change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
             change.changeCamera();
         }
     }
+    /*private void Start()
+    {
+        change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
+    }*/
 
     void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
     {
-        if (other.gameObject.name == "InDoor")          
+        if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 NPC라면
         {
             Door = true;
             text.text = "들어가기";

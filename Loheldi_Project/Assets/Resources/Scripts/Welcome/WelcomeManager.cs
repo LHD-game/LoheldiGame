@@ -7,6 +7,8 @@ using BackEnd;
 public class WelcomeManager : MonoBehaviour
 {
     [SerializeField]
+    GameObject BeforePanel;
+    [SerializeField]
     GameObject StartBtn;
     [SerializeField]
     GameObject WelcomePanel;
@@ -32,6 +34,7 @@ public class WelcomeManager : MonoBehaviour
 
     void Start()
     {
+        BeforePanel.SetActive(true);
         StartBtn.SetActive(true);
         WelcomePanel.SetActive(false);
         LoginPanel.SetActive(false);
@@ -50,6 +53,7 @@ public class WelcomeManager : MonoBehaviour
     // 화면 터치 시, 로그인 여부를 판별하여 로그인하지 않은 경우 welcomePanel 활성화
     public void WelcomePop()
     {
+        Destroy(BeforePanel);   //이제 쓸모 없어진 건 삭제한다.
         if (!isLogin)   //자동로그인x
         {
             StartBtn.SetActive(false);

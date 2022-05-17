@@ -25,10 +25,6 @@ public class Interaction : MonoBehaviour
             change.changeCamera();
         }
     }
-    /*private void Start()
-    {
-        change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
-    }*/
 
     void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
     {

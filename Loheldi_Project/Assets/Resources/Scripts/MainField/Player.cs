@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    void OnCollisionEnter (Collision collision)
+    void OnTriggerStay (Collider trigger)
     {
-        if (collision.gameObject.tag == "Land")
+        if (trigger.gameObject.tag == "Land")
         {
             UIButton.OnLand = true;
+        }
+    }
+        void OnTriggerExit(Collider trigger)
+    {
+        if (trigger.gameObject.tag == "Land")
+        {
+            UIButton.OnLand = false;
         }
     }
 }

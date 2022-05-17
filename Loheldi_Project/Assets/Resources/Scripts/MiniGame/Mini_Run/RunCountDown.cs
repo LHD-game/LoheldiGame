@@ -15,6 +15,8 @@ public class RunCountDown : MonoBehaviour
     private int timer = 3;
     public static bool CountEnd = false;
 
+    public GameObject SoundManager;
+
     void Start()
     {
         ResetTimer();
@@ -37,14 +39,17 @@ public class RunCountDown : MonoBehaviour
         else if(timer == 2)
         {
             Num_3.SetActive(true);
+            SoundManager.GetComponent<SoundEffect>().Sound("CountFinish");
         }
         else if (timer == 1)
         {
             Num_2.SetActive(true);
+            SoundManager.GetComponent<SoundEffect>().Sound("CountFinish");
         }
         else if (timer == 0)
         {
             Num_1.SetActive(true);
+            SoundManager.GetComponent<SoundEffect>().Sound("CountFinish");
         }
         else if(timer == -1)
         {
@@ -53,6 +58,7 @@ public class RunCountDown : MonoBehaviour
             Num_2.SetActive(false);
             Num_3.SetActive(false);
             CountEnd = true;
+            SoundManager.GetComponent<SoundEffect>().Sound("Count");
             CancelInvoke("NumAppear");
         }
         timer--;

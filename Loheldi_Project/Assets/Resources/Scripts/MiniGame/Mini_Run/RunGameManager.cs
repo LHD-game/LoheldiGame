@@ -32,7 +32,9 @@ public class RunGameManager : MonoBehaviour
     public static int Goll;  //골지점
     public static bool isPause = false;
     RunPlayerRun Nownpc;
-    
+
+    public GameObject SoundManager;
+
     void Start()
     {
         markerPos = NMarker.localPosition;
@@ -65,6 +67,7 @@ public class RunGameManager : MonoBehaviour
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
+                SoundManager.GetComponent<SoundEffect>().Sound("GameFail");
             }
             else if (Player.position.z >= Goll)
             {
@@ -72,6 +75,7 @@ public class RunGameManager : MonoBehaviour
                 RunBtnPanel.SetActive(false);
                 Win_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
+                SoundManager.GetComponent<SoundEffect>().Sound("GameSuccess");
             }
             NPCz = nowNPC.position.z;
             Playerz = Player.position.z;

@@ -10,11 +10,11 @@ public class VirtualJoystick : MonoBehaviour
     public Transform Stick;
     public float speed1 = 8f;
     public float speed2 = 10f;
+    public bool MoveFlag;
 
     private Vector3 StickFirstPos;
     private Vector3 JoyVec;
     private float Radius;
-    private bool MoveFlag;
 
     //public Animator Animation;
 

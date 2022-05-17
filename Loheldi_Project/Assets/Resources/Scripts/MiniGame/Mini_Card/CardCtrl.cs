@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardCtrl : MonoBehaviour
 {
     bool isOpen = false;
+    public GameObject SoundManager;
 
     Animator anim;
 
@@ -68,6 +69,7 @@ public class CardCtrl : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (this.gameObject != null)
         {
+            SoundManager.GetComponent<SoundEffect>().Sound("CardCurrect");
             CardFX.instance.DisCardFX(this.transform.position); //fx
             Destroy(this.gameObject);
         }

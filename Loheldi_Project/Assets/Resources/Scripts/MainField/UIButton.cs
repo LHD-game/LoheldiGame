@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIButton : MonoBehaviour
 {
@@ -39,7 +40,8 @@ public class UIButton : MonoBehaviour
     {
         map = false;
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        if (SceneManager.GetActiveScene().name == "MainField")
+            Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
     }
 
     public void JumpButton()                //점프버튼

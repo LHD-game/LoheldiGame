@@ -1010,7 +1010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JoyStick: {fileID: 5081900558151988453}
-  EventSystem: {fileID: 0}
 --- !u!1001 &149018644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1538,10 +1537,12 @@ MonoBehaviour:
   Player: {fileID: 1431261793}
   Map: {fileID: 0}
   Inv: {fileID: 0}
+  shop: {fileID: 0}
   ConditionWindow: {fileID: 0}
   Playerrb: {fileID: 1431261795}
   conditionLevelText: {fileID: 0}
   JumpButtons: {fileID: 0}
+  chat: {fileID: 0}
   Inter: {fileID: 0}
   SoundManager: {fileID: 0}
 --- !u!114 &219778285
@@ -8147,7 +8148,7 @@ GameObject:
   - component: {fileID: 1714889070}
   m_Layer: 0
   m_Name: 1 (1)
-  m_TagString: Untagged
+  m_TagString: Land
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8160,7 +8161,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714889069}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -9012,8 +9013,12 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1701297580994259705, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701297580994259705, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_Constraints
-      value: 116
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 5075700830378204139, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_RootOrder
@@ -9071,9 +9076,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5461052779744064180, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5579439140277405422, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6653426005932863580, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_Name
@@ -9085,7 +9094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8924395752284339265, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1701297580994259704, guid: 4e175717c02a8f74d91c180b85593321, type: 3}

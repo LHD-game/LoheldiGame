@@ -8,7 +8,6 @@ public class AnimationTrigger : MonoBehaviour
     private bool Jumping;
 
     public GameObject JoyStick;
-    public GameObject EventSystem;
 
     private void Awake()
     {

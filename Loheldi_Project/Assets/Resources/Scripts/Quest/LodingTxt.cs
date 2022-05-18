@@ -140,7 +140,7 @@ public class LodingTxt : MonoBehaviour
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 5:
-                        Player.transform.position = new Vector3(-93.97f, 11.60f, 140.38f);
+                        Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 6:

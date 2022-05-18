@@ -28,9 +28,12 @@ public class UIButton : MonoBehaviour
 
     private void Awake()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (SceneManager.GetActiveScene().name == "MainField")
+        {
             ConditionWindow.SetActive(true); //상태창 열기
+            chat = GameObject.Find("chatManager").GetComponent<LodingTxt>(); 
+        }
+            
         ChangColor.badge = GameObject.FindGameObjectsWithTag("badge"); //뱃지 태그 저장
 
         ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/"); //이미지 경로

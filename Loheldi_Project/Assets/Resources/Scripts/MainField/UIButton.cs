@@ -9,7 +9,8 @@ public class UIButton : MonoBehaviour
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언
-    public GameObject Inv;
+    public GameObject Inv;                
+    public GameObject shop;
     public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public Text conditionLevelText;            //상태창 레벨
@@ -20,12 +21,14 @@ public class UIButton : MonoBehaviour
     bool inv;
 
     private FlieChoice Chat;
+    public LodingTxt chat;
     public Interaction Inter;
 
     public GameObject SoundManager;
 
     private void Awake()
     {
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (SceneManager.GetActiveScene().name == "MainField")
             ConditionWindow.SetActive(true); //상태창 열기
         ChangColor.badge = GameObject.FindGameObjectsWithTag("badge"); //뱃지 태그 저장
@@ -144,11 +147,12 @@ public class UIButton : MonoBehaviour
         else if (Inter.NameNPC.Equals("Yeomi"))  //NPC이름이 이거면
         {
             Chat.fox1();
-        }
+        }*/
         else if (Inter.NameNPC.Equals("Mu"))  //NPC이름이 이거면
         {
-            Chat.dog();
-        }*/
+            shop.SetActive(true);
+            chat.ChatEnd();
+        }
     }
 
     /*public void MapButton()                 //지도버튼

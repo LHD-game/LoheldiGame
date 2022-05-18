@@ -18,6 +18,7 @@ public class SoundEffect : MonoBehaviour
     public AudioClip audioClickIcon;
     public AudioClip audioJump;
     public AudioClip audioOpenDoor;
+    public AudioClip audioOpening;
     AudioSource audioSource;
 
     private void Awake()
@@ -72,6 +73,9 @@ public class SoundEffect : MonoBehaviour
                 break;
             case "OpenDoor":
                 audioSource.clip = audioOpenDoor;    //50%
+                break;
+            case "Opening":
+                audioSource.clip = audioOpening;       //100%
                 break;
             default:
                 break;

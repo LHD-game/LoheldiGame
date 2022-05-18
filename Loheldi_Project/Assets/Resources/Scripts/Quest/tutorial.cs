@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class tutorial : MonoBehaviour
 {
@@ -19,33 +18,33 @@ public class tutorial : MonoBehaviour
     public void forTutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.Num = "0_12";
+        chat.Num = "0_6";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
     }
 
     public void Tutorial()
     {
-        Debug.Log("Æ©Åä¸®¾ó ½ÇÁP¤·22");
+        //Debug.Log("Æ©Åä¸®¾ó ½ÇÁP¤·22");
 
         Image tutoblack = chat.block.GetComponent<Image>();
         
         chat.color.a = 0.8f;
         chat.block.GetComponent<Image>().color = chat.color;
         if (!chat.tuto)
-            chat.chatCanvus.SetActive(false);
+            chat.ChatWin.SetActive(false);
         chat.j--;
 
-        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_6"))
+        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_6")||(chat.tutoi<=4&&chat.tutoi>0))
         {
             //Debug.Log("Æ©Åäi=" + chat.tutoi);
             //Debug.Log("¹öÆ°=" + chat.block.transform.GetChild(chat.tutoi));
-            tutoblack.sprite = chat.cuttoonImageList[5];
             if (chat.tutoi < 4)
             {
-                if(chat.tutoi ==0)
+                tutoblack.sprite = chat.cuttoonImageList[5];
+                if (chat.tutoi == 0)
                     chat.Main_UI.SetActive(true);
-                else if(chat.tutoi ==1)
+                else if (chat.tutoi == 1)
                     chat.Main_UI.SetActive(false);
                 chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);
                 chat.tutoi++;
@@ -61,16 +60,15 @@ public class tutorial : MonoBehaviour
                 chat.ChatEnd();
                 forTutorial();
             }
-            
         }
-        
+
         if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_12"))
         {
             if (chat.tutoi < 7)
             {
                 if (chat.tutoi == 0)
                     chat.tutoi += 4;
-                Debug.Log("12½ÇÇà Æ©Åäi=" + chat.tutoi);
+                //Debug.Log("12½ÇÇà Æ©Åäi=" + chat.tutoi);
                 tutoblack.sprite = chat.cuttoonImageList[5];
                 chat.Main_UI.SetActive(true);
                 chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);
@@ -86,9 +84,9 @@ public class tutorial : MonoBehaviour
                 chat.tutoFinish = true;
                 chat.ChatEnd();
                 forTutorial();
-
             }
         }
+        
 
         /*if (chat.fade_in_out.Panel == null)
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIButton : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class UIButton : MonoBehaviour
     //public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
     bool inv;
-    public static bool conditionWindow;      //상태창이 열려있는지 확인
 
     private FlieChoice Chat;
     public Interaction Inter;
@@ -26,20 +26,22 @@ public class UIButton : MonoBehaviour
 
     private void Awake()
     {
-        ConditionWindow.SetActive(true); //상태창 열기
+        if (SceneManager.GetActiveScene().name == "MainField")
+            ConditionWindow.SetActive(true); //상태창 열기
         ChangColor.badge = GameObject.FindGameObjectsWithTag("badge"); //뱃지 태그 저장
 
         ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/"); //이미지 경로
 
-        ConditionWindow.SetActive(false);//상태창 닫기
-        conditionWindow = false;
+        if (SceneManager.GetActiveScene().name == "MainField")
+            ConditionWindow.SetActive(false);//상태창 닫기
     }
 
     void Start()
     {
         map = false;
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        if (SceneManager.GetActiveScene().name == "MainField")
+            Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
     }
 
     public void JumpButton()                //점프버튼
@@ -99,7 +101,7 @@ public class UIButton : MonoBehaviour
         }
         else                                                //NPC주변에 있지 않다면
         {
-            if (OnLand)                                         //Player가 바닥에 있다면
+            if (OnLand&&(SceneManager.GetActiveScene().name == "MainField"))                                         //Player가 바닥에 있다면
             {
                 SoundManager.GetComponent<SoundEffect>().Sound("Jump");
                 Playerrb.AddForce(transform.up * 15000);

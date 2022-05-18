@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class RealClock : MonoBehaviour
 {
     public Text DayTxt;                 //½Ã°£À» ³ªÅ¸³»´Â Text ¿ÀºêÁ§Æ®
@@ -48,49 +49,52 @@ public class RealClock : MonoBehaviour
 
     public void TimeSetting(float Time)
     {
-        switch (Time)
+        if (SceneManager.GetActiveScene().name == "MainField")
         {
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:                     //¾ÆÄ§
-                RenderSettings.skybox = DaySky;                                                           //½ºÄ«ÀÌ¹Ú½º º¯°æ
-                Light.GetComponent<Light>().color = new Color(255f / 255f, 244f / 255f, 214f / 255f);     //ºû »ö º¯°æ
-                NightLight.SetActive(false);                                                              //±¤¿øÀº ¾ÆÄ§¿¡ ²¨Áü
-                Light.transform.eulerAngles = new Vector3(50, (Time - 11) * 15, 0);                       //ºûÀ» 15µµ¾¿ µ¹¸²
-                break;
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 18:
-            case 19:
-            case 20:
-            case 21:
-            case 22:
-            case 23:
-            case 24:                    //¹ã
-                RenderSettings.skybox = NightSky;
-                Light.GetComponent<Light>().color = new Color(68f / 255f, 68f / 255f, 128f / 255f);
-                NightLight.SetActive(true);
-                Light.transform.eulerAngles = new Vector3(50, (Time - 23) * 15, 0);
-                break;
-        }
-        if (Time == 5 || Time == 17)    //»õº®, Àú³á
-        {
-            RenderSettings.skybox = NoonSky;
-            Light.GetComponent<Light>().color = new Color(139f / 255f, 9f / 255f, 202f / 255f);
-            Light.transform.rotation = Quaternion.Euler(50, -90, 0);    //ºûÀÇ À§Ä¡¸¦ ÃÊ±âÈ­ÇÔ (ÇØ°¡ ¶ß¸é ºµÀ» ÂØ°í, ´ÞÀÌ ¶ß¸é ´ÞÀ» ÂØ°í)
-            if (Time == 17)             //±¤¿øÀº Àú³á¿¡ ÄÑÁü
+            switch (Time)
             {
-                NightLight.SetActive(true);
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:                     //¾ÆÄ§
+                    RenderSettings.skybox = DaySky;                                                           //½ºÄ«ÀÌ¹Ú½º º¯°æ
+                    Light.GetComponent<Light>().color = new Color(255f / 255f, 244f / 255f, 214f / 255f);     //ºû »ö º¯°æ
+                    NightLight.SetActive(false);                                                              //±¤¿øÀº ¾ÆÄ§¿¡ ²¨Áü
+                    Light.transform.eulerAngles = new Vector3(50, (Time - 11) * 15, 0);                       //ºûÀ» 15µµ¾¿ µ¹¸²
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:                    //¹ã
+                    RenderSettings.skybox = NightSky;
+                    Light.GetComponent<Light>().color = new Color(68f / 255f, 68f / 255f, 128f / 255f);
+                    NightLight.SetActive(true);
+                    Light.transform.eulerAngles = new Vector3(50, (Time - 23) * 15, 0);
+                    break;
+            }
+            if (Time == 5 || Time == 17)    //»õº®, Àú³á
+            {
+                RenderSettings.skybox = NoonSky;
+                Light.GetComponent<Light>().color = new Color(139f / 255f, 9f / 255f, 202f / 255f);
+                Light.transform.rotation = Quaternion.Euler(50, -90, 0);    //ºûÀÇ À§Ä¡¸¦ ÃÊ±âÈ­ÇÔ (ÇØ°¡ ¶ß¸é ºµÀ» ÂØ°í, ´ÞÀÌ ¶ß¸é ´ÞÀ» ÂØ°í)
+                if (Time == 17)             //±¤¿øÀº Àú³á¿¡ ÄÑÁü
+                {
+                    NightLight.SetActive(true);
+                }
             }
         }
     }

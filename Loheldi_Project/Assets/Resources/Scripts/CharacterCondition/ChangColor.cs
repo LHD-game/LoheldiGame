@@ -7,7 +7,6 @@ public class ChangColor : MonoBehaviour
 {
     public static bool color;
     public static int k;
-    public static int l;
 
     public static GameObject[] badge;
     public static Sprite[] badgeList;
@@ -24,7 +23,7 @@ public class ChangColor : MonoBehaviour
         spriteR = badge[k].GetComponent<Image>();
         if (color)
         {
-            spriteR.sprite = badgeList[l] ;
+            spriteR.sprite = badgeList[0] ;
             color = false;
         }
     }

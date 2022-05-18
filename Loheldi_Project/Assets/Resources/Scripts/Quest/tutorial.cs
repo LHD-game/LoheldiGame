@@ -18,7 +18,7 @@ public class tutorial : MonoBehaviour
     public void forTutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.Num = "0_6";
+        chat.Num = "0_1";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
     }

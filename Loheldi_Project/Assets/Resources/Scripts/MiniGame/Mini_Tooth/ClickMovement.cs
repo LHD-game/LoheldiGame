@@ -7,8 +7,12 @@ public class ClickMovement : MonoBehaviour
     private new Camera camera;
     private bool isMove;
     private Vector3 destination;
+    int layerMask;
+
+
     private void Awake()
     {
+        layerMask = 1 << LayerMask.NameToLayer("BTooth");
         camera = Camera.main;
     }
     void Update()
@@ -18,7 +22,7 @@ public class ClickMovement : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 RaycastHit hit;
-                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit))
+                if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, layerMask))
                 {
                     SetDestination(hit.transform.gameObject);
                 }

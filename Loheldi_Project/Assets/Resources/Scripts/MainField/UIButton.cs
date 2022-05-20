@@ -13,7 +13,6 @@ public class UIButton : MonoBehaviour
     public GameObject shop;
     public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
-    public Text conditionLevelText;            //상태창 레벨
     public GameObject JumpButtons;
 
     //public GameObject ShopMok;             // 목공방
@@ -36,7 +35,7 @@ public class UIButton : MonoBehaviour
             
         ChangColor.badge = GameObject.FindGameObjectsWithTag("badge"); //뱃지 태그 저장
 
-        ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/"); //이미지 경로
+        //ChangColor.badgeList = Resources.LoadAll<Sprite>("Sprites/badgeList/imgList/"); //이미지 경로
 
         if (SceneManager.GetActiveScene().name == "MainField")
             ConditionWindow.SetActive(false);//상태창 닫기

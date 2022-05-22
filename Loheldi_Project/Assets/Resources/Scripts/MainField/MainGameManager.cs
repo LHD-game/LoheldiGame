@@ -12,6 +12,7 @@ public class MainGameManager : MonoBehaviour
 
     public Text moneyText;
     public Text levelText;
+    public Text conditionLevelText;            //상태창 레벨
     public Text expBarleftText;                    //필요한 경험치량
     public Text expBarrightText;                  //현재 경험치량
     public Slider slider;

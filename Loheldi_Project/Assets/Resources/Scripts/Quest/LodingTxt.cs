@@ -128,8 +128,7 @@ public class LodingTxt : MonoBehaviour
         //o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_")+1));
         
 
-        //Debug.Log("o=" +o);
-        //Debug.Log("m=" +m);
+        Debug.Log("o=" +o+ "m=" + m);
         if(o!=m)
         {
             if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (n == 0))
@@ -141,7 +140,7 @@ public class LodingTxt : MonoBehaviour
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 5:
-                        Player.transform.position = new Vector3(-93.97f, 11.60f, 140.38f);
+                        Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 6:
@@ -185,8 +184,8 @@ public class LodingTxt : MonoBehaviour
     public void Line()  //줄넘김
     {
         //튜토리얼 스크립트 이어가는 애
-        Debug.Log("튜툐:"+tuto);
-        Debug.Log("튜툐피니:"+tutoFinish);
+        //Debug.Log("튜툐:"+tuto);
+        //Debug.Log("튜툐피니:"+tutoFinish);
         if (tuto && tutoFinish)
         {
             chatCanvus.SetActive(true);
@@ -195,7 +194,10 @@ public class LodingTxt : MonoBehaviour
             tuto = false;
             tutoFinish = false;
             if (tutoi == 6)
+            {
                 j = 33;
+                o++;
+            }
             if (tutoi == 12)
             {
                 Main_UI.SetActive(true);
@@ -208,27 +210,34 @@ public class LodingTxt : MonoBehaviour
             chatCanvus.SetActive(true);
             ++j;
         }
-
-        if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
-            Main_UI.SetActive(false);
-        /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
-        n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
-        spriteR = CCImage[0].GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
-        l = Int32.Parse(data_Dialog[j]["image"].ToString());
-        //Debug.Log("이미지번호="+l);
-        spriteR.sprite = CCImageList[l];
-        //Debug.Log("밖:" +data_Dialog[j]["cuttoon"].ToString());
-        if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
+        if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
-            Cuttoon();
-            ChatWin.SetActive(false);
-            Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
+            //Debug.Log("end실행");
+            ChatEnd();
         }
         else
         {
-            //Debug.Log("그냥실행");
-            cuttoon.SetActive(false);
-            scriptLine();
+            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
+                Main_UI.SetActive(false);
+            /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
+            n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
+            spriteR = CCImage[0].GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
+            l = Int32.Parse(data_Dialog[j]["image"].ToString());
+            //Debug.Log("이미지번호="+l);
+            spriteR.sprite = CCImageList[l];
+            //Debug.Log("밖:" +data_Dialog[j]["cuttoon"].ToString());
+            if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
+            {
+                Cuttoon();
+                ChatWin.SetActive(false);
+                Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
+            }
+            else
+            {
+                //Debug.Log("그냥실행");
+                cuttoon.SetActive(false);
+                scriptLine();
+            }
         }
     }
 
@@ -237,28 +246,21 @@ public class LodingTxt : MonoBehaviour
     {
         if (ChatWin.activeSelf == false)
             ChatWin.SetActive(true);
-        if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
+        if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
-            ChatEnd();
+            QuizeTIme();
         }
-        else
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //퀴즈끝
         {
-            if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
-            {
-                QuizeTIme();
-            }
-            else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //퀴즈끝
-            {
-                ChatTime();
-            }
+            ChatTime();
+        }
 
-            Debug.Log("j=" + j);
-            LoadTxt = data_Dialog[j]["dialog"].ToString();
-            Name.text = data_Dialog[j]["name"].ToString();
-            StartCoroutine(_typing());
-            Arrow.SetActive(false);
-            block.SetActive(true);
-        }
+        //Debug.Log("j=" + j);
+        LoadTxt = data_Dialog[j]["dialog"].ToString();
+        Name.text = data_Dialog[j]["name"].ToString();
+        StartCoroutine(_typing());
+        Arrow.SetActive(false);
+        block.SetActive(true);
 
         j++;
     }
@@ -275,7 +277,7 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatEnd() //리셋
     {
-        if (SceneManager.GetActiveScene().name == "MainField")
+        //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.JumpButtons.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
@@ -348,7 +350,7 @@ public class LodingTxt : MonoBehaviour
 
         if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
         {
-            Debug.Log("튜토리얼 실핻ㅇ");
+            //Debug.Log("튜토리얼 실핻ㅇ");
             block.SetActive(true);
             //tuto = true;
             /*if (!tuto)
@@ -420,19 +422,5 @@ public class LodingTxt : MonoBehaviour
         Button.SetActive(true);
     }
 
-    /*private static DateTime Delay(int MS)
-    {
-        DateTime ThisMoment = DateTime.Now;
-        TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
-        DateTime AfterWards = ThisMoment.Add(duration);
-
-        while (AfterWards >= ThisMoment)
-        {
-            System.Windows.Forms.Application.DoEvents();
-            ThisMoment = DateTime.Now;
-        }
-
-        return DateTime.Now;
-    }*/
 }
 

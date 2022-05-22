@@ -7,11 +7,10 @@ public class ChangColor : MonoBehaviour
 {
     public static bool color;
     public static int k;
-    public static int l;
 
     public static GameObject[] badge;
-    public static Sprite[] badgeList;
-    static  Image spriteR;
+    //public static Sprite[] badgeList;
+    //static  Image spriteR;
 
     void start()
     {
@@ -21,10 +20,11 @@ public class ChangColor : MonoBehaviour
 
     public static void PopUp()
     {
-        spriteR = badge[k].GetComponent<Image>();
+        //spriteR = badge[k].GetComponent<Image>();
         if (color)
         {
-            spriteR.sprite = badgeList[l] ;
+            badge[k].SetActive(false);
+            //spriteR.sprite = badgeList[0] ;
             color = false;
         }
     }

@@ -18,9 +18,11 @@ public class RealClock : MonoBehaviour
 
     private int PreTime;                //시간이 변경됬는지 확인하기 위한 변수
     public int Time;                    //시간 변수
+    private QuestScript Quest;
 
     void Start()
     {
+        Quest = GameObject.Find("EventSystem").GetComponent<QuestScript>();
         GetCurrentDate();               //시간 불러는 함수
         TimeSetting(Time);
         PreTime = Time;                 //변경 함수 초기화
@@ -84,6 +86,10 @@ public class RealClock : MonoBehaviour
                     Light.GetComponent<Light>().color = new Color(68f / 255f, 68f / 255f, 128f / 255f);
                     NightLight.SetActive(true);
                     Light.transform.eulerAngles = new Vector3(50, (Time - 23) * 15, 0);
+
+                    //메인 퀘스트 주는 스크립트
+                    if (!Quest.Quest)
+                        Quest.MainQuestLoding();
                     break;
             }
             if (Time == 5 || Time == 17)    //새벽, 저녁

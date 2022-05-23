@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         CreateLife();
         InitScore();
         newFoodDropSec = foodDropSec[0];
-        foods = Resources.LoadAll<GameObject>("Prefebs/Foods/");
+        foods = Resources.LoadAll<GameObject>("Prefabs/Foods/");
 
     }
     public void GameStart()

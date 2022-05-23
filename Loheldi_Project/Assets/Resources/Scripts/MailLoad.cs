@@ -40,7 +40,7 @@ public class MailLoad : MonoBehaviour
                 string detail = json[i]["content"].ToString();
                 string sent = json[i]["author"].ToString();
 
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefebs/UI/Mail"), MailList);                      //皋老 橇府崎 积己
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), MailList);                      //皋老 橇府崎 积己
                 ThisTitle = TempObject.transform.Find("Title").gameObject;                                              //橇府崎俊 加己
                 ThisSent = TempObject.transform.Find("Sent").gameObject;
                 ThisDetail = TempObject.transform.Find("Detail").gameObject;

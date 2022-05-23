@@ -65,29 +65,19 @@ public class SignupCheck : MonoBehaviour
 
     public bool ChkID(string uID = "")     //ID 5~20자 이내 영어, 숫자
     {
-        Regex regex = new Regex(@"[a-zA-Z0-9]$"); //ID 정규식. 영대소문자, 숫자 0~8자 이내 가능
+        Regex regex = new Regex(@"[a-zA-Z0-9]{5,20}$"); //ID 정규식. 영대소문자, 숫자 5~20자 이내 가능
         bool isCorrect = true; //정규식 만족 시, true
 
-        if(uID.Length <= 8)
+        if ((regex.IsMatch(uID)))    //정규식 불일치 시
         {
-            if ((regex.IsMatch(uID)))    //정규식 불일치 시
-            {
-                Debug.Log("ID가 양식과 일치합니다.");
-                ErrorLine[1].gameObject.SetActive(false);
-                ErrorTxt[1].gameObject.SetActive(false);
-                isCorrect = true;
-            }
-            else
-            {
-                Debug.Log("ID가 양식과 일치하지 않습니다.");
-                ErrorLine[1].gameObject.SetActive(true);
-                ErrorTxt[1].gameObject.SetActive(true);
-                isCorrect = false;
-            }
+            Debug.Log("ID가 양식과 일치합니다.");
+            ErrorLine[1].gameObject.SetActive(false);
+            ErrorTxt[1].gameObject.SetActive(false);
+            isCorrect = true;
         }
         else
         {
-            Debug.Log("ID가 양식과 일치하지 않습니다.(자리수 불일치)");
+            Debug.Log("ID가 양식과 일치하지 않습니다.");
             ErrorLine[1].gameObject.SetActive(true);
             ErrorTxt[1].gameObject.SetActive(true);
             isCorrect = false;
@@ -98,60 +88,13 @@ public class SignupCheck : MonoBehaviour
     public bool ChkPW(string uPW = "")     //비밀번호 20자 이내 영어+숫자+특수문자 조합
     {
         bool isCorrect = true; //정규식 만족 시, true
-        char[] upw = uPW.ToCharArray();  //입력받은거 배열로 저장
-        int Num = 0; //숫자 연속 체크
-        int Num2 = 0;  //반복 숫자 체크
-        int Num3 = 0;  //연속 숫자 체크
-        int[] Numupw = new int[uPW.Length];
-        bool numupw = true; //비번 연속, 반복 4이상 아닐시, ture
-        
+
         //숫자1이상, 영문1이상, 특수문자1이상
         Regex regex = new Regex(@"^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$", RegexOptions.IgnorePatternWhitespace);
 
-        if (uPW.Length >= 6 && uPW.Length <= 10)
+        if (uPW.Length >= 5 && uPW.Length <= 20)
         {
-            foreach(char c in upw) //upw안에 애들 한번씩 실행
-            {
-                if (char.IsNumber(c))
-                {
-                    Numupw[Num] = (int)c; //숫자 따로 배열로 뺌
-                    Num++;
-                    if (Num == 4)
-                    {
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (Numupw[i] == Numupw[i + 1]) //반복일때
-                                Num2++;
-                            else if (Numupw[i] + 1 == Numupw[i + 1]) //연속일때 (+형)
-                                Num3++;
-                            else if (Numupw[i] - 1 == Numupw[i + 1]) //연속일떼(-형)
-                                Num3++;
-                            else
-                                continue;
-                            Debug.Log("연속 숫자:" + Num3);
-                            Debug.Log("i:" + i);
-
-                        }
-                        if(Num2==4^Num3==4)
-                            numupw = false;
-                        Debug.Log("반복 숫자:" + Num2);
-                        
-                        break;
-                    }
-                }
-                else
-                    Num = 0;
-
-            }
-            
-            if (!numupw)
-            {
-                ErrorLine[2].gameObject.SetActive(true);
-                ErrorTxt[2].gameObject.SetActive(true);
-                isCorrect = false;
-                Debug.Log("PW중 연속/반복되는 숫자가 4개이상 있습니다.");
-            }
-            else if (regex.IsMatch(uPW))
+            if (regex.IsMatch(uPW))
             {
                 ErrorLine[2].gameObject.SetActive(false);
                 ErrorTxt[2].gameObject.SetActive(false);
@@ -164,9 +107,7 @@ public class SignupCheck : MonoBehaviour
                 ErrorTxt[2].gameObject.SetActive(true);
                 isCorrect = false;
                 Debug.Log("PW가 양식과 일치하지 않습니다.(정규식 불만족)");
-                
             }
-
         }
         else
         {
@@ -175,10 +116,11 @@ public class SignupCheck : MonoBehaviour
             isCorrect = false;
             Debug.Log("PW가 양식과 일치하지 않습니다.(자릿수 불일치)");
         }
+
         return isCorrect;
     }
-        
-    
+
+
 
     public bool RePW(string PW = "", string rePW = "")      //비밀번호 중복 확인
     {

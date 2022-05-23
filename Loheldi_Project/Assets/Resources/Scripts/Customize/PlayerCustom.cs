@@ -17,10 +17,10 @@ public class PlayerCustom : MonoBehaviour
     protected Mesh meHair;
 
     //player's material
-    public Material p_mSkin;
-    public Material p_mEyes;
-    public Material p_mMouth;
-    public Material p_mHair;
+    protected Material p_mSkin;
+    protected Material p_mEyes;
+    protected Material p_mMouth;
+    protected Material p_mHair;
 
     public GameObject p_Eyes;
     public GameObject p_Mouth;
@@ -28,7 +28,7 @@ public class PlayerCustom : MonoBehaviour
 
     protected static bool newAcc = false;
 
-    protected void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
+    public void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
         var bro = Backend.GameData.GetMyData("USER_CUSTOM", new Where());
 
@@ -75,23 +75,26 @@ public class PlayerCustom : MonoBehaviour
         tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
     }
 
-    protected void PlayerLook()   //외관 커스텀 업데이트
+    public void PlayerLook()   //외관 커스텀 업데이트
     {
         NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_name);
         NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) + "_" + NowSettings.u_eyes_color;
         NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_name);
         NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
 
-        tSkin = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_skin_texture));
-        tEyes = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_eyes_texture));
-        tMouth = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_mouth_texture));
-        tHair = Resources.Load<Texture>(("Customize/Textures/" + NowSettings.u_hair_texture));
+        tSkin = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_skin_texture);
+        tEyes = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_eyes_texture);
+        tMouth = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_mouth_texture);
+        tHair = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_hair_texture);
 
-        meEyes = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_eyes_name + "_mesh"));
-        meMouth = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_mouth_name + "_mesh"));
-        meHair = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_hair_name + "_mesh"));
+        meEyes = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_eyes_name + "_mesh");
+        meMouth = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_mouth_name + "_mesh");
+        meHair = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_hair_name + "_mesh");
 
-
+        p_mSkin = Resources.Load<Material>("Customize/Materials/Skin");
+        p_mEyes = Resources.Load<Material>("Customize/Materials/Eyes");
+        p_mMouth = Resources.Load<Material>("Customize/Materials/Mouth");
+        p_mHair = Resources.Load<Material>("Customize/Materials/Hair");
 
         p_mSkin.SetTexture("_MainTex", tSkin);    //_MainTex: Material의 Albedo texture입니다. 
         p_mEyes.SetTexture("_MainTex", tEyes);

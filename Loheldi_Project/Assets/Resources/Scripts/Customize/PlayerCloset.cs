@@ -15,15 +15,15 @@ public class PlayerCloset : MonoBehaviour
     protected Mesh meLower;
 
     //player's material
-    public Material p_mUpper;
-    public Material p_mLower;
-    public Material p_mSocks;
-    public Material p_mShoes;
+    protected Material p_mUpper;
+    protected Material p_mLower;
+    protected Material p_mSocks;
+    protected Material p_mShoes;
 
     public GameObject p_Lower;
 
 
-    protected void nowClothes()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
+    public void nowClothes()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
         var bro = Backend.GameData.GetMyData("USER_CLOTHES", new Where());
 
@@ -77,7 +77,7 @@ public class PlayerCloset : MonoBehaviour
         tShoes = Resources.Load<Texture>(("Customize/Textures/Shoes/" + NowSettings.u_shoes_texture));
     }
 
-    protected void PlayerLook()   //외관 커스텀 업데이트
+    public void PlayerLook()   //외관 커스텀 업데이트
     {
         NowSettings.u_upper_texture = NowSettings.u_upper_name + "_texture_" + NowSettings.u_upper_color;
         NowSettings.u_lower_texture = NowSettings.u_lower_name + "_texture_" + NowSettings.u_lower_color;
@@ -91,6 +91,10 @@ public class PlayerCloset : MonoBehaviour
 
         //meLower = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_name + "_mesh"));
 
+        p_mUpper = Resources.Load<Material>("Customize/Materials/Upper");
+        p_mLower = Resources.Load<Material>("Customize/Materials/Lower");
+        p_mSocks = Resources.Load<Material>("Customize/Materials/Socks");
+        p_mShoes = Resources.Load<Material>("Customize/Materials/Shoes");
 
         p_mUpper.SetTexture("_MainTex", tUpper);    //_MainTex: Material의 Albedo texture입니다. 
         p_mLower.SetTexture("_MainTex", tLower);

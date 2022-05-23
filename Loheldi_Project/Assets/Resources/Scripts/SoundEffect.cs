@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class SoundEffect : MonoBehaviour
 {
-    public AudioClip audioVomit;
-    public AudioClip audioLevelUp;
-    public AudioClip audioCount;
-    public AudioClip audioCountFinish;
-    public AudioClip audioFootSteps1;
-    public AudioClip audioFootSteps2;
-    public AudioClip audioFootSteps3;
+    public AudioClip audioFoodGood;
+    public AudioClip audioFoodNotGood;
+    public AudioClip audioRunCount;
+    public AudioClip audioRunCountFinish;
+    public AudioClip audioRunFootSteps1;
+    public AudioClip audioRunFootSteps2;
+    public AudioClip audioRunFootSteps3;
+    public AudioClip audioRunClose;
+    public AudioClip audioCardFlip;
     public AudioClip audioCardCurrect;
+    public AudioClip audioCardWrong;
+    public AudioClip audioGameTimeless;
     public AudioClip audioGameSuccess;
     public AudioClip audioGameFail;
     public AudioClip audioReward;
+    public AudioClip audioLevelUp;
     public AudioClip audioClickIcon;
+    public AudioClip audioClickBack;
     public AudioClip audioJump;
     public AudioClip audioOpenDoor;
     public AudioClip audioOpening;
@@ -32,55 +38,73 @@ public class SoundEffect : MonoBehaviour
         {
             case "Idle":
                 break;
-            case "Vomit":
-                audioSource.clip = audioVomit;       //100%
+            case "FoodGood":
+                audioSource.clip = audioFoodGood;
+                break;
+            case "FoodNotGood":
+                audioSource.clip = audioFoodNotGood;
                 break;
             case "LevelUp":
-                audioSource.clip = audioLevelUp;     //100%
+                audioSource.clip = audioLevelUp;
                 break;
-            case "Count":
-                audioSource.clip = audioCount;       //100%
+            case "RunCount":
+                audioSource.clip = audioRunCount;
                 audioSource.volume = 0.05f;
                 break;
-            case "CountFinish":
-                audioSource.clip = audioCountFinish; //100%
+            case "RunCountFinish":
+                audioSource.clip = audioRunCountFinish;
                 audioSource.volume = 0.05f;
                 break;
-            case "FootSteps1":
-                audioSource.clip = audioFootSteps1;  //100%
+            case "RunFootSteps1":
+                audioSource.clip = audioRunFootSteps1;
                 audioSource.volume = 0.5f;
                 break;
-            case "FootSteps2":
-                audioSource.clip = audioFootSteps2;  //100%
+            case "RunFootSteps2":
+                audioSource.clip = audioRunFootSteps2;
                 audioSource.volume = 0.5f;
                 break;
-            case "FootSteps3":
-                audioSource.clip = audioFootSteps3;  //100%
+            case "RunFootSteps3":
+                audioSource.clip = audioRunFootSteps3;
                 audioSource.volume = 0.5f;
+                break;
+            case "RunClose":
+                audioSource.clip = audioRunClose;
+                break;
+            case "CardFlip":
+                audioSource.clip = audioCardFlip;
                 break;
             case "CardCurrect":
-                audioSource.clip = audioCardCurrect; //100%
+                audioSource.clip = audioCardCurrect;
+                break;
+            case "CardWrong":
+                audioSource.clip = audioCardWrong;
+                break;
+            case "audioGameTimeless":
+                audioSource.clip = audioGameTimeless;
                 break;
             case "GameSuccess":
-                audioSource.clip = audioGameSuccess; //25%
+                audioSource.clip = audioGameSuccess;
                 break;
             case "GameFail":
-                audioSource.clip = audioGameFail;    //25% (음식먹기, 카드 뒤집기에 성공 실패 기준이 없음)
+                audioSource.clip = audioGameFail;
                 break;
             case "Reward":
-                audioSource.clip = audioReward;      //0%
+                audioSource.clip = audioReward;
                 break;
             case "ClickIcon":
-                audioSource.clip = audioClickIcon;   //0%
+                audioSource.clip = audioClickIcon;
+                break;
+            case "audioClickBack":
+                audioSource.clip = audioClickBack;
                 break;
             case "Jump":
-                audioSource.clip = audioJump;        //100%
+                audioSource.clip = audioJump;
                 break;
             case "OpenDoor":
-                audioSource.clip = audioOpenDoor;    //50%
+                audioSource.clip = audioOpenDoor;
                 break;
             case "Opening":
-                audioSource.clip = audioOpening;       //100%
+                audioSource.clip = audioOpening;
                 break;
             default:
                 break;

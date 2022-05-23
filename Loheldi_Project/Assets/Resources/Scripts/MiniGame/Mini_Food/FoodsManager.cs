@@ -63,12 +63,13 @@ public class FoodsManager : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb.gameObject.tag == "GoodFood")
         {
+            SoundManager.GetComponent<SoundEffect>().Sound("FoodGood");
             GameManager.instance.ScoreCnt();
             FoodFX.instance.GoodFoodFX();
         }
         else
         {
-            SoundManager.GetComponent<SoundEffect>().Sound("Vomit");
+            SoundManager.GetComponent<SoundEffect>().Sound("FoodNotGood");
             GameManager.instance.LifeCnt();
             FoodFX.instance.BadFoodFX();
         }

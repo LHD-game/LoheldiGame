@@ -47,15 +47,15 @@ public class RunPlayerRun : MonoBehaviour
 
             if (RunGameManager.difficulty == 1)
             {
-                SoundManager.GetComponent<SoundEffect>().Sound("FootSteps1");
+                SoundManager.GetComponent<SoundEffect>().Sound("RunFootSteps1");
             }
             else if (RunGameManager.difficulty == 2)
             {
-                SoundManager.GetComponent<SoundEffect>().Sound("FootSteps2");
+                SoundManager.GetComponent<SoundEffect>().Sound("RunFootSteps2");
             }
             else if (RunGameManager.difficulty == 3)
             {
-                SoundManager.GetComponent<SoundEffect>().Sound("FootSteps3");
+                SoundManager.GetComponent<SoundEffect>().Sound("RunFootSteps3");
             }
             AnimationTrigger.GetComponent<AnimationTriggerforMinigame>().GetButtonDown = true;
         }

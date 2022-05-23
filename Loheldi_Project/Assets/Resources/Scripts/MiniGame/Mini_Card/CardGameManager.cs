@@ -52,7 +52,6 @@ public class CardGameManager : MonoBehaviour
             {
                 case STATE.START:   //게임 시작
                     CardSet();
-                    
                     break;
                 case STATE.HIT:     //카드 눌렀을 때
                     CheckCard();
@@ -70,7 +69,6 @@ public class CardGameManager : MonoBehaviour
                     Card_TimeSlider.instance.TimeDel();
                     break;
             }
-
             //시간이 0이 되면 게임 오버
             if (Card_TimeSlider.nowTime <= 0)
             {

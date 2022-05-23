@@ -40,18 +40,23 @@ public class SoundEffect : MonoBehaviour
                 break;
             case "Count":
                 audioSource.clip = audioCount;       //100%
+                audioSource.volume = 0.05f;
                 break;
             case "CountFinish":
                 audioSource.clip = audioCountFinish; //100%
+                audioSource.volume = 0.05f;
                 break;
             case "FootSteps1":
                 audioSource.clip = audioFootSteps1;  //100%
+                audioSource.volume = 0.5f;
                 break;
             case "FootSteps2":
                 audioSource.clip = audioFootSteps2;  //100%
+                audioSource.volume = 0.5f;
                 break;
             case "FootSteps3":
                 audioSource.clip = audioFootSteps3;  //100%
+                audioSource.volume = 0.5f;
                 break;
             case "CardCurrect":
                 audioSource.clip = audioCardCurrect; //100%

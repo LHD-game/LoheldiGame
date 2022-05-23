@@ -11,6 +11,9 @@ public class LodingTxt : MonoBehaviour
     public Transform Player;
     public Transform Nari;
 
+    public Camera MainCamera;
+    public Camera QuizCamera;
+
     private Text Txt;
     public Text Name;
     public Text chatName;
@@ -27,6 +30,10 @@ public class LodingTxt : MonoBehaviour
     public GameObject NPCButtons;
     public GameObject OImage;
     public GameObject XImage;
+    public GameObject Quiz;
+    public Material[] Quiz_material;
+    [SerializeField]
+    private Material[] material;
 
     public GameObject Arrow;
     public GameObject block;        //넘김방지 맨앞 블럭
@@ -45,8 +52,6 @@ public class LodingTxt : MonoBehaviour
     public string Num;                       //스크립트 번호
     public int j;                                  //data_Dialog 줄갯수
     public int c=0;                              //컷툰 이미지 번호
-    int m;                                  //카메라 무빙
-    int o=0;                                  //m서포터
     private int h;                          //이미지 넣을 번호
     private int n;                          //뜨는 이미지 번호(스크립트 상)
     public static int k;                    //npc
@@ -54,6 +59,7 @@ public class LodingTxt : MonoBehaviour
     public int tutoi;                            //튜토리얼 하이라이트 이미지용
     string Answer;               //누른 버튼 인식
 
+    public bool tutoEnd=false;  //튜토리얼 완전 끝
     public bool tutoFinish=false;
     public bool tuto=false;
     public static GameObject[] CCImage;     //캐릭터 이미지
@@ -69,8 +75,16 @@ public class LodingTxt : MonoBehaviour
     tutorial tu;
     //Interaction Inter;
 
+    int m;                                  //카메라 무빙
+    int o = 0;                                  //m서포터
+    int MataNum = 0;                        //메터리얼 번호
+
     private void Awake()
     {
+        for(int i = 0; i < 10;i++)
+            Debug.Log(material[i]);
+        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+
         //Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
         color = block.GetComponent<Image>().color;
         cuttoon.SetActive(true);
@@ -99,7 +113,7 @@ public class LodingTxt : MonoBehaviour
     {
         //h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
         //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
-        if (SceneManager.GetActiveScene().name == "MainField")
+        //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k=0;k<= data_Dialog.Count;k++)
@@ -128,7 +142,7 @@ public class LodingTxt : MonoBehaviour
         //o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_")+1));
         
 
-        Debug.Log("o=" +o+ "m=" + m);
+        //Debug.Log("o=" +o+ "m=" + m);
         if(o!=m)
         {
             if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (n == 0))
@@ -202,6 +216,7 @@ public class LodingTxt : MonoBehaviour
             {
                 Main_UI.SetActive(true);
                 j = 80;
+                tutoEnd = true;
             }
             tutoi = 0;
         }
@@ -239,6 +254,11 @@ public class LodingTxt : MonoBehaviour
                 scriptLine();
             }
         }
+        if(data_Dialog[j]["scriptType"].ToString().Equals("choice"))
+        {
+            MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
+            QuizMate();
+        }
     }
 
     
@@ -248,9 +268,9 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
-            QuizeTIme();
+            QuizTIme();
         }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //퀴즈끝
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
             ChatTime();
         }
@@ -305,22 +325,35 @@ public class LodingTxt : MonoBehaviour
         }
     }
 
-    public void QuizeTIme()
+    public void QuizTIme() //카메라 시점 변경으로 변경
     {
-        k = 1;
-        Txt = QuizTxt;
-        Name=QuizName;
-        ChatWin.SetActive(false);
-        QuizeWin.SetActive(true);
+        QuizMate();
+        MainCamera.enabled = false;
+        QuizCamera.enabled = true;
+        //k = 1;
+        //Txt = QuizTxt;
+        //Name=QuizName;
+        //ChatWin.SetActive(false);
+        //QuizeWin.SetActive(true);
+    }
+    public void QuizMate() //전광판 메테리얼 설정
+    {
+        Quiz_material[1] = material[MataNum]; //0에 메테리얼 번호
+        Quiz.GetComponent<MeshRenderer>().materials = Quiz_material;
+        Debug.Log("응애"+ material[MataNum]);
+
     }
 
-    public void ChatTime()
+    public void ChatTime() //시작에 합체시킴
     {
-        k = 0;
+        
+        MainCamera.enabled = true;
+        QuizCamera.enabled = false;
+        //k = 0;
         Txt = chatTxt;
         Name=chatName;
-        ChatWin.SetActive(true);
-        QuizeWin.SetActive(false);
+        //ChatWin.SetActive(true);
+        //QuizeWin.SetActive(false);
     }
 
     IEnumerator _typing()  //타이핑 효과
@@ -344,7 +377,7 @@ public class LodingTxt : MonoBehaviour
                 QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
                 //string selecNumber = "select" + (i + 1).ToString();
             }
-            Button.SetActive(true);
+            Button.SetActive(true); //유니티에서 버튼 위치 옮김
         }
         block.SetActive(false);
 
@@ -401,7 +434,7 @@ public class LodingTxt : MonoBehaviour
     public void O()//정답 골랐을 때
     {
         block.SetActive(true);
-        OImage.SetActive(true);
+        OImage.SetActive(true); 
         Button.SetActive(false);
         j++;
 

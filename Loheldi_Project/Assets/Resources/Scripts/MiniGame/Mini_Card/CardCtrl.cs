@@ -45,6 +45,7 @@ public class CardCtrl : MonoBehaviour
         if (isOpen) return;
         isOpen = true;
         anim.Play("CardFlipAnimation");
+        SoundManager.GetComponent<SoundEffect>().Sound("CardFlip");
         CardFX.instance.TrunCardFX(this.gameObject);    //fx
         CardGameManager.state = CardGameManager.STATE.HIT;
         CardGameManager.OpenCard = this.gameObject;
@@ -52,6 +53,7 @@ public class CardCtrl : MonoBehaviour
     }
     IEnumerator CloseCard()
     {
+        SoundManager.GetComponent<SoundEffect>().Sound("CardWrong");
         yield return new WaitForSeconds(0.5f);
         anim.Play("CardFlipBackAnimation");
         isOpen = false;

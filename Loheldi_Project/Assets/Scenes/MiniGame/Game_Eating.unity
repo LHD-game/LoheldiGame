@@ -462,6 +462,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6653426005932863580, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
   m_PrefabInstance: {fileID: 1701297580831703791}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &392051589 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1701297580994259705, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+  m_PrefabInstance: {fileID: 1701297580831703791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &427741690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3585,21 +3590,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f038aa819e3abd74b90384daa9b918b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioVomit: {fileID: 8300000, guid: 20268ac9fb6924c408e78d71edfc498d, type: 3}
-  audioLevelUp: {fileID: 8300000, guid: 5eb7824dd7c699c458d5c3a145dc2d82, type: 3}
-  audioCount: {fileID: 8300000, guid: 40a1a4e288350cd488761dbbc42738de, type: 3}
-  audioCountFinish: {fileID: 8300000, guid: e53ebfb939ef7574d913e51c8ce59f0b, type: 3}
-  audioFootSteps1: {fileID: 8300000, guid: b1dc2c55992bd8a4b90b85a633bb95d0, type: 3}
-  audioFootSteps2: {fileID: 8300000, guid: b9424686be8b32a4e8734fbdec740dd8, type: 3}
-  audioFootSteps3: {fileID: 8300000, guid: 9a3cfe9ec945d9e4c8564d1703538ffb, type: 3}
+  audioFoodGood: {fileID: 8300000, guid: 4be3f624dd7dccc4d81635513c88e373, type: 3}
+  audioFoodNotGood: {fileID: 8300000, guid: c6d6ecc54e66f7740be1e156a22dbe95, type: 3}
+  audioRunCount: {fileID: 8300000, guid: 40a1a4e288350cd488761dbbc42738de, type: 3}
+  audioRunCountFinish: {fileID: 8300000, guid: e53ebfb939ef7574d913e51c8ce59f0b, type: 3}
+  audioRunFootSteps1: {fileID: 8300000, guid: b1dc2c55992bd8a4b90b85a633bb95d0, type: 3}
+  audioRunFootSteps2: {fileID: 8300000, guid: b9424686be8b32a4e8734fbdec740dd8, type: 3}
+  audioRunFootSteps3: {fileID: 8300000, guid: 9a3cfe9ec945d9e4c8564d1703538ffb, type: 3}
+  audioRunClose: {fileID: 8300000, guid: 8e53efa8d37d94b40be66378736f852a, type: 3}
   audioCardCurrect: {fileID: 8300000, guid: 88851756add06014b9145e15bb6320b8, type: 3}
+  audioGameTimeless: {fileID: 8300000, guid: 60ee5d59b538c674288255760eb8000d, type: 3}
   audioGameSuccess: {fileID: 8300000, guid: 7228ebda7518ff540a4de0615dc1e26a, type: 3}
   audioGameFail: {fileID: 8300000, guid: 6823977559ddad8479cc49399d9c77cd, type: 3}
   audioReward: {fileID: 8300000, guid: 678c57f0eff01d546be41ccf165dcf49, type: 3}
+  audioLevelUp: {fileID: 8300000, guid: 5eb7824dd7c699c458d5c3a145dc2d82, type: 3}
   audioClickIcon: {fileID: 8300000, guid: eb7fbe27294274346bef96dba529d5a5, type: 3}
+  audioClickBack: {fileID: 8300000, guid: 5f7b41072e0aa0b439a46a4f118c636c, type: 3}
   audioJump: {fileID: 8300000, guid: a54667d119f5fd6428d37cdd3207894d, type: 3}
   audioOpenDoor: {fileID: 8300000, guid: a2345da820d59a145b738328c4cb7e1d, type: 3}
-  audioOpening: {fileID: 0}
+  audioOpening: {fileID: 8300000, guid: 52adebc0bc1aea0488352dfc62121262, type: 3}
 --- !u!114 &1892346178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4157,6 +4166,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079694965}
   m_Mesh: {fileID: 3997086615093105961, guid: c455f2fde70b5934baf4ee52d61bb6f0, type: 3}
+--- !u!1 &2127576767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5721725899922288876, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+  m_PrefabInstance: {fileID: 1701297580831703791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2127576769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127576767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaf2dad212be4040a22c196575a2704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetButtonDown: 0
+  Playerrb: {fileID: 392051589}
 --- !u!1001 &2127897525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4383,6 +4411,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1701297580994259704, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+      propertyPath: AnimationTrigger
+      value: 
+      objectReference: {fileID: 2127576767}
     - target: {fileID: 5075700830378204139, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4443,7 +4475,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2385248373750773591, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
 --- !u!1001 &2162969089402773274
 PrefabInstance:

@@ -18,6 +18,7 @@ public class RunPlayerRun : MonoBehaviour
     private float nexttime = 0.0f;
 
     public GameObject SoundManager;
+    public GameObject AnimationTrigger;
 
     void Update()
     {
@@ -41,7 +42,6 @@ public class RunPlayerRun : MonoBehaviour
     {
         if (RunCountDown.CountEnd == true)
         {
-
             player.AddRelativeForce(Vector3.forward * 2000f);   //600f
             runFX.instance. RunningFX(this.gameObject);
 
@@ -57,7 +57,7 @@ public class RunPlayerRun : MonoBehaviour
             {
                 SoundManager.GetComponent<SoundEffect>().Sound("FootSteps3");
             }
-
+            AnimationTrigger.GetComponent<AnimationTriggerforMinigame>().GetButtonDown = true;
         }
     }
 

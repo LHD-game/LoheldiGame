@@ -114,7 +114,7 @@ public class Store_CategoryControl : MonoBehaviour
     //make category item list on game//
     void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)   
     {
-        itemBtn = (GameObject)Resources.Load("Prefebs/UI/ItemBtn2");
+        itemBtn = (GameObject)Resources.Load("Prefabs/UI/ItemBtn2");
         print(dialog.Count);
         for(int i=0; i < dialog.Count; i++)
         {

@@ -85,7 +85,7 @@ public class CardGameManager : MonoBehaviour
         GameStart = false;
         isPause = false;
         a = 0;
-        cards = Resources.LoadAll<GameObject>("Prefebs/Cards/");    //카드들을 전부 저장한다.
+        cards = Resources.LoadAll<GameObject>("Prefabs/Cards/");    //카드들을 전부 저장한다.
         stageNum = 1;   //스테이지 1로 초기화
         Card_TimeSlider.instance.TimeInit();
 

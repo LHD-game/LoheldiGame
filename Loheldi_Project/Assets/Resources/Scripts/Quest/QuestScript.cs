@@ -43,7 +43,7 @@ public class QuestScript : MonoBehaviour
         string detail = Quest_Mail[QuestNumber]["content"].ToString();
         string sent = Quest_Mail[QuestNumber]["author"].ToString();
 
-        Mail.TempObject = Instantiate(Resources.Load<GameObject>("Prefebs/UI/Mail"), Mail.MailList);                      //皋老 橇府崎 积己
+        Mail.TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), Mail.MailList);                      //皋老 橇府崎 积己
         Mail.ThisTitle = Mail.TempObject.transform.Find("Title").gameObject;                                              //橇府崎俊 加己
         Mail.ThisSent = Mail.TempObject.transform.Find("Sent").gameObject;
         Mail.ThisDetail = Mail.TempObject.transform.Find("Detail").gameObject;

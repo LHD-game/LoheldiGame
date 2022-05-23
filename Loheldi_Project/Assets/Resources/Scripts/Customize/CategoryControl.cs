@@ -23,11 +23,11 @@ public class CategoryControl : MonoBehaviour
     {
         if (scene.Equals("Custom")) //커스텀 씬일 경우
         {
-            itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ItemBtn");
+            itemBtn = (GameObject)Resources.Load("Prefabs/Customize/ItemBtn");
         }
         else if(scene.Equals("Closet")) //의상 변경 씬일 경우
         {
-            itemBtn = (GameObject)Resources.Load("Prefebs/Customize/ClosetItemBtn");
+            itemBtn = (GameObject)Resources.Load("Prefabs/Customize/ClosetItemBtn");
         }
         
         Debug.Log(dialog.Count);

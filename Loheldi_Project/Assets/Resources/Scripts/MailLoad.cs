@@ -17,6 +17,12 @@ public class MailLoad : MonoBehaviour
     public Transform MailList;                                        //매일들이 정렬될 ParentObject
     public GameObject TempObject;
 
+    public Text NoticeTitleText;
+    public Text NoticeSentText;
+    public Transform NoticeList;
+    public GameObject NoticeTitle;
+    public GameObject NoticeSent;
+
     void Start()
     {
         RTitleText = GameObject.Find("RTitleText").GetComponent<Text>();    //RTitleText라는 이름에 Text오브젝트를 찾아 RTitleText라고 지정함
@@ -62,13 +68,7 @@ public class MailLoad : MonoBehaviour
 
     public void ReceiveMail()
     {
-        /*PostType type = PostType.Admin;
-        BackendReturnObject bro = Backend.UPost.GetPostList(type);
-        JsonData json = bro.GetReturnValuetoJSON()["postList"];
-
-        string recentPostIndate = json[0]["inDate"].ToString();
-
-        Backend.UPost.ReceivePostItem(type, recentPostIndate);*/
+       
         var bro = Backend.UPost.ReceivePostItemAll(PostType.Admin);
 
         if (bro.IsSuccess())
@@ -80,27 +80,7 @@ public class MailLoad : MonoBehaviour
                     Debug.Log("아이템이 없는 우편 수령");
                     continue;
                 }
-                /*foreach (LitJson.JsonData items in postItems)
-                {
-                    string itemInfo = string.Empty;
-
-                    if (postType == PostType.User) // 유저만 리턴형식이 다름
-                    {
-                        foreach (var key in items.Keys)
-                        {
-                            itemInfo += string.Format("{0} : {1}\n", key, items[key].ToString());
-                        }
-                    }
-                    else
-                    {
-                        foreach (var key in items["item"].Keys)
-                        {
-                            itemInfo += string.Format("{0} : {1}\n", key, items["item"][key].ToString());
-                        }
-                        itemInfo += string.Format("아아템 갯수 : {0}\n", items["itemCount"].ToString());
-                    }
-                    Debug.Log(itemInfo);
-                }*/
+               
             }
         }
         else
@@ -110,5 +90,49 @@ public class MailLoad : MonoBehaviour
                 Debug.LogError("더이상 수령할 우편이 존재하지 않습니다.");
             }
         }
+    }
+
+    public void GetNotice()
+    {
+        /*NoticeTitleText = GameObject.Find("NoticeTitleText").GetComponent<Text>();
+        NoticeSentText = GameObject.Find("NoticeSentText").GetComponent<Text>();
+        NoticeList = GameObject.Find("NoticeList").transform;*/
+
+        List<MailLoad> noticeList = new List<MailLoad>();
+
+        BackendReturnObject bro = Backend.Notice.NoticeList(10);
+        JsonData json = bro.FlattenRows();
+
+        if (bro.IsSuccess())
+        {
+            Debug.Log("리턴 값:" + bro);
+            
+            for (int i = 0; i < json.Count; i++)
+            {
+              
+                string noticetitle = json[i]["title"].ToString();                      
+                string noticesent = json[i]["author"].ToString();
+                /*TempObject = Instantiate(Resources.Load<GameObject>("Prefebs/UI/Mail"), NoticeList);
+                NoticeTitle = TempObject.transform.Find("Title").gameObject;                                              //프리펩에 속성
+                NoticeSent = TempObject.transform.Find("Sent").gameObject;
+
+                NoticeTitle.GetComponent<Text>().text = noticetitle;                                                            //버튼에 속성을 서버에서 불러온 속성으로 바꿈
+                NoticeSent.GetComponent<Text>().text = noticesent;*/
+
+                Debug.Log(noticetitle);
+                Debug.Log(noticesent);
+            }
+
+        }
+    }
+    public void NoticeLoading()
+    {
+        TempObject = EventSystem.current.currentSelectedGameObject;             //선택한 메일을 TempObject에 저장
+
+        NoticeTitle = TempObject.transform.Find("Title").gameObject;              //선택한 메일의 제목을 지정
+        NoticeSent = TempObject.transform.Find("Sent").gameObject;            //(     ''     )내용을 지정
+
+        NoticeTitleText.text = NoticeTitle.GetComponent<Text>().text;                  //우측에 표시되는 제목을 선택한 제목과 같게 함
+        NoticeSentText.text = NoticeSent.GetComponent<Text>().text;                //내용을 Detail1으로 바꿈
     }
 }

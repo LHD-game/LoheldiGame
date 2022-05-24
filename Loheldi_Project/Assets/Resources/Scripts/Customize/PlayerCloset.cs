@@ -48,8 +48,6 @@ public class PlayerCloset : MonoBehaviour
         PreviousSettings.u_socks_color = rows[0]["SColor"]["S"].ToString();
         PreviousSettings.u_shoes_name = rows[0]["Shoes"]["S"].ToString();
         PreviousSettings.u_shoes_color = rows[0]["ShColor"]["S"].ToString();
-
-        Debug.Log("previous settings" + PreviousSettings.u_skin_name);
     }
 
     public void ResetClothes()  //현재 커스터마이징을 초기 커스터마이징으로 초기화

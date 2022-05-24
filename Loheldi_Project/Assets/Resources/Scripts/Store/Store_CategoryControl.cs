@@ -102,7 +102,6 @@ public class Store_CategoryControl : MonoBehaviour
     //itemTheme 별로 모아서 저장
     void initItem(Dictionary<string, object> item, StoreItem data) 
     {
-        print("initItem");
         item.Add("itemCode", data.itemCode);
         item.Add("name", data.name);
         item.Add("price", data.price);
@@ -115,7 +114,7 @@ public class Store_CategoryControl : MonoBehaviour
     void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)   
     {
         itemBtn = (GameObject)Resources.Load("Prefabs/UI/ItemBtn2");
-        print(dialog.Count);
+
         for(int i=0; i < dialog.Count; i++)
         {
             //create caltalog box
@@ -126,20 +125,19 @@ public class Store_CategoryControl : MonoBehaviour
             GameObject item_img= child.transform.Find("ItemImg").gameObject;
             Image img = item_img.GetComponent<Image>();
             img.sprite = Resources.Load<Sprite>("Sprites/Store/Catalog_Images/"+ dialog[i]["itemCode"] + "_catalog");
-            print(dialog[i]["itemCode"]);
+
 
             //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
             GameObject item_name = child.transform.Find("ItemName").gameObject;
             Text txt = item_name.GetComponent<Text>();
             txt.text = dialog[i]["name"].ToString();
-            print(dialog[i]["name"]);
+
 
             //change catalog box price
             GameObject price_parent = child.transform.Find("CostImg").gameObject;
             GameObject item_price = price_parent.transform.Find("CostTxt").gameObject;
             Text price_txt = item_price.GetComponent<Text>();
             price_txt.text = dialog[i]["price"].ToString();
-            print(dialog[i]["price"]);
         }
     }
 

@@ -15,15 +15,6 @@ public class ClosetControl : PlayerCloset
 
     public void SaveCustom()    //현재 커스터마이징을 서버에 저장
     {
-/*        PreviousSettings.u_upper_name = NowSettings.u_upper_name;
-        PreviousSettings.u_upper_color = NowSettings.u_upper_color;
-        PreviousSettings.u_lower_name = NowSettings.u_lower_name;
-        PreviousSettings.u_lower_color = NowSettings.u_lower_color;
-        PreviousSettings.u_socks_name = NowSettings.u_socks_name;
-        PreviousSettings.u_socks_color = NowSettings.u_socks_color;
-        PreviousSettings.u_shoes_name = NowSettings.u_shoes_name;
-        PreviousSettings.u_shoes_color = NowSettings.u_shoes_color;*/
-
         Param param = new Param();
         param.Add("Upper", NowSettings.u_upper_name);
         param.Add("UColor", NowSettings.u_upper_color);

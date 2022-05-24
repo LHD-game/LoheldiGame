@@ -7,12 +7,15 @@ using UnityEngine.UI;
 
 public class PlayerCloset : MonoBehaviour
 {
+    //PlaterSet.cs 에서 설정합니다.
     protected Texture tUpper;
     protected Texture tLower;
     protected Texture tSocks;
     protected Texture tShoes;
 
-    protected Mesh meLower;
+    protected Mesh meLower_L;
+    protected Mesh meLower_R;
+
 
     //player's material
     protected Material p_mUpper;
@@ -20,7 +23,8 @@ public class PlayerCloset : MonoBehaviour
     protected Material p_mSocks;
     protected Material p_mShoes;
 
-    public GameObject p_Lower;
+    public GameObject p_Lower_L;
+    public GameObject p_Lower_R;
 
 
     public void nowClothes()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
@@ -87,8 +91,10 @@ public class PlayerCloset : MonoBehaviour
         tSocks = Resources.Load<Texture>(("Customize/Textures/Socks/" + NowSettings.u_socks_texture));
         tShoes = Resources.Load<Texture>(("Customize/Textures/Shoes/" + NowSettings.u_shoes_texture));
 
-        //meLower = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_name + "_mesh"));
+        meLower_L = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_name + "_L_mesh"));
+        meLower_R = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_name + "_R_mesh"));
 
+        //플레이어 모델링 메시
         p_mUpper = Resources.Load<Material>("Customize/Materials/Upper");
         p_mLower = Resources.Load<Material>("Customize/Materials/Lower");
         p_mSocks = Resources.Load<Material>("Customize/Materials/Socks");
@@ -99,9 +105,11 @@ public class PlayerCloset : MonoBehaviour
         p_mSocks.SetTexture("_MainTex", tSocks);
         p_mShoes.SetTexture("_MainTex", tShoes);
   
-        //SkinnedMeshRenderer l_mesh = p_Lower.GetComponent<SkinnedMeshRenderer>();
+        SkinnedMeshRenderer l_mesh_L = p_Lower_L.GetComponent<SkinnedMeshRenderer>();
+        SkinnedMeshRenderer l_mesh_R = p_Lower_R.GetComponent<SkinnedMeshRenderer>();
 
-        //l_mesh.sharedMesh = meLower;
+        l_mesh_L.sharedMesh = meLower_L;
+        l_mesh_R.sharedMesh = meLower_R;
 
     }
 }

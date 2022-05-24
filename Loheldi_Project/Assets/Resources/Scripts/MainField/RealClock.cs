@@ -72,6 +72,7 @@ public class RealClock : MonoBehaviour
                     NightLight.SetActive(false);                                                              //±¤¿øÀº ¾ÆÄ§¿¡ ²¨Áü
                     Light.transform.eulerAngles = new Vector3(50, (Time - 11) * 15, 0);                       //ºûÀ» 15µµ¾¿ µ¹¸²
                     break;
+                case 0:
                 case 1:
                 case 2:
                 case 3:

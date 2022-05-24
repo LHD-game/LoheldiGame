@@ -20,9 +20,9 @@ public class LodingTxt : MonoBehaviour
     public Text QuizName;
     public Text chatTxt;
     public Text QuizTxt;
-    public Text[] QuizButton=new Text[3];
+    public Text[] QuizButton = new Text[3];
 
-    public GameObject[] SelecButton=new GameObject[5];
+    public GameObject[] SelecButton = new GameObject[5];
     public Text[] SelecButtonTxt = new Text[5];
 
     public GameObject Main_UI;
@@ -44,6 +44,7 @@ public class LodingTxt : MonoBehaviour
 
     public int NPCButton = 0;
     public string LoadTxt;
+    public string[] ButtonPlusNpc = new string[9]{"","","","","","","","",""};
 
     public List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
     public string FileAdress;                // 스크립트 파일 위치
@@ -62,7 +63,7 @@ public class LodingTxt : MonoBehaviour
     public bool tutoEnd=false;  //튜토리얼 완전 끝
     public bool tutoFinish=false;
     public bool tuto=false;
-    public static GameObject[] CCImage;     //캐릭터 이미지
+    public static GameObject CCImage;     //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
 
@@ -71,9 +72,9 @@ public class LodingTxt : MonoBehaviour
     static Image cuttoonspriteR;
 
     public Fadeln fade_in_out;
-    UIButton JumpButtons;
+    public UIButton JumpButtons;
     tutorial tu;
-    //Interaction Inter;
+    public Interaction Inter;
 
     int m;                                  //카메라 무빙
     int o = 0;                                  //m서포터
@@ -81,11 +82,9 @@ public class LodingTxt : MonoBehaviour
 
     private void Awake()
     {
-        for(int i = 0; i < 10;i++)
-            Debug.Log(material[i]);
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
 
-        //Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
+        Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
         color = block.GetComponent<Image>().color;
         cuttoon.SetActive(true);
         ChatWin.SetActive(true);
@@ -95,7 +94,8 @@ public class LodingTxt : MonoBehaviour
         fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
 
-        CCImage = GameObject.FindGameObjectsWithTag("CCImage"); //뱃지 태그 저장
+        CCImage = GameObject.Find("CCImage"); //뱃지 태그 저장
+        Debug.Log("이미지=" + CCImage);
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         //cuttoon = GameObject.Find("Cutton");
@@ -135,13 +135,6 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        //int n;
-
-        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_")));   //나중에_를-로 바꿔야 함
-        //Debug.Log("n=" + n);
-        //o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_")+1));
-        
-
         //Debug.Log("o=" +o+ "m=" + m);
         if(o!=m)
         {
@@ -192,8 +185,6 @@ public class LodingTxt : MonoBehaviour
         }
         m = o;
         o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
-
-        
     }
     public void Line()  //줄넘김
     {
@@ -236,7 +227,7 @@ public class LodingTxt : MonoBehaviour
                 Main_UI.SetActive(false);
             /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
             n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
-            spriteR = CCImage[0].GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
+            spriteR = CCImage.GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
             l = Int32.Parse(data_Dialog[j]["image"].ToString());
             //Debug.Log("이미지번호="+l);
             spriteR.sprite = CCImageList[l];
@@ -312,10 +303,20 @@ public class LodingTxt : MonoBehaviour
             SelecButton[i].SetActive(false);
             SelecButtonTxt[i].text = data_Dialog[j - 1][selecNumber].ToString();
         }
+        NPCButton = 0;
     }
 
     public void Buttons()      //npc대화 상호작용 선택지 수
     {
+        Debug.Log("인터NPC:" + Inter.NameNPC);
+        for(int i = 0; i < ButtonPlusNpc.Length; i++)
+        {
+            if (Inter.NameNPC.Equals(ButtonPlusNpc[i]))
+                NPCButton += 1;
+            else
+                continue;
+        }
+        
         NPCButtons.SetActive(true);
         for (int i= 0; i < NPCButton;i++)
         {

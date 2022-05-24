@@ -11,10 +11,13 @@ public class QuestScript : MonoBehaviour
     public bool Quest = true;
     [SerializeField]
     private int QuestIndex = 0;
+    private GameObject NpcQuest;
 
     private MailLoad Mail;
     private LodingTxt chat;
 
+
+    public GameObject[] ExclamationMark;
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
     public int QuestNumber;
     //1. 메인 퀘스트 불함수
@@ -25,7 +28,8 @@ public class QuestScript : MonoBehaviour
     void Start()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        
+        Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();//이거랑 밑에꺼 나중에 없앰 테스트 때문에 둔거
+        Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
     }
 
     public void MainQuestLoding()
@@ -33,13 +37,14 @@ public class QuestScript : MonoBehaviour
         Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         Quest = true;
-        QuestIndex = +1;
         GiveQuest();
+        QuestIndex = +1;
+        
     }
 
     private void GiveQuest()
     {
-        string title = Quest_Mail[QuestNumber]["title"].ToString();                      //서버에서 불러온 메일에 속성
+        string title = Quest_Mail[QuestNumber]["title"].ToString();                      
         string detail = Quest_Mail[QuestNumber]["content"].ToString();
         string sent = Quest_Mail[QuestNumber]["author"].ToString();
 
@@ -54,12 +59,23 @@ public class QuestScript : MonoBehaviour
         Mail.ThisDetail.GetComponent<Text>().text = detail;
     }
 
+    public void Quest1()
+    {
+        NpcQuest = GameObject.Find("Hami");
+        LodingTxt Load = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+        Load.ButtonPlusNpc[0] = "Hami";
+        ExclamationMarkCreate();
+    }
+
     private void ClearQuest()
     {
         Quest = false;
     }
 
-    
+    private void ExclamationMarkCreate()
+    {
+        Instantiate(ExclamationMark[Int32.Parse(Quest_Mail[QuestNumber]["authorNumber"].ToString())], NpcQuest.transform.position+new Vector3(0,5,0),NpcQuest.transform.rotation);
+    }
 
     // Update is called once per frame
     void Update()

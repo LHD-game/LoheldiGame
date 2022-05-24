@@ -43,7 +43,10 @@ public class tutorial : MonoBehaviour
             {
                 tutoblack.sprite = chat.cuttoonImageList[5];
                 if (chat.tutoi == 0)
+                {
                     chat.Main_UI.SetActive(true);
+                    chat.JumpButtons.JumpButtons.SetActive(true);
+                }
                 else if (chat.tutoi == 1)
                     chat.Main_UI.SetActive(false);
                 chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);

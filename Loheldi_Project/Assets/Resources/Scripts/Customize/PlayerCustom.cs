@@ -52,8 +52,6 @@ public class PlayerCustom : MonoBehaviour
         PreviousSettings.u_mouth_name = rows[0]["Mouth"]["S"].ToString();
         PreviousSettings.u_hair_name = rows[0]["Hair"]["S"].ToString();
         PreviousSettings.u_hair_color = rows[0]["HColor"]["S"].ToString();
-
-        Debug.Log("previous settings" + PreviousSettings.u_skin_name);
     }
 
     public void ResetCustom()  //현재 커스터마이징을 초기 커스터마이징으로 초기화

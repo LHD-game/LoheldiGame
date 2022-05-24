@@ -94,7 +94,7 @@ public class SoundEffect : MonoBehaviour
             case "ClickIcon":
                 audioSource.clip = audioClickIcon;
                 break;
-            case "audioClickBack":
+            case "ClickBack":
                 audioSource.clip = audioClickBack;
                 break;
             case "Jump":

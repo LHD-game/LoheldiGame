@@ -28,7 +28,7 @@ public class QuestScript : MonoBehaviour
     void Start()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();//ÀÌ°Å¶û ¹Ø¿¡²¨ ³ªÁß¿¡ ¾ø¾Ú
+        Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();//ÀÌ°Å¶û ¹Ø¿¡²¨ ³ªÁß¿¡ ¾ø¾Ú Å×½ºÆ® ¶§¹®¿¡ µÐ°Å
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
     }
 

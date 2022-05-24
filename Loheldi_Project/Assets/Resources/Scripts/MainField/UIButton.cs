@@ -19,7 +19,7 @@ public class UIButton : MonoBehaviour
     bool map;                              //지도가 열려있는지 확인
     bool inv;
 
-    private FlieChoice Chat;
+    public FlieChoice Chat;
     public LodingTxt chat;
     public Interaction Inter;
 
@@ -54,43 +54,7 @@ public class UIButton : MonoBehaviour
         if (Inter.NearNPC)     //NPC주변에 있다면
         {
             JumpButtons.SetActive(false);
-            if (Inter.NameNPC.Equals("Himchan"))  //NPC이름이 이거면
-            {
-                Chat.tiger();
-            }
-            else if (Inter.NameNPC.Equals("Markatman"))  //NPC이름이 이거면
-            {
-                Chat.cat();
-            }
-            else if (Inter.NameNPC.Equals("Hami"))  //NPC이름이 이거면
-            {
-                Chat.chick();
-            }
-            else if (Inter.NameNPC.Equals("Suho"))  //NPC이름이 이거면
-            {
-                Chat.rabbit();
-            }
-            else if (Inter.NameNPC.Equals("Nari"))  //NPC이름이 이거면
-            {
-                Chat.squirrel();
-            }
-            else if (Inter.NameNPC.Equals("Mei"))  //NPC이름이 이거면
-            {
-                Chat.goat();
-            }
-            else if (Inter.NameNPC.Equals("Yomi"))  //NPC이름이 이거면
-            {
-                Chat.fox2();
-            }
-            else if (Inter.NameNPC.Equals("Yeomi"))  //NPC이름이 이거면
-            {
-                Chat.fox1();
-            }
-            else if (Inter.NameNPC.Equals("Mu"))  //NPC이름이 이거면
-            {
-                Chat.dog();
-            }
-            //ShopMok.SetActive(true);
+            Chat.NpcChoice();
         }
         else if (Inter.Door)
         {
@@ -116,7 +80,7 @@ public class UIButton : MonoBehaviour
     }
 
 
-    public void NPCButtonUI()
+    /*public void NPCButtonUI()
     {
         if (Inter.NameNPC.Equals("Himchan"))  //NPC이름이 이거면
         {
@@ -126,7 +90,7 @@ public class UIButton : MonoBehaviour
         {
             SceneLoader.instance.GotoPlayerCustom();
         }
-        /*else if (Inter.NameNPC.Equals("Hami"))  //NPC이름이 이거면
+        else if (Inter.NameNPC.Equals("Hami"))  //NPC이름이 이거면
         {
             Chat.chick();
         }
@@ -149,13 +113,13 @@ public class UIButton : MonoBehaviour
         else if (Inter.NameNPC.Equals("Yeomi"))  //NPC이름이 이거면
         {
             Chat.fox1();
-        }*/
+        }
         else if (Inter.NameNPC.Equals("Mu"))  //NPC이름이 이거면
         {
             shop.SetActive(true);
             chat.ChatEnd();
         }
-    }
+    }*/
 
     /*public void MapButton()                 //지도버튼
     {

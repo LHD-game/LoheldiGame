@@ -17,106 +17,70 @@ public class FlieChoice : MonoBehaviour
     public void test()
     {
         chat.Num = "1";
-        chat.l = 1;
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
     }
 
     public void test2()
     {
-        chat.l = 1;
         chat.Num = "2";
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
     }
-
-    public void tiger()
+    public void Quest1()
     {
-        chat.l = 1;
-        chat.Num = "1";
-        chat.NPCButton = 2;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
+        chat.Num = "0_1";
+        chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
-        chat.Buttons();
     }
 
-    public void cat()
+    public void NpcChoice()
     {
-        chat.l = 2;
-        chat.Num = "2";
-        chat.NPCButton = 1;
         chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
-    }
 
-    public void chick()
-    {
-        chat.l = 3;
-        chat.Num = "3";
-        chat.NPCButton = 1;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
+        switch (chat.Inter.NameNPC)
+        {
+            case "Himchan":
+                chat.Num = "1";
+                chat.NPCButton = 2;
+                break;
+            case "Markatman":
+                chat.Num = "2";
+                chat.NPCButton += 1;
+                break;
+            case "Hami":
+                chat.Num = "3";
+                chat.NPCButton += 1;
+                break;
+            case "Suho":
+                chat.Num = "4";
+                chat.NPCButton += 1;
+                break;
+            case "Nari":
+                chat.Num = "5";
+                chat.NPCButton += 1;
+                break;
+            case "Mei":
+                chat.Num = "6";
+                chat.NPCButton += 1;
+                break;
+            case "Yomi":
+                chat.Num = "7";
+                chat.NPCButton += 2;
+                break;
+            case "Yeomi":
+                chat.Num = "8";
+                chat.NPCButton += 1;
+                break;
+            case "Mu":
+                chat.Num = "9";
+                chat.NPCButton += 2;
+                break;
+        }
+        
         chat.NewChat();
         chat.Buttons();
-    }
 
-    public void rabbit()
-    {
-        chat.l = 4;
-        chat.Num = "4";
-        chat.NPCButton = 1;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
     }
-
-    public void squirrel()
-    {
-        chat.l = 5;
-        chat.Num = "5";
-        chat.NPCButton = 1;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
-    }
-
-    public void goat()
-    {
-        chat.l = 6;
-        chat.Num = "6";
-        chat.NPCButton = 1;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
-    }
-
-    public void fox2()
-    {
-        chat.l = 7;
-        chat.Num = "7";
-        chat.NPCButton = 2;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
-    }
-
-    public void fox1()
-    {
-        chat.l = 8;
-        chat.Num = "8";
-        chat.NPCButton = 1;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
-    }
-
-    public void dog()
-    {
-        chat.l = 0;
-        chat.Num = "9";
-        chat.NPCButton = 2;
-        chat.FileAdress = "Scripts/Quest/DialogNPC";
-        chat.NewChat();
-        chat.Buttons();
-    }
+    
 }

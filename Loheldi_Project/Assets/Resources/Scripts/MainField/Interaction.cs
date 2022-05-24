@@ -18,6 +18,7 @@ public class Interaction : MonoBehaviour
             NearNPC = true;
             text.text = "대화";
             NameNPC = other.gameObject.name.ToString();
+            Debug.Log("NPC이름="+NameNPC);
         }
         if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
         {
@@ -32,7 +33,7 @@ public class Interaction : MonoBehaviour
 
     void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
     {
-        if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 NPC라면
+        if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 InDoor라면
         {
             Door = true;
             text.text = "들어가기";

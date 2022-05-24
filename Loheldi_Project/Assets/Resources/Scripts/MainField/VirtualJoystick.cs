@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class VirtualJoystick : MonoBehaviour
@@ -9,7 +10,7 @@ public class VirtualJoystick : MonoBehaviour
     public Rigidbody Playerrb;
     public Transform Stick;
     public float speed1 = 8f;
-    public float speed2 = 10f;
+    public float speed2 = 11f;
     public bool MoveFlag;
 
     private Vector3 StickFirstPos;
@@ -37,7 +38,16 @@ public class VirtualJoystick : MonoBehaviour
 
             if (Playerrb.velocity.magnitude > speed1)
             {
-                Playerrb.velocity = Playerrb.velocity.normalized * speed2;  //최대 속도
+                if (SceneManager.GetActiveScene().name == "Housing")
+                {
+                    Debug.Log("하우징속도");
+                    Playerrb.velocity = Playerrb.velocity.normalized / speed2;
+                }
+                else if (SceneManager.GetActiveScene().name == "MainField")
+                {
+                    Debug.Log("메인속도");
+                    Playerrb.velocity = Playerrb.velocity.normalized * speed2;  //최대 속도
+                }
             }
         }
     }

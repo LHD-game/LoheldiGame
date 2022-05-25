@@ -45,7 +45,7 @@ public class VirtualJoystick : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "MainField")
                 {
-                    Debug.Log("메인속도");
+                    //Debug.Log("메인속도");
                     Playerrb.velocity = Playerrb.velocity.normalized * speed2;  //최대 속도
                 }
             }

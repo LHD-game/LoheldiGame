@@ -22,6 +22,9 @@ public class MailLoad : MonoBehaviour
     public Transform NoticeList;
     public GameObject NoticeTitle;
     public GameObject NoticeSent;
+    public GameObject NoticeObject;
+
+
 
     void Start()
     {
@@ -49,6 +52,13 @@ public class MailLoad : MonoBehaviour
                 ThisTitle.GetComponent<Text>().text = title;                                                            //버튼에 속성을 서버에서 불러온 속성으로 바꿈
                 ThisSent.GetComponent<Text>().text = sent;
                 ThisDetail.GetComponent<Text>().text = detail;
+
+                /*NoticeObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), MailList);
+                NoticeTitle = NoticeObject.transform.Find("NTitle").gameObject;
+                NoticeSent = NoticeSent.transform.Find("NSent").gameObject;
+                NoticeObject.transform.GetComponent<Button>().onClick.AddListener(delegate { this.MailLoading(); });*/
+
+
             }
         }
         
@@ -68,7 +78,7 @@ public class MailLoad : MonoBehaviour
 
     public void ReceiveMail()
     {
-       
+
         var bro = Backend.UPost.ReceivePostItemAll(PostType.Admin);
 
         if (bro.IsSuccess())
@@ -80,7 +90,18 @@ public class MailLoad : MonoBehaviour
                     Debug.Log("아이템이 없는 우편 수령");
                     continue;
                 }
-               
+                else
+                {
+                    Param param = new Param();
+                    Dictionary<string, string> dic = new Dictionary<string, string>();
+
+                    dic.Add("chartFileName", "gagu_shop.xlsx");
+                    
+
+                    param.Add("MailItem", dic);
+                    bro = Backend.GameData.Insert("INVENTORY", param);
+                }
+
             }
         }
         else
@@ -91,6 +112,7 @@ public class MailLoad : MonoBehaviour
             }
         }
     }
+
 
     public void GetNotice()
     {
@@ -106,11 +128,11 @@ public class MailLoad : MonoBehaviour
         if (bro.IsSuccess())
         {
             Debug.Log("리턴 값:" + bro);
-            
+
             for (int i = 0; i < json.Count; i++)
             {
-              
-                string noticetitle = json[i]["title"].ToString();                      
+
+                string noticetitle = json[i]["title"].ToString();
                 string noticesent = json[i]["author"].ToString();
                 /*TempObject = Instantiate(Resources.Load<GameObject>("Prefebs/UI/Mail"), NoticeList);
                 NoticeTitle = TempObject.transform.Find("Title").gameObject;                                              //프리펩에 속성
@@ -127,12 +149,19 @@ public class MailLoad : MonoBehaviour
     }
     public void NoticeLoading()
     {
-        TempObject = EventSystem.current.currentSelectedGameObject;             //선택한 메일을 TempObject에 저장
+        NoticeObject = EventSystem.current.currentSelectedGameObject;
 
-        NoticeTitle = TempObject.transform.Find("Title").gameObject;              //선택한 메일의 제목을 지정
-        NoticeSent = TempObject.transform.Find("Sent").gameObject;            //(     ''     )내용을 지정
+        NoticeTitle = TempObject.transform.Find("NTitle").gameObject;                                              //프리펩에 속성
+        NoticeSent = TempObject.transform.Find("NSent").gameObject;
 
         NoticeTitleText.text = NoticeTitle.GetComponent<Text>().text;                  //우측에 표시되는 제목을 선택한 제목과 같게 함
         NoticeSentText.text = NoticeSent.GetComponent<Text>().text;                //내용을 Detail1으로 바꿈
+
     }
+
+
+    
+
+    
+    
 }

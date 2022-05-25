@@ -88,10 +88,8 @@ public class RealClock : MonoBehaviour
                     Light.GetComponent<Light>().color = new Color(68f / 255f, 68f / 255f, 128f / 255f);
                     NightLight.SetActive(true);
                     Light.transform.eulerAngles = new Vector3(50, (Time - 23) * 15, 0);
-
-                    //메인 퀘스트 주는 스크립트
-                    if (!Quest.Quest)
-                        Quest.MainQuestLoding();
+                    /*if (!Quest.Quest)    //메인 퀘스트 주는 스크립트
+                        Quest.MainQuestLoding();*/
                     break;
             }
             if (Time == 5 || Time == 17)    //새벽, 저녁

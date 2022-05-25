@@ -94,8 +94,8 @@ public class LodingTxt : MonoBehaviour
         fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
 
-        CCImage = GameObject.Find("CCImage"); //뱃지 태그 저장
-        Debug.Log("이미지=" + CCImage);
+        CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
+                                              //Debug.Log("이미지=" + CCImage);
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         //cuttoon = GameObject.Find("Cutton");

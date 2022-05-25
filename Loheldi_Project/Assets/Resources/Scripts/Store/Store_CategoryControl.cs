@@ -132,6 +132,10 @@ public class Store_CategoryControl : MonoBehaviour
             Text txt = item_name.GetComponent<Text>();
             txt.text = dialog[i]["name"].ToString();
 
+            //change catalog box item code
+            GameObject item_code = child.transform.Find("ItemCode").gameObject;
+            Text item_code_txt = item_code.GetComponent<Text>();
+            item_code_txt.text = dialog[i]["itemCode"].ToString();
 
             //change catalog box price
             GameObject price_parent = child.transform.Find("CostImg").gameObject;

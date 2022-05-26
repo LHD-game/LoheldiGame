@@ -27,6 +27,20 @@ public class FlieChoice : MonoBehaviour
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
     }
+    public void QuestChoice()
+    {
+        //chat.Num = "0_1";
+        chat.FileAdress = "Scripts/Quest/script_1";
+        switch (chat.Num) 
+        {
+            case "1":
+                break;
+        }
+        
+        
+        chat.NewChat();
+    }
+
     public void Quest1()
     {
         chat.Num = "0_1";

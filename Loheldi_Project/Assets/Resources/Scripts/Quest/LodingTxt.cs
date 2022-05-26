@@ -53,16 +53,15 @@ public class LodingTxt : MonoBehaviour
     public string Num;                       //스크립트 번호
     public int j;                                  //data_Dialog 줄갯수
     public int c=0;                              //컷툰 이미지 번호
-    private int h;                          //이미지 넣을 번호
-    private int n;                          //뜨는 이미지 번호(스크립트 상)
-    public static int k;                    //npc
-    public int l;                            //뜨는 이미지 번호(기본 대화)
+    //public static int k;                    //npc
+    public int l;                            //뜨는 이미지 번호
     public int tutoi;                            //튜토리얼 하이라이트 이미지용
     string Answer;               //누른 버튼 인식
 
     public bool tutoEnd=false;  //튜토리얼 완전 끝
     public bool tutoFinish=false;
     public bool tuto=false;
+    public bool move = false; //캐릭터 순간이동
     public static GameObject CCImage;     //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
@@ -84,7 +83,7 @@ public class LodingTxt : MonoBehaviour
     {
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
 
-        Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
+        Inter = GameObject.Find("Player").GetComponent<Interaction>();
         color = block.GetComponent<Image>().color;
         cuttoon.SetActive(true);
         ChatWin.SetActive(true);
@@ -111,8 +110,6 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
-        //h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
-        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
         //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
@@ -135,51 +132,54 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        //Debug.Log("o=" +o+ "m=" + m);
-        if(o!=m)
-        {
-            if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (n == 0))
+        int O = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0,data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기
+        if (move)
+        { //Debug.Log("o=" +o+ "m=" + m);
+            if (o != m )
             {
-                switch (o)
+                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (O == 0))
                 {
-                    case 4:
-                        Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 5:
-                        Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 6:
-                        Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 7:
-                        Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 8:
-                        Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 9:
-                        Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 10:
-                        Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 11:
-                        Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 12:
-                        Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    default:
-                        break;
+                    switch (o)
+                    {
+                        case 4:
+                            Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 5:
+                            Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 6:
+                            Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 7:
+                            Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 8:
+                            Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 9:
+                            Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 10:
+                            Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 11:
+                            Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 12:
+                            Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -384,14 +384,9 @@ public class LodingTxt : MonoBehaviour
 
         if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
         {
+            changeMoment();
             //Debug.Log("튜토리얼 실핻ㅇ");
             block.SetActive(true);
-            //tuto = true;
-            /*if (!tuto)
-            {
-                Debug.Log("tuto0만들기");
-                tutoi = 0;
-            }*/
 
             Invoke("Tutorial_", 2f);
             

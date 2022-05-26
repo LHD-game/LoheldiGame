@@ -15,7 +15,7 @@ public class NpcButtonClick : MonoBehaviour
     private UIButton UIB;
     // Start is called before the first frame update
 
-    public void SecondButtonClick()
+    public void ButtonClick()
     {
         UIB = GameObject.Find("EventSystem").GetComponent<UIButton>();
         Debug.Log(SecondButtonTxt.text);

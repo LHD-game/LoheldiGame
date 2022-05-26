@@ -19,6 +19,8 @@ public class RunPlayerRun : MonoBehaviour
 
     public GameObject SoundManager;
     public GameObject AnimationTrigger;
+    [SerializeField]
+    private GameObject ExclamationMark;
 
     void Update()
     {
@@ -30,8 +32,12 @@ public class RunPlayerRun : MonoBehaviour
 
                 if (Vector3.Distance(NPC_.position, transform.position) <= 400f)
                 {
-                    Hurry();
+                    ExclamationMark.SetActive(true);
+                    ExclamationMark.transform.localScale = new Vector3(2f, 2f, 2f);
+                    //Hurry();
                 }
+                else
+                    ExclamationMark.SetActive(false);
             }
         }
         
@@ -61,8 +67,8 @@ public class RunPlayerRun : MonoBehaviour
         }
     }
 
-    public void Hurry()
+    /*public void Hurry()
     {
         warningFX.instance.WunningFX(FXpo);
-    }
+    }*/
 }

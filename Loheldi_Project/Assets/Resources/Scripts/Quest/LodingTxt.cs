@@ -41,6 +41,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject ChatWin;
     public GameObject QuizeWin;
     public GameObject chatCanvus;
+    public GameObject shopCanvus;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -88,6 +89,7 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(true);
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
+        shopCanvus.SetActive(true );
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
         fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
@@ -100,6 +102,7 @@ public class LodingTxt : MonoBehaviour
         //cuttoon = GameObject.Find("Cutton");
         cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
 
+        shopCanvus.SetActive(false);
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
@@ -225,9 +228,7 @@ public class LodingTxt : MonoBehaviour
         {
             if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
                 Main_UI.SetActive(false);
-            /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
-            n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
-            spriteR = CCImage.GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
+            spriteR = CCImage.GetComponent<Image>();     
             l = Int32.Parse(data_Dialog[j]["image"].ToString());
             //Debug.Log("이미지번호="+l);
             spriteR.sprite = CCImageList[l];

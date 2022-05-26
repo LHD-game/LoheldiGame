@@ -13,10 +13,12 @@ public class NpcButtonClick : MonoBehaviour
     Text SecondButtonTxt;
     //private Text TButtonTxt;
     private UIButton UIB;
+    private FlieChoice Chat;
     // Start is called before the first frame update
 
-    public void ButtonClick()
+    public void SecondButtonClick()
     {
+        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         UIB = GameObject.Find("EventSystem").GetComponent<UIButton>();
         Debug.Log(SecondButtonTxt.text);
         if (SecondButtonTxt.text.Equals("미니게임 하기"))
@@ -30,7 +32,7 @@ public class NpcButtonClick : MonoBehaviour
         }
         else if (SecondButtonTxt.text.Equals("퀘스트 하미"))
         {
-           // UIB.chat.
+            Chat.QuestNumber = 1;
         }
     }
 }

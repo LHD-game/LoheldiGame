@@ -8,11 +8,13 @@ public class tutorial : MonoBehaviour
     public static GameObject button;
     public LodingTxt chat;
     private FlieChoice Chat;
+    
 
-    private void Awake()
+    private void start()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+
     }
 
     public void forTutorial()
@@ -49,7 +51,7 @@ public class tutorial : MonoBehaviour
                 }
                 else if (chat.tutoi == 1)
                     chat.Main_UI.SetActive(false);
-                chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);
+                chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true); //블럭의 tutoi번째 자식을 Active하기
                 chat.tutoi++;
                 if (!chat.tuto)
                     chat.tuto = true;

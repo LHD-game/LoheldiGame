@@ -25,6 +25,10 @@ public class MailLoad : MonoBehaviour
     public GameObject NoticeObject;
 
 
+    Dictionary<string, string> icode = new Dictionary<string, string>();
+    Dictionary<string, string> iname = new Dictionary<string, string>();
+    Dictionary<string, string> price = new Dictionary<string, string>();
+
 
     void Start()
     {
@@ -92,14 +96,15 @@ public class MailLoad : MonoBehaviour
                 }
                 else
                 {
-                    Param param = new Param();
-                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    
+                    string itemCode = (string)bro.FlattenRows()[0];
 
-                    dic.Add("chartFileName", "gagu_shop.xlsx");
+                    Param param = new Param();
+                    icode.Add ("itemCode", itemCode);
                     
 
-                    param.Add("MailItem", dic);
-                    bro = Backend.GameData.Insert("INVENTORY", param);
+                    param.Add("MailItem", icode);
+                    bro = Backend.GameData.Insert("MAILITEM", param);
                 }
 
             }

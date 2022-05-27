@@ -91,16 +91,6 @@ public class tutorial : MonoBehaviour
                 forTutorial();
             }
         }
-        
-
-        /*if (chat.fade_in_out.Panel == null)
-        {
-            chat.Cuttoon();
-            chat.fade_in_out.Panel = chat.cuttoon.GetComponent<Image>();
-            InvokeRepeating("fade_in_out.Fade", 0.5f, 0.1F);
-        }
-        else
-            CancelInvoke("fade_in_out.Fade");*/
     }
 
 }

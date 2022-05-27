@@ -79,6 +79,7 @@ public class LodingTxt : MonoBehaviour
     int m;                                  //카메라 무빙
     int o = 0;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
+    int QuestSubNum;                                  //퀘스트 스크립트 앞번호
 
     private void Awake()
     {
@@ -135,12 +136,12 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        int O = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0,data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기
+        QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0,data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기
         if (move)
         { //Debug.Log("o=" +o+ "m=" + m);
             if (o != m )
             {
-                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (O == 0))
+                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (QuestSubNum == 0))
                 {
                     switch (o)
                     {
@@ -239,6 +240,36 @@ public class LodingTxt : MonoBehaviour
                 ChatWin.SetActive(false);
                 Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
             }
+            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
+            {
+                c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
+                RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1200);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 700);
+                Vector3 position = cuttoon.transform.localPosition;
+                if (c == 1)
+                {
+                    position.x = 0;
+                    position.y = 0;
+                }
+                else if (c == 2)
+                {
+                    position.x = 100;
+                    position.y = 100;
+                }
+                cuttoon.transform.localPosition = position;
+            }
+            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepCOver"))
+            {
+                RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1200);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 700);
+                Vector3 position = cuttoon.transform.localPosition;
+
+                position.x = 0;
+                position.y = 0;
+                cuttoon.transform.localPosition = position;
+            }
             else
             {
                 //Debug.Log("그냥실행");
@@ -284,7 +315,6 @@ public class LodingTxt : MonoBehaviour
         //Debug.Log("컷툰갯수=" + cuttoonImageList.Length);
         cuttoonspriteR = cuttoon.GetComponent<Image>();
         cuttoonspriteR.sprite = cuttoonImageList[c];
-        
     }
 
     public void ChatEnd() //리셋
@@ -453,4 +483,3 @@ public class LodingTxt : MonoBehaviour
     }
 
 }
-

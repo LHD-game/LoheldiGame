@@ -82,11 +82,15 @@ public class MailLoad : MonoBehaviour
 
     public void ReceiveMail()
     {
-
+        var BRO = Backend.Chart.GetChartContents("46292"); //서버의 엑셀파일을 불러온다.
+        
+        Param param = new Param();
+        
         var bro = Backend.UPost.ReceivePostItemAll(PostType.Admin);
 
         if (bro.IsSuccess())
         {
+            
             foreach (LitJson.JsonData postItems in bro.GetReturnValuetoJSON()["postItems"])
             {
                 if (postItems.Count <= 0)
@@ -96,15 +100,27 @@ public class MailLoad : MonoBehaviour
                 }
                 else
                 {
-                    
-                    string itemCode = (string)bro.FlattenRows()[0];
+                    if (BRO.IsSuccess())
+                    {
+                        JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
+                        if (rows.Count >= 1)
+                        {
+                            string icode = BRO.FlattenRows()[0]["itemCode"].ToString();
+                            string name = BRO.FlattenRows()[0]["name"].ToString();
+                            string price = BRO.FlattenRows()[0]["price"].ToString();
 
-                    Param param = new Param();
-                    icode.Add ("itemCode", itemCode);
-                    
+                            param.Add("icode", icode);
+                            param.Add("name", name);
+                            param.Add("price", price);
 
-                    param.Add("MailItem", icode);
-                    bro = Backend.GameData.Insert("MAILITEM", param);
+                            Backend.GameData.Insert("MAILITEM", param);
+
+                        }
+                    }
+                    Debug.Log(icode);
+                    Debug.Log(name);
+                    Debug.Log(price);
+
                 }
 
             }
@@ -117,6 +133,26 @@ public class MailLoad : MonoBehaviour
             }
         }
     }
+
+    /*oid GetChartContents(string chartNum)
+    {
+        var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.
+        JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
+        Param param = new Param();
+        if (rows.Count <= 0)
+        {
+            string icode = BRO.FlattenRows()[0]["itemCode"].ToString();
+            string name = BRO.FlattenRows()[0]["name"].ToString();
+            string price = BRO.FlattenRows()[0]["price"].ToString();
+
+            param.Add("icode", icode);
+            param.Add("name", name);
+            param.Add("price", price);
+
+            Backend.GameData.Insert("MAILITEM", param);
+
+        }
+    }*/
 
 
     public void GetNotice()

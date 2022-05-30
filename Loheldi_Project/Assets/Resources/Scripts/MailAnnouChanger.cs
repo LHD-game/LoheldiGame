@@ -6,18 +6,18 @@ public class MailAnnouChanger : MonoBehaviour
 {
     public GameObject MailPost;
     public GameObject Announcement;
-
-    public void change()
+    public void Mail()
     {
-        if (this.gameObject.name == "AnnouButton")
-        {
-            MailPost.SetActive(false);
-            Announcement.SetActive(true);
-        }
-        else
-        {
-            MailPost.SetActive(true);
-            Announcement.SetActive(false);
-        }
+        MailPost.SetActive(true);
+        Announcement.SetActive(false);
+        MailLoad.MailorAnnou = true;
+        this.gameObject.GetComponent<MailLoad>().UpdateList();
+    }
+    public void Annou()
+    {
+        MailPost.SetActive(false);
+        Announcement.SetActive(true);
+        MailLoad.MailorAnnou = false;
+        this.gameObject.GetComponent<MailLoad>().UpdateList();
     }
 }

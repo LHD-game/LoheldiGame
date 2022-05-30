@@ -27,6 +27,7 @@ public class MailLoad : MonoBehaviour
     public GameObject NoticeDetail;
     public GameObject NoticeTempObject;
 
+    public Text MailCount;
 
     Dictionary<string, string> icode = new Dictionary<string, string>();
     Dictionary<string, string> iname = new Dictionary<string, string>();
@@ -35,6 +36,12 @@ public class MailLoad : MonoBehaviour
     void Start()
     {
         MailorAnnou = true;
+        NewMailCheck();
+        UpdateList();
+    }
+
+    private void Update()
+    {
     }
 
     public void UpdateList()
@@ -180,6 +187,20 @@ public class MailLoad : MonoBehaviour
             if (bro.GetErrorCode() == "NotFoundException")
             {
                 Debug.LogError("더이상 수령할 우편이 존재하지 않습니다.");
+            }
+        }
+    }
+
+    public void NewMailCheck()
+    {
+        BackendReturnObject bro = Backend.UPost.GetPostList(PostType.Admin, 10);  //서버에서 메일 리스트 불러오기
+        JsonData json = bro.GetReturnValuetoJSON()["postList"];
+        if (json.Count != 0)
+        {
+            MailCount.text = json.Count.ToString();
+            if (json.Count >= 10)
+            {
+                MailCount.text = "9+";
             }
         }
     }

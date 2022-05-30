@@ -34,7 +34,9 @@ public class RunGameManager : MonoBehaviour
     public static bool isPause = false;
     RunPlayerRun Nownpc;
     RunCountDown Count;
+
     public GameObject SoundManager;
+    public bool FinishSound;
 
     void Start()
     {
@@ -69,7 +71,11 @@ public class RunGameManager : MonoBehaviour
                 RunBtnPanel.SetActive(false);
                 Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
-                SoundManager.GetComponent<SoundEffect>().Sound("GameFail");
+                if (!FinishSound)
+                {
+                    SoundManager.GetComponent<SoundEffect>().Sound("GameFail");
+                    FinishSound = true;
+                }
             }
             else if (Player.position.z >= Goll)
             {
@@ -77,7 +83,11 @@ public class RunGameManager : MonoBehaviour
                 RunBtnPanel.SetActive(false);
                 Win_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
-                SoundManager.GetComponent<SoundEffect>().Sound("GameSuccess");
+                if (!FinishSound)
+                {
+                    SoundManager.GetComponent<SoundEffect>().Sound("GameSuccess");
+                    FinishSound = true;
+                }
             }
             NPCz = nowNPC.position.z;
             Playerz = Player.position.z;
@@ -139,6 +149,8 @@ public class RunGameManager : MonoBehaviour
         NPC[3].gameObject.GetComponent<RunNPC>().enabled = true;
 
         player.velocity = new Vector3(0, 0, 0);
+
+        FinishSound = false;
         //Count.ResetTimer();
     }
 

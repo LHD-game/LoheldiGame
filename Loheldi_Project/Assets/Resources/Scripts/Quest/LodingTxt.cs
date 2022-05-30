@@ -136,9 +136,9 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0,data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기
         if (move)
         { //Debug.Log("o=" +o+ "m=" + m);
+            QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
             if (o != m )
             {
                 if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (QuestSubNum == 0))
@@ -185,10 +185,11 @@ public class LodingTxt : MonoBehaviour
                             break;
                     }
                 }
+                m = o;
+                o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("-") + 1));
             }
         }
-        m = o;
-        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
+        
     }
     public void Line()  //줄넘김
     {
@@ -220,14 +221,16 @@ public class LodingTxt : MonoBehaviour
             chatCanvus.SetActive(true);
             ++j;
         }
+
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
             //Debug.Log("end실행");
             ChatEnd();
+            QuestEnd();
         }
         else
         {
-            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
+            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0-1"))
                 Main_UI.SetActive(false);
             spriteR = CCImage.GetComponent<Image>();     
             l = Int32.Parse(data_Dialog[j]["image"].ToString());
@@ -244,31 +247,48 @@ public class LodingTxt : MonoBehaviour
             {
                 c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
                 RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1200);
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 700);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 8208);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 3888);
                 Vector3 position = cuttoon.transform.localPosition;
                 if (c == 1)
                 {
-                    position.x = 0;
-                    position.y = 0;
+                    position.x = -778;
+                    position.y = -42;
+                    cuttoon.transform.Rotate(0, 0, -35);
                 }
                 else if (c == 2)
                 {
-                    position.x = 100;
-                    position.y = 100;
+                    position.x = -2029;
+                    position.y = -233;
+                    cuttoon.transform.Rotate(0, 0, 35);
+                }
+                else if (c == 3)
+                {
+                    position.x = -1913;
+                    position.y = 685;
+                    cuttoon.transform.Rotate(0, 0, 0);
+                }
+                else if (c == 4)
+                {
+                    position.x = -493;
+                    position.y = 685;
+                    cuttoon.transform.Rotate(0, 0, 0);
                 }
                 cuttoon.transform.localPosition = position;
+                ChatWin.SetActive(false);
+                Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
             }
-            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepCOver"))
+            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))
             {
                 RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 1200);
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 700);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3040);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1440);
                 Vector3 position = cuttoon.transform.localPosition;
 
                 position.x = 0;
                 position.y = 0;
                 cuttoon.transform.localPosition = position;
+                scriptLine();
             }
             else
             {
@@ -277,7 +297,7 @@ public class LodingTxt : MonoBehaviour
                 scriptLine();
             }
         }
-        if(data_Dialog[j]["scriptType"].ToString().Equals("choice"))
+        if(data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))
         {
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
             QuizMate();
@@ -291,7 +311,9 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
+            MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
             QuizTIme();
+            Debug.Log("j:" + j + "MataNum=" + MataNum);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
@@ -372,7 +394,7 @@ public class LodingTxt : MonoBehaviour
     {
         Quiz_material[1] = material[MataNum]; //0에 메테리얼 번호
         Quiz.GetComponent<MeshRenderer>().materials = Quiz_material;
-        Debug.Log("응애"+ material[MataNum]);
+        //Debug.Log("응애"+ material[MataNum]);
 
     }
 
@@ -481,5 +503,16 @@ public class LodingTxt : MonoBehaviour
         XImage.SetActive(false);
         Button.SetActive(true);
     }
-
+    private void QuestEnd()
+    {
+        for (int i = 0; i < ButtonPlusNpc.Length; i++)
+        {
+            if (ButtonPlusNpc[i] == Inter.NameNPC)
+            {
+                ButtonPlusNpc[i] = "";
+                break;
+            }
+        }
+        
+    }
 }

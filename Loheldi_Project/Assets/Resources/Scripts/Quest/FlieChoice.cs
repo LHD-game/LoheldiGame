@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System;
-using UnityEngine.UI;
 
 public class FlieChoice : MonoBehaviour
 {
@@ -11,18 +9,17 @@ public class FlieChoice : MonoBehaviour
     // l=뜨는 이미지 번호(스크립트 대화)  n이랑l이랑 합칠 수 있나요(전 모르겠어요)
     //n=뜨는 이미지 번호(기본대화)
     //h=이미지 넣을 곳 번호
-    public int QuestNumber; //엑셀파일 상 퀘스트 번호
 
     private void Awake()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-
     }
     public void test()
     {
-        chat.Num = "1";
-        chat.FileAdress = "Scripts/Quest/Dialog";
+        chat.Num = "0-1";
+        chat.FileAdress = "Scripts/Quest/test";
         chat.NewChat();
+        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
     }
 
     public void test2()
@@ -31,26 +28,19 @@ public class FlieChoice : MonoBehaviour
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
     }
-    public void QuestChoice()
-    {
-        //chat.Num = "0_1";
-        chat.FileAdress = "Scripts/Quest/script_1";
-        switch (QuestNumber) 
-        {
-            case 1:
-                chat.Num = "1-0";
-                break;
-        }
-        
-        
-        chat.NewChat();
-    }
-
-    public void Quest1()
+    public void Tutorial()
     {
         chat.Num = "0_1";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
+        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
+    }
+    public void Quest1()
+    {
+        chat.Num = "1-1";
+        chat.FileAdress = "Scripts/Quest/script_1";
+        chat.NewChat();
+        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
     }
 
     public void NpcChoice()

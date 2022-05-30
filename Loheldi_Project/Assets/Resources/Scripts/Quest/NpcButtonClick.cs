@@ -24,7 +24,7 @@ public class NpcButtonClick : MonoBehaviour
         if (SecondButtonTxt.text.Equals("미니게임 하기"))
             SceneLoader.instance.GotoLobby();
         else if (SecondButtonTxt.text.Equals("미용실 이용하기"))
-            SceneLoader.instance.GotoPlayerCustom();
+            SceneLoader.instance.GotoPlayerCloset();
         else if (SecondButtonTxt.text.Equals("가구점 이용하기"))
         {
             UIB.shop.SetActive(true);
@@ -32,7 +32,14 @@ public class NpcButtonClick : MonoBehaviour
         }
         else if (SecondButtonTxt.text.Equals("퀘스트 하미"))
         {
-            Chat.QuestNumber = 1;
+            Chat.Quest1();
+
+            GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
+
+            for (int i = 0; i < clone.Length; i++)
+            {
+                Destroy(clone[i]);
+            }
         }
     }
 }

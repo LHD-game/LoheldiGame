@@ -185,10 +185,6 @@ public class MailLoad : MonoBehaviour
     }
 
     /*oid GetChartContents(string chartNum)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b8745c92901c006f735134360d70afac216f9c1f
     {
         var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.
         JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
@@ -207,30 +203,4 @@ public class MailLoad : MonoBehaviour
 
         }
     }*/
-<<<<<<< HEAD
-
-
-    public void GetNotice()
-=======
->>>>>>> b8745c92901c006f735134360d70afac216f9c1f
-    {
-        var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.
-        JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
-        Param param = new Param();
-        if (rows.Count <= 0)
-        {
-            string icode = BRO.FlattenRows()[0]["itemCode"].ToString();
-            string name = BRO.FlattenRows()[0]["name"].ToString();
-            string price = BRO.FlattenRows()[0]["price"].ToString();
-
-            param.Add("icode", icode);
-            param.Add("name", name);
-            param.Add("price", price);
-
-            Backend.GameData.Insert("MAILITEM", param);
-
-        }
-    }*/
-=======
->>>>>>> b8745c92901c006f735134360d70afac216f9c1f
 }

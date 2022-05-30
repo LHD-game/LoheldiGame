@@ -9,13 +9,19 @@ public class RunCountDown : MonoBehaviour
     public GameObject RunBtnPanel;
 
     public GameObject Num;
-    public GameObject Num_1;
+    /*public GameObject Num_1;
     public GameObject Num_2;
-    public GameObject Num_3;
+    public GameObject Num_3;*/
     private int timer = 3;
     public static bool CountEnd = false;
 
     public GameObject SoundManager;
+
+    public GameObject[] Light;
+    public Material Light_material;
+    [SerializeField]
+    private Material[] material;
+    int MataNum = 0;                        //메터리얼 번호
 
     void Start()
     {
@@ -26,39 +32,52 @@ public class RunCountDown : MonoBehaviour
     {
         DifficultyPanel.gameObject.SetActive(false);
         RunBtnPanel.SetActive(true);
+        Num.SetActive(true);
 
         InvokeRepeating("NumAppear", 0f, 1f);
     }
 
     private void NumAppear()
     {
-        if(timer == 3)
+        if (timer == 3)
         {
-            Num.SetActive(true);
+            MataNum=0;
+            Light_material = material[MataNum]; //0에 메테리얼 번호
+            Light[MataNum].GetComponent<MeshRenderer>().material = Light_material;
+            SoundManager.GetComponent<SoundEffect>().Sound("RunCount");
+            //Num.SetActive(true);
         }
         else if(timer == 2)
         {
-            Num_3.SetActive(true);
+            MataNum = 1;
+            Light_material = material[MataNum]; //0에 메테리얼 번호
+            Light[MataNum].GetComponent<MeshRenderer>().material = Light_material;
+            //Num_3.SetActive(true);
             SoundManager.GetComponent<SoundEffect>().Sound("RunCount");
         }
         else if (timer == 1)
         {
-            Num_2.SetActive(true);
+            MataNum = 2;
+            Light_material = material[MataNum]; //0에 메테리얼 번호
+            Light[MataNum].GetComponent<MeshRenderer>().material = Light_material;
+            //Num_2.SetActive(true);
             SoundManager.GetComponent<SoundEffect>().Sound("RunCount");
         }
         else if (timer == 0)
         {
-            Num_1.SetActive(true);
-            SoundManager.GetComponent<SoundEffect>().Sound("RunCount");
+            Light_material = material[2];
+            //for (int i = 0; i < 1; i++)
+                Light[0].GetComponent<MeshRenderer>().material = Light_material;
+                Light[1].GetComponent<MeshRenderer>().material = Light_material;
+            //Num_1.SetActive(true);
+            SoundManager.GetComponent<SoundEffect>().Sound("RunCountFinish");
         }
         else if(timer == -1)
         {
+            //RunBtnPanel.SetActive(false);
             Num.SetActive(false);
-            Num_1.SetActive(false);
-            Num_2.SetActive(false);
-            Num_3.SetActive(false);
             CountEnd = true;
-            SoundManager.GetComponent<SoundEffect>().Sound("RunCountFinish");
+            //SoundManager.GetComponent<SoundEffect>().Sound("RunCountFinish");
             CancelInvoke("NumAppear");
         }
         timer--;
@@ -67,12 +86,13 @@ public class RunCountDown : MonoBehaviour
 
     public void ResetTimer()
     {
+        Light_material = material[3];
         timer = 3;
         CountEnd = false;
         Num.SetActive(false);
-        Num_1.SetActive(false);
-        Num_2.SetActive(false);
-        Num_3.SetActive(false);
+        Light[0].GetComponent<MeshRenderer>().material = Light_material;
+        Light[1].GetComponent<MeshRenderer>().material = Light_material;
+        Light[2].GetComponent<MeshRenderer>().material = Light_material;
         CancelInvoke("NumAppear");
         
     }

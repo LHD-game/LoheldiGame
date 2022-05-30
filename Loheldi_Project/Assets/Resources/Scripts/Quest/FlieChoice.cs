@@ -16,9 +16,10 @@ public class FlieChoice : MonoBehaviour
     }
     public void test()
     {
-        chat.Num = "1";
-        chat.FileAdress = "Scripts/Quest/Dialog";
+        chat.Num = "0-1";
+        chat.FileAdress = "Scripts/Quest/test";
         chat.NewChat();
+        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
     }
 
     public void test2()
@@ -27,11 +28,19 @@ public class FlieChoice : MonoBehaviour
         chat.FileAdress = "Scripts/Quest/Dialog";
         chat.NewChat();
     }
-    public void Quest1()
+    public void Tutorial()
     {
         chat.Num = "0_1";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
+        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
+    }
+    public void Quest1()
+    {
+        chat.Num = "1-1";
+        chat.FileAdress = "Scripts/Quest/script_1";
+        chat.NewChat();
+        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
     }
 
     public void NpcChoice()

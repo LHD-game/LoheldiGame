@@ -41,6 +41,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject ChatWin;
     public GameObject QuizeWin;
     public GameObject chatCanvus;
+    public GameObject shopCanvus;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -53,16 +54,15 @@ public class LodingTxt : MonoBehaviour
     public string Num;                       //스크립트 번호
     public int j;                                  //data_Dialog 줄갯수
     public int c=0;                              //컷툰 이미지 번호
-    private int h;                          //이미지 넣을 번호
-    private int n;                          //뜨는 이미지 번호(스크립트 상)
-    public static int k;                    //npc
-    public int l;                            //뜨는 이미지 번호(기본 대화)
+    //public static int k;                    //npc
+    public int l;                            //뜨는 이미지 번호
     public int tutoi;                            //튜토리얼 하이라이트 이미지용
     string Answer;               //누른 버튼 인식
 
     public bool tutoEnd=false;  //튜토리얼 완전 끝
     public bool tutoFinish=false;
     public bool tuto=false;
+    public bool move = false; //캐릭터 순간이동
     public static GameObject CCImage;     //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
@@ -79,16 +79,18 @@ public class LodingTxt : MonoBehaviour
     int m;                                  //카메라 무빙
     int o = 0;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
+    int QuestSubNum;                                  //퀘스트 스크립트 앞번호
 
     private void Awake()
     {
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
 
-        Inter = GameObject.Find("Player").GetComponent<Interaction>(); //안쓰는거
+        Inter = GameObject.Find("Player").GetComponent<Interaction>();
         color = block.GetComponent<Image>().color;
         cuttoon.SetActive(true);
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
+        shopCanvus.SetActive(true );
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
         fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
@@ -101,6 +103,7 @@ public class LodingTxt : MonoBehaviour
         //cuttoon = GameObject.Find("Cutton");
         cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
 
+        shopCanvus.SetActive(false);
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
@@ -111,8 +114,6 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
-        //h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
-        //n = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 번호(기본대화)
         //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
@@ -135,56 +136,60 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        //Debug.Log("o=" +o+ "m=" + m);
-        if(o!=m)
-        {
-            if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (n == 0))
+        if (move)
+        { //Debug.Log("o=" +o+ "m=" + m);
+            QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
+            if (o != m )
             {
-                switch (o)
+                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (QuestSubNum == 0))
                 {
-                    case 4:
-                        Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 5:
-                        Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 6:
-                        Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 7:
-                        Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 8:
-                        Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 9:
-                        Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 10:
-                        Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 11:
-                        Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 12:
-                        Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    default:
-                        break;
+                    switch (o)
+                    {
+                        case 4:
+                            Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 5:
+                            Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 6:
+                            Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 7:
+                            Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 8:
+                            Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 9:
+                            Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 10:
+                            Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 11:
+                            Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        case 12:
+                            Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                m = o;
+                o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("-") + 1));
             }
         }
-        m = o;
-        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
+        
     }
     public void Line()  //줄넘김
     {
@@ -216,18 +221,18 @@ public class LodingTxt : MonoBehaviour
             chatCanvus.SetActive(true);
             ++j;
         }
+
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
             //Debug.Log("end실행");
             ChatEnd();
+            QuestEnd();
         }
         else
         {
-            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
+            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0-1"))
                 Main_UI.SetActive(false);
-            /*h = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString()); //이미지 넣을 곳 리스트 번호
-            n = Int32.Parse(data_Dialog[j]["image"].ToString()); //이미지 번호(기본대화)*/
-            spriteR = CCImage.GetComponent<Image>();     //이미지 넣을 곳 0에다 h넣기
+            spriteR = CCImage.GetComponent<Image>();     
             l = Int32.Parse(data_Dialog[j]["image"].ToString());
             //Debug.Log("이미지번호="+l);
             spriteR.sprite = CCImageList[l];
@@ -238,6 +243,53 @@ public class LodingTxt : MonoBehaviour
                 ChatWin.SetActive(false);
                 Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
             }
+            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
+            {
+                c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
+                RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 8208);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 3888);
+                Vector3 position = cuttoon.transform.localPosition;
+                if (c == 1)
+                {
+                    position.x = -778;
+                    position.y = -42;
+                    cuttoon.transform.Rotate(0, 0, -35);
+                }
+                else if (c == 2)
+                {
+                    position.x = -2029;
+                    position.y = -233;
+                    cuttoon.transform.Rotate(0, 0, 35);
+                }
+                else if (c == 3)
+                {
+                    position.x = -1913;
+                    position.y = 685;
+                    cuttoon.transform.Rotate(0, 0, 0);
+                }
+                else if (c == 4)
+                {
+                    position.x = -493;
+                    position.y = 685;
+                    cuttoon.transform.Rotate(0, 0, 0);
+                }
+                cuttoon.transform.localPosition = position;
+                ChatWin.SetActive(false);
+                Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
+            }
+            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))
+            {
+                RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3040);
+                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1440);
+                Vector3 position = cuttoon.transform.localPosition;
+
+                position.x = 0;
+                position.y = 0;
+                cuttoon.transform.localPosition = position;
+                scriptLine();
+            }
             else
             {
                 //Debug.Log("그냥실행");
@@ -245,7 +297,7 @@ public class LodingTxt : MonoBehaviour
                 scriptLine();
             }
         }
-        if(data_Dialog[j]["scriptType"].ToString().Equals("choice"))
+        if(data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))
         {
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
             QuizMate();
@@ -259,7 +311,9 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
+            MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
             QuizTIme();
+            Debug.Log("j:" + j + "MataNum=" + MataNum);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
@@ -283,7 +337,6 @@ public class LodingTxt : MonoBehaviour
         //Debug.Log("컷툰갯수=" + cuttoonImageList.Length);
         cuttoonspriteR = cuttoon.GetComponent<Image>();
         cuttoonspriteR.sprite = cuttoonImageList[c];
-        
     }
 
     public void ChatEnd() //리셋
@@ -341,7 +394,7 @@ public class LodingTxt : MonoBehaviour
     {
         Quiz_material[1] = material[MataNum]; //0에 메테리얼 번호
         Quiz.GetComponent<MeshRenderer>().materials = Quiz_material;
-        Debug.Log("응애"+ material[MataNum]);
+        //Debug.Log("응애"+ material[MataNum]);
 
     }
 
@@ -384,14 +437,9 @@ public class LodingTxt : MonoBehaviour
 
         if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
         {
+            changeMoment();
             //Debug.Log("튜토리얼 실핻ㅇ");
             block.SetActive(true);
-            //tuto = true;
-            /*if (!tuto)
-            {
-                Debug.Log("tuto0만들기");
-                tutoi = 0;
-            }*/
 
             Invoke("Tutorial_", 2f);
             
@@ -455,6 +503,16 @@ public class LodingTxt : MonoBehaviour
         XImage.SetActive(false);
         Button.SetActive(true);
     }
-
+    private void QuestEnd()
+    {
+        for (int i = 0; i < ButtonPlusNpc.Length; i++)
+        {
+            if (ButtonPlusNpc[i] == Inter.NameNPC)
+            {
+                ButtonPlusNpc[i] = "";
+                break;
+            }
+        }
+        
+    }
 }
-

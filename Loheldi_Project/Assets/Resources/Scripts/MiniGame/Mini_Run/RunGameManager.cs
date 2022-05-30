@@ -33,7 +33,7 @@ public class RunGameManager : MonoBehaviour
     public static int Goll;  //골지점
     public static bool isPause = false;
     RunPlayerRun Nownpc;
-
+    RunCountDown Count;
     public GameObject SoundManager;
 
     void Start()
@@ -42,6 +42,7 @@ public class RunGameManager : MonoBehaviour
         Reset();
         MAP[0].gameObject.SetActive(true);
         Nownpc = GameObject.Find("Player").GetComponent<RunPlayerRun>();
+        Count = GameObject.Find("CountDown").GetComponent<RunCountDown>();
         Close = false;
     }
 
@@ -57,8 +58,8 @@ public class RunGameManager : MonoBehaviour
             MAP[0].gameObject.SetActive(false);
             nowMAP = MAP[difficulty];
             nowMAP.gameObject.SetActive(true);
-
             Nownpc.NPC_ = nowNPC;
+            //Nownpc.NPC_ = nowNPC;
 
             EndMove();
 
@@ -138,6 +139,7 @@ public class RunGameManager : MonoBehaviour
         NPC[3].gameObject.GetComponent<RunNPC>().enabled = true;
 
         player.velocity = new Vector3(0, 0, 0);
+        //Count.ResetTimer();
     }
 
     public void GamePause()

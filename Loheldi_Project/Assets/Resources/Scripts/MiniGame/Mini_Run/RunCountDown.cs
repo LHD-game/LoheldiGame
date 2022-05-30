@@ -17,6 +17,7 @@ public class RunCountDown : MonoBehaviour
 
     public GameObject SoundManager;
 
+    public GameObject TrafficLight;
     public GameObject[] Light;
     public Material Light_material;
     [SerializeField]
@@ -39,6 +40,7 @@ public class RunCountDown : MonoBehaviour
 
     private void NumAppear()
     {
+        TrafficLight.gameObject.SetActive(true);
         if (timer == 3)
         {
             MataNum=0;
@@ -79,9 +81,9 @@ public class RunCountDown : MonoBehaviour
             CountEnd = true;
             //SoundManager.GetComponent<SoundEffect>().Sound("RunCountFinish");
             CancelInvoke("NumAppear");
+            TrafficLight.gameObject.SetActive(false);
         }
         timer--;
-
     }
 
     public void ResetTimer()
@@ -94,7 +96,6 @@ public class RunCountDown : MonoBehaviour
         Light[1].GetComponent<MeshRenderer>().material = Light_material;
         Light[2].GetComponent<MeshRenderer>().material = Light_material;
         CancelInvoke("NumAppear");
-        
+        TrafficLight.gameObject.SetActive(false);
     }
-
 }

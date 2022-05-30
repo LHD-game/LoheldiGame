@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
     }
     public void CameraReset()
     {
-        tr.position = new Vector3(240.0f, 85.0f, 82.0f);
+        tr.position = new Vector3(292.0f, 103.0f, 82.0f);
 
     }
 }

@@ -186,6 +186,9 @@ public class MailLoad : MonoBehaviour
 
     /*oid GetChartContents(string chartNum)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b8745c92901c006f735134360d70afac216f9c1f
     {
         var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.
         JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
@@ -204,6 +207,7 @@ public class MailLoad : MonoBehaviour
 
         }
     }*/
+<<<<<<< HEAD
 
 
     public void GetNotice()
@@ -227,4 +231,6 @@ public class MailLoad : MonoBehaviour
 
         }
     }*/
+=======
+>>>>>>> b8745c92901c006f735134360d70afac216f9c1f
 }

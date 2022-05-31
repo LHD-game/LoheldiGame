@@ -46,14 +46,14 @@ public class CardCtrl : MonoBehaviour
         isOpen = true;
         anim.Play("CardFlipAnimation");
         SoundManager.GetComponent<SoundEffect>().Sound("CardFlip");
-        //CardFX.instance.TrunCardFX(this.gameObject);    //fx
+        CardFX.instance.TrunCardFX(this.gameObject);    //fx
         CardGameManager.state = CardGameManager.STATE.HIT;
         CardGameManager.OpenCard = this.gameObject;
 
     }
     IEnumerator CloseCard()
     {
-        //SoundManager.GetComponent<SoundEffect>().Sound("CardWrong");
+        SoundManager.GetComponent<SoundEffect>().Sound("CardWrong");
         yield return new WaitForSeconds(0.5f);
         anim.Play("CardFlipBackAnimation");
         isOpen = false;
@@ -72,7 +72,7 @@ public class CardCtrl : MonoBehaviour
         if (this.gameObject != null)
         {
             SoundManager.GetComponent<SoundEffect>().Sound("CardCurrect");
-            //CardFX.instance.DisCardFX(this.transform.position); //fx
+            CardFX.instance.DisCardFX(this.transform.position); //fx
             Destroy(this.gameObject);
         }
 

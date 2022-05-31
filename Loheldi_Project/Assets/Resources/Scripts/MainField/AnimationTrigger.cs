@@ -6,7 +6,6 @@ public class AnimationTrigger : MonoBehaviour
 {
     private Animator animator;
     private bool Jumping;
-    private bool running=false;
 
     public GameObject JoyStick;
 
@@ -19,7 +18,7 @@ public class AnimationTrigger : MonoBehaviour
         if (JoyStick.GetComponent<VirtualJoystick>().MoveFlag)      //Player가 움직이고 있다면
         {
             animator.SetBool("JoyStickMove", true);                 //JoyStickMove 파라미터 조절 (애니메이션 컴포넌트에 있음, Animator 탭을 열어야 보임)
-            if (JoyStick.GetComponent<VirtualJoystick>().Playerrb.velocity.magnitude >= JoyStick.GetComponent<VirtualJoystick>().speed1 * 1.428f&&running)    //Player가 최대속도 라면
+            if (JoyStick.GetComponent<VirtualJoystick>().Playerrb.velocity.magnitude >= JoyStick.GetComponent<VirtualJoystick>().speed1 * 1.428f)    //Player가 최대속도 라면
             {
                 animator.SetBool("JoyStickMove2", true);            //JoyStickMove2 파라미터 조절
             }

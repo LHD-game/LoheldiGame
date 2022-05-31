@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class Super_Category : StoreCategoryControl
 {
-
     //category
     [SerializeField]
     private GameObject c_seed;
@@ -18,10 +17,14 @@ public class Super_Category : StoreCategoryControl
 
     List<Dictionary<string, object>> seedItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> treeItem = new List<Dictionary<string, object>>();
-    
-    public void PopSuperStore()
+
+    private void Start()
     {
         GetChartContents("51350");
+    }
+
+    public void PopSuperStore()
+    {
         MakeCategory(c_seed, seedItem);
         MakeCategory(c_tree, treeItem);
     }

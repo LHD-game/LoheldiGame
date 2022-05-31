@@ -27,9 +27,13 @@ public class Gagu_Category : StoreCategoryControl
     List<Dictionary<string, object>> classicItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> wallpaperItem = new List<Dictionary<string, object>>();
 
-    public void PopGaguStore()
+    private void Start()
     {
         GetChartContents("51350");
+    }
+
+    public void PopGaguStore()
+    {
         MakeCategory(c_wood, woodItem);
         MakeCategory(c_modern, modernItem);
         MakeCategory(c_kitsch, kitschItem);

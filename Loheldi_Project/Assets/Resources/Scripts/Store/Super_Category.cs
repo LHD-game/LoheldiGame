@@ -21,7 +21,7 @@ public class Super_Category : StoreCategoryControl
     
     public void PopSuperStore()
     {
-        GetChartContents("51334");
+        GetChartContents("51350");
         MakeCategory(c_seed, seedItem);
         MakeCategory(c_tree, treeItem);
     }
@@ -33,7 +33,7 @@ public class Super_Category : StoreCategoryControl
         JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
         ParsingJSON pj = new ParsingJSON();
 
-        int s = 0, t = 0, k = 0, c = 0, wa = 0;
+        int s = 0, t = 0;
         for (int i = 0; i < rows.Count; i++)
         {
             StoreItem data = pj.ParseBackendData<StoreItem>(rows[i]);

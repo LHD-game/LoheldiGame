@@ -17,7 +17,7 @@ public class AccInfo
 public class StoreItem
 {
     public string ICode;
-    public string Iname;
+    public string IName;
     public string Price;
     public string Category;
     public string ItemType;

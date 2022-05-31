@@ -42,6 +42,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject QuizeWin;
     public GameObject chatCanvus;
     public GameObject shopCanvus;
+    public GameObject MailCanvus;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -90,7 +91,6 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(true);
         ChatWin.SetActive(true);
         QuizeWin.SetActive(true);
-        shopCanvus.SetActive(true );
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
         fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
@@ -107,6 +107,7 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
+        MailCanvus.SetActive(false);
         /*
         Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
         Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);*/

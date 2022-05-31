@@ -24,7 +24,18 @@ public class SoundEffect : MonoBehaviour
     public AudioClip audioClickBack;
     public AudioClip audioJump;
     public AudioClip audioOpenDoor;
-    public AudioClip audioOpening;
+    public AudioClip audioBGMOpening;
+    public AudioClip audioBGMField;
+    public AudioClip audioBGMHouse;
+    public AudioClip audioBGMLobby;
+    public AudioClip audioBGMFood;
+    public AudioClip audioBGMTooth;
+    public AudioClip audioBGMCard;
+    public AudioClip audioBGMGacha;
+    public AudioClip audioBGMRun;
+    public AudioClip audioBGMQuest;
+    public AudioClip audioBGMQuestEnd;
+    public AudioClip audioBGMNight;
     AudioSource audioSource;
 
     private void Awake()
@@ -103,8 +114,41 @@ public class SoundEffect : MonoBehaviour
             case "OpenDoor":
                 audioSource.clip = audioOpenDoor;
                 break;
-            case "Opening":
-                audioSource.clip = audioOpening;
+            case "BGMOpening":
+                audioSource.clip = audioBGMOpening;
+                break;
+            case "BGMField":
+                audioSource.clip = audioBGMField;
+                break;
+            case "BGMHouse":
+                audioSource.clip = audioBGMHouse;
+                break;
+            case "BGMLobby":
+                audioSource.clip = audioBGMLobby;
+                break;
+            case "BGMFood":
+                audioSource.clip = audioBGMFood;
+                break;
+            case "BGMTooth":
+                audioSource.clip = audioBGMTooth;
+                break;
+            case "BGMCard":
+                audioSource.clip = audioBGMCard;
+                break;
+            case "BGMGacha":
+                audioSource.clip = audioBGMGacha;
+                break;
+            case "BGMRun":
+                audioSource.clip = audioBGMRun;
+                break;
+            case "BGMQuest":
+                audioSource.clip = audioBGMQuest;
+                break;
+            case "BGMQuestEnd":
+                audioSource.clip = audioBGMQuestEnd;
+                break;
+            case "BGMNight":
+                audioSource.clip = audioBGMNight;
                 break;
             default:
                 break;

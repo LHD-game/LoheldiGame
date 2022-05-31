@@ -29,7 +29,6 @@ public class RunGameManager : MonoBehaviour
 
     public Transform EndLine;
     public Transform EndBlock;
-    public bool Close;       //NPC와의 거리 (소리 풀력을 위함)
     public static int Goll;  //골지점
     public static bool isPause = false;
     RunPlayerRun Nownpc;
@@ -43,9 +42,9 @@ public class RunGameManager : MonoBehaviour
         markerPos = NMarker.localPosition;
         Reset();
         MAP[0].gameObject.SetActive(true);
+        SoundManager.GetComponent<SoundEffect>().Sound("BGMRun");
         Nownpc = GameObject.Find("Player").GetComponent<RunPlayerRun>();
         Count = GameObject.Find("CountDown").GetComponent<RunCountDown>();
-        Close = false;
     }
 
     public Transform nowNPC;
@@ -96,17 +95,6 @@ public class RunGameManager : MonoBehaviour
             NMarker.localPosition = new Vector3(NPCz / Goll * 2560 - 1365, 180, 0);         //  플레이어 위치에 백분률  * 미터기 길이   + 위치조정
 
             player.velocity = player.velocity / 1.0085f;
-
-            if (Playerz - NPCz >= 250)
-            {
-                Close = true;
-            }
-
-            if (Playerz - NPCz <= 250 && Close == true)
-            {
-                Close = false;
-                SoundManager.GetComponent<SoundEffect>().Sound("RunClose");
-            }
         }
     }
 

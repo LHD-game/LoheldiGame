@@ -27,6 +27,8 @@ public class CardGameManager : MonoBehaviour
     int cardCnt;
     int flipCnt = 0;
 
+    public GameObject SoundManager;
+
     static public int stageNum = 1;
     [SerializeField]
     private Text stageTxt;
@@ -41,6 +43,7 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {
+        SoundManager.GetComponent<SoundEffect>().Sound("BGMCard");
         Welcome();
     }
 

@@ -6,10 +6,11 @@ public class Enter_Exit : MonoBehaviour //패널 열기/닫기에 사용되는 클래스
 {
     public static GameObject SoundManager;
 
-    private void Awake()
+    private void Start()
     {
         SoundManager = this.gameObject;
     }
+
     public static void ExitBtn(GameObject exitThis)    //해당 오브젝트를 비활성화
     {
         SoundManager.GetComponent<SoundEffect>().Sound("ClickBack");

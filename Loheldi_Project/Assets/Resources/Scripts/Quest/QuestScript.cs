@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class QuestScript : MonoBehaviour
 {
-    public Transform QMailList;
     public bool Quest = true;
     [SerializeField]
     private int QuestIndex = 0;
@@ -30,6 +29,7 @@ public class QuestScript : MonoBehaviour
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();//ÀÌ°Å¶û ¹Ø¿¡²¨ ³ªÁß¿¡ ¾ø¾Ú Å×½ºÆ® ¶§¹®¿¡ µÐ°Å
+        Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
     }
 
     public void MainQuestLoding()
@@ -39,7 +39,6 @@ public class QuestScript : MonoBehaviour
         Quest = true;
         GiveQuest();
         QuestIndex = +1;
-        QuestNumber = 0;
         
     }
 
@@ -49,7 +48,7 @@ public class QuestScript : MonoBehaviour
         string detail = Quest_Mail[QuestNumber]["content"].ToString();
         string sent = Quest_Mail[QuestNumber]["author"].ToString();
 
-        Mail.TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), QMailList);                      //¸ÞÀÏ ÇÁ¸®Æé »ý¼º
+        Mail.TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), Mail.MailList);                      //¸ÞÀÏ ÇÁ¸®Æé »ý¼º
         Mail.ThisTitle = Mail.TempObject.transform.Find("Title").gameObject;                                              //ÇÁ¸®Æé¿¡ ¼Ó¼º
         Mail.ThisSent = Mail.TempObject.transform.Find("Sent").gameObject;
         Mail.ThisDetail = Mail.TempObject.transform.Find("Detail").gameObject;

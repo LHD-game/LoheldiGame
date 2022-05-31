@@ -695,6 +695,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GotoLobby
       objectReference: {fileID: 0}
+    - target: {fileID: 3348349259911634001, guid: aebc1b842ca66854a9f8aafe3906ac44, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f2b73928940bde045a2ba517389b6647, type: 3}
+    - target: {fileID: 3348349259911634001, guid: aebc1b842ca66854a9f8aafe3906ac44, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3348349259917752914, guid: aebc1b842ca66854a9f8aafe3906ac44, type: 3}
       propertyPath: m_Name
       value: WelcomePanel
@@ -3468,6 +3476,7 @@ MonoBehaviour:
   WelcomePanel: {fileID: 489150621}
   GameOverPanel: {fileID: 585670686}
   PausePanel: {fileID: 1717229979}
+  SoundManager: {fileID: 1892346173}
 --- !u!4 &1892346175
 Transform:
   m_ObjectHideFlags: 0
@@ -3610,7 +3619,18 @@ MonoBehaviour:
   audioClickBack: {fileID: 8300000, guid: 5f7b41072e0aa0b439a46a4f118c636c, type: 3}
   audioJump: {fileID: 8300000, guid: a54667d119f5fd6428d37cdd3207894d, type: 3}
   audioOpenDoor: {fileID: 8300000, guid: a2345da820d59a145b738328c4cb7e1d, type: 3}
-  audioOpening: {fileID: 8300000, guid: 52adebc0bc1aea0488352dfc62121262, type: 3}
+  audioBGMOpening: {fileID: 8300000, guid: df0ff5ac6f498f644a78df9209e1f4ba, type: 3}
+  audioBGMField: {fileID: 8300000, guid: e2b4dd2fe0821c246bb56c67f5b3380e, type: 3}
+  audioBGMHouse: {fileID: 8300000, guid: ea1f2de34c0de264f87769f6522869ca, type: 3}
+  audioBGMLobby: {fileID: 0}
+  audioBGMFood: {fileID: 0}
+  audioBGMTooth: {fileID: 8300000, guid: 20bcd102cae8891438acf54639b17eb3, type: 3}
+  audioBGMCard: {fileID: 8300000, guid: 688ebb2ffdcff91408eddc0bda7bc8fa, type: 3}
+  audioBGMGacha: {fileID: 0}
+  audioBGMRun: {fileID: 8300000, guid: 23a316b2e2b473b48b33dc4d117ad168, type: 3}
+  audioBGMQuest: {fileID: 8300000, guid: 30f35f00d1a17794180c5fcfa27e0a63, type: 3}
+  audioBGMQuestEnd: {fileID: 8300000, guid: 49c9b3ecc64837546aae44a5ce5888b3, type: 3}
+  audioBGMNight: {fileID: 0}
 --- !u!114 &1892346178
 MonoBehaviour:
   m_ObjectHideFlags: 0

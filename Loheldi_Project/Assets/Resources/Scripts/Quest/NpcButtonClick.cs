@@ -14,7 +14,7 @@ public class NpcButtonClick : MonoBehaviour
     //private Text TButtonTxt;
     private UIButton UIB;
     private FlieChoice Chat;
-    private Store_CategoryControl Store;
+    private Gagu_Category GStore;
 
     // Start is called before the first frame update
 
@@ -22,7 +22,7 @@ public class NpcButtonClick : MonoBehaviour
     {
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         UIB = GameObject.Find("EventSystem").GetComponent<UIButton>();
-        Store = GameObject.Find("StoreManager").GetComponent<Store_CategoryControl>();
+        GStore = GameObject.Find("StoreManager").GetComponent<Gagu_Category>();
         Debug.Log(SecondButtonTxt.text);
         if (SecondButtonTxt.text.Equals("미니게임 하기"))
             SceneLoader.instance.GotoLobby();
@@ -32,7 +32,7 @@ public class NpcButtonClick : MonoBehaviour
         {
             UIB.shop.SetActive(true);
             UIB.chat.ChatEnd();
-            Store.PopGaguStore();
+            GStore.PopGaguStore();
         }
         else if (SecondButtonTxt.text.Equals("퀘스트 하미"))
         {

@@ -27,6 +27,7 @@ public class MailLoad : MonoBehaviour
     public GameObject NoticeDetail;
     public GameObject NoticeTempObject;
 
+    public GameObject MailCountImage;
     public Text MailCount;
 
     Dictionary<string, string> icode = new Dictionary<string, string>();
@@ -200,8 +201,13 @@ public class MailLoad : MonoBehaviour
             MailCount.text = json.Count.ToString();
             if (json.Count >= 10)
             {
+                MailCountImage.SetActive(true);
                 MailCount.text = "9+";
             }
+        }
+        else if (json.Count == 0)
+        {
+            MailCountImage.SetActive(false);
         }
     }
 

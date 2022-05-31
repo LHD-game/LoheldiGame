@@ -45,11 +45,13 @@ public class GameManager : MonoBehaviour
 
     private bool stopTrigger = false;   //true일 동안 게임 동작
     private bool pauseTrigger = false;  //true일 경우 일시정지
-    
+
+    public GameObject SoundManager;
 
     private void Start()
     {
         highScoreTxt.text = "최고점수: " + highScore;
+        SoundManager.GetComponent<SoundEffect>().Sound("BGMFood");
         Welcome();
     }
 

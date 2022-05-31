@@ -6,7 +6,7 @@ using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Store_CategoryControl : MonoBehaviour
+public class Gagu_Category : StoreCategoryControl
 {
 
     //category
@@ -27,12 +27,13 @@ public class Store_CategoryControl : MonoBehaviour
     List<Dictionary<string, object>> classicItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> wallpaperItem = new List<Dictionary<string, object>>();
 
-    GameObject itemBtn;
-
+    private void Start()
+    {
+        GetChartContents("51350");
+    }
 
     public void PopGaguStore()
     {
-        GetChartContents("46292");
         MakeCategory(c_wood, woodItem);
         MakeCategory(c_modern, modernItem);
         MakeCategory(c_kitsch, kitschItem);
@@ -54,33 +55,33 @@ public class Store_CategoryControl : MonoBehaviour
 
             //아이템 테마에 따라 다른 리스트에 저장.
 
-            if (data.itemTheme.Equals("wood"))
+            if (data.Category.Equals("wood"))
             {
                 woodItem.Add(new Dictionary<string, object>()); // list에 공간을 만들어줍니다.
                 initItem(woodItem[w], data);
                 w++;
             }
-            else if (data.itemTheme.Equals("modern"))
+            else if (data.Category.Equals("modern"))
             {
                 modernItem.Add(new Dictionary<string, object>());
                 initItem(modernItem[m], data);
                 m++;
             }
-            else if (data.itemTheme.Equals("kitsch"))
+            else if (data.Category.Equals("kitsch"))
             {
                 kitschItem.Add(new Dictionary<string, object>());
                 
                 initItem(kitschItem[k], data);
                 k++;
             }
-            else if (data.itemTheme.Equals("classic"))
+            else if (data.Category.Equals("classic"))
             {
                 classicItem.Add(new Dictionary<string, object>());
                 
                 initItem(classicItem[c], data);
                 c++;
             }
-            else if (data.itemTheme.Equals("wallpaper"))
+            else if (data.Category.Equals("wallpaper"))
             {
                 wallpaperItem.Add(new Dictionary<string, object>());
                 
@@ -93,57 +94,6 @@ public class Store_CategoryControl : MonoBehaviour
         print("kitsch: " + kitschItem.Count);
         print("classic: " + classicItem.Count);
         print("wallpaper: " + wallpaperItem.Count);
-
-
-
     }
-
-    //---init list---//
-    //itemTheme 별로 모아서 저장
-    void initItem(Dictionary<string, object> item, StoreItem data) 
-    {
-        item.Add("itemCode", data.itemCode);
-        item.Add("name", data.name);
-        item.Add("price", data.price);
-        item.Add("itemTheme", data.itemTheme);
-        item.Add("itemType", data.itemType);
-    }
-
-
-    //make category item list on game//
-    void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)   
-    {
-        itemBtn = (GameObject)Resources.Load("Prefabs/UI/ItemBtn2");
-
-        for(int i=0; i < dialog.Count; i++)
-        {
-            //create caltalog box
-            GameObject child = Instantiate(itemBtn);    //create itemBtn instance
-            child.transform.SetParent(category.transform);  //move instance: child
-            
-            //change catalog box img
-            GameObject item_img= child.transform.Find("ItemImg").gameObject;
-            Image img = item_img.GetComponent<Image>();
-            img.sprite = Resources.Load<Sprite>("Sprites/Store/Catalog_Images/"+ dialog[i]["itemCode"] + "_catalog");
-
-
-            //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
-            GameObject item_name = child.transform.Find("ItemName").gameObject;
-            Text txt = item_name.GetComponent<Text>();
-            txt.text = dialog[i]["name"].ToString();
-
-            //change catalog box item code
-            GameObject item_code = child.transform.Find("ItemCode").gameObject;
-            Text item_code_txt = item_code.GetComponent<Text>();
-            item_code_txt.text = dialog[i]["itemCode"].ToString();
-
-            //change catalog box price
-            GameObject price_parent = child.transform.Find("CostImg").gameObject;
-            GameObject item_price = price_parent.transform.Find("CostTxt").gameObject;
-            Text price_txt = item_price.GetComponent<Text>();
-            price_txt.text = dialog[i]["price"].ToString();
-        }
-    }
-
     //todo: 선택된 커스텀(nowsettings)에는 선택된 표시를 해줄 것 --> setActive이용
 }

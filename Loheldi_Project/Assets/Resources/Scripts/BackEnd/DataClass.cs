@@ -16,11 +16,11 @@ public class AccInfo
 //상점 아이템 정보
 public class StoreItem
 {
-    public string itemCode;
-    public string name;
-    public string price;
-    public string itemTheme;
-    public string itemType;
+    public string ICode;
+    public string IName;
+    public string Price;
+    public string Category;
+    public string ItemType;
 }
 public class CustomItem
 {

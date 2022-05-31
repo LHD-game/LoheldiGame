@@ -13,8 +13,13 @@ public class FurnitureChangeClick : MonoBehaviour
     private RaycastHit hit;
     public static string CurrentFurniture = "None";
 
-    public bool housing=false;
+    public GameObject SoundManager;
 
+    public bool housing=false;
+    private void Start()
+    {
+        SoundManager.GetComponent<SoundEffect>().Sound("BGMHouse");
+    }
     void Update()
     {
         if(housing)
@@ -24,13 +29,6 @@ public class FurnitureChangeClick : MonoBehaviour
                 Ray ray = getCamera.ScreenPointToRay(Input.mousePosition);         //마우스 위치에 RRayCast사용하기
                 if (Physics.Raycast(ray, out hit))                                      //만약 무언가를 눌랐다면
                 {
-                    /* if (Input.GetMouseButtonDown(0) && !IsPointerOverUIObject())        //UI을 누른게 아니라면
-                     {
-                         *//*Debug.Log(hit.collider.gameObject.name);
-                         Buttons.SetActive(false);                                               //버튼 치우기
-                         ButtonToggle = false;
-                         CurrentFurniture = "None";*//*
-                     }*/
                     if (hit.collider.gameObject.tag == "ChangeableFurniture")           //가구를 누른거라면
                     {
                         if (CurrentFurniture == "None")                                     //그때 선택된 가구가 없다면
@@ -49,6 +47,7 @@ public class FurnitureChangeClick : MonoBehaviour
                 }
             }
         }
+        SoundManager.GetComponent<SoundEffect>().Sound("GameFail");
     }
 
     public void Reset()

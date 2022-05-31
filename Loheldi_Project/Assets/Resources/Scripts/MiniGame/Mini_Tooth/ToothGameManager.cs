@@ -52,11 +52,16 @@ public class ToothGameManager : MonoBehaviour
     private GameObject GameOverPanel;
     [SerializeField]
     private GameObject PausePanel;
+
+    public GameObject SoundManager;
+
     void Start()
     {
         //자식오브젝트들을 전부 배열에 저장한다.
         blackTooth = blackToothP.gameObject.GetComponentsInChildren<Transform>();
         blackTooth = blackTooth.Where(child => child.tag == "BTooth").ToArray();
+
+        SoundManager.GetComponent<SoundEffect>().Sound("BGMTooth");
 
         Welcome();
     }

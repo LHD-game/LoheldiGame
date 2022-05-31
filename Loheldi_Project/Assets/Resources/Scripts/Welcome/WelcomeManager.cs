@@ -42,7 +42,7 @@ public class WelcomeManager : MonoBehaviour
         SignupPanel.SetActive(false);
         SignupSucPanel.SetActive(false);
         FindAccPanel.SetActive(false);
-        SoundManager.GetComponent<SoundEffect>().Sound("Opening");
+        SoundManager.GetComponent<SoundEffect>().Sound("BGMOpening");
 
     }
 

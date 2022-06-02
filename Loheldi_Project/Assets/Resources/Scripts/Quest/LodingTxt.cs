@@ -38,6 +38,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject Arrow;
     public GameObject block;        //넘김방지 맨앞 블럭
     public Color color;
+    public GameObject Chat;
     public GameObject ChatWin;
     public GameObject QuizeWin;
     public GameObject chatCanvus;
@@ -432,8 +433,10 @@ public class LodingTxt : MonoBehaviour
                 QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
                 //string selecNumber = "select" + (i + 1).ToString();
             }
-            Button.SetActive(true); //유니티에서 버튼 위치 옮김
+            Invoke("QuizCho", 1f);
+            //Button.SetActive(true); //유니티에서 버튼 위치 옮김
         }
+
         block.SetActive(false);
 
         if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
@@ -446,6 +449,13 @@ public class LodingTxt : MonoBehaviour
             
         }
     }
+
+    void QuizCho()
+    {
+        Chat.SetActive(false);
+        Button.SetActive(true); //유니티에서 버튼 위치 옮김
+    }
+
     void Tutorial_()
     {
         tu.Tutorial();
@@ -471,12 +481,14 @@ public class LodingTxt : MonoBehaviour
     {
         if (data_Dialog[j]["answer"].ToString().Equals(Answer))
         {
+            Chat.SetActive(true);
             O();
             Line();
         }
 
         else
         {
+            Chat.SetActive(true);
             X();
         }
     }

@@ -17,7 +17,9 @@ public class QuestScript : MonoBehaviour
     private MailLoad Mail;
     private LodingTxt chat;
 
-
+    public bool Draw=false;
+    public Camera MainCamera;
+    public Camera DrawCamera;
     public GameObject[] ExclamationMark;
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
     public int QuestNumber;
@@ -30,6 +32,7 @@ public class QuestScript : MonoBehaviour
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();//ÀÌ°Å¶û ¹Ø¿¡²¨ ³ªÁß¿¡ ¾ø¾Ú Å×½ºÆ® ¶§¹®¿¡ µÐ°Å
+        Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
     }
 
     public void MainQuestLoding()
@@ -78,6 +81,20 @@ public class QuestScript : MonoBehaviour
         Instantiate(ExclamationMark[Int32.Parse(Quest_Mail[QuestNumber]["authorNumber"].ToString())], NpcQuest.transform.position+new Vector3(0,5,0),NpcQuest.transform.rotation);
     }
 
+    public void ChangeDrawCamera()
+    {
+        if (DrawCamera.enabled == false)
+        {
+            Draw=true;
+            MainCamera.enabled = false;
+            DrawCamera.enabled = true;
+        }
+        else
+        {
+            MainCamera.enabled = true;
+            DrawCamera.enabled = false;
+        }
+    }
     // Update is called once per frame
     void Update()
     {

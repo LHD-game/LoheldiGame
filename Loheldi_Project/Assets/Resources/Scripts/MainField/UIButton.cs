@@ -8,8 +8,7 @@ public class UIButton : MonoBehaviour
 {
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
     public GameObject Player;             //Player선언
-    public GameObject Map;                //Map선언
-    public GameObject Inv;                
+    public GameObject Map;                //Map선언                
     public GameObject shop;
     public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
@@ -17,7 +16,6 @@ public class UIButton : MonoBehaviour
 
     //public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
-    bool inv;
 
     public FlieChoice Chat;
     public LodingTxt chat;
@@ -126,19 +124,6 @@ public class UIButton : MonoBehaviour
         Map.SetActive(true);
     }
 
-    public void InvButton()
-    {
-        if (inv)
-        {
-            Inv.SetActive(false);
-            map = false;
-        }
-        else
-        {
-            Inv.SetActive(true);
-            map = true;
-        }
-    }
 
     public  void ConditionButton()                 //상태창버튼
     {

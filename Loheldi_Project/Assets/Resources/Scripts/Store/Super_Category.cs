@@ -20,11 +20,12 @@ public class Super_Category : StoreCategoryControl
 
     private void Start()
     {
-        GetChartContents("51350");
+        PopSuperStore();
     }
 
     public void PopSuperStore()
     {
+        GetChartContents("51350");
         MakeCategory(c_seed, seedItem);
         MakeCategory(c_tree, treeItem);
     }

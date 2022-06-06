@@ -13,6 +13,12 @@ public class AccInfo
     public DateTime BIRTH;
 }
 
+public class MyItem
+{
+    public string ICode;
+    public int Amount;
+}
+
 //상점 아이템 정보
 public class StoreItem
 {

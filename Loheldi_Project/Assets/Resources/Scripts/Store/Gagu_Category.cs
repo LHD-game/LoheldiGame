@@ -29,11 +29,12 @@ public class Gagu_Category : StoreCategoryControl
 
     private void Start()
     {
-        GetChartContents("51350");
+        PopGaguStore();
     }
 
     public void PopGaguStore()
     {
+        GetChartContents("51350");
         MakeCategory(c_wood, woodItem);
         MakeCategory(c_modern, modernItem);
         MakeCategory(c_kitsch, kitschItem);

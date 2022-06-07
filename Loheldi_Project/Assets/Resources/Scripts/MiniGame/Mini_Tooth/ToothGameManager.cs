@@ -61,8 +61,6 @@ public class ToothGameManager : MonoBehaviour
         blackTooth = blackToothP.gameObject.GetComponentsInChildren<Transform>();
         blackTooth = blackTooth.Where(child => child.tag == "BTooth").ToArray();
 
-        SoundManager.GetComponent<SoundEffect>().Sound("BGMTooth");
-
         Welcome();
     }
 

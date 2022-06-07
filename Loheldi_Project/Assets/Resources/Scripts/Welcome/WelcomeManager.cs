@@ -30,7 +30,6 @@ public class WelcomeManager : MonoBehaviour
     private bool isSPopup = false;  // 회원가입 패널 활성화 여부
     private bool isSSPopup = false;  // 회원가입 성공 문구 패널 활성화 여부
     private bool isAccPopup = false;  // 아이디/비밀번호 찾기 패널 활성화 여부
-    public GameObject SoundManager;
 
 
     void Start()
@@ -42,7 +41,6 @@ public class WelcomeManager : MonoBehaviour
         SignupPanel.SetActive(false);
         SignupSucPanel.SetActive(false);
         FindAccPanel.SetActive(false);
-        SoundManager.GetComponent<SoundEffect>().Sound("BGMOpening");
 
     }
 

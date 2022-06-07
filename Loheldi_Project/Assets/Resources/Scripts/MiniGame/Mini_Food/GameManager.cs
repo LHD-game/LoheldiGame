@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         highScoreTxt.text = "최고점수: " + highScore;
-        SoundManager.GetComponent<SoundEffect>().Sound("BGMFood");
         Welcome();
     }
 
@@ -60,7 +59,6 @@ public class GameManager : MonoBehaviour
         
         while (stopTrigger)
         {
-            
             CreateFood();
             yield return new WaitForSeconds(newFoodDropSec);
         }

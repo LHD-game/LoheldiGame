@@ -24,18 +24,6 @@ public class SoundEffect : MonoBehaviour
     public AudioClip audioClickBack;
     public AudioClip audioJump;
     public AudioClip audioOpenDoor;
-    public AudioClip audioBGMOpening;
-    public AudioClip audioBGMField;
-    public AudioClip audioBGMHouse;
-    public AudioClip audioBGMLobby;
-    public AudioClip audioBGMFood;
-    public AudioClip audioBGMTooth;
-    public AudioClip audioBGMCard;
-    public AudioClip audioBGMGacha;
-    public AudioClip audioBGMRun;
-    public AudioClip audioBGMQuest;
-    public AudioClip audioBGMQuestEnd;
-    public AudioClip audioBGMNight;
     AudioSource audioSource;
 
     private void Awake()
@@ -129,70 +117,6 @@ public class SoundEffect : MonoBehaviour
             case "Jump":
                 audioSource.clip = audioJump;
                 audioSource.loop = false;
-                break;
-            case "OpenDoor":
-                audioSource.clip = audioOpenDoor;
-                audioSource.loop = false;
-                break;
-            case "BGMOpening":
-                audioSource.clip = audioBGMOpening;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMField":
-                audioSource.clip = audioBGMField;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMHouse":
-                audioSource.clip = audioBGMHouse;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMLobby":
-                audioSource.clip = audioBGMLobby;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMFood":
-                audioSource.clip = audioBGMFood;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMTooth":
-                audioSource.clip = audioBGMTooth;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMCard":
-                audioSource.clip = audioBGMCard;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMGacha":
-                audioSource.clip = audioBGMGacha;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMRun":
-                audioSource.clip = audioBGMRun;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMQuest":
-                audioSource.clip = audioBGMQuest;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMQuestEnd":
-                audioSource.clip = audioBGMQuestEnd;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
-                break;
-            case "BGMNight":
-                audioSource.clip = audioBGMNight;
-                audioSource.volume = 1f;
-                audioSource.loop = true;
                 break;
             default:
                 break;

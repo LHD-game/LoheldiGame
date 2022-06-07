@@ -4,8 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class CardGameManager : MonoBehaviour
 {
     GameObject[] cards;     //카드를 프리펩에서 저장
@@ -27,8 +25,6 @@ public class CardGameManager : MonoBehaviour
     int cardCnt;
     int flipCnt = 0;
 
-    public GameObject SoundManager;
-
     static public int stageNum = 1;
     [SerializeField]
     private Text stageTxt;
@@ -43,7 +39,6 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {
-        SoundManager.GetComponent<SoundEffect>().Sound("BGMCard");
         Welcome();
     }
 

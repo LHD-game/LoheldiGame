@@ -28,6 +28,15 @@ public class StoreItem
     public string Category;
     public string ItemType;
 }
+public class CustomStoreItem
+{
+    public string ICode;
+    public string IName;
+    public string Price;
+    public string Category;
+    public string ItemType;
+    public string Texture;
+}
 public class CustomItem
 {
     public string ICode;

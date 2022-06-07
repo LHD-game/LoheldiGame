@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class Drawing : MonoBehaviour
 {
     public Camera cam;  //Gets Main Camera
     public Camera Dcam;  //Gets Draw Camera
-    public Material defaultMaterial; //Material for Line Renderer
+    public Material[] Material; //Material for Line Renderer
 
     private LineRenderer curLine;  //Line which draws now
     private int positionCount = 2;  //Initial start and end position
@@ -15,6 +17,8 @@ public class Drawing : MonoBehaviour
     int layerMask;
     private bool ForDraw = false;
     private bool Erase = false;
+
+    int i=0;  //메테리얼 번호
 
     private void Awake()
     {
@@ -67,7 +71,7 @@ public class Drawing : MonoBehaviour
         lineRend.endWidth = 0.01f;
         lineRend.numCornerVertices = 50;
         lineRend.numCapVertices = 50;
-        lineRend.material = defaultMaterial;//Resources.Load<Material>("Resources/Fonts/Materials/Furniture/Quiz/pen"); ;
+        lineRend.material = Material[i];//Resources.Load<Material>("Resources/Fonts/Materials/Furniture/Quiz/pen"); ;
         lineRend.SetPosition(0, mousePos);
         lineRend.SetPosition(1, mousePos);
         curLine = lineRend;
@@ -100,22 +104,31 @@ public class Drawing : MonoBehaviour
         if (Physics.Raycast(ray,out hit))
         {
             Debug.Log(hit.collider.gameObject.name);
-
-            GameObject target = hit.collider.transform.parent.gameObject;
-            Destroy(target);
-
+            if (hit.collider.gameObject.tag.Equals("Eraser"))
+            {
+                GameObject target = hit.collider.transform.parent.gameObject;
+                Destroy(target);
+            }
             //Destroy(target);
         }
     }
-/*
-    RaycastHit2D layerChk(string layerName)
-    {
-        Vector3 pos = Dcam.ScreenToWorldPoint(Input.mousePosition);
 
-        int layerMask =1 <<LayerMask.NameToLayer(layerName);
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f, layerMask);
-        return hit;
-    }*/
+    public void changeColor()
+    {
+        GameObject click = EventSystem.current.currentSelectedGameObject;
+        Debug.Log(click.name);
+        if (click.name.Equals("red"))
+            i = 1;
+        else if (click.name.Equals("yellow"))
+            i = 2;
+        else if (click.name.Equals("green"))
+            i = 3;
+        else if (click.name.Equals("blue"))
+            i = 4;
+        else if (click.name.Equals("black"))
+            i = 0;
+        Debug.Log(i);
+    }
     
     public void ChangeDrawCamera()
     {

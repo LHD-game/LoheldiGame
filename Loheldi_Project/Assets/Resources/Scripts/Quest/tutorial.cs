@@ -18,7 +18,7 @@ public class tutorial : MonoBehaviour
     public void forTutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.Num = "0_1";
+        chat.Num = "0-1";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
     }
@@ -41,7 +41,7 @@ public class tutorial : MonoBehaviour
             //Debug.Log("¹öÆ°=" + chat.block.transform.GetChild(chat.tutoi));
             if (chat.tutoi < 4)
             {
-                tutoblack.sprite = chat.cuttoonImageList[5];
+                tutoblack.sprite = chat.cuttoonImageList[5+chat.tutoi];
                 if (chat.tutoi == 0)
                 {
                     chat.Main_UI.SetActive(true);
@@ -49,7 +49,10 @@ public class tutorial : MonoBehaviour
                 }
                 else if (chat.tutoi == 1)
                     chat.Main_UI.SetActive(false);
+                chat.c += 1;
+                chat.Cuttoon();
                 chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);
+                chat.block.transform.GetChild(chat.tutoi-1).gameObject.SetActive(false);
                 chat.tutoi++;
                 if (!chat.tuto)
                     chat.tuto = true;

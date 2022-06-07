@@ -16,6 +16,15 @@ public class StoreCategoryControl : MonoBehaviour
         item.Add("Category", data.Category);
         item.Add("ItemType", data.ItemType);
     }
+    protected void initItem(Dictionary<string, object> item, CustomStoreItem data)
+    {
+        item.Add("ICode", data.ICode);
+        item.Add("IName", data.IName);
+        item.Add("Price", data.Price);
+        item.Add("Category", data.Category);
+        item.Add("ItemType", data.ItemType);
+        item.Add("Texture", data.Texture);
+    }
 
     //make category item list on game//
     protected void MakeCategory(GameObject category, List<Dictionary<string, object>> dialog)

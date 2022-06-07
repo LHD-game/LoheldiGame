@@ -14,7 +14,7 @@ public class QuestScript : MonoBehaviour
     private int QuestIndex = 0;
     private GameObject NpcQuest;
 
-    private MailLoad Mail;
+    public MailLoad Mail;
     private LodingTxt chat;
 
     public bool Draw=false;
@@ -31,13 +31,13 @@ public class QuestScript : MonoBehaviour
     void Start()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();//ÀÌ°Å¶û ¹Ø¿¡²¨ ³ªÁß¿¡ ¾ø¾Ú Å×½ºÆ® ¶§¹®¿¡ µÐ°Å
+        Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();//ÀÌ°Å¶û ¹Ø¿¡²¨ ³ªÁß¿¡ ¾ø¾Ú Å×½ºÆ® ¶§¹®¿¡ µÐ°Å
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
     }
 
     public void MainQuestLoding()
     {
-        Mail = GameObject.Find("chatManager").GetComponent<MailLoad>();
+        Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         Quest = true;
         GiveQuest();
@@ -52,7 +52,9 @@ public class QuestScript : MonoBehaviour
         string detail = Quest_Mail[QuestNumber]["content"].ToString();
         string sent = Quest_Mail[QuestNumber]["author"].ToString();
 
-        Mail.TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), QMailList);                      //¸ÞÀÏ ÇÁ¸®Æé »ý¼º
+        GameObject temp = Resources.Load<GameObject>("Prefabs/UI/Mail") as GameObject;
+
+        Mail.TempObject = Instantiate(temp, Mail.MailList);                      //¸ÞÀÏ ÇÁ¸®Æé »ý¼º
         Mail.ThisTitle = Mail.TempObject.transform.Find("Title").gameObject;                                              //ÇÁ¸®Æé¿¡ ¼Ó¼º
         Mail.ThisSent = Mail.TempObject.transform.Find("Sent").gameObject;
         Mail.ThisDetail = Mail.TempObject.transform.Find("Detail").gameObject;

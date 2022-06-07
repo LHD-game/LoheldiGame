@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 93020858}
   - component: {fileID: 93020857}
   - component: {fileID: 93020856}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Directional Light1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,7 +691,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6132076, g: 0.54511684, b: 0.41941082, a: 1}
+  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -729,7 +729,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8192
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -836,7 +836,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!1 &762525549
 GameObject:
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 762525552}
   - component: {fileID: 762525551}
   - component: {fileID: 762525550}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1013,7 +1013,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!1 &878097474
 GameObject:
@@ -1095,7 +1095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 982358163}
   - component: {fileID: 982358162}
   - component: {fileID: 982358161}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 1048221919}
   - component: {fileID: 1048221918}
   - component: {fileID: 1048221917}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,6 +1579,99 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8624122064201255299, guid: d140ef1643313d04a9c0b0956fd49f52, type: 3}
   m_PrefabInstance: {fileID: 1176574080}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1213960485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1213960487}
+  - component: {fileID: 1213960486}
+  m_Layer: 13
+  m_Name: Directional Light2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1213960486
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213960485}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: 3
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 5.5
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 24576
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1213960487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213960485}
+  m_LocalRotation: {x: -0.056837816, y: 0.592673, z: -0.78271586, w: 0.18128459}
+  m_LocalPosition: {x: 1.92, y: 17.4, z: 13.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 65.119, y: -313.763, z: -483.423}
 --- !u!1 &1407485663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1951,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1639578770
 GameObject:
@@ -1961,7 +2054,7 @@ RectTransform:
   - {fileID: 1176574081}
   - {fileID: 140534964}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2093,7 +2186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780226217}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2211,7 @@ Transform:
   - {fileID: 982358164}
   - {fileID: 2024615527}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1786519036 stripped
 MonoBehaviour:
@@ -2143,7 +2236,7 @@ GameObject:
   - component: {fileID: 1808246117}
   - component: {fileID: 1808246116}
   - component: {fileID: 1808246115}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2235,7 +2328,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 767330600701609284, guid: c9a0e4623ad0d6b469a20caf7739e65e, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 767330600701609284, guid: c9a0e4623ad0d6b469a20caf7739e65e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2314,7 +2407,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1985600074
 MonoBehaviour:
@@ -2347,7 +2440,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2458,19 +2551,19 @@ MonoBehaviour:
   audioReward: {fileID: 8300000, guid: 678c57f0eff01d546be41ccf165dcf49, type: 3}
   audioLevelUp: {fileID: 8300000, guid: 5eb7824dd7c699c458d5c3a145dc2d82, type: 3}
   audioClickIcon: {fileID: 8300000, guid: eb7fbe27294274346bef96dba529d5a5, type: 3}
-  audioClickBack: {fileID: 8300000, guid: 5f7b41072e0aa0b439a46a4f118c636c, type: 3}
+  audioClickBack: {fileID: 0}
   audioJump: {fileID: 8300000, guid: a54667d119f5fd6428d37cdd3207894d, type: 3}
   audioOpenDoor: {fileID: 8300000, guid: a2345da820d59a145b738328c4cb7e1d, type: 3}
   audioBGMOpening: {fileID: 8300000, guid: df0ff5ac6f498f644a78df9209e1f4ba, type: 3}
-  audioBGMField: {fileID: 8300000, guid: e2b4dd2fe0821c246bb56c67f5b3380e, type: 3}
-  audioBGMHouse: {fileID: 8300000, guid: ea1f2de34c0de264f87769f6522869ca, type: 3}
-  audioBGMLobby: {fileID: 0}
+  audioBGMField: {fileID: 8300000, guid: a978a6bc8b49f8745b361df1fea1228b, type: 3}
+  audioBGMHouse: {fileID: 8300000, guid: 0c435c4da299cf94e9ab812719d35ee1, type: 3}
+  audioBGMLobby: {fileID: 8300000, guid: 457849831cdd2504abb0d827e99de89e, type: 3}
   audioBGMFood: {fileID: 0}
-  audioBGMTooth: {fileID: 8300000, guid: 20bcd102cae8891438acf54639b17eb3, type: 3}
-  audioBGMCard: {fileID: 8300000, guid: 688ebb2ffdcff91408eddc0bda7bc8fa, type: 3}
+  audioBGMTooth: {fileID: 8300000, guid: dd72135b3440ea24292a394d3ad9aa73, type: 3}
+  audioBGMCard: {fileID: 8300000, guid: 2464774aa233e36408ada80a5c6dcd6f, type: 3}
   audioBGMGacha: {fileID: 0}
   audioBGMRun: {fileID: 8300000, guid: 23a316b2e2b473b48b33dc4d117ad168, type: 3}
-  audioBGMQuest: {fileID: 8300000, guid: 30f35f00d1a17794180c5fcfa27e0a63, type: 3}
+  audioBGMQuest: {fileID: 8300000, guid: daca5c5825e1bc445bbc475665066cff, type: 3}
   audioBGMQuestEnd: {fileID: 8300000, guid: 49c9b3ecc64837546aae44a5ce5888b3, type: 3}
   audioBGMNight: {fileID: 0}
 --- !u!1 &2003076749
@@ -2718,7 +2811,7 @@ GameObject:
   - component: {fileID: 2024615526}
   - component: {fileID: 2024615525}
   - component: {fileID: 2024615524}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

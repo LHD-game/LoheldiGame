@@ -47,7 +47,8 @@ public class RealClock : MonoBehaviour
         string DayTime = DateTime.Now.ToString("t");                      //시간 불러오기
         TimeTxT.text = "시간 : " + DayTime;
 
-        Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
+        Time = 12;
+        //Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
     }
 
     public void TimeSetting(float Time)

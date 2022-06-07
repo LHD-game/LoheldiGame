@@ -42,7 +42,6 @@ public class RunGameManager : MonoBehaviour
         markerPos = NMarker.localPosition;
         Reset();
         MAP[0].gameObject.SetActive(true);
-        SoundManager.GetComponent<SoundEffect>().Sound("BGMRun");
         Nownpc = GameObject.Find("Player").GetComponent<RunPlayerRun>();
         Count = GameObject.Find("CountDown").GetComponent<RunCountDown>();
     }
@@ -72,7 +71,8 @@ public class RunGameManager : MonoBehaviour
                 GameOverPanel.SetActive(true);
                 if (!FinishSound)
                 {
-                    SoundManager.GetComponent<SoundEffect>().Sound("GameFail");
+                    SoundManager sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+                    sound.Loose();
                     FinishSound = true;
                 }
             }
@@ -84,7 +84,8 @@ public class RunGameManager : MonoBehaviour
                 GameOverPanel.SetActive(true);
                 if (!FinishSound)
                 {
-                    SoundManager.GetComponent<SoundEffect>().Sound("GameSuccess");
+                    SoundManager sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+                    sound.Win();
                     FinishSound = true;
                 }
             }

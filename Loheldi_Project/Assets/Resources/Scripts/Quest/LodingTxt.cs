@@ -47,7 +47,7 @@ public class LodingTxt : MonoBehaviour
 
     public int NPCButton = 0;
     public string LoadTxt;
-    public string[] ButtonPlusNpc = new string[9]{"","","","","","","","",""};
+    public string[] ButtonPlusNpc = new string[2]{"",""};
 
     public List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
     public string FileAdress;                // 스크립트 파일 위치
@@ -81,7 +81,7 @@ public class LodingTxt : MonoBehaviour
     int m;                                  //카메라 무빙
     int o = 0;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
-    int QuestSubNum;                                  //퀘스트 스크립트 앞번호
+    public int QuestSubNum;                                  //퀘스트 스크립트 앞번호
 
     private void Awake()
     {

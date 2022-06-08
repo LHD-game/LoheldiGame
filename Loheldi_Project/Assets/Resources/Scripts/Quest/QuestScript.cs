@@ -23,6 +23,8 @@ public class QuestScript : MonoBehaviour
     public GameObject[] ExclamationMark;
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
     public int QuestNumber;
+
+    private int QuestNum;
     //1. 메인 퀘스트 불함수
     //2. 함수가 true인데 시간이 00이 되면 퀘스트 주는 스크립드X
     //3. int함수 하나 해서 날짜++
@@ -40,19 +42,22 @@ public class QuestScript : MonoBehaviour
         Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         Quest = true;
+        Debug.Log(QuestIndex);
+        QuestNum = Int32.Parse(Quest_Mail[QuestIndex]["QusetNumber"].ToString()); ;
         GiveQuest();
-        QuestIndex = +1;
-        QuestNumber = 0;
+        QuestIndex++;
+        //QuestNumber = QuestNum-1;
+        Debug.Log(QuestNum);
         
     }
 
     private void GiveQuest()
     {
-        string title = Quest_Mail[QuestNumber]["title"].ToString();                      
-        string detail = Quest_Mail[QuestNumber]["content"].ToString();
-        string sent = Quest_Mail[QuestNumber]["author"].ToString();
+        string title = Quest_Mail[QuestNum-1]["title"].ToString();                      
+        string detail = Quest_Mail[QuestNum-1]["content"].ToString();
+        string sent = Quest_Mail[QuestNum-1]["author"].ToString();
 
-        GameObject temp = Resources.Load<GameObject>("Prefabs/UI/Mail") as GameObject;
+        GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
 
         Mail.TempObject = Instantiate(temp, Mail.MailList);                      //메일 프리펩 생성
         Mail.ThisTitle = Mail.TempObject.transform.Find("Title").gameObject;                                              //프리펩에 속성
@@ -65,11 +70,55 @@ public class QuestScript : MonoBehaviour
         Mail.ThisDetail.GetComponent<Text>().text = detail;
     }
 
-    public void Quest1()
+    public void QuestChoice()
     {
-        NpcQuest = GameObject.Find("Hami");
+        string QnpcName="";
+        switch (QuestNum)
+        {
+            case 1:
+                QnpcName = "Hami";
+                chat.Num = "1-1";
+                break;
+            case 2:
+                QnpcName = "Himchan";
+                chat.Num = "2-1";
+                break;
+            case 3:
+                QnpcName = "Suho";
+                chat.Num = "3-1";
+                break;
+            case 4:
+                QnpcName = "Himchan";
+                chat.Num = "4-1";
+                break;
+            case 5 :
+                QnpcName = "Yeomi";
+                chat.Num = "5-1";
+                break;
+            case 6:
+                QnpcName = "Hami";
+                chat.Num = "6-1";
+                break;
+            case 7:
+                QnpcName = "Himchan";
+                chat.Num = "7-1";
+                break;
+            case 8:
+                QnpcName = "Mei";
+                chat.Num = "8-1";
+                break;
+            case 9:
+                QnpcName = "Himchan";
+                chat.Num = "9-1";
+                break;
+            case 10:
+                QnpcName = "Suho";
+                chat.Num = "10-1";
+                break;
+        }
+        NpcQuest = GameObject.Find(QnpcName);
         LodingTxt Load = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        Load.ButtonPlusNpc[0] = "Hami";
+        Load.ButtonPlusNpc[0] = QnpcName;
         ExclamationMarkCreate();
     }
 

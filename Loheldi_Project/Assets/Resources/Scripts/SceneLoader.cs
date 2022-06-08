@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     private VirtualJoystick joystic;
     private static SceneLoader _instance;
+    public GameObject DontDestroyQuest;
     public static SceneLoader instance
     {
         get

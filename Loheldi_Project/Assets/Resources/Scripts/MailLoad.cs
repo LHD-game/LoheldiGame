@@ -229,6 +229,14 @@ public class MailLoad : MonoBehaviour
         }
     }
 
+    public void MailReset()
+    {
+        TotalCount = 0;
+        NewMailCheck();
+
+    }
+
+
     /*oid GetChartContents(string chartNum)
     {
         var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.

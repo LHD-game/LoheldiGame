@@ -27,6 +27,8 @@ public class QuestScript : MonoBehaviour
 
 
     private int QuestNum;
+
+    QuestDontDestroy Load;
     //1. 메인 퀘스트 불함수
     //2. 함수가 true인데 시간이 00이 되면 퀘스트 주는 스크립드X
     //3. int함수 하나 해서 날짜++
@@ -34,9 +36,10 @@ public class QuestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();//이거랑 밑에꺼 나중에 없앰 테스트 때문에 둔거
-        Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
+        Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+
+        if (Load.ButtonPlusNpc != null)
+            ExclamationMarkCreate();
     }
 
     public void MainQuestLoding()
@@ -77,6 +80,7 @@ public class QuestScript : MonoBehaviour
 
     public void QuestChoice()
     {
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         string QnpcName="";
         switch (QuestNum)
         {
@@ -122,9 +126,10 @@ public class QuestScript : MonoBehaviour
                 break;
         }
         NpcQuest = GameObject.Find(QnpcName);
-        LodingTxt Load = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        Load.ButtonPlusNpc[0] = QnpcName;
+        Load.ButtonPlusNpc = QnpcName;
         ExclamationMarkCreate();
+        Load.QuestSubNum = QuestNum;
+        Debug.Log("쳇넘" + chat.Num);
     }
 
     private void ClearQuest()
@@ -134,7 +139,7 @@ public class QuestScript : MonoBehaviour
 
     private void ExclamationMarkCreate()
     {
-        Instantiate(ExclamationMark[Int32.Parse(Quest_Mail[QuestNumber]["authorNumber"].ToString())], NpcQuest.transform.position+new Vector3(0,5,0),NpcQuest.transform.rotation);
+        Instantiate(ExclamationMark[1], GameObject.Find(Load.ButtonPlusNpc).transform.position+new Vector3(0,5,0), GameObject.Find(Load.ButtonPlusNpc).transform.rotation);
     }
 
     public void ChangeDrawCamera()

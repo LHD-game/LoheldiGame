@@ -30,17 +30,50 @@ public class FlieChoice : MonoBehaviour
     }
     public void Tutorial()
     {
-        chat.Num = "0_1";
+        chat.Num = "0-1";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.NewChat();
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
     }
     public void Quest1()
     {
-        chat.Num = "1-1";
         chat.FileAdress = "Scripts/Quest/script_1";
+        switch (chat.QuestSubNum)
+        { 
+            case 1:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
+                break;
+            case 2:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest2");
+                break;
+            case 3:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest3");
+                break;
+            case 4:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest4");
+                break;
+            case 5:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest5");
+                break;
+            case 6:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest6");
+                break;
+            case 7:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest7");
+                break;
+            case 8:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest8");
+                break;
+            case 9:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest9");
+                break;
+            case 10:
+                chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest10");
+                break;
+        }
+    
+
         chat.NewChat();
-        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
     }
 
     public void NpcChoice()

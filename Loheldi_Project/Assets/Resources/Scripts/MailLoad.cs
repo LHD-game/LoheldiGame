@@ -16,6 +16,7 @@ public class MailLoad : MonoBehaviour
     public GameObject ThisTitle;                                      //메일 제목
     public GameObject ThisSent;                                       //보낸 사람
     public GameObject ThisDetail;                                     //메일 내용
+    public GameObject ThisType;                                       //메일 타입(서버인지 퀘스트인지)
     public Transform MailList;                                        //매일들이 정렬될 ParentObject
     public GameObject TempObject;
 
@@ -30,12 +31,15 @@ public class MailLoad : MonoBehaviour
     public GameObject MailCountImage;
     public Text MailCount;
 
+    QuestScript Quest;
+
     Dictionary<string, string> icode = new Dictionary<string, string>();
     Dictionary<string, string> iname = new Dictionary<string, string>();
     Dictionary<string, string> price = new Dictionary<string, string>();
 
     void Start()
     {
+        Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         MailorAnnou = true;
         NewMailCheck();
         UpdateList();
@@ -121,7 +125,6 @@ public class MailLoad : MonoBehaviour
 
         ThisTitle = TempObject.transform.Find("Title").gameObject;              //선택한 프리팹의 제목을 지정
         ThisDetail = TempObject.transform.Find("Detail").gameObject;            //(     ''     )내용을 지정
-
         RTitleText.text = ThisTitle.GetComponent<Text>().text;                  //우측에 표시되는 제목을 선택한 제목과 같게 함
         RDetailText.text = ThisDetail.GetComponent<Text>().text;                //내용을 프리펩에 속성인 Detail로 바꿈
     }
@@ -132,12 +135,21 @@ public class MailLoad : MonoBehaviour
 
         NoticeTitle = NoticeTempObject.transform.Find("Title").gameObject;      //선택한 프리팹의 제목을 지정
         NoticeDetail = NoticeTempObject.transform.Find("Detail").gameObject;    //(      ''     )내용을 지정
-
         NoticeTitleText.text = NoticeTitle.GetComponent<Text>().text;           //우측에 표시되는 제목을 선택한 제목과 같게 함
         NoticeDetailText.text = NoticeDetail.GetComponent<Text>().text;         //내용을 프리펩에 속성인 Detail로 바꿈
 
     }
 
+    public void Type_classification()
+    {
+        ThisType = TempObject.transform.Find("Type").gameObject;            //타입 지정
+        Transform type = ThisType.transform.GetChild(0);
+        Debug.Log(type.name);
+        if (type.name.Equals("Quest"))
+            Quest.QuestChoice();
+        else
+            ReceiveMail();
+    }
     public void ReceiveMail()
     {
         var BRO = Backend.Chart.GetChartContents("46292"); //서버의 엑셀파일을 불러온다.

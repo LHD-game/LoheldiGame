@@ -13,12 +13,9 @@ public class FurnitureChangeClick : MonoBehaviour
     private RaycastHit hit;
     public static string CurrentFurniture = "None";
 
-    public GameObject SoundManager;
-
     public bool housing=false;
     private void Start()
     {
-        SoundManager.GetComponent<SoundEffect>().Sound("BGMHouse");
     }
     void Update()
     {
@@ -47,7 +44,6 @@ public class FurnitureChangeClick : MonoBehaviour
                 }
             }
         }
-        SoundManager.GetComponent<SoundEffect>().Sound("GameFail");
     }
 
     public void Reset()

@@ -30,6 +30,7 @@ public class MailLoad : MonoBehaviour
 
     public GameObject MailCountImage;
     public Text MailCount;
+    public int TotalCount;
 
     QuestScript Quest;
 
@@ -43,10 +44,6 @@ public class MailLoad : MonoBehaviour
         MailorAnnou = true;
         NewMailCheck();
         UpdateList();
-    }
-
-    private void Update()
-    {
     }
 
     public void UpdateList()
@@ -146,7 +143,10 @@ public class MailLoad : MonoBehaviour
         Transform type = ThisType.transform.GetChild(0);
         Debug.Log(type.name);
         if (type.name.Equals("Quest"))
+        {
             Quest.QuestChoice();
+            Quest.QuestMail = false;
+        }
         else
             ReceiveMail();
     }
@@ -208,16 +208,22 @@ public class MailLoad : MonoBehaviour
     {
         BackendReturnObject bro = Backend.UPost.GetPostList(PostType.Admin, 10);  //서버에서 메일 리스트 불러오기
         JsonData json = bro.GetReturnValuetoJSON()["postList"];
-        if (json.Count != 0)
+
+        if (Quest.QuestMail)
+            TotalCount = json.Count + 1;
+        else if (!Quest.QuestMail)
+            TotalCount = json.Count;
+
+        if (TotalCount != 0)
         {
-            MailCount.text = json.Count.ToString();
-            if (json.Count >= 10)
+            MailCountImage.SetActive(true);
+            MailCount.text = TotalCount.ToString();
+            if (TotalCount >= 10)
             {
-                MailCountImage.SetActive(true);
                 MailCount.text = "9+";
             }
         }
-        else if (json.Count == 0)
+        else if (TotalCount == 0)
         {
             MailCountImage.SetActive(false);
         }

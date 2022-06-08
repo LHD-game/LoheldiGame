@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class QuestScript : MonoBehaviour
 {
     public Transform QMailList;
+    public bool QuestMail = false; //퀘스트 메일이 왔는지 확인하는 bool값
     public bool Quest = true;
     [SerializeField]
     private int QuestIndex = 0;
@@ -23,6 +24,7 @@ public class QuestScript : MonoBehaviour
     public GameObject[] ExclamationMark;
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
     public int QuestNumber;
+
 
     private int QuestNum;
     //1. 메인 퀘스트 불함수
@@ -53,6 +55,7 @@ public class QuestScript : MonoBehaviour
 
     private void GiveQuest()
     {
+        QuestMail = true;
         string title = Quest_Mail[QuestNum-1]["title"].ToString();                      
         string detail = Quest_Mail[QuestNum-1]["content"].ToString();
         string sent = Quest_Mail[QuestNum-1]["author"].ToString();
@@ -68,6 +71,8 @@ public class QuestScript : MonoBehaviour
         Mail.ThisTitle.GetComponent<Text>().text = title;                                                            //버튼에 속성을 서버에서 불러온 속성으로 바꿈
         Mail.ThisSent.GetComponent<Text>().text = sent;
         Mail.ThisDetail.GetComponent<Text>().text = detail;
+
+        Mail.NewMailCheck();
     }
 
     public void QuestChoice()
@@ -145,10 +150,5 @@ public class QuestScript : MonoBehaviour
             MainCamera.enabled = true;
             DrawCamera.enabled = false;
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

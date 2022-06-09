@@ -133,7 +133,7 @@ public class PlayerCustom : MonoBehaviour
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
         string item_texture = rows[0]["Texture"]["S"].ToString();
 
-        Debug.Log("FindTexture: " + item_texture);
+        //Debug.Log("FindTexture: " + item_texture);
 
         return item_texture;
     }

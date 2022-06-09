@@ -82,9 +82,11 @@ public class LodingTxt : MonoBehaviour
     int MataNum = 0;                        //메터리얼 번호
 
     public QuestDontDestroy DontDestroy;
+    private QuestScript Quest;
 
     private void Awake()
     {
+        Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
 
@@ -116,6 +118,7 @@ public class LodingTxt : MonoBehaviour
     {
         Debug.Log(FileAdress);
         Debug.Log("Num="+Num);
+        DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
         //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
@@ -140,7 +143,6 @@ public class LodingTxt : MonoBehaviour
     {
         if (move)
         { //Debug.Log("o=" +o+ "m=" + m);
-            DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
             if (o != m )
             {
                 if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
@@ -524,6 +526,9 @@ public class LodingTxt : MonoBehaviour
         if (DontDestroy.ButtonPlusNpc == Inter.NameNPC)
         {
             DontDestroy.ButtonPlusNpc = "";
+            Quest.Load.QuestMail = false;
+            Quest.Load.Quest = true;
+
         }
         /*for (int i = 0; i < ButtonPlusNpc.Length; i++)
         {

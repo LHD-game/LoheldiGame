@@ -40,7 +40,6 @@ public class VirtualJoystick : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name == "Housing")
                 {
-                    Debug.Log("ÇÏ¿ìÂ¡¼Óµµ");
                     Playerrb.velocity = Playerrb.velocity.normalized / speed2;
                 }
                 else if (SceneManager.GetActiveScene().name == "MainField")

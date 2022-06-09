@@ -45,7 +45,7 @@ public class StoreCategoryControl : MonoBehaviour
 
             //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
             GameObject item_name = child.transform.Find("ItemName").gameObject;
-            print(dialog[i]["IName"]);
+            //print(dialog[i]["IName"]);
             Text txt = item_name.GetComponent<Text>();
             txt.text = dialog[i]["IName"].ToString();
 

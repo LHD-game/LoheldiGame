@@ -145,7 +145,6 @@ public class MailLoad : MonoBehaviour
         if (type.name.Equals("Quest"))
         {
             Quest.QuestChoice();
-            Quest.QuestMail = false;
         }
         else
             ReceiveMail();
@@ -209,9 +208,9 @@ public class MailLoad : MonoBehaviour
         BackendReturnObject bro = Backend.UPost.GetPostList(PostType.Admin, 10);  //서버에서 메일 리스트 불러오기
         JsonData json = bro.GetReturnValuetoJSON()["postList"];
 
-        if (Quest.QuestMail)
+        if (Quest.Load.QuestMail)
             TotalCount = json.Count + 1;
-        else if (!Quest.QuestMail)
+        else if (!Quest.Load.QuestMail)
             TotalCount = json.Count;
 
         if (TotalCount != 0)

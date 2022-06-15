@@ -90,11 +90,11 @@ public class Gagu_Category : StoreCategoryControl
                 wa++;
             }
         }
-        print("wood: " + woodItem.Count);
+        /*print("wood: " + woodItem.Count);
         print("modern: " + modernItem.Count);
         print("kitsch: " + kitschItem.Count);
         print("classic: " + classicItem.Count);
-        print("wallpaper: " + wallpaperItem.Count);
+        print("wallpaper: " + wallpaperItem.Count);*/
     }
     //todo: 선택된 커스텀(nowsettings)에는 선택된 표시를 해줄 것 --> setActive이용
 }

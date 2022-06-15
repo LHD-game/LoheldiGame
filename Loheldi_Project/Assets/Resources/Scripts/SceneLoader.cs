@@ -7,6 +7,8 @@ public class SceneLoader : MonoBehaviour
 {
     private VirtualJoystick joystic;
     private static SceneLoader _instance;
+    //private QuestDontDestroy DontDestroy;
+    //public GameObject DontDestroyQuest;
     public static SceneLoader instance
     {
         get
@@ -24,7 +26,9 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("UserInfo");
     }
     public void GotoMainField()
-    {
+    {/*
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+        DontDestroy.Dontdestroy();*/
         /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
         joystic.speed1 = 8f;
         joystic.speed2 = 10f;*/

@@ -1209,6 +1209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578b710da1d68754099b1cff73735d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroyQuest: {fileID: 0}
 --- !u!1 &113345094
 GameObject:
   m_ObjectHideFlags: 0
@@ -9898,6 +9899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578b710da1d68754099b1cff73735d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroyQuest: {fileID: 0}
 --- !u!1 &1623812213
 GameObject:
   m_ObjectHideFlags: 0
@@ -13518,6 +13520,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4318438049007910218, guid: 871cbc08966394044b792fb1f1006e78, type: 3}
   m_PrefabInstance: {fileID: 1416204469340574263}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2725399510364555320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725399510364555322}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1000.12915, y: 559.1885, z: -252.3739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2725399510364555322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2725399510364555320}
+  - component: {fileID: 2725399510364555323}
+  m_Layer: 0
+  m_Name: DontDestroyQuest
+  m_TagString: Quest
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2725399510364555323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725399510364555322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19b02a2f591df446b02e43c793ecf25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonPlusNpc: 
 --- !u!1001 &3608006403798530471
 PrefabInstance:
   m_ObjectHideFlags: 0

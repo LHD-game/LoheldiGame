@@ -57,8 +57,8 @@ public class Super_Category : StoreCategoryControl
                 t++;
             }
         }
-        print("seed: " + seedItem.Count);
-        print("tree: " + treeItem.Count);
+        //print("seed: " + seedItem.Count);
+        //print("tree: " + treeItem.Count);
 
     }
     //todo: 선택된 커스텀(nowsettings)에는 선택된 표시를 해줄 것 --> setActive이용

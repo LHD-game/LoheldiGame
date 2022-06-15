@@ -47,7 +47,6 @@ public class LodingTxt : MonoBehaviour
 
     public int NPCButton = 0;
     public string LoadTxt;
-    public string[] ButtonPlusNpc = new string[2]{"",""};
 
     public List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
     public string FileAdress;                // 스크립트 파일 위치
@@ -81,10 +80,14 @@ public class LodingTxt : MonoBehaviour
     int m;                                  //카메라 무빙
     int o = 0;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
-    public int QuestSubNum;                                  //퀘스트 스크립트 앞번호
+
+    public QuestDontDestroy DontDestroy;
+    private QuestScript Quest;
 
     private void Awake()
     {
+        Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
 
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
@@ -102,13 +105,10 @@ public class LodingTxt : MonoBehaviour
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         //cuttoon = GameObject.Find("Cutton");
-        cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
-
-        shopCanvus.SetActive(false);
+        //cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
-        MailCanvus.SetActive(false);
         /*
         Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
         Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);*/
@@ -116,6 +116,9 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
+        Debug.Log(FileAdress);
+        Debug.Log("Num="+Num);
+        DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
         //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.JumpButtons.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
@@ -140,10 +143,9 @@ public class LodingTxt : MonoBehaviour
     {
         if (move)
         { //Debug.Log("o=" +o+ "m=" + m);
-            QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
             if (o != m )
             {
-                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (QuestSubNum == 0))
+                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
                 {
                     switch (o)
                     {
@@ -228,6 +230,7 @@ public class LodingTxt : MonoBehaviour
         {
             //Debug.Log("end실행");
             ChatEnd();
+            if(data_Dialog[j]["name"].ToString().Equals("end"))
             QuestEnd();
         }
         else
@@ -363,15 +366,17 @@ public class LodingTxt : MonoBehaviour
 
     public void Buttons()      //npc대화 상호작용 선택지 수
     {
-        Debug.Log("인터NPC:" + Inter.NameNPC);
-        for(int i = 0; i < ButtonPlusNpc.Length; i++)
+        //Debug.Log("인터NPC:" + Inter.NameNPC);
+        if (Inter.NameNPC.Equals(DontDestroy.ButtonPlusNpc))
+            NPCButton += 1;
+        /*for(int i = 0; i < ButtonPlusNpc.Length; i++)
         {
-            if (Inter.NameNPC.Equals(ButtonPlusNpc[i]))
+            if (Inter.NameNPC.Equals(DontDestroy.ButtonPlusNpc))
                 NPCButton += 1;
             else
                 continue;
-        }
-        
+        }*/
+
         NPCButtons.SetActive(true);
         for (int i= 0; i < NPCButton;i++)
         {
@@ -518,14 +523,21 @@ public class LodingTxt : MonoBehaviour
     }
     private void QuestEnd()
     {
-        for (int i = 0; i < ButtonPlusNpc.Length; i++)
+        if (DontDestroy.ButtonPlusNpc == Inter.NameNPC)
         {
-            if (ButtonPlusNpc[i] == Inter.NameNPC)
+            DontDestroy.ButtonPlusNpc = "";
+            Quest.Load.QuestMail = false;
+            Quest.Load.Quest = true;
+
+        }
+        /*for (int i = 0; i < ButtonPlusNpc.Length; i++)
+        {
+            if (ButtonPlusNpc == Inter.NameNPC)
             {
-                ButtonPlusNpc[i] = "";
+                ButtonPlusNpc = "";
                 break;
             }
-        }
+        }*/
         
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class QuestScript : MonoBehaviour
 {
     public Transform QMailList;
-    //public bool Quest = true;
+    public bool Quest = false;               //현재 받은 퀘스트 메일이 있는지 확인하는 함수 (MailLoad 211참조)
     [SerializeField]
     private GameObject NpcQuest;
 
@@ -48,7 +48,7 @@ public class QuestScript : MonoBehaviour
     {
         //Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
-        //Quest = true;
+        Quest = true;
         Debug.Log("퀘스트 번호" + Load.QuestIndex);
         QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); ;
         GiveQuest();

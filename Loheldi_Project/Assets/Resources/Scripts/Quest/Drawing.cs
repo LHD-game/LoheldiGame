@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System;
 
 
 public class Drawing : MonoBehaviour
@@ -9,7 +11,9 @@ public class Drawing : MonoBehaviour
     public Camera cam;  //Gets Main Camera
     public Camera Dcam;  //Gets Draw Camera
     public Material[] Material; //Material for Line Renderer
+    public GameObject SkechBook;
 
+    [SerializeField]
     private LineRenderer curLine;  //Line which draws now
     private int positionCount = 2;  //Initial start and end position
     private Vector3 PrevPos = Vector3.zero; // 0,0,0 position variable
@@ -20,20 +24,11 @@ public class Drawing : MonoBehaviour
 
     int i=0;  //메테리얼 번호
 
-    private void Awake()
-    {
-        layerMask = 1 << LayerMask.NameToLayer("Draw");
-    }
-    // Update is called once per frame
     void Update()
     {
         if (ForDraw)
         {
-            RaycastHit hit;
-            if (Input.GetMouseButton(0) && Physics.Raycast(Dcam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, layerMask))
-            {
-                DrawMouse();
-            }
+            DrawMouse();
         }
         
     }
@@ -90,20 +85,17 @@ public class Drawing : MonoBehaviour
             child.transform.position = curLine.GetPosition(positionCount - 1);
             child.transform.parent = ForErase;
             child.tag = "Eraser";
-            //Debug.Log(curLine.GetPosition(positionCount-1));
         }
     }
 
     void EraseLine(Vector3 mousePos)
     {
-        Debug.Log("지우개");
         Ray ray = Dcam.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
 
         if (Physics.Raycast(ray,out hit))
         {
-            Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.gameObject.tag.Equals("Eraser"))
             {
                 GameObject target = hit.collider.transform.parent.gameObject;
@@ -116,7 +108,6 @@ public class Drawing : MonoBehaviour
     public void changeColor()
     {
         GameObject click = EventSystem.current.currentSelectedGameObject;
-        Debug.Log(click.name);
         if (click.name.Equals("red"))
             i = 1;
         else if (click.name.Equals("yellow"))
@@ -127,19 +118,26 @@ public class Drawing : MonoBehaviour
             i = 4;
         else if (click.name.Equals("black"))
             i = 0;
-        Debug.Log(i);
+        Erase = false;
     }
     
     public void ChangeDrawCamera()
     {
-        if(cam.enabled)
+        GameObject mainUI = GameObject.Find("Canvas").transform.Find("mainUI").gameObject;
+        SkechBook = GameObject.Find("QuestEventUI").transform.Find("DrawUI").gameObject;
+        Debug.Log(SkechBook);
+        if (cam.enabled)
         {
+            mainUI.SetActive(false);
+            SkechBook.SetActive(true);
             ForDraw = true;
             cam.enabled=false;
             Dcam.enabled = true;
         }
         else
         {
+            mainUI.SetActive(true);
+            SkechBook.SetActive(false);
             ForDraw = false;
             Dcam.enabled = false;
             cam.enabled = true;
@@ -150,7 +148,195 @@ public class Drawing : MonoBehaviour
     {
         if (!Erase)
             Erase = true;
-        else
-            Erase = false;
     }
+
+    //kkkkk노트버리기kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+
+
+    public GameObject[] notes;
+    public Animator NoteAnimator;
+    [SerializeField]
+    private GameObject Destroyed;
+    int removeNote = 0;
+    int Length;
+
+    public void FinishWrite()
+    {
+        for (int i = 0; i < notes.Length; i++)
+        {
+            Destroy(notes[i].GetComponent<InputField>());
+        }
+        Invoke("AddButton",0.1f);
+    }
+    public void AddButton()
+    {
+        for (int i = 0; i < notes.Length; i++)
+        {
+            notes[i].AddComponent<Button>().onClick.AddListener(GotoWastebasket);
+        }
+    }
+    public void GotoWastebasket()
+    {
+        GameObject click = EventSystem.current.currentSelectedGameObject;
+        if (click.name.Equals("note"))
+        {
+            NoteAnimator.SetTrigger("NoteTrigger");
+            removeNote++;
+            Destroy(notes[0].GetComponent<Button>());
+        }
+        else if (click.name.Equals("note (1)"))
+        {
+            NoteAnimator.SetTrigger("NoteTrigger1");
+            removeNote++;
+            Destroy(notes[1].GetComponent<Button>());
+        }
+        else if (click.name.Equals("note (2)"))
+        { 
+            NoteAnimator.SetTrigger("NoteTrigger2");
+            removeNote++;
+            Destroy(notes[2].GetComponent<Button>());
+        }
+        else if (click.name.Equals("note (3)"))
+        {
+            NoteAnimator.SetTrigger("NoteTrigger3");
+            removeNote++;
+            Destroy(notes[3].GetComponent<Button>());
+        }
+        //this.GetComponent<Drawing>().Destroyed = click.name;
+        Destroyed = click.gameObject;
+        if (removeNote == notes.Length)
+            Debug.Log("다버림");
+    }
+
+    ///////////////가치관 카드//////////////////////////////////////////
+
+    public int ValueLevel=0;
+    public int ValueLength=0;
+    private int MaxValueLength=10;
+    int j;
+    public static GameObject ValueCardBack;
+    static Image spriteR;
+    public Sprite ValueCardBackImage;
+    public GameObject Button;
+    public void NextLevel()
+    {
+        j = 0;
+        if (ValueLength < MaxValueLength)
+        {
+            Debug.Log(MaxValueLength + "개의 카드를 선택하세요");
+        }
+        else
+        {
+            if (ValueLevel==1)
+            {
+                ValueCardBack = GameObject.Find("ValueCardBack");
+                spriteR = ValueCardBack.GetComponent<Image>();
+                spriteR.sprite = ValueCardBackImage;
+                Button.SetActive(false);
+            }
+            ValueLevel++;
+            RectTransform RectTransform;
+            MaxValueLength = 5;
+            GameObject parentsObject = GameObject.Find("ValueCards").gameObject;
+            for (int i = 0; i < parentsObject.transform.childCount; i++)
+            {
+                GameObject gameObject = GameObject.Find("ValueCards").transform.GetChild(i).gameObject;
+                RectTransform = gameObject.GetComponent<RectTransform>();
+                if (gameObject.tag.Equals("DestroyCard"))
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    ValueLength = 0;
+                    j++;
+                    RectTransform.transform.localScale = new Vector2(4f, 3f);
+                    gameObject.transform.GetChild(1).gameObject.SetActive(false);
+                    gameObject.tag = "DestroyCard";
+                    
+                    if (ValueLevel == 1)
+                    {
+                        switch (j)
+                        {
+                            case 10:
+                                RectTransform.anchoredPosition = new Vector2(-1089.614f, 82.99998f);
+                                break;
+                            case 1:
+                                RectTransform.anchoredPosition = new Vector2(-583.024f, 82.99998f);
+                                break;
+                            case 2:
+                                RectTransform.anchoredPosition = new Vector2(-583.024f, -317.27f);
+                                break;
+                            case 3:
+                                RectTransform.anchoredPosition = new Vector2(-82.29398f, 82.99998f);
+                                break;
+                            case 4:
+                                RectTransform.anchoredPosition = new Vector2(-1089.614f, -317.27f);
+                                break;
+                            case 5:
+                                RectTransform.anchoredPosition = new Vector2(-82.2937f, -317.2701f);
+                                break;
+                            case 6:
+                                RectTransform.anchoredPosition = new Vector2(432f, 83f);
+                                break;
+                            case 7:
+                                RectTransform.anchoredPosition = new Vector2(432f, -317.27f);
+                                break;
+                            case 8:
+                                RectTransform.anchoredPosition = new Vector2(918.9661f, 82.99998f);
+                                break;
+                            case 9:
+                                RectTransform.anchoredPosition = new Vector2(918.9661f, -317.27f);
+                                break;
+                        }
+                    }
+                    else if (ValueLevel == 2)
+                    {
+                        switch (j)
+                        {
+                            case 1:
+                                RectTransform.anchoredPosition = new Vector2(-781f, -215f);
+                                break;
+                            case 2:
+                                RectTransform.anchoredPosition = new Vector2(-299f, -215f);
+                                break;
+                            case 3:
+                                RectTransform.anchoredPosition = new Vector2(174f, -215f);
+                                break;
+                            case 4:
+                                RectTransform.anchoredPosition = new Vector2(678f, -215f);
+                                break;
+                            case 5:
+                                RectTransform.anchoredPosition = new Vector2(1157f, -215f);
+                                Debug.Log("끝!");
+                                break;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    public void Select()
+    {
+        GameObject click = EventSystem.current.currentSelectedGameObject;
+        if (click.tag.Equals("DestroyCard"))
+        {
+            if (ValueLength < MaxValueLength)
+            {
+                click.gameObject.tag = "SaveCard";
+                click.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+                ValueLength++;
+            }
+        }
+        else
+        {
+            click.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            click.gameObject.tag = "DestroyCard";
+            ValueLength--;
+        }
+
+    }
+
 }

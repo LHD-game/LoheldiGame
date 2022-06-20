@@ -23,7 +23,11 @@ public class Drawing : MonoBehaviour
     private bool Erase = false;
 
     int i=0;  //메테리얼 번호
-
+    public LodingTxt chat;
+    void Start()
+    {
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+    }
     void Update()
     {
         if (ForDraw)
@@ -205,7 +209,11 @@ public class Drawing : MonoBehaviour
         //this.GetComponent<Drawing>().Destroyed = click.name;
         Destroyed = click.gameObject;
         if (removeNote == notes.Length)
+        {
+            //chat.j++;
+            chat.Line();
             Debug.Log("다버림");
+        }
     }
 
     ///////////////가치관 카드//////////////////////////////////////////

@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class LodingTxt : MonoBehaviour
 {
@@ -45,6 +46,15 @@ public class LodingTxt : MonoBehaviour
     public GameObject shopCanvus;
     public GameObject MailCanvus;
 
+    public GameObject movie;
+    public GameObject DrawUI;
+    public GameObject Note;
+    public GameObject Value;
+    public GameObject IMessage;
+    public GameObject KeyToDream;
+    public GameObject AppleTree;
+    public GameObject MasterOfMtLife;
+
     public int NPCButton = 0;
     public string LoadTxt;
 
@@ -83,12 +93,14 @@ public class LodingTxt : MonoBehaviour
 
     public QuestDontDestroy DontDestroy;
     private QuestScript Quest;
+    private VideoScript video;
 
     private void Awake()
     {
+        video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+        //Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;  //나중에 주석 풀어야 함
 
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
         color = block.GetComponent<Image>().color;
@@ -109,9 +121,9 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
-        /*
-        Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
-        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.Length);*/
+        
+        //Debug.Log("이미지 리스트 갯수"+CCImageList.Length);
+        Debug.Log("이미지 스프라이트 오브젝트: "+CCImage.name);
 
     }
     public void NewChat()
@@ -122,7 +134,7 @@ public class LodingTxt : MonoBehaviour
             DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
         Debug.Log("이게 원인인듯");
         //if (SceneManager.GetActiveScene().name == "MainField")
-        JumpButtons.JumpButtons.SetActive(false);
+        Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k=0;k<= data_Dialog.Count;k++)
         {
@@ -304,10 +316,72 @@ public class LodingTxt : MonoBehaviour
                 scriptLine();
             }
         }
-        if(data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))
+        /*if(data_Dialog[j-1]["scriptType"].ToString().Equals("movie"))
         {
-            MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
-            QuizMate();
+            chatCanvus.SetActive(false);
+            video.OnPlayVideo();
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("movieEnd"))
+        {
+            chatCanvus.SetActive(true);
+            video.OnResetVideo();
+            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
+        }*/
+
+        if(data_Dialog[j-1]["scriptType"].ToString().Equals("note"))
+        {
+            chatCanvus.SetActive(false);
+            Note.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("noteEnd"))
+        {
+            chatCanvus.SetActive(true);
+            Note.SetActive(false);
+            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
+        }
+
+        if(data_Dialog[j-1]["scriptType"].ToString().Equals("i-message"))
+        {
+            chatCanvus.SetActive(false);
+            IMessage.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-messageEnd"))
+        {
+            chatCanvus.SetActive(true);
+            IMessage.SetActive(false);
+            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
+        }
+
+        if(data_Dialog[j-1]["scriptType"].ToString().Equals("train"))
+        {
+            chatCanvus.SetActive(false);
+            Value.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("trainEnd"))
+        {
+            chatCanvus.SetActive(true);
+            Value.SetActive(false);
+            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
+        }
+
+        if(data_Dialog[j-1]["scriptType"].ToString().Equals("draw"))
+        {
+            Value.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawFinish"))
+        {
+            Value.SetActive(false);
+            Debug.Log("다그려땡");
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("Screenshot"))
+        {
+            Value.SetActive(false);
+            Debug.Log("스샷 어케하는경");
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawEnd"))
+        {
+            Value.SetActive(false);
+            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
         }
     }
 

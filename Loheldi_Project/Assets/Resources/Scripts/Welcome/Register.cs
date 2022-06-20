@@ -44,6 +44,12 @@ public class Register : MonoBehaviour
     [SerializeField]
     private InputField InputFPW_ID;
 
+    //level, coin ..etc
+    public int money;
+    public static int level;
+    public static float exp;
+    float Maxexp;
+
     public void Start()
     {
         ErrorLine.gameObject.SetActive(false);
@@ -130,8 +136,20 @@ public class Register : MonoBehaviour
             UserInfoDB();
         }
 
+        level = 1;
+        Maxexp = 100;
+        exp = 0;
+        Param param = new Param();
+        param.Add("level", level);
+        param.Add("Maxexp", Maxexp);
+        param.Add("exp", exp);
 
-        
+        var bro = Backend.GameData.Insert("USER_GAME_DATA", param);
+        if (bro.IsSuccess())
+        {
+            print("동기 방식 데이터 입력 성공");
+        }
+
     }
 
 

@@ -29,13 +29,8 @@ public class Card_TimeSlider : MonoBehaviour
 
     void Start()
     {
-        sliderImg = GetComponent<Image>();
+        sliderImg = this.GetComponent<Image>();
         TimeInit();
-    }
-
-    void Update()
-    {
-        
     }
 
     public void TimeInit() //시간 초기화 - 200초

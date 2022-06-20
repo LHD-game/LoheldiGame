@@ -33,7 +33,7 @@ public class RunCountDown : MonoBehaviour
     {
         DifficultyPanel.gameObject.SetActive(false);
         RunBtnPanel.SetActive(true);
-        Num.SetActive(true);
+        //Num.SetActive(true);
 
         InvokeRepeating("NumAppear", 0f, 1f);
     }

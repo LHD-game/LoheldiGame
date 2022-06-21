@@ -23,7 +23,11 @@ public class Drawing : MonoBehaviour
     private bool Erase = false;
 
     int i=0;  //메테리얼 번호
-
+    public LodingTxt chat;
+    void Start()
+    {
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+    }
     void Update()
     {
         if (ForDraw)
@@ -157,7 +161,6 @@ public class Drawing : MonoBehaviour
     public Animator NoteAnimator;
     [SerializeField]
     private GameObject Destroyed;
-    int removeNote = 0;
     int Length;
 
     public void FinishWrite()
@@ -181,31 +184,24 @@ public class Drawing : MonoBehaviour
         if (click.name.Equals("note"))
         {
             NoteAnimator.SetTrigger("NoteTrigger");
-            removeNote++;
             Destroy(notes[0].GetComponent<Button>());
         }
         else if (click.name.Equals("note (1)"))
         {
             NoteAnimator.SetTrigger("NoteTrigger1");
-            removeNote++;
             Destroy(notes[1].GetComponent<Button>());
         }
         else if (click.name.Equals("note (2)"))
         { 
             NoteAnimator.SetTrigger("NoteTrigger2");
-            removeNote++;
             Destroy(notes[2].GetComponent<Button>());
         }
         else if (click.name.Equals("note (3)"))
         {
             NoteAnimator.SetTrigger("NoteTrigger3");
-            removeNote++;
             Destroy(notes[3].GetComponent<Button>());
         }
-        //this.GetComponent<Drawing>().Destroyed = click.name;
         Destroyed = click.gameObject;
-        if (removeNote == notes.Length)
-            Debug.Log("다버림");
     }
 
     ///////////////가치관 카드//////////////////////////////////////////
@@ -309,6 +305,7 @@ public class Drawing : MonoBehaviour
                             case 5:
                                 RectTransform.anchoredPosition = new Vector2(1157f, -215f);
                                 Debug.Log("끝!");
+                                Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
                                 break;
                         }
                     }
@@ -316,6 +313,11 @@ public class Drawing : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void scriptLine()
+    {
+        chat.scriptLine();
     }
 
     public void Select()

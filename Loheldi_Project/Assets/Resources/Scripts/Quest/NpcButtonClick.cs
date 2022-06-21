@@ -28,6 +28,7 @@ public class NpcButtonClick : MonoBehaviour
             SceneLoader.instance.GotoPlayerCloset();
         else if (SecondButtonTxt.text.Equals("가구점 이용하기"))
         {
+            Chat.chat.Main_UI.SetActive(true);
             UIB.shop.SetActive(true);
             UIB.chat.ChatEnd();
         }

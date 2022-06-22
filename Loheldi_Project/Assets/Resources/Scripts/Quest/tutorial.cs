@@ -8,12 +8,13 @@ public class tutorial : MonoBehaviour
     public static GameObject button;
     public LodingTxt chat;
     private FlieChoice Chat;
+    public int tutoi;                            //∆©≈‰∏ÆæÛ «œ¿Ã∂Û¿Ã∆Æ ¿ÃπÃ¡ˆøÎ
 
     private void Awake()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
-    }
+    }/*
 
     public void forTutorial()
     {
@@ -23,76 +24,81 @@ public class tutorial : MonoBehaviour
         chat.move = true;
         chat.cuttoonFileAdress = "Sprites/Quest/cuttoon/tutorial";
         chat.NewChat();
-    }
+    }*/
 
     public void Tutorial()
     {
         Debug.Log("∆©≈‰∏ÆæÛ Ω«¡P§∑22");
 
         Image tutoblack = chat.block.GetComponent<Image>();
-        
+        if (tutoi < 7)
+            tutoblack.sprite = chat.cuttoonImageList[4 + tutoi];
         chat.color.a = 1f;
         chat.block.GetComponent<Image>().color = chat.color;
         if (!chat.tuto)
             chat.ChatWin.SetActive(false);
-        chat.j--;
-
-        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0-6")||(chat.tutoi<=4&&chat.tutoi>0))
+        //chat.j--;
+        Debug.Log("∆©≈‰i=" + tutoi);
+        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0-6")||(tutoi<=4&&tutoi>0))
         {
-            Debug.Log("∆©≈‰i=" + chat.tutoi);
-            Debug.Log("πˆ∆∞=" + chat.block.transform.GetChild(chat.tutoi));
-            if (chat.tutoi < 4)
+            //Debug.Log("∆©≈‰i=" + tutoi);
+            //Debug.Log("πˆ∆∞=" + chat.block.transform.GetChild(tutoi));
+            if (tutoi < 4)
             {
-                tutoblack.sprite = chat.cuttoonImageList[4+chat.tutoi];
-                if (chat.tutoi == 0)
+                //Debug.Log("6Ω««‡ ∆©≈‰i=" + tutoi);
+                //tutoblack.sprite = chat.cuttoonImageList[4+tutoi];
+                if (tutoi == 0)
                 {
                     chat.Main_UI.SetActive(true);
-                    chat.JumpButtons.JumpButtons.SetActive(true);
+                    chat.JumpButtons.Main_UI.SetActive(true);
                 }
-                else if (chat.tutoi == 1)
+                else if (tutoi == 1)
                     chat.Main_UI.SetActive(false);
-                chat.c += 1;
+                //chat.c += 1;
                 //chat.Cuttoon();
-                chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);
-                if(chat.tutoi>0)
-                    chat.block.transform.GetChild(chat.tutoi-1).gameObject.SetActive(false);
-                chat.tutoi++;
+                chat.block.transform.GetChild(tutoi).gameObject.SetActive(true);
+                if(tutoi>0)
+                    chat.block.transform.GetChild(tutoi-1).gameObject.SetActive(false);
+                tutoi++;
                 if (!chat.tuto)
                     chat.tuto = true;
             }
             else
             {
-                for (int i = 0; i < 4; i++)
-                    chat.block.transform.GetChild(i).gameObject.SetActive(false);
-                chat.tutoi = 6;
+                chat.block.transform.GetChild(3).gameObject.SetActive(false);
+                //chat.tutoi = 6;
                 chat.tutoFinish = true;
-                chat.ChatEnd();
-                forTutorial();
+                //chat.ChatEnd();
+                chat.Line();
+                //forTutorial();
             }
         }
 
         if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0-12"))
         {
-            if (chat.tutoi < 7)
+            if (tutoi == 0)
+                tutoi += 4;
+            if (tutoi < 7)
             {
-                if (chat.tutoi == 0)
-                    chat.tutoi += 4;
-                //Debug.Log("12Ω««‡ ∆©≈‰i=" + chat.tutoi);
-                tutoblack.sprite = chat.cuttoonImageList[5];
+                //Debug.Log("12Ω««‡ ∆©≈‰i=" + (tutoi));
+                //tutoblack.sprite = chat.cuttoonImageList[4+tutoi];
                 chat.Main_UI.SetActive(true);
-                chat.block.transform.GetChild(chat.tutoi).gameObject.SetActive(true);
-                chat.tutoi++;
+                //Debug.Log(chat.block.transform.GetChild(tutoi).gameObject.name);
+                chat.block.transform.GetChild(tutoi).gameObject.SetActive(true);
+                if (tutoi > 4)
+                    chat.block.transform.GetChild(tutoi - 1).gameObject.SetActive(false);
+                tutoi++;
                 if (!chat.tuto)
                     chat.tuto = true;
             }
             else
             {
-                for (int i = 4; i < 7; i++)
-                    chat.block.transform.GetChild(i).gameObject.SetActive(false);
-                chat.tutoi = 12;
+                chat.block.transform.GetChild(6).gameObject.SetActive(false);
+                //chat.tutoi = 12;
                 chat.tutoFinish = true;
-                chat.ChatEnd();
-                forTutorial();
+                //chat.ChatEnd();
+                chat.Line();
+                //forTutorial();
             }
         }
         

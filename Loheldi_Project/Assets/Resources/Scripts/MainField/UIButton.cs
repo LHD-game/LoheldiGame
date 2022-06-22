@@ -12,7 +12,7 @@ public class UIButton : MonoBehaviour
     public GameObject shop;
     public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
-    public GameObject JumpButtons;
+    public GameObject Main_UI;
 
     //public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
@@ -51,8 +51,17 @@ public class UIButton : MonoBehaviour
     {
         if (Inter.NearNPC)     //NPC주변에 있다면
         {
-            JumpButtons.SetActive(false);
+
+            GameObject NPC;
+            NPC = GameObject.Find(Inter.NameNPC);
+            Vector3 targetPositionNPC;
+            Vector3 targetPositionPlayer;
+            targetPositionNPC = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
+            targetPositionPlayer = new Vector3(NPC.transform.position.x, transform.position.y, NPC.transform.position.z);
+            Main_UI.SetActive(false);
             Chat.NpcChoice();
+            NPC.transform.LookAt(targetPositionNPC);
+            Player.transform.LookAt(targetPositionPlayer);
         }
         else if (Inter.Door)
         {
@@ -76,67 +85,4 @@ public class UIButton : MonoBehaviour
             }
         }
     }
-
-
-    /*public void NPCButtonUI()
-    {
-        if (Inter.NameNPC.Equals("Himchan"))  //NPC이름이 이거면
-        {
-            SceneLoader.instance.GotoLobby();
-        }
-        else if (Inter.NameNPC.Equals("Yomi"))  //NPC이름이 이거면
-        {
-            SceneLoader.instance.GotoPlayerCustom();
-        }
-        else if (Inter.NameNPC.Equals("Hami"))  //NPC이름이 이거면
-        {
-            Chat.chick();
-        }
-        else if (Inter.NameNPC.Equals("Suho"))  //NPC이름이 이거면
-        {
-            Chat.rabbit();
-        }
-        else if (Inter.NameNPC.Equals("Nari"))  //NPC이름이 이거면
-        {
-            Chat.squirrel();
-        }
-        else if (Inter.NameNPC.Equals("Mei"))  //NPC이름이 이거면
-        {
-            Chat.goat();
-        }
-        else if (Inter.NameNPC.Equals("Markatman"))  //NPC이름이 이거면
-        {
-            Chat.fox2();
-        }
-        else if (Inter.NameNPC.Equals("Yeomi"))  //NPC이름이 이거면
-        {
-            Chat.fox1();
-        }
-        else if (Inter.NameNPC.Equals("Mu"))  //NPC이름이 이거면
-        {
-            shop.SetActive(true);
-            chat.ChatEnd();
-        }
-    }*/
-
-    /*public void MapButton()                 //지도버튼
-    {
-        Map.SetActive(true);
-    }
-
-
-    public  void ConditionButton()                 //상태창버튼
-    {
-        if (conditionWindow)                                            //상태창이 열려있다면
-        {
-            ConditionWindow.SetActive(false);
-            conditionWindow = false;
-        }
-        else                                                //상태창이 닫혀있다면
-        {
-            ConditionWindow.SetActive(true);
-            conditionWindow = true;
-            conditionLevelText.text = MainGameManager.level.ToString();
-        }
-    }*/
 }

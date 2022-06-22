@@ -67,7 +67,7 @@ public class LodingTxt : MonoBehaviour
     public int c=0;                              //컷툰 이미지 번호
     //public static int k;                    //npc
     public int l;                            //뜨는 이미지 번호
-    public int tutoi;                            //튜토리얼 하이라이트 이미지용
+    //public int tutoi;                            //튜토리얼 하이라이트 이미지용
     string Answer;               //누른 버튼 인식
 
     public bool tutoEnd=false;  //튜토리얼 완전 끝
@@ -98,8 +98,8 @@ public class LodingTxt : MonoBehaviour
 
     private void Awake()
     {
-        //Draw = GameObject.Find("QuestManager").GetComponent<Drawing>(); //나중에 주석 풀어야함
-        //video = GameObject.Find("QuestManager").GetComponent<VideoScript>(); //나중에 주석 풀어야함
+        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>(); //나중에 주석 풀어야함
+        video = GameObject.Find("QuestManager").GetComponent<VideoScript>(); //나중에 주석 풀어야함
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;  //나중에 주석 풀어야 함
@@ -129,10 +129,10 @@ public class LodingTxt : MonoBehaviour
     public void NewChat()
     {
         cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
-        Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
-        Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
-        Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        Debug.Log("Num="+Num);
+        //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
+        //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
+        //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
+        //Debug.Log("Num="+Num);
         if (DontDestroy.QuestMail)
             DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
         //if (SceneManager.GetActiveScene().name == "MainField")
@@ -158,7 +158,7 @@ public class LodingTxt : MonoBehaviour
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
         if (move)
-        { Debug.Log("o=" +o+ "m=" + m);
+        { //Debug.Log("o=" +o+ "m=" + m);
             if (o != m )
             {
                 if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
@@ -206,10 +206,123 @@ public class LodingTxt : MonoBehaviour
                     }
                     m = o;
                 }
-                o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("-") + 1));
             }
+            o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("-") + 1));
         }
         
+    }
+
+    private void QuestSubChoice()
+    {
+        if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
+        {
+            Cuttoon();
+            ChatWin.SetActive(false);
+            Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
+        {
+            c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
+            RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
+            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 8208);
+            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 3888);
+            Vector3 position = cuttoon.transform.localPosition;
+            if (c == 1)
+            {
+                position.x = -778;
+                position.y = -42;
+                cuttoon.transform.Rotate(0, 0, -35);
+            }
+            else if (c == 2)
+            {
+                position.x = -2029;
+                position.y = -233;
+                cuttoon.transform.Rotate(0, 0, 35);
+            }
+            else if (c == 3)
+            {
+                position.x = -1913;
+                position.y = 685;
+                cuttoon.transform.Rotate(0, 0, 0);
+            }
+            else if (c == 4)
+            {
+                position.x = -493;
+                position.y = 685;
+                cuttoon.transform.Rotate(0, 0, 0);
+            }
+            cuttoon.transform.localPosition = position;
+            ChatWin.SetActive(false);
+            Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))
+        {
+            RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
+            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3040);
+            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1440);
+            Vector3 position = cuttoon.transform.localPosition;
+
+            position.x = 0;
+            position.y = 0;
+            cuttoon.transform.localPosition = position;
+            scriptLine();
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
+        {
+            ChatWin.SetActive(false);
+            Note.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("noteEnd"))
+        {
+            //ChatWin.SetActive(true);
+            scriptLine();
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-message"))
+        {
+            ChatWin.SetActive(false);
+            IMessage.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-messageEnd"))
+        {
+            //ChatWin.SetActive(true);
+            IMessage.SetActive(false);
+            scriptLine();
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("train"))
+        {
+            ChatWin.SetActive(false);
+            Value.SetActive(true);
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("trainEnd"))
+        {
+            //ChatWin.SetActive(true);
+            Value.SetActive(false);
+            scriptLine();
+
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("draw"))
+        {
+            ChatWin.SetActive(false);
+            Draw.ChangeDrawCamera();
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawFinish"))
+        {
+            scriptLine();
+            Debug.Log("다그려땡");
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("Screenshot"))
+        {
+            Value.SetActive(false);
+            scriptLine();
+            Debug.Log("스샷 어케하는경");
+        }
+        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawEnd"))
+        {
+            Value.SetActive(false);
+            scriptLine();
+            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
+            Draw.ChangeDrawCamera();
+        }
     }
     public void Line()  //줄넘김
     {
@@ -223,171 +336,28 @@ public class LodingTxt : MonoBehaviour
             block.GetComponent<Image>().color = color;
             tuto = false;
             tutoFinish = false;
-            if (tutoi == 6)
-            {
-                j = 33;
-                o++;
-            }
-            if (tutoi == 12)
-            {
-                Main_UI.SetActive(true);
-                j = 80;
-                tutoEnd = true;
-            }
-            tutoi = 0;
         }
-        else if (tutoi == 5)
-        {
-            chatCanvus.SetActive(true);
-            ++j;
-        }
-
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
-            //Debug.Log("end실행");
             ChatEnd();
-            if(data_Dialog[j]["name"].ToString().Equals("end"))
-            QuestEnd();
+            if (data_Dialog[j]["name"].ToString().Equals("end"))
+                QuestEnd();
         }
         else
         {
+            if (!data_Dialog[j]["scriptType"].ToString().Equals("nomal"))
+                QuestSubChoice();
+
             if (data_Dialog[j]["scriptNumber"].ToString().Equals("0-1"))
                 Main_UI.SetActive(false);
-            spriteR = CCImage.GetComponent<Image>();     
+
+            spriteR = CCImage.GetComponent<Image>();
             l = Int32.Parse(data_Dialog[j]["image"].ToString());
-            //Debug.Log("이미지번호="+l);
+            //Debug.Log("이미지번호=" + l);
             spriteR.sprite = CCImageList[l];
-            //Debug.Log("밖:" +data_Dialog[j]["cuttoon"].ToString());
-            if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
-            {
-                Cuttoon();
-                ChatWin.SetActive(false);
-                Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
-            }
-            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
-            {
-                c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
-                RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 8208);
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 3888);
-                Vector3 position = cuttoon.transform.localPosition;
-                if (c == 1)
-                {
-                    position.x = -778;
-                    position.y = -42;
-                    cuttoon.transform.Rotate(0, 0, -35);
-                }
-                else if (c == 2)
-                {
-                    position.x = -2029;
-                    position.y = -233;
-                    cuttoon.transform.Rotate(0, 0, 35);
-                }
-                else if (c == 3)
-                {
-                    position.x = -1913;
-                    position.y = 685;
-                    cuttoon.transform.Rotate(0, 0, 0);
-                }
-                else if (c == 4)
-                {
-                    position.x = -493;
-                    position.y = 685;
-                    cuttoon.transform.Rotate(0, 0, 0);
-                }
-                cuttoon.transform.localPosition = position;
-                ChatWin.SetActive(false);
-                Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
-            }
-            else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))
-            {
-                RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3040);
-                rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1440);
-                Vector3 position = cuttoon.transform.localPosition;
-
-                position.x = 0;
-                position.y = 0;
-                cuttoon.transform.localPosition = position;
-                scriptLine();
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
-            {
-                ChatWin.SetActive(false);
-                Note.SetActive(true);
-            }
-            else if (data_Dialog[j-1]["scriptType"].ToString().Equals("noteEnd"))
-            {
-                //ChatWin.SetActive(true);
-                scriptLine();
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-message"))
-            {
-                ChatWin.SetActive(false);
-                IMessage.SetActive(true);
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-messageEnd"))
-            {
-                //ChatWin.SetActive(true);
-                IMessage.SetActive(false);
-                scriptLine();
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("train"))
-            {
-                ChatWin.SetActive(false);
-                Value.SetActive(true);
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("trainEnd"))
-            {
-                //ChatWin.SetActive(true);
-                Value.SetActive(false);
-                scriptLine();
-
-            }
-            else if (data_Dialog[j]["scriptType"].ToString().Equals("draw"))
-            {
-                ChatWin.SetActive(false);
-                Draw.ChangeDrawCamera();
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawFinish"))
-            {
-                scriptLine();
-                Debug.Log("다그려땡");
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("Screenshot"))
-            {
-                Value.SetActive(false);
-                scriptLine();
-                Debug.Log("스샷 어케하는경");
-            }
-            else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawEnd"))
-            {
-                Value.SetActive(false);
-                scriptLine();
-                Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
-                Draw.ChangeDrawCamera();
-            }
-            else
-            {
-                //Debug.Log("그냥실행");
-                cuttoon.SetActive(false);
-                scriptLine();
-            }
+            cuttoon.SetActive(false);
+            scriptLine();
         }
-        /*if(data_Dialog[j-1]["scriptType"].ToString().Equals("movie"))
-        {
-            chatCanvus.SetActive(false);
-            video.OnPlayVideo();
-        }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("movieEnd"))
-        {
-            chatCanvus.SetActive(true);
-            video.OnResetVideo();
-            Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
-        }*/
-
-
-        
     }
 
     
@@ -428,13 +398,14 @@ public class LodingTxt : MonoBehaviour
     public void ChatEnd() //리셋
     {
         //if (SceneManager.GetActiveScene().name == "MainField")
-        JumpButtons.JumpButtons.SetActive(true);
+        JumpButtons.Main_UI.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
         Arrow.SetActive(false);
         NPCButtons.SetActive(false);
         Name.text = " ";
+        Main_UI.SetActive(true);
         c = 0;
         for (int i = 0; i < NPCButton; i++)
         {
@@ -450,13 +421,6 @@ public class LodingTxt : MonoBehaviour
         //Debug.Log("인터NPC:" + Inter.NameNPC);
         if (Inter.NameNPC.Equals(DontDestroy.ButtonPlusNpc))
             NPCButton += 1;
-        /*for(int i = 0; i < ButtonPlusNpc.Length; i++)
-        {
-            if (Inter.NameNPC.Equals(DontDestroy.ButtonPlusNpc))
-                NPCButton += 1;
-            else
-                continue;
-        }*/
 
         NPCButtons.SetActive(true);
         for (int i= 0; i < NPCButton;i++)
@@ -472,11 +436,6 @@ public class LodingTxt : MonoBehaviour
         QuizMate();
         MainCamera.enabled = false;
         QuizCamera.enabled = true;
-        //k = 1;
-        //Txt = QuizTxt;
-        //Name=QuizName;
-        //ChatWin.SetActive(false);
-        //QuizeWin.SetActive(true);
     }
     public void QuizMate() //전광판 메테리얼 설정
     {
@@ -622,9 +581,4 @@ public class LodingTxt : MonoBehaviour
         
     }
 
-    public void fortest()
-    {
-        Debug.Log("개같은 애니메이션");
-        Line();
-    }
 }

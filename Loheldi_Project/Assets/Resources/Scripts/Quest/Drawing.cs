@@ -11,9 +11,9 @@ public class Drawing : MonoBehaviour
     public Camera cam;  //Gets Main Camera
     public Camera Dcam;  //Gets Draw Camera
     public Material[] Material; //Material for Line Renderer
-    public GameObject SkechBook;
 
-    [SerializeField]
+    //[SerializeField]
+    private GameObject SkechBook;
     private LineRenderer curLine;  //Line which draws now
     private int positionCount = 2;  //Initial start and end position
     private Vector3 PrevPos = Vector3.zero; // 0,0,0 position variable
@@ -23,7 +23,7 @@ public class Drawing : MonoBehaviour
     private bool Erase = false;
 
     int i=0;  //메테리얼 번호
-    public LodingTxt chat;
+    private LodingTxt chat;
     void Start()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
@@ -159,7 +159,7 @@ public class Drawing : MonoBehaviour
 
     public GameObject[] notes;
     public Animator NoteAnimator;
-    [SerializeField]
+    //[SerializeField]
     private GameObject Destroyed;
     int Length;
 
@@ -206,14 +206,14 @@ public class Drawing : MonoBehaviour
 
     ///////////////가치관 카드//////////////////////////////////////////
 
-    public int ValueLevel=0;
-    public int ValueLength=0;
+    private int ValueLevel=0;
+    private int ValueLength=0;
     private int MaxValueLength=10;
     int j;
-    public static GameObject ValueCardBack;
+    private static GameObject ValueCardBack;
     static Image spriteR;
-    public Sprite ValueCardBackImage;
-    public GameObject Button;
+    private Sprite ValueCardBackImage;
+    private GameObject Button;
     public void NextLevel()
     {
         j = 0;

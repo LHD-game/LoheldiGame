@@ -31,7 +31,7 @@ public class FlieChoice : MonoBehaviour
     public void Tutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.Num = "0-12";
+        chat.Num = "0-1";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.move = true;
         chat.cuttoonFileAdress = "Sprites/Quest/cuttoon/tutorial";

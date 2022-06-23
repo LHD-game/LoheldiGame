@@ -67,12 +67,11 @@ public class LodingTxt : MonoBehaviour
     public int c=0;                              //컷툰 이미지 번호
     //public static int k;                    //npc
     public int l;                            //뜨는 이미지 번호
-    //public int tutoi;                            //튜토리얼 하이라이트 이미지용
     string Answer;               //누른 버튼 인식
 
     public bool tutoEnd=false;  //튜토리얼 완전 끝
     public bool tutoFinish=false;
-    public bool tuto=false;
+    public bool tuto;
     public bool move = false; //캐릭터 순간이동
     public static GameObject CCImage;     //캐릭터 이미지
     public static Sprite[] CCImageList;
@@ -347,7 +346,11 @@ public class LodingTxt : MonoBehaviour
         {
             if (!data_Dialog[j]["scriptType"].ToString().Equals("nomal"))
                 QuestSubChoice();
-
+            else
+            {
+                cuttoon.SetActive(false);
+                scriptLine();
+            }
             if (data_Dialog[j]["scriptNumber"].ToString().Equals("0-1"))
                 Main_UI.SetActive(false);
 
@@ -355,8 +358,6 @@ public class LodingTxt : MonoBehaviour
             l = Int32.Parse(data_Dialog[j]["image"].ToString());
             //Debug.Log("이미지번호=" + l);
             spriteR.sprite = CCImageList[l];
-            cuttoon.SetActive(false);
-            scriptLine();
         }
     }
 
@@ -482,17 +483,14 @@ public class LodingTxt : MonoBehaviour
             //Button.SetActive(true); //유니티에서 버튼 위치 옮김
         }
 
-        block.SetActive(false);
 
         if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
         {
             changeMoment();
             //Debug.Log("튜토리얼 실핻ㅇ");
-            block.SetActive(true);
-
             Invoke("Tutorial_", 2f);
-            
         }
+        block.SetActive(false);
     }
 
     void QuizCho()
@@ -563,13 +561,11 @@ public class LodingTxt : MonoBehaviour
     }
     private void QuestEnd()
     {
-        if (DontDestroy.ButtonPlusNpc == Inter.NameNPC)
-        {
-            DontDestroy.ButtonPlusNpc = "";
-            Quest.Load.QuestMail = false;
-            Quest.Load.Quest = true;
+        DontDestroy.ButtonPlusNpc = "";
+        Quest.Load.QuestMail = false;
+       // Quest.Load.Quest = true;
 
-        }
+        DontDestroy.LastDay = DontDestroy.ToDay;
         /*for (int i = 0; i < ButtonPlusNpc.Length; i++)
         {
             if (ButtonPlusNpc == Inter.NameNPC)
@@ -578,7 +574,7 @@ public class LodingTxt : MonoBehaviour
                 break;
             }
         }*/
-        
+
     }
 
 }

@@ -91,4 +91,9 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Mail");
     }
+
+    public void GotoTestGacha()
+    {
+        SceneManager.LoadScene("Gacha");
+    }
 }

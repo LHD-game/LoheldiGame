@@ -21,10 +21,12 @@ public class QuestScript : MonoBehaviour
     public Camera DrawCamera;
     public GameObject[] ExclamationMark;
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
+
     //public int QuestNumber;
 
 
     private int QuestNum;
+    FlieChoice file;
 
     public QuestDontDestroy Load;
     //1. 메인 퀘스트 불함수
@@ -34,19 +36,30 @@ public class QuestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
+        file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(Load.ButtonPlusNpc) + Load.QuestMail);
-
-        if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
-            ExclamationMarkCreate();
-        if (Load.QuestMail)
+        if (Load.LastDay != Load.ToDay)
+            QuestCheck();
+    }
+    private void QuestCheck()
+    {
+        if (Load.QuestIndex == 0)
+        {
+            Load.Quest = false;
+            file.Tutorial();
+        }
+        else if (Load.QuestIndex < 0 && Load.QuestIndex < 11)
+        {
             MainQuestLoding();
+            if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
+                ExclamationMarkCreate();
+        }
     }
 
     public void MainQuestLoding()
     {
-        //Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
+        Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         Quest = true;
         Debug.Log("퀘스트 번호" + Load.QuestIndex);

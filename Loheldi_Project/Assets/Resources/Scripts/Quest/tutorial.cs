@@ -14,17 +14,7 @@ public class tutorial : MonoBehaviour
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
-    }/*
-
-    public void forTutorial()
-    {
-        chat.Main_UI.SetActive(false);
-        chat.Num = "0-5";
-        chat.FileAdress = "Scripts/Quest/script_1";
-        chat.move = true;
-        chat.cuttoonFileAdress = "Sprites/Quest/cuttoon/tutorial";
-        chat.NewChat();
-    }*/
+    }
 
     public void Tutorial()
     {

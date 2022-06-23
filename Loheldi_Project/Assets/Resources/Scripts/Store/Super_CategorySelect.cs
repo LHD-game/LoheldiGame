@@ -6,6 +6,7 @@ public class Super_CategorySelect : MonoBehaviour
 {
     public GameObject SeedPanel;
     public GameObject TreePanel;
+    public GameObject GachaPanel;
 
 
     void Start()
@@ -29,5 +30,10 @@ public class Super_CategorySelect : MonoBehaviour
     {
         SeedPanel.SetActive(false);
         TreePanel.SetActive(true);
+    }
+    public void PopGacha()
+    {
+        SeedPanel.SetActive(false);
+        TreePanel.SetActive(false);
     }
 }

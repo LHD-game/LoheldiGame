@@ -19,6 +19,7 @@ public class MailLoad : MonoBehaviour
     public GameObject ThisType;                                       //메일 타입(서버인지 퀘스트인지)
     public Transform MailList;                                        //매일들이 정렬될 ParentObject
     public GameObject TempObject;
+    public GameObject ReceiveMailButton;
 
     public Text NoticeTitleText;
     public Text NoticeDetailText;
@@ -53,6 +54,8 @@ public class MailLoad : MonoBehaviour
 
         BackendReturnObject bro1 = Backend.Notice.NoticeList(4);                 //서버에서 공지사항 불러오기
         JsonData json1 = bro1.FlattenRows();                                     //Json1으로 지정
+
+        ReceiveMailButton.SetActive(false);
 
         if (MailorAnnou)
         {
@@ -124,6 +127,7 @@ public class MailLoad : MonoBehaviour
         ThisDetail = TempObject.transform.Find("Detail").gameObject;            //(     ''     )내용을 지정
         RTitleText.text = ThisTitle.GetComponent<Text>().text;                  //우측에 표시되는 제목을 선택한 제목과 같게 함
         RDetailText.text = ThisDetail.GetComponent<Text>().text;                //내용을 프리펩에 속성인 Detail로 바꿈
+        ReceiveMailButton.SetActive(true);
     }
 
     public void NoticeLoading()
@@ -149,6 +153,7 @@ public class MailLoad : MonoBehaviour
         }
         else
             ReceiveMail();
+        UpdateList();
     }
     public void ReceiveMail()
     {
@@ -233,7 +238,6 @@ public class MailLoad : MonoBehaviour
     {
         TotalCount = 0;
         NewMailCheck();
-
     }
 
 

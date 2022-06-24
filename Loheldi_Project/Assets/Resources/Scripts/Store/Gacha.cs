@@ -10,6 +10,9 @@ public class Gacha : MonoBehaviour
     public GameObject TextObject;
     public GameObject ResultTxt;
 
+    public GameObject Machine;
+    public GameObject BackGround;
+
     List<Dictionary<string, object>> gachaItem = new List<Dictionary<string, object>>();
 
     protected void initItem(Dictionary<string, object> item, StoreItem data)
@@ -26,6 +29,9 @@ public class Gacha : MonoBehaviour
 
     public void ItemGacha(int GachaTime)  //랜덤한 아이템 이름 띄우기
     {
+        Machine.SetActive(true);
+        BackGround.SetActive(false);
+
         Transform[] childList = TextObject.GetComponentsInChildren<Transform>();  //이미 있는 아이템 이름 초기화
         if (childList != null)
         {
@@ -42,7 +48,7 @@ public class Gacha : MonoBehaviour
         {
             int k = 0;
             k = Random.Range(0, gachaItem.Count); //아이템 가챠 부분
-
+            Debug.Log(gachaItem[k]["IName"]);
             if (GachaTime == 1)
             {
                 y = 1020;
@@ -67,7 +73,8 @@ public class Gacha : MonoBehaviour
                 }
                 y = y - 120;
             }
-            CreateText(new Vector3(x, y, 0), gachaItem[k]["IName"].ToString());  //아이템 이름 출력
+            CreateText(new Vector3(x, y, 0), gachaItem[k]["IName"].ToString());  //아이템 이름 출력*/
+            this.GetComponent<GachaMachineMovement>().LeverSpin();
         }
     }
 

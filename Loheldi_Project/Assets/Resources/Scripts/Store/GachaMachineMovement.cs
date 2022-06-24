@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class GachaMachineMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private Animator SpinAnimator;
+    private Animator CapsuleAnimator;
+
+    public GameObject Lever;
+    public GameObject Capsule;
+
+    public GameObject Machine;
+    public GameObject BackGround;
+
+    public void LeverSpin()
     {
-        
+        SpinAnimator = Lever.GetComponent<Animator>();   //애니메이터 컴포넌트 불러오기
+        SpinAnimator.SetBool("Spin", true);
+    }
+    public void TimeLineEvent()
+    {
+        CapsuleAnimator = Capsule.GetComponent<Animator>();
+        CapsuleAnimator.SetBool("Capsule", true);
+    }
+    public void TimeLineEventReset()
+    {
+        SpinAnimator = Lever.GetComponent<Animator>();
+        CapsuleAnimator = Capsule.GetComponent<Animator>();
+        SpinAnimator.SetBool("Spin", false);
+        CapsuleAnimator.SetBool("Capsule", false);
+        Machine.SetActive(false);
+        BackGround.SetActive(true);
+        Debug.Log("애니메이션 초기화 완료");
     }
 }

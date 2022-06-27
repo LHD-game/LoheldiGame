@@ -56,7 +56,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,7 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &8837118908126651189
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -107,10 +105,10 @@ GameObject:
   - component: {fileID: 3282868706931400450}
   - component: {fileID: 1882729113574920359}
   - component: {fileID: 4450747678551942253}
-  - component: {fileID: -150575232832982376}
+  - component: {fileID: 5133638281854061016}
   m_Layer: 0
   m_Name: Bed_01_Single
-  m_TagString: ChangeableFurniture
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +151,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -178,9 +175,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-150575232832982376
-BoxCollider:
+--- !u!64 &5133638281854061016
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,6 +185,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0882531, y: 1.0227811, z: 2.0102067}
-  m_Center: {x: 2.1658233e-22, y: 0.51139057, z: -0.00024801493}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5475996246482295672, guid: 47c402684884f6842be75b14995ca3c2, type: 3}

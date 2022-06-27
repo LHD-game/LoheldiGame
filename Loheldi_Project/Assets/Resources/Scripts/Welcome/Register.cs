@@ -210,6 +210,7 @@ public class Register : MonoBehaviour
             //자동로그인 함수 실행
             AutoLogin();
             Debug.Log("동기방식 로그인 성공");
+
             if (AccChk())   //계정 정보 만들어져 있으면, 필드로
             {
                 SceneLoader.instance.GotoMainField();

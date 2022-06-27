@@ -8,13 +8,13 @@ public class CategoryControl : MonoBehaviour
     GameObject itemBtn;
 
     //---init list---//
-    protected void initCustomItem(Dictionary<string, object> item, CustomItem data)
+    protected void initCustomItem(Dictionary<string, object> item, CustomStoreItem data)
     {
         print("initCustomItem");
         item.Add("ICode", data.ICode);
         item.Add("IName", data.IName);
-        item.Add("Model", data.Model);
-        item.Add("Material", data.Material);
+        item.Add("Category", data.Category);
+        item.Add("ItemType", data.ItemType);
         item.Add("Texture", data.Texture);
     }
 

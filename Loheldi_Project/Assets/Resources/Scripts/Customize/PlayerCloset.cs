@@ -57,21 +57,21 @@ public class PlayerCloset : MonoBehaviour
     public void ResetClothes()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
     {
         //상의
-        NowSettings.u_upper_name = PreviousSettings.u_upper_name;
+        NowSettings.u_upper_id = PreviousSettings.u_upper_name;
         NowSettings.u_upper_color = PreviousSettings.u_upper_color;
-        NowSettings.u_upper_texture = NowSettings.u_upper_name + "_texture_" + NowSettings.u_upper_color;
+        NowSettings.u_upper_texture = NowSettings.u_upper_id + "_texture_" + NowSettings.u_upper_color;
         //하의
-        NowSettings.u_lower_name = PreviousSettings.u_lower_name;
+        NowSettings.u_lower_id = PreviousSettings.u_lower_name;
         NowSettings.u_lower_color = PreviousSettings.u_lower_color;
-        NowSettings.u_lower_texture = NowSettings.u_lower_name + "_texture_" + NowSettings.u_lower_color;
+        NowSettings.u_lower_texture = NowSettings.u_lower_id + "_texture_" + NowSettings.u_lower_color;
         //양말
-        NowSettings.u_socks_name = PreviousSettings.u_socks_name;
+        NowSettings.u_socks_id = PreviousSettings.u_socks_name;
         NowSettings.u_socks_color = PreviousSettings.u_socks_color;
-        NowSettings.u_socks_texture = NowSettings.u_socks_name + "_texture_" + NowSettings.u_socks_color;
+        NowSettings.u_socks_texture = NowSettings.u_socks_id + "_texture_" + NowSettings.u_socks_color;
         //신발
-        NowSettings.u_shoes_name = PreviousSettings.u_shoes_name;
+        NowSettings.u_shoes_id = PreviousSettings.u_shoes_name;
         NowSettings.u_shoes_color = PreviousSettings.u_shoes_color;
-        NowSettings.u_shoes_texture = NowSettings.u_shoes_name + "_texture_" + NowSettings.u_shoes_color;
+        NowSettings.u_shoes_texture = NowSettings.u_shoes_id + "_texture_" + NowSettings.u_shoes_color;
         //texture 해당 경로에서 불러오기
         tUpper = Resources.Load<Texture>(("Customize/Textures/Upper/" + NowSettings.u_upper_texture));
         tLower = Resources.Load<Texture>(("Customize/Textures/Lower/" + NowSettings.u_lower_texture));
@@ -81,18 +81,19 @@ public class PlayerCloset : MonoBehaviour
 
     public void PlayerLook()   //외관 커스텀 업데이트
     {
-        NowSettings.u_upper_texture = NowSettings.u_upper_name + "_texture_" + NowSettings.u_upper_color;
-        NowSettings.u_lower_texture = NowSettings.u_lower_name + "_texture_" + NowSettings.u_lower_color;
-        NowSettings.u_socks_texture = NowSettings.u_socks_name + "_texture_" + NowSettings.u_socks_color;
-        NowSettings.u_shoes_texture = NowSettings.u_shoes_name + "_texture_" + NowSettings.u_shoes_color;
+        string str = "Closet";
+        NowSettings.u_upper_texture = FindTexture(NowSettings.u_upper_texture, str) + "_texture_" + NowSettings.u_upper_color;
+        NowSettings.u_lower_texture = NowSettings.u_lower_id + "_texture_" + NowSettings.u_lower_color;
+        NowSettings.u_socks_texture = NowSettings.u_socks_id + "_texture_" + NowSettings.u_socks_color;
+        NowSettings.u_shoes_texture = NowSettings.u_shoes_id + "_texture_" + NowSettings.u_shoes_color;
 
         tUpper = Resources.Load<Texture>(("Customize/Textures/Upper/" + NowSettings.u_upper_texture));
         tLower = Resources.Load<Texture>(("Customize/Textures/Lower/" + NowSettings.u_lower_texture));
         tSocks = Resources.Load<Texture>(("Customize/Textures/Socks/" + NowSettings.u_socks_texture));
         tShoes = Resources.Load<Texture>(("Customize/Textures/Shoes/" + NowSettings.u_shoes_texture));
 
-        meLower_L = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_name + "_L_mesh"));
-        meLower_R = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_name + "_R_mesh"));
+        meLower_L = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_id + "_L_mesh"));
+        meLower_R = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_id + "_R_mesh"));
 
         //플레이어 모델링 메시
         p_mUpper = Resources.Load<Material>("Customize/Materials/Upper");
@@ -111,5 +112,37 @@ public class PlayerCloset : MonoBehaviour
         l_mesh_L.sharedMesh = meLower_L;
         l_mesh_R.sharedMesh = meLower_R;
 
+    }
+
+    //서버 보유 아이템 목록에서 아이템의 Texture 조회 메소드
+    protected string FindTexture(string item_code, string scene)
+    {
+        string chart = "";
+        string item_texture = "null";
+        if (scene.Equals("Custom"))
+        {
+            chart = ChartNum.CustomItemChart;
+        }
+        else
+        {
+            chart = ChartNum.ClothesItemChart;
+        }
+        var allChart = Backend.Chart.GetChartContents(chart);
+
+        JsonData all_rows = allChart.GetReturnValuetoJSON()["rows"];
+        ParsingJSON pj = new ParsingJSON();
+
+        for (int i = 0; i < all_rows.Count; i++)
+        {
+            CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(all_rows[i]);
+            if (data.ICode.Equals(item_code))
+            {
+                item_texture = data.Texture;
+            }
+        }
+
+        //Debug.Log("FindTexture: " + item_texture);
+
+        return item_texture;
     }
 }

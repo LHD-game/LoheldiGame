@@ -16,13 +16,13 @@ public class ClosetControl : PlayerCloset
     public void SaveCustom()    //현재 커스터마이징을 서버에 저장
     {
         Param param = new Param();
-        param.Add("Upper", NowSettings.u_upper_name);
+        param.Add("Upper", NowSettings.u_upper_id);
         param.Add("UColor", NowSettings.u_upper_color);
-        param.Add("Lower", NowSettings.u_lower_name);
+        param.Add("Lower", NowSettings.u_lower_id);
         param.Add("LColor", NowSettings.u_lower_color);
-        param.Add("Socks", NowSettings.u_socks_name);
+        param.Add("Socks", NowSettings.u_socks_id);
         param.Add("SColor", NowSettings.u_socks_color);
-        param.Add("Shoes", NowSettings.u_shoes_name);
+        param.Add("Shoes", NowSettings.u_shoes_id);
         param.Add("ShColor", NowSettings.u_shoes_color);
 
         //유저 현재 착장 저장된 row 검색
@@ -54,21 +54,21 @@ public class ClosetControl : PlayerCloset
         {
             if (d_dialog[i][CommonField.nName].ToString().Equals(itemName)) //itemName과 동일한 아이템 이름을 가진 아이템 db에서 찾음
             {
-                if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_upper)) //upper일 경우,
+                if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_upper)) //upper일 경우,
                 {
-                    NowSettings.u_upper_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_upper_id = d_dialog[i][CommonField.nCID].ToString();
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_lower))    //lower일 경우,
+                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_lower))    //lower일 경우,
                 {
-                    NowSettings.u_lower_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_lower_id = d_dialog[i][CommonField.nCID].ToString();
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_socks))    //socks일 경우,
+                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_socks))    //socks일 경우,
                 {
-                    NowSettings.u_socks_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_socks_id = d_dialog[i][CommonField.nCID].ToString();
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_shoes))    //shoes일 경우
+                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_shoes))    //shoes일 경우
                 {
-                    NowSettings.u_shoes_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_shoes_id = d_dialog[i][CommonField.nCID].ToString();
                 }
 
             }

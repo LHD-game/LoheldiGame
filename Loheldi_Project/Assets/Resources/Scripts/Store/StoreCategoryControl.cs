@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StoreCategoryControl : MonoBehaviour
 {
-    GameObject itemBtn;
+    protected GameObject itemBtn;
     //---init list---//
     //itemTheme 별로 모아서 저장
     protected void initItem(Dictionary<string, object> item, StoreItem data)

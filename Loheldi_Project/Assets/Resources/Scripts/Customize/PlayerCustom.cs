@@ -55,15 +55,15 @@ public class PlayerCustom : MonoBehaviour
     }
 
     public void ResetCustom()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
-    {
-        NowSettings.u_skin_name = PreviousSettings.u_skin_name;
-        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_name);
-        NowSettings.u_eyes_name = PreviousSettings.u_eyes_name;
+    { string str = "Custom";
+        NowSettings.u_skin_id = PreviousSettings.u_skin_name;
+        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id, str);
+        NowSettings.u_eyes_id = PreviousSettings.u_eyes_name;
         NowSettings.u_eyes_color = PreviousSettings.u_eyes_color;
-        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) + "_" + NowSettings.u_eyes_color;
-        NowSettings.u_mouth_name = PreviousSettings.u_mouth_name;
-        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_name);
-        NowSettings.u_hair_name = PreviousSettings.u_hair_name;
+        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id, str) + "_" + NowSettings.u_eyes_color;
+        NowSettings.u_mouth_id = PreviousSettings.u_mouth_name;
+        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id, str);
+        NowSettings.u_hair_id = PreviousSettings.u_hair_name;
         NowSettings.u_hair_color = PreviousSettings.u_hair_color;
         NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
 
@@ -75,9 +75,10 @@ public class PlayerCustom : MonoBehaviour
 
     public void PlayerLook()   //외관 커스텀 업데이트
     {
-        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_name);
-        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_name) + "_" + NowSettings.u_eyes_color;
-        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_name);
+        string str = "Custom";
+        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id, str);
+        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id, str) + "_" + NowSettings.u_eyes_color;
+        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id, str);
         NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
 
         tSkin = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_skin_texture);
@@ -85,9 +86,9 @@ public class PlayerCustom : MonoBehaviour
         tMouth = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_mouth_texture);
         tHair = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_hair_texture);
 
-        meEyes = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_eyes_name + "_mesh");
-        meMouth = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_mouth_name + "_mesh");
-        meHair = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_hair_name + "_mesh");
+        meEyes = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_eyes_id + "_mesh");
+        meMouth = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_mouth_id + "_mesh");
+        meHair = Resources.Load<Mesh>("Customize/Mesh/" + NowSettings.u_hair_id + "_mesh");
 
         p_mSkin = Resources.Load<Material>("Customize/Materials/Skin");
         p_mEyes = Resources.Load<Material>("Customize/Materials/Eyes");
@@ -110,28 +111,31 @@ public class PlayerCustom : MonoBehaviour
     }
 
     //서버 보유 아이템 목록에서 아이템의 Texture 조회 메소드
-    protected string FindTexture(string item_name)
+    protected string FindTexture(string item_code, string scene)
     {
-        Where where = new Where();
-        where.Equal("IName", item_name);
-
-        var bro = Backend.GameData.GetMyData("ACC_CUSTOM", where);
-
-        if (bro.IsSuccess() == false)
+        string chart = "";
+        string item_texture = "null";
+        if (scene.Equals("Custom"))
         {
-            Debug.Log("요청 실패");
-            return null;
+            chart = ChartNum.CustomItemChart;
         }
-        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        else
         {
-            // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
-            // 데이터가 존재하는지 확인
-            // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
-            Debug.Log("요청 성공했지만 테이블에 row가 하나도 없음");
-            return null;
+            chart = ChartNum.ClothesItemChart;
         }
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-        string item_texture = rows[0]["Texture"]["S"].ToString();
+        var allChart = Backend.Chart.GetChartContents(chart);
+
+        JsonData all_rows = allChart.GetReturnValuetoJSON()["rows"];
+        ParsingJSON pj = new ParsingJSON();
+
+        for(int i=0; i < all_rows.Count; i++)
+        {
+            CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(all_rows[i]);
+            if (data.ICode.Equals(item_code))
+            {
+                item_texture = data.Texture;
+            }
+        }
 
         //Debug.Log("FindTexture: " + item_texture);
 

@@ -26,13 +26,14 @@ public class CustomCategory : CategoryControl
     
     private void Start()
     {
-        var bro = Backend.GameData.GetMyData("ACC_CUSTOM", new Where(), 100);
-        if (bro.IsSuccess() == false)
+        var allCustomChart = Backend.Chart.GetChartContents(ChartNum.CustomItemChart); //서버의 엑셀파일을 불러온다.
+        var myCustom = Backend.GameData.GetMyData("ACC_CUSTOM", new Where(), 100);
+        if (myCustom.IsSuccess() == false)
         {
             Debug.Log("요청 실패");
             return;
         }
-        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        if (myCustom.GetReturnValuetoJSON()["rows"].Count <= 0)
         {
             // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
             // 데이터가 존재하는지 확인
@@ -41,43 +42,47 @@ public class CustomCategory : CategoryControl
             return;
         }
 
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+        JsonData allCustom_rows = allCustomChart.GetReturnValuetoJSON()["rows"];
+        JsonData myCustom_rows = myCustom.GetReturnValuetoJSON()["rows"];
+        ParsingJSON pj = new ParsingJSON();
+        ParsingJSON pj2 = new ParsingJSON();
 
         int s = 0, e = 0, m = 0, h = 0;
-        for (int i = rows.Count-1 ; i >= 0 ; i--)
+        for (int i = myCustom_rows.Count-1 ; i >= 0 ; i--)
         {
-            CustomItem data = new CustomItem();
-            data.ICode = bro.Rows()[i]["ICode"]["S"].ToString();
-            data.IName = bro.Rows()[i]["IName"]["S"].ToString();
-            data.Model = bro.Rows()[i]["Model"]["S"].ToString();
-            data.Material = bro.Rows()[i]["Material"]["S"].ToString();
-            data.Texture = bro.Rows()[i]["Texture"]["S"].ToString();
-
-            CommonField.SetDataDialog(data);
-
-            if (data.Model.Equals("Skin"))
+            CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allCustom_rows[i]);
+            
+            for(int j = 0; j < myCustom_rows.Count; j++)
             {
-                skin_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(skin_Dialog[s], data);
-                s++;
-            }
-            else if (data.Model.Equals("Eyes"))
-            {
-                eyes_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(eyes_Dialog[e], data);
-                e++;
-            }
-            else if (data.Model.Equals("Mouth"))
-            {
-                mouth_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(mouth_Dialog[m], data);
-                m++;
-            }
-            else if (data.Model.Equals("Hair"))
-            {
-                hair_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(hair_Dialog[h], data);
-                h++;
+                CustomStoreItem mydata = pj2.ParseBackendData<CustomStoreItem>(myCustom_rows[j]);
+                if (data.ICode.Equals(mydata.ICode))
+                {
+                    CommonField.SetDataDialog(data);
+                    if (data.Category.Equals("Skin"))
+                    {
+                        skin_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(skin_Dialog[s], data);
+                        s++;
+                    }
+                    else if (data.Category.Equals("Eyes"))
+                    {
+                        eyes_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(eyes_Dialog[e], data);
+                        e++;
+                    }
+                    else if (data.Category.Equals("Mouth"))
+                    {
+                        mouth_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(mouth_Dialog[m], data);
+                        m++;
+                    }
+                    else if (data.Category.Equals("Hair"))
+                    {
+                        hair_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(hair_Dialog[h], data);
+                        h++;
+                    }
+                }
             }
         }
 

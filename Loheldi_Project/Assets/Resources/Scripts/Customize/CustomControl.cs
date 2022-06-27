@@ -23,11 +23,11 @@ public class CustomControl : PlayerCustom
         PreviousSettings.u_hair_color = NowSettings.u_hair_color;*/
 
         Param param = new Param();
-        param.Add("Skin", NowSettings.u_skin_name);
-        param.Add("Eyes", NowSettings.u_eyes_name);
+        param.Add("Skin", NowSettings.u_skin_id);
+        param.Add("Eyes", NowSettings.u_eyes_id);
         param.Add("EColor", NowSettings.u_eyes_color);
-        param.Add("Mouth", NowSettings.u_mouth_name);
-        param.Add("Hair", NowSettings.u_hair_name);
+        param.Add("Mouth", NowSettings.u_mouth_id);
+        param.Add("Hair", NowSettings.u_hair_id);
         param.Add("HColor", NowSettings.u_hair_color);
 
         //유저 현재 착장 저장된 row 검색
@@ -74,24 +74,24 @@ public class CustomControl : PlayerCustom
         {
             if (d_dialog[i][CommonField.nName].ToString().Equals(itemName)) //itemName과 동일한 아이템 이름을 가진 아이템 db에서 찾음
             {
-                if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_skin))//그게 skin이면
+                if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_skin))//그게 skin이면
                 {
-                    NowSettings.u_skin_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_skin_id = d_dialog[i][CommonField.nCID].ToString();
                     //NowSettings.u_skin_texture = d_dialog[i][CommonField.nTexture].ToString();
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_eyes))
+                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_eyes))
                 {
-                    NowSettings.u_eyes_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_eyes_id = d_dialog[i][CommonField.nCID].ToString();
                     //NowSettings.u_eyes_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_eyes_color;
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_mouth))    //그게 입이면,
+                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_mouth))    //그게 입이면,
                 {
-                    NowSettings.u_mouth_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_mouth_id = d_dialog[i][CommonField.nCID].ToString();
                     //NowSettings.u_mouth_texture = d_dialog[i][CommonField.nTexture].ToString();
                 }
-                else if (d_dialog[i][CommonField.nModel].ToString().Equals(CommonField.m_hair))    //그게 hair이면,
+                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_hair))    //그게 hair이면,
                 {
-                    NowSettings.u_hair_name = d_dialog[i][CommonField.nName].ToString();
+                    NowSettings.u_hair_id = d_dialog[i][CommonField.nCID].ToString();
                     //NowSettings.u_hair_texture = d_dialog[i][CommonField.nTexture].ToString() + "_" + NowSettings.u_hair_color;
                 }
 

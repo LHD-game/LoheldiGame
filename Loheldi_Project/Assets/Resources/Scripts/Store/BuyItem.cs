@@ -143,10 +143,37 @@ public class BuyItem : MonoBehaviour
         }
         //todo: 코인 차감한 값 서버에 저장, 팝업 띄우기
     }
+    //의상 아이템 구입
+    public void BuyClothesBtn()
+    {
+        Param param = new Param();
+        param.Add("ICode", iCode);
+        param.Add("Amount", 1);
+
+        var insert_bro = Backend.GameData.Insert("ACC_CLOSET", param);
+
+        if (insert_bro.IsSuccess())
+        {
+            Debug.Log("아이템 구입 완료: " + iCode);
+        }
+        else
+        {
+            Debug.Log("아이템 구입 오류");
+        }
+            
+        //todo: 코인 차감한 값 서버에 저장, 팝업 띄우기
+    }
+
 
     public void CancleBtn()
     {
         GameObject panel = main_ui.transform.Find("StoreBuyPanel(Clone)").gameObject;
+        print("삭제");
+        Destroy(panel);
+    }
+    public void CancleClothesBtn()
+    {
+        GameObject panel = main_ui.transform.Find("ClothesBuyPanel(Clone)").gameObject;
         print("삭제");
         Destroy(panel);
     }

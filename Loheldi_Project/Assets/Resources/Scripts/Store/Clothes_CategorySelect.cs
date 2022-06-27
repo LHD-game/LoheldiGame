@@ -7,7 +7,7 @@ public class Clothes_CategorySelect : MonoBehaviour
     public GameObject UpperPanel;
     public GameObject LowerPanel;
     public GameObject ShoesPanel;
-    public GameObject EtcPanel;
+    public GameObject AccePanel;
 
 
     void Start()
@@ -20,7 +20,7 @@ public class Clothes_CategorySelect : MonoBehaviour
         UpperPanel.SetActive(true);
         LowerPanel.SetActive(false);
         ShoesPanel.SetActive(false);
-        EtcPanel.SetActive(false);
+        AccePanel.SetActive(false);
     }
 
     public void PopUpper()
@@ -28,7 +28,7 @@ public class Clothes_CategorySelect : MonoBehaviour
         UpperPanel.SetActive(true);
         LowerPanel.SetActive(false);
         ShoesPanel.SetActive(false);
-        EtcPanel.SetActive(false);
+        AccePanel.SetActive(false);
     }
 
     public void PopLower()
@@ -36,7 +36,7 @@ public class Clothes_CategorySelect : MonoBehaviour
         UpperPanel.SetActive(false);
         LowerPanel.SetActive(true);
         ShoesPanel.SetActive(false);
-        EtcPanel.SetActive(false);
+        AccePanel.SetActive(false);
     }
 
     public void PopShoes()
@@ -44,7 +44,7 @@ public class Clothes_CategorySelect : MonoBehaviour
         UpperPanel.SetActive(false);
         LowerPanel.SetActive(false);
         ShoesPanel.SetActive(true);
-        EtcPanel.SetActive(false);
+        AccePanel.SetActive(false);
     }
 
     public void PopEtc()
@@ -52,6 +52,6 @@ public class Clothes_CategorySelect : MonoBehaviour
         UpperPanel.SetActive(false);
         LowerPanel.SetActive(false);
         ShoesPanel.SetActive(false);
-        EtcPanel.SetActive(true);
+        AccePanel.SetActive(true);
     }
 }

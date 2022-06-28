@@ -148,7 +148,6 @@ public class BuyItem : MonoBehaviour
     {
         Param param = new Param();
         param.Add("ICode", iCode);
-        param.Add("Amount", 1);
 
         var insert_bro = Backend.GameData.Insert("ACC_CLOSET", param);
 

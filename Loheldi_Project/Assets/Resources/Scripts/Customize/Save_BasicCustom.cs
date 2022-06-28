@@ -20,7 +20,6 @@ public class Save_BasicCustom
                 Param param = new Param();  // 새 객체 생성
 
                 param.Add("ICode", rows[i]["ICode"][0]);    //객체에 값 추가
-                param.Add("Amount", rows[i]["Amount"][0]);
 
                 Backend.GameData.Insert("ACC_CUSTOM", param);   //객체를 서버에 업로드
             }
@@ -40,9 +39,7 @@ public class Save_BasicCustom
             for (int i = 0; i < rows.Count; i++)
             {
                 Param param = new Param();  // 새 객체 생성
-
                 param.Add("ICode", rows[i]["ICode"][0]);    //객체에 값 추가
-                param.Add("Amount", rows[i]["Amount"][0]);
 
                 Backend.GameData.Insert("ACC_CLOSET", param);   //객체를 서버에 업로드
             }

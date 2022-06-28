@@ -12,8 +12,13 @@ public class UIButton : MonoBehaviour
     public GameObject shop;
     public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
+    public GameObject JoyStick;
     public GameObject Main_UI;
     public GameObject GachaUI;
+    public GameObject FarmUI;
+
+    public Camera Camera1;
+    public Camera Camera2;
 
     //public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
@@ -22,7 +27,7 @@ public class UIButton : MonoBehaviour
     public LodingTxt chat;
     public Interaction Inter;
 
-    public GameObject SoundManager;
+    public GameObject SoundEffectManager;
 
     private void Awake()
     {
@@ -50,8 +55,10 @@ public class UIButton : MonoBehaviour
 
     public void JumpButton()                //점프버튼
     {
+        GameObject SoundManager = GameObject.Find("SoundManager");
         if (Inter.Gacha)
         {
+            SoundManager.GetComponent<SoundManager>().Sound("BGMGacha");
             GachaUI.SetActive(true);
         }
         else if (Inter.NearNPC)     //NPC주변에 있다면
@@ -72,19 +79,38 @@ public class UIButton : MonoBehaviour
         {
             if (Inter.NameNPC.Equals("InDoor"))
             {
-                SoundManager.GetComponent<SoundEffect>().Sound("OpenDoor");
+                SoundEffectManager.GetComponent<SoundEffect>().Sound("OpenDoor");
                 SceneLoader.instance.GotoHouse();
             }
-                
+
             else if (Inter.NameNPC.Equals("ExitDoor"))
                 SceneLoader.instance.GotoMainField();
             Inter.Door = false;
         }
+        else if (Inter.Farm)
+        {
+            if (Camera1.enabled == true)
+            {
+                Camera1.enabled = false;
+                Camera2.enabled = true;
+                JoyStick.SetActive(false);
+                FarmUI.SetActive(true);
+            }
+            else
+            {
+                Camera2.enabled = false;
+                Camera1.enabled = true;
+                JoyStick.SetActive(true);
+                FarmUI.SetActive(false);
+            }
+        }
         else                                                //NPC주변에 있지 않다면
         {
-            if (OnLand&&(SceneManager.GetActiveScene().name == "MainField"))                                         //Player가 바닥에 있다면
+            Camera2.enabled = false;
+            Camera1.enabled = true;
+            if (OnLand && (SceneManager.GetActiveScene().name == "MainField"))                                         //Player가 바닥에 있다면
             {
-                SoundManager.GetComponent<SoundEffect>().Sound("Jump");
+                SoundEffectManager.GetComponent<SoundEffect>().Sound("Jump");
                 Playerrb.AddForce(transform.up * 15000);
                 MainGameManager.exp = MainGameManager.exp + 100;
             }

@@ -28,6 +28,8 @@ public class PlayerCustom : MonoBehaviour
 
     protected static bool newAcc = false;
 
+    static BackendReturnObject custom_chart = new BackendReturnObject();
+
     public void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
         var bro = Backend.GameData.GetMyData("USER_CUSTOM", new Where());
@@ -55,14 +57,14 @@ public class PlayerCustom : MonoBehaviour
     }
 
     public void ResetCustom()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
-    { string str = "Custom";
+    {
         NowSettings.u_skin_id = PreviousSettings.u_skin_name;
-        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id, str);
+        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id);
         NowSettings.u_eyes_id = PreviousSettings.u_eyes_name;
         NowSettings.u_eyes_color = PreviousSettings.u_eyes_color;
-        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id, str) + "_" + NowSettings.u_eyes_color;
+        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id) + "_" + NowSettings.u_eyes_color;
         NowSettings.u_mouth_id = PreviousSettings.u_mouth_name;
-        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id, str);
+        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id);
         NowSettings.u_hair_id = PreviousSettings.u_hair_name;
         NowSettings.u_hair_color = PreviousSettings.u_hair_color;
         NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
@@ -75,10 +77,9 @@ public class PlayerCustom : MonoBehaviour
 
     public void PlayerLook()   //외관 커스텀 업데이트
     {
-        string str = "Custom";
-        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id, str);
-        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id, str) + "_" + NowSettings.u_eyes_color;
-        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id, str);
+        NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id);
+        NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id) + "_" + NowSettings.u_eyes_color;
+        NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id);
         NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
 
         tSkin = Resources.Load<Texture>("Customize/Textures/" + NowSettings.u_skin_texture);
@@ -111,24 +112,19 @@ public class PlayerCustom : MonoBehaviour
     }
 
     //서버 보유 아이템 목록에서 아이템의 Texture 조회 메소드
-    protected string FindTexture(string item_code, string scene)
+    protected string FindTexture(string item_code)
     {
-        string chart = "";
         string item_texture = "null";
-        if (scene.Equals("Custom"))
+        string chart = ChartNum.CustomItemChart;
+        if (custom_chart == null)
         {
-            chart = ChartNum.CustomItemChart;
+            custom_chart = Backend.Chart.GetChartContents(chart);
         }
-        else
-        {
-            chart = ChartNum.ClothesItemChart;
-        }
-        var allChart = Backend.Chart.GetChartContents(chart);
 
-        JsonData all_rows = allChart.GetReturnValuetoJSON()["rows"];
+        JsonData all_rows = custom_chart.GetReturnValuetoJSON()["rows"];
         ParsingJSON pj = new ParsingJSON();
 
-        for(int i=0; i < all_rows.Count; i++)
+        for (int i = 0; i < all_rows.Count; i++)
         {
             CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(all_rows[i]);
             if (data.ICode.Equals(item_code))
@@ -137,7 +133,7 @@ public class PlayerCustom : MonoBehaviour
             }
         }
 
-        //Debug.Log("FindTexture: " + item_texture);
+        Debug.Log("FindTexture: " + item_texture);
 
         return item_texture;
     }

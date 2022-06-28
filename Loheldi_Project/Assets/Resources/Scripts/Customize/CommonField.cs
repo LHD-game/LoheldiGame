@@ -12,15 +12,15 @@ public class CommonField
     public static string nTexture = "Texture";
 
     //DB model name
-    public static string m_skin = "Skin";
-    public static string m_eyes = "Eyes";
-    public static string m_mouth = "Mouth";
-    public static string m_hair = "Hair";
+    public static string m_skin = "skin";
+    public static string m_eyes = "eyes";
+    public static string m_mouth = "mouth";
+    public static string m_hair = "hair";
 
-    public static string m_upper = "Upper";
-    public static string m_lower = "Lower";
-    public static string m_socks = "Socks";
-    public static string m_shoes = "Shoes";
+    public static string m_upper = "upper";
+    public static string m_lower = "lower";
+    public static string m_socks = "socks";
+    public static string m_shoes = "shoes";
 
     //custom DB
     static List<Dictionary<string, object>> data_dialog = new List<Dictionary<string, object>>();

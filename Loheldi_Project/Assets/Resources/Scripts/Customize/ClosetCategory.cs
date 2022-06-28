@@ -50,7 +50,7 @@ public class ClosetCategory : CategoryControl
         ParsingJSON pj2 = new ParsingJSON();
 
         int u = 0, l = 0, so = 0, sh = 0;
-        for (int i = allClothes_rows.Count-1 ; i >= 0 ; i--)
+        for (int i = 0; i < allClothes_rows.Count ; i++)
         {
             CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allClothes_rows[i]);
             for(int j = 0; j < myClothes_rows.Count; j++)

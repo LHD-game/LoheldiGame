@@ -26,6 +26,8 @@ public class PlayerCloset : MonoBehaviour
     public GameObject p_Lower_L;
     public GameObject p_Lower_R;
 
+    static BackendReturnObject closet_chart = new BackendReturnObject();
+
 
     public void nowClothes()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
@@ -59,19 +61,19 @@ public class PlayerCloset : MonoBehaviour
         //상의
         NowSettings.u_upper_id = PreviousSettings.u_upper_name;
         NowSettings.u_upper_color = PreviousSettings.u_upper_color;
-        NowSettings.u_upper_texture = NowSettings.u_upper_id + "_texture_" + NowSettings.u_upper_color;
+        NowSettings.u_upper_texture = FindTexture(NowSettings.u_upper_id) + "_" + NowSettings.u_upper_color;
         //하의
         NowSettings.u_lower_id = PreviousSettings.u_lower_name;
         NowSettings.u_lower_color = PreviousSettings.u_lower_color;
-        NowSettings.u_lower_texture = NowSettings.u_lower_id + "_texture_" + NowSettings.u_lower_color;
+        NowSettings.u_lower_texture = FindTexture(NowSettings.u_lower_id) + "_" + NowSettings.u_lower_color;
         //양말
         NowSettings.u_socks_id = PreviousSettings.u_socks_name;
         NowSettings.u_socks_color = PreviousSettings.u_socks_color;
-        NowSettings.u_socks_texture = NowSettings.u_socks_id + "_texture_" + NowSettings.u_socks_color;
+        NowSettings.u_socks_texture = FindTexture(NowSettings.u_socks_id) + "_" + NowSettings.u_socks_color;
         //신발
         NowSettings.u_shoes_id = PreviousSettings.u_shoes_name;
         NowSettings.u_shoes_color = PreviousSettings.u_shoes_color;
-        NowSettings.u_shoes_texture = NowSettings.u_shoes_id + "_texture_" + NowSettings.u_shoes_color;
+        NowSettings.u_shoes_texture = FindTexture(NowSettings.u_shoes_id) + "_" + NowSettings.u_shoes_color;
         //texture 해당 경로에서 불러오기
         tUpper = Resources.Load<Texture>(("Customize/Textures/Upper/" + NowSettings.u_upper_texture));
         tLower = Resources.Load<Texture>(("Customize/Textures/Lower/" + NowSettings.u_lower_texture));
@@ -81,11 +83,10 @@ public class PlayerCloset : MonoBehaviour
 
     public void PlayerLook()   //외관 커스텀 업데이트
     {
-        string str = "Closet";
-        NowSettings.u_upper_texture = FindTexture(NowSettings.u_upper_texture, str) + "_texture_" + NowSettings.u_upper_color;
-        NowSettings.u_lower_texture = NowSettings.u_lower_id + "_texture_" + NowSettings.u_lower_color;
-        NowSettings.u_socks_texture = NowSettings.u_socks_id + "_texture_" + NowSettings.u_socks_color;
-        NowSettings.u_shoes_texture = NowSettings.u_shoes_id + "_texture_" + NowSettings.u_shoes_color;
+        NowSettings.u_upper_texture = FindTexture(NowSettings.u_upper_id) + "_" + NowSettings.u_upper_color;
+        NowSettings.u_lower_texture = FindTexture(NowSettings.u_lower_id) + "_" + NowSettings.u_lower_color;
+        NowSettings.u_socks_texture = FindTexture(NowSettings.u_socks_id) + "_" + NowSettings.u_socks_color;
+        NowSettings.u_shoes_texture = FindTexture(NowSettings.u_shoes_id) + "_" + NowSettings.u_shoes_color;
 
         tUpper = Resources.Load<Texture>(("Customize/Textures/Upper/" + NowSettings.u_upper_texture));
         tLower = Resources.Load<Texture>(("Customize/Textures/Lower/" + NowSettings.u_lower_texture));
@@ -115,21 +116,16 @@ public class PlayerCloset : MonoBehaviour
     }
 
     //서버 보유 아이템 목록에서 아이템의 Texture 조회 메소드
-    protected string FindTexture(string item_code, string scene)
+    protected string FindTexture(string item_code)
     {
-        string chart = "";
         string item_texture = "null";
-        if (scene.Equals("Custom"))
+        string chart = ChartNum.ClothesItemChart;
+        if (closet_chart == null)
         {
-            chart = ChartNum.CustomItemChart;
+            closet_chart = Backend.Chart.GetChartContents(chart);
         }
-        else
-        {
-            chart = ChartNum.ClothesItemChart;
-        }
-        var allChart = Backend.Chart.GetChartContents(chart);
 
-        JsonData all_rows = allChart.GetReturnValuetoJSON()["rows"];
+        JsonData all_rows = closet_chart.GetReturnValuetoJSON()["rows"];
         ParsingJSON pj = new ParsingJSON();
 
         for (int i = 0; i < all_rows.Count; i++)
@@ -141,7 +137,7 @@ public class PlayerCloset : MonoBehaviour
             }
         }
 
-        //Debug.Log("FindTexture: " + item_texture);
+        Debug.Log("FindTexture: " + item_texture);
 
         return item_texture;
     }

@@ -17,22 +17,13 @@ public class Gacha : MonoBehaviour
     List<Dictionary<string, object>> gachaClothes = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> gachaTable = new List<Dictionary<string, object>>();
 
-    protected void initItem(Dictionary<string, object> item, StoreItem data)
-    {
-        item.Add("ICode", data.ICode);
-        item.Add("IName", data.IName);
-        item.Add("ItemType", data.ItemType);
-    }
 
     private void Start()
     {
         GetChartContents("53552", gachaItem);
         GetChartContents("53550", gachaClothes);
-        for (int i = 0; i < gachaClothes.Count; i++)
-        {
-                //가챠 아이템을 리스트에 저장.
-                gachaTable.Add(gachaClothes[i]);
-        }
+        gachaTable.AddRange(gachaItem);
+        gachaTable.AddRange(gachaClothes);
     }
 
     public void ItemGacha(int GachaTime)  //랜덤한 아이템 이름 띄우기
@@ -106,6 +97,14 @@ public class Gacha : MonoBehaviour
             }
         }
     }
+
+    protected void initItem(Dictionary<string, object> item, StoreItem data)
+    {
+        item.Add("ICode", data.ICode);
+        item.Add("IName", data.IName);
+        item.Add("ItemType", data.ItemType);
+    }
+
     public void CreateText(Vector3 Position, string Result)  //아이템 이름 프리펩("Text")에서 생성
     {
         GameObject ResultText = Instantiate(ResultTxt, Position, Quaternion.identity, TextObject.transform);

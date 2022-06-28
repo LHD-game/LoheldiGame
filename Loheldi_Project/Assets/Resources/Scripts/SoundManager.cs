@@ -91,8 +91,7 @@ public class SoundManager : MonoBehaviour
         {
             Sound("BGMRun");
         }
-
-        /*if (scene.name == "Game_Gacha")       //아직 구현 안된 장면, 씬 변경도 확실하지 않기에 조건 생각해야함
+        if (scene.name == "Game_Gacha")
         {
             Sound("BGMGacha");
         }
@@ -107,7 +106,7 @@ public class SoundManager : MonoBehaviour
         if (scene.name == "MainField")
         {
             Sound("BGMNight");
-        }*/
+        }
     }
 
     public void Win()

@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class Enter_Exit : MonoBehaviour //패널 열기/닫기에 사용되는 클래스
 {
-    public GameObject SoundManager;
+    public GameObject SoundEffectManager;
 
     private void Start()
     {
-        SoundManager = this.gameObject;
+        SoundEffectManager = this.gameObject;
     }
 
     public void ExitBtn(GameObject exitThis)    //해당 오브젝트를 비활성화
     {
-        SoundManager.GetComponent<SoundEffect>().Sound("ClickBack");
+        GameObject SoundManager = GameObject.Find("SoundManager");
+        SoundEffectManager.GetComponent<SoundEffect>().Sound("ClickBack");
         exitThis.SetActive(false);
+        if (SoundEffectManager.GetComponent<AudioSource>().clip == SoundManager.GetComponent<SoundManager>().audioBGMGacha)
+        {
+
+            SoundManager.GetComponent<SoundManager>().Sound("BGMQuestEnd");
+        }
     }
      
     public void EnterBtn(GameObject enterThis)  //해당 오브젝트를 활성화
     {
-        SoundManager.GetComponent<SoundEffect>().Sound("ClickIcon");
+        SoundEffectManager.GetComponent<SoundEffect>().Sound("ClickIcon");
         enterThis.SetActive(true);
     }
 }

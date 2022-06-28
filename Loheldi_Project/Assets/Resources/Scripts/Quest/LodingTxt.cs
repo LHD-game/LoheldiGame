@@ -118,9 +118,9 @@ public class LodingTxt : MonoBehaviour
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         cuttoon = GameObject.Find("Cutton");
-        cuttoon.SetActive(false);
+        /*cuttoon.SetActive(false);
         ChatWin.SetActive(false);
-        QuizeWin.SetActive(false);
+        QuizeWin.SetActive(false);*/
         
         
 

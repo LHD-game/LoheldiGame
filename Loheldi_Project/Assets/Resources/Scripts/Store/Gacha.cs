@@ -14,6 +14,8 @@ public class Gacha : MonoBehaviour
     public GameObject BackGround;
 
     List<Dictionary<string, object>> gachaItem = new List<Dictionary<string, object>>();
+    List<Dictionary<string, object>> gachaClothes = new List<Dictionary<string, object>>();
+    List<Dictionary<string, object>> gachaTable = new List<Dictionary<string, object>>();
 
     protected void initItem(Dictionary<string, object> item, StoreItem data)
     {
@@ -24,7 +26,13 @@ public class Gacha : MonoBehaviour
 
     private void Start()
     {
-        GetChartContents("53206");
+        GetChartContents("53552", gachaItem);
+        GetChartContents("53550", gachaClothes);
+        for (int i = 0; i < gachaClothes.Count; i++)
+        {
+                //가챠 아이템을 리스트에 저장.
+                gachaTable.Add(gachaClothes[i]);
+        }
     }
 
     public void ItemGacha(int GachaTime)  //랜덤한 아이템 이름 띄우기
@@ -47,8 +55,8 @@ public class Gacha : MonoBehaviour
         for (int i = 0; i < GachaTime; i++)  //아이템 이름들의 위치 지정
         {
             int k = 0;
-            k = Random.Range(0, gachaItem.Count); //아이템 가챠 부분
-            Debug.Log(gachaItem[k]["IName"]);
+            k = Random.Range(0, gachaTable.Count); //아이템 가챠 부분
+            Debug.Log(gachaTable[k]["IName"]);
             if (GachaTime == 1)
             {
                 y = 1020;
@@ -73,12 +81,12 @@ public class Gacha : MonoBehaviour
                 }
                 y = y - 120;
             }
-            CreateText(new Vector3(x, y, 0), gachaItem[k]["IName"].ToString());  //아이템 이름 출력*/
+            CreateText(new Vector3(x, y, 0), gachaTable[k]["IName"].ToString());  //아이템 이름 출력
             this.GetComponent<GachaMachineMovement>().LeverSpin();
         }
     }
 
-    void GetChartContents(string chartNum)  //서버 상의 차트를 불러와 저장
+    void GetChartContents(string chartNum, List<Dictionary<string, object>> ItemList)  //서버상에 차트를 불러와 저장
     {
         var BRO = Backend.Chart.GetChartContents(chartNum); //서버의 엑셀파일을 불러온다.
 
@@ -92,8 +100,8 @@ public class Gacha : MonoBehaviour
             if (data.Category.Equals("gacha"))
             {
                 //가챠 아이템을 리스트에 저장.
-                gachaItem.Add(new Dictionary<string, object>());
-                initItem(gachaItem[g], data);
+                ItemList.Add(new Dictionary<string, object>());
+                initItem(ItemList[g], data);
                 g++;
             }
         }

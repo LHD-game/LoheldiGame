@@ -29,13 +29,13 @@ public class GachaMachineMovement : MonoBehaviour
     }
     public void TimeLineEventReset()
     {
-        ButtonPanel.SetActive(true);
         SpinAnimator = Lever.GetComponent<Animator>();
         CapsuleAnimator = Capsule.GetComponent<Animator>();
         SpinAnimator.SetBool("Spin", false);
         CapsuleAnimator.SetBool("Capsule", false);
         Machine.SetActive(false);
         BackGround.SetActive(true);
+        ButtonPanel.SetActive(true);
         Debug.Log("애니메이션 초기화 완료");
     }
 }

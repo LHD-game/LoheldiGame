@@ -13,6 +13,7 @@ public class UIButton : MonoBehaviour
     public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public GameObject Main_UI;
+    public GameObject GachaUI;
 
     //public GameObject ShopMok;             // 목공방
     bool map;                              //지도가 열려있는지 확인
@@ -49,7 +50,11 @@ public class UIButton : MonoBehaviour
 
     public void JumpButton()                //점프버튼
     {
-        if (Inter.NearNPC)     //NPC주변에 있다면
+        if (Inter.Gacha)
+        {
+            GachaUI.SetActive(true);
+        }
+        else if (Inter.NearNPC)     //NPC주변에 있다면
         {
 
             GameObject NPC;

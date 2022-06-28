@@ -114,7 +114,7 @@ public class LodingTxt : MonoBehaviour
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
 
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
-                                              //Debug.Log("이미지=" + CCImage);
+                                              Debug.Log("이미지=" + CCImage);
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         cuttoon = GameObject.Find("Cutton");
@@ -305,7 +305,7 @@ public class LodingTxt : MonoBehaviour
             scriptLine();
 
         }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("draw"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("e"))
         {
             ChatWin.SetActive(false);
             Draw.ChangeDrawCamera();

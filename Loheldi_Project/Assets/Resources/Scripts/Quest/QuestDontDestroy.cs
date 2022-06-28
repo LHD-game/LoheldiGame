@@ -20,7 +20,7 @@ public class QuestDontDestroy : MonoBehaviour
     //public GameObject[] Mails;
     /// </summary>
     
-    private void Start()
+    private void Awake()
     {
         Dontdestroy();
     }
@@ -29,7 +29,7 @@ public class QuestDontDestroy : MonoBehaviour
         Debug.Log("돈디스트로이 스타ㅡ");
         if (SceneManager.GetActiveScene().name == "Welcome")
             QuestIndex=0;    //나중에 서버랑 연동해서 초기값 0, 그 뒤값을 서버에 저장하고 다시 불러오는 식으로
-        DontDestroyOnLoad(GameObject.Find("DontDestroyQuest"));
+        DontDestroyOnLoad(this.gameObject);
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Quest");
 
         if (objs.Length > 1)

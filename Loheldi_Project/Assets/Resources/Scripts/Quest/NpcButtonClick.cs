@@ -25,7 +25,7 @@ public class NpcButtonClick : MonoBehaviour
         if (SecondButtonTxt.text.Equals("미니게임 하기"))
             SceneLoader.instance.GotoLobby();
         else if (SecondButtonTxt.text.Equals("미용실 이용하기"))
-            SceneLoader.instance.GotoPlayerCloset();
+            SceneLoader.instance.GotoPlayerCustom();
         else if (SecondButtonTxt.text.Equals("가구점 이용하기"))
         {
             Chat.chat.Main_UI.SetActive(true);

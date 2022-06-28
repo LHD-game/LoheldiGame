@@ -58,25 +58,25 @@ public class CustomCategory : CategoryControl
                 if (data.ICode.Equals(mydata.ICode))
                 {
                     CommonField.SetDataDialog(data);
-                    if (data.Category.Equals("Skin"))
+                    if (data.Category.Equals(CommonField.m_skin))
                     {
                         skin_Dialog.Add(new Dictionary<string, object>());
                         initCustomItem(skin_Dialog[s], data);
                         s++;
                     }
-                    else if (data.Category.Equals("Eyes"))
+                    else if (data.Category.Equals(CommonField.m_eyes))
                     {
                         eyes_Dialog.Add(new Dictionary<string, object>());
                         initCustomItem(eyes_Dialog[e], data);
                         e++;
                     }
-                    else if (data.Category.Equals("Mouth"))
+                    else if (data.Category.Equals(CommonField.m_mouth))
                     {
                         mouth_Dialog.Add(new Dictionary<string, object>());
                         initCustomItem(mouth_Dialog[m], data);
                         m++;
                     }
-                    else if (data.Category.Equals("Hair"))
+                    else if (data.Category.Equals(CommonField.m_hair))
                     {
                         hair_Dialog.Add(new Dictionary<string, object>());
                         initCustomItem(hair_Dialog[h], data);
@@ -85,6 +85,10 @@ public class CustomCategory : CategoryControl
                 }
             }
         }
+        Debug.Log(s);
+        Debug.Log(e);
+        Debug.Log(m);
+        Debug.Log(h);
 
         MakeCategory(c_skin, skin_Dialog);
         MakeCategory(c_eyes, eyes_Dialog);

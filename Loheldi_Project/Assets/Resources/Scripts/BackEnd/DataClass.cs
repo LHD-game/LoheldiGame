@@ -10,8 +10,8 @@ public static class ChartNum
 {
     public static string BasicCustomItemChart = "53501";
     public static string BasicClothesItemChart = "53497";
-    public static string CustomItemChart = "49391";
-    public static string ClothesItemChart = "53480";
+    public static string CustomItemChart = "53553";
+    public static string ClothesItemChart = "53550";
 }
 
 //계정 정보

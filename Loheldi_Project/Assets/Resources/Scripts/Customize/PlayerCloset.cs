@@ -26,7 +26,7 @@ public class PlayerCloset : MonoBehaviour
     public GameObject p_Lower_L;
     public GameObject p_Lower_R;
 
-    static BackendReturnObject closet_chart = new BackendReturnObject();
+    public BackendReturnObject closet_chart = null;
 
 
     public void nowClothes()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.

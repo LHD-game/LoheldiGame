@@ -63,7 +63,7 @@ public class QuestScript : MonoBehaviour
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         //Quest = true;
         Debug.Log("퀘스트 번호" + Load.QuestIndex);
-        QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); ;
+        QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); 
         GiveQuest();
         //QuestNumber = QuestNum-1;
         

@@ -235,16 +235,10 @@ public class Register : MonoBehaviour
     private bool AccChk()
     {
         bool isOK = false;
-        /*
-        string owner_inDate = Backend.UserInDate;
-        Where where = new Where();
-        where.Equal("owner_inDate", owner_inDate);
-        */
         BackendReturnObject bro = Backend.GameData.GetMyData("ACC_INFO", new Where(), 100);
-        //BackendReturnObject bro = Backend.GameData.GetMyData("USER_INFO", owner_inDate);
+
         if (bro.IsSuccess())
         {
-            //GetGameInfo(bro.GetReturnValuetoJSON());
             var json = bro.GetReturnValuetoJSON();
             
             try

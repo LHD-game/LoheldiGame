@@ -28,7 +28,7 @@ public class PlayerCustom : MonoBehaviour
 
     protected static bool newAcc = false;
 
-    static BackendReturnObject custom_chart = new BackendReturnObject();
+    public BackendReturnObject custom_chart = null;
 
     public void nowCustom()    //서버에서 유저의 커스터마이징 목록을 받아와 PreviousSettings에 저장.
     {
@@ -115,13 +115,13 @@ public class PlayerCustom : MonoBehaviour
     protected string FindTexture(string item_code)
     {
         string item_texture = "null";
-        string chart = ChartNum.CustomItemChart;
+
         if (custom_chart == null)
         {
-            custom_chart = Backend.Chart.GetChartContents(chart);
+            custom_chart = Backend.Chart.GetChartContents(ChartNum.CustomItemChart);
         }
-
         JsonData all_rows = custom_chart.GetReturnValuetoJSON()["rows"];
+
         ParsingJSON pj = new ParsingJSON();
 
         for (int i = 0; i < all_rows.Count; i++)

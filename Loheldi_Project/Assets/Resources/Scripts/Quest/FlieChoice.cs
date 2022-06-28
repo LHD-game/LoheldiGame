@@ -31,8 +31,8 @@ public class FlieChoice : MonoBehaviour
     public void Tutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.Num = "0_12";
-        chat.FileAdress = "Scripts/Quest/script_1";
+        chat.Num = "0_1";
+        chat.FileAdress = "Scripts/Quest/script";
         chat.move = true;
         chat.cuttoonFileAdress = "Sprites/Quest/cuttoon/tutorial";
         chat.NewChat();
@@ -96,7 +96,7 @@ public class FlieChoice : MonoBehaviour
         {
             case "Himchan":
                 chat.Num = "1";
-                chat.NPCButton = 2;
+                chat.NPCButton += 2;
                 break;
             case "Markatman":
                 chat.Num = "2";

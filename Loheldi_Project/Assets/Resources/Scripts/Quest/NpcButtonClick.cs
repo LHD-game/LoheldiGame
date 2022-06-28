@@ -21,7 +21,6 @@ public class NpcButtonClick : MonoBehaviour
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         UIB = GameObject.Find("EventSystem").GetComponent<UIButton>();
 
-        Debug.Log(SecondButtonTxt.text);
         if (SecondButtonTxt.text.Equals("미니게임 하기"))
             SceneLoader.instance.GotoLobby();
         else if (SecondButtonTxt.text.Equals("미용실 이용하기"))
@@ -34,6 +33,7 @@ public class NpcButtonClick : MonoBehaviour
         }
         else if (SecondButtonTxt.text.Equals("퀘스트 하미"))
         {
+            Debug.Log(SecondButtonTxt.text);
             Chat.Quest();
 
             GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");

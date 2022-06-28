@@ -37,7 +37,7 @@ public class MainGameManager : MonoBehaviour
         {
             print("동기 방식 데이터 입력 성공");
         }
-        var bro1 = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 10);
+        var bro1 = Backend.GameData.GetMyData("USER_GAME_DATA", Backend.UserInDate);
         JsonData rows = bro1.GetReturnValuetoJSON()["rows"];
         if (bro1.IsSuccess())
         {

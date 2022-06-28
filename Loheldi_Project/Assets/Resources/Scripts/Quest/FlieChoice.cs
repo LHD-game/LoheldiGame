@@ -39,20 +39,21 @@ public class FlieChoice : MonoBehaviour
     }
     public void Quest()  //ÄÆÅ÷ µîÀåÇÏ´Â Äù½ºÆ®ÀÏ ¶§, ÄÆÅ÷ ÀÌ¹ÌÁö ºÒ·¯¿À±â
     {
-        chat.FileAdress = "Scripts/Quest/script_1";
+        Debug.Log("subNum" + chat.DontDestroy.QuestSubNum);
+        chat.FileAdress = "Scripts/Quest/script";
         switch (chat.DontDestroy.QuestSubNum)
         { 
             case 1:
                 chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
-                chat.Num = "1-1";
+                chat.Num = "1_1";
                 break;
-            case 2:
+            /*case 2:
                 chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest2");
-                chat.Num = "2-1";
-                break;
+                chat.Num = "2_1";
+                break;*/
             case 3:
                 chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest3");
-                chat.Num = "3-1";
+                chat.Num = "3_1";
                 break;
             case 4:
                 chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest4");

@@ -61,7 +61,7 @@ public class QuestScript : MonoBehaviour
     {
         Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
-        Quest = true;
+        //Quest = true;
         Debug.Log("Äù½ºÆ® ¹øÈ£" + Load.QuestIndex);
         QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); ;
         GiveQuest();
@@ -88,8 +88,8 @@ public class QuestScript : MonoBehaviour
         Mail.ThisSent.GetComponent<Text>().text = sent;
         Mail.ThisDetail.GetComponent<Text>().text = detail;
 
-        if (!Load.QuestMail)
-            Mail.NewMailCheck();
+        //if (!Load.QuestMail)
+        Mail.NewMailCheck();
     }
 
     private void CheckMail()

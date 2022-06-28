@@ -81,7 +81,7 @@ public class LodingTxt : MonoBehaviour
     public Sprite[] cuttoonImageList;
     static Image cuttoonspriteR;
 
-    public Fadeln fade_in_out;
+    //public Fadeln fade_in_out;
     public UIButton JumpButtons;
     tutorial tu;
     public Interaction Inter;
@@ -97,11 +97,11 @@ public class LodingTxt : MonoBehaviour
 
     private void Awake()
     {
-        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>(); //나중에 주석 풀어야함
-        video = GameObject.Find("QuestManager").GetComponent<VideoScript>(); //나중에 주석 풀어야함
+        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>(); 
+        video = GameObject.Find("QuestManager").GetComponent<VideoScript>(); 
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;  //나중에 주석 풀어야 함
+        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;  
 
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
         color = block.GetComponent<Image>().color;
@@ -110,7 +110,7 @@ public class LodingTxt : MonoBehaviour
         QuizeWin.SetActive(true);
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-        fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
+        //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
 
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
@@ -130,15 +130,17 @@ public class LodingTxt : MonoBehaviour
         cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
         //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
         //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
-        //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        //Debug.Log("Num="+Num);
-        if (DontDestroy.QuestMail)
-            DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("-"))); //앞쪽 퀘스트 넘버만 자르기
+        Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
+        Debug.Log("Num="+Num);
+/*        if (DontDestroy.QuestMail)    //이거 여기있으면 안되는 애 같은데 이따 확인해보자
+            DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
+        Debug.Log(data_Dialog[0]["scriptNumber"].ToString());
         for (int k=0;k<= data_Dialog.Count;k++)
         {
+            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
             if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
             {
                 j = k;
@@ -156,59 +158,56 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        if (move)
-        { //Debug.Log("o=" +o+ "m=" + m);
-            if (o != m )
+        if (o != m)
+        {
+            if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
             {
-                if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
+                switch (o)
                 {
-                    switch (o)
-                    {
-                        case 4:
-                            Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 5:
-                            Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 6:
-                            Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 7:
-                            Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 8:
-                            Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 9:
-                            Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 10:
-                            Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 11:
-                            Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        case 12:
-                            Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                            break;
-                        default:
-                            break;
-                    }
-                    m = o;
+                    case 4:
+                        Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 5:
+                        Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 6:
+                        Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 7:
+                        Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 8:
+                        Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 9:
+                        Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 10:
+                        Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 11:
+                        Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    case 12:
+                        Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
+                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        break;
+                    default:
+                        break;
                 }
+                m = o;
             }
-            o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("-") + 1));
         }
-        
+        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
+
     }
 
     private void QuestSubChoice()
@@ -218,7 +217,13 @@ public class LodingTxt : MonoBehaviour
             Cuttoon();
             ChatWin.SetActive(false);
             Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
-        }
+        } //컷툰 보이기
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//튜토리얼
+            scriptLine(); //video.OnPlayVideo();
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("movie"))//동영상 실행
+            scriptLine(); //video.OnPlayVideo();
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("movieEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
+            scriptLine(); //video.OnPauseVideo();
         else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
         {
             c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
@@ -253,8 +258,8 @@ public class LodingTxt : MonoBehaviour
             cuttoon.transform.localPosition = position;
             ChatWin.SetActive(false);
             Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
-        }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))
+        }   //컷툰 계속 (회전)
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))  //컷툰 계속 하는거 끝 (회전)
         {
             RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
             rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3040);
@@ -266,33 +271,34 @@ public class LodingTxt : MonoBehaviour
             cuttoon.transform.localPosition = position;
             scriptLine();
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {
             ChatWin.SetActive(false);
             Note.SetActive(true);
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("noteEnd"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("noteEnd"))
         {
+            Note.SetActive(false);
             //ChatWin.SetActive(true);
             scriptLine();
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-message"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("i-message"))
         {
             ChatWin.SetActive(false);
             IMessage.SetActive(true);
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("i-messageEnd"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("i-messageEnd"))
         {
             //ChatWin.SetActive(true);
             IMessage.SetActive(false);
             scriptLine();
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("train"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("train"))
         {
             ChatWin.SetActive(false);
             Value.SetActive(true);
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("trainEnd"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("trainEnd"))
         {
             //ChatWin.SetActive(true);
             Value.SetActive(false);
@@ -304,21 +310,21 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(false);
             Draw.ChangeDrawCamera();
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawFinish"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
             scriptLine();
             Debug.Log("다그려땡");
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("Screenshot"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Screenshot"))
         {
             Value.SetActive(false);
             scriptLine();
             Debug.Log("스샷 어케하는경");
         }
-        else if (data_Dialog[j - 1]["scriptType"].ToString().Equals("drawEnd"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
         {
             Value.SetActive(false);
-            scriptLine();
+            //scriptLine();
             Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
             Draw.ChangeDrawCamera();
         }
@@ -351,35 +357,41 @@ public class LodingTxt : MonoBehaviour
                 cuttoon.SetActive(false);
                 scriptLine();
             }
-            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0-1"))
+            if (data_Dialog[j]["scriptNumber"].ToString().Equals("0_1"))
                 Main_UI.SetActive(false);
 
-            spriteR = CCImage.GetComponent<Image>();
-            l = Int32.Parse(data_Dialog[j]["image"].ToString());
-            //Debug.Log("이미지번호=" + l);
-            spriteR.sprite = CCImageList[l];
         }
+        if (move)
+            changeMoment();
     }
 
     
     public void scriptLine()  //스크립트 띄우는 거
     {
+        spriteR = CCImage.GetComponent<Image>();
+        l = Int32.Parse(data_Dialog[j]["image"].ToString());
+        Debug.Log("j=" + j);
+        Debug.Log("이미지번호=" + l);
+        spriteR.sprite = CCImageList[l];
+
         if (ChatWin.activeSelf == false)
             ChatWin.SetActive(true);
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
             QuizTIme();
-            //Debug.Log("j:" + j + "MataNum=" + MataNum);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
             ChatTime();
         }
 
-        //Debug.Log("j=" + j);
-        LoadTxt = data_Dialog[j]["dialog"].ToString();
-        Name.text = data_Dialog[j]["name"].ToString();
+        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name","이름");
+        if (data_Dialog[j]["name"].ToString().Equals("주인공"))
+            Name.text = "이름";
+        else
+            Name.text = data_Dialog[j]["name"].ToString();
+        
         StartCoroutine(_typing());
         Arrow.SetActive(false);
         block.SetActive(true);
@@ -484,13 +496,14 @@ public class LodingTxt : MonoBehaviour
         }
 
 
-        if (data_Dialog[j-1]["scriptType"].ToString().Equals("tutorial")||tuto)
+        if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
-            changeMoment();
-            //Debug.Log("튜토리얼 실핻ㅇ");
+            //changeMoment();
+            Debug.Log("튜토리얼 실핻ㅇ");
             Invoke("Tutorial_", 2f);
         }
-        block.SetActive(false);
+        else
+            block.SetActive(false);
     }
 
     void QuizCho()
@@ -563,6 +576,7 @@ public class LodingTxt : MonoBehaviour
     {
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
+        DontDestroy.QuestIndex++;
        // Quest.Load.Quest = true;
 
         DontDestroy.LastDay = DontDestroy.ToDay;

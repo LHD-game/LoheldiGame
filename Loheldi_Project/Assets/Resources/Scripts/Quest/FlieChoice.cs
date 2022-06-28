@@ -16,7 +16,7 @@ public class FlieChoice : MonoBehaviour
     }
     public void test()
     {
-        chat.Num = "1-15";
+        chat.Num = "1_15";
         chat.FileAdress = "Scripts/Quest/test";
         chat.NewChat();
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest1");
@@ -31,13 +31,13 @@ public class FlieChoice : MonoBehaviour
     public void Tutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.Num = "0-1";
+        chat.Num = "0_12";
         chat.FileAdress = "Scripts/Quest/script_1";
         chat.move = true;
         chat.cuttoonFileAdress = "Sprites/Quest/cuttoon/tutorial";
         chat.NewChat();
     }
-    public void Quest1()
+    public void Quest()  //컷툰 등장하는 퀘스트일 때, 컷툰 이미지 불러오기
     {
         chat.FileAdress = "Scripts/Quest/script_1";
         switch (chat.DontDestroy.QuestSubNum)
@@ -88,7 +88,7 @@ public class FlieChoice : MonoBehaviour
         chat.NewChat();
     }
 
-    public void NpcChoice()
+    public void NpcChoice() //npc와 대화 선택하는 함수
     {
         chat.FileAdress = "Scripts/Quest/DialogNPC";
 

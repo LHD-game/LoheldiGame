@@ -34,7 +34,7 @@ public class NpcButtonClick : MonoBehaviour
         }
         else if (SecondButtonTxt.text.Equals("Äù½ºÆ® ÇÏ¹Ì"))
         {
-            Chat.Quest1();
+            Chat.Quest();
 
             GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
 

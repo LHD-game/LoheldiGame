@@ -29,18 +29,18 @@ public class tutorial : MonoBehaviour
             chat.ChatWin.SetActive(false);
         //chat.j--;
         Debug.Log("∆©≈‰i=" + tutoi);
-        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0-6")||(tutoi<=4&&tutoi>0))
+        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_6")||(tutoi<=4&&tutoi>0))
         {
             //Debug.Log("∆©≈‰i=" + tutoi);
             //Debug.Log("πˆ∆∞=" + chat.block.transform.GetChild(tutoi));
             if (tutoi < 4)
             {
-                //Debug.Log("6Ω««‡ ∆©≈‰i=" + tutoi);
+                Debug.Log("6Ω««‡ ∆©≈‰i=" + tutoi);
                 //tutoblack.sprite = chat.cuttoonImageList[4+tutoi];
                 if (tutoi == 0)
                 {
                     chat.Main_UI.SetActive(true);
-                    chat.JumpButtons.Main_UI.SetActive(true);
+                    //chat.JumpButtons.Main_UI.SetActive(true);
                 }
                 else if (tutoi == 1)
                     chat.Main_UI.SetActive(false);
@@ -64,7 +64,7 @@ public class tutorial : MonoBehaviour
             }
         }
 
-        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0-12"))
+        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_12"))
         {
             if (tutoi == 0)
                 tutoi += 4;
@@ -88,6 +88,7 @@ public class tutorial : MonoBehaviour
                 chat.tutoFinish = true;
                 //chat.ChatEnd();
                 chat.Line();
+                chat.move = false;
                 //forTutorial();
             }
         }

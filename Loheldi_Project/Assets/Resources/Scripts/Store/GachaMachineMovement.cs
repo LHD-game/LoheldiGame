@@ -11,11 +11,14 @@ public class GachaMachineMovement : MonoBehaviour
     public GameObject Lever;
     public GameObject Capsule;
 
+    public GameObject ButtonPanel;
     public GameObject Machine;
     public GameObject BackGround;
 
     public void LeverSpin()
     {
+        ButtonPanel.SetActive(false);
+        Capsule.transform.position = new Vector3(-0.2544488f, 1.7f, 0.3488888f);
         SpinAnimator = Lever.GetComponent<Animator>();   //애니메이터 컴포넌트 불러오기
         SpinAnimator.SetBool("Spin", true);
     }
@@ -26,6 +29,7 @@ public class GachaMachineMovement : MonoBehaviour
     }
     public void TimeLineEventReset()
     {
+        ButtonPanel.SetActive(true);
         SpinAnimator = Lever.GetComponent<Animator>();
         CapsuleAnimator = Capsule.GetComponent<Animator>();
         SpinAnimator.SetBool("Spin", false);

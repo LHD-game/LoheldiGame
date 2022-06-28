@@ -24,7 +24,7 @@ public class Clothes_Category : StoreCategoryControl
     List<Dictionary<string, object>> shoesItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> acceItem = new List<Dictionary<string, object>>();
 
-    JsonData myClothes_rows = new JsonData();
+    JsonData myClothes_rows = null;
     List<GameObject> upper_list = new List<GameObject>();   //상의 아이템을 저장하는 변수
     List<GameObject> lower_list = new List<GameObject>();   //하의 아이템을 저장하는 변수
     List<GameObject> shoes_list = new List<GameObject>();   //신발 아이템을 저장하는 변수
@@ -147,7 +147,7 @@ public class Clothes_Category : StoreCategoryControl
             disable_img.SetActive(false);
             for (int j = 0; j < myClothes_rows.Count; j++)
             {
-                MyItem data = pj.ParseBackendData<MyItem>(myClothes_rows[j]);
+                MyCustomItem data = pj.ParseBackendData<MyCustomItem>(myClothes_rows[j]);
 
                 if (data.ICode.Equals(dialog[i]["ICode"].ToString()))
                 {

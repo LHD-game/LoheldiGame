@@ -27,6 +27,11 @@ public class MyItem
     public int Amount;
 }
 
+public class MyCustomItem
+{
+    public string ICode;
+}
+
 //상점 아이템 정보
 public class StoreItem
 {

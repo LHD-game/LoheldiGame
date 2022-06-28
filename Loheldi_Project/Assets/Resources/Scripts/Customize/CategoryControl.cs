@@ -31,7 +31,7 @@ public class CategoryControl : MonoBehaviour
         }
         
         Debug.Log(dialog.Count);
-        for (int i = 0; i < dialog.Count; i++)
+        for (int i = dialog.Count-1; i >= 0 ; i--)
         {
             //create caltalog box
             GameObject child = Instantiate(itemBtn);    //create itemBtn instance

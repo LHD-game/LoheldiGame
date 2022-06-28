@@ -5,6 +5,14 @@ using UnityEngine;
 
 //정보 저장 클래스
 
+//차트 번호
+public static class ChartNum
+{
+    public static string BasicCustomItemChart = "53501";
+    public static string BasicClothesItemChart = "53497";
+    public static string CustomItemChart = "49391";
+    public static string ClothesItemChart = "53480";
+}
 
 //계정 정보
 public class AccInfo
@@ -37,6 +45,7 @@ public class CustomStoreItem
     public string ItemType;
     public string Texture;
 }
+
 public class CustomItem
 {
     public string ICode;

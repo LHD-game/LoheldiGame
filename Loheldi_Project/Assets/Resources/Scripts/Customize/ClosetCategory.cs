@@ -28,13 +28,14 @@ public class ClosetCategory : CategoryControl
     
     private void Start()
     {
-        var bro = Backend.GameData.GetMyData("ACC_CLOSET", new Where(), 100);
-        if (bro.IsSuccess() == false)
+        var allClothesChart = Backend.Chart.GetChartContents(ChartNum.ClothesItemChart); //서버의 엑셀파일을 불러온다.
+        var myClothes = Backend.GameData.GetMyData("ACC_CLOSET", new Where(), 100);
+        if (myClothes.IsSuccess() == false)
         {
             Debug.Log("요청 실패");
             return;
         }
-        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        if (myClothes.GetReturnValuetoJSON()["rows"].Count <= 0)
         {
             // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
             // 데이터가 존재하는지 확인
@@ -43,43 +44,47 @@ public class ClosetCategory : CategoryControl
             return;
         }
 
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+        JsonData allClothes_rows = allClothesChart.GetReturnValuetoJSON()["rows"];
+        JsonData myClothes_rows = myClothes.GetReturnValuetoJSON()["rows"];
+        ParsingJSON pj = new ParsingJSON();
+        ParsingJSON pj2 = new ParsingJSON();
 
         int u = 0, l = 0, so = 0, sh = 0;
-        for (int i = rows.Count-1 ; i >= 0 ; i--)
+        for (int i = allClothes_rows.Count-1 ; i >= 0 ; i--)
         {
-            CustomItem data = new CustomItem();
-            data.ICode = bro.Rows()[i]["ICode"]["S"].ToString();
-            data.IName = bro.Rows()[i]["IName"]["S"].ToString();
-            data.Model = bro.Rows()[i]["Model"]["S"].ToString();
-            data.Material = bro.Rows()[i]["Material"]["S"].ToString();
-            data.Texture = bro.Rows()[i]["Texture"]["S"].ToString();
+            CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allClothes_rows[i]);
+            for(int j = 0; j < myClothes_rows.Count; j++)
+            {
+                CustomStoreItem mydata = pj2.ParseBackendData<CustomStoreItem>(myClothes_rows[j]);
+                if (data.ICode.Equals(mydata.ICode))
+                {
+                    CommonField.SetDataDialog(data);
+                    if (data.Category.Equals(CommonField.m_upper))
+                    {
+                        upper_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(upper_Dialog[u], data);
+                        u++;
+                    }
+                    else if (data.Category.Equals(CommonField.m_lower))
+                    {
+                        lower_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(lower_Dialog[l], data);
+                        l++;
+                    }
+                    else if (data.Category.Equals(CommonField.m_socks))
+                    {
+                        socks_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(socks_Dialog[so], data);
+                        so++;
+                    }
+                    else if (data.Category.Equals(CommonField.m_shoes))
+                    {
+                        shoes_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(shoes_Dialog[sh], data);
+                        sh++;
+                    }
+                }
 
-            CommonField.SetDataDialog(data);
-
-            if (data.Model.Equals(CommonField.m_upper))
-            {
-                upper_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(upper_Dialog[u], data);
-                u++;
-            }
-            else if (data.Model.Equals(CommonField.m_lower))
-            {
-                lower_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(lower_Dialog[l], data);
-                l++;
-            }
-            else if (data.Model.Equals(CommonField.m_socks))
-            {
-                socks_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(socks_Dialog[so], data);
-                so++;
-            }
-            else if (data.Model.Equals(CommonField.m_shoes))
-            {
-                shoes_Dialog.Add(new Dictionary<string, object>());
-                initCustomItem(shoes_Dialog[sh], data);
-                sh++;
             }
         }
 

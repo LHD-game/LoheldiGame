@@ -117,8 +117,8 @@ public class MailLoad : MonoBehaviour
                 List<MailLoad> noticeList = new List<MailLoad>();
             }
         }
-        if (Quest.Load.QuestMail)
-            Quest.MainQuestLoding();
+        /*if (Quest.Load.QuestMail)
+            Quest.MainQuestLoding();*/
     }
 
     public void MailLoading()

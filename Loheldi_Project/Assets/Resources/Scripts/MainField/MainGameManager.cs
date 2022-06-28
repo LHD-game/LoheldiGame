@@ -42,7 +42,7 @@ public class MainGameManager : MonoBehaviour
         if (bro1.IsSuccess())
         {
             print("정보 있음");
-            levelText.text = rows[0]["newlevel"].ToString();
+            /*levelText.text = rows[0]["newlevel"].ToString();*/
             /*expBarleftText.text = rows[0]["exp"].ToString();              
             expBarrightText.text = rows[0]["Maxexp"].ToString();*/
         }

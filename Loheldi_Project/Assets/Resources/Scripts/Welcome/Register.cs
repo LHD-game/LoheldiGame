@@ -44,6 +44,12 @@ public class Register : MonoBehaviour
     [SerializeField]
     private InputField InputFPW_ID;
 
+    public Text FindIDErrorTxt;
+    public Text InitPWErrorTxt;
+
+    public static bool isIDFind = false;
+    public static bool isPWFind = false;
+
     //level, coin ..etc
     public int money;
     public static int level;
@@ -285,27 +291,100 @@ public class Register : MonoBehaviour
     public void FindID()    //아이디 찾기
     {
         string uEmail = InputFID_Email.text;
-        Backend.BMember.FindCustomID(uEmail);
-        Debug.Log("발송 완료");
-        //todo: 발송 완 팝업
+        var bro = Backend.BMember.FindCustomID(uEmail);
+        if (ChkCase(bro, "ID"))
+        {
+            isIDFind = true;
+        }
+        else
+        {
+            isIDFind = false;
+        }
+
     }
 
     public void InitPW()    //비밀번호 초기화
     {
         string uID = InputFPW_ID.text;
         string uEmail = InputFPW_Email.text;
-        Backend.BMember.ResetPassword(uID, uEmail);
-        //todo: 발송 완 팝업
-    }
-    /*public void Load()
-    {
-        if (PlayerPrefs.HasKey("ID"))
+        var bro = Backend.BMember.ResetPassword(uID, uEmail);
+        if (ChkCase(bro, "PW"))
         {
-            userID.text = PlayerPrefs.GetString("ID");
-            userPW.text = PlayerPrefs.GetString("PW").ToString();
-            userEmail.text = PlayerPrefs.GetString("Email").ToString();
+            isPWFind = true;
         }
-    }*/
+        else
+        {
+            isPWFind = false;
+        }
+    }
+
+    private bool ChkCase(BackendReturnObject bro, string find)  //계정 찾기 성공 여부 확인 
+    {
+        int statusCode = int.Parse(bro.GetStatusCode());
+        bool isSuccess = false;
+        switch (statusCode)
+        {
+            case 204:   //이메일 송신 성공
+                Debug.Log(bro.GetMessage());
+                if (find.Equals("ID"))
+                {
+                    FindIDErrorTxt.gameObject.SetActive(false);
+                }
+                else
+                {
+                    InitPWErrorTxt.gameObject.SetActive(false);
+                }
+
+                isSuccess = true;
+                break;
+
+            case 404:   // 등록된 유저가 없는 경우
+                Debug.Log(bro.GetMessage());
+                if (find.Equals("ID"))
+                {
+                    FindIDErrorTxt.gameObject.SetActive(true);
+                    FindIDErrorTxt.text = bro.GetMessage();
+                }
+                else
+                {
+                    InitPWErrorTxt.gameObject.SetActive(true);
+                    InitPWErrorTxt.text = bro.GetMessage();
+                }
+                break;
+
+            case 429:   //24시간 이내에 5회 이상 같은 이메일 정보로 찾기를 시도한 경우
+                Debug.Log(bro.GetMessage());
+                if (find.Equals("ID"))
+                {
+                    FindIDErrorTxt.gameObject.SetActive(true);
+                    FindIDErrorTxt.text = bro.GetMessage();
+                }
+                else
+                {
+                    InitPWErrorTxt.gameObject.SetActive(true);
+                    InitPWErrorTxt.text = bro.GetMessage();
+                }
+
+                break;
+
+            default:
+                Debug.Log(bro.GetMessage());
+                if (find.Equals("ID"))
+                {
+                    FindIDErrorTxt.gameObject.SetActive(true);
+                    FindIDErrorTxt.text = "문제가 발생했습니다.\n자세한 사항은 loheldi412@gmail.com으로 문의 바랍니다. (오류코드: " + statusCode + ")";
+                }
+                else
+                {
+                    InitPWErrorTxt.gameObject.SetActive(true);
+                    InitPWErrorTxt.text = "문제가 발생했습니다.\n자세한 사항은 loheldi412@gmail.com으로 문의 바랍니다. (오류코드:" + statusCode + ")";
+                }
+                
+                break;
+        }
+
+        return isSuccess;
+    }
 
 
     void Error(string errorCode, string type)

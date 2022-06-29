@@ -7,8 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     private VirtualJoystick joystic;
     private static SceneLoader _instance;
-    //private QuestDontDestroy DontDestroy;
-    //public GameObject DontDestroyQuest;
+    private QuestDontDestroy QDD;
     public static SceneLoader instance
     {
         get
@@ -26,9 +25,8 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("UserInfo");
     }
     public void GotoMainField()
-    {/*
-        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        DontDestroy.Dontdestroy();*/
+    {
+        //DontDestroy.Dontdestroy();*/
         /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
         joystic.speed1 = 8f;
         joystic.speed2 = 10f;*/
@@ -46,10 +44,12 @@ public class SceneLoader : MonoBehaviour
     public void GotoPlayerCustom()
     {
         SceneManager.LoadScene("PlayerCustom");
+        PlayerTransForm();
     }
     public void GotoPlayerCloset()
     {
         SceneManager.LoadScene("PlayerCloset");
+        PlayerTransForm();
     }
 
 
@@ -57,6 +57,7 @@ public class SceneLoader : MonoBehaviour
     public void GotoLobby()
     {
         SceneManager.LoadScene("Game_Lobby");
+        PlayerTransForm();
     }
     public void GotoEatingGame()
     {
@@ -75,7 +76,7 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("Game_Tooth");
     }
 
-    public void GotoComditionWindow()
+    public void GotoComditionWindow() //삭제될 친구
     {
         SceneManager.LoadScene("CharacterCondition");
     }
@@ -95,5 +96,12 @@ public class SceneLoader : MonoBehaviour
     public void GotoTestGacha()
     {
         SceneManager.LoadScene("Gacha");
+    }
+
+    private void PlayerTransForm()
+    {
+        QDD = GameObject.Find("QuestDontDestroy").GetComponent<QuestDontDestroy>();
+        QDD.LastPlayerTransform.position = GameObject.Find("Player").transform.position;
+        Debug.Log(QDD.LastPlayerTransform);
     }
 }

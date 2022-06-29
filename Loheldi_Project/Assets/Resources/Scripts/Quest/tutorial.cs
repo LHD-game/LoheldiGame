@@ -19,6 +19,7 @@ public class tutorial : MonoBehaviour
     public void Tutorial()
     {
         Debug.Log("∆©≈‰∏ÆæÛ Ω«¡P§∑22");
+        Debug.Log("∆©≈‰i=" + tutoi);
 
         Image tutoblack = chat.block.GetComponent<Image>();
         if (tutoi < 7)
@@ -28,7 +29,12 @@ public class tutorial : MonoBehaviour
         if (!chat.tuto)
             chat.ChatWin.SetActive(false);
         //chat.j--;
-        Debug.Log("∆©≈‰i=" + tutoi);
+        if(chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_4"))
+        {
+            chat.Main_UI.SetActive(false);
+            chat.block.transform.GetChild(8).gameObject.SetActive(true);
+        }
+
         if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_6")||(tutoi<=4&&tutoi>0))
         {
             //Debug.Log("∆©≈‰i=" + tutoi);

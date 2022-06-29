@@ -101,18 +101,16 @@ public class LodingTxt : MonoBehaviour
         video = GameObject.Find("QuestManager").GetComponent<VideoScript>(); 
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
-        Debug.Log("어디서 막히는 거야");
-        Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        color = block.GetComponent<Image>().color;
-        //cuttoon.SetActive(true);
-        ChatWin.SetActive(true);
-        //QuizeWin.SetActive(true);
-        //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-        //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
+        Inter = GameObject.Find("Player").GetComponent<Interaction>();
 
+        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+        color = block.GetComponent<Image>().color;
+        ChatWin.SetActive(true);
+        //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
+        
+        //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
                                              Debug.Log("이미지=" + CCImage);
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
@@ -121,18 +119,15 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
-        
-        
-
     }
     public void NewChat()
     {
         cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
         //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
-        Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
-        Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        Debug.Log("Num="+Num);
-/*        if (DontDestroy.QuestMail)    //이거 여기있으면 안되는 애 같은데 이따 확인해보자
+        //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
+        //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
+        //Debug.Log("Num="+Num);
+/*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
             DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
@@ -160,12 +155,15 @@ public class LodingTxt : MonoBehaviour
     {
         if (o != m)
         {
-            if ((o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
+            if ((o==0||o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
             {
                 switch (o)
                 {
+                    case 0:
+                        Player.transform.position = new Vector3(-145.334457f, 17.3483009f, -32.4463768f);
+                        break;
                     case 4:
-                        Player.transform.position = new Vector3(-39.69f, 5.577f, -74.88f);
+                        Player.transform.position = new Vector3(45.25f, 5.2f, 49.5f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 5:
@@ -580,14 +578,6 @@ public class LodingTxt : MonoBehaviour
        // Quest.Load.Quest = true;
 
         DontDestroy.LastDay = DontDestroy.ToDay;
-        /*for (int i = 0; i < ButtonPlusNpc.Length; i++)
-        {
-            if (ButtonPlusNpc == Inter.NameNPC)
-            {
-                ButtonPlusNpc = "";
-                break;
-            }
-        }*/
 
     }
 

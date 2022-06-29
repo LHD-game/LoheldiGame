@@ -14,17 +14,18 @@ public class ChangColor : MonoBehaviour
 
     void start()
     {
-        color = false;
+       
+        color = true;
     }
     // Update is called once per frame
 
     public static void PopUp()
     {
-        //spriteR = badge[k].GetComponent<Image>();
         if (color)
         {
-            badge[k].SetActive(false);
-            //spriteR.sprite = badgeList[0] ;
+            Debug.Log("popup½ÇÇà");
+            for (int i = 0; i <= ColorList.QDD.badgeList.Count; i++)
+                badge[ColorList.QDD.badgeList[i]].SetActive(false);
             color = false;
         }
     }

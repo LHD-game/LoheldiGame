@@ -11,7 +11,7 @@ public class QuestScript : MonoBehaviour
     public Transform QMailList;
     public bool Quest = false;               //현재 받은 퀘스트 메일이 있는지 확인하는 함수 (MailLoad 211참조)
     [SerializeField]
-    private GameObject NpcQuest;
+    //private GameObject NpcQuest;
 
     public MailLoad Mail;
     private LodingTxt chat;
@@ -44,16 +44,20 @@ public class QuestScript : MonoBehaviour
     }
     private void QuestCheck()
     {
-        if (Load.QuestIndex == 0)
+        Debug.Log("퀘스트 체크 실행");
+        if (Load.QuestIndex < 11)
         {
-            Load.Quest = false;
-            file.Tutorial();
-        }
-        else if (Load.QuestIndex < 0 && Load.QuestIndex < 11)
-        {
-            MainQuestLoding();
-            if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
-                ExclamationMarkCreate();
+            if (Load.QuestIndex == 0)
+            {
+                Load.Quest = false;
+                file.Tutorial();
+            }
+            else
+            {
+                MainQuestLoding();
+                if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
+                    ExclamationMarkCreate();
+            }
         }
     }
 
@@ -145,7 +149,7 @@ public class QuestScript : MonoBehaviour
                 chat.Num = "10-1";
                 break;
         }
-        NpcQuest = GameObject.Find(QnpcName);
+        //NpcQuest = GameObject.Find(QnpcName);
         Load.ButtonPlusNpc = QnpcName;
         ExclamationMarkCreate();
         Debug.Log("쳇넘" + chat.Num);

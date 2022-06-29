@@ -24,12 +24,16 @@ public class WelcomeManager : MonoBehaviour
     GameObject FindID;
     [SerializeField]
     GameObject FindPW;
+    public GameObject FindSuccIDPopup;
+    public GameObject InitSuccPWPopup;
 
     private bool isLogin = false;   //로그인 여부
     private bool isLPopup = false;  // 로그인 패널 활성화 여부
     private bool isSPopup = false;  // 회원가입 패널 활성화 여부
     private bool isSSPopup = false;  // 회원가입 성공 문구 패널 활성화 여부
     private bool isAccPopup = false;  // 아이디/비밀번호 찾기 패널 활성화 여부
+    private static bool isIDSPopup = false;  // 아이디 찾기 성공 패널 활성화 여부
+    private static bool isPWSPopup = false;  // 비밀번호 초기화 성공 패널 활성화 여부
 
 
     void Start()
@@ -45,10 +49,7 @@ public class WelcomeManager : MonoBehaviour
     }
 
     //todo: 뒤로가기 클릭 시(esc), 종료 여부 패널 띄우기. 팝업 하나당 스택 하나.
-    void Update()
-    {
-        
-    }
+
     //todo:
     // 화면 터치 시, 로그인 여부를 판별하여 로그인하지 않은 경우 welcomePanel 활성화
     public void WelcomePop()
@@ -115,6 +116,25 @@ public class WelcomeManager : MonoBehaviour
     {
         FindID.SetActive(false);
         FindPW.SetActive(true);
+    }
+
+    public void FindIDSucPop()
+    {
+        if (Register.isIDFind)
+        {
+            isIDSPopup = !isIDSPopup;
+            FindSuccIDPopup.SetActive(isIDSPopup);
+        }
+    }
+
+    public void InitPWSucPop()
+    {
+        if (Register.isPWFind)
+        {
+            isPWSPopup = !isPWSPopup;
+            InitSuccPWPopup.SetActive(isPWSPopup);
+        }
+
     }
 
     public void Restart()   //회원가입 완료 후 재시작

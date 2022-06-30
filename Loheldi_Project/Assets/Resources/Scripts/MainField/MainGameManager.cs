@@ -24,7 +24,7 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
-        level = 1;
+        /*level = 1;
         Maxexp = 100;
         exp = 0;
 
@@ -36,13 +36,13 @@ public class MainGameManager : MonoBehaviour
         if (bro.IsSuccess())
         {
             print("동기 방식 데이터 입력 성공");
-        }
-        var bro1 = Backend.GameData.GetMyData("USER_GAME_DATA", Backend.UserInDate);
-        JsonData rows = bro1.GetReturnValuetoJSON()["rows"];
-        if (bro1.IsSuccess())
+        }*/
+        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where());
+        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+        if (bro.IsSuccess())
         {
             print("정보 있음");
-            /*levelText.text = rows[0]["newlevel"].ToString();*/
+            levelText.text = rows[0]["level"].ToString();
             /*expBarleftText.text = rows[0]["exp"].ToString();              
             expBarrightText.text = rows[0]["Maxexp"].ToString();*/
         }

@@ -6,7 +6,12 @@ public class ColorList : MonoBehaviour
 {
     private int active;
 
+    public static QuestDontDestroy QDD;
     // Update is called once per frame
+    void Start()
+    {
+        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+    }
     void Update()
     {
         active = MainGameManager.level;
@@ -43,48 +48,48 @@ public class ColorList : MonoBehaviour
     {
         ChangColor.color = true;
         ChangColor.k = 0;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 
     public void runBadge()
     {
         ChangColor.color = true;
         ChangColor.k = 1;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 
     public void quest1_2()
     {
         ChangColor.color = true;
         ChangColor.k = 2;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 
     public void quest4_2()
     {
         ChangColor.color = true;
         ChangColor.k = 3;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 
     public void quest1_4()
     {
         ChangColor.color = true;
         ChangColor.k = 4;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 
     public void quest2_4()
     {
         ChangColor.color = true;
         ChangColor.k = 5;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 
     public void quest3_4()
     {
         ChangColor.color = true;
         ChangColor.k = 6;
-        ChangColor.PopUp();
+        QDD.badgeList.Add(ChangColor.k);
     }
 }

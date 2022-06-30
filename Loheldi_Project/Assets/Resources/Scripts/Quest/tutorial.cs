@@ -19,6 +19,7 @@ public class tutorial : MonoBehaviour
     public void Tutorial()
     {
         Debug.Log("∆©≈‰∏ÆæÛ Ω«¡P§∑22");
+        Debug.Log("∆©≈‰i=" + tutoi);
 
         Image tutoblack = chat.block.GetComponent<Image>();
         if (tutoi < 7)
@@ -28,7 +29,13 @@ public class tutorial : MonoBehaviour
         if (!chat.tuto)
             chat.ChatWin.SetActive(false);
         //chat.j--;
-        Debug.Log("∆©≈‰i=" + tutoi);
+        if(chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_4")&& !chat.DontDestroy.tutorialLoading)
+        {
+            tutoblack.sprite = chat.cuttoonImageList[4];
+            chat.Main_UI.SetActive(true);
+            chat.block.transform.Find("Button8").gameObject.SetActive(true);
+        }
+
         if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_6")||(tutoi<=4&&tutoi>0))
         {
             //Debug.Log("∆©≈‰i=" + tutoi);
@@ -66,13 +73,16 @@ public class tutorial : MonoBehaviour
 
         if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_12"))
         {
-            if (tutoi == 0)
-                tutoi += 4;
+            /*if (tutoi == 0)
+                tutoi += 4;*/
             if (tutoi < 7)
             {
                 //Debug.Log("12Ω««‡ ∆©≈‰i=" + (tutoi));
                 //tutoblack.sprite = chat.cuttoonImageList[4+tutoi];
-                chat.Main_UI.SetActive(true);
+                if (tutoi == 4)
+                    chat.Main_UI.SetActive(true);
+                else
+                    chat.Main_UI.SetActive(false);
                 //Debug.Log(chat.block.transform.GetChild(tutoi).gameObject.name);
                 chat.block.transform.GetChild(tutoi).gameObject.SetActive(true);
                 if (tutoi > 4)

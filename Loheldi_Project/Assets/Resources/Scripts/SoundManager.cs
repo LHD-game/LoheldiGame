@@ -83,11 +83,7 @@ public class SoundManager : MonoBehaviour
         }
         if (scene.name == "MainField")
         {
-            Sound("BGMQuestEnd");
-        }
-        if (scene.name == "MainField")
-        {
-            Sound("BGMNight");
+            Sound("BGMField");
         }
     }
 

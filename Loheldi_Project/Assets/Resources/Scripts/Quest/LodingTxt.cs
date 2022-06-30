@@ -64,13 +64,13 @@ public class LodingTxt : MonoBehaviour
 
     public string Num;                       //스크립트 번호
     public int j;                                  //data_Dialog 줄갯수
-    public int c=0;                              //컷툰 이미지 번호
+    public int c = 0;                              //컷툰 이미지 번호
     //public static int k;                    //npc
     public int l;                            //뜨는 이미지 번호
     string Answer;               //누른 버튼 인식
 
-    public bool tutoEnd=false;  //튜토리얼 완전 끝
-    public bool tutoFinish=false;
+    public bool tutoEnd = false;  //튜토리얼 완전 끝
+    public bool tutoFinish = false;
     public bool tuto;
     public bool move = false; //캐릭터 순간이동
     public static GameObject CCImage;     //캐릭터 이미지
@@ -86,7 +86,7 @@ public class LodingTxt : MonoBehaviour
     tutorial tu;
     public Interaction Inter;
 
-    int m=0;                                  //카메라 무빙
+    int m = 0;                                  //카메라 무빙
     int o = 1;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
 
@@ -97,8 +97,8 @@ public class LodingTxt : MonoBehaviour
 
     private void Awake()
     {
-        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>(); 
-        video = GameObject.Find("QuestManager").GetComponent<VideoScript>(); 
+        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
+        video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
@@ -109,10 +109,10 @@ public class LodingTxt : MonoBehaviour
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
-        
+
         //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
-                                             Debug.Log("이미지=" + CCImage);
+        Debug.Log("이미지=" + CCImage);
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
 
         cuttoon = GameObject.Find("chatUI").transform.Find("Cuttoon").gameObject;
@@ -126,13 +126,13 @@ public class LodingTxt : MonoBehaviour
         //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
         //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
         //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        Debug.Log("Num="+Num);
-/*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
-            DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
+        Debug.Log("Num=" + Num);
+        /*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
+                    DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
-        for (int k=0;k<= data_Dialog.Count;k++)
+        for (int k = 0; k <= data_Dialog.Count; k++)
         {
             //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
             if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
@@ -140,7 +140,7 @@ public class LodingTxt : MonoBehaviour
                 j = k;
                 if (DontDestroy.tutorialLoading)
                 {
-                    j+=1;
+                    j += 1;
                 }
                 chatCanvus.SetActive(true);
                 ChatTime();
@@ -152,14 +152,14 @@ public class LodingTxt : MonoBehaviour
                 continue;
             }
         }
-        
+
     }
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
         if (o != m)
         {
-            if ((o==3||o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
+            if ((o == 3 || o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
             {
                 switch (o)
                 {
@@ -167,7 +167,7 @@ public class LodingTxt : MonoBehaviour
                         Player.transform.position = new Vector3(-145.334457f, 17.3483009f, -32.4463768f);
                         break;
                     case 4:
-                        if(DontDestroy.tutorialLoading)
+                        if (DontDestroy.tutorialLoading)
                             Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         Player.transform.position = new Vector3(45.25f, 5.2f, 49.5f);
                         DontDestroy.tutorialLoading = false;
@@ -210,9 +210,9 @@ public class LodingTxt : MonoBehaviour
                 m = o;
             }
         }
-        o = Int32.Parse(data_Dialog[j-1]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
+        o = Int32.Parse(data_Dialog[j - 1]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
 
-    }
+    } 
 
     private void QuestSubChoice()
     {

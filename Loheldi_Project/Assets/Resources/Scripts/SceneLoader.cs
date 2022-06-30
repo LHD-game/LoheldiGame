@@ -43,21 +43,21 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoPlayerCustom()
     {
-        SceneManager.LoadScene("PlayerCustom");
         PlayerTransForm();
+        SceneManager.LoadScene("PlayerCustom");
     }
     public void GotoPlayerCloset()
     {
-        SceneManager.LoadScene("PlayerCloset");
         PlayerTransForm();
+        SceneManager.LoadScene("PlayerCloset");
     }
 
 
     //Mini Game
     public void GotoLobby()
     {
-        SceneManager.LoadScene("Game_Lobby");
         PlayerTransForm();
+        SceneManager.LoadScene("Game_Lobby");
     }
     public void GotoEatingGame()
     {
@@ -100,7 +100,7 @@ public class SceneLoader : MonoBehaviour
 
     private void PlayerTransForm()
     {
-        QDD = GameObject.Find("QuestDontDestroy").GetComponent<QuestDontDestroy>();
+        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         QDD.LastPlayerTransform.position = GameObject.Find("Player").transform.position;
         Debug.Log(QDD.LastPlayerTransform);
     }

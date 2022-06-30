@@ -23,8 +23,8 @@ public class VideoScript : MonoBehaviour
     public void OnResetVideo()
     {
         myVideo.SetActive(false);
-        videoClip.time = 0f;
-        videoClip.playbackSpeed = 1f;
+        videoClip.Stop();
+        
     }
 
 }

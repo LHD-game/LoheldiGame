@@ -110,11 +110,11 @@ public class QuestScript : MonoBehaviour
         {
             case 1:
                 QnpcName = "Hami";
-                chat.Num = "1-1";
+                chat.Num = "1_1";
                 break;
             case 2:
                 QnpcName = "Himchan";
-                chat.Num = "2-1";
+                chat.Num = "2_1";
                 break;
             case 3:
                 QnpcName = "Suho";

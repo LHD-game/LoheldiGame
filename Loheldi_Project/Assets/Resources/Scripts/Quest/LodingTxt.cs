@@ -126,19 +126,22 @@ public class LodingTxt : MonoBehaviour
         //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
         //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
         //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        //Debug.Log("Num="+Num);
+        Debug.Log("Num="+Num);
 /*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
             DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
-        Debug.Log(data_Dialog[0]["scriptNumber"].ToString());
         for (int k=0;k<= data_Dialog.Count;k++)
         {
             //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
             if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
             {
                 j = k;
+                if (DontDestroy.tutorialLoading)
+                {
+                    j+=1;
+                }
                 chatCanvus.SetActive(true);
                 ChatTime();
                 Line();
@@ -149,22 +152,25 @@ public class LodingTxt : MonoBehaviour
                 continue;
             }
         }
+        
     }
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
         if (o != m)
         {
-            if ((o==0||o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
+            if ((o==3||o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
             {
                 switch (o)
                 {
-                    case 0:
+                    case 3:
                         Player.transform.position = new Vector3(-145.334457f, 17.3483009f, -32.4463768f);
                         break;
                     case 4:
+                        if(DontDestroy.tutorialLoading)
+                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         Player.transform.position = new Vector3(45.25f, 5.2f, 49.5f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                        DontDestroy.tutorialLoading = false;
                         break;
                     case 5:
                         Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
@@ -204,7 +210,7 @@ public class LodingTxt : MonoBehaviour
                 m = o;
             }
         }
-        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
+        o = Int32.Parse(data_Dialog[j-1]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
 
     }
 
@@ -217,11 +223,17 @@ public class LodingTxt : MonoBehaviour
             Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
         } //컷툰 보이기
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//튜토리얼
-            scriptLine(); //video.OnPlayVideo();
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("movie"))//동영상 실행
-            scriptLine(); //video.OnPlayVideo();
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("movieEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
-            scriptLine(); //video.OnPauseVideo();
+            scriptLine();
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("video"))//동영상 실행
+        { 
+            video.OnPlayVideo();
+            Main_UI.SetActive(false);
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
+        {
+            video.OnResetVideo();
+            Main_UI.SetActive(false);
+        }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
         {
             c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
@@ -302,12 +314,12 @@ public class LodingTxt : MonoBehaviour
             Value.SetActive(false);
             scriptLine();
 
-        }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("e"))
+        }/*
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("e"))  //뭐하는 애지
         {
             ChatWin.SetActive(false);
             Draw.ChangeDrawCamera();
-        }
+        }*/
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
             scriptLine();

@@ -54,6 +54,7 @@ public class ToothGameManager : MonoBehaviour
     private GameObject PausePanel;
 
     public GameObject SoundManager;
+    public Animator PlayerAnimation;
 
     void Start()
     {
@@ -123,6 +124,7 @@ public class ToothGameManager : MonoBehaviour
 
     public void GameStart()
     {
+        PlayerAnimation.SetBool("BrushStart", true);
         timer = timerLen[difficulty];   //난이도 선택 시 난이도에 따른 시간을 timer 변수에 저장.
         isRun = true;
         InvokeRepeating("BoxRandom", repeatLen[difficulty], repeatLen[difficulty]);
@@ -176,8 +178,9 @@ public class ToothGameManager : MonoBehaviour
      public void GameOver()
      {
          isRun = false;
-        isPause = true; //종료 후 캐릭터 못움직이게하기
+         isPause = true; //종료 후 캐릭터 못움직이게하기
          GameOverPanel.SetActive(true);
+         PlayerAnimation.SetBool("BrushStart", false);
          CancelInvoke("BoxRandom");
          if (timer <= 0)  //승리 조건
          {

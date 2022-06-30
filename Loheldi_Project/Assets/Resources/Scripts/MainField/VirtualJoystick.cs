@@ -9,6 +9,7 @@ public class VirtualJoystick : MonoBehaviour
     public Transform Player;
     public Rigidbody Playerrb;
     public Transform Stick;
+    public GameObject PlayerAnimation;
     public float speed1 = 8f;
     public float speed2 = 11f;
     public bool MoveFlag;
@@ -16,8 +17,6 @@ public class VirtualJoystick : MonoBehaviour
     private Vector3 StickFirstPos;
     private Vector3 JoyVec;
     private float Radius;
-
-    //public Animator Animation;
 
     void Start()
     {
@@ -46,6 +45,10 @@ public class VirtualJoystick : MonoBehaviour
                 {
                     //Debug.Log("메인속도");
                     Playerrb.velocity = Playerrb.velocity.normalized * speed2;  //최대 속도
+                    if (PlayerAnimation.GetComponent<BicycleRide>().Ride)
+                        {
+                        Playerrb.velocity = Playerrb.velocity.normalized * speed2 * 2;  //최대 속도
+                        }
                 }
             }
         }

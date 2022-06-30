@@ -16,10 +16,9 @@ public class Enter_Exit : MonoBehaviour //패널 열기/닫기에 사용되는 클래스
         GameObject SoundManager = GameObject.Find("SoundManager");
         SoundEffectManager.GetComponent<SoundEffect>().Sound("ClickBack");
         exitThis.SetActive(false);
-        if (SoundEffectManager.GetComponent<AudioSource>().clip == SoundManager.GetComponent<SoundManager>().audioBGMGacha)
+        if (exitThis.name == "GachaUI")
         {
-
-            SoundManager.GetComponent<SoundManager>().Sound("BGMQuestEnd");
+            SoundManager.GetComponent<SoundManager>().Sound("BGMField");
         }
     }
      

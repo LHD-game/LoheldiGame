@@ -15,6 +15,7 @@ public class SoundEffect : MonoBehaviour
     public AudioClip audioCardFlip;
     public AudioClip audioCardCurrect;
     public AudioClip audioCardWrong;
+    public AudioClip ToothBrush;
     public AudioClip audioGameTimeless;
     public AudioClip audioGameSuccess;
     public AudioClip audioGameFail;
@@ -90,6 +91,10 @@ public class SoundEffect : MonoBehaviour
                 audioSource.clip = audioCardWrong;
                 audioSource.loop = false;
                 break;
+            case "ToothBrushing":
+                audioSource.clip = ToothBrush;
+                audioSource.loop = false;
+                break;
             case "audioGameTimeless":
                 audioSource.clip = audioGameTimeless;
                 audioSource.loop = false;
@@ -120,6 +125,7 @@ public class SoundEffect : MonoBehaviour
                 break;
             default:
                 break;
+                
         }
         audioSource.Play();
     }

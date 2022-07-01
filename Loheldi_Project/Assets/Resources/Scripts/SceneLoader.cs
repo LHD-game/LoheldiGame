@@ -22,7 +22,7 @@ public class SceneLoader : MonoBehaviour
     //Login
     public void GotoUserInfo()
     {
-        SceneManager.LoadScene("UserInfo");
+        LoadingSceneManager.LoadScene("UserInfo");
     }
     public void GotoMainField()
     {
@@ -30,26 +30,26 @@ public class SceneLoader : MonoBehaviour
         /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
         joystic.speed1 = 8f;
         joystic.speed2 = 10f;*/
-        SceneManager.LoadScene("MainField");
+        LoadingSceneManager.LoadScene("MainField");
     }
     public void GotoGameMove()  // 테스트 용 - 이민진 5/3
     {
-        SceneManager.LoadScene("GameMove");
+        LoadingSceneManager.LoadScene("GameMove");
     }
 
     public void GotoCreateAcc()
     {
-        SceneManager.LoadScene("CreateAcc");
+        LoadingSceneManager.LoadScene("CreateAcc");
     }
     public void GotoPlayerCustom()
     {
         PlayerTransForm();
-        SceneManager.LoadScene("PlayerCustom");
+        LoadingSceneManager.LoadScene("PlayerCustom");
     }
     public void GotoPlayerCloset()
     {
         PlayerTransForm();
-        SceneManager.LoadScene("PlayerCloset");
+        LoadingSceneManager.LoadScene("PlayerCloset");
     }
 
 
@@ -57,28 +57,28 @@ public class SceneLoader : MonoBehaviour
     public void GotoLobby()
     {
         PlayerTransForm();
-        SceneManager.LoadScene("Game_Lobby");
+        LoadingSceneManager.LoadScene("Game_Lobby");
     }
     public void GotoEatingGame()
     {
-        SceneManager.LoadScene("Game_Eating");
+        LoadingSceneManager.LoadScene("Game_Eating");
     }
     public void GotoCardGame()
     {
-        SceneManager.LoadScene("Game_Card");
+        LoadingSceneManager.LoadScene("Game_Card");
     }
     public void GotoRunningGame()
     {
-        SceneManager.LoadScene("Game_Running");
+        LoadingSceneManager.LoadScene("Game_Running");
     }
     public void GotoToothGame()
     {
-        SceneManager.LoadScene("Game_Tooth");
+        LoadingSceneManager.LoadScene("Game_Tooth");
     }
 
     public void GotoComditionWindow() //삭제될 친구
     {
-        SceneManager.LoadScene("CharacterCondition");
+        LoadingSceneManager.LoadScene("CharacterCondition");
     }
 
     public void GotoHouse()
@@ -86,16 +86,16 @@ public class SceneLoader : MonoBehaviour
         /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
         joystic.speed1 = 2f;
         joystic.speed2 = 3f;*/
-        SceneManager.LoadScene("Housing");
+        LoadingSceneManager.LoadScene("Housing");
     }
     public void GotoMail()
     {
-        SceneManager.LoadScene("Mail");
+        LoadingSceneManager.LoadScene("Mail");
     }
 
     public void GotoTestGacha()
     {
-        SceneManager.LoadScene("Gacha");
+        LoadingSceneManager.LoadScene("Gacha");
     }
 
     private void PlayerTransForm()

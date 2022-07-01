@@ -14,9 +14,9 @@ public class MainGameManager : MonoBehaviour
 
     public Text moneyText;
     public Text levelText;
-    public Text conditionLevelText;            //상태창 레벨
+    public Text conditionLevelText;                //상태창 레벨
     public Text expBarleftText;                    //필요한 경험치량
-    public Text expBarrightText;                  //현재 경험치량
+    public Text expBarrightText;                   //현재 경험치량
     public Slider slider;
     public Slider conditionSlider;
 
@@ -24,11 +24,11 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
-        /*level = 1;
+        level = 1;
         Maxexp = 100;
         exp = 0;
 
-        Param param = new Param();
+        /*Param param = new Param();
         param.Add("level", level);
         param.Add("Maxexp", Maxexp);
         param.Add("exp", exp);
@@ -84,16 +84,14 @@ public class MainGameManager : MonoBehaviour
     void Update()
     {
         moneyText.text = money.ToString();
-        expBarleftText.text = exp.ToString("F0");              //설명설명
+        expBarleftText.text = exp.ToString("F0");                      //설명설명
         expBarrightText.text = Maxexp.ToString("F0");                  //설명설명설명
         levelText.text = level.ToString();
-
 
         slider.maxValue = Maxexp;
         conditionSlider.maxValue = Maxexp;
         slider.value = exp;
         conditionSlider.value = exp;
-
         if (exp >= Maxexp)
         {
             SoundManager.GetComponent<SoundEffect>().Sound("LevelUp");
@@ -102,7 +100,6 @@ public class MainGameManager : MonoBehaviour
             JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
             string indate = rows[0]["inDate"]["S"].ToString();
-
 
             Param param = new Param();
             param.Add("newlevel", level);
@@ -124,7 +121,5 @@ public class MainGameManager : MonoBehaviour
         exp = exp - Maxexp;
         Maxexp = Maxexp * 1.2f;
         level++;
-
-        
     }
 }

@@ -8,10 +8,13 @@ public class BicycleRide : MonoBehaviour
     public bool Ride = false;
     public GameObject Bicycles;
     public GameObject Player;
+    public Animator BicyclesAnimator;
+    public Animator PlayerAnimator;
     public void RideOn()
     {
         if (Ride)
         {
+            PlayerAnimator.GetComponent<Animator>().speed = 1;
             Bicycles.GetComponent<Animator>().SetBool("BicycleMove", false);
             Player.GetComponent<Animator>().SetBool("BicycleMove", false);
             Bicycles.SetActive(false);

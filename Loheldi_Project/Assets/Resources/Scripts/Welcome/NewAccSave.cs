@@ -11,6 +11,8 @@ using System;
 public class NewAccSave : MonoBehaviour
 {
     [SerializeField]
+    private GameObject NariField;   //나리의 설명
+    [SerializeField]
     private GameObject NickNameField;   //닉네임 입력 화면
     [SerializeField]
     private GameObject BirthField;   //생년월일 입력 화면
@@ -22,14 +24,17 @@ public class NewAccSave : MonoBehaviour
     [SerializeField]
     private Dropdown[] InputBirth = new Dropdown[3];      //계정주 생년,월,일
 
-    string uNickName;   // 서버에 저장되기 전 값을 담아놓는 변수
-    DateTime uBirth;    // 위와 같음
+    public static string uNickName;   // 서버에 저장되기 전 값을 담아놓는 변수
+    public static DateTime uBirth;    // 위와 같음
 
     public Text nick;
     public Text birth;
 
+    public static bool nari_can_talk = true;
+
     void Start()
     {
+        NariField.SetActive(true);
         NickNameField.SetActive(true);
         BirthField.SetActive(false);
         ResultField.SetActive(false);
@@ -54,12 +59,14 @@ public class NewAccSave : MonoBehaviour
             uNickName = InputNickName.text; //uNickName 변수에 입력값을 저장하고,
             
             ShowNHide(BirthField, NickNameField);   //닉네임 입력 비활성화, 생일 입력 활성화
+            nari_can_talk = true;
         }
         else    //정규식 불일치시
         {
             //오류 팝업 활성화
             Transform t = NickNameField.transform.Find("ErrorPop");
             t.gameObject.SetActive(true);
+            nari_can_talk = false;
         }
     }
 
@@ -74,6 +81,7 @@ public class NewAccSave : MonoBehaviour
             {
                 isOK = false;
                 Debug.Log(birthValue);
+                nari_can_talk = false;
             }
         }
 
@@ -85,12 +93,14 @@ public class NewAccSave : MonoBehaviour
             Debug.Log(str);
             uBirth = Convert.ToDateTime(str);   //uBirth 변수에 입력값 저장
             ShowNHide(ResultField, BirthField);
+            nari_can_talk = true;
         }
         else    //정규식 불일치시
         {
             //오류 팝업 활성화
             Transform t = BirthField.transform.Find("ErrorPop");
             t.gameObject.SetActive(true);
+            nari_can_talk = false;
         }
     }
 
@@ -120,7 +130,6 @@ public class NewAccSave : MonoBehaviour
             Debug.Log("계정 정보 설정 완료!");
             
             Save_BasicCustom.SaveBasicClothes(); //기본 의상 아이템 저장
-            //SceneLoader.instance.GotoGameMove();
             SceneLoader.instance.GotoPlayerCustom();    //캐릭터 커스터마이징 씬으로 이동
         }
         else

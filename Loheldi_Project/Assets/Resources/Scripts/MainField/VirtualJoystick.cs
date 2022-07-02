@@ -57,10 +57,13 @@ public class VirtualJoystick : MonoBehaviour
         }
         else
         {
-            if (BicycleAnimator.GetComponent<BicycleRide>().Ride)
+            if (SceneManager.GetActiveScene().name == "MainField")
             {
-                BicycleAnimator.GetComponent<Animator>().speed = 0;
-                PlayerAnimator.GetComponent<Animator>().speed = 0;
+                if (BicycleAnimator.GetComponent<BicycleRide>().Ride)
+                {
+                    BicycleAnimator.GetComponent<Animator>().speed = 0;
+                    PlayerAnimator.GetComponent<Animator>().speed = 0;
+                }
             }
         }
     }

@@ -49,7 +49,6 @@ public class QuestScript : MonoBehaviour
         {
             if (Load.QuestIndex == 0)
             {
-                Load.Quest = false;
                 file.Tutorial();
             }
             else

@@ -1,5 +1,6 @@
 using BackEnd;
 using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,14 +38,30 @@ public class MainGameManager : MonoBehaviour
         {
             print("동기 방식 데이터 입력 성공");
         }*/
-        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where());
+        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 1);
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+        for (int i = 0; i < bro.Rows().Count; ++i)
+        {
+            var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
+            Debug.Log(inDate);
+        }
         if (bro.IsSuccess())
         {
             print("정보 있음");
-            levelText.text = rows[0]["level"].ToString();
+            
+            levelText.text = bro.Rows()[0]["newlevel"].ToString();
             /*expBarleftText.text = rows[0]["exp"].ToString();              
             expBarrightText.text = rows[0]["Maxexp"].ToString();*/
+        }
+        else
+        {
+            if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+            {
+                level = 1;
+                Maxexp = 100;
+                exp = 0;
+            }
+            
         }
         /*else
         {
@@ -96,20 +113,7 @@ public class MainGameManager : MonoBehaviour
         {
             SoundManager.GetComponent<SoundEffect>().Sound("LevelUp");
             LevelUp();
-            var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 10);
-            JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-
-            string indate = rows[0]["inDate"]["S"].ToString();
-
-            Param param = new Param();
-            param.Add("newlevel", level);
-            param.Add("newMaxexp", Maxexp);
-            param.Add("newexp", exp);
-            var bro2 = Backend.GameData.UpdateV2("USER_GAME_DATA", indate, Backend.UserInDate, param);
-            if (bro2.IsSuccess())
-            {
-                print("동기 방식 데이터 입력 성공");
-            }
+            
         }
     }
 
@@ -121,5 +125,19 @@ public class MainGameManager : MonoBehaviour
         exp = exp - Maxexp;
         Maxexp = Maxexp * 1.2f;
         level++;
+        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 10);
+        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+
+        string indate = rows[0]["inDate"]["S"].ToString();
+
+        Param param = new Param();
+        param.Add("newlevel", level);
+        param.Add("newMaxexp", Maxexp);
+        param.Add("newexp", exp);
+        var bro2 = Backend.GameData.UpdateV2("USER_GAME_DATA", indate, Backend.UserInDate, param);
+        if (bro2.IsSuccess())
+        {
+            print("동기 방식 데이터 입력 성공");
+        }
     }
 }

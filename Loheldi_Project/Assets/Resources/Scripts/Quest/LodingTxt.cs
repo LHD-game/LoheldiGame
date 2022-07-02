@@ -122,10 +122,10 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
-        cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
+        //cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
         //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
         //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
-        //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
+        Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
         Debug.Log("Num=" + Num);
         /*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
                     DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
@@ -159,7 +159,7 @@ public class LodingTxt : MonoBehaviour
     {
         if (o != m)
         {
-            if ((o == 3 || o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12) && (DontDestroy.QuestSubNum == 0))
+            if ((o == 3 || o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12))
             {
                 switch (o)
                 {
@@ -210,17 +210,47 @@ public class LodingTxt : MonoBehaviour
                 m = o;
             }
         }
-        o = Int32.Parse(data_Dialog[j - 1]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
+        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
 
     } 
 
     private void QuestSubChoice()
     {
-        if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
+        if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
+        {
+            MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
+            QuizTIme();
+            scriptLine();
+            for (int i = 0; i < QuizButton.Length; i++)
+            {
+                QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
+                //string selecNumber = "select" + (i + 1).ToString();
+            }
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //선택지
+        {
+            j--;
+            /*for (int i = 0; i < QuizButton.Length; i++)
+            {
+                QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
+                //string selecNumber = "select" + (i + 1).ToString();
+            }*/
+            QuizCho();
+            //Button.SetActive(true); //유니티에서 버튼 위치 옮김
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
+        {
+            ChatTime();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
         {
             Cuttoon();
             ChatWin.SetActive(false);
             Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
+        } //컷툰 보이기
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Dcuttoon"))
+        {
+            scriptLine();
         } //컷툰 보이기
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//튜토리얼
             scriptLine();
@@ -344,6 +374,7 @@ public class LodingTxt : MonoBehaviour
         //튜토리얼 스크립트 이어가는 애
         //Debug.Log("튜툐:"+tuto);
         //Debug.Log("튜툐피니:"+tutoFinish);
+        Debug.Log("무브=" + move);
         if (tuto && tutoFinish)
         {
             chatCanvus.SetActive(true);
@@ -380,21 +411,13 @@ public class LodingTxt : MonoBehaviour
     {
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());
-        Debug.Log("j=" + j);
-        Debug.Log("이미지번호=" + l);
+        //Debug.Log("j=" + j);
+        //Debug.Log("이미지번호=" + l);
         spriteR.sprite = CCImageList[l];
 
         if (ChatWin.activeSelf == false)
             ChatWin.SetActive(true);
-        if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
-        {
-            MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
-            QuizTIme();
-        }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
-        {
-            ChatTime();
-        }
+        
 
         LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name","이름");
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))
@@ -459,6 +482,7 @@ public class LodingTxt : MonoBehaviour
         QuizMate();
         MainCamera.enabled = false;
         QuizCamera.enabled = true;
+        Draw.Dcam.enabled = false;
     }
     public void QuizMate() //전광판 메테리얼 설정
     {
@@ -493,7 +517,7 @@ public class LodingTxt : MonoBehaviour
         
         //Arrow.SetActive(true);
 
-        if (data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))  //선택지
+        /*if (data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))  //선택지
         {
             j--;
             for (int i = 0;i<QuizButton.Length; i++)
@@ -503,12 +527,11 @@ public class LodingTxt : MonoBehaviour
             }
             Invoke("QuizCho", 1f);
             //Button.SetActive(true); //유니티에서 버튼 위치 옮김
-        }
+        }*/
 
 
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
-            //changeMoment();
             Debug.Log("튜토리얼 실핻ㅇ");
             Invoke("Tutorial_", 2f);
         }
@@ -543,13 +566,24 @@ public class LodingTxt : MonoBehaviour
         Answer = "3";
         QuizeAnswer();
     }
+    public void Answer4()
+    {
+        Answer = "4";
+        QuizeAnswer();
+    }
+    public void Answer5()
+    {
+        Answer = "5";
+        QuizeAnswer();
+    }
     public void QuizeAnswer()
     {
         if (data_Dialog[j]["answer"].ToString().Equals(Answer))
         {
             Chat.SetActive(true);
             O();
-            Line();
+            scriptLine();
+            //Line();
         }
 
         else

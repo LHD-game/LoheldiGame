@@ -8,10 +8,9 @@ public class QuestDontDestroy : MonoBehaviour
     //public string[] ButtonPlusNpc = new string[2]{"",""};
 
     public string ButtonPlusNpc;  //버튼 추가되는 NPC이름(퀘스트)
-    public int QuestSubNum;         //퀘스트 스크립트 앞번호
+    //public int QuestSubNum;         //퀘스트 스크립트 앞번호
     public int QuestIndex;   //몇번째 퀘스트차례인지 (서버저장)
     public bool QuestMail = false; //퀘스트 메일이 왔는지 확인하는 bool값
-    public bool Quest =false; //퀘스트 완료했는지 확인하는 bool값
     public int LastDay=0;  //마지막으로 퀘스트를 클리어한 날짜(서버 저장)
     public int ToDay=0;      //오늘 날짜
     public List<int> badgeList = new List<int>();  //획득한 벳지 

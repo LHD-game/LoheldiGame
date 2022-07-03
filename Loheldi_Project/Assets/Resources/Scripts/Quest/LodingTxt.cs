@@ -164,7 +164,7 @@ public class LodingTxt : MonoBehaviour
                 switch (o)
                 {
                     case 3:
-                        Player.transform.position = new Vector3(-145.334457f, 17.3483009f, -32.4463768f);
+                        Player.transform.position = new Vector3(-145.135605f, 12.609005f, -32.4478226f);
                         break;
                     case 4:
                         if (DontDestroy.tutorialLoading)

@@ -38,18 +38,22 @@ public class MainGameManager : MonoBehaviour
         {
             print("동기 방식 데이터 입력 성공");
         }*/
-        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 1);
+        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
         for (int i = 0; i < bro.Rows().Count; ++i)
         {
             var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
+            //var level = bro.Rows()[i]["level"]["S"].ToString();
+            var level2 = rows[0]["level"]["N"].ToString();
             Debug.Log(inDate);
+            Debug.Log(level2);
         }
         if (bro.IsSuccess())
         {
-            print("정보 있음");
+            print("레벨 정보 있음");
             
-            levelText.text = bro.Rows()[0]["newlevel"].ToString();
+            
+            //levelText.text = bro.Rows()[0]["newlevel"].ToString();
             /*expBarleftText.text = rows[0]["exp"].ToString();              
             expBarrightText.text = rows[0]["Maxexp"].ToString();*/
         }
@@ -131,13 +135,13 @@ public class MainGameManager : MonoBehaviour
         string indate = rows[0]["inDate"]["S"].ToString();
 
         Param param = new Param();
-        param.Add("newlevel", level);
-        param.Add("newMaxexp", Maxexp);
-        param.Add("newexp", exp);
+        param.Add("level", level);
+        /*param.Add("newMaxexp", Maxexp);
+        param.Add("newexp", exp);*/
         var bro2 = Backend.GameData.UpdateV2("USER_GAME_DATA", indate, Backend.UserInDate, param);
         if (bro2.IsSuccess())
         {
-            print("동기 방식 데이터 입력 성공");
+            print("동기 방식 데이터 수정 성공");
         }
     }
 }

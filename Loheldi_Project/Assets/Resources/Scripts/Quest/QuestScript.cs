@@ -66,7 +66,7 @@ public class QuestScript : MonoBehaviour
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         //Quest = true;
         Debug.Log("Äù½ºÆ® ¹øÈ£" + Load.QuestIndex);
-        QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); 
+        //QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); 
         GiveQuest();
         //QuestNumber = QuestNum-1;
         
@@ -75,9 +75,9 @@ public class QuestScript : MonoBehaviour
     private void GiveQuest()
     {
         Load.QuestMail = true;
-        string title = Quest_Mail[QuestNum - 1]["title"].ToString();                      
-        string detail = Quest_Mail[QuestNum - 1]["content"].ToString();
-        string sent = Quest_Mail[QuestNum - 1]["author"].ToString();
+        string title = Quest_Mail[Load.QuestIndex - 1]["title"].ToString();                      
+        string detail = Quest_Mail[Load.QuestIndex - 1]["content"].ToString();
+        string sent = Quest_Mail[Load.QuestIndex - 1]["author"].ToString();
 
         GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
 
@@ -105,7 +105,7 @@ public class QuestScript : MonoBehaviour
         //Load.RiciveQuest = true;
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         string QnpcName="";
-        switch (QuestNum)
+        switch (Load.QuestIndex)
         {
             case 1:
                 QnpcName = "Hami";

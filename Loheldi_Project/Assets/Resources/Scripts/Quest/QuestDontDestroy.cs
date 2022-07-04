@@ -37,7 +37,7 @@ public class QuestDontDestroy : MonoBehaviour
             Destroy(objs[0]);
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
-            QuestIndex=0;    //나중에 서버랑 연동해서 초기값 0, 그 뒤값을 서버에 저장하고 다시 불러오는 식으로
+            //QuestIndex=0;    //나중에 서버랑 연동해서 초기값 0, 그 뒤값을 서버에 저장하고 다시 불러오는 식으로
         DontDestroyOnLoad(this.gameObject);
         
     }

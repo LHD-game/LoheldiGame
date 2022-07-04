@@ -214,7 +214,7 @@ public class LodingTxt : MonoBehaviour
 
     } 
 
-    private void QuestSubChoice()
+    public void QuestSubChoice()
     {
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
@@ -241,6 +241,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
             ChatTime();
+            scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
         {
@@ -257,12 +258,16 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("video"))//동영상 실행
         { 
             video.OnPlayVideo();
-            Main_UI.SetActive(false);
+            Chat.SetActive(false);
+            j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
         {
-            video.OnResetVideo();
-            Main_UI.SetActive(false);
+            Debug.Log("reset");
+            video.OnResetVideo(); 
+            Chat.SetActive(true);
+            j+=1;
+            scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
         {
@@ -369,7 +374,7 @@ public class LodingTxt : MonoBehaviour
             Draw.ChangeDrawCamera();
         }
     }
-    public void Line()  //줄넘김
+    public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
         //튜토리얼 스크립트 이어가는 애
         //Debug.Log("튜툐:"+tuto);
@@ -407,7 +412,7 @@ public class LodingTxt : MonoBehaviour
     }
 
     
-    public void scriptLine()  //스크립트 띄우는 거
+    public void scriptLine()  //스크립트 띄우는 거 (어굴 이미지+ 이름+ 뜨는 텍스트)
     {
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());

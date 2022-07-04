@@ -101,7 +101,7 @@ public class SceneLoader : MonoBehaviour
     private void PlayerTransForm()
     {
         QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        QDD.LastPlayerTransform.position = GameObject.Find("Player").transform.position;
+        QDD.LastPlayerTransform.transform.position = GameObject.Find("Player").transform.position;
         Debug.Log(QDD.LastPlayerTransform);
     }
 }

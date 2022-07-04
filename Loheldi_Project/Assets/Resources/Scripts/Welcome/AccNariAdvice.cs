@@ -44,7 +44,7 @@ public class AccNariAdvice : MonoBehaviour
                     NextBtn.SetActive(false);
                     BgColor(now_num);
                     break;
-                case 4:
+                case 5:
                     Nari.transform.localPosition = new Vector3(0, 0, 0);
                     NextBtn.SetActive(true);
                     BgColor(now_num);

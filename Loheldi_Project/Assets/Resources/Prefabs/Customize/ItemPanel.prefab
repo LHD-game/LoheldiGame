@@ -671,6 +671,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5559293494797597812}
+  - component: {fileID: 7438414730731263474}
+  - component: {fileID: 1494972558032521969}
   m_Layer: 5
   m_Name: SideBtn (1)
   m_TagString: Untagged
@@ -698,6 +700,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!222 &7438414730731263474
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5559293494797597815}
+  m_CullTransparentMesh: 1
+--- !u!114 &1494972558032521969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5559293494797597815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9490196, g: 0.9411765, b: 0.9254902, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7e4b324aee8f449db9bedc900785edbf, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5559293494811506811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,11 +2165,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb076f4e289fcf4f9cd52122cf79f0a, type: 3}
---- !u!224 &6244605799576538945 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5525554265756192042, guid: ccb076f4e289fcf4f9cd52122cf79f0a, type: 3}
-  m_PrefabInstance: {fileID: 1875746734719648363}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6244605799576538944 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5525554265756192043, guid: ccb076f4e289fcf4f9cd52122cf79f0a, type: 3}
@@ -2141,6 +2176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &6244605799576538945 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5525554265756192042, guid: ccb076f4e289fcf4f9cd52122cf79f0a, type: 3}
+  m_PrefabInstance: {fileID: 1875746734719648363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5559293496127847897
 PrefabInstance:
   m_ObjectHideFlags: 0

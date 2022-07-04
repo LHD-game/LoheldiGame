@@ -54,6 +54,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject KeyToDream;
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
+    public GameObject screenShot;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -119,6 +120,9 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
+
+        GameObject.Find("Player").transform.position = DontDestroy.LastPlayerTransform.transform.position;
+        Debug.Log("ÇÃ·¹ÀÌ¾î À§Ä¡ ¼³Á¤" + DontDestroy.LastPlayerTransform.transform.position);
     }
     public void NewChat()
     {
@@ -223,6 +227,10 @@ public class LodingTxt : MonoBehaviour
             scriptLine();
             for (int i = 0; i < QuizButton.Length; i++)
             {
+                if (data_Dialog[j]["select" + (i + 1)].ToString().Equals("ºóÄ­"))
+                    QuizButton[i].transform.parent.gameObject.SetActive(false);
+                else
+                    QuizButton[i].transform.parent.gameObject.SetActive(true);
                 QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
                 //string selecNumber = "select" + (i + 1).ToString();
             }
@@ -266,7 +274,6 @@ public class LodingTxt : MonoBehaviour
             Debug.Log("reset");
             video.OnResetVideo(); 
             Chat.SetActive(true);
-            j+=1;
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
@@ -324,7 +331,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("noteEnd"))
         {
             Note.SetActive(false);
-            //ChatWin.SetActive(true);
+            ChatWin.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("i-message"))
@@ -349,26 +356,27 @@ public class LodingTxt : MonoBehaviour
             Value.SetActive(false);
             scriptLine();
 
-        }/*
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("e"))  //¹¹ÇÏ´Â ¾ÖÁö
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("draw"))
         {
             ChatWin.SetActive(false);
-            Draw.ChangeDrawCamera();
-        }*/
+            Draw.ChangeDrawCamera(); 
+            //scriptLine();
+        }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
+            Draw.ForDraw = false;
             scriptLine();
-            Debug.Log("´Ù±×·Á¶¯");
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Screenshot"))
         {
-            Value.SetActive(false);
-            scriptLine();
-            Debug.Log("½º¼¦ ¾îÄÉÇÏ´Â°æ");
+            screenShot.SetActive(true);
+            Chat.SetActive(false);
+            //scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
         {
-            Value.SetActive(false);
+            Draw.ChangeDrawCamera();
             //scriptLine();
             Invoke("scriptLine", 1f);   //µô·¹ÀÌ ÈÄ ½ºÅ©¸³Æ® ¶ç¿ò
             Draw.ChangeDrawCamera();

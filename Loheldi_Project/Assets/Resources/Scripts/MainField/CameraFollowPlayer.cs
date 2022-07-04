@@ -10,7 +10,7 @@ public class CameraFollowPlayer : MonoBehaviour
     public float SmoothTime = 1f;
     private Vector3 velocity = Vector3.zero;
 
-    private void Start()
+    private void Awake()
     {
         vec3 = Camera.position - Player.transform.position;                                                     //카메라와 플레이어 사이에 거리를 Vector3형태로 구함
     }

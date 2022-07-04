@@ -21,7 +21,7 @@ public class QuestDontDestroy : MonoBehaviour
     public int DayToday;     //이 둘은 뭐하는 애지 내가 만든건가
     public int DayYesterday;
 
-    public Transform LastPlayerTransform;
+    public GameObject LastPlayerTransform;
     //public GameObject[] Mails;
     /// </summary>
 
@@ -31,22 +31,19 @@ public class QuestDontDestroy : MonoBehaviour
     }
     public void Dontdestroy()
     {
+        LastPlayerTransform = this.gameObject;
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Quest");
         if (objs.Length > 1)
         {
             Destroy(objs[0]);
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
-            QuestIndex=0;    //나중에 서버랑 연동해서 초기값 0, 그 뒤값을 서버에 저장하고 다시 불러오는 식으로
+            LastPlayerTransform.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
+        //QuestIndex=0;    //나중에 서버랑 연동해서 초기값 0, 그 뒤값을 서버에 저장하고 다시 불러오는 식으로
         DontDestroyOnLoad(this.gameObject);
-        
     }
-    /*public void OnEnable()
+    public void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name == "MainField")
-        {
-            GameObject.Find("Player").transform.position = LastPlayerTransform.position;
-            Debug.Log("플레이어 위치 설정" + LastPlayerTransform.position);
-        }
-    }*/
+        Debug.Log("onEnable");
+    }
 }

@@ -19,7 +19,7 @@ public class Drawing : MonoBehaviour
     private Vector3 PrevPos = Vector3.zero; // 0,0,0 position variable
     private Transform ForErase;
     int layerMask;
-    private bool ForDraw = false;
+    public bool ForDraw = false;
     private bool Erase = false;
 
     int i=0;  //메테리얼 번호

@@ -54,6 +54,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject KeyToDream;
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
+    public GameObject screenShot;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -119,6 +120,9 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
+
+        GameObject.Find("Player").transform.position = DontDestroy.LastPlayerTransform.transform.position;
+        Debug.Log("플레이어 위치 설정" + DontDestroy.LastPlayerTransform.transform.position);
     }
     public void NewChat()
     {
@@ -164,7 +168,7 @@ public class LodingTxt : MonoBehaviour
                 switch (o)
                 {
                     case 3:
-                        Player.transform.position = new Vector3(-145.334457f, 17.3483009f, -32.4463768f);
+                        Player.transform.position = new Vector3(-145.135605f, 12.609005f, -32.4478226f);
                         break;
                     case 4:
                         if (DontDestroy.tutorialLoading)
@@ -214,7 +218,7 @@ public class LodingTxt : MonoBehaviour
 
     } 
 
-    private void QuestSubChoice()
+    public void QuestSubChoice()
     {
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
@@ -223,6 +227,10 @@ public class LodingTxt : MonoBehaviour
             scriptLine();
             for (int i = 0; i < QuizButton.Length; i++)
             {
+                if (data_Dialog[j]["select" + (i + 1)].ToString().Equals("빈칸"))
+                    QuizButton[i].transform.parent.gameObject.SetActive(false);
+                else
+                    QuizButton[i].transform.parent.gameObject.SetActive(true);
                 QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
                 //string selecNumber = "select" + (i + 1).ToString();
             }
@@ -241,6 +249,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
             ChatTime();
+            scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
         {
@@ -257,12 +266,15 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("video"))//동영상 실행
         { 
             video.OnPlayVideo();
-            Main_UI.SetActive(false);
+            Chat.SetActive(false);
+            j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
         {
-            video.OnResetVideo();
-            Main_UI.SetActive(false);
+            Debug.Log("reset");
+            video.OnResetVideo(); 
+            Chat.SetActive(true);
+            scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
         {
@@ -319,7 +331,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("noteEnd"))
         {
             Note.SetActive(false);
-            //ChatWin.SetActive(true);
+            ChatWin.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("i-message"))
@@ -344,32 +356,33 @@ public class LodingTxt : MonoBehaviour
             Value.SetActive(false);
             scriptLine();
 
-        }/*
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("e"))  //뭐하는 애지
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("draw"))
         {
             ChatWin.SetActive(false);
-            Draw.ChangeDrawCamera();
-        }*/
+            Draw.ChangeDrawCamera(); 
+            //scriptLine();
+        }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
+            Draw.ForDraw = false;
             scriptLine();
-            Debug.Log("다그려땡");
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Screenshot"))
         {
-            Value.SetActive(false);
-            scriptLine();
-            Debug.Log("스샷 어케하는경");
+            screenShot.SetActive(true);
+            Chat.SetActive(false);
+            //scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
         {
-            Value.SetActive(false);
+            Draw.ChangeDrawCamera();
             //scriptLine();
             Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
             Draw.ChangeDrawCamera();
         }
     }
-    public void Line()  //줄넘김
+    public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
         //튜토리얼 스크립트 이어가는 애
         //Debug.Log("튜툐:"+tuto);
@@ -407,7 +420,7 @@ public class LodingTxt : MonoBehaviour
     }
 
     
-    public void scriptLine()  //스크립트 띄우는 거
+    public void scriptLine()  //스크립트 띄우는 거 (어굴 이미지+ 이름+ 뜨는 텍스트)
     {
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());

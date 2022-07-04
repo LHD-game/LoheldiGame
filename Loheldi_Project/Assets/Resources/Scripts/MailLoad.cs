@@ -43,6 +43,7 @@ public class MailLoad : MonoBehaviour
     {
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         MailorAnnou = true;
+        
         NewMailCheck();
         UpdateList();
     }
@@ -238,6 +239,11 @@ public class MailLoad : MonoBehaviour
 
     public void MailReset()
     {
+        RTitleText.text = " ";
+        RDetailText.text = " ";
+        NoticeTitleText.text = " ";
+        NoticeDetailText.text = " ";
+
         TotalCount = 0;
         NewMailCheck();
     }

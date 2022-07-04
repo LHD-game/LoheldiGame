@@ -203,9 +203,6 @@ public class Register : MonoBehaviour
                 break;
         }
     }
-
-
-    private QuestDontDestroy QDD;
     public void Login() //로그인시 실행되는 메소드
     {
         BackendReturnObject BRO = Backend.BMember.CustomLogin(InputLID.text, InputLPW.text);
@@ -217,8 +214,6 @@ public class Register : MonoBehaviour
             //자동로그인 함수 실행
             AutoLogin();
             Debug.Log("동기방식 로그인 성공");
-            QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-            QDD.LastPlayerTransform.position = new Vector3(45.25f, 5.2f, 49.5f);
 
             if (AccChk())   //계정 정보 만들어져 있으면, 필드로
             {

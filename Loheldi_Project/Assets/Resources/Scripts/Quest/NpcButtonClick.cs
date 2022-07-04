@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.IO;
 using UnityEngine.UI;
 using System;
@@ -18,30 +19,49 @@ public class NpcButtonClick : MonoBehaviour
 
     public void SecondButtonClick()
     {
+        GameObject click = EventSystem.current.currentSelectedGameObject;
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         UIB = GameObject.Find("EventSystem").GetComponent<UIButton>();
 
-        if (SecondButtonTxt.text.Equals("미니게임 하기"))
+        if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미니게임 하기"))
             SceneLoader.instance.GotoLobby();
-        else if (SecondButtonTxt.text.Equals("미용실 이용하기"))
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미용실 이용하기"))
             SceneLoader.instance.GotoPlayerCustom();
-        else if (SecondButtonTxt.text.Equals("가구점 이용하기"))
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("가구점 이용하기"))
         {
             Chat.chat.Main_UI.SetActive(true);
             UIB.shop.SetActive(true);
             UIB.chat.ChatEnd();
         }
-        else if (SecondButtonTxt.text.Equals("퀘스트 하미"))
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 하미"))
         {
-            Debug.Log(SecondButtonTxt.text);
             Chat.Quest();
+            CheckQuest();
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 힘찬"))
+        {
+            Chat.Quest();
+            CheckQuest();
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 수호"))
+        {
+            Chat.Quest();
+            CheckQuest();
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 여미"))
+        {
+            Chat.Quest();
+            CheckQuest();
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 메이"))
+        {
+            Chat.Quest();
+            CheckQuest();
+        }
+    }
+    void CheckQuest()
+    {
+        GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
 
-            GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
-
-            for (int i = 0; i < clone.Length; i++)
-            {
-                Destroy(clone[i]);
-            }
+        for (int i = 0; i < clone.Length; i++)
+        {
+            Destroy(clone[i]);
         }
     }
 }

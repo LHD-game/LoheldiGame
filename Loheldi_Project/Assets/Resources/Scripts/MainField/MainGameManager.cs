@@ -25,37 +25,27 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
-        level = 1;
-        Maxexp = 100;
-        exp = 0;
-
-        /*Param param = new Param();
-        param.Add("level", level);
-        param.Add("Maxexp", Maxexp);
-        param.Add("exp", exp);
-        var bro = Backend.GameData.Insert("USER_GAME_DATA", param);
-        if (bro.IsSuccess())
-        {
-            print("동기 방식 데이터 입력 성공");
-        }*/
         var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-        for (int i = 0; i < bro.Rows().Count; ++i)
-        {
-            var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
+       
+            //var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
             //var level = bro.Rows()[i]["level"]["S"].ToString();
-            var level2 = rows[0]["level"]["N"].ToString();
-            Debug.Log(inDate);
-            Debug.Log(level2);
-        }
+        
+            //Debug.Log(inDate);
+        
+        
         if (bro.IsSuccess())
         {
+            /*level = bro.Rows()[0]["level"]["N"].ToString();*/
+            /*Maxexp = 100;
+            exp = 0;*/
             print("레벨 정보 있음");
-            
-            
-            //levelText.text = bro.Rows()[0]["newlevel"].ToString();
-            /*expBarleftText.text = rows[0]["exp"].ToString();              
-            expBarrightText.text = rows[0]["Maxexp"].ToString();*/
+            var level2 = rows[0]["level"]["N"].ToString();
+            Debug.Log(level2);
+            /*string level1 = (string)rows[0]["level"]["N"];*/
+            //level = level2;
+            levelText.text = level2;
+
         }
         else
         {
@@ -67,39 +57,7 @@ public class MainGameManager : MonoBehaviour
             }
             
         }
-        /*else
-        {
-            level = 1;
-            Maxexp = 100;
-            exp = 0;
-            Param param = new Param();
-            param.Add("level", level);
-            param.Add("Maxexp", Maxexp);
-            param.Add("exp", exp);
-            var bro2 = Backend.GameData.Insert("USER_GAME_DATA", param);
-            if (bro2.IsSuccess())
-            {
-                print("동기 방식 데이터 입력 성공");
-            }
-        }*/
-
-        /*var bro2 = Backend.GameData.Insert("USER_GAME_DATA", param);
-        if (bro2.IsSuccess())
-        {
-            print("동기 방식 데이터 입력 성공");
-        }*/
-        /*var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 10);
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-        if (bro.IsSuccess())
-        {
-            string level = rows[0]["level"]["S"].ToString();
-            string Maxexp = rows[0]["Maxexp"]["S"].ToString();
-            string exp = rows[0]["exp"]["S"].ToString();
-
-            levelText.text = level.ToString();
-                  
-
-        }*/
+        
     }
 
     void Update()

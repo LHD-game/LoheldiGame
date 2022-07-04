@@ -56,7 +56,7 @@ public class AccNariAdvice : MonoBehaviour
             }
             script_num = now_num;
         }
-        if (print_line > nari_script.Count)
+        if (print_line >= nari_script.Count)
         {
             //todo: 터치를 기다리는 코드 추가
             return;

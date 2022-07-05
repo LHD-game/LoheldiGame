@@ -140,21 +140,23 @@ public class Register : MonoBehaviour
             Backend.BMember.CreateNickname(InputName.text); //닉네임(이름) 저장
             Backend.BMember.UpdateCustomEmail(InputEmail.text); //비밀번호 찾기 용 이메일 저장
             UserInfoDB();
+
+            level = 1;
+            Maxexp = 100;
+            exp = 0;
+            Param param = new Param();
+            param.Add("level", level);
+            param.Add("Maxexp", Maxexp);
+            param.Add("exp", exp);
+
+            var bro = Backend.GameData.Insert("USER_GAME_DATA", param);
+            if (bro.IsSuccess())
+            {
+                print("동기 방식 데이터 입력 성공");
+            }
         }
 
-        level = 1;
-        Maxexp = 100;
-        exp = 0;
-        Param param = new Param();
-        param.Add("level", level);
-        param.Add("Maxexp", Maxexp);
-        param.Add("exp", exp);
-
-        var bro = Backend.GameData.Insert("USER_GAME_DATA", param);
-        if (bro.IsSuccess())
-        {
-            print("동기 방식 데이터 입력 성공");
-        }
+        
 
     }
 

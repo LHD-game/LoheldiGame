@@ -91,6 +91,12 @@ public class tutorial : MonoBehaviour
                 if (!chat.tuto)
                     chat.tuto = true;
             }
+            else if(tutoi==7)
+            {
+                GameObject SoundManager = GameObject.Find("SoundManager");
+                SoundManager.GetComponent<SoundManager>().Sound("BGMField");
+                chat.Line();
+            }
             else
             {
                 tutoi++;

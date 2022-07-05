@@ -80,11 +80,11 @@ public class FlieChoice : MonoBehaviour
                 break;
             case "Yomi":
                 chat.Num = "7";
-                chat.NPCButton += 2;
+                chat.NPCButton += 1;
                 break;
             case "Yeomi":
                 chat.Num = "8";
-                chat.NPCButton += 1;
+                chat.NPCButton += 2;
                 break;
             case "Mu":
                 chat.Num = "9";

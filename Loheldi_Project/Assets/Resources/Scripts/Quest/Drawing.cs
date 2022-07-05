@@ -212,8 +212,8 @@ public class Drawing : MonoBehaviour
     int j;
     private static GameObject ValueCardBack;
     static Image spriteR;
-    private Sprite ValueCardBackImage;
-    private GameObject Button;
+    public Sprite ValueCardBackImage;
+    public GameObject ValueButton;
     public void NextLevel()
     {
         j = 0;
@@ -228,7 +228,7 @@ public class Drawing : MonoBehaviour
                 ValueCardBack = GameObject.Find("ValueCardBack");
                 spriteR = ValueCardBack.GetComponent<Image>();
                 spriteR.sprite = ValueCardBackImage;
-                Button.SetActive(false);
+                ValueButton.SetActive(false);
             }
             ValueLevel++;
             RectTransform RectTransform;

@@ -30,32 +30,6 @@ public class AccNariAdvice : MonoBehaviour
 
     void PrintScript()
     {
-        int now_num = (int)nari_script[print_line]["Num"];
-        if (script_num != now_num)
-        {
-            switch (now_num)
-            {
-                case 0:
-                    Nari.transform.localPosition = new Vector3(0, 0, 0);
-                    NextBtn.SetActive(true);
-                    break;
-                case 1:
-                    Nari.transform.localPosition = new Vector3(1000, 0, 0);
-                    NextBtn.SetActive(false);
-                    BgColor(now_num);
-                    break;
-                case 5:
-                    Nari.transform.localPosition = new Vector3(0, 0, 0);
-                    NextBtn.SetActive(true);
-                    BgColor(now_num);
-                    break;
-                default:
-                    Nari.transform.localPosition = new Vector3(1000, 0, 0);
-                    NextBtn.SetActive(false);
-                    break;
-            }
-            script_num = now_num;
-        }
         if (print_line >= nari_script.Count)
         {
             //todo: 터치를 기다리는 코드 추가
@@ -63,13 +37,40 @@ public class AccNariAdvice : MonoBehaviour
         }
         else
         {
-            string txt = nari_script[print_line]["Text"].ToString();
-            string txt2 = txt.Replace("n", "\n");
-            string txt3 = txt2.Replace("<이름>", NewAccSave.uNickName);
-            string result = txt3.Replace("<생년월일>", NewAccSave.uBirth.ToString("yyyy년 M월 d일"));
-            TextBox.text = result;
+            int now_num = (int)nari_script[print_line]["Num"];
+            if (script_num != now_num)
+            {
+                switch (now_num)
+                {
+                    case 0:
+                        Nari.transform.localPosition = new Vector3(0, 0, 0);
+                        NextBtn.SetActive(true);
+                        break;
+                    case 1:
+                        Nari.transform.localPosition = new Vector3(1000, 0, 0);
+                        NextBtn.SetActive(false);
+                        BgColor(now_num);
+                        break;
+                    case 5:
+                        Nari.transform.localPosition = new Vector3(0, 0, 0);
+                        NextBtn.SetActive(true);
+                        BgColor(now_num);
+                        break;
+                    default:
+                        Nari.transform.localPosition = new Vector3(1000, 0, 0);
+                        NextBtn.SetActive(false);
+                        break;
+                }
+                script_num = now_num;
+            }
 
-            print_line++;
+                string txt = nari_script[print_line]["Text"].ToString();
+                string txt2 = txt.Replace("n", "\n");
+                string txt3 = txt2.Replace("<이름>", NewAccSave.uNickName);
+                string result = txt3.Replace("<생년월일>", NewAccSave.uBirth.ToString("yyyy년 M월 d일"));
+                TextBox.text = result;
+
+                print_line++;
         }
     }
 

@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip audioBGMRun;
     public AudioClip audioBGMQuest;
     public AudioClip audioBGMQuestEnd;
+    public AudioClip audioBGMTutorial;
     public AudioClip audioBGMNight;
     AudioSource audioSource;
 
@@ -72,10 +73,6 @@ public class SoundManager : MonoBehaviour
         else if (scene.name == "Game_Running")
         {
             Sound("BGMRun");
-        }
-        if (scene.name == "Game_Gacha")
-        {
-            Sound("BGMGacha");
         }
         if (scene.name == "Game_Quest")
         {
@@ -167,6 +164,11 @@ public class SoundManager : MonoBehaviour
                 break;
             case "BGMQuestEnd":
                 audioSource.clip = audioBGMQuestEnd;
+                audioSource.volume = 0.1f;
+                audioSource.loop = true;
+                break;
+            case "BGMTutorial":
+                audioSource.clip = audioBGMTutorial;
                 audioSource.volume = 0.1f;
                 audioSource.loop = true;
                 break;

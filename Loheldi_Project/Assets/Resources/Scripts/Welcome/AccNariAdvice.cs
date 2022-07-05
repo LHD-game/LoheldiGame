@@ -32,7 +32,7 @@ public class AccNariAdvice : MonoBehaviour
     {
         if (print_line >= nari_script.Count)
         {
-            //todo: 터치를 기다리는 코드 추가
+            SceneLoader.instance.GotoPlayerCustom();    //캐릭터 커스터마이징 씬으로 이동
             return;
         }
         else

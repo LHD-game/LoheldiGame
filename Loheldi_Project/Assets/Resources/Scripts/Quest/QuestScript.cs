@@ -92,7 +92,7 @@ public class QuestScript : MonoBehaviour
         Mail.ThisDetail.GetComponent<Text>().text = detail;
 
         //if (!Load.QuestMail)
-        Mail.NewMailCheck();
+        //Mail.NewMailCheck();
     }
 
     private void CheckMail()

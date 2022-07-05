@@ -15,9 +15,10 @@ public class ScreenShot : MonoBehaviour
     ***********************************************************************/
     #region .
     public Button screenShotButton;          // 전체 화면 캡쳐
-    public Button screenShotWithoutUIButton; // UI 제외 화면 캡쳐
-    public Button readAndShowButton; // 저장된 경로에서 스크린샷 파일 읽어와서 이미지에 띄우기
+    //public Button screenShotWithoutUIButton; // UI 제외 화면 캡쳐
+    //public Button readAndShowButton; // 저장된 경로에서 스크린샷 파일 읽어와서 이미지에 띄우기
     public Image imageToShow;        // 띄울 이미지 컴포넌트
+    public GameObject ImageToShow;
 
     public ScreenShotFlash flash;
 
@@ -26,6 +27,7 @@ public class ScreenShot : MonoBehaviour
     public string extName = "png";
 
     private bool _willTakeScreenShot = false;
+    private LodingTxt Txt;
     #endregion
     /***********************************************************************
     *                               Fields & Properties
@@ -58,9 +60,14 @@ public class ScreenShot : MonoBehaviour
     #region .
     private void Awake()
     {
+        Txt = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         screenShotButton.onClick.AddListener(TakeScreenShotFull);
-        screenShotWithoutUIButton.onClick.AddListener(TakeScreenShotWithoutUI);
-        readAndShowButton.onClick.AddListener(ReadScreenShotAndShow);
+        //screenShotButton.onClick.AddListener(ReadScreenShotAndShow);
+        screenShotButton.onClick.AddListener(Txt.scriptLine);
+        //screenShotWithoutUIButton.onClick.AddListener(TakeScreenShotWithoutUI);
+        //readAndShowButton.onClick.AddListener(ReadScreenShotAndShow);
+
+        
     }
     #endregion
     /***********************************************************************
@@ -93,6 +100,7 @@ public class ScreenShot : MonoBehaviour
         CheckAndroidPermissionAndDo(Permission.ExternalStorageRead, () => ReadScreenShotFileAndShow(imageToShow));
 #else
         ReadScreenShotFileAndShow(imageToShow);
+        Invoke("SetActiveT", 1f);
 #endif
     }
     #endregion
@@ -187,6 +195,7 @@ public class ScreenShot : MonoBehaviour
 
         // 갤러리 갱신
         RefreshAndroidGallery(totalPath);
+        ReadScreenShotAndShow();
     }
 
     [System.Diagnostics.Conditional("UNITY_ANDROID")]
@@ -250,4 +259,9 @@ public class ScreenShot : MonoBehaviour
         destination.sprite = sprite;
     }
     #endregion
+
+    void SetActiveT()
+    {
+        ImageToShow.SetActive(true);
+    }
 }

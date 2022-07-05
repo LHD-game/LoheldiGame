@@ -15,7 +15,7 @@ public class ColorList : MonoBehaviour
     void Update()
     {
         active = MainGameManager.level;
-        if (active == 2)
+        /*if (active == 2)
         {
             walkBadge();
         }
@@ -42,7 +42,7 @@ public class ColorList : MonoBehaviour
         else if(active == 8)
         {
             quest3_4();
-        }
+        }*/
     }
     public void walkBadge()
     {

@@ -114,6 +114,7 @@ public class QuestScript : MonoBehaviour
             case 2:
                 QnpcName = "Himchan";
                 chat.Num = "2_1";
+                chat.video.videoClip.clip = chat.video.VideoClip[0];
                 break;
             case 3:
                 QnpcName = "Suho";
@@ -133,7 +134,8 @@ public class QuestScript : MonoBehaviour
                 break;
             case 7:
                 QnpcName = "Himchan";
-                chat.Num = "7-1";
+                chat.Num = "7-1"; 
+                chat.video.videoClip.clip = chat.video.VideoClip[1];
                 break;
             case 8:
                 QnpcName = "Mei";

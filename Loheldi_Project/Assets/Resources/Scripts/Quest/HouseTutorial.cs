@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HouseTutorial : MonoBehaviour
 {
+    public GameObject tutogameobject;
     private int button=0;
     public int tutoi;                            //튜토리얼 하이라이트 이미지용
     private string tutoTxt;
@@ -22,7 +23,7 @@ public class HouseTutorial : MonoBehaviour
 
     public void Tutorial()
     {
-        
+        tutogameobject.SetActive(true);
         Debug.Log("튜토리얼 실핻ㅇ22");
         QDD.tutorialLoading = true;
 

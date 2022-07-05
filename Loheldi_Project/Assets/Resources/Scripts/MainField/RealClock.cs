@@ -20,13 +20,18 @@ public class RealClock : MonoBehaviour
     public int Time;                    //시간 변수
     private QuestScript Quest;
 
+    QuestDontDestroy QDD;
+
     void Start()
     {
+        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         if (SceneManager.GetActiveScene().name == "MainField")
             Quest = GameObject.Find("EventSystem").GetComponent<QuestScript>();
         GetCurrentDate();               //시간 불러는 함수
         TimeSetting(Time);
         PreTime = Time;                 //변경 함수 초기화
+
+        QDD.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 (주석 풀어야 함)
     }
 
     private void Update()

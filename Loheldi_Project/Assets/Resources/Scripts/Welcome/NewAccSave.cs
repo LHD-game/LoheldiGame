@@ -163,6 +163,14 @@ public class NewAccSave : MonoBehaviour
         }
     }
 
+    //계정 정보를 다시 입력하기 위한 메소드(아니야! 선택)
+    public void ReturnToFirst()
+    {
+        ResultField.SetActive(false);   //결과 패널 비활성화
+        NickNameField.SetActive(true);  //닉네임 입력 패널 활성화
+        AccNariAdvice.print_line = 6;
+    }
+
     //최종적으로 서버에 닉네임과 생년월일을 저장하는 메소드
     public void AccSave()
     {
@@ -180,8 +188,8 @@ public class NewAccSave : MonoBehaviour
             {
                 Debug.Log("계정 정보 설정 완료!");
 
-                Save_BasicCustom.SaveBasicClothes(); //기본 의상 아이템 저장
-                
+                Save_Basic.PlayerInfoInit();    //계정 기본 정보 저장(레벨, 재화 등)
+                Save_Basic.SaveBasicClothes(); //기본 의상 아이템 저장 
             }
             else
             {

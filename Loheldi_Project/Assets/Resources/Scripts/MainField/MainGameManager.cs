@@ -25,6 +25,12 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
+        //∑π∫ß ∏ÿ√Á!
+        level = 1;
+        Maxexp = 100;
+        exp = 0;
+
+
         var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
        

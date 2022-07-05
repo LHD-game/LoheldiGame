@@ -22,8 +22,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip audioBGMNight;
     AudioSource audioSource;
 
+    QuestDontDestroy QDD;
+
     void Awake()
     {
+        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Music");
 
         if (objs.Length > 1)
@@ -45,10 +48,6 @@ public class SoundManager : MonoBehaviour
         if (scene.name == "Welcome")
         {
             Sound("BGMOpening");
-        }
-        else if (scene.name == "MainField")
-        {
-            Sound("BGMField");
         }
         else if (scene.name == "Housing")
         {
@@ -80,7 +79,10 @@ public class SoundManager : MonoBehaviour
         }
         if (scene.name == "MainField")
         {
-            Sound("BGMField");
+            if (QDD.QuestIndex == 0)
+                Sound("BGMTutorial");
+            else
+                Sound("BGMField");
         }
     }
 

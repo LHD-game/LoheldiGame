@@ -93,7 +93,7 @@ public class LodingTxt : MonoBehaviour
 
     public QuestDontDestroy DontDestroy;
     private QuestScript Quest;
-    private VideoScript video;
+    public VideoScript video;
     public Drawing Draw;
 
     private void Awake()
@@ -129,8 +129,8 @@ public class LodingTxt : MonoBehaviour
         //cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
         //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
         //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
-        Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        Debug.Log("Num=" + Num);
+        //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
+        //Debug.Log("Num=" + Num);
         /*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
                     DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
@@ -264,13 +264,15 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//튜토리얼
             scriptLine();
         else if (data_Dialog[j]["scriptType"].ToString().Equals("video"))//동영상 실행
-        { 
+        {
+            movie.SetActive(true);
             video.OnPlayVideo();
             Chat.SetActive(false);
             j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
         {
+            movie.SetActive(false);
             Debug.Log("reset");
             video.OnResetVideo(); 
             Chat.SetActive(true);
@@ -325,6 +327,7 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {
+            j++;
             ChatWin.SetActive(false);
             Note.SetActive(true);
         }
@@ -334,7 +337,7 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
             scriptLine();
         }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("i-message"))
+        /*else if (data_Dialog[j]["scriptType"].ToString().Equals("i-message"))
         {
             ChatWin.SetActive(false);
             IMessage.SetActive(true);
@@ -344,11 +347,12 @@ public class LodingTxt : MonoBehaviour
             //ChatWin.SetActive(true);
             IMessage.SetActive(false);
             scriptLine();
-        }
+        }*/
         else if (data_Dialog[j]["scriptType"].ToString().Equals("train"))
         {
             ChatWin.SetActive(false);
             Value.SetActive(true);
+            j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("trainEnd"))
         {
@@ -379,7 +383,6 @@ public class LodingTxt : MonoBehaviour
             Draw.ChangeDrawCamera();
             //scriptLine();
             Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
-            Draw.ChangeDrawCamera();
         }
     }
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
@@ -387,7 +390,7 @@ public class LodingTxt : MonoBehaviour
         //튜토리얼 스크립트 이어가는 애
         //Debug.Log("튜툐:"+tuto);
         //Debug.Log("튜툐피니:"+tutoFinish);
-        Debug.Log("무브=" + move);
+        //Debug.Log("무브=" + move);
         if (tuto && tutoFinish)
         {
             chatCanvus.SetActive(true);
@@ -449,13 +452,14 @@ public class LodingTxt : MonoBehaviour
     {
         c= Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
         cuttoon.SetActive(true);
-        //Debug.Log("컷툰갯수=" + cuttoonImageList.Length);
+        Debug.Log("컷툰갯수=" + cuttoonImageList.Length);
         cuttoonspriteR = cuttoon.GetComponent<Image>();
         cuttoonspriteR.sprite = cuttoonImageList[c];
     }
 
     public void ChatEnd() //리셋
     {
+        ChatTime();
         //if (SceneManager.GetActiveScene().name == "MainField")
         JumpButtons.Main_UI.SetActive(true);
         chatCanvus.SetActive(false);

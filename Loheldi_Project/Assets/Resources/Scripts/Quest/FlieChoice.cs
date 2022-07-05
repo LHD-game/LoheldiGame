@@ -30,7 +30,7 @@ public class FlieChoice : MonoBehaviour
     }
     public void Tutorial()
     {
-        if(chat.DontDestroy.tutorialLoading )
+        if (chat.DontDestroy.tutorialLoading )
             chat.Num = "0_4";
         else
             chat.Num = "0_1";
@@ -44,9 +44,6 @@ public class FlieChoice : MonoBehaviour
     {
         chat.FileAdress = "Scripts/Quest/script";
         chat.Num = chat.DontDestroy.QuestIndex + "_1";
-
-
-        //chat.cuttoonFileAdress = "Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex;
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex);
         chat.NewChat();
     }

@@ -49,7 +49,8 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoPlayerCloset()
     {
-        PlayerTransForm();
+        if (SceneManager.GetActiveScene().name == "MainField")
+            PlayerTransForm();
         LoadingSceneManager.LoadScene("PlayerCloset");
     }
 

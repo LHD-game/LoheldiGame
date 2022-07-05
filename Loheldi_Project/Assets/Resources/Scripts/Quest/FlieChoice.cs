@@ -33,7 +33,7 @@ public class FlieChoice : MonoBehaviour
         if (chat.DontDestroy.tutorialLoading )
             chat.Num = "0_4";
         else
-            chat.Num = "0_1";
+            chat.Num = "0_12";
         chat.Main_UI.SetActive(false);
         chat.FileAdress = "Scripts/Quest/script";
         chat.move = true;

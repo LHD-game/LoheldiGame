@@ -91,12 +91,14 @@ public class tutorial : MonoBehaviour
                 if (!chat.tuto)
                     chat.tuto = true;
             }
-            else if(tutoi==7)
+            /*else if(tutoi==7)
             {
                 GameObject SoundManager = GameObject.Find("SoundManager");
                 SoundManager.GetComponent<SoundManager>().Sound("BGMField");
+                chat.block.transform.GetChild(7).gameObject.SetActive(false);
+                chat.color.a = 0f;
                 chat.Line();
-            }
+            }*/
             else
             {
                 tutoi++;
@@ -107,6 +109,8 @@ public class tutorial : MonoBehaviour
                 chat.Line();
                 chat.move = false;
                 //forTutorial();
+                GameObject SoundManager = GameObject.Find("SoundManager");
+                SoundManager.GetComponent<SoundManager>().Sound("BGMField");
             }
         }
         

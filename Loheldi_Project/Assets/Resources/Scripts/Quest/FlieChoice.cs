@@ -30,7 +30,7 @@ public class FlieChoice : MonoBehaviour
     }
     public void Tutorial()
     {
-        if(chat.DontDestroy.tutorialLoading )
+        if (chat.DontDestroy.tutorialLoading )
             chat.Num = "0_4";
         else
             chat.Num = "0_1";

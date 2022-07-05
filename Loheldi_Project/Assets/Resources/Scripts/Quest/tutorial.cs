@@ -93,6 +93,7 @@ public class tutorial : MonoBehaviour
             }
             else
             {
+                tutoi++;
                 chat.block.transform.GetChild(6).gameObject.SetActive(false);
                 //chat.tutoi = 12;
                 chat.tutoFinish = true;

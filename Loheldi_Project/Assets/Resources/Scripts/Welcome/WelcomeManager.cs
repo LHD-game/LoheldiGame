@@ -124,6 +124,10 @@ public class WelcomeManager : MonoBehaviour
         {
             isIDSPopup = !isIDSPopup;
             FindSuccIDPopup.SetActive(isIDSPopup);
+            if (!isIDSPopup)
+            {
+                FindAccPopup();
+            }
         }
     }
 
@@ -133,6 +137,10 @@ public class WelcomeManager : MonoBehaviour
         {
             isPWSPopup = !isPWSPopup;
             InitSuccPWPopup.SetActive(isPWSPopup);
+            if (!isPWSPopup)
+            {
+                FindAccPopup();
+            }
         }
 
     }

@@ -40,7 +40,7 @@ public class PlayerCloset : MonoBehaviour
         }
         if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)  // 기본 의상 아이템이 없을 경우
         {
-            Save_BasicCustom.SaveBasicClothes(); //기본 의상 아이템 저장
+            Save_Basic.SaveBasicClothes(); //기본 의상 아이템 저장
             nowClothes();//재실행
             return;
         }

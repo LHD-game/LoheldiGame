@@ -42,7 +42,7 @@ public class PlayerCustom : MonoBehaviour
         if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)  // 기본 커마 아이템이 없을 경우
         {
             newAcc = true;  // 이 계정은 새 계정입니다.
-            Save_BasicCustom.SaveBasicCustom(); //기본 커스텀 아이템 저장
+            Save_Basic.SaveBasicCustom(); //기본 커스텀 아이템 저장
             nowCustom();//재실행
             return;
         }

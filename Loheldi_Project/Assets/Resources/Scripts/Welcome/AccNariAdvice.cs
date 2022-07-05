@@ -12,7 +12,7 @@ public class AccNariAdvice : MonoBehaviour
 
     Image nari_background;
     int script_num = 0;
-    int print_line = 0;
+    public static int print_line = 0;
     List<Dictionary<string, object>> nari_script = new List<Dictionary<string, object>>();
     // Start is called before the first frame update
     void Start()

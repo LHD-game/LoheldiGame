@@ -130,8 +130,6 @@ public class Register : MonoBehaviour
     {
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
 
-       
-
         ShowStatus(BRO);
 
         if (BRO.IsSuccess())
@@ -155,9 +153,6 @@ public class Register : MonoBehaviour
                 print("동기 방식 데이터 입력 성공");
             }
         }
-
-        
-
     }
 
 
@@ -228,12 +223,12 @@ public class Register : MonoBehaviour
             }
             
         }
-
         else
         {
             ErrorLine.gameObject.SetActive(true);
             ErrorTxt.gameObject.SetActive(true);
             Error(BRO.GetErrorCode(), "UserFunc");
+            Debug.Log(BRO.GetMessage());
         }
     }
 

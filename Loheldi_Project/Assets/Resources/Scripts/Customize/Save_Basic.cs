@@ -1,10 +1,11 @@
 using BackEnd;
 using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Save_BasicCustom
+public class Save_Basic //초기값을 서버에 저장해주는 클래스
 {
     public static void SaveBasicCustom()
     {
@@ -76,4 +77,29 @@ public class Save_BasicCustom
         Backend.GameData.Insert("USER_CLOTHES", param);
         Debug.Log("PlayerClothesInit");
     }
+
+    //계정의 초기 재화, 레벨, 경험치, 최대 경험치량, 퀘스트 진행도, 지난 퀘스트 완료 시각 저장 메소드
+    public static void PlayerInfoInit()
+    {
+        Param param = new Param();
+        
+        param.Add("Wallet", 10);
+        param.Add("Level", 1);
+        param.Add("NowExp", 0);
+        param.Add("MaxExp", 100);
+        param.Add("QuestPreg", "0");
+        param.Add("LastQTime", DateTime.Today);
+
+        var bro = Backend.GameData.Insert("PLAY_INFO", param);
+
+        if (bro.IsSuccess())
+        {
+            Debug.Log("PlayerInfoInit() Success");
+        }
+        else
+        {
+            Debug.Log("PlayerInfoInit() Fail");
+        }
+    }
+
 }

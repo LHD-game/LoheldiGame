@@ -24,6 +24,9 @@ public class ClosetControl : PlayerCloset
         param.Add("SColor", NowSettings.u_socks_color);
         param.Add("Shoes", NowSettings.u_shoes_id);
         param.Add("ShColor", NowSettings.u_shoes_color);
+        param.Add("Hat", NowSettings.u_hat_id);
+        param.Add("Glasses", NowSettings.u_glasses_id);
+        param.Add("Bag", NowSettings.u_bag_id);
 
         //蜡历 泅犁 馒厘 历厘等 row 八祸
         var bro = Backend.GameData.Get("USER_CLOTHES", new Where());
@@ -69,6 +72,18 @@ public class ClosetControl : PlayerCloset
                 else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_shoes))    //shoes老 版快
                 {
                     NowSettings.u_shoes_id = d_dialog[i][CommonField.nCID].ToString();
+                }
+                else if (d_dialog[i][CommonField.nItemType].ToString().Equals(CommonField.it_hat))    //hat老 版快
+                {
+                    NowSettings.u_hat_id = d_dialog[i][CommonField.nCID].ToString();
+                }
+                else if (d_dialog[i][CommonField.nItemType].ToString().Equals(CommonField.it_glasses))    //glasses老 版快
+                {
+                    NowSettings.u_glasses_id = d_dialog[i][CommonField.nCID].ToString();
+                }
+                else if (d_dialog[i][CommonField.nItemType].ToString().Equals(CommonField.it_bag))    //bag老 版快
+                {
+                    NowSettings.u_bag_id = d_dialog[i][CommonField.nCID].ToString();
                 }
 
             }

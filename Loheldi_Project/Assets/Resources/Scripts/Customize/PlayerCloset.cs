@@ -46,32 +46,32 @@ public class PlayerCloset : MonoBehaviour
         }
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        PreviousSettings.u_upper_name = rows[0]["Upper"]["S"].ToString();
+        PreviousSettings.u_upper_id = rows[0]["Upper"]["S"].ToString();
         PreviousSettings.u_upper_color = rows[0]["UColor"]["S"].ToString();
-        PreviousSettings.u_lower_name = rows[0]["Lower"]["S"].ToString();
+        PreviousSettings.u_lower_id = rows[0]["Lower"]["S"].ToString();
         PreviousSettings.u_lower_color = rows[0]["LColor"]["S"].ToString();
-        PreviousSettings.u_socks_name = rows[0]["Socks"]["S"].ToString();
+        PreviousSettings.u_socks_id = rows[0]["Socks"]["S"].ToString();
         PreviousSettings.u_socks_color = rows[0]["SColor"]["S"].ToString();
-        PreviousSettings.u_shoes_name = rows[0]["Shoes"]["S"].ToString();
+        PreviousSettings.u_shoes_id = rows[0]["Shoes"]["S"].ToString();
         PreviousSettings.u_shoes_color = rows[0]["ShColor"]["S"].ToString();
     }
 
     public void ResetClothes()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
     {
         //상의
-        NowSettings.u_upper_id = PreviousSettings.u_upper_name;
+        NowSettings.u_upper_id = PreviousSettings.u_upper_id;
         NowSettings.u_upper_color = PreviousSettings.u_upper_color;
         NowSettings.u_upper_texture = FindTexture(NowSettings.u_upper_id) + "_" + NowSettings.u_upper_color;
         //하의
-        NowSettings.u_lower_id = PreviousSettings.u_lower_name;
+        NowSettings.u_lower_id = PreviousSettings.u_lower_id;
         NowSettings.u_lower_color = PreviousSettings.u_lower_color;
         NowSettings.u_lower_texture = FindTexture(NowSettings.u_lower_id) + "_" + NowSettings.u_lower_color;
         //양말
-        NowSettings.u_socks_id = PreviousSettings.u_socks_name;
+        NowSettings.u_socks_id = PreviousSettings.u_socks_id;
         NowSettings.u_socks_color = PreviousSettings.u_socks_color;
         NowSettings.u_socks_texture = FindTexture(NowSettings.u_socks_id) + "_" + NowSettings.u_socks_color;
         //신발
-        NowSettings.u_shoes_id = PreviousSettings.u_shoes_name;
+        NowSettings.u_shoes_id = PreviousSettings.u_shoes_id;
         NowSettings.u_shoes_color = PreviousSettings.u_shoes_color;
         NowSettings.u_shoes_texture = FindTexture(NowSettings.u_shoes_id) + "_" + NowSettings.u_shoes_color;
         //texture 해당 경로에서 불러오기

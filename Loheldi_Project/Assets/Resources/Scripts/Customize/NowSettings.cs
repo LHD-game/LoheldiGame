@@ -31,4 +31,8 @@ public class NowSettings
     public static string u_shoes_id { get; set; }
     public static string u_shoes_color { get; set; }
     public static string u_shoes_texture { get; set; }
+    //accessory
+    public static string u_hat_id { get; set; }
+    public static string u_glasses_id { get; set; }
+    public static string u_bag_id { get; set; }
 }

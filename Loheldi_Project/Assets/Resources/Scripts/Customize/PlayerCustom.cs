@@ -48,24 +48,24 @@ public class PlayerCustom : MonoBehaviour
         }
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        PreviousSettings.u_skin_name = rows[0]["Skin"]["S"].ToString();
-        PreviousSettings.u_eyes_name = rows[0]["Eyes"]["S"].ToString();
+        PreviousSettings.u_skin_id = rows[0]["Skin"]["S"].ToString();
+        PreviousSettings.u_eyes_id = rows[0]["Eyes"]["S"].ToString();
         PreviousSettings.u_eyes_color = rows[0]["EColor"]["S"].ToString();
-        PreviousSettings.u_mouth_name = rows[0]["Mouth"]["S"].ToString();
-        PreviousSettings.u_hair_name = rows[0]["Hair"]["S"].ToString();
+        PreviousSettings.u_mouth_id = rows[0]["Mouth"]["S"].ToString();
+        PreviousSettings.u_hair_id = rows[0]["Hair"]["S"].ToString();
         PreviousSettings.u_hair_color = rows[0]["HColor"]["S"].ToString();
     }
 
     public void ResetCustom()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
     {
-        NowSettings.u_skin_id = PreviousSettings.u_skin_name;
+        NowSettings.u_skin_id = PreviousSettings.u_skin_id;
         NowSettings.u_skin_texture = FindTexture(NowSettings.u_skin_id);
-        NowSettings.u_eyes_id = PreviousSettings.u_eyes_name;
+        NowSettings.u_eyes_id = PreviousSettings.u_eyes_id;
         NowSettings.u_eyes_color = PreviousSettings.u_eyes_color;
         NowSettings.u_eyes_texture = FindTexture(NowSettings.u_eyes_id) + "_" + NowSettings.u_eyes_color;
-        NowSettings.u_mouth_id = PreviousSettings.u_mouth_name;
+        NowSettings.u_mouth_id = PreviousSettings.u_mouth_id;
         NowSettings.u_mouth_texture = FindTexture(NowSettings.u_mouth_id);
-        NowSettings.u_hair_id = PreviousSettings.u_hair_name;
+        NowSettings.u_hair_id = PreviousSettings.u_hair_id;
         NowSettings.u_hair_color = PreviousSettings.u_hair_color;
         NowSettings.u_hair_texture = "texture_" + NowSettings.u_hair_color;
 

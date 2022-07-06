@@ -114,7 +114,7 @@ public class Drawing : MonoBehaviour
         GameObject click = EventSystem.current.currentSelectedGameObject;
         if (click.name.Equals("red"))
             i = 1;
-        else if (click.name.Equals("yellow"))
+        else if (click.name.Equals("pink"))
             i = 2;
         else if (click.name.Equals("green"))
             i = 3;
@@ -339,6 +339,56 @@ public class Drawing : MonoBehaviour
             ValueLength--;
         }
 
+    }
+
+    //////////////////////////ÀÚÀü°Å////////////////////////////////////////////////
+    public Animator[] BikeAnimator;
+    RectTransform RectTransform;
+    public int protect = 0;
+    private int lastButton;
+    public void setProtectiveGear()
+    {
+        GameObject click = EventSystem.current.currentSelectedGameObject;
+        RectTransform = click.GetComponent<RectTransform>();
+        Debug.Log(click.gameObject.name);
+        Destroy(click.GetComponent<Button>());
+        if (click.name.Equals("ProtectiveGearRk"))
+        {
+            BikeAnimator[0].SetTrigger("RK");
+            lastButton = 0;
+        }
+        else if (click.name.Equals("ProtectiveGearLK"))
+        {
+            BikeAnimator[1].SetTrigger("LK");
+            lastButton = 1;
+        }
+        else if (click.name.Equals("ProtectiveGearLA"))
+        {
+            BikeAnimator[2].SetTrigger("LA");
+            lastButton = 2;
+        }
+        else if (click.name.Equals("ProtectiveGearRA"))
+        {
+            BikeAnimator[3].SetTrigger("RA");
+            lastButton = 3;
+        }
+        else if (click.name.Equals("ProtectiveGearH"))
+        {
+            BikeAnimator[4].SetTrigger("H");
+            lastButton = 4;
+        }
+        Debug.Log(RectTransform.anchoredPosition);
+    }
+
+    public void WearOut()
+    {
+        ++protect;
+        if (protect == 5 && BikeAnimator[lastButton].GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        { 
+            chat.Bike.SetActive(false);
+            chat.scriptLine();
+        }
+        Debug.Log(protect);
     }
 
 }

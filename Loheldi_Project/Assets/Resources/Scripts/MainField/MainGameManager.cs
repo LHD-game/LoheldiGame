@@ -12,6 +12,8 @@ public class MainGameManager : MonoBehaviour
     public static int Level;
     public static float NowExp;
     public static float MaxExp;
+    public static int QuestPreg;
+    public static int LastQTime;
     private float tempNowExp;
     private float tempMoney;
 
@@ -29,6 +31,9 @@ public class MainGameManager : MonoBehaviour
     {
         var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+
+        QuestPreg = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>().QuestIndex;
+        LastQTime = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>().LastDay;
 
         if (rows != null)
         {
@@ -48,6 +53,7 @@ public class MainGameManager : MonoBehaviour
                 MaxExp = 100;
                 NowExp = 0;
                 Money = 10;
+                ParameterUpload();
             }
             
         }
@@ -90,20 +96,36 @@ public class MainGameManager : MonoBehaviour
 
     void ParameterUpload()
     {
-        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where(), 10);
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-
-        var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
-
         Param param = new Param();
         param.Add("Level", Level);
+        param.Add("QuestPreg", QuestPreg);
         param.Add("MaxExp", MaxExp);
         param.Add("NowExp", NowExp);
         param.Add("Wallet", Money);
+<<<<<<< HEAD
         var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", inDate, Backend.UserInDate, param);
         if (bro2.IsSuccess())
+=======
+        param.Add("LastQTime", LastQTime);
+
+
+        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
+        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+
+        if (rows != null)
+>>>>>>> 995aef0681011c11603c39ceceebee3497521dd3
         {
-            print("데이터 업로드 성공");
+            Backend.GameData.Insert("PLAY_INFO", param);
         }
+        else
+        {
+            var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
+            var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", inDate, Backend.UserInDate, param);
+            if (bro2.IsSuccess())
+            {
+                print("데이터 업데이트 성공");
+            }
+        }
+
     }
 }

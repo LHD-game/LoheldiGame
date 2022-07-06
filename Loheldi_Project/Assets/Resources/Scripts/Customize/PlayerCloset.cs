@@ -54,6 +54,9 @@ public class PlayerCloset : MonoBehaviour
         PreviousSettings.u_socks_color = rows[0]["SColor"]["S"].ToString();
         PreviousSettings.u_shoes_id = rows[0]["Shoes"]["S"].ToString();
         PreviousSettings.u_shoes_color = rows[0]["ShColor"]["S"].ToString();
+        PreviousSettings.u_hat_id = rows[0]["hat"]["S"].ToString();
+        PreviousSettings.u_glasses_id = rows[0]["glasses"]["S"].ToString();
+        PreviousSettings.u_bag_id = rows[0]["bag"]["S"].ToString();
     }
 
     public void ResetClothes()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
@@ -74,6 +77,10 @@ public class PlayerCloset : MonoBehaviour
         NowSettings.u_shoes_id = PreviousSettings.u_shoes_id;
         NowSettings.u_shoes_color = PreviousSettings.u_shoes_color;
         NowSettings.u_shoes_texture = FindTexture(NowSettings.u_shoes_id) + "_" + NowSettings.u_shoes_color;
+        //모자,안경,가방
+        NowSettings.u_hat_id = PreviousSettings.u_hat_id;
+        NowSettings.u_glasses_id = PreviousSettings.u_glasses_id;
+        NowSettings.u_bag_id = PreviousSettings.u_bag_id;
         //texture 해당 경로에서 불러오기
         tUpper = Resources.Load<Texture>(("Customize/Textures/Upper/" + NowSettings.u_upper_texture));
         tLower = Resources.Load<Texture>(("Customize/Textures/Lower/" + NowSettings.u_lower_texture));
@@ -112,6 +119,8 @@ public class PlayerCloset : MonoBehaviour
 
         l_mesh_L.sharedMesh = meLower_L;
         l_mesh_R.sharedMesh = meLower_R;
+
+        //todo: 악세서리
 
     }
 

@@ -62,7 +62,6 @@ public class MainGameManager : MonoBehaviour
 
     void Update()
     {
-
         moneyText.text = Money.ToString();
         NowExpBarleftText.text = NowExp.ToString("F0");                      //설명설명
         NowExpBarrightText.text = MaxExp.ToString("F0");                  //설명설명설명
@@ -104,8 +103,7 @@ public class MainGameManager : MonoBehaviour
         param.Add("Wallet", Money);
         param.Add("LastQTime", LastQTime);
 
-
-        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
+        var bro = Backend.GameData.Get("PLAY_INFO", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
         if (rows != null)
@@ -121,6 +119,5 @@ public class MainGameManager : MonoBehaviour
                 print("데이터 업데이트 성공");
             }
         }
-
     }
 }

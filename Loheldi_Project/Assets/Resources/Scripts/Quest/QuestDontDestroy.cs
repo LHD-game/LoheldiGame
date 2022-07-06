@@ -18,9 +18,6 @@ public class QuestDontDestroy : MonoBehaviour
     public bool tutorialLoading=false; //튜토리얼 진행 중인지(하우징갔다가 메인왔을 때 진행 시키는 용)
     //public bool RiciveQuest = false; //퀘스트를 받았는지 확인하는 bool값
 
-    public int DayToday;     //이 둘은 뭐하는 애지 내가 만든건가
-    public int DayYesterday;
-
     public GameObject LastPlayerTransform;
     //public GameObject[] Mails;
     /// </summary>

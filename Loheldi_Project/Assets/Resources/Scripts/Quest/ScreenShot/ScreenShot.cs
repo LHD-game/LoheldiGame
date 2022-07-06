@@ -62,8 +62,8 @@ public class ScreenShot : MonoBehaviour
     {
         Txt = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         screenShotButton.onClick.AddListener(TakeScreenShotFull);
-        //screenShotButton.onClick.AddListener(ReadScreenShotAndShow);
-        screenShotButton.onClick.AddListener(Txt.scriptLine);
+        screenShotButton.onClick.AddListener(ReadScreenShotAndShow);
+        //screenShotButton.onClick.AddListener(Txt.scriptLine);
         //screenShotWithoutUIButton.onClick.AddListener(TakeScreenShotWithoutUI);
         //readAndShowButton.onClick.AddListener(ReadScreenShotAndShow);
 
@@ -257,6 +257,7 @@ public class ScreenShot : MonoBehaviour
         Rect rect = new Rect(0, 0, _imageTexture.width, _imageTexture.height);
         Sprite sprite = Sprite.Create(_imageTexture, rect, Vector2.one * 0.5f);
         destination.sprite = sprite;
+        Invoke("SetActiveT", 1F);
     }
     #endregion
 

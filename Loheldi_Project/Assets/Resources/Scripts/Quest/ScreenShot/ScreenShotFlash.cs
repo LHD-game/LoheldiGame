@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary> 스크린샷 찍을 때 화면 번쩍이기 </summary>
 public class ScreenShotFlash : MonoBehaviour
 {
-    public float duration = 0.3f;
+    public float duration = 0.5f;
 
     private UnityEngine.UI.Image _image;
     private float _currentAlpha = 1f;

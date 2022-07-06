@@ -14,7 +14,7 @@ public class ColorList : MonoBehaviour
     }
     void Update()
     {
-        active = MainGameManager.level;
+        active = MainGameManager.Level;
         /*if (active == 2)
         {
             walkBadge();

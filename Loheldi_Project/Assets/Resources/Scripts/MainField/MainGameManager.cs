@@ -8,16 +8,18 @@ using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour
 {
-    public int money;
-    public static int level;
-    public static float exp;
-    float Maxexp;
+    public static int Money;
+    public static int Level;
+    public static float NowExp;
+    public static float MaxExp;
+    private float tempNowExp;
+    private float tempMoney;
 
     public Text moneyText;
-    public Text levelText;
+    public Text LevelText;
     public Text conditionLevelText;                //상태창 레벨
-    public Text expBarleftText;                    //필요한 경험치량
-    public Text expBarrightText;                   //현재 경험치량
+    public Text NowExpBarleftText;                    //필요한 경험치량
+    public Text NowExpBarrightText;                   //현재 경험치량
     public Slider slider;
     public Slider conditionSlider;
 
@@ -25,41 +27,27 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
-        //레벨 멈춰!
-        level = 1;
-        Maxexp = 100;
-        exp = 0;
-
-
-        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where());
+        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-       
-            //var inDate = bro.Rows()[i]["inDate"]["S"].ToString();
-            //var level = bro.Rows()[i]["level"]["S"].ToString();
-        
-            //Debug.Log(inDate);
-        
-        
-        if (bro.IsSuccess())
+
+        if (rows != null)
         {
-            /*level = bro.Rows()[0]["level"]["N"].ToString();*/
-            /*Maxexp = 100;
-            exp = 0;*/
             print("레벨 정보 있음");
-            var level2 = rows[0]["level"]["N"].ToString();
-            Debug.Log(level2);
-            /*string level1 = (string)rows[0]["level"]["N"];*/
-            //level = level2;
-            levelText.text = level2;
+            //var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
+            Level = int.Parse(bro.Rows()[0]["Level"]["N"].ToString());
+            NowExp = float.Parse(bro.Rows()[0]["NowExp"]["N"].ToString());
+            MaxExp = float.Parse(bro.Rows()[0]["MaxExp"]["N"].ToString());
+            Money = int.Parse(bro.Rows()[0]["Wallet"]["N"].ToString());
 
         }
         else
         {
             if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
             {
-                level = 1;
-                Maxexp = 100;
-                exp = 0;
+                Level = 1;
+                MaxExp = 100;
+                NowExp = 0;
+                Money = 10;
             }
             
         }
@@ -68,44 +56,54 @@ public class MainGameManager : MonoBehaviour
 
     void Update()
     {
-        moneyText.text = money.ToString();
-        expBarleftText.text = exp.ToString("F0");                      //설명설명
-        expBarrightText.text = Maxexp.ToString("F0");                  //설명설명설명
-        levelText.text = level.ToString();
 
-        slider.maxValue = Maxexp;
-        conditionSlider.maxValue = Maxexp;
-        slider.value = exp;
-        conditionSlider.value = exp;
-        if (exp >= Maxexp)
+        moneyText.text = Money.ToString();
+        NowExpBarleftText.text = NowExp.ToString("F0");                      //설명설명
+        NowExpBarrightText.text = MaxExp.ToString("F0");                  //설명설명설명
+        LevelText.text = Level.ToString();
+
+        slider.maxValue = MaxExp;
+        conditionSlider.maxValue = MaxExp;
+        slider.value = NowExp;
+        conditionSlider.value = NowExp;
+        if (NowExp >= MaxExp)
         {
             SoundManager.GetComponent<SoundEffect>().Sound("LevelUp");
             LevelUp();
-            
         }
+        if (tempNowExp != NowExp || tempMoney != Money)
+        {
+            ParameterUpload();
+        }
+        tempNowExp = NowExp;
     }
-
 
     void LevelUp()
     {
         conditionSlider.value = 0;
         slider.value = 0;
-        exp = exp - Maxexp;
-        Maxexp = Maxexp * 1.2f;
-        level++;
-        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 10);
+        NowExp = NowExp - MaxExp;
+        MaxExp = MaxExp * 1.2f;
+        Level++;
+        ParameterUpload();
+    }
+
+    void ParameterUpload()
+    {
+        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where(), 10);
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        string indate = rows[0]["inDate"]["S"].ToString();
+        var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
 
         Param param = new Param();
-        param.Add("level", level);
-        /*param.Add("newMaxexp", Maxexp);
-        param.Add("newexp", exp);*/
-        var bro2 = Backend.GameData.UpdateV2("USER_GAME_DATA", indate, Backend.UserInDate, param);
+        param.Add("Level", Level);
+        param.Add("MaxExp", MaxExp);
+        param.Add("NowExp", NowExp);
+        param.Add("Wallet", Money);
+        var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", indate, Backend.UserInDate, param);
         if (bro2.IsSuccess())
         {
-            print("동기 방식 데이터 수정 성공");
+            print("데이터 업로드 성공");
         }
     }
 }

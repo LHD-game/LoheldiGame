@@ -55,9 +55,11 @@ public class LodingTxt : MonoBehaviour
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
     public GameObject screenShot;
+    public GameObject Bike;
 
     public int NPCButton = 0;
     public string LoadTxt;
+    private string[] Xdialog = {"다시 한번 생각해봐.","아쉽지만 틀렸어.","땡!","다시 도전해봐"};
 
     public List<Dictionary<string, object>> data_Dialog = new List<Dictionary<string, object>>();
     public string FileAdress;                // 스크립트 파일 위치
@@ -324,6 +326,12 @@ public class LodingTxt : MonoBehaviour
             position.y = 0;
             cuttoon.transform.localPosition = position;
             scriptLine();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Bike"))
+        {
+            Chat.SetActive(false);
+            Bike.SetActive(true); 
+            j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {
@@ -620,10 +628,11 @@ public class LodingTxt : MonoBehaviour
     }
     public void X()//틀린 정답 골랐을 때
     {
+        int x = UnityEngine.Random.Range(0,3);
         block.SetActive(true);
         XImage.SetActive(true);
         Button.SetActive(false);
-        LoadTxt = "다시 생각해보자!";
+        LoadTxt = Xdialog[x];
         StartCoroutine(_typing());
 
     }

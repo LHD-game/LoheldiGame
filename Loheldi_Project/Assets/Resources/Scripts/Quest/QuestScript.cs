@@ -109,45 +109,38 @@ public class QuestScript : MonoBehaviour
         {
             case 1:
                 QnpcName = "Hami";
-                chat.Num = "1_1";
                 break;
             case 2:
                 QnpcName = "Himchan";
-                chat.Num = "2_1";
                 chat.video.videoClip.clip = chat.video.VideoClip[0];
                 break;
             case 3:
                 QnpcName = "Suho";
-                chat.Num = "3-1";
                 break;
             case 4:
                 QnpcName = "Himchan";
-                chat.Num = "4-1";
+                GameObject gameObject = new GameObject();
+                gameObject.transform.position = new Vector3(65.1100006f, 5.41002083f, -17.799999f);
+                Instantiate(Resources.Load<GameObject>("Animation/PlayerAnimation/bicycle")as GameObject, gameObject.transform.position, Quaternion.Euler(0, 51.4773521f, 0));
                 break;
             case 5 :
                 QnpcName = "Yeomi";
-                chat.Num = "5-1";
                 break;
             case 6:
                 QnpcName = "Hami";
-                chat.Num = "6-1";
                 break;
             case 7:
                 QnpcName = "Himchan";
-                chat.Num = "7-1"; 
                 chat.video.videoClip.clip = chat.video.VideoClip[1];
                 break;
             case 8:
                 QnpcName = "Mei";
-                chat.Num = "8-1";
                 break;
             case 9:
                 QnpcName = "Himchan";
-                chat.Num = "9-1";
                 break;
             case 10:
                 QnpcName = "Suho";
-                chat.Num = "10-1";
                 break;
         }
         //NpcQuest = GameObject.Find(QnpcName);

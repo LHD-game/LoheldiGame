@@ -73,7 +73,7 @@ public class MainGameManager : MonoBehaviour
         }
         if (tempNowExp != NowExp || tempMoney != Money)
         {
-            ParameterUpload();
+            //ParameterUpload();
         }
         tempNowExp = NowExp;
     }
@@ -100,7 +100,7 @@ public class MainGameManager : MonoBehaviour
         param.Add("MaxExp", MaxExp);
         param.Add("NowExp", NowExp);
         param.Add("Wallet", Money);
-        var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", indate, Backend.UserInDate, param);
+        var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", inDate, Backend.UserInDate, param);
         if (bro2.IsSuccess())
         {
             print("데이터 업로드 성공");

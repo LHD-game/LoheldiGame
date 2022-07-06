@@ -97,6 +97,7 @@ public class LodingTxt : MonoBehaviour
     private QuestScript Quest;
     public VideoScript video;
     public Drawing Draw;
+    private BicycleRide bicycleRide;
 
     private void Awake()
     {
@@ -332,6 +333,10 @@ public class LodingTxt : MonoBehaviour
             Chat.SetActive(false);
             Bike.SetActive(true); 
             j++;
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Bicycle"))
+        { 
+
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {

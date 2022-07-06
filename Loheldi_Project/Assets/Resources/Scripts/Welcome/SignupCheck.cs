@@ -33,8 +33,8 @@ public class SignupCheck : MonoBehaviour
         {
             ErrorTxt[i].gameObject.SetActive(false);
         }
-        Debug.Log(ErrorLine.Length);  //오브젝트 인지O
-        Debug.Log(ErrorLine[1]);  //오브젝트 인지O
+        //Debug.Log(ErrorLine.Length);  //오브젝트 인지O
+        //Debug.Log(ErrorLine[1]);  //오브젝트 인지O
     }
 
 

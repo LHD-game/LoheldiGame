@@ -101,17 +101,12 @@ public class MainGameManager : MonoBehaviour
         param.Add("MaxExp", MaxExp);
         param.Add("NowExp", NowExp);
         param.Add("Wallet", Money);
-<<<<<<< HEAD
-        var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", inDate, Backend.UserInDate, param);
-        if (bro2.IsSuccess())
-=======
         param.Add("LastQTime", LastQTime);
 
         var bro = Backend.GameData.Get("PLAY_INFO", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
         if (rows != null)
->>>>>>> 995aef0681011c11603c39ceceebee3497521dd3
         {
             Backend.GameData.Insert("PLAY_INFO", param);
         }

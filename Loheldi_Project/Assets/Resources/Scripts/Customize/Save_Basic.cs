@@ -73,6 +73,9 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("SColor", "white");
         param.Add("Shoes", "4030106");
         param.Add("ShColor", "white");
+        param.Add("hat", "null");
+        param.Add("glasses", "null");
+        param.Add("bag", "null");
 
         Backend.GameData.Insert("USER_CLOTHES", param);
         Debug.Log("PlayerClothesInit");

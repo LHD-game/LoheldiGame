@@ -30,7 +30,7 @@ public class MainGameManager : MonoBehaviour
         var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        if (bro.IsSuccess())
+        if (rows != null)
         {
             print("레벨 정보 있음");
             //var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
@@ -90,17 +90,17 @@ public class MainGameManager : MonoBehaviour
 
     void ParameterUpload()
     {
-        var bro = Backend.GameData.GetMyData("USER_GAME_DATA", new Where(), 10);
+        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where(), 10);
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
-        string indate = rows[0]["inDate"]["S"].ToString();
+        var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
 
         Param param = new Param();
         param.Add("Level", Level);
         param.Add("MaxExp", MaxExp);
         param.Add("NowExp", NowExp);
         param.Add("Wallet", Money);
-        var bro2 = Backend.GameData.UpdateV2("USER_GAME_DATA", indate, Backend.UserInDate, param);
+        var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", indate, Backend.UserInDate, param);
         if (bro2.IsSuccess())
         {
             print("데이터 업로드 성공");

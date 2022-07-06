@@ -21,6 +21,10 @@ public class CommonField
     public static string m_lower = "lower";
     public static string m_socks = "socks";
     public static string m_shoes = "shoes";
+    //item type name
+    public static string it_hat = "hat";
+    public static string it_glasses = "glasses";
+    public static string it_bag = "bag";
 
     //custom DB
     static List<Dictionary<string, object>> data_dialog = new List<Dictionary<string, object>>();

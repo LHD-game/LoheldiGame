@@ -19,12 +19,21 @@ public class ClosetCategory : CategoryControl
     private GameObject c_socks;
     [SerializeField]
     private GameObject c_shoes;
+    [SerializeField]
+    private GameObject c_hat;
+    [SerializeField]
+    private GameObject c_glasses;
+    [SerializeField]
+    private GameObject c_bag;
 
     Param param = new Param();
     List<Dictionary<string, object>> upper_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
-    List<Dictionary<string, object>> lower_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
-    List<Dictionary<string, object>> socks_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
-    List<Dictionary<string, object>> shoes_Dialog = new List<Dictionary<string, object>>();   // cid, name, model, meterial, texture
+    List<Dictionary<string, object>> lower_Dialog = new List<Dictionary<string, object>>();   
+    List<Dictionary<string, object>> socks_Dialog = new List<Dictionary<string, object>>();   
+    List<Dictionary<string, object>> shoes_Dialog = new List<Dictionary<string, object>>();  
+    List<Dictionary<string, object>> hat_Dialog = new List<Dictionary<string, object>>();   
+    List<Dictionary<string, object>> glasses_Dialog = new List<Dictionary<string, object>>();   
+    List<Dictionary<string, object>> bag_Dialog = new List<Dictionary<string, object>>();   
     
     private void Start()
     {
@@ -49,7 +58,7 @@ public class ClosetCategory : CategoryControl
         ParsingJSON pj = new ParsingJSON();
         ParsingJSON pj2 = new ParsingJSON();
 
-        int u = 0, l = 0, so = 0, sh = 0;
+        int u = 0, l = 0, so = 0, sh = 0, h=0, g=0, b=0;
         for (int i = 0; i < allClothes_rows.Count ; i++)
         {
             CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allClothes_rows[i]);
@@ -83,6 +92,24 @@ public class ClosetCategory : CategoryControl
                         initCustomItem(shoes_Dialog[sh], data);
                         sh++;
                     }
+                    else if (data.ItemType.Equals(CommonField.it_hat))
+                    {
+                        hat_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(hat_Dialog[h], data);
+                        h++;
+                    }
+                    else if (data.ItemType.Equals(CommonField.it_glasses))
+                    {
+                        glasses_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(glasses_Dialog[g], data);
+                        g++;
+                    }
+                    else if (data.ItemType.Equals(CommonField.it_bag))
+                    {
+                        bag_Dialog.Add(new Dictionary<string, object>());
+                        initCustomItem(bag_Dialog[b], data);
+                        b++;
+                    }
                 }
 
             }
@@ -94,6 +121,9 @@ public class ClosetCategory : CategoryControl
         MakeCategory(c_lower, lower_Dialog, scene);
         MakeCategory(c_socks, socks_Dialog, scene);
         MakeCategory(c_shoes, shoes_Dialog, scene);
+        MakeCategory(c_hat, hat_Dialog, scene);
+        MakeCategory(c_glasses, glasses_Dialog, scene);
+        MakeCategory(c_bag, bag_Dialog, scene);
 
     }
 

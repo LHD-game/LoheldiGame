@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerCloset : MonoBehaviour
 {
+    GameObject playerPrefab;
     //PlaterSet.cs 에서 설정합니다.
     protected Texture tUpper;
     protected Texture tLower;
@@ -54,9 +55,9 @@ public class PlayerCloset : MonoBehaviour
         PreviousSettings.u_socks_color = rows[0]["SColor"]["S"].ToString();
         PreviousSettings.u_shoes_id = rows[0]["Shoes"]["S"].ToString();
         PreviousSettings.u_shoes_color = rows[0]["ShColor"]["S"].ToString();
-        PreviousSettings.u_hat_id = rows[0]["hat"]["S"].ToString();
-        PreviousSettings.u_glasses_id = rows[0]["glasses"]["S"].ToString();
-        PreviousSettings.u_bag_id = rows[0]["bag"]["S"].ToString();
+        PreviousSettings.u_hat_id = rows[0]["Hat"]["S"].ToString();
+        PreviousSettings.u_glasses_id = rows[0]["Glasses"]["S"].ToString();
+        PreviousSettings.u_bag_id = rows[0]["Bag"]["S"].ToString();
     }
 
     public void ResetClothes()  //현재 커스터마이징을 초기 커스터마이징으로 초기화
@@ -121,6 +122,52 @@ public class PlayerCloset : MonoBehaviour
         l_mesh_R.sharedMesh = meLower_R;
 
         //todo: 악세서리
+        playerPrefab = GameObject.Find("Player");
+        Transform parents_folder = playerPrefab.transform.Find("player_body");
+        Debug.Log(NowSettings.u_hat_id);
+        //hat의 id가 null이 아닐 경우,
+        if (!NowSettings.u_hat_id.Equals("null"))
+        {
+            Debug.Log("hat");
+            
+            Transform hat_folder = parents_folder.transform.Find("Hat");
+            int hat_cnt = hat_folder.childCount;
+
+                for(int i=1; i < hat_cnt; i++)
+                {
+                    hat_folder.GetChild(i).gameObject.SetActive(false);
+                }
+                Transform active_hat = hat_folder.Find(NowSettings.u_hat_id+"_hat");
+                active_hat.gameObject.SetActive(true);
+        }
+        if (!NowSettings.u_glasses_id.Equals("null"))
+        {
+            Debug.Log("glasses");
+
+            Transform glasses_folder = parents_folder.transform.Find("Glasses");
+            int glasses_cnt = glasses_folder.childCount;
+
+            for (int i = 1; i < glasses_cnt; i++)
+            {
+                glasses_folder.GetChild(i).gameObject.SetActive(false);
+            }
+            Transform active_glasses = glasses_folder.Find(NowSettings.u_hat_id + "_glasses");
+            active_glasses.gameObject.SetActive(true);
+        }
+        if (!NowSettings.u_bag_id.Equals("null"))
+        {
+            Debug.Log("bag");
+
+            Transform bag_folder = parents_folder.transform.Find("Bag");
+            int bag_cnt = bag_folder.childCount;
+
+            for (int i = 1; i < bag_cnt; i++)
+            {
+                bag_folder.GetChild(i).gameObject.SetActive(false);
+            }
+            Transform active_bag = bag_folder.Find(NowSettings.u_hat_id + "_bag");
+            active_bag.gameObject.SetActive(true);
+        }
 
     }
 

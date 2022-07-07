@@ -21,6 +21,16 @@ public class AccInfo
     public DateTime BIRTH;
 }
 
+public class PlayInfo
+{
+    public int Wallet;
+    public int Level;
+    public float NowExp;
+    public float MaxExp;
+    public string QuestPreg;
+    public DateTime LastQTime;
+}
+
 public class MyItem
 {
     public string ICode;

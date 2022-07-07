@@ -73,9 +73,9 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("SColor", "white");
         param.Add("Shoes", "4030106");
         param.Add("ShColor", "white");
-        param.Add("hat", "null");
-        param.Add("glasses", "null");
-        param.Add("bag", "null");
+        param.Add("Hat", "null");
+        param.Add("Glasses", "null");
+        param.Add("Bag", "null");
 
         Backend.GameData.Insert("USER_CLOTHES", param);
         Debug.Log("PlayerClothesInit");
@@ -102,6 +102,36 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         else
         {
             Debug.Log("PlayerInfoInit() Fail");
+        }
+    }
+
+    //play info 테이블 가져와 로컬에 저장하는 메소드
+    public static void LoadPlayInfo()
+    {
+        BackendReturnObject bro = Backend.GameData.GetMyData("PLAY_INFO", new Where(), 10);
+
+        if (bro.IsSuccess())
+        {
+            var json = bro.GetReturnValuetoJSON();
+
+            try
+            {
+                var json_data = json["rows"][0];
+                ParsingJSON pj = new ParsingJSON();
+                PlayInfo data = pj.ParseBackendData<PlayInfo>(json_data);
+                Debug.Log("퀘스트 진행도:" + data.QuestPreg);
+                PlayerPrefs.SetInt("Wallet", data.Wallet);
+                PlayerPrefs.SetInt("Level", data.Level);
+                PlayerPrefs.SetFloat("NowExp", data.NowExp);
+                PlayerPrefs.SetFloat("MaxExp", data.MaxExp);
+                PlayerPrefs.SetString("QuestPreg", data.QuestPreg);
+                PlayerPrefs.SetString("LastQTime", data.LastQTime.ToString());
+
+            }
+            catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
+            {
+                Debug.Log(ex);
+            }
         }
     }
 

@@ -137,6 +137,7 @@ public class Register : MonoBehaviour
             print("동기방식 회원가입 성공");
             Backend.BMember.CreateNickname(InputName.text); //닉네임(이름) 저장
             Backend.BMember.UpdateCustomEmail(InputEmail.text); //비밀번호 찾기 용 이메일 저장
+            Save_Basic.PlayerInfoInit();    //계정 기본 정보 저장(레벨, 재화 등)
             UserInfoDB();
         }
     }
@@ -197,6 +198,9 @@ public class Register : MonoBehaviour
             //자동로그인 함수 실행
             AutoLogin();
             Debug.Log("동기방식 로그인 성공");
+
+            // play_info를 서버에서 불러와 로컬에 저장
+            Save_Basic.LoadPlayInfo();
 
             if (AccChk())   //계정 정보 만들어져 있으면, 필드로
             {

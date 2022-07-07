@@ -149,7 +149,7 @@ public class MailLoad : MonoBehaviour
         ThisType = TempObject.transform.Find("Type").gameObject;            //타입 지정
         Transform type = ThisType.transform.GetChild(0);
         Debug.Log(type.name);
-        if (type.name.Equals("Quest"))
+        if (type.name.Equals("Quest")) //퀘스트 메일 받기 수정부분
         {
             Quest.QuestChoice();
             Quest.Quest = false;

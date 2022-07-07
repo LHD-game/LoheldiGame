@@ -39,6 +39,11 @@ public class QuestScript : MonoBehaviour
         file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(Load.ButtonPlusNpc) + Load.QuestMail);
+
+        if (Load.QuestIndex == 0)
+        {
+            file.Tutorial();
+        }
         if (Load.LastDay != Load.ToDay)
             QuestCheck();
     }
@@ -47,16 +52,10 @@ public class QuestScript : MonoBehaviour
         Debug.Log("퀘스트 체크 실행");
         if (Load.QuestIndex < 11)
         {
-            if (Load.QuestIndex == 0)
-            {
-                file.Tutorial();
-            }
-            else
-            {
-                MainQuestLoding();
-                if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
-                    ExclamationMarkCreate();
-            }
+            QuestChoice();
+            MainQuestLoding();
+            if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
+                ExclamationMarkCreate();
         }
     }
 
@@ -119,9 +118,7 @@ public class QuestScript : MonoBehaviour
                 break;
             case 4:
                 QnpcName = "Himchan";
-                GameObject gameObject = new GameObject();
-                gameObject.transform.position = new Vector3(65.1100006f, 5.41002083f, -17.799999f);
-                Instantiate(Resources.Load<GameObject>("Animation/PlayerAnimation/bicycle")as GameObject, gameObject.transform.position, Quaternion.Euler(0, 51.4773521f, 0));
+                Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
                 break;
             case 5 :
                 QnpcName = "Yeomi";

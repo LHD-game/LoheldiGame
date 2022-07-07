@@ -74,6 +74,9 @@ public class UIButton : MonoBehaviour
             Chat.NpcChoice();
             NPC.transform.LookAt(targetPositionNPC);
             Player.transform.LookAt(targetPositionPlayer);
+
+            if (chat.bicycleRide.Ride)
+                chat.bicycleRide.RideOn();
         }
         else if (Inter.Door)
         {

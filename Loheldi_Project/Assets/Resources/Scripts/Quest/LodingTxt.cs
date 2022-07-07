@@ -183,6 +183,12 @@ public class LodingTxt : MonoBehaviour
             }
         }
     }
+
+    public void skip()
+    {
+        j = 85;
+        scriptLine();
+    }
     public void NewChat()
     {
         //cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
@@ -417,7 +423,11 @@ public class LodingTxt : MonoBehaviour
             }
             else if (BikeQ)
             {
+                //페이드 인 페이드 아웃하면서 화면에 한시간 후... 띄우기
                 QBikeSpeed = 12;
+                BikeNPC.transform.position = Player.position + new Vector3(10,0,10);
+                Player.position = new Vector3(-16.200098f, 5.09000015f, -62.4001007f);
+                Player.rotation = Player.rotation = Quaternion.Euler(0, 90, 0);
             }
             
             scriptLine();

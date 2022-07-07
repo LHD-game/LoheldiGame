@@ -55,7 +55,9 @@ public class LodingTxt : MonoBehaviour
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
     public GameObject screenShot;
+
     public GameObject Bike;
+    public GameObject BikeNPC;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -89,15 +91,25 @@ public class LodingTxt : MonoBehaviour
     tutorial tu;
     public Interaction Inter;
 
+
+
     int m = 0;                                  //카메라 무빙
     int o = 1;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
+    int QBikeSpeed;
+    bool BikeQ = false;
+    float timer=0.0f;
+    bool bikerotate = false;
+    Vector3 NPCBike;
 
     public QuestDontDestroy DontDestroy;
     private QuestScript Quest;
     public VideoScript video;
     public Drawing Draw;
-    private BicycleRide bicycleRide;
+    public BicycleRide bicycleRide; 
+    public ChangColor badgeList; 
+    [SerializeField]
+    private ParticleSystem hairPs;
 
     private void Awake()
     {
@@ -106,6 +118,7 @@ public class LodingTxt : MonoBehaviour
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
+        badgeList = GameObject.Find("EventSystem").GetComponent<ChangColor>();
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
 
@@ -126,6 +139,55 @@ public class LodingTxt : MonoBehaviour
 
         GameObject.Find("Player").transform.position = DontDestroy.LastPlayerTransform.transform.position;
         Debug.Log("플레이어 위치 설정" + DontDestroy.LastPlayerTransform.transform.position);
+    }
+
+    void FixedUpdate()
+    {
+        
+        if(BikeQ)
+        {
+            timer +=Time.deltaTime;
+            JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f);  //앞 방향으로 밀기 (방향 * 힘)
+
+            
+            if (QBikeSpeed == 3 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
+            {
+                BikeNPC.transform.position = Player.position + NPCBike;
+                BikeNPC.transform.rotation = Player.rotation;
+                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
+            }
+            else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
+                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * (QBikeSpeed +2);
+            
+            if (timer > 5)
+            {
+                Debug.Log(QBikeSpeed);
+                if (bikerotate)
+                {
+                    JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+                    NPCBike = new Vector3 (-4,0,0);
+                    Player.rotation = Quaternion.Euler(0, 90, 0);
+                    bikerotate = false;
+                }
+                else
+                {
+                    JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+                    NPCBike = new Vector3(4, 0, 0);
+                    Player.rotation = Quaternion.Euler(0, -90, 0);
+                    bikerotate = true;
+                }
+                    //Quaternion.Slerp(Player.rotation, Quaternion.Euler(0, Player.rotation.y + 90f, 0), 0.5f);
+                    //Player.Rotate(new Vector3(0, 2f, 0) * Time.deltaTime);
+                    timer = 0;
+                
+            }
+        }
+    }
+
+    public void skip()
+    {
+        j = 85;
+        scriptLine();
     }
     public void NewChat()
     {
@@ -265,7 +327,9 @@ public class LodingTxt : MonoBehaviour
             scriptLine();
         } //컷툰 보이기
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//튜토리얼
-            scriptLine();
+        { 
+            scriptLine(); 
+        }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("video"))//동영상 실행
         {
             movie.SetActive(true);
@@ -277,7 +341,7 @@ public class LodingTxt : MonoBehaviour
         {
             movie.SetActive(false);
             Debug.Log("reset");
-            video.OnResetVideo(); 
+            video.OnResetVideo();
             Chat.SetActive(true);
             scriptLine();
         }
@@ -330,13 +394,51 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Bike"))
         {
+            cuttoon.SetActive(false);
             Chat.SetActive(false);
-            Bike.SetActive(true); 
+            Bike.SetActive(true);
             j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Bicycle"))
-        { 
+        {
+            if (!BikeQ)
+            {
+                NPCBike = new Vector3(-4, 0, 0);
+                bicycleRide.RideOn();
+                BikeNPC = GameObject.Find(Inter.NameNPC);
+                Destroy(GameObject.Find("Qbicycle(Clone)"));
+                Player.rotation = Quaternion.Euler(0, 90, 0);
+                QBikeSpeed = 3;
+                BikeQ = true;
+            }
+            else if (QBikeSpeed == 12)
+            {
+                BikeQ = false; 
+                Vector3 targetPositionNPC;
+                Vector3 targetPositionPlayer;
+                targetPositionNPC = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
+                targetPositionPlayer = new Vector3(BikeNPC.transform.position.x, BikeNPC.transform.position.y, BikeNPC.transform.position.z);
+                BikeNPC.transform.LookAt(targetPositionNPC);
+                Player.transform.LookAt(targetPositionPlayer);
+            }
+            else if (BikeQ)
+            {
+                //페이드 인 페이드 아웃하면서 화면에 한시간 후... 띄우기
+                QBikeSpeed = 12;
+                BikeNPC.transform.position = Player.position + new Vector3(10,0,10);
+                Player.position = new Vector3(-16.200098f, 5.09000015f, -62.4001007f);
+                Player.rotation = Player.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            
+            scriptLine();
 
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("hair"))
+        {
+            Chat.SetActive(false);
+            hairFX(GameObject.Find("Player"));
+            j++;
+            Invoke("clearHair", 1f);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {
@@ -350,17 +452,6 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
             scriptLine();
         }
-        /*else if (data_Dialog[j]["scriptType"].ToString().Equals("i-message"))
-        {
-            ChatWin.SetActive(false);
-            IMessage.SetActive(true);
-        }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("i-messageEnd"))
-        {
-            //ChatWin.SetActive(true);
-            IMessage.SetActive(false);
-            scriptLine();
-        }*/
         else if (data_Dialog[j]["scriptType"].ToString().Equals("train"))
         {
             ChatWin.SetActive(false);
@@ -377,7 +468,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("draw"))
         {
             ChatWin.SetActive(false);
-            Draw.ChangeDrawCamera(); 
+            Draw.ChangeDrawCamera();
             //scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
@@ -647,15 +738,71 @@ public class LodingTxt : MonoBehaviour
         XImage.SetActive(false);
         Button.SetActive(true);
     }
+
+    int Questbadge;
     private void QuestEnd()
     {
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
         DontDestroy.QuestIndex++;
-       // Quest.Load.Quest = true;
-
+        // Quest.Load.Quest = true;
+        //아래가 몇번째 퀘스트인지에 따라서 어느 뱃지를 잠금 해제해야하는지 해놓은거입니다!
+        //저는 풀리는 뱃지의 list번호를 넣어두고 상태창을 열면 for문을 돌려서 setActive(false)하는 식으로
+        //짜뒀었는데 혹시 이거 안필요한거면 말씀해주세요! 수정해두겠습니다.
+        /*switch(DontDestroy.QuestIndex)
+         {
+             case 2:
+                 DontDestroy.badgeList.Add(2);
+                 break;
+             case 3:
+                 DontDestroy.badgeList.Add(9);
+                 break;
+             case 4:
+                 DontDestroy.badgeList.Add(4);
+                 badgeList.Ride.SetActive(true);
+                 break;
+             case 6:
+                 DontDestroy.badgeList.Add(7);
+                 break;
+             case 8:
+                 DontDestroy.badgeList.Add(10);
+                 break;
+             case 9:
+                 DontDestroy.badgeList.Add(5);
+                 break;
+             case 14:
+                 DontDestroy.badgeList.Add(6);
+                 break;
+             case 15:
+                 DontDestroy.badgeList.Add(11);
+                 break;
+             case 16:
+                 DontDestroy.badgeList.Add(8);
+                 break;
+             case 17:
+                 DontDestroy.badgeList.Add(3);
+                 break;
+             case 20:
+                 DontDestroy.badgeList.Add(12);
+                 break;
+         }
+         badgeList.color = true;*/
         DontDestroy.LastDay = DontDestroy.ToDay;
+    }
+    public void hairFX(GameObject go)    //머리 반짝!하는 파티클
+    {
+        Debug.Log("반짝");
+        ParticleSystem newfx = Instantiate(hairPs);
+        newfx.transform.position = go.transform.position+new Vector3(0,10,0);
+        newfx.transform.SetParent(go.transform);
 
+        newfx.Play();
+    }
+
+    void clearHair()
+    {
+        Chat.SetActive(true);
+        scriptLine();
     }
 
 }

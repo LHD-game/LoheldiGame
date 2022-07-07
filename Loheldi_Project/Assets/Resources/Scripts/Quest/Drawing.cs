@@ -386,7 +386,9 @@ public class Drawing : MonoBehaviour
         if (protect == 5 && BikeAnimator[lastButton].GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         { 
             chat.Bike.SetActive(false);
-            chat.scriptLine();
+            chat.Chat.SetActive(true);
+            chat.Line();
+            Debug.Log("in"+protect);
         }
         Debug.Log(protect);
     }

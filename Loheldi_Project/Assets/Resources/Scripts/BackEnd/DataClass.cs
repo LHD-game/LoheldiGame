@@ -19,6 +19,7 @@ public class AccInfo
 {
     public string NICKNAME;
     public DateTime BIRTH;
+    public string PARENTSNO;
 }
 
 public class PlayInfo
@@ -27,8 +28,8 @@ public class PlayInfo
     public int Level;
     public float NowExp;
     public float MaxExp;
-    public string QuestPreg;
-    public DateTime LastQTime;
+    public int QuestPreg;
+    public int LastQTime;
 }
 
 public class MyItem

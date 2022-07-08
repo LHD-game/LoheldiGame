@@ -202,10 +202,10 @@ public class Register : MonoBehaviour
             // play_info를 서버에서 불러와 로컬에 저장
             Save_Basic.LoadPlayInfo();
 
-            if (AccChk())   //계정 정보 만들어져 있으면, 필드로
+            if (AccChk())   //계정 정보 만들어져 있으면, 계정 정보를 로컬에 저장하고, 필드로
             {
+                Save_Basic.LoadAccInfo();  //계정 정보를 로컬에 저장
                 SceneLoader.instance.GotoMainField();
-                //SceneLoader.instance.GotoMail();
             }
             else    //없으면 계정 정보 생성
             {
@@ -256,7 +256,8 @@ public class Register : MonoBehaviour
         }
         else
         {
-            Debug.Log("조회 실패");
+            Debug.Log("조회 실패: " + bro.GetMessage());
+            //todo: 새로고침 팝업 만들기, 서버 관련 문제이므로 문의
         }
         return isOK;
     }

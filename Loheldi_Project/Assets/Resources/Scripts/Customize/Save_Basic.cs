@@ -84,14 +84,15 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
     //계정의 초기 재화, 레벨, 경험치, 최대 경험치량, 퀘스트 진행도, 지난 퀘스트 완료 시각 저장 메소드
     public static void PlayerInfoInit()
     {
+        DateTime today = DateTime.Today;
         Param param = new Param();
         
         param.Add("Wallet", 10);
         param.Add("Level", 1);
         param.Add("NowExp", 0);
         param.Add("MaxExp", 100);
-        param.Add("QuestPreg", "0");
-        param.Add("LastQTime", DateTime.Today);
+        param.Add("QuestPreg", 0);
+        param.Add("LastQTime", today.Day);
 
         var bro = Backend.GameData.Insert("PLAY_INFO", param);
 
@@ -124,8 +125,35 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetInt("Level", data.Level);
                 PlayerPrefs.SetFloat("NowExp", data.NowExp);
                 PlayerPrefs.SetFloat("MaxExp", data.MaxExp);
-                PlayerPrefs.SetString("QuestPreg", data.QuestPreg);
-                PlayerPrefs.SetString("LastQTime", data.LastQTime.ToString());
+                PlayerPrefs.SetInt("QuestPreg", data.QuestPreg);
+                PlayerPrefs.SetInt("LastQTime", data.LastQTime);
+
+            }
+            catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
+            {
+                Debug.Log(ex);
+            }
+        }
+    }
+
+    //acc info 테이블 가져와 로컬에 저장하는 메소드: 닉네임, 생년월일, 보호자인증번호
+    public static void LoadAccInfo()
+    {
+        BackendReturnObject bro = Backend.GameData.GetMyData("ACC_INFO", new Where(), 10);
+
+        if (bro.IsSuccess())
+        {
+            var json = bro.GetReturnValuetoJSON();
+
+            try
+            {
+                var json_data = json["rows"][0];
+                ParsingJSON pj = new ParsingJSON();
+                AccInfo data = pj.ParseBackendData<AccInfo>(json_data);
+
+                PlayerPrefs.SetString("Nickname", data.NICKNAME);
+                PlayerPrefs.SetString("Birth", data.BIRTH.ToString("yyyy년 M월 d일"));
+                PlayerPrefs.SetString("ParentsNo", data.PARENTSNO);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

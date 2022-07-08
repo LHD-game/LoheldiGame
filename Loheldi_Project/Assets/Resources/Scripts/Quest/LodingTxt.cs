@@ -26,6 +26,10 @@ public class LodingTxt : MonoBehaviour
     public GameObject[] SelecButton = new GameObject[5];
     public Text[] SelecButtonTxt = new Text[5];
 
+    public Text videocheckTxT;
+    public string parentscheckTxTNum;
+    public GameObject ErrorWin;
+
     public GameObject Main_UI;
     public GameObject Button;
     public GameObject NPCButtons;
@@ -143,29 +147,18 @@ public class LodingTxt : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        if(BikeQ)
+        if (BikeQ)
         {
-            timer +=Time.deltaTime;
-            JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f);  //앞 방향으로 밀기 (방향 * 힘)
-
-            
-            if (QBikeSpeed == 3 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
-            {
-                BikeNPC.transform.position = Player.position + NPCBike;
-                BikeNPC.transform.rotation = Player.rotation;
-                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
-            }
-            else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
-                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * (QBikeSpeed +2);
-            
+            if(QBikeSpeed != 12)
+            BikeNPC.transform.position = Player.position + NPCBike;
+            BikeNPC.transform.rotation = Player.rotation;
             if (timer > 5)
             {
                 Debug.Log(QBikeSpeed);
                 if (bikerotate)
                 {
                     JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
-                    NPCBike = new Vector3 (-4,0,0);
+                    NPCBike = new Vector3(-4, 0, 0);
                     Player.rotation = Quaternion.Euler(0, 90, 0);
                     bikerotate = false;
                 }
@@ -176,17 +169,29 @@ public class LodingTxt : MonoBehaviour
                     Player.rotation = Quaternion.Euler(0, -90, 0);
                     bikerotate = true;
                 }
-                    //Quaternion.Slerp(Player.rotation, Quaternion.Euler(0, Player.rotation.y + 90f, 0), 0.5f);
-                    //Player.Rotate(new Vector3(0, 2f, 0) * Time.deltaTime);
-                    timer = 0;
-                
+                timer = 0;
             }
+
+            if (QBikeSpeed == 3 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
+            {
+                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
+            }
+            else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
+                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * (QBikeSpeed + 2);
+            timer += Time.deltaTime;
+            JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f); //앞 방향으로 밀기 (방향 * 힘)
+            
+
+
+
+
+
         }
     }
 
     public void skip()
     {
-        j = 85;
+        j = 82;
         scriptLine();
     }
     public void NewChat()
@@ -339,58 +344,16 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
         {
-            movie.SetActive(false);
-            Debug.Log("reset");
-            video.OnResetVideo();
-            Chat.SetActive(true);
-            scriptLine();
-        }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC"))
-        {
-            c = Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
-            RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
-            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 8208);
-            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 3888);
-            Vector3 position = cuttoon.transform.localPosition;
-            if (c == 1)
+            if (videocheckTxT.text.Equals(parentscheckTxTNum))
             {
-                position.x = -778;
-                position.y = -42;
-                cuttoon.transform.Rotate(0, 0, -35);
+                movie.SetActive(false);
+                Chat.SetActive(true);
+                scriptLine();
             }
-            else if (c == 2)
+            else
             {
-                position.x = -2029;
-                position.y = -233;
-                cuttoon.transform.Rotate(0, 0, 35);
+                ErrorWin.SetActive(true);
             }
-            else if (c == 3)
-            {
-                position.x = -1913;
-                position.y = 685;
-                cuttoon.transform.Rotate(0, 0, 0);
-            }
-            else if (c == 4)
-            {
-                position.x = -493;
-                position.y = 685;
-                cuttoon.transform.Rotate(0, 0, 0);
-            }
-            cuttoon.transform.localPosition = position;
-            ChatWin.SetActive(false);
-            Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
-        }   //컷툰 계속 (회전)
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeepC_Over"))  //컷툰 계속 하는거 끝 (회전)
-        {
-            RectTransform rectTran = cuttoon.GetComponent<RectTransform>();
-            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3040);
-            rectTran.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 1440);
-            Vector3 position = cuttoon.transform.localPosition;
-
-            position.x = 0;
-            position.y = 0;
-            cuttoon.transform.localPosition = position;
-            scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Bike"))
         {
@@ -425,9 +388,12 @@ public class LodingTxt : MonoBehaviour
             {
                 //페이드 인 페이드 아웃하면서 화면에 한시간 후... 띄우기
                 QBikeSpeed = 12;
-                BikeNPC.transform.position = Player.position + new Vector3(10,0,10);
-                Player.position = new Vector3(-16.200098f, 5.09000015f, -62.4001007f);
+                Player.position = new Vector3(37, 6, -14);
+                BikeNPC.transform.position = Player.position + new Vector3(10, 0, 10);
+                BikeNPC.transform.rotation = Quaternion.Euler(0, 0, 0);
                 Player.rotation = Player.rotation = Quaternion.Euler(0, 90, 0);
+                bikerotate = true;
+                timer = 0;
             }
             
             scriptLine();
@@ -488,6 +454,33 @@ public class LodingTxt : MonoBehaviour
             //scriptLine();
             Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
         }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("song"))
+        {
+            //웃어봐 송 틀기
+            Invoke("scriptLine", 10f);   //딜레이 후 스크립트 띄움
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("songend"))
+        {
+            //원래 노래로 바꾸기
+            scriptLine();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLife"))
+        {
+            //나에게 편지쓰기
+            MasterOfMtLife.SetActive(true);
+            Chat.SetActive(false);
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLifeEnd"))
+        {
+            MasterOfMtLife.SetActive(false);
+            Chat.SetActive(true);
+            scriptLine();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("songend"))
+        {
+            //원래 노래로 바꾸기
+            scriptLine();
+        }
     }
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
@@ -539,7 +532,7 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
         
 
-        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name","이름");
+        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name","이름"); //로컬값 가져오긴
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))
             Name.text = "이름";
         else
@@ -749,6 +742,8 @@ public class LodingTxt : MonoBehaviour
         //아래가 몇번째 퀘스트인지에 따라서 어느 뱃지를 잠금 해제해야하는지 해놓은거입니다!
         //저는 풀리는 뱃지의 list번호를 넣어두고 상태창을 열면 for문을 돌려서 setActive(false)하는 식으로
         //짜뒀었는데 혹시 이거 안필요한거면 말씀해주세요! 수정해두겠습니다.
+        if(DontDestroy.QuestIndex ==4)
+            badgeList.Ride.SetActive(true);
         /*switch(DontDestroy.QuestIndex)
          {
              case 2:

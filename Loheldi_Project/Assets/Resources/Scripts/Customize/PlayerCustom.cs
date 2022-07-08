@@ -133,7 +133,7 @@ public class PlayerCustom : MonoBehaviour
             }
         }
 
-        Debug.Log("FindTexture: " + item_texture);
+        //Debug.Log("FindTexture: " + item_texture);
 
         return item_texture;
     }

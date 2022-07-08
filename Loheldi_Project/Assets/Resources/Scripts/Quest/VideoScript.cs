@@ -12,20 +12,25 @@ public class VideoScript : MonoBehaviour
     {
         myVideo.SetActive(true);
         videoClip.Play();
-        
+        Invoke("finishButtonActive", 30f);
     }
 
     public void OnPauseVideo()
     {
         myVideo.SetActive(false);
         videoClip.Pause();
+        Invoke("finishButtonActive", 30f);
     }
 
     public void OnResetVideo()
     {
-        myVideo.SetActive(false);
-        videoClip.Stop();
-        
+        videoClip.time = 0f;
+        videoClip.playbackSpeed = 1f;
     }
 
+    public GameObject finishButton;
+    void finishButtonActive()
+    {
+        finishButton.SetActive(true);
+    }
 }

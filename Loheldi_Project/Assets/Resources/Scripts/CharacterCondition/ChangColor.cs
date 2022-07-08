@@ -7,7 +7,7 @@ public class ChangColor : MonoBehaviour
 {
     public static bool color;
     public static int k;
-
+    public GameObject Ride;
     public static GameObject[] badge;
     //public static Sprite[] badgeList;
     //static  Image spriteR;
@@ -19,7 +19,7 @@ public class ChangColor : MonoBehaviour
     }
     // Update is called once per frame
 
-    public static void PopUp()
+    public void PopUp()
     {
         if (color)
         {

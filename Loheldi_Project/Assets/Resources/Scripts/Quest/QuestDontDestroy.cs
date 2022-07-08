@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 public class QuestDontDestroy : MonoBehaviour
 {
 
@@ -36,7 +37,7 @@ public class QuestDontDestroy : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
             LastPlayerTransform.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
-        //QuestIndex=0;    //나중에 서버랑 연동해서 초기값 0, 그 뒤값을 서버에 저장하고 다시 불러오는 식으로
+        QuestIndex = Int32.Parse(PlayerPrefs.GetString("QuestPreg"));  //로컬값 가져오기
         DontDestroyOnLoad(this.gameObject);
     }
     public void OnEnable()

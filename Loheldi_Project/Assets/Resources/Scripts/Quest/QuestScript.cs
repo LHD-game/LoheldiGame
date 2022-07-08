@@ -44,7 +44,7 @@ public class QuestScript : MonoBehaviour
         {
             file.Tutorial();
         }
-        if (Load.LastDay != Load.ToDay)
+        else if (Load.LastDay != Load.ToDay)
             QuestCheck();
     }
     private void QuestCheck()

@@ -37,7 +37,7 @@ public class QuestDontDestroy : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
             LastPlayerTransform.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
-        QuestIndex = Int32.Parse(PlayerPrefs.GetString("QuestPreg"));  //로컬값 가져오기
+        QuestIndex = PlayerPrefs.GetInt("QuestPreg");  //로컬값 가져오기
         DontDestroyOnLoad(this.gameObject);
     }
     public void OnEnable()

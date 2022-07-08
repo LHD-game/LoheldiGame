@@ -47,5 +47,6 @@ public class CategoryControl : MonoBehaviour
             Text txt = item_name.GetComponent<Text>();
             txt.text = dialog[i][CommonField.nName].ToString();
         }
+
     }
 }

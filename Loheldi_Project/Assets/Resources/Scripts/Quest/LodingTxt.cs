@@ -192,6 +192,7 @@ public class LodingTxt : MonoBehaviour
     public void skip()
     {
         j = 82;
+        move = false;
         scriptLine();
     }
     public void NewChat()
@@ -464,6 +465,11 @@ public class LodingTxt : MonoBehaviour
             //원래 노래로 바꾸기
             scriptLine();
         }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("songend"))
+        {
+            //원래 노래로 바꾸기
+            scriptLine();
+        }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLife"))
         {
             //나에게 편지쓰기
@@ -476,11 +482,25 @@ public class LodingTxt : MonoBehaviour
             Chat.SetActive(true);
             scriptLine();
         }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("songend"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("AppleTree"))
         {
-            //원래 노래로 바꾸기
+            AppleTree.SetActive(true);
+            Chat.SetActive(true);
             scriptLine();
         }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("AppleTreeEnd"))
+        {
+            MasterOfMtLife.SetActive(false);
+            Chat.SetActive(true);
+            scriptLine();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("MakeAppleTree"))
+        {
+            //사과 나무 프리펩 쩌구저꾸저
+            Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
+            scriptLine();
+        }
+        
     }
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {

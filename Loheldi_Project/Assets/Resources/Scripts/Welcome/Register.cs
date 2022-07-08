@@ -256,8 +256,9 @@ public class Register : MonoBehaviour
         }
         else
         {
-            Debug.Log("조회 실패: " + bro.GetMessage());
-            //todo: 새로고침 팝업 만들기, 서버 관련 문제이므로 문의
+            Debug.Log("조회 실패" + bro.GetMessage());
+            //todo: 새로고침 팝업 만들기, 403 fobidden. 잦은 요청 트래픽으로 인한 오류. 5분 대기 후 다시 접속하면 해결 된다.
+
         }
         return isOK;
     }

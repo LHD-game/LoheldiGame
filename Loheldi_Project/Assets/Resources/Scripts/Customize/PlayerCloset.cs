@@ -125,51 +125,51 @@ public class PlayerCloset : MonoBehaviour
         playerPrefab = GameObject.Find("Player");
         Transform parents_folder = playerPrefab.transform.Find("player_body");
         Debug.Log(NowSettings.u_hat_id);
+        //hat init
+        Transform hat_folder = parents_folder.transform.Find("Hat");
+        int hat_cnt = hat_folder.childCount;
+        for (int i = 0; i < hat_cnt; i++)
+        {
+            hat_folder.GetChild(i).gameObject.SetActive(false);
+        }
         //hat의 id가 null이 아닐 경우,
         if (!NowSettings.u_hat_id.Equals("null"))
         {
-            Debug.Log("hat");
-            
-            Transform hat_folder = parents_folder.transform.Find("Hat");
-            int hat_cnt = hat_folder.childCount;
-
-                for(int i=1; i < hat_cnt; i++)
-                {
-                    hat_folder.GetChild(i).gameObject.SetActive(false);
-                }
-                Transform active_hat = hat_folder.Find(NowSettings.u_hat_id+"_hat");
-                active_hat.gameObject.SetActive(true);
+            Transform active_hat = hat_folder.Find(NowSettings.u_hat_id+"_hat");
+            active_hat.gameObject.SetActive(true);
+        }
+        //glasses
+        Transform glasses_folder = parents_folder.transform.Find("Glasses");
+        int glasses_cnt = glasses_folder.childCount;
+        for (int i = 0; i < glasses_cnt; i++)
+        {
+            glasses_folder.GetChild(i).gameObject.SetActive(false);
         }
         if (!NowSettings.u_glasses_id.Equals("null"))
         {
             Debug.Log("glasses");
 
-            Transform glasses_folder = parents_folder.transform.Find("Glasses");
-            int glasses_cnt = glasses_folder.childCount;
-
-            for (int i = 1; i < glasses_cnt; i++)
-            {
-                glasses_folder.GetChild(i).gameObject.SetActive(false);
-            }
-            Transform active_glasses = glasses_folder.Find(NowSettings.u_hat_id + "_glasses");
+            Transform active_glasses = glasses_folder.Find(NowSettings.u_glasses_id + "_glasses");
             active_glasses.gameObject.SetActive(true);
+        }
+        //bag
+        Transform bag_folder = parents_folder.transform.Find("Bag");
+        int bag_cnt = bag_folder.childCount;
+
+        for (int i = 0; i < bag_cnt; i++)
+        {
+            bag_folder.GetChild(i).gameObject.SetActive(false);
         }
         if (!NowSettings.u_bag_id.Equals("null"))
         {
             Debug.Log("bag");
 
-            Transform bag_folder = parents_folder.transform.Find("Bag");
-            int bag_cnt = bag_folder.childCount;
-
-            for (int i = 1; i < bag_cnt; i++)
-            {
-                bag_folder.GetChild(i).gameObject.SetActive(false);
-            }
-            Transform active_bag = bag_folder.Find(NowSettings.u_hat_id + "_bag");
+            Transform active_bag = bag_folder.Find(NowSettings.u_bag_id + "_bag");
             active_bag.gameObject.SetActive(true);
         }
 
     }
+
 
     //서버 보유 아이템 목록에서 아이템의 Texture 조회 메소드
     protected string FindTexture(string item_code)

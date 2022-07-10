@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class InvenCategory : MonoBehaviour
 {
+    GridLayoutGroup csf;
     //category
     [SerializeField]
     private GameObject c_super;
@@ -115,6 +116,10 @@ public class InvenCategory : MonoBehaviour
                 //create caltalog box
                 child = Instantiate(itemBtn);    //create itemBtn instance
                 child.transform.SetParent(category.transform);  //move instance: child
+                                                                //아이템 박스 크기 재설정
+                RectTransform rt = child.GetComponent<RectTransform>();
+                rt.localScale = new Vector3(1f, 1f, 1f);
+
                 itemObject.Add(child);
             }
             else    //아니라면 기존 객체 재활용
@@ -158,8 +163,10 @@ public class InvenCategory : MonoBehaviour
                     break;
                 }
             }
-            
 
+            csf = category.GetComponent<GridLayoutGroup>();
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)csf.transform);
+            
 
         }
     }

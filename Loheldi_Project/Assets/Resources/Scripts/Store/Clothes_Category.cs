@@ -110,6 +110,10 @@ public class Clothes_Category : StoreCategoryControl
                 //create caltalog box
                 child = Instantiate(itemBtn);    //create itemBtn instance
                 child.transform.SetParent(category.transform);  //move instance: child
+                //아이템 박스 크기 재설정
+                RectTransform rt = child.GetComponent<RectTransform>();
+                rt.localScale = new Vector3(1f, 1f, 1f);
+
                 itemObject.Add(child);
             }
             else    //아니라면 기존 객체 재활용

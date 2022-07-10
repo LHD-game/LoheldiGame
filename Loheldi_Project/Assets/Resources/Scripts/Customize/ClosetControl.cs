@@ -112,4 +112,22 @@ public class ClosetControl : PlayerCloset
             NowSettings.u_shoes_color = color;
         }
     }
+
+    //악세서리 선택 안 함 버튼
+    public void selectAccNull(string item_type)
+    {
+        if (item_type.Equals(CommonField.it_hat))   //item_type = hat
+        {
+            NowSettings.u_hat_id = "null";
+        }
+        else if (item_type.Equals(CommonField.it_glasses))  //item_type = glasses
+        {
+            NowSettings.u_glasses_id = "null";
+        }
+        else if (item_type.Equals(CommonField.it_bag))  //item_type = bag
+        {
+            NowSettings.u_bag_id = "null";
+        }
+    }
+
 }

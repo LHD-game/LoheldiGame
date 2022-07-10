@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CategoryControl : MonoBehaviour
 {
+    GridLayoutGroup csf;
+
     GameObject itemBtn;
 
     //---init list---//
@@ -35,7 +37,12 @@ public class CategoryControl : MonoBehaviour
         {
             //create caltalog box
             GameObject child = Instantiate(itemBtn);    //create itemBtn instance
+
             child.transform.SetParent(category.transform);  //move instance: child
+
+            //아이템 박스 크기 재설정
+            RectTransform rt = child.GetComponent<RectTransform>();
+            rt.localScale = new Vector3(1f, 1f, 1f);
 
             //change catalog box img
             GameObject item_img = child.transform.Find("ItemImage").gameObject;
@@ -47,6 +54,9 @@ public class CategoryControl : MonoBehaviour
             Text txt = item_name.GetComponent<Text>();
             txt.text = dialog[i][CommonField.nName].ToString();
         }
+        
+        csf = category.GetComponent<GridLayoutGroup>();
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)csf.transform);
 
     }
 }

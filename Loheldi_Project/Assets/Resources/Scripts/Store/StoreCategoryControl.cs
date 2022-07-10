@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StoreCategoryControl : MonoBehaviour
 {
+    GridLayoutGroup csf;
     protected GameObject itemBtn;
     //---init list---//
     //itemTheme 별로 모아서 저장
@@ -37,6 +38,10 @@ public class StoreCategoryControl : MonoBehaviour
             GameObject child = Instantiate(itemBtn);    //create itemBtn instance
             child.transform.SetParent(category.transform);  //move instance: child
 
+            //아이템 박스 크기 재설정
+            RectTransform rt = child.GetComponent<RectTransform>();
+            rt.localScale = new Vector3(1f, 1f, 1f);
+
             //change catalog box img
             GameObject item_img = child.transform.Find("ItemImg").gameObject;
             Image img = item_img.GetComponent<Image>();
@@ -59,6 +64,9 @@ public class StoreCategoryControl : MonoBehaviour
             GameObject item_price = price_parent.transform.Find("CostTxt").gameObject;
             Text price_txt = item_price.GetComponent<Text>();
             price_txt.text = dialog[i]["Price"].ToString();
+
+            csf = category.GetComponent<GridLayoutGroup>();
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)csf.transform);
         }
     }
 }

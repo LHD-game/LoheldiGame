@@ -74,7 +74,7 @@ public class MainGameManager : MonoBehaviour
         if (NowExp >= MaxExp)
         {
             SoundManager.GetComponent<SoundEffect>().Sound("LevelUp");
-            LevelUp();
+            //LevelUp();
         }
         if (tempNowExp != NowExp || tempMoney != Money)
         {

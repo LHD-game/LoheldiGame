@@ -21,17 +21,17 @@ public class tutorial : MonoBehaviour
         Debug.Log("Æ©Åä¸®¾ó ½ÇÁP¤·22");
         Debug.Log("Æ©Åäi=" + tutoi);
 
-        Image tutoblack = chat.block.GetComponent<Image>();
-        if (tutoi < 7)
-            tutoblack.sprite = chat.cuttoonImageList[4 + tutoi];
-        chat.color.a = 1f;
-        chat.block.GetComponent<Image>().color = chat.color;
+        //Image tutoblack = chat.block.GetComponent<Image>();
+        //if (tutoi < 7)
+            //tutoblack.sprite = chat.cuttoonImageList[4 + tutoi];
+        //chat.color.a = 1f;
+        //chat.block.GetComponent<Image>().color = chat.color;
         if (!chat.tuto)
             chat.ChatWin.SetActive(false);
         //chat.j--;
         if(chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_4")&& !chat.DontDestroy.tutorialLoading)
         {
-            tutoblack.sprite = chat.cuttoonImageList[4];
+            //tutoblack.sprite = chat.cuttoonImageList[4];
             chat.Main_UI.SetActive(true);
             chat.block.transform.Find("Button8").gameObject.SetActive(true);
         }

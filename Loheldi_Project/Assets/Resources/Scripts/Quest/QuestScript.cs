@@ -43,6 +43,7 @@ public class QuestScript : MonoBehaviour
         if (Load.QuestIndex == 0)
         {
             file.Tutorial();
+            QuestCheck();
         }
         else if (Load.LastDay != Load.ToDay)
             QuestCheck();
@@ -50,7 +51,7 @@ public class QuestScript : MonoBehaviour
     private void QuestCheck()
     {
         Debug.Log("퀘스트 체크 실행");
-        if (Load.QuestIndex < 11)
+        if (Load.QuestIndex < 21)
         {
             QuestChoice();
             MainQuestLoding();
@@ -74,9 +75,9 @@ public class QuestScript : MonoBehaviour
     private void GiveQuest()
     {
         Load.QuestMail = true;
-        string title = Quest_Mail[Load.QuestIndex - 1]["title"].ToString();                      
-        string detail = Quest_Mail[Load.QuestIndex - 1]["content"].ToString();
-        string sent = Quest_Mail[Load.QuestIndex - 1]["author"].ToString();
+        string title = Quest_Mail[Load.QuestIndex]["title"].ToString();                      
+        string detail = Quest_Mail[Load.QuestIndex]["content"].ToString();
+        string sent = Quest_Mail[Load.QuestIndex]["author"].ToString();
 
         GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
 
@@ -106,14 +107,13 @@ public class QuestScript : MonoBehaviour
         string QnpcName="";
         switch (Load.QuestIndex)
         {
-            case 1:
+            case 1: case 6: case 11: case 16:
                 QnpcName = "Hami";
                 break;
-            case 2:
+            case 2: case 7: case 12: case 14: case 17:
                 QnpcName = "Himchan";
-                chat.video.videoClip.clip = chat.video.VideoClip[0];
                 break;
-            case 3:
+            case 3: case 10: case 13:
                 QnpcName = "Suho";
                 break;
             case 4:
@@ -123,21 +123,19 @@ public class QuestScript : MonoBehaviour
             case 5 :
                 QnpcName = "Yeomi";
                 break;
-            case 6:
-                QnpcName = "Hami";
-                break;
-            case 7:
-                QnpcName = "Himchan";
-                chat.video.videoClip.clip = chat.video.VideoClip[1];
-                break;
             case 8:
                 QnpcName = "Mei";
                 break;
             case 9:
                 QnpcName = "Himchan";
                 break;
-            case 10:
-                QnpcName = "Suho";
+            case 15:
+                QnpcName = "Yomi";
+                break;
+            case 18:
+                QnpcName = "Nari";
+                break;
+                default:
                 break;
         }
         //NpcQuest = GameObject.Find(QnpcName);

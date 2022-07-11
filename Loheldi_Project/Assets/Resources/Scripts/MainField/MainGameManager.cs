@@ -74,7 +74,7 @@ public class MainGameManager : MonoBehaviour
     void Update()
     {
         moneyText.text = Money.ToString();
-        NowExpBarleftText.text = NowExp.ToString("F0");                      //설명설명
+/*        NowExpBarleftText.text = NowExp.ToString("F0");                      //설명설명
         NowExpBarrightText.text = MaxExp.ToString("F0");                  //설명설명설명
         LevelText.text = Level.ToString();
 
@@ -93,7 +93,7 @@ public class MainGameManager : MonoBehaviour
             //ParameterUpload();
             Debug.Log("ParameterUpdate");
         }
-        tempNowExp = NowExp;
+        tempNowExp = NowExp;*/
     }
 
     void LevelUp()

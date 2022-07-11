@@ -126,6 +126,7 @@ public class LodingTxt : MonoBehaviour
     string PlayerName;
     private void Awake()
     {
+        Player.transform.position = DontDestroy.LastPlayerTransform.transform.position;
         Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
         video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
@@ -150,8 +151,8 @@ public class LodingTxt : MonoBehaviour
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
 
-        GameObject.Find("Player").transform.position = DontDestroy.LastPlayerTransform.transform.position;
-        Debug.Log("플레이어 위치 설정" + DontDestroy.LastPlayerTransform.transform.position);
+        parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
+        PlayerName = PlayerPrefs.GetString("Nickname");
     }
 
     void FixedUpdate()
@@ -161,32 +162,54 @@ public class LodingTxt : MonoBehaviour
             if(QBikeSpeed != 12)
             BikeNPC.transform.position = Player.position + NPCBike;
             BikeNPC.transform.rotation = Player.rotation;
-            if (timer > 5)
-            {
-                Debug.Log(QBikeSpeed);
-                if (bikerotate)
-                {
-                    JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
-                    NPCBike = new Vector3(-4, 0, 0);
-                    Player.rotation = Quaternion.Euler(0, 90, 0);
-                    bikerotate = false;
-                }
-                else
-                {
-                    JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
-                    NPCBike = new Vector3(4, 0, 0);
-                    Player.rotation = Quaternion.Euler(0, -90, 0);
-                    bikerotate = true;
-                }
-                timer = 0;
-            }
+            
 
             if (QBikeSpeed == 3 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
             {
+                if (timer > 5)
+                {
+                    Debug.Log(QBikeSpeed);
+                    if (bikerotate)
+                    {
+                        JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+                        NPCBike = new Vector3(-4, 0, 0);
+                        Player.rotation = Quaternion.Euler(0, 90, 0);
+                        bikerotate = false;
+                    }
+                    else
+                    {
+                        JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+                        NPCBike = new Vector3(4, 0, 0);
+                        Player.rotation = Quaternion.Euler(0, -90, 0);
+                        bikerotate = true;
+                    }
+                    timer = 0;
+                }
                 JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
             }
             else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
-                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * (QBikeSpeed + 2);
+            {
+                if (timer > 2)
+                {
+                    Debug.Log(QBikeSpeed);
+                    if (bikerotate)
+                    {
+                        JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+                        NPCBike = new Vector3(-4, 0, 0);
+                        Player.rotation = Quaternion.Euler(0, 90, 0);
+                        bikerotate = false;
+                    }
+                    else
+                    {
+                        JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+                        NPCBike = new Vector3(4, 0, 0);
+                        Player.rotation = Quaternion.Euler(0, -90, 0);
+                        bikerotate = true;
+                    }
+                    timer = 0;
+                }
+                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * (QBikeSpeed + 2); 
+            }
             timer += Time.deltaTime;
             JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f); //앞 방향으로 밀기 (방향 * 힘)
             
@@ -206,15 +229,7 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
-        //cuttoonImageList = Resources.LoadAll<Sprite>(cuttoonFileAdress);
-        //Debug.Log("이미지 리스트 갯수" + cuttoonImageList.Length);
-        //Debug.Log("이미지 스프라이트 오브젝트: " + CCImage.name);
-        //Debug.Log("컷툰 파일 주소:"+ cuttoonFileAdress);
-        //Debug.Log("Num=" + Num);
-        /*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
-                    DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
-        PlayerName=PlayerPrefs.GetString("Nickname");
         Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
@@ -358,7 +373,10 @@ public class LodingTxt : MonoBehaviour
         {
             if (videocheckTxT.text.Equals(parentscheckTxTNum))
             {
+                GameObject.Find("checkUI").SetActive(false);
+                videocheckTxT.text = "";
                 movie.SetActive(false);
+                video.OnFinishVideo();
                 Chat.SetActive(true);
                 scriptLine();
             }
@@ -826,46 +844,10 @@ public class LodingTxt : MonoBehaviour
         //아래가 몇번째 퀘스트인지에 따라서 어느 뱃지를 잠금 해제해야하는지 해놓은거입니다!
         //저는 풀리는 뱃지의 list번호를 넣어두고 상태창을 열면 for문을 돌려서 setActive(false)하는 식으로
         //짜뒀었는데 혹시 이거 안필요한거면 말씀해주세요! 수정해두겠습니다.
-        if(DontDestroy.QuestIndex ==4)
+        if (DontDestroy.QuestIndex ==4)
             badgeList.Ride.SetActive(true);
-        /*switch(DontDestroy.QuestIndex)
-         {
-             case 2:
-                 DontDestroy.badgeList.Add(2);
-                 break;
-             case 3:
-                 DontDestroy.badgeList.Add(9);
-                 break;
-             case 4:
-                 DontDestroy.badgeList.Add(4);
-                 badgeList.Ride.SetActive(true);
-                 break;
-             case 6:
-                 DontDestroy.badgeList.Add(7);
-                 break;
-             case 8:
-                 DontDestroy.badgeList.Add(10);
-                 break;
-             case 9:
-                 DontDestroy.badgeList.Add(5);
-                 break;
-             case 14:
-                 DontDestroy.badgeList.Add(6);
-                 break;
-             case 15:
-                 DontDestroy.badgeList.Add(11);
-                 break;
-             case 16:
-                 DontDestroy.badgeList.Add(8);
-                 break;
-             case 17:
-                 DontDestroy.badgeList.Add(3);
-                 break;
-             case 20:
-                 DontDestroy.badgeList.Add(12);
-                 break;
-         }
-         badgeList.color = true;*/
+        PlayerPrefs.SetInt("QuestPreg", DontDestroy.QuestIndex + 1);
+        PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
         DontDestroy.LastDay = DontDestroy.ToDay;
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클

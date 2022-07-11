@@ -43,7 +43,6 @@ public class QuestScript : MonoBehaviour
         if (Load.QuestIndex == 0)
         {
             file.Tutorial();
-            QuestCheck();
         }
         else if (Load.LastDay != Load.ToDay)
             QuestCheck();

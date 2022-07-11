@@ -40,8 +40,8 @@ public class Gacha : MonoBehaviour
             }
         }
 
-        int x = 1490;
-        int y = 1140;
+        int x = 745;
+        int y = 570;
 
         for (int i = 0; i < GachaTime; i++)  //아이템 이름들의 위치 지정
         {
@@ -50,27 +50,27 @@ public class Gacha : MonoBehaviour
             Debug.Log(gachaTable[k]["IName"]);
             if (GachaTime == 1)
             {
-                y = 1020;
+                y = 510;
             }
             else if (GachaTime == 5)
             {
-                y = y - 120;
+                y = y - 60;
             }
             else if (GachaTime == 10)
             {
                 if (i <= 4)
                 {
-                    x = 1140;
+                    x = 570;
                 }
                 else if (i > 4)
                 {
                     if (i == 5)
                     {
-                        y = 1140;
+                        y = 570;
                     }
-                    x = 1840;
+                    x = 920;
                 }
-                y = y - 120;
+                y = y - 60;
             }
             CreateText(new Vector3(x, y, 0), gachaTable[k]["IName"].ToString());  //아이템 이름 출력
             this.GetComponent<GachaMachineMovement>().LeverSpin();

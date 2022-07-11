@@ -115,6 +115,15 @@ public class LodingTxt : MonoBehaviour
     [SerializeField]
     private ParticleSystem hairPs;
 
+    public Animator JumpAnimator;
+    public Animator NPCJumpAnimator;
+    public Animator JumpAnimatorRope;
+    public Animator NPCJumpAnimatorRope;
+    public GameObject PlayerRope;
+    public GameObject NPCRope;
+
+    public Animator CleanT;
+    string PlayerName;
     private void Awake()
     {
         Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
@@ -205,6 +214,7 @@ public class LodingTxt : MonoBehaviour
         /*        if (DontDestroy.QuestMail)    //이거 없어도 될듯 뭐하는 애지 (아마 순간이동 할 떄 쓰이는 애 근데 이거 없어도 알아서 잘 하는데..? 이거 이미 0으로 할당 해두고 진행시킴. 혹시 모르니 남겨둬야지)
                     DontDestroy.QuestSubNum = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(0, data_Dialog[j]["scriptNumber"].ToString().IndexOf("_"))); //앞쪽 퀘스트 넘버만 자르기*/
         //if (SceneManager.GetActiveScene().name == "MainField")
+        PlayerName=PlayerPrefs.GetString("Nickname");
         Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
@@ -239,32 +249,32 @@ public class LodingTxt : MonoBehaviour
                 switch (o)
                 {
                     case 3:
-                        Player.transform.position = new Vector3(-145.135605f, 12.609005f, -32.4478226f);
+                        Player.transform.position = new Vector3(-145.300003f, 12.6158857f, -21.80023f);
                         break;
                     case 4:
                         if (DontDestroy.tutorialLoading)
                             Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        Player.transform.position = new Vector3(45.25f, 5.2f, 49.5f);
+                        Player.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
                         DontDestroy.tutorialLoading = false;
                         break;
                     case 5:
-                        Player.transform.position = new Vector3(102.449997f, 16.0599995f, 163.380005f);
+                        Player.transform.position = new Vector3(103.51342f, 15.7201061f, 165.103439f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 6:
-                        Player.transform.position = new Vector3(-43.25f, 5.78999996f, 81.6999969f);
+                        Player.transform.position = new Vector3(-44.7900009f, 5.319489f, 79.5400085f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 7:
-                        Player.transform.position = new Vector3(273.381134f, 5.6500001f, 100.656158f);
+                        Player.transform.position = new Vector3(288.572632f, 5.31948948f, 98.3887405f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 8:
-                        Player.transform.position = new Vector3(257.940002f, 5.6500001f, 100.656158f);
+                        Player.transform.position = new Vector3(255, 5.31949139f, 101.299973f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 9:
-                        Player.transform.position = new Vector3(71.1548233f, 5.98000002f, -20.8635712f);
+                        Player.transform.position = new Vector3(69.9799881f, 5.67073011f, -16.2484417f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 10:
@@ -272,11 +282,11 @@ public class LodingTxt : MonoBehaviour
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 11:
-                        Player.transform.position = new Vector3(327.879333f, 5.67999983f, 19.1537189f);
+                        Player.transform.position = new Vector3(317.426666f, 5.67073059f, 25.669136f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 12:
-                        Player.transform.position = new Vector3(46.8151436f, 5.57000017f, 55.7096672f);
+                        Player.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     default:
@@ -338,6 +348,7 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("video"))//동영상 실행
         {
+            video.videoClip.clip = video.VideoClip[Int32.Parse(data_Dialog[j]["cuttoon"].ToString())];
             movie.SetActive(true);
             video.OnPlayVideo();
             Chat.SetActive(false);
@@ -465,10 +476,17 @@ public class LodingTxt : MonoBehaviour
             //원래 노래로 바꾸기
             scriptLine();
         }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("songend"))
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("JumpRope"))
         {
-            //원래 노래로 바꾸기
+            //줄넘기
+            NPCJumpAnimator.SetBool("JumpRope", true);
+            Invoke("scriptLine", 2f);
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("JumpRopeEnd"))
+        {
+            //줄넘기
             scriptLine();
+            NPCJumpAnimator.SetBool("JumpRope", false);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLife"))
         {
@@ -551,10 +569,10 @@ public class LodingTxt : MonoBehaviour
         if (ChatWin.activeSelf == false)
             ChatWin.SetActive(true);
         
-
-        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name","이름"); //로컬값 가져오긴
+        
+        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName); //로컬값 가져오긴
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))
-            Name.text = "이름";
+            Name.text = PlayerName;
         else
             Name.text = data_Dialog[j]["name"].ToString();
         

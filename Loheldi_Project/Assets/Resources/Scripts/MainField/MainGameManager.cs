@@ -29,7 +29,19 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
-        var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
+        BackendReturnObject bro = Backend.GameData.GetMyData("PLAY_INFO", new Where(), 10);
+        var json = bro.GetReturnValuetoJSON();
+        var json_data = json["rows"][0];
+        ParsingJSON pj = new ParsingJSON();
+        PlayInfo data = pj.ParseBackendData<PlayInfo>(json_data);
+
+        Money = PlayerPrefs.GetInt("Wallet", data.Wallet);
+        Level = PlayerPrefs.GetInt("Level", data.Level);
+        NowExp = PlayerPrefs.GetFloat("NowExp", data.NowExp);
+        MaxExp = PlayerPrefs.GetFloat("MaxExp", data.MaxExp);
+        Debug.Log(data.MaxExp);
+        //서버에 연동할때 쓰던것 1
+        /*var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
         JsonData rows = bro.GetReturnValuetoJSON()["rows"];
 
         QuestPreg = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>().QuestIndex;
@@ -56,8 +68,7 @@ public class MainGameManager : MonoBehaviour
                 ParameterUpload();
             }
             
-        }
-        
+        }*/
     }
 
     void Update()
@@ -75,10 +86,12 @@ public class MainGameManager : MonoBehaviour
         {
             SoundManager.GetComponent<SoundEffect>().Sound("LevelUp");
             //LevelUp();
+            Debug.Log("LevelUP!");
         }
         if (tempNowExp != NowExp || tempMoney != Money)
         {
             //ParameterUpload();
+            Debug.Log("ParameterUpdate");
         }
         tempNowExp = NowExp;
     }

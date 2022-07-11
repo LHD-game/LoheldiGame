@@ -479,14 +479,60 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("JumpRope"))
         {
             //줄넘기
-            NPCJumpAnimator.SetBool("JumpRope", true);
+            if (data_Dialog[j]["cuttoon"].ToString().Equals("0"))
+            {
+                GameObject.Find("Himchan").transform.rotation = Quaternion.Euler(0, -90, 0);
+                NPCJumpAnimator.SetBool("JumpRope", true);
+                NPCJumpAnimatorRope.SetBool("JumpRope", true);
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("1"))
+            {
+                JumpAnimator.SetBool("JumpRope", true);
+                JumpAnimatorRope.SetBool("JumpRope", true);
+                JumpAnimator.speed = 0.3f;
+                JumpAnimatorRope.speed = 0.3f;
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("2"))
+            {
+                JumpAnimator.speed = 1f; 
+                JumpAnimatorRope.speed = 1f;
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("3"))
+            {
+                NPCJumpAnimator.SetBool("JumpRopeSide", true);
+                NPCJumpAnimatorRope.SetBool("JumpRopeSide", true);
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("4"))
+            {
+                NPCRope.transform.rotation = Quaternion.Euler(-180, 0, -180);
+                NPCJumpAnimator.SetBool("JumpRope", true);
+                NPCJumpAnimatorRope.SetBool("JumpRope", true);
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("5"))
+            {
+                NPCRope.transform.rotation = Quaternion.Euler(-180, 180, -180);
+                NPCJumpAnimator.SetBool("JumpRope", true);
+                NPCJumpAnimatorRope.SetBool("JumpRope", true);
+                NPCJumpAnimatorRope.speed = 2f;
+            }
             Invoke("scriptLine", 2f);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("JumpRopeEnd"))
         {
             //줄넘기
-            scriptLine();
             NPCJumpAnimator.SetBool("JumpRope", false);
+            NPCJumpAnimator.SetBool("JumpRopeSide", false);
+            NPCJumpAnimator.SetBool("JumpRopeBack", false);
+            NPCJumpAnimatorRope.SetBool("JumpRope", false);
+            NPCJumpAnimatorRope.SetBool("JumpRopeSide", false);
+            NPCJumpAnimatorRope.SetBool("JumpRopeBack", false);
+            JumpAnimator.SetBool("JumpRope", false);
+            JumpAnimator.SetBool("JumpRopeSide", false);
+            JumpAnimator.SetBool("JumpRopeBack", false);
+            JumpAnimatorRope.SetBool("JumpRope", false);
+            JumpAnimatorRope.SetBool("JumpRopeSide", false);
+            JumpAnimatorRope.SetBool("JumpRopeBack", false);
+            scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLife"))
         {

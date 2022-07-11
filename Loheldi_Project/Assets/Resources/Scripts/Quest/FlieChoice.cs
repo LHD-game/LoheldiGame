@@ -42,10 +42,7 @@ public class FlieChoice : MonoBehaviour
     }
     public void Quest()  //컷툰 등장하는 퀘스트일 때, 컷툰 이미지 불러오기
     {
-        if (chat.DontDestroy.QuestIndex < 11)
-            chat.FileAdress = "Scripts/Quest/script";
-        else
-            chat.FileAdress = "Scripts/Quest/script1";
+        chat.FileAdress = "Scripts/Quest/script";
         chat.Num = chat.DontDestroy.QuestIndex + "_1";
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex);
         chat.NewChat();

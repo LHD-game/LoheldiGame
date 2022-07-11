@@ -25,7 +25,7 @@ public class HouseTutorial : MonoBehaviour
         Debug.Log("Æ©Åä¸®¾ó ½ÇÁP¤·22");
         QDD.tutorialLoading = true;
 
-        GameObject tutoblack = GameObject.Find("tutoBlack");
+        GameObject tutoblack = tutogameobject.transform.GetChild(0).gameObject;
         tutoblack.SetActive(true);
         //color.a = 0f;
         //tutoblack.GetComponent<Image>().color = color;

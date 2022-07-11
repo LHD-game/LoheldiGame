@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 4297483124712326075}
   - component: {fileID: 3218153558855285496}
   - component: {fileID: 729212927219009207}
-  - component: {fileID: 4171311427382624224}
   m_Layer: 0
   m_Name: FurnitureSet_10_v_02_Door_L
-  m_TagString: Untagged
+  m_TagString: ChangeableFurniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,20 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4171311427382624224
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292047931396953784}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2704508429244154030, guid: 4702e838e945c0b4288c5125844686c6, type: 3}
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &7241754518939254723
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,10 +92,9 @@ GameObject:
   - component: {fileID: 6737679525644282189}
   - component: {fileID: 2750514926831948103}
   - component: {fileID: 1429469343443220095}
-  - component: {fileID: 7778168802958752106}
   m_Layer: 0
   m_Name: FurnitureSet_10_v_02_Door_R
-  m_TagString: Untagged
+  m_TagString: ChangeableFurniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +136,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -174,20 +161,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7778168802958752106
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7241754518939254723}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5430781053725724230, guid: 4702e838e945c0b4288c5125844686c6, type: 3}
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9179933408846324929
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,10 +173,10 @@ GameObject:
   - component: {fileID: 8371765512622243451}
   - component: {fileID: 4864353745740886494}
   - component: {fileID: 7234277146949649684}
-  - component: {fileID: 1061760050889374535}
+  - component: {fileID: 7177856181122823456}
   m_Layer: 0
   m_Name: FurnitureSet_10_v_02
-  m_TagString: Untagged
+  m_TagString: ChangeableFurniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,15 +188,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9179933408846324929}
-  m_LocalRotation: {x: 0.000000021855694, y: -0.00000004371139, z: 9.055528e-16, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4297483124712326075}
   - {fileID: 6737679525644282189}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &4864353745740886494
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -246,6 +220,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -270,8 +245,9 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1061760050889374535
-MeshCollider:
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7177856181122823456
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -280,7 +256,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6632542808568357251, guid: 4702e838e945c0b4288c5125844686c6, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.0020885, y: 2.0358944, z: 0.6695764}
+  m_Center: {x: -0.0000011622908, y: 1.0179472, z: -0.00000005960466}

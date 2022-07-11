@@ -26,6 +26,7 @@ public class FurnitureChangeClick : MonoBehaviour
                 Ray ray = getCamera.ScreenPointToRay(Input.mousePosition);         //마우스 위치에 RRayCast사용하기
                 if (Physics.Raycast(ray, out hit))                                      //만약 무언가를 눌랐다면
                 {
+                    Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.tag == "ChangeableFurniture")           //가구를 누른거라면
                     {
                         if (CurrentFurniture == "None")                                     //그때 선택된 가구가 없다면

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Interaction : MonoBehaviour
 {
     public Text text;                               //점프버튼에 글자를 선언
+    public GameObject JumpButton;
     public bool NearNPC = false;                    //NPC근처에 있는지 확인하는 함수 선언
     public string NameNPC;
     public bool Door;
@@ -35,6 +36,7 @@ public class Interaction : MonoBehaviour
         }
         if (other.gameObject.name == "ExitDoor")
         {
+            JumpButton.SetActive(true);
             Door = true;
             text.text = "나가기";
             NameNPC = other.gameObject.name.ToString();
@@ -73,7 +75,7 @@ public class Interaction : MonoBehaviour
 
     void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때
     {
-        if (other.gameObject.tag == "NPC" || other.gameObject.name == "InDoor" || other.gameObject.name == "ExitDoor" || other.gameObject.name == "GachaMachine" || other.gameObject.name == "Farm")          //콜리더의 Tag가 NPC라면
+        if (other.gameObject.tag == "NPC" || other.gameObject.name == "InDoor" || other.gameObject.name == "GachaMachine" || other.gameObject.name == "Farm")          //콜리더의 Tag가 NPC라면
         {
             Door = false;
             Gacha = false;
@@ -81,6 +83,10 @@ public class Interaction : MonoBehaviour
             NearNPC = false;
             text.text = "점프";
             NameNPC = " ";
+        }
+        if (other.gameObject.name == "ExitDoor")
+        {
+            JumpButton.SetActive(false);
         }
         if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
         {

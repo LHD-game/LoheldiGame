@@ -15,11 +15,10 @@ public class VideoScript : MonoBehaviour
         Invoke("finishButtonActive", 30f);
     }
 
-    public void OnPauseVideo()
+    public void OnFinishVideo()
     {
         myVideo.SetActive(false);
-        videoClip.Pause();
-        Invoke("finishButtonActive", 30f);
+        videoClip.Stop();
     }
 
     public void OnResetVideo()

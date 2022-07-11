@@ -10,7 +10,6 @@ public class UIButton : MonoBehaviour
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언                
     public GameObject shop;
-    public GameObject ConditionWindow;
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public GameObject JoyStick;
     public GameObject Main_UI;
@@ -33,14 +32,8 @@ public class UIButton : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainField")
         {
-            ConditionWindow.SetActive(true); //상태창 열기
             chat = GameObject.Find("chatManager").GetComponent<LodingTxt>(); 
         }
-            
-        ChangColor.badge = GameObject.FindGameObjectsWithTag("badge"); //뱃지 태그 저장
-
-        if (SceneManager.GetActiveScene().name == "MainField")
-            ConditionWindow.SetActive(false);//상태창 닫기
     }
 
     void Start()

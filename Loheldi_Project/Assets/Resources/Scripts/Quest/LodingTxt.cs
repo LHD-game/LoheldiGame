@@ -126,7 +126,6 @@ public class LodingTxt : MonoBehaviour
     string PlayerName;
     private void Awake()
     {
-        Player.transform.position = DontDestroy.LastPlayerTransform.transform.position;
         Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
         video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();

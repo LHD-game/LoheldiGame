@@ -270,7 +270,7 @@ public class LodingTxt : MonoBehaviour
                     case 4:
                         if (DontDestroy.tutorialLoading)
                             Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        Player.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
+                        Player.transform.position = new Vector3(45f, 5f, 40f);
                         DontDestroy.tutorialLoading = false;
                         break;
                     case 5:
@@ -302,7 +302,7 @@ public class LodingTxt : MonoBehaviour
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     case 12:
-                        Player.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
+                        Player.transform.position = new Vector3(45f, 5f, 40f);
                         Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                         break;
                     default:

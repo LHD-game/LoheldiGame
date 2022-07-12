@@ -104,7 +104,7 @@ public class UIButton : MonoBehaviour
             {
                 SoundEffectManager.GetComponent<SoundEffect>().Sound("Jump");
                 Playerrb.AddForce(transform.up * 15000);
-                MainGameManager.NowExp = MainGameManager.NowExp + 100;
+                //MainGameManager.NowExp = MainGameManager.NowExp + 100;
             }
         }
     }

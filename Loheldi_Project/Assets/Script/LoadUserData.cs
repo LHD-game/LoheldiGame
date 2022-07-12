@@ -6,10 +6,7 @@ using UnityEngine.UI;
 
 public class LoadUserData : MonoBehaviour
 {
-    public Text usernick;
-    public Text userbirth;
-    // Start is called before the first frame update
-    void Start()
+    public void LoadAccInfo()
     {
         var bro = Backend.GameData.GetMyData("ACC_INFO", new Where(), 10);
         if (bro.IsSuccess() == false)
@@ -33,15 +30,6 @@ public class LoadUserData : MonoBehaviour
             string birth = bro.Rows()[i]["BIRTH"]["S"].ToString();
             Debug.Log(nick);
             Debug.Log(birth);
-            usernick.text = nick;
-            userbirth.text = birth;
         }
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

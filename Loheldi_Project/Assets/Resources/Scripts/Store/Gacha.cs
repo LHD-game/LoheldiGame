@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Gacha : MonoBehaviour
 {
-    public GameObject TextObject;
+    public GameObject Contents;
     public GameObject ResultTxt;
 
     public GameObject Machine;
@@ -31,7 +31,7 @@ public class Gacha : MonoBehaviour
         Machine.SetActive(true);
         BackGround.SetActive(false);
 
-        Transform[] childList = TextObject.GetComponentsInChildren<Transform>();  //이미 있는 아이템 이름 초기화
+        Transform[] childList = Contents.GetComponentsInChildren<Transform>();  //이미 있는 아이템 이름 초기화
         if (childList != null)
         {
             for (int i = 1; i < childList.Length; i++)
@@ -48,30 +48,7 @@ public class Gacha : MonoBehaviour
             int k = 0;
             k = Random.Range(0, gachaTable.Count); //아이템 가챠 부분
             Debug.Log(gachaTable[k]["IName"]);
-            if (GachaTime == 1)
-            {
-                y = 510;
-            }
-            else if (GachaTime == 5)
-            {
-                y = y - 60;
-            }
-            else if (GachaTime == 10)
-            {
-                if (i <= 4)
-                {
-                    x = 570;
-                }
-                else if (i > 4)
-                {
-                    if (i == 5)
-                    {
-                        y = 570;
-                    }
-                    x = 920;
-                }
-                y = y - 60;
-            }
+            
             CreateText(new Vector3(x, y, 0), gachaTable[k]["IName"].ToString());  //아이템 이름 출력
             this.GetComponent<GachaMachineMovement>().LeverSpin();
         }
@@ -107,7 +84,7 @@ public class Gacha : MonoBehaviour
 
     public void CreateText(Vector3 Position, string Result)  //아이템 이름 프리펩("Text")에서 생성
     {
-        GameObject ResultText = Instantiate(ResultTxt, Position, Quaternion.identity, TextObject.transform);
+        GameObject ResultText = Instantiate(ResultTxt, Contents.transform);
         ResultText.GetComponent<Text>().text = Result;
     }
 }

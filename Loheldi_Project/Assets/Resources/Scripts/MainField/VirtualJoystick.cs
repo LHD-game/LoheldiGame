@@ -84,7 +84,7 @@ public class VirtualJoystick : MonoBehaviour
             Stick.position = StickFirstPos + JoyVec * Radius;
 
         Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
-        //Animation.SetBool("IsWalk", true);
+        PlayerAnimator.GetComponent<Animator>().SetBool("JoyStickMove", true);
     }
 
     public void DragEnd()
@@ -93,6 +93,6 @@ public class VirtualJoystick : MonoBehaviour
         JoyVec = Vector3.zero;
         MoveFlag = false;
         Playerrb.velocity = new Vector3(0, 0, 0);
-        //Animation.SetBool("IsWalk", false);
+        PlayerAnimator.GetComponent<Animator>().SetBool("JoyStickMove", false);
     }
 }

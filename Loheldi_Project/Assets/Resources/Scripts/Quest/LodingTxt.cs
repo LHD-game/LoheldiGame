@@ -222,8 +222,10 @@ public class LodingTxt : MonoBehaviour
 
     public void skip()
     {
-        j = 82;
+        j = 80;
         move = false;
+        GameObject SoundManager = GameObject.Find("SoundManager");
+        SoundManager.GetComponent<SoundManager>().Sound("BGMField");
         scriptLine();
     }
     public void NewChat()

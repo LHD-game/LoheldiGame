@@ -54,20 +54,18 @@ public class UIButton : MonoBehaviour
         }
         else if (OnLand && Inter.NearNPC)     //NPC주변에 있다면
         {
-
+            if (chat.bicycleRide.Ride)
+                chat.bicycleRide.RideOn();
             GameObject NPC;
             NPC = GameObject.Find(Inter.NameNPC);
             Vector3 targetPositionNPC;
             Vector3 targetPositionPlayer;
-            targetPositionNPC = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
-            targetPositionPlayer = new Vector3(NPC.transform.position.x, NPC.transform.position.y, NPC.transform.position.z);
+            targetPositionNPC = new Vector3(Player.transform.position.x, Player.transform.position.y-2, Player.transform.position.z);
+            targetPositionPlayer = new Vector3(NPC.transform.position.x, NPC.transform.position.y+2, NPC.transform.position.z);
             Main_UI.SetActive(false);
             Chat.NpcChoice();
             NPC.transform.LookAt(targetPositionNPC);
             Player.transform.LookAt(targetPositionPlayer);
-
-            if (chat.bicycleRide.Ride)
-                chat.bicycleRide.RideOn();
         }
         else if (Inter.Door)
         {

@@ -188,7 +188,7 @@ public class LodingTxt : MonoBehaviour
             }
             else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
             {
-                if (timer > 2)
+                if (timer > 3)
                 {
                     Debug.Log(QBikeSpeed);
                     if (bikerotate)
@@ -367,7 +367,9 @@ public class LodingTxt : MonoBehaviour
             video.videoClip.clip = video.VideoClip[Int32.Parse(data_Dialog[j]["cuttoon"].ToString())];
             movie.SetActive(true);
             video.OnPlayVideo();
-            Chat.SetActive(false);
+            Chat.SetActive(false); 
+            GameObject SoundManager = GameObject.Find("SoundManager");
+            SoundManager.GetComponent<AudioSource>().volume = 0f;
             j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
@@ -375,10 +377,12 @@ public class LodingTxt : MonoBehaviour
             if (videocheckTxT.text.Equals(parentscheckTxTNum))
             {
                 GameObject.Find("checkUI").SetActive(false);
-                videocheckTxT.text = "";
+                videocheckTxT.text = " ";
                 movie.SetActive(false);
                 video.OnFinishVideo();
                 Chat.SetActive(true);
+                GameObject SoundManager = GameObject.Find("SoundManager");
+                SoundManager.GetComponent<AudioSource>().volume = 1f;
                 scriptLine();
             }
             else
@@ -477,6 +481,7 @@ public class LodingTxt : MonoBehaviour
         {
             screenShot.SetActive(true);
             Chat.SetActive(false);
+            j++;
             //scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
@@ -842,9 +847,6 @@ public class LodingTxt : MonoBehaviour
         Quest.Load.QuestMail = false;
         DontDestroy.QuestIndex++;
         // Quest.Load.Quest = true;
-        //아래가 몇번째 퀘스트인지에 따라서 어느 뱃지를 잠금 해제해야하는지 해놓은거입니다!
-        //저는 풀리는 뱃지의 list번호를 넣어두고 상태창을 열면 for문을 돌려서 setActive(false)하는 식으로
-        //짜뒀었는데 혹시 이거 안필요한거면 말씀해주세요! 수정해두겠습니다.
         if (DontDestroy.QuestIndex ==4)
             badgeList.Ride.SetActive(true);
         PlayerPrefs.SetInt("QuestPreg", DontDestroy.QuestIndex + 1);

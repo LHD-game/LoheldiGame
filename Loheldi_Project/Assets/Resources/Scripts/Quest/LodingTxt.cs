@@ -158,11 +158,6 @@ public class LodingTxt : MonoBehaviour
     {
         if (BikeQ)
         {
-            if(QBikeSpeed != 12)
-            BikeNPC.transform.position = Player.position + NPCBike;
-            BikeNPC.transform.rotation = Player.rotation;
-            
-
             if (QBikeSpeed == 3 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
             {
                 if (timer > 5)
@@ -185,7 +180,9 @@ public class LodingTxt : MonoBehaviour
                     timer = 0;
                 }
                 JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
-            }
+                BikeNPC.transform.position = Player.position + NPCBike;
+                BikeNPC.transform.rotation = Player.rotation;
+                }
             else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
             {
                 if (timer > 3)
@@ -418,6 +415,7 @@ public class LodingTxt : MonoBehaviour
                 targetPositionPlayer = new Vector3(BikeNPC.transform.position.x, BikeNPC.transform.position.y, BikeNPC.transform.position.z);
                 BikeNPC.transform.LookAt(targetPositionNPC);
                 Player.transform.LookAt(targetPositionPlayer);
+                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
             }
             else if (BikeQ)
             {
@@ -427,7 +425,7 @@ public class LodingTxt : MonoBehaviour
                 BikeNPC.transform.position = Player.position + new Vector3(10, 0, 10);
                 BikeNPC.transform.rotation = Quaternion.Euler(0, 0, 0);
                 Player.rotation = Player.rotation = Quaternion.Euler(0, 90, 0);
-                bikerotate = true;
+                bikerotate = false;
                 timer = 0;
             }
             

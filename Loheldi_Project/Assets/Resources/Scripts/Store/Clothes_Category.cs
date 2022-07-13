@@ -55,8 +55,6 @@ public class Clothes_Category : StoreCategoryControl
 
         int s = 0, g = 0, c = 0, m = 0;
 
-
-
         for (int i = 0; i < allClothes_rows.Count; i++)
         {
             CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allClothes_rows[i]);

@@ -90,8 +90,8 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("Wallet", 10);
         param.Add("Level", 1);
         param.Add("NowExp", 0);
-        param.Add("MaxExp", 100);
-        param.Add("QuestPreg", 0);
+        param.Add("MaxExp", 10);
+        param.Add("QuestPreg", "0_1");
         param.Add("LastQTime", today.Day);
 
         var bro = Backend.GameData.Insert("PLAY_INFO", param);
@@ -125,7 +125,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetInt("Level", data.Level);
                 PlayerPrefs.SetFloat("NowExp", data.NowExp);
                 PlayerPrefs.SetFloat("MaxExp", data.MaxExp);
-                PlayerPrefs.SetInt("QuestPreg", data.QuestPreg);
+                PlayerPrefs.SetString("QuestPreg", data.QuestPreg);
                 PlayerPrefs.SetInt("LastQTime", data.LastQTime);
 
             }

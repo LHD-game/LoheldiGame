@@ -39,6 +39,8 @@ public class MailLoad : MonoBehaviour
     Dictionary<string, string> iname = new Dictionary<string, string>();
     Dictionary<string, string> price = new Dictionary<string, string>();
 
+    static string iCode = "";
+
     void Start()
     {
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
@@ -161,14 +163,12 @@ public class MailLoad : MonoBehaviour
     public void ReceiveMail()
     {
         var BRO = Backend.Chart.GetChartContents("46292"); //서버의 엑셀파일을 불러온다.
-        
-        Param param = new Param();
-        
+
         var bro = Backend.UPost.ReceivePostItemAll(PostType.Admin);
 
         if (bro.IsSuccess())
         {
-            
+
             foreach (LitJson.JsonData postItems in bro.GetReturnValuetoJSON()["postItems"])
             {
                 if (postItems.Count <= 0)
@@ -180,24 +180,10 @@ public class MailLoad : MonoBehaviour
                 {
                     if (BRO.IsSuccess())
                     {
-                        JsonData rows = BRO.GetReturnValuetoJSON()["rows"];
-                        if (rows.Count >= 1)
-                        {
-                            string icode = BRO.FlattenRows()[0]["itemCode"].ToString();
-                            string name = BRO.FlattenRows()[0]["name"].ToString();
-                            string price = BRO.FlattenRows()[0]["price"].ToString();
+                        Debug.Log("Mailgood");
 
-                            param.Add("icode", icode);
-                            param.Add("name", name);
-                            param.Add("price", price);
-
-                            Backend.GameData.Insert("MAILITEM", param);
-
-                        }
                     }
-                    Debug.Log(icode);
-                    Debug.Log(name);
-                    Debug.Log(price);
+
 
                 }
 
@@ -210,7 +196,66 @@ public class MailLoad : MonoBehaviour
                 Debug.LogError("더이상 수령할 우편이 존재하지 않습니다.");
             }
         }
+
+        //Inventory 테이블 불러와서, 여기에 해당하는 아이템과 일치하는 코드가 있을 경우 개수를 1증가시켜서 업데이트
+
+        Where where = new Where();
+        where.Equal("ICode", iCode);
+        var bro2 = Backend.GameData.GetMyData("INVENTORY", where);
+
+        if (bro2.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+        }
+        else
+        {
+            JsonData rows = bro2.GetReturnValuetoJSON()["rows"];
+            //없을 경우 아이템 행 추가
+            if (rows.Count <= 0)
+            {
+                Param param = new Param();
+                param.Add("ICode", iCode);
+                param.Add("Amount", 1);
+
+                var insert_bro = Backend.GameData.Insert("INVENTORY", param);
+
+                if (insert_bro.IsSuccess())
+                {
+                    Debug.Log("아이템 수령 완료: " + iCode);
+                }
+                else
+                {
+                    Debug.Log("아이템 수령 오류");
+                }
+            }
+            //있을 경우 해당 아이템 indate찾고, 개수 수정
+            else
+            {
+                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+                Debug.Log(rowIndate);
+                int item_amount = (int)bro.FlattenRows()[0]["Amount"];
+                item_amount++;
+                Debug.Log(item_amount);
+
+                Param param = new Param();
+                param.Add("ICode", iCode);
+                param.Add("Amount", item_amount);
+
+                var update_bro = Backend.GameData.UpdateV2("INVENTORY", rowIndate, Backend.UserInDate, param);
+                if (update_bro.IsSuccess())
+                {
+                    Debug.Log("아이템 구입 완료: " + iCode);
+                }
+                else
+                {
+                    Debug.Log("아이템 구입 오류");
+                }
+            }
+        }
+        //todo: 코인 차감한 값 서버에 저장, 팝업 띄우기
+
     }
+    
 
     public void NewMailCheck()
     {

@@ -110,8 +110,7 @@ public class LodingTxt : MonoBehaviour
     private QuestScript Quest;
     public VideoScript video;
     public Drawing Draw;
-    public BicycleRide bicycleRide; 
-    public ChangColor badgeList; 
+    public BicycleRide bicycleRide;
     [SerializeField]
     private ParticleSystem hairPs;
 
@@ -131,7 +130,6 @@ public class LodingTxt : MonoBehaviour
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-        badgeList = GameObject.Find("EventSystem").GetComponent<ChangColor>();
         tu = GameObject.Find("chatManager").GetComponent<tutorial>();
         Inter = GameObject.Find("Player").GetComponent<Interaction>();
 
@@ -846,7 +844,7 @@ public class LodingTxt : MonoBehaviour
         DontDestroy.QuestIndex++;
         // Quest.Load.Quest = true;
         if (DontDestroy.QuestIndex ==4)
-            badgeList.Ride.SetActive(true);
+            //badgeList.Ride.SetActive(true);
         PlayerPrefs.SetInt("QuestPreg", DontDestroy.QuestIndex + 1);
         PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
         DontDestroy.LastDay = DontDestroy.ToDay;

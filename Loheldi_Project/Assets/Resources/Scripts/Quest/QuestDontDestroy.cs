@@ -10,7 +10,7 @@ public class QuestDontDestroy : MonoBehaviour
 
     public string ButtonPlusNpc;  //버튼 추가되는 NPC이름(퀘스트)
     //public int QuestSubNum;         //퀘스트 스크립트 앞번호
-    public int QuestIndex;   //몇번째 퀘스트차례인지 (서버저장)
+    public string QuestIndex;   //몇번째 퀘스트차례인지 (서버저장)
     public bool QuestMail = false; //퀘스트 메일이 왔는지 확인하는 bool값
     public int LastDay=0;  //마지막으로 퀘스트를 클리어한 날짜(서버 저장)
     public int ToDay=0;      //오늘 날짜
@@ -37,7 +37,7 @@ public class QuestDontDestroy : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
             LastPlayerTransform.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
-        QuestIndex = PlayerPrefs.GetInt("QuestPreg");  //로컬값 가져오기
+        QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기
         LastDay = PlayerPrefs.GetInt("LastQTime");
         DontDestroyOnLoad(this.gameObject);
     }

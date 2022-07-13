@@ -12,6 +12,8 @@ public static class ChartNum
     public static string BasicClothesItemChart = "53497";
     public static string CustomItemChart = "53553";
     public static string ClothesItemChart = "54323";
+    public static string BadgeChart = "54709";
+
 }
 
 //계정 정보
@@ -69,4 +71,12 @@ public class CustomItem
     public string Model;
     public string Material;
     public string Texture;
+}
+
+public class Badge
+{
+    public string BCode;
+    public string BName;
+    public string Bcontent;
+    public string Category;
 }

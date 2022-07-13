@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class FlieChoice : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class FlieChoice : MonoBehaviour
 
     private void Awake()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+        if (SceneManager.GetActiveScene().name == "Quiz")
+            Quest();
+            chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
     }
     public void test()
     {
@@ -42,9 +45,8 @@ public class FlieChoice : MonoBehaviour
     }
     public void Quest()  //ÄÆÅ÷ µîÀåÇÏ´Â Äù½ºÆ®ÀÏ ¶§, ÄÆÅ÷ ÀÌ¹ÌÁö ºÒ·¯¿À±â
     {
-        chat.FileAdress = "Scripts/Quest/script";
-        chat.Num = chat.DontDestroy.QuestIndex + "_1";
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex);
+        
         chat.NewChat();
     }
 

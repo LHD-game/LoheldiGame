@@ -79,7 +79,7 @@ public class SoundManager : MonoBehaviour
         }
         if (scene.name == "MainField")
         {
-            if (QDD.QuestIndex == 0)
+            if (QDD.QuestIndex.Equals("0_1"))
                 Sound("BGMTutorial");
             else
                 Sound("BGMField");

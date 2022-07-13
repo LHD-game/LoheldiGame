@@ -40,7 +40,7 @@ public class QuestScript : MonoBehaviour
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(Load.ButtonPlusNpc) + Load.QuestMail);
 
-        if (Load.QuestIndex == 0)
+        if (Load.QuestIndex.Equals("0_1"))
         {
             file.Tutorial();
         }
@@ -49,14 +49,30 @@ public class QuestScript : MonoBehaviour
     }
     private void QuestCheck()
     {
-        Debug.Log("퀘스트 체크 실행");
-        if (Load.QuestIndex < 21)
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+        chat.data_Dialog = CSVReader.Read("Scripts/Quest/script");
+        for (int k = 0; k <= chat.data_Dialog.Count; k++)
         {
-            QuestChoice();
-            MainQuestLoding();
-            if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
-                ExclamationMarkCreate();
+            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
+            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(Load.QuestIndex))
+            {
+                chat.j = k;
+                if (chat.DontDestroy.tutorialLoading)
+                {
+                    chat.j += 1;
+                }
+                break;
+            }
+            else
+            {
+                continue;
+            }
         }
+        Debug.Log("퀘스트 체크 실행");
+        QuestChoice();
+        MainQuestLoding();
+        if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
+            ExclamationMarkCreate();
     }
 
     public void MainQuestLoding()
@@ -73,10 +89,24 @@ public class QuestScript : MonoBehaviour
 
     private void GiveQuest()
     {
+        int Q=0;
+        for (int k = 0; k <= Quest_Mail.Count; k++)
+        {
+            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
+            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(Load.QuestIndex))
+            {
+                Q= k;
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
         Load.QuestMail = true;
-        string title = Quest_Mail[Load.QuestIndex]["title"].ToString();                      
-        string detail = Quest_Mail[Load.QuestIndex]["content"].ToString();
-        string sent = Quest_Mail[Load.QuestIndex]["author"].ToString();
+        string title = Quest_Mail[Q]["title"].ToString();                      
+        string detail = Quest_Mail[Q]["content"].ToString();
+        string sent = Quest_Mail[Q]["author"].ToString();
 
         GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
 
@@ -101,42 +131,31 @@ public class QuestScript : MonoBehaviour
     }
     public void QuestChoice()
     {
-        //Load.RiciveQuest = true;
+        Load.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        string QnpcName="";
-        switch (Load.QuestIndex)
+        chat.data_Dialog = CSVReader.Read("Scripts/Quest/script");
+        for (int k = 0; k <= chat.data_Dialog.Count; k++)
         {
-            case 1: case 6: case 11: case 16:
-                QnpcName = "Hami";
+            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
+            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(Load.QuestIndex))
+            {
+                chat.j = k;
+                if (chat.DontDestroy.tutorialLoading)
+                {
+                    chat.j += 1;
+                }
                 break;
-            case 2: case 7: case 12: case 14: case 17:
-                QnpcName = "Himchan";
-                break;
-            case 3: case 10: case 13:
-                QnpcName = "Suho";
-                break;
-            case 4:
-                QnpcName = "Himchan";
-                Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
-                break;
-            case 5 :
-                QnpcName = "Yeomi";
-                break;
-            case 8:
-                QnpcName = "Mei";
-                break;
-            case 9:
-                QnpcName = "Himchan";
-                break;
-            case 15:
-                QnpcName = "Yomi";
-                break;
-            case 18:
-                QnpcName = "Nari";
-                break;
-                default:
-                break;
+            }
+            else
+            {
+                continue;
+            }
         }
+        //Load.RiciveQuest = true;
+        string QnpcName= Quest_Mail[chat.j]["author"].ToString();
+        if(Quest_Mail[chat.j]["scriptNumber"].ToString().Equals("4_1")|| Quest_Mail[chat.j]["scriptNumber"].ToString().Equals("4_2"))
+                Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
+                
         //NpcQuest = GameObject.Find(QnpcName);
         Load.ButtonPlusNpc = QnpcName;
         ExclamationMarkCreate();
@@ -150,7 +169,7 @@ public class QuestScript : MonoBehaviour
 
     private void ExclamationMarkCreate()
     {
-        Instantiate(ExclamationMark[1], GameObject.Find(Load.ButtonPlusNpc).transform.position+new Vector3(0,5,0), GameObject.Find(Load.ButtonPlusNpc).transform.rotation);
+        Instantiate(ExclamationMark[1], GameObject.Find(Load.ButtonPlusNpc).transform.position+new Vector3(0,6,0), GameObject.Find(Load.ButtonPlusNpc).transform.rotation);
     }
 
     public void ChangeDrawCamera()

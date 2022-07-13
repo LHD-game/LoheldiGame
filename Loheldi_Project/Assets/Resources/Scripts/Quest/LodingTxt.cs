@@ -228,27 +228,9 @@ public class LodingTxt : MonoBehaviour
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
         data_Dialog = CSVReader.Read(FileAdress);
-        for (int k = 0; k <= data_Dialog.Count; k++)
-        {
-            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
-            if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
-            {
-                j = k;
-                if (DontDestroy.tutorialLoading)
-                {
-                    j += 1;
-                }
-                chatCanvus.SetActive(true);
-                ChatTime();
-                Line();
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
-
+        chatCanvus.SetActive(true);
+        ChatTime();
+        Line();
     }
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
@@ -314,6 +296,7 @@ public class LodingTxt : MonoBehaviour
     {
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
+            SceneLoader.instance.GotoQuizGame();
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
             QuizTIme();
             scriptLine();
@@ -330,18 +313,12 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //선택지
         {
             j--;
-            /*for (int i = 0; i < QuizButton.Length; i++)
-            {
-                QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
-                //string selecNumber = "select" + (i + 1).ToString();
-            }*/
             QuizCho();
-            //Button.SetActive(true); //유니티에서 버튼 위치 옮김
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
         {
-            ChatTime();
-            scriptLine();
+            PlayerPrefs.SetString("QuestPreg", data_Dialog[j+1]["scriptNumber"].ToString());
+            SceneLoader.instance.GotoMainField();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
         {
@@ -604,7 +581,7 @@ public class LodingTxt : MonoBehaviour
         {
             ChatEnd();
             if (data_Dialog[j]["name"].ToString().Equals("end"))
-                QuestEnd();
+            { QuestEnd(); }
         }
         else
         {
@@ -841,11 +818,11 @@ public class LodingTxt : MonoBehaviour
     {
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
-        DontDestroy.QuestIndex++;
+        DontDestroy.QuestIndex = data_Dialog[j+1]["scriptNumber"].ToString();
         // Quest.Load.Quest = true;
-        if (DontDestroy.QuestIndex ==4)
+        if (DontDestroy.QuestIndex.Equals("4_2"))
             //badgeList.Ride.SetActive(true);
-        PlayerPrefs.SetInt("QuestPreg", DontDestroy.QuestIndex + 1);
+        PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
         PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
         DontDestroy.LastDay = DontDestroy.ToDay;
     }

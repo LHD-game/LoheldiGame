@@ -102,6 +102,10 @@ public class SceneLoader : MonoBehaviour
     {
         LoadingSceneManager.LoadScene("Gacha");
     }
+    public void GotoQuizGame()
+    {
+        LoadingSceneManager.LoadScene("Quiz");
+    }
 
     private void PlayerTransForm()
     {

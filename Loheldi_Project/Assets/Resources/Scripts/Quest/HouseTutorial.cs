@@ -15,7 +15,7 @@ public class HouseTutorial : MonoBehaviour
     {
         Debug.Log("하우징 스타트");
         QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        if (QDD.QuestIndex == 0)
+        if (QDD.QuestIndex.Equals("0_1"))
             Tutorial();
     }
 

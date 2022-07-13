@@ -28,7 +28,7 @@ public class PlayInfo
     public int Level;
     public float NowExp;
     public float MaxExp;
-    public int QuestPreg;
+    public string QuestPreg;
     public int LastQTime;
 }
 

@@ -41,7 +41,7 @@ public class PlayerInfoControl : MonoBehaviour
         ExpTxt.text = now_exp + " / " + max_exp;
         BirthTxt.text = "생년월일: " + PlayerPrefs.GetString("Birth");
         Debug.Log(PlayerPrefs.GetString("Birth"));
-        QuestPregTxt.text = "건강도: " + PlayerPrefs.GetInt("QuestPreg");
+        QuestPregTxt.text = "건강도: " + PlayerPrefs.GetString("QuestPreg");
         WalletTxt.text = PlayerPrefs.GetInt("Wallet").ToString();
 
         ExpSlider.value = (now_exp / max_exp)*100;  //백분율로 변환

@@ -84,6 +84,10 @@ public class PlayerInfoControl : MonoBehaviour
 
     void GetBadgeChart(string itemChart)
     {
+        exerciseB.Clear();
+        foodB.Clear();
+        mindB.Clear();
+        homeB.Clear();
         if (!is_get_b_chart)
         {
             allBadgeChart = Backend.Chart.GetChartContents(itemChart);

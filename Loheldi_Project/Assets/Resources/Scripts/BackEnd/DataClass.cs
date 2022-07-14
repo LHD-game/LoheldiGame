@@ -12,7 +12,7 @@ public static class ChartNum
     public static string BasicClothesItemChart = "53497";
     public static string CustomItemChart = "53553";
     public static string ClothesItemChart = "54323";
-    public static string BadgeChart = "54709";
+    public static string BadgeChart = "54754";
 
 }
 

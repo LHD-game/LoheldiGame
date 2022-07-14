@@ -47,7 +47,7 @@ public class CategoryControl : MonoBehaviour
             //change catalog box img
             GameObject item_img = child.transform.Find("ItemImage").gameObject;
             Image img = item_img.GetComponent<Image>();
-            img.sprite = Resources.Load<Sprite>("Customize/Catalog_Images/" + dialog[i][CommonField.nName] + "_catalog");
+            img.sprite = Resources.Load<Sprite>("Sprites/Catalog_Images/Customize/" + dialog[i][CommonField.nCID] + "_catalog");
 
             //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
             GameObject item_name = child.transform.Find("ItemName").gameObject;

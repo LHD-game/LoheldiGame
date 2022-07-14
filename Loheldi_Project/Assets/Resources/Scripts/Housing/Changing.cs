@@ -16,7 +16,7 @@ public class Changing : MonoBehaviour
 
     public void ButtonClick()
     {                                                           //해당 조건문 고민해볼것. (지금 누른 오브젝트의 이름을 비교해서 침대인지 아닌지 구분하는 조건문임)    P.S.가구에 부품들(옷장에 문짝이나, 서랍 등)도 추가하면 너무 복잡해지므로 콜리더 제거하거나 비활성화시키고 본체에 콜리더 조절하기
-        if (FurnitureChangeClick.CurrentFurniture == "Bed_01_Single" || FurnitureChangeClick.CurrentFurniture == "Bed_01_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_W(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture == "Bed_01_Single" || FurnitureChangeClick.CurrentFurniture == "Bed_01_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_K(Clone)")
         {
             if (EventSystem.current.currentSelectedGameObject.name == "Option1")            //첫번째 옵션을 선택했다면
             {
@@ -39,9 +39,16 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장.
                 BedNum = 3;
             }
+            else if (EventSystem.current.currentSelectedGameObject.name == "Option4")       //네번째 옵션을 선택했다면
+            {
+                Destroy(BedPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/Bed_K"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
+                TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장.
+                BedNum = 4;
+            }
         }
                                                                 //옷장
-        if (FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02" || FurnitureChangeClick.CurrentFurniture == "wardrobe(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02" || FurnitureChangeClick.CurrentFurniture == "wardrobe(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_K(Clone)")
         {
             if (EventSystem.current.currentSelectedGameObject.name == "Option1")
             {
@@ -64,9 +71,16 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(ClosetPosition.transform);
                 ClosetNum = 3;
             }
+            else if (EventSystem.current.currentSelectedGameObject.name == "Option4")
+            {
+                Destroy(ClosetPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Wardrobe_K"), ClosetPosition.transform);
+                TempObject.transform.SetParent(ClosetPosition.transform);
+                ClosetNum = 4;
+            }
         }
                                                                 //책상
-        if (FurnitureChangeClick.CurrentFurniture == "Table_01" || FurnitureChangeClick.CurrentFurniture == "Table_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "table_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Table4_W(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture == "Table_01" || FurnitureChangeClick.CurrentFurniture == "Table_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "table_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Table4_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "table2_K(Clone)")
         {
             if (EventSystem.current.currentSelectedGameObject.name == "Option1")
             {
@@ -89,9 +103,16 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(TablePosition.transform);
                 ClosetNum = 3;
             }
+            else if (EventSystem.current.currentSelectedGameObject.name == "Option4")
+            {
+                Destroy(TablePosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/table2_K"), TablePosition.transform);
+                TempObject.transform.SetParent(TablePosition.transform);
+                ClosetNum = 4;
+            }
         }
                                                                 //책상
-        if (FurnitureChangeClick.CurrentFurniture == "Chair_01" || FurnitureChangeClick.CurrentFurniture == "Chair_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "chair_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair2_W(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture == "Chair_01" || FurnitureChangeClick.CurrentFurniture == "Chair_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "chair_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair2_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair_K(Clone)")
         {
             if (EventSystem.current.currentSelectedGameObject.name == "Option1")
             {
@@ -113,6 +134,13 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair2_W"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);
                 ClosetNum = 3;
+            }
+            else if (EventSystem.current.currentSelectedGameObject.name == "Option4")
+            {
+                Destroy(ChairPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair_K"), ChairPosition.transform);
+                TempObject.transform.SetParent(ChairPosition.transform);
+                ClosetNum = 4;
             }
         }
     }

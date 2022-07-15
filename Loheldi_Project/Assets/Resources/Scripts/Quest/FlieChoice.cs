@@ -15,7 +15,7 @@ public class FlieChoice : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Quiz")
             Quest();
-            chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
     }
     public void test()
     {
@@ -33,14 +33,34 @@ public class FlieChoice : MonoBehaviour
     }
     public void Tutorial()
     {
-        if (chat.DontDestroy.tutorialLoading)
-            chat.Num = "0_4";
-        else
-            chat.Num = "0_1";
         chat.Main_UI.SetActive(false);
-        chat.FileAdress = "Scripts/Quest/script";
+        chat.data_Dialog = CSVReader.Read("Scripts/Quest/script");
         chat.move = true;
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
+        if (chat.DontDestroy.tutorialLoading)
+        {
+            chat.DontDestroy.QuestIndex = "0_4";
+        }
+        else
+            chat.Num = "0_1";
+        for (int k = 0; k <= chat.data_Dialog.Count; k++)
+        {
+            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
+            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(chat.DontDestroy.QuestIndex))
+            {
+                chat.j = k;
+                if (chat.DontDestroy.tutorialLoading)
+                {
+                    chat.j += 1;
+                }
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+        
         chat.NewChat();
     }
     public void Quest()  //ÄÆÅ÷ µîÀåÇÏ´Â Äù½ºÆ®ÀÏ ¶§, ÄÆÅ÷ ÀÌ¹ÌÁö ºÒ·¯¿À±â

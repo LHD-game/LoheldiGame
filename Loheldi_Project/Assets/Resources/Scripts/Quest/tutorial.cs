@@ -111,6 +111,7 @@ public class tutorial : MonoBehaviour
                 //forTutorial();
                 GameObject SoundManager = GameObject.Find("SoundManager");
                 SoundManager.GetComponent<SoundManager>().Sound("BGMField");
+                chat.DontDestroy.tutorialLoading = false;
             }
         }
         

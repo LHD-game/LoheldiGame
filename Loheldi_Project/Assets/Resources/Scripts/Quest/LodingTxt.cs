@@ -227,7 +227,7 @@ public class LodingTxt : MonoBehaviour
     {
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
-        data_Dialog = CSVReader.Read(FileAdress);
+        //data_Dialog = CSVReader.Read(FileAdress); //다른 곳으로 옮김
         chatCanvus.SetActive(true);
         ChatTime();
         Line();

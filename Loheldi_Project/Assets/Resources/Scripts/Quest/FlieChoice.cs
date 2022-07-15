@@ -13,9 +13,9 @@ public class FlieChoice : MonoBehaviour
 
     private void Awake()
     {
+        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (SceneManager.GetActiveScene().name == "Quiz")
             Quest();
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
     }
     public void test()
     {
@@ -34,7 +34,7 @@ public class FlieChoice : MonoBehaviour
     public void Tutorial()
     {
         chat.Main_UI.SetActive(false);
-        chat.data_Dialog = CSVReader.Read("Scripts/Quest/script");
+        chat.FileAdress = "Scripts/Quest/script";
         chat.move = true;
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
         if (chat.DontDestroy.tutorialLoading)
@@ -43,30 +43,18 @@ public class FlieChoice : MonoBehaviour
         }
         else
             chat.Num = "0_1";
-        for (int k = 0; k <= chat.data_Dialog.Count; k++)
-        {
-            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
-            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(chat.DontDestroy.QuestIndex))
-            {
-                chat.j = k;
-                if (chat.DontDestroy.tutorialLoading)
-                {
-                    chat.j += 1;
-                }
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
         
         chat.NewChat();
     }
     public void Quest()  //ÄÆÅ÷ µîÀåÇÏ´Â Äù½ºÆ®ÀÏ ¶§, ÄÆÅ÷ ÀÌ¹ÌÁö ºÒ·¯¿À±â
     {
-        chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex);
-        
+        if (SceneManager.GetActiveScene().name == "MainField")
+        {
+            Debug.Log(chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
+            chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
+        }
+        chat.FileAdress = "Scripts/Quest/script";
+        chat.Num = chat.DontDestroy.QuestIndex;
         chat.NewChat();
     }
 
@@ -85,7 +73,10 @@ public class FlieChoice : MonoBehaviour
                 chat.NPCButton += 1;
                 break;
             case "Hami":
-                chat.Num = "3";
+                if (chat.DontDestroy.QuestIndex.Substring(chat.DontDestroy.QuestIndex.IndexOf("_")+1).Equals("2"))
+                    chat.Num = "10";
+                else
+                    chat.Num = "3";
                 chat.NPCButton += 1;
                 break;
             case "Suho":

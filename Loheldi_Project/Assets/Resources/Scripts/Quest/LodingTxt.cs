@@ -125,14 +125,17 @@ public class LodingTxt : MonoBehaviour
     string PlayerName;
     private void Awake()
     {
-        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
-        video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
-        Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
+        if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
+        {
+            Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
+            video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
+            JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
+            tu = GameObject.Find("chatManager").GetComponent<tutorial>();
+            Inter = GameObject.Find("Player").GetComponent<Interaction>();
+            Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
+        }
+        
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-        tu = GameObject.Find("chatManager").GetComponent<tutorial>();
-        Inter = GameObject.Find("Player").GetComponent<Interaction>();
-
         Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
@@ -225,12 +228,27 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
+        data_Dialog = CSVReader.Read(FileAdress);
+        for (int k = 0; k <= data_Dialog.Count; k++)
+        {
+            Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
+            if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
+            {
+                j = k; 
+                chatCanvus.SetActive(true);
+                ChatTime();
+                Line();
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
         //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
-        //data_Dialog = CSVReader.Read(FileAdress); //다른 곳으로 옮김
-        chatCanvus.SetActive(true);
-        ChatTime();
-        Line();
+        //
+        
     }
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
@@ -296,9 +314,8 @@ public class LodingTxt : MonoBehaviour
     {
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
-            SceneLoader.instance.GotoQuizGame();
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
-            QuizTIme();
+            //QuizTIme();
             scriptLine();
             for (int i = 0; i < QuizButton.Length; i++)
             {
@@ -639,7 +656,7 @@ public class LodingTxt : MonoBehaviour
     {
         ChatTime();
         //if (SceneManager.GetActiveScene().name == "MainField")
-        JumpButtons.Main_UI.SetActive(true);
+        //JumpButtons.Main_UI.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
@@ -689,9 +706,11 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatTime() //시작에 합체시킴
     {
-        
-        MainCamera.enabled = true;
-        QuizCamera.enabled = false;
+        if (SceneManager.GetActiveScene().name == "MainField")
+        {
+            MainCamera.enabled = true;
+            QuizCamera.enabled = false;
+        }
         //k = 0;
         Txt = chatTxt;
         Name=chatName;

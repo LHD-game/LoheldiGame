@@ -70,6 +70,7 @@ public class QuestScript : MonoBehaviour
             }
         }*/
         Debug.Log("퀘스트 체크 실행");
+        Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         QuestChoice();
         MainQuestLoding();
         if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
@@ -87,14 +88,14 @@ public class QuestScript : MonoBehaviour
         //QuestNumber = QuestNum-1;
         
     }
-
+    int Q = 0;
     private void GiveQuest()
     {
-        int Q=0;
+        
         for (int k = 0; k <= Quest_Mail.Count; k++)
         {
             //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
-            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(Load.QuestIndex))
+            if (Quest_Mail[k]["QID"].ToString().Equals(Load.QuestIndex))
             {
                 Q= k;
                 break;
@@ -105,10 +106,10 @@ public class QuestScript : MonoBehaviour
             }
         }
         Load.QuestMail = true;
-        string title = Quest_Mail[Q]["title"].ToString();                      
-        string detail = Quest_Mail[Q]["content"].ToString();
-        string sent = Quest_Mail[Q]["author"].ToString();
-
+        string title = Quest_Mail[Q]["QName"].ToString();                      
+        string detail = Quest_Mail[Q]["Content"].ToString();
+        string sent = Quest_Mail[Q]["authorName"].ToString();
+        Load.ButtonPlusNpc = sent;
         GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
 
         Mail.TempObject = Instantiate(temp, Mail.MailList);                      //메일 프리펩 생성
@@ -133,26 +134,14 @@ public class QuestScript : MonoBehaviour
     public void QuestChoice()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        chat.data_Dialog = CSVReader.Read("Scripts/Quest/script");
-        for (int k = 0; k <= chat.data_Dialog.Count; k++)
-        {
-            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
-            if (chat.data_Dialog[k]["scriptNumber"].ToString().Equals(Load.QuestIndex))
-            {
-                chat.j = k;
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
+        Debug.Log("여기냐");
+        //chat.FileAdress="Scripts/Quest/script";
         //Load.RiciveQuest = true;
-        string QnpcName= Quest_Mail[chat.j]["author"].ToString(); //퀘스트 실행하러 찾아가야 할 NPC
-        if (Quest_Mail[chat.j]["scriptNumber"].ToString().Equals("4_1")|| Quest_Mail[chat.j]["scriptNumber"].ToString().Equals("4_2"))
+        //string QnpcName= Quest_Mail[Q]["author"].ToString(); //퀘스트 실행하러 찾아가야 할 NPC
+        if (Quest_Mail[Q]["QID"].ToString().Equals("4_1"))
                 Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
         //NpcQuest = GameObject.Find(QnpcName);
-        Load.ButtonPlusNpc = QnpcName;
+        //Load.ButtonPlusNpc = QnpcName;
         ExclamationMarkCreate();
         //Debug.Log("쳇넘" + chat.Num);
     }

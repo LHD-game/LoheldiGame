@@ -37,8 +37,8 @@ public class QuestDontDestroy : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
             LastPlayerTransform.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
-        
-            QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기
+
+        QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기 여기말고 다른데 놓아야될 듯
         LastDay = PlayerPrefs.GetInt("LastQTime");
         DontDestroyOnLoad(this.gameObject);
     }

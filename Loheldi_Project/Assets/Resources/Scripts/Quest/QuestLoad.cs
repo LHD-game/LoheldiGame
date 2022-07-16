@@ -10,35 +10,46 @@ public class QuestLoad : MonoBehaviour
     void Start()
     {
         var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+        
         Param param = new Param();
         if (bro.IsSuccess())
         {
-            if(rows.Count <= 0)
+            var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
+            
+            if (bro2.IsSuccess())
             {
-                Backend.Chart.GetChartContents("54787");
-                string QID = rows[0]["QID"]["S"].ToString();
-                int Exp = int.Parse(rows[0]["Reward"]["Exp"]["N"].ToString());
-                int Coin = int.Parse(rows[0]["Reward"]["Coin"]["N"].ToString());
-                int Gagu = int.Parse(rows[0]["Reward"]["1010102"]["N"].ToString());
-
-                param.Add("QID", QID);
-                param.Add("Exp", Exp);
-                param.Add("Coin", Coin);
-                param.Add("Gagu", Gagu);
-
-                Backend.GameData.Insert("QUEST_INFO", param);
-
-            }
-            else
-            {
-                string QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
-                string newQuest = rows[0]["QID"]["S"].ToString();
-                if(QuestPreg == newQuest)
+                if (bro2.GetReturnValuetoJSON()["rows"].Count <= 0)
                 {
-                    Debug.Log("다음퀘스트 준비완료");
+                   
+                    /*string QID = bro2.FlattenRows()[0]["QID"].ToString();*/
+                    /*string Exp = rows[0]["Reward"]["Exp"].ToString();
+                    string Coin = rows[0]["Reward"]["Coin"].ToString();
+                    string Gagu = rows[0]["Reward"]["1010102"].ToString();*/
+
+                    param.Add("QID", "0_1");
+                    param.Add("Exp", "10");
+                    param.Add("Coin", "10");
+                    param.Add("Gagu", "1010102:3");
+
+                    Backend.GameData.Insert("QUEST_INFO", param);
+                    Debug.Log(param);
+                }
+                else
+                {
+                    string QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
+                    Debug.Log(QuestPreg);
+                    string newQuest = bro2.Rows()[0]["QID"]["S"].ToString();
+                    Debug.Log(newQuest);
+                    if (QuestPreg == newQuest)
+                    {
+                        Debug.Log("다음퀘스트 준비완료");
+
+                    }
                 }
             }
+            
+            
+            
         }
         /*string selectedProbabilityFileId = "560";
 

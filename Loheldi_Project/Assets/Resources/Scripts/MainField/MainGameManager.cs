@@ -18,6 +18,11 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
+        UpdateField();
+    }
+
+    public void UpdateField()
+    {
         UpdateFieldMyInfo();
     }
 
@@ -43,6 +48,16 @@ public class MainGameManager : MonoBehaviour
         PlayInfoManager.GetExp(exp_get);
         UpdateFieldMyInfo();
     }
+
+    public void GetCoinBtn()    //임시 코인 획득 버튼 메소드
+    {
+        int coin_get = 20;
+
+        PlayInfoManager.GetCoin(coin_get);
+        UpdateFieldMyInfo();
+    }
+
+
 
     /*void ParameterUpload()
     {

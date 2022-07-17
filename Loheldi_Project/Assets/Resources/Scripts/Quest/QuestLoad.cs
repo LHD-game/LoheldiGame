@@ -54,17 +54,18 @@ public class QuestLoad : MonoBehaviour
 
                         JsonData json = bro3.FlattenRows();
                         JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
-                        for (int i = 1; i <rows.Count; i++)
+
+                        /*아래 반복문은 배열 초과 오류가 나기에 수정해두었습니다. - 이민진*/
+                        for (int i = 0; i < rows.Count; i++)
                         {
-                            while (rows.Count >= 1)
+                            if (rows.Count >= 1)
                             {
-                                string QID = rows[i++]["QID"]["S"].ToString();
+                                string QID = rows[i]["QID"]["S"].ToString();
                                 //string EXP = rows[1][0]["Reward"]["Exp"].ToString();
                                 /* string Coin = json[1]["Reward"]["Coin"]["S"].ToString();
                                  string Gagu = json[1]["Reward"]["1010102"]["S"].ToString();*/
                                 
                                 Debug.Log(QID);
-                                continue;
                                 //Debug.Log(EXP);
                                 /*Debug.Log(Coin);
                                 Debug.Log(Gagu);*/

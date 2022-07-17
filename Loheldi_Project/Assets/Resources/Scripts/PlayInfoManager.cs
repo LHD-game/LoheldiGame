@@ -34,7 +34,7 @@ public class PlayInfoManager : MonoBehaviour
     }
 
     //재화 갱신 메소드
-    static void GetCoin(int coin)  //상점에서 아이템 구매시, coin은 음수. 미니게임/퀘스트 등으로 코인을 얻는 경우 coin은 양수
+    public static void GetCoin(int coin)  //상점에서 아이템 구매시, coin은 음수. 미니게임/퀘스트 등으로 코인을 얻는 경우 coin은 양수
     {
         int wallet = PlayerPrefs.GetInt("Wallet");
 

@@ -228,16 +228,20 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
+        Debug.Log("ÄûÁî3");
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
         {
-            Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
+            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
             if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
             {
                 j = k; 
+                if (DontDestroy.QuestIndex.Equals("0_4"))
+                    ++j;
                 chatCanvus.SetActive(true);
                 ChatTime();
                 Line();
+                Debug.Log("ÄûÁî4");
                 break;
             }
             else
@@ -326,6 +330,7 @@ public class LodingTxt : MonoBehaviour
                 QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
                 //string selecNumber = "select" + (i + 1).ToString();
             }
+            QuizMate();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //¼±ÅÃÁö
         {
@@ -582,6 +587,7 @@ public class LodingTxt : MonoBehaviour
     }
     public void Line()  //ÁÙ³Ñ±è (scriptTypeÀÌ ¹ºÁö °É·¯³¿)
     {
+        Debug.Log(data_Dialog[j]["scriptNumber"].ToString());
         //Æ©Åä¸®¾ó ½ºÅ©¸³Æ® ÀÌ¾î°¡´Â ¾Ö
         //Debug.Log("Æ©Åô:"+tuto);
         //Debug.Log("Æ©ÅôÇÇ´Ï:"+tutoFinish);
@@ -603,7 +609,9 @@ public class LodingTxt : MonoBehaviour
         else
         {
             if (!data_Dialog[j]["scriptType"].ToString().Equals("nomal"))
-                QuestSubChoice();
+            {
+                QuestSubChoice(); 
+            }
             else
             {
                 cuttoon.SetActive(false);

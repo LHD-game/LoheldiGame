@@ -12,7 +12,10 @@ public class BuyItem : MonoBehaviour
     private GameObject StoreBuyPanel;
 
     static GameObject main_ui;
+    static GameObject buy_suc_panel;
     static string iCode = "";
+
+    static int this_cost = 0;
 
     public void PopBuyBtn()
     {
@@ -39,7 +42,10 @@ public class BuyItem : MonoBehaviour
         main_ui = canvas.transform.Find("mainUI").gameObject;
         GameObject child = Instantiate(StoreBuyPanel, main_ui.transform);
 
-        
+        buy_suc_panel = canvas.transform.Find("StoreBuySucPanel").gameObject;
+
+
+
         GameObject Asset_StorePopup = child.transform.Find("Asset_StorePopup").gameObject;
 
         //GameObject buy_item_img = BuyBg.transform.Find("ItemImg").gameObject;
@@ -55,13 +61,15 @@ public class BuyItem : MonoBehaviour
         GameObject my_coin_parent = Asset_StorePopup.transform.Find("MyCoin").gameObject;
         GameObject my_coin = my_coin_parent.transform.Find("Text").gameObject;
         Text my_coin_txt = my_coin.GetComponent<Text>();
-        my_coin_txt.text = "80"; //todo: 임시 코인입니다. 
+        my_coin_txt.text = PlayerPrefs.GetInt("Wallet").ToString(); //현재 나의 코인 수 띄운다.
 
         //아이템 가격 띄우기
         GameObject item_cost_parent = Asset_StorePopup.transform.Find("ItemCost").gameObject;
         GameObject item_cost = item_cost_parent.transform.Find("Text").gameObject;
         Text item_cost_txt = item_cost.GetComponent<Text>();
         item_cost_txt.text = price_txt.text;
+
+        this_cost = Int32.Parse(item_cost_txt.text);    //현재 아이템 가격
 
         //잔액 띄우기
         int result_cost = Convert.ToInt32(my_coin_txt.text) - Convert.ToInt32(item_cost_txt.text);
@@ -111,6 +119,9 @@ public class BuyItem : MonoBehaviour
                 if (insert_bro.IsSuccess())
                 {
                     Debug.Log("아이템 구입 완료: " +iCode);
+                    PlayInfoManager.GetCoin(-this_cost);
+                    CancleBtn();
+                    buy_suc_panel.SetActive(true);
                 }
                 else
                 {
@@ -134,6 +145,9 @@ public class BuyItem : MonoBehaviour
                 if (update_bro.IsSuccess())
                 {
                     Debug.Log("아이템 구입 완료: " + iCode);
+                    PlayInfoManager.GetCoin(-this_cost);
+                    CancleBtn();
+                    buy_suc_panel.SetActive(true);
                 }
                 else
                 {
@@ -154,6 +168,9 @@ public class BuyItem : MonoBehaviour
         if (insert_bro.IsSuccess())
         {
             Debug.Log("아이템 구입 완료: " + iCode);
+            PlayInfoManager.GetCoin(-this_cost);
+            CancleClothesBtn();
+            buy_suc_panel.SetActive(true);
         }
         else
         {

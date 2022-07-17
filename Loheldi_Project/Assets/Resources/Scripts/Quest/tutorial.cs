@@ -10,14 +10,11 @@ public class tutorial : MonoBehaviour
     private FlieChoice Chat;
     public int tutoi;                            //튜토리얼 하이라이트 이미지용
 
-    private void Awake()
+    public void Tutorial()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
-    }
 
-    public void Tutorial()
-    {
         Debug.Log("튜토리얼 실핻ㅇ22");
         Debug.Log("튜토i=" + tutoi);
 

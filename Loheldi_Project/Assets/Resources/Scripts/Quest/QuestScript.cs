@@ -73,14 +73,17 @@ public class QuestScript : MonoBehaviour
         Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         QuestChoice();
         MainQuestLoding();
-        if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
-            ExclamationMarkCreate();
+        //if (!String.IsNullOrEmpty(Load.ButtonPlusNpc))
+            //ExclamationMarkCreate();
     }
 
     public void MainQuestLoding()
     {
-        Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
-        Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
+        if (SceneManager.GetActiveScene().name == "MainField")
+        {
+            Mail = GameObject.Find("MailManager").GetComponent<MailLoad>();
+            Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
+        }
         //Quest = true;
         Debug.Log("Äù½ºÆ® ¹øÈ£" + Load.QuestIndex);
         //QuestNum = Int32.Parse(Quest_Mail[Load.QuestIndex]["QusetNumber"].ToString()); 
@@ -142,7 +145,8 @@ public class QuestScript : MonoBehaviour
                 Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
         //NpcQuest = GameObject.Find(QnpcName);
         //Load.ButtonPlusNpc = QnpcName;
-        ExclamationMarkCreate();
+        if (SceneManager.GetActiveScene().name == "MainField")
+            ExclamationMarkCreate();
         //Debug.Log("ÃÂ³Ñ" + chat.Num);
     }
 

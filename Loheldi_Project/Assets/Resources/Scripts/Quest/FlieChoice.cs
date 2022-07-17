@@ -15,7 +15,9 @@ public class FlieChoice : MonoBehaviour
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (SceneManager.GetActiveScene().name == "Quiz")
-            Quest();
+        {
+            Quest(); 
+        }
     }
     public void test()
     {

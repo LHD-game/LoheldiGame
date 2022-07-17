@@ -29,7 +29,7 @@ public class QuestLoad : MonoBehaviour
                     param.Add("QID", "0_1");
                     param.Add("Exp", "10");
                     param.Add("Coin", "10");
-                    param.Add("Gagu", "1010102:3");
+                    param.Add("1010102", "3");
 
                     Backend.GameData.Insert("QUEST_INFO", param);
                     Debug.Log(param);
@@ -43,7 +43,39 @@ public class QuestLoad : MonoBehaviour
                     if (QuestPreg == newQuest)
                     {
                         Debug.Log("다음퀘스트 준비완료");
+                        string selectedProbabilityFileId = "54787";
 
+                        var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
+                        if (!bro3.IsSuccess())
+                        {
+                            Debug.LogError(bro3.ToString());
+                            return;
+                        }
+
+                        JsonData json = bro3.FlattenRows();
+                        JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
+                        for (int i = 1; i <rows.Count; i++)
+                        {
+                            while (rows.Count >= 1)
+                            {
+                                string QID = rows[i++]["QID"]["S"].ToString();
+                                //string EXP = rows[1][0]["Reward"]["Exp"].ToString();
+                                /* string Coin = json[1]["Reward"]["Coin"]["S"].ToString();
+                                 string Gagu = json[1]["Reward"]["1010102"]["S"].ToString();*/
+                                
+                                Debug.Log(QID);
+                                continue;
+                                //Debug.Log(EXP);
+                                /*Debug.Log(Coin);
+                                Debug.Log(Gagu);*/
+                            }
+                        }
+                        
+
+                    }
+                    else
+                    {
+                        Debug.Log("아직 완료되지 않은 퀘스트가 있습니다.");
                     }
                 }
             }

@@ -136,7 +136,8 @@ public class LodingTxt : MonoBehaviour
         }
         
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+        if (SceneManager.GetActiveScene().name == "Quiz")
+            Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
@@ -229,6 +230,8 @@ public class LodingTxt : MonoBehaviour
     public void NewChat()
     {
         Debug.Log("퀴즈3");
+        Txt = chatTxt;
+        Name = chatName;
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
         {
@@ -239,7 +242,7 @@ public class LodingTxt : MonoBehaviour
                 if (DontDestroy.QuestIndex.Equals("0_4"))
                     ++j;
                 chatCanvus.SetActive(true);
-                ChatTime();
+                //ChatTime();
                 Line();
                 Debug.Log("퀴즈4");
                 break;
@@ -337,9 +340,10 @@ public class LodingTxt : MonoBehaviour
             j--;
             QuizCho();
         }
-        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //카메라 시점 원상복귀로 변경
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //main으로
         {
-            PlayerPrefs.SetString("QuestPreg", data_Dialog[j+1]["scriptNumber"].ToString());
+            DontDestroy.QuestIndex = data_Dialog[j + 1]["scriptNumber"].ToString();
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
             SceneLoader.instance.GotoMainField();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
@@ -662,7 +666,7 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatEnd() //리셋
     {
-        ChatTime();
+        //ChatTime();
         //if (SceneManager.GetActiveScene().name == "MainField")
         //JumpButtons.Main_UI.SetActive(true);
         chatCanvus.SetActive(false);
@@ -697,13 +701,6 @@ public class LodingTxt : MonoBehaviour
         }
     }
 
-    public void QuizTIme() //카메라 시점 변경으로 변경
-    {
-        QuizMate();
-        MainCamera.enabled = false;
-        QuizCamera.enabled = true;
-        Draw.Dcam.enabled = false;
-    }
     public void QuizMate() //전광판 메테리얼 설정
     {
         Quiz_material[1] = material[MataNum]; //0에 메테리얼 번호
@@ -714,16 +711,8 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatTime() //시작에 합체시킴
     {
-        if (SceneManager.GetActiveScene().name == "MainField")
-        {
-            MainCamera.enabled = true;
-            QuizCamera.enabled = false;
-        }
-        //k = 0;
         Txt = chatTxt;
         Name=chatName;
-        //ChatWin.SetActive(true);
-        //QuizeWin.SetActive(false);
     }
 
     IEnumerator _typing()  //타이핑 효과

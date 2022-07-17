@@ -36,15 +36,13 @@ public class MainGameManager : MonoBehaviour
         ExpSlider.value = (now_exp / max_exp) * 100;
     }
 
-/*    void LevelUp()
+    public void GetExpBtn()    //임시 경험치 획득 버튼 메소드
     {
-        conditionSlider.value = 0;
-        slider.value = 0;
-        NowExp = NowExp - MaxExp;
-        MaxExp = MaxExp * 1.2f;
-        Level++;
-        ParameterUpload();
-    }*/
+        float exp_get = 10;
+
+        PlayInfoManager.GetExp(exp_get);
+        UpdateFieldMyInfo();
+    }
 
     /*void ParameterUpload()
     {

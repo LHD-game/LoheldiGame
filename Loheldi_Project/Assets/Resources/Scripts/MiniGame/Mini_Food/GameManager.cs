@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
     private GameObject GameOverPanel;
     [SerializeField]
     private GameObject PausePanel;
-    
+    public GameObject HPDisablePanel;   //hp 부족으로 인한 팝업 패널 오브젝트
+
     private float[] foodDropSec = new float[] {1.8f, 1.6f, 1.4f, 1.0f, 0.8f, 0.5f, 0.4f, 0.3f, 0.3f  }; //중간단계 더 많이 떨어지게 수정
     private float newFoodDropSec;
 
@@ -87,13 +88,26 @@ public class GameManager : MonoBehaviour
     }
     public void GameStart()
     {
-        stopTrigger = true;
-        
-        //foods = GameObject.FindGameObjectsWithTag("Food");  //활성화된 오브젝트만!
-        StopCoroutine(CreateFoodRoutine());
-        StartCoroutine(CreateFoodRoutine());
-        WelcomePanel.SetActive(false);
-        Timer.instance.StartTimer();
+        int now_hp = PlayerPrefs.GetInt("HP");
+
+        if (now_hp > 0)  //현재 hp가 0보다 크다면
+        {
+            //hp 1 감소
+            PlayInfoManager.GetHP(-1);
+            stopTrigger = true;
+
+            //foods = GameObject.FindGameObjectsWithTag("Food");  //활성화된 오브젝트만!
+            StopCoroutine(CreateFoodRoutine());
+            StartCoroutine(CreateFoodRoutine());
+            WelcomePanel.SetActive(false);
+            Timer.instance.StartTimer();
+        }
+        else    //0 이하라면: 게임 플레이 불가
+        {
+            // hp가 부족합니다! 팝업 띄우기
+            HPDisablePanel.SetActive(true);
+        }
+
     }
 
 

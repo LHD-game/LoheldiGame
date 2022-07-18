@@ -55,10 +55,6 @@ public class InvenCategory : MonoBehaviour
 
         int s = 0, g = 0, c = 0, m;
 
-        /*super_list.Clear();
-        gagu_list.Clear();
-        crop_list.Clear();*/
-
         for (int i = 0; i < allItem_rows.Count; i++)
         {
             StoreItem data = pj.ParseBackendData<StoreItem>(allItem_rows[i]);

@@ -88,7 +88,7 @@ public class QuestScript : MonoBehaviour
 
         Mail.ThisTitle.GetComponent<Text>().text = title;                                                            //버튼에 속성을 서버에서 불러온 속성으로 바꿈
         Mail.ThisSent.GetComponent<Text>().text = sent;
-        Mail.ThisDetail.GetComponent<Text>().text = detail;
+        Mail.ThisDetail.GetComponent<Text>().text = detail.Replace("<n>","\n");
 
         QuestChoice();
     }

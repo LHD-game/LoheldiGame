@@ -55,20 +55,45 @@ public class QuestLoad : MonoBehaviour
                         JsonData json = bro3.FlattenRows();
                         JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
 
+                        Param param2 = new Param();
                         /*아래 반복문은 배열 초과 오류가 나기에 수정해두었습니다. - 이민진*/
                         for (int i = 0; i < rows.Count; i++)
                         {
-                            if (rows.Count >= 1)
+                            string QID = rows[i]["QID"]["S"].ToString();
+                            if (QID == QuestPreg)
                             {
-                                string QID = rows[i]["QID"]["S"].ToString();
+                                string QID2 = rows[i+1]["QID"]["S"].ToString();
+                                string QName = rows[i+1]["QName"]["S"].ToString();
+                                string From = rows[i+1]["From"]["S"].ToString();
+                                string Content = rows[i+1]["Content"]["S"].ToString();
+                                string Reward = rows[i + 1]["Reward"]["S"].ToString(); 
+                                /*string Exp = json[i + 1]["Reward"]["Exp"]["S"].ToString();
+                                string Coin = json[i + 1]["Reward"]["Coin"]["S"].ToString();
+                                string Gagu = json[i + 1]["Reward"]["1010102"]["S"].ToString();*/
+                                string authorName = rows[i+1]["authorName"]["S"].ToString();
                                 //string EXP = rows[1][0]["Reward"]["Exp"].ToString();
                                 /* string Coin = json[1]["Reward"]["Coin"]["S"].ToString();
                                  string Gagu = json[1]["Reward"]["1010102"]["S"].ToString();*/
-                                
-                                Debug.Log(QID);
+
+                                Debug.Log(QID2);
+                                Debug.Log(QName);
+                                Debug.Log(From);
+                                Debug.Log(Content);
+                                Debug.Log(Reward);
+                                /*Debug.Log(Coin);
+                                Debug.Log(Gagu);*/
+                                Debug.Log(authorName);
                                 //Debug.Log(EXP);
                                 /*Debug.Log(Coin);
                                 Debug.Log(Gagu);*/
+                                param2.Add("QID", QID2);
+                                param2.Add("QName", QName);
+                                param2.Add("From", From);
+                                param2.Add("Content", Content);
+                                param2.Add("Reward", Reward);
+                                param2.Add("authorName", authorName);
+                                Backend.GameData.Insert("QUEST_INFO", param2);
+
                             }
                         }
                         

@@ -32,6 +32,8 @@ public class PlayInfo
     public float MaxExp;
     public string QuestPreg;
     public int LastQTime;
+    public int HP;
+    public int LastHPTime;
 }
 
 public class MyItem

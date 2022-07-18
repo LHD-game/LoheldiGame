@@ -76,6 +76,7 @@ public class NpcButtonClick : MonoBehaviour
     void CheckQuest()
     {
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
+        Chat.EPin.SetActive(false);
 
         for (int i = 0; i < clone.Length; i++)
         {

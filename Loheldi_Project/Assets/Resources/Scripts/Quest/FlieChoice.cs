@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class FlieChoice : MonoBehaviour
 {
     public LodingTxt chat;
+    public GameObject EPin;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class FlieChoice : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainField")
         {
-            Debug.Log(chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
+            //Debug.Log(chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
             chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
         }
         chat.FileAdress = "Scripts/Quest/script";

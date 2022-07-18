@@ -88,7 +88,7 @@ public class QuestScript : MonoBehaviour
 
         Mail.ThisTitle.GetComponent<Text>().text = title;                                                            //버튼에 속성을 서버에서 불러온 속성으로 바꿈
         Mail.ThisSent.GetComponent<Text>().text = sent;
-        Mail.ThisDetail.GetComponent<Text>().text = detail;
+        Mail.ThisDetail.GetComponent<Text>().text = detail.Replace("<n>","\n");
 
         QuestChoice();
     }
@@ -110,6 +110,8 @@ public class QuestScript : MonoBehaviour
     private void ExclamationMarkCreate()
     {
         Instantiate(ExclamationMark[1], GameObject.Find(Load.ButtonPlusNpc).transform.position+new Vector3(0,6,0), GameObject.Find(Load.ButtonPlusNpc).transform.rotation);
+        file.EPin.SetActive(true);
+        file.EPin.GetComponent<MapPin>().Owner = GameObject.Find(Load.ButtonPlusNpc);
     }
 
     public void ChangeDrawCamera()

@@ -45,6 +45,7 @@ public class PlayInfoManager : MonoBehaviour
         SavePlayInfo();
     }
 
+    //hp 갱신 메소드
     public static void GetHP(int hp)
     {
         int now_hp = PlayerPrefs.GetInt("HP");

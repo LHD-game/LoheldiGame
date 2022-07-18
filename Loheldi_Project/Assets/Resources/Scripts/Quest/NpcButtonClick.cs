@@ -77,6 +77,7 @@ public class NpcButtonClick : MonoBehaviour
     {
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
 
+
         for (int i = 0; i < clone.Length; i++)
         {
             Destroy(clone[i]);

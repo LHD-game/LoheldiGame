@@ -110,6 +110,8 @@ public class QuestScript : MonoBehaviour
     private void ExclamationMarkCreate()
     {
         Instantiate(ExclamationMark[1], GameObject.Find(Load.ButtonPlusNpc).transform.position+new Vector3(0,6,0), GameObject.Find(Load.ButtonPlusNpc).transform.rotation);
+        file.EPin.SetActive(true);
+        file.EPin.GetComponent<MapPin>().Owner = GameObject.Find(Load.ButtonPlusNpc);
     }
 
     public void ChangeDrawCamera()

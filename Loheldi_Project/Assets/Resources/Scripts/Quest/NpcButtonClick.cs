@@ -27,10 +27,22 @@ public class NpcButtonClick : MonoBehaviour
             SceneLoader.instance.GotoLobby();
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미용실 이용하기"))
             SceneLoader.instance.GotoPlayerCustom();
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("의상실 이용하기"))
+        {
+            Chat.chat.Main_UI.SetActive(true);
+            UIB.clothesShop.SetActive(true);
+            UIB.chat.ChatEnd();
+        }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("가구점 이용하기"))
         {
             Chat.chat.Main_UI.SetActive(true);
-            UIB.shop.SetActive(true);
+            UIB.GaguShop.SetActive(true);
+            UIB.chat.ChatEnd();
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("마켓 이용하기"))
+        {
+            Chat.chat.Main_UI.SetActive(true);
+            UIB.Market.SetActive(true);
             UIB.chat.ChatEnd();
         }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 하미"))

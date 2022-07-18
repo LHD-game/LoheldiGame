@@ -9,7 +9,9 @@ public class UIButton : MonoBehaviour
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
     public GameObject Player;             //Player선언
     public GameObject Map;                //Map선언                
-    public GameObject shop;
+    public GameObject GaguShop;           //가구점             
+    public GameObject Market;           //슈퍼         
+    public GameObject clothesShop;           //슈퍼
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public GameObject JoyStick;
     public GameObject Main_UI;

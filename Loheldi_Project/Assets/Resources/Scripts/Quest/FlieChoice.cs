@@ -72,7 +72,7 @@ public class FlieChoice : MonoBehaviour
                 break;
             case "Markatman":
                 chat.Num = "2";
-                chat.NPCButton += 1;
+                chat.NPCButton += 2;
                 break;
             case "Hami":
                 if (chat.DontDestroy.QuestIndex.Substring(chat.DontDestroy.QuestIndex.IndexOf("_")+1).Equals("2"))
@@ -95,7 +95,7 @@ public class FlieChoice : MonoBehaviour
                 break;
             case "Yomi":
                 chat.Num = "7";
-                chat.NPCButton += 1;
+                chat.NPCButton += 2;
                 break;
             case "Yeomi":
                 chat.Num = "8";

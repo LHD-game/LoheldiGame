@@ -45,6 +45,14 @@ public class PlayInfoManager : MonoBehaviour
         SavePlayInfo();
     }
 
+    public static void GetHP(int hp)
+    {
+        int now_hp = PlayerPrefs.GetInt("HP");
+        now_hp += hp;
+        PlayerPrefs.SetInt("HP", now_hp);
+        SavePlayInfo();
+    }
+
 
     //서버 상 play_info에 prefs저장하는 메소드
     static void  SavePlayInfo()
@@ -55,6 +63,8 @@ public class PlayInfoManager : MonoBehaviour
         float new_max_exp = PlayerPrefs.GetFloat("MaxExp");
         string new_quest_preg = PlayerPrefs.GetString("QuestPreg");
         int new_last_q_time = PlayerPrefs.GetInt("LastQTime");
+        int new_hp = PlayerPrefs.GetInt("HP");
+        int new_last_hp_time = PlayerPrefs.GetInt("LastHPTime");
 
         Param param = new Param();
         param.Add("Wallet", new_wallet);
@@ -63,6 +73,8 @@ public class PlayInfoManager : MonoBehaviour
         param.Add("MaxExp", new_max_exp);
         param.Add("QuestPreg", new_quest_preg);
         param.Add("LastQTime", new_last_q_time);
+        param.Add("HP", new_hp);
+        param.Add("LastHPTime", new_last_hp_time);
 
         //유저 현재 row 검색
         var bro = Backend.GameData.Get("PLAY_INFO", new Where());

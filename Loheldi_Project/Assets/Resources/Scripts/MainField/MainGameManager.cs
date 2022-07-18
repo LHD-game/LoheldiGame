@@ -10,6 +10,7 @@ public class MainGameManager : MonoBehaviour
 {
 
     public Text FieldWalletTxt;
+    public Text FieldHPTxt;
     public Text FieldLevelTxt;
     public Text FieldExpTxt;
     public Slider ExpSlider;
@@ -18,6 +19,7 @@ public class MainGameManager : MonoBehaviour
 
     void Start()
     {
+        GetDailyHP();
         UpdateField();
     }
 
@@ -31,6 +33,8 @@ public class MainGameManager : MonoBehaviour
     {
         //재화
         FieldWalletTxt.text = PlayerPrefs.GetInt("Wallet").ToString();
+        //HP
+        FieldHPTxt.text = PlayerPrefs.GetInt("HP") + " / 5";
         //레벨
         FieldLevelTxt.text = PlayerPrefs.GetInt("Level").ToString();
         //경험치
@@ -57,33 +61,28 @@ public class MainGameManager : MonoBehaviour
         UpdateFieldMyInfo();
     }
 
-
-
-    /*void ParameterUpload()
+    void GetDailyHP()   //일자를 검사하여 hp를 5 제공
     {
-        Param param = new Param();
-        param.Add("Level", Level);
-        param.Add("QuestPreg", QuestPreg);
-        param.Add("MaxExp", MaxExp);
-        param.Add("NowExp", NowExp);
-        param.Add("Wallet", Money);
-        param.Add("LastQTime", LastQTime);
+        //if(오늘 일자 != 서버에 저장된 hp수령 일자){
+        // if(hp<5){
+        //      hp = 5
+        //      서버에 저장된 hp 수령 일자 = 오늘 일자
+        //  }
+        //}
 
-        var bro = Backend.GameData.Get("PLAY_INFO", new Where());
-        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
-
-        if (rows != null)
+        DateTime today = DateTime.Today;
+        int today_day = today.Day;
+        int hp_day = PlayerPrefs.GetInt("LastHPTime");
+        int now_hp = PlayerPrefs.GetInt("HP");
+        if (today_day != hp_day)    //마지막 수령 일자에서 날짜가 바뀐 상태라면
         {
-            Backend.GameData.Insert("PLAY_INFO", param);
-        }
-        else
-        {
-            var inDate = bro.Rows()[0]["inDate"]["S"].ToString();
-            var bro2 = Backend.GameData.UpdateV2("PLAY_INFO", inDate, Backend.UserInDate, param);
-            if (bro2.IsSuccess())
+            if (now_hp < 5) //또한 마지막 hp 소지 수가 5 이하라면
             {
-                print("데이터 업데이트 성공");
+                PlayerPrefs.SetInt("LastHPTime", today_day);
+                PlayInfoManager.GetHP(5-now_hp);
+                
+                Debug.Log("날짜가 바뀌어 hp가 회복되었습니다.");
             }
         }
-    }*/
+    }
 }

@@ -93,6 +93,8 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("MaxExp", 10);
         param.Add("QuestPreg", "0_1");
         param.Add("LastQTime", today.Day);
+        param.Add("HP", 5);
+        param.Add("LastHPTime", today.Day);
 
         var bro = Backend.GameData.Insert("PLAY_INFO", param);
 
@@ -127,6 +129,8 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetFloat("MaxExp", data.MaxExp);
                 PlayerPrefs.SetString("QuestPreg", data.QuestPreg);
                 PlayerPrefs.SetInt("LastQTime", data.LastQTime);
+                PlayerPrefs.SetInt("HP", data.HP);
+                PlayerPrefs.SetInt("LastHPTime", data.LastHPTime);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 public class FlieChoice : MonoBehaviour
 {
     public LodingTxt chat;
-    // l=뜨는 이미지 번호(스크립트 대화)  n이랑l이랑 합칠 수 있나요(전 모르겠어요)
-    //n=뜨는 이미지 번호(기본대화)
-    //h=이미지 넣을 곳 번호
 
     private void Awake()
     {
@@ -41,7 +38,7 @@ public class FlieChoice : MonoBehaviour
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
         if (chat.DontDestroy.tutorialLoading)
         {
-            chat.DontDestroy.QuestIndex = "0_4";
+            chat.Num = "0_4";
         }
         else
             chat.Num = "0_1";
@@ -76,13 +73,16 @@ public class FlieChoice : MonoBehaviour
                 break;
             case "Hami":
                 if (chat.DontDestroy.QuestIndex.Substring(chat.DontDestroy.QuestIndex.IndexOf("_")+1).Equals("2"))
-                    chat.Num = "10";
+                    chat.Num = "11";
                 else
                     chat.Num = "3";
                 chat.NPCButton += 1;
                 break;
             case "Suho":
-                chat.Num = "4";
+                if (chat.DontDestroy.QuestIndex.Substring(chat.DontDestroy.QuestIndex.IndexOf("_") + 1).Equals("2"))
+                    chat.Num = "12";
+                else
+                    chat.Num = "4";
                 chat.NPCButton += 1;
                 break;
             case "Nari":
@@ -105,8 +105,12 @@ public class FlieChoice : MonoBehaviour
                 chat.Num = "9";
                 chat.NPCButton += 2;
                 break;
+            case "WallMirror":
+                chat.Num = "10";
+                chat.NPCButton += 2;
+                break;
         }
-        
+        // CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"+chat.Inter.NameNPC); //이미지 경로
         chat.NewChat();
         chat.Buttons();
 

@@ -26,7 +26,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject[] SelecButton = new GameObject[5];
     public Text[] SelecButtonTxt = new Text[5];
 
-    public Text videocheckTxT;
+    public InputField videocheckTxT;
     public string parentscheckTxTNum;
     public GameObject ErrorWin;
 
@@ -74,7 +74,6 @@ public class LodingTxt : MonoBehaviour
     public string Num;                       //스크립트 번호
     public int j;                                  //data_Dialog 줄갯수
     public int c = 0;                              //컷툰 이미지 번호
-    //public static int k;                    //npc
     public int l;                            //뜨는 이미지 번호
     string Answer;               //누른 버튼 인식
 
@@ -103,6 +102,7 @@ public class LodingTxt : MonoBehaviour
     int QBikeSpeed;
     bool BikeQ = false;
     float timer=0.0f;
+    float Maxtime;
     bool bikerotate = false;
     Vector3 NPCBike;
 
@@ -160,9 +160,9 @@ public class LodingTxt : MonoBehaviour
     {
         if (BikeQ)
         {
-            if (QBikeSpeed == 3 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
+            if (JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
             {
-                if (timer > 5)
+                if (timer > Maxtime)
                 {
                     Debug.Log(QBikeSpeed);
                     if (bikerotate)
@@ -182,40 +182,14 @@ public class LodingTxt : MonoBehaviour
                     timer = 0;
                 }
                 JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
-                BikeNPC.transform.position = Player.position + NPCBike;
-                BikeNPC.transform.rotation = Player.rotation;
-                }
-            else if (QBikeSpeed == 12 && JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
-            {
-                if (timer > 3)
-                {
-                    Debug.Log(QBikeSpeed);
-                    if (bikerotate)
+                if (Maxtime == 5)
                     {
-                        JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
-                        NPCBike = new Vector3(-4, 0, 0);
-                        Player.rotation = Quaternion.Euler(0, 90, 0);
-                        bikerotate = false;
-                    }
-                    else
-                    {
-                        JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
-                        NPCBike = new Vector3(4, 0, 0);
-                        Player.rotation = Quaternion.Euler(0, -90, 0);
-                        bikerotate = true;
-                    }
-                    timer = 0;
+                    BikeNPC.transform.position = Player.position + NPCBike;
+                    BikeNPC.transform.rotation = Player.rotation;
                 }
-                JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * (QBikeSpeed + 2); 
-            }
+                }
             timer += Time.deltaTime;
             JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f); //앞 방향으로 밀기 (방향 * 힘)
-            
-
-
-
-
-
         }
     }
 
@@ -235,14 +209,12 @@ public class LodingTxt : MonoBehaviour
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
         {
-            //Debug.Log(data_Dialog[k]["scriptNumber"].ToString());
             if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
             {
                 j = k; 
-                if (DontDestroy.QuestIndex.Equals("0_4"))
+                if (Num.Equals("0_4"))
                     ++j;
                 chatCanvus.SetActive(true);
-                //ChatTime();
                 Line();
                 Debug.Log("퀴즈4");
                 break;
@@ -252,9 +224,7 @@ public class LodingTxt : MonoBehaviour
                 continue;
             }
         }
-        //if (SceneManager.GetActiveScene().name == "MainField")
         Main_UI.SetActive(false);
-        //
         
     }
 
@@ -322,7 +292,6 @@ public class LodingTxt : MonoBehaviour
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
-            //QuizTIme();
             scriptLine();
             for (int i = 0; i < QuizButton.Length; i++)
             {
@@ -331,7 +300,6 @@ public class LodingTxt : MonoBehaviour
                 else
                     QuizButton[i].transform.parent.gameObject.SetActive(true);
                 QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
-                //string selecNumber = "select" + (i + 1).ToString();
             }
             QuizMate();
         }
@@ -375,7 +343,7 @@ public class LodingTxt : MonoBehaviour
             if (videocheckTxT.text.Equals(parentscheckTxTNum))
             {
                 GameObject.Find("checkUI").SetActive(false);
-                videocheckTxT.text = " ";
+                videocheckTxT.text = null;
                 movie.SetActive(false);
                 video.OnFinishVideo();
                 Chat.SetActive(true);
@@ -403,9 +371,12 @@ public class LodingTxt : MonoBehaviour
                 bicycleRide.RideOn();
                 BikeNPC = GameObject.Find(Inter.NameNPC);
                 Destroy(GameObject.Find("Qbicycle(Clone)"));
+                Player.position = new Vector3(36, 5, -23);
                 Player.rotation = Quaternion.Euler(0, 90, 0);
                 QBikeSpeed = 3;
+                Maxtime = 8;
                 BikeQ = true;
+                NPCJumpAnimator.SetBool("BikeWalk", true);
             }
             else if (QBikeSpeed == 12)
             {
@@ -422,12 +393,14 @@ public class LodingTxt : MonoBehaviour
             {
                 //페이드 인 페이드 아웃하면서 화면에 한시간 후... 띄우기
                 QBikeSpeed = 12;
-                Player.position = new Vector3(37, 6, -14);
+                Maxtime = 3;
+                Player.position = new Vector3(36, 5, -23);
                 BikeNPC.transform.position = Player.position + new Vector3(10, 0, 10);
-                BikeNPC.transform.rotation = Quaternion.Euler(0, 0, 0);
+                BikeNPC.transform.rotation = Quaternion.Euler(0, -90, 0);
                 Player.rotation = Player.rotation = Quaternion.Euler(0, 90, 0);
                 bikerotate = false;
                 timer = 0;
+                NPCJumpAnimator.SetBool("BikeWalk", false);
             }
             
             scriptLine();
@@ -460,7 +433,6 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("trainEnd"))
         {
-            //ChatWin.SetActive(true);
             Value.SetActive(false);
             scriptLine();
 
@@ -469,7 +441,6 @@ public class LodingTxt : MonoBehaviour
         {
             ChatWin.SetActive(false);
             Draw.ChangeDrawCamera();
-            //scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
@@ -481,12 +452,10 @@ public class LodingTxt : MonoBehaviour
             screenShot.SetActive(true);
             Chat.SetActive(false);
             j++;
-            //scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
         {
             Draw.ChangeDrawCamera();
-            //scriptLine();
             Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("song"))
@@ -592,10 +561,6 @@ public class LodingTxt : MonoBehaviour
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
         Debug.Log(data_Dialog[j]["scriptNumber"].ToString());
-        //튜토리얼 스크립트 이어가는 애
-        //Debug.Log("튜툐:"+tuto);
-        //Debug.Log("튜툐피니:"+tutoFinish);
-        //Debug.Log("무브=" + move);
         if (tuto && tutoFinish)
         {
             chatCanvus.SetActive(true);
@@ -634,8 +599,6 @@ public class LodingTxt : MonoBehaviour
     {
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());
-        //Debug.Log("j=" + j);
-        //Debug.Log("이미지번호=" + l);
         spriteR.sprite = CCImageList[l];
 
         if (ChatWin.activeSelf == false)
@@ -666,9 +629,6 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatEnd() //리셋
     {
-        //ChatTime();
-        //if (SceneManager.GetActiveScene().name == "MainField")
-        //JumpButtons.Main_UI.SetActive(true);
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         QuizeWin.SetActive(false);
@@ -688,7 +648,6 @@ public class LodingTxt : MonoBehaviour
 
     public void Buttons()      //npc대화 상호작용 선택지 수
     {
-        //Debug.Log("인터NPC:" + Inter.NameNPC);
         if (Inter.NameNPC.Equals(DontDestroy.ButtonPlusNpc))
             NPCButton += 1;
 
@@ -705,7 +664,6 @@ public class LodingTxt : MonoBehaviour
     {
         Quiz_material[1] = material[MataNum]; //0에 메테리얼 번호
         Quiz.GetComponent<MeshRenderer>().materials = Quiz_material;
-        //Debug.Log("응애"+ material[MataNum]);
 
     }
 
@@ -726,21 +684,6 @@ public class LodingTxt : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         
-        //Arrow.SetActive(true);
-
-        /*if (data_Dialog[j-1]["scriptType"].ToString().Equals("choice"))  //선택지
-        {
-            j--;
-            for (int i = 0;i<QuizButton.Length; i++)
-            {
-                QuizButton[i].text = data_Dialog[j]["select" + (i + 1)].ToString();
-                //string selecNumber = "select" + (i + 1).ToString();
-            }
-            Invoke("QuizCho", 1f);
-            //Button.SetActive(true); //유니티에서 버튼 위치 옮김
-        }*/
-
-
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
             Debug.Log("튜토리얼 실핻ㅇ");
@@ -794,7 +737,6 @@ public class LodingTxt : MonoBehaviour
             Chat.SetActive(true);
             O();
             scriptLine();
-            //Line();
         }
 
         else
@@ -835,12 +777,13 @@ public class LodingTxt : MonoBehaviour
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
         DontDestroy.QuestIndex = data_Dialog[j+1]["scriptNumber"].ToString();
-        // Quest.Load.Quest = true;
         if (DontDestroy.QuestIndex.Equals("4_2"))
-            //badgeList.Ride.SetActive(true);
+            if(data_Dialog[j]["dialog"].ToString().Equals("end"))
+            {
+                PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+                DontDestroy.LastDay = DontDestroy.ToDay;
+            }
         PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-        PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-        DontDestroy.LastDay = DontDestroy.ToDay;
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클
     {

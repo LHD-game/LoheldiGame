@@ -11,11 +11,9 @@ public class NpcButtonClick : MonoBehaviour
 {
     [SerializeField]
     Text SecondButtonTxt;
-    //private Text TButtonTxt;
     private UIButton UIB;
     private FlieChoice Chat;
 
-    // Start is called before the first frame update
 
     public void SecondButtonClick()
     {
@@ -45,11 +43,15 @@ public class NpcButtonClick : MonoBehaviour
             UIB.Market.SetActive(true);
             UIB.chat.ChatEnd();
         }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("옷장 이용하기"))
+        {
+            SceneLoader.instance.GotoPlayerCloset();
+        }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 하미"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어!"))
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어!")&&click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어요!"))
         {
             SceneLoader.instance.GotoQuizGame();
         }

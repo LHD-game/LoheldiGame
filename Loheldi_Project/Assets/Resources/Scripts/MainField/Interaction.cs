@@ -51,6 +51,11 @@ public class Interaction : MonoBehaviour
             Farm = true;
             text.text = "≥Û¿Â";
         }
+        if (other.gameObject.name == "WallMirror")
+        {
+            Farm = true;
+            text.text = "∞≈øÔ";
+        }
     }
     /*private void Start()
     {

@@ -58,15 +58,19 @@ public class UIButton : MonoBehaviour
         {
             if (chat.bicycleRide.Ride)
                 chat.bicycleRide.RideOn();
+            
             GameObject NPC;
             NPC = GameObject.Find(Inter.NameNPC);
             Vector3 targetPositionNPC;
             Vector3 targetPositionPlayer;
-            targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+            if (!Inter.NameNPC.Equals("WallMirror"))
+            {
+                targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+                NPC.transform.LookAt(targetPositionNPC);
+            }
             targetPositionPlayer = new Vector3(NPC.transform.position.x, Player.transform.position.y, NPC.transform.position.z);
             Main_UI.SetActive(false);
             Chat.NpcChoice();
-            NPC.transform.LookAt(targetPositionNPC);
             Player.transform.LookAt(targetPositionPlayer);
              
         }

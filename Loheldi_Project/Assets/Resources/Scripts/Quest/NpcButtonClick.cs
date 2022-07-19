@@ -11,11 +11,9 @@ public class NpcButtonClick : MonoBehaviour
 {
     [SerializeField]
     Text SecondButtonTxt;
-    //private Text TButtonTxt;
     private UIButton UIB;
     private FlieChoice Chat;
 
-    // Start is called before the first frame update
 
     public void SecondButtonClick()
     {
@@ -45,11 +43,15 @@ public class NpcButtonClick : MonoBehaviour
             UIB.Market.SetActive(true);
             UIB.chat.ChatEnd();
         }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("¿ÊÀå ÀÌ¿ëÇÏ±â"))
+        {
+            SceneLoader.instance.GotoPlayerCloset();
+        }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("Äù½ºÆ® ÇÏ¹Ì"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("ÁØºñµÆ¾î!"))
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("ÁØºñµÆ¾î!")&&click.transform.GetChild(0).GetComponent<Text>().text.Equals("ÁØºñµÆ¾î¿ä!"))
         {
             SceneLoader.instance.GotoQuizGame();
         }
@@ -74,6 +76,8 @@ public class NpcButtonClick : MonoBehaviour
     void CheckQuest()
     {
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
+        Chat.EPin.SetActive(false);
+
 
         for (int i = 0; i < clone.Length; i++)
         {

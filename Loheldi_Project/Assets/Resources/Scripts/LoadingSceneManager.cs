@@ -18,19 +18,19 @@ public class LoadingSceneManager : MonoBehaviour
         switch (tipnum)
         {
             case 0:
-                tiptext.text = "우체통을 확인해보세요! 선물이나 특별 이벤트가 기다리고 있을지도 몰라요";
+                tiptext.text = "집 왼쪽의 작은 텃밭에서는 씨앗을 심고 수확할 수 있습니다.";
                 break;
             case 1:
-                tiptext.text = "미니게임을 통해 집을 꾸며보는 것은 어떨까요?";
+                tiptext.text = "미니게임을 통해 코인과 경험치를 획득할 수 있습니다.";
                 break;
             case 2:
-                tiptext.text = "당일 퀘스트에 도전하면 보상과 경험치를 획득할 수 있어요";
+                tiptext.text = "매일 새로운 메인 퀘스트를 수행할 수 있습니다. 풍성한 보상을 얻어 보세요.";
                 break;
             case 3:
-                tiptext.text = "그동안 모은 돈으로 뽑기도 해보세요! 레어 아이템이 뽑기에 숨겨져 있어요";
+                tiptext.text = "코인은 많이 모았나요? 슈퍼 앞에 있는 뽑기에 도전해 보세요.";
                 break;
             case 4:
-                tiptext.text = "게임에 필요한 데이터를 가져오고 있으니 잠시만 기다려 주세요";
+                tiptext.text = "게임에 필요한 데이터를 가져오고 있으니 잠시만 기다려 주세요.";
                 break;
             default:
                 break;

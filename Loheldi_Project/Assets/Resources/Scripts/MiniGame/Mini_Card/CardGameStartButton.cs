@@ -20,6 +20,7 @@ public class CardGameStartButton : MonoBehaviour
             //hp 1 감소
             PlayInfoManager.GetHP(-1);
             CardGameManager.GameStart = true;
+            Card_TimeSlider.instance.TimeInit();
             WelcomePanel.SetActive(false);
         }
         else    //0 이하라면: 게임 플레이 불가

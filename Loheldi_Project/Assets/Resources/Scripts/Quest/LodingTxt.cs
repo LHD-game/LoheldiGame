@@ -811,13 +811,17 @@ public class LodingTxt : MonoBehaviour
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
         DontDestroy.QuestIndex = data_Dialog[j+1]["scriptNumber"].ToString();
-        if (DontDestroy.QuestIndex.Equals("4_2"))
+        if (DontDestroy.QuestIndex.Equals("4_1"))
+            Main_UI.transform.Find("Ride").gameObject.SetActive(true);
             if(data_Dialog[j]["dialog"].ToString().Equals("end"))
             {
                 PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
                 DontDestroy.LastDay = DontDestroy.ToDay;
             }
-        PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+        if (DontDestroy.weekend)
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
+        else
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클
     {

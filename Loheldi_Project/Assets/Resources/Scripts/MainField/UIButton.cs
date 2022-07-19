@@ -63,7 +63,11 @@ public class UIButton : MonoBehaviour
             NPC = GameObject.Find(Inter.NameNPC);
             Vector3 targetPositionNPC;
             Vector3 targetPositionPlayer;
-            if (!Inter.NameNPC.Equals("WallMirror"))
+            if (Inter.NameNPC.Equals("WallMirror"))
+                Debug.Log("거울");
+            else if (chat.DontDestroy.QuestIndex.Equals("8_1"))
+                Debug.Log("메이 퀘스트");
+            else
             {
                 targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
                 NPC.transform.LookAt(targetPositionNPC);

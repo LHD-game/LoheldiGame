@@ -18,7 +18,7 @@ public class Animation : MonoBehaviour
         {
             chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
             chat.scriptLine();
-            Debug.Log("다버림");
+            //Debug.Log("다버림");
         }
         Destroy(GameObject.Find(DestryedObject));
     }

@@ -182,12 +182,18 @@ public class LodingTxt : MonoBehaviour
                     timer = 0;
                 }
                 JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * QBikeSpeed;
-                if (Maxtime == 5)
-                    {
+                if (Maxtime == 8)
+                {
                     BikeNPC.transform.position = Player.position + NPCBike;
                     BikeNPC.transform.rotation = Player.rotation;
                 }
+                else
+                {
+                    Vector3 targetPositionNPC;
+                    targetPositionNPC = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
+                    BikeNPC.transform.LookAt(targetPositionNPC);
                 }
+            }
             timer += Time.deltaTime;
             JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f); //¾Õ ¹æÇâÀ¸·Î ¹Ð±â (¹æÇâ * Èû)
         }
@@ -203,7 +209,7 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
-        Debug.Log("ÄûÁî3");
+        //Debug.Log("ÄûÁî3");
         Txt = chatTxt;
         Name = chatName;
         data_Dialog = CSVReader.Read(FileAdress);
@@ -216,7 +222,7 @@ public class LodingTxt : MonoBehaviour
                     ++j;
                 chatCanvus.SetActive(true);
                 Line();
-                Debug.Log("ÄûÁî4");
+                //Debug.Log("ÄûÁî4");
                 break;
             }
             else
@@ -391,12 +397,12 @@ public class LodingTxt : MonoBehaviour
             }
             else if (BikeQ)
             {
+                
                 //ÆäÀÌµå ÀÎ ÆäÀÌµå ¾Æ¿ôÇÏ¸é¼­ È­¸é¿¡ ÇÑ½Ã°£ ÈÄ... ¶ç¿ì±â
                 QBikeSpeed = 12;
                 Maxtime = 3;
                 Player.position = new Vector3(36, 5, -23);
                 BikeNPC.transform.position = Player.position + new Vector3(10, 0, 10);
-                BikeNPC.transform.rotation = Quaternion.Euler(0, -90, 0);
                 Player.rotation = Player.rotation = Quaternion.Euler(0, 90, 0);
                 bikerotate = false;
                 timer = 0;
@@ -420,6 +426,18 @@ public class LodingTxt : MonoBehaviour
             Note.SetActive(true);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("noteEnd"))
+        {
+            Note.SetActive(false);
+            ChatWin.SetActive(true);
+            scriptLine();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("nutrient"))        //Äù½ºÆ®Áß°£¾Öµé
+        {
+            j++;
+            ChatWin.SetActive(false);
+            Note.SetActive(true);
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("nutrientEnd"))
         {
             Note.SetActive(false);
             ChatWin.SetActive(true);
@@ -560,7 +578,7 @@ public class LodingTxt : MonoBehaviour
     }
     public void Line()  //ÁÙ³Ñ±è (scriptTypeÀÌ ¹ºÁö °É·¯³¿)
     {
-        Debug.Log(data_Dialog[j]["scriptNumber"].ToString());
+        //Debug.Log(data_Dialog[j]["scriptNumber"].ToString());
         if (tuto && tutoFinish)
         {
             chatCanvus.SetActive(true);
@@ -622,7 +640,7 @@ public class LodingTxt : MonoBehaviour
     {
         c= Int32.Parse(data_Dialog[j]["cuttoon"].ToString());
         cuttoon.SetActive(true);
-        Debug.Log("ÄÆÅ÷°¹¼ö=" + cuttoonImageList.Length);
+        //Debug.Log("ÄÆÅ÷°¹¼ö=" + cuttoonImageList.Length);
         cuttoonspriteR = cuttoon.GetComponent<Image>();
         cuttoonspriteR.sprite = cuttoonImageList[c];
     }
@@ -789,7 +807,7 @@ public class LodingTxt : MonoBehaviour
     {
         Debug.Log("¹ÝÂ¦");
         ParticleSystem newfx = Instantiate(hairPs);
-        newfx.transform.position = go.transform.position+new Vector3(0,10,0);
+        newfx.transform.position = go.transform.position+new Vector3(0,5,0);
         newfx.transform.SetParent(go.transform);
 
         newfx.Play();

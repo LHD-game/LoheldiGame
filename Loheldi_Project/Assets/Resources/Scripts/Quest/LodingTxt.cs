@@ -158,6 +158,7 @@ public class LodingTxt : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         if (BikeQ)
         {
             if (JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
@@ -615,6 +616,21 @@ public class LodingTxt : MonoBehaviour
     
     public void scriptLine()  //스크립트 띄우는 거 (어굴 이미지+ 이름+ 뜨는 텍스트)
     {
+        if (Quest.note)
+        {
+            if (data_Dialog[j]["scriptNumber"].ToString().Equals("8_2"))
+            {
+                GameObject NPC = GameObject.Find(Inter.NameNPC);
+                Vector3 targetPositionNPC;
+                targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+                NPC.transform.LookAt(targetPositionNPC);
+                Quest.note = false;
+                GameObject[] objs = GameObject.FindGameObjectsWithTag("note");
+                for (int i = 0; i < objs.Length; i++)
+                    Destroy(objs[i]);
+                
+            }
+        }
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());
         spriteR.sprite = CCImageList[l];

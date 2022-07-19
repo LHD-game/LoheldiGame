@@ -21,6 +21,8 @@ public class QuestScript : MonoBehaviour
     public GameObject[] ExclamationMark;
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
 
+    public bool note=false;
+
     private int QuestNum;
     FlieChoice file;
 
@@ -39,6 +41,7 @@ public class QuestScript : MonoBehaviour
         else if (Load.LastDay != Load.ToDay)
             QuestCheck();
     }
+
     private void QuestCheck()
     {
         Debug.Log("퀘스트 체크 실행");
@@ -103,6 +106,11 @@ public class QuestScript : MonoBehaviour
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (Quest_Mail[Q]["QID"].ToString().Equals("4_1"))
                 Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
+        if (Quest_Mail[Q]["QID"].ToString().Equals("8_1"))
+        {
+            note = true;
+            GameObject.Find("Mei").transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
         if (SceneManager.GetActiveScene().name == "MainField")
             ExclamationMarkCreate();
     }

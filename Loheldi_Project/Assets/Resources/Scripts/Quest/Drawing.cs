@@ -304,7 +304,7 @@ public class Drawing : MonoBehaviour
                                 break;
                             case 5:
                                 RectTransform.anchoredPosition = new Vector2(1157f, -215f);
-                                Debug.Log("끝!");
+                                //Debug.Log("끝!");
                                 Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
                                 break;
                         }
@@ -350,7 +350,7 @@ public class Drawing : MonoBehaviour
     {
         GameObject click = EventSystem.current.currentSelectedGameObject;
         RectTransform = click.GetComponent<RectTransform>();
-        Debug.Log(click.gameObject.name);
+        //Debug.Log(click.gameObject.name);
         Destroy(click.GetComponent<Button>());
         if (click.name.Equals("ProtectiveGearRk"))
         {
@@ -377,7 +377,7 @@ public class Drawing : MonoBehaviour
             BikeAnimator[4].SetTrigger("H");
             lastButton = 4;
         }
-        Debug.Log(RectTransform.anchoredPosition);
+        //Debug.Log(RectTransform.anchoredPosition);
     }
 
     public void WearOut()
@@ -388,9 +388,9 @@ public class Drawing : MonoBehaviour
             chat.Bike.SetActive(false);
             chat.Chat.SetActive(true);
             chat.Line();
-            Debug.Log("in"+protect);
+            //Debug.Log("in"+protect);
         }
-        Debug.Log(protect);
+        //Debug.Log(protect);
     }
 
 }

@@ -10,6 +10,7 @@ public class ClickMovement : MonoBehaviour
     int layerMask;
 
     //플레이어 애니메이션
+    public GameObject Player;
     public Animator PlayerAnimation;
     public Animator ToothbrushAnimation;
     public GameObject SoundEffectManager;
@@ -48,16 +49,16 @@ public class ClickMovement : MonoBehaviour
             if (Vector3.Distance(destination, transform.position) <= 0.1f)
             {
                 PlayerAnimation.SetBool("BrushMove", true);
-                ToothbrushAnimation.SetBool("BrushMove", true);
+                ToothbrushAnimation.SetBool("BrushStart", true);
                 SoundEffectManager.GetComponent<SoundEffect>().Sound("ToothBrushing");
                 isMove = false;
             }
             else
             {
                 PlayerAnimation.SetBool("BrushMove", false);
-                ToothbrushAnimation.SetBool("BrushMove", false);
+                ToothbrushAnimation.SetBool("BrushStart", false);
                 var dir = destination - transform.position;
-                transform.position += dir.normalized * Time.deltaTime * 100f;
+                Player.transform.position += dir.normalized * Time.deltaTime * 100f;
             }
         }
     }

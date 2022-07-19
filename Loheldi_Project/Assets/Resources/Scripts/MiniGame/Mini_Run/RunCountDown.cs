@@ -81,7 +81,10 @@ public class RunCountDown : MonoBehaviour
             CountEnd = true;
             //SoundManager.GetComponent<SoundEffect>().Sound("RunCountFinish");
             CancelInvoke("NumAppear");
+
             TrafficLight.gameObject.SetActive(false);
+            Debug.Log(SoundManager.GetComponent<RunGameManager>().nowNPC.GetChild(0).GetChild(2));
+            SoundManager.GetComponent<RunGameManager>().nowNPC.GetChild(0).GetChild(2).GetComponent<Animator>().SetBool("NPCRunBool", true);
         }
         timer--;
     }

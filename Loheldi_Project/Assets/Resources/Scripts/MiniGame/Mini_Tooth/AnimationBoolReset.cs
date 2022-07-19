@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationBoolReset : StateMachineBehaviour
+public class AnimationBoolReset : MonoBehaviour
 {
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public void Reset()
     {
-        animator.SetBool("BrushMove", false);
+        Animator animator = this.GetComponent<Animator>();
+        animator.SetBool("BrushStart", false);
     }
 }

@@ -37,7 +37,7 @@ public class InvenCategory : MonoBehaviour
         gaguItem = new List<Dictionary<string, object>>();
         cropsItem = new List<Dictionary<string, object>>();
 
-        GetChartContents("51350");
+        GetChartContents("55031");
         MakeCategory(c_super, superItem, super_list);
         MakeCategory(c_gagu, gaguItem, gagu_list);
         MakeCategory(c_crops, cropsItem, crop_list);
@@ -211,11 +211,14 @@ public class InvenCategory : MonoBehaviour
 
                 GameObject disable_img = child.transform.Find("Disable").gameObject;
                 disable_img.SetActive(true);
+                Debug.Log(myInven_rows.Count);
                 for (int j = 0; j < myInven_rows.Count; j++)
                 {
+                    Debug.Log("AAAAAAAAAAAAAA");
                     MyItem data = pj.ParseBackendData<MyItem>(myInven_rows[j]);
                     if (data.ICode.Equals(dialog[i]["ICode"].ToString()))
                     {
+                        Debug.Log("BBBBBBBBBBBBBBBB");
                         //비활성 창 오브젝트(Disable)를 비활성화
                         disable_img.SetActive(false);
                         //change catalog box price
@@ -225,6 +228,60 @@ public class InvenCategory : MonoBehaviour
                         a_txt.text = data.Amount.ToString();
                         break;
                     }
+                }
+            }
+        }
+    }
+    public void MakeCategoryforFarming(GameObject category, List<Dictionary<string, object>> dialog, List<GameObject> itemObject)
+    {
+
+        itemBtn = (GameObject)Resources.Load("Prefabs/UI/InvenItemforFarming");
+        ParsingJSON pj = new ParsingJSON();
+
+        for (int i = 0; i < dialog.Count; i++)
+        {
+            //create caltalog box
+            child = Instantiate(itemBtn);    //create itemBtn instance
+            child.transform.SetParent(category.transform, false);  //move instance: child
+                                                                    //아이템 박스 크기 재설정
+            RectTransform rt = child.GetComponent<RectTransform>();
+            rt.localScale = new Vector3(1f, 1f, 1f);
+
+            itemObject.Add(child);
+
+            GameObject ItemBtn = child.transform.Find("ItemBtn").gameObject;
+
+            //change catalog box img
+            GameObject item_img = ItemBtn.transform.Find("ItemImg").gameObject;
+            Image img = item_img.GetComponent<Image>();
+            img.sprite = Resources.Load<Sprite>("Sprites/Store/Catalog_Images/" + dialog[i]["ICode"] + "_catalog");
+
+
+            //change catalog box item name (선택시 해당 아이템을 찾기 위한 꼬리표 용도)
+            GameObject item_name = ItemBtn.transform.Find("ItemName").gameObject;
+            Text txt = item_name.GetComponent<Text>();
+            txt.text = dialog[i]["IName"].ToString();
+
+            //change catalog box item code
+            GameObject item_code = ItemBtn.transform.Find("ItemCode").gameObject;
+            Text item_code_txt = item_code.GetComponent<Text>();
+            item_code_txt.text = dialog[i]["ICode"].ToString();
+
+            GameObject disable_img = child.transform.Find("Disable").gameObject;
+            disable_img.SetActive(true);
+            for (int j = 0; j < myInven_rows.Count; j++)
+            {
+                MyItem data = pj.ParseBackendData<MyItem>(myInven_rows[j]);
+                if (data.ICode.Equals(dialog[i]["ICode"].ToString()))
+                {
+                    //비활성 창 오브젝트(Disable)를 비활성화
+                    disable_img.SetActive(false);
+                    //change catalog box price
+                    GameObject amount_parent = ItemBtn.transform.Find("Amount").gameObject;
+                    GameObject amount_text = amount_parent.transform.Find("Text").gameObject;
+                    Text a_txt = amount_text.GetComponent<Text>();
+                    a_txt.text = data.Amount.ToString();
+                    break;
                 }
             }
         }

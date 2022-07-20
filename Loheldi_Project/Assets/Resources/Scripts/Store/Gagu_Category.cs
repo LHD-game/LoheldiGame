@@ -34,7 +34,7 @@ public class Gagu_Category : StoreCategoryControl
 
     public void PopGaguStore()
     {
-        GetChartContents("51350");
+        GetChartContents("55031");
         MakeCategory(c_wood, woodItem);
         MakeCategory(c_modern, modernItem);
         MakeCategory(c_kitsch, kitschItem);

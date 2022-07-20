@@ -55,7 +55,7 @@ public class FurnitureChangeClick : MonoBehaviour
                             this.GetComponent<InvenCategory>().superItem.Clear();
                             this.GetComponent<InvenCategory>().gaguItem.Clear();
                             this.GetComponent<InvenCategory>().cropsItem.Clear();
-                            this.GetComponent<InvenCategory>().GetChartContents("51350");
+                            this.GetComponent<InvenCategory>().GetChartContents("55031");
                             this.GetComponent<InvenCategory>().MakeCategoryforHousing(Contents, this.GetComponent<InvenCategory>().gaguItem, this.GetComponent<InvenCategory>().gagu_list, ItemType);
                             Buttons.transform.position = Input.mousePosition;                   //버튼을 클릭한 위치에 생성하기
                             Buttons.SetActive(true);

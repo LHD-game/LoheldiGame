@@ -11,7 +11,9 @@ public class Interaction : MonoBehaviour
     public string NameNPC;
     public bool Door;
     public bool Gacha;
-    public bool Farm;
+    public bool Farm = false;
+
+    public GameObject FarmingMaster;
 
     private ChangeMode change;
     void OnTriggerEnter(Collider other)             //´Ù¸¥ ÄÝ¸®´õ¿Í ºÎµóÇûÀ»¶§
@@ -48,6 +50,7 @@ public class Interaction : MonoBehaviour
         }
         if (other.gameObject.name == "Field")
         {
+            FarmingMaster.GetComponent<FarmingMaster>().SeedList();
             Farm = true;
             text.text = "³óÀå";
         }

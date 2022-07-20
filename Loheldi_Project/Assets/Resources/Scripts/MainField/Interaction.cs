@@ -46,7 +46,7 @@ public class Interaction : MonoBehaviour
             Gacha = true;
             text.text = "ªÃ±‚";
         }
-        if (other.gameObject.name == "Farm")
+        if (other.gameObject.name == "Field")
         {
             Farm = true;
             text.text = "≥Û¿Â";

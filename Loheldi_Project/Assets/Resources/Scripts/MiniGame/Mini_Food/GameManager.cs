@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
     private void InitScore()
     {
         score = 0;
-        scoreTxt.text = "점수: " + score;
+        scoreTxt.text = "현재 점수: " + score;
     }
 
     
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
         {
             highScore = score;
         }
-        scoreTxt.text = "점수: " + score;
+        scoreTxt.text = "현재 점수: " + score;
         highScoreTxt.text = "최고점수: " + highScore;
         //Debug.Log("score: "+score);
     }

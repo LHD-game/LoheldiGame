@@ -46,7 +46,7 @@ public class Interaction : MonoBehaviour
             Gacha = true;
             text.text = "뽑기";
         }
-        if (other.gameObject.name == "Farm")
+        if (other.gameObject.name == "Field")
         {
             Farm = true;
             text.text = "농장";
@@ -80,7 +80,7 @@ public class Interaction : MonoBehaviour
 
     void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때
     {
-        if (other.gameObject.tag == "NPC" || other.gameObject.name == "InDoor" || other.gameObject.name == "GachaMachine" || other.gameObject.name == "Farm")          //콜리더의 Tag가 NPC라면
+        if (other.gameObject.tag == "NPC" || other.gameObject.name == "InDoor" || other.gameObject.name == "GachaMachine" || other.gameObject.name == "Field")          //콜리더의 Tag가 NPC라면
         {
             Door = false;
             Gacha = false;

@@ -91,7 +91,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("Level", 1);
         param.Add("NowExp", 0);
         param.Add("MaxExp", 10);
-        param.Add("QuestPreg", "0_1");
+        param.Add("QuestPreg", "0_0");
         param.Add("LastQTime", today.Day);
         param.Add("HP", 5);
         param.Add("LastHPTime", today.Day);

@@ -2756,6 +2756,9 @@ MonoBehaviour:
   WelcomePanel: {fileID: 1178384958}
   GameOverPanel: {fileID: 931707906}
   PausePanel: {fileID: 470713811}
+  ResultTxt: {fileID: 931707909}
+  ResultCoinTxt: {fileID: 931707908}
+  ResultExpTxt: {fileID: 931707907}
   SoundManager: {fileID: 522188649}
   PlayerAnimation: {fileID: 1244887070}
 --- !u!114 &522188652
@@ -5418,6 +5421,39 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8624122064201255298, guid: d140ef1643313d04a9c0b0956fd49f52, type: 3}
   m_PrefabInstance: {fileID: 931707904}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &931707907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9156181378059473115, guid: d140ef1643313d04a9c0b0956fd49f52, type: 3}
+  m_PrefabInstance: {fileID: 931707904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &931707908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 289257709395470723, guid: d140ef1643313d04a9c0b0956fd49f52, type: 3}
+  m_PrefabInstance: {fileID: 931707904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &931707909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3715097529732891545, guid: d140ef1643313d04a9c0b0956fd49f52, type: 3}
+  m_PrefabInstance: {fileID: 931707904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &932407733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7062,7 +7098,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3348349259548654465, guid: aebc1b842ca66854a9f8aafe3906ac44, type: 3}
       propertyPath: m_Text
-      value: "\uC591\uCE58 \uAC8C\uC784"
+      value: "\uC591\uCE58\uD558\uAE30"
       objectReference: {fileID: 0}
     - target: {fileID: 3348349259697357439, guid: aebc1b842ca66854a9f8aafe3906ac44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

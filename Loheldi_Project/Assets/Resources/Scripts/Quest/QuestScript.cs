@@ -106,10 +106,20 @@ public class QuestScript : MonoBehaviour
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (Quest_Mail[Q]["QID"].ToString().Equals("4_1"))
                 Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
-        if (Quest_Mail[Q]["QID"].ToString().Equals("8_1"))
+        else if (Quest_Mail[Q]["QID"].ToString().Equals("8_1"))
         {
             note = true;
             GameObject.Find("Mei").transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Quest_Mail[Q]["QID"].ToString().Equals("13_1"))
+        {
+            note = true;
+            GameObject.Find("Suho").transform.position = new Vector3(170, 15, -122);
+            GameObject.Find("Suho").transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (Quest_Mail[Q]["QID"].ToString().Equals("14_1"))
+        {
+            chat.NPCRope.SetActive(true);
         }
         if (SceneManager.GetActiveScene().name == "MainField")
             ExclamationMarkCreate();

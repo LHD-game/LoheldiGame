@@ -63,6 +63,8 @@ public class LodingTxt : MonoBehaviour
     public GameObject Bike;
     public GameObject BikeNPC;
 
+    public GameObject AppleTreeObj;
+
     public int NPCButton = 0;
     public string LoadTxt;
     private string[] Xdialog = {"다시 한번 생각해봐.","아쉽지만 틀렸어.","땡!","다시 도전해봐"};
@@ -429,7 +431,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("noteEnd"))
         {
             Note.SetActive(false);
-            ChatWin.SetActive(true);
+            //ChatWin.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("nutrient"))        //퀘스트중간애들
@@ -441,7 +443,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("nutrientEnd"))
         {
             Note.SetActive(false);
-            ChatWin.SetActive(true);
+            //ChatWin.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("train"))
@@ -492,12 +494,15 @@ public class LodingTxt : MonoBehaviour
             //줄넘기
             if (data_Dialog[j]["cuttoon"].ToString().Equals("0"))
             {
-                GameObject.Find("Himchan").transform.rotation = Quaternion.Euler(0, -90, 0);
+                GameObject.Find("Himchan").transform.rotation = Quaternion.Euler(0, 180, 0);
+                PlayerRope.SetActive(true);
                 NPCJumpAnimator.SetBool("JumpRope", true);
                 NPCJumpAnimatorRope.SetBool("JumpRope", true);
             }
             else if (data_Dialog[j]["cuttoon"].ToString().Equals("1"))
             {
+                Player.position = new Vector3(54, 5, -14);
+                Player.rotation = Quaternion.Euler(0, 180, 0);
                 JumpAnimator.SetBool("JumpRope", true);
                 JumpAnimatorRope.SetBool("JumpRope", true);
                 JumpAnimator.speed = 0.3f;
@@ -515,16 +520,25 @@ public class LodingTxt : MonoBehaviour
             }
             else if (data_Dialog[j]["cuttoon"].ToString().Equals("4"))
             {
-                NPCRope.transform.rotation = Quaternion.Euler(-180, 0, -180);
+                NPCRope.transform.rotation = Quaternion.Euler(new Vector3(-180, 180, -180));
                 NPCJumpAnimator.SetBool("JumpRope", true);
                 NPCJumpAnimatorRope.SetBool("JumpRope", true);
             }
             else if (data_Dialog[j]["cuttoon"].ToString().Equals("5"))
             {
-                NPCRope.transform.rotation = Quaternion.Euler(-180, 180, -180);
+                NPCRope.transform.rotation = Quaternion.Euler(-180, 0, -180);
                 NPCJumpAnimator.SetBool("JumpRope", true);
                 NPCJumpAnimatorRope.SetBool("JumpRope", true);
                 NPCJumpAnimatorRope.speed = 2f;
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("6"))
+            {
+                PlayerRope.SetActive(false);
+                NPCRope.SetActive(false);
+            }
+            else if (data_Dialog[j]["cuttoon"].ToString().Equals("7"))
+            {
+                PlayerRope.SetActive(true);
             }
             Invoke("scriptLine", 2f);
         }
@@ -560,25 +574,27 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("AppleTree"))
         {
             AppleTree.SetActive(true);
-            Chat.SetActive(true);
-            scriptLine();
+            Chat.SetActive(false);
+            //scriptLine();
+            j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("AppleTreeEnd"))
         {
-            MasterOfMtLife.SetActive(false);
             Chat.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MakeAppleTree"))
         {
             //사과 나무 프리펩 쩌구저꾸저
-            Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
+            AppleTree.SetActive(false);
+            AppleTreeObj.SetActive(true);
             scriptLine();
         }
         
     }
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
+        block.SetActive(true);
         //Debug.Log(data_Dialog[j]["scriptNumber"].ToString());
         if (tuto && tutoFinish)
         {
@@ -616,29 +632,29 @@ public class LodingTxt : MonoBehaviour
     
     public void scriptLine()  //스크립트 띄우는 거 (어굴 이미지+ 이름+ 뜨는 텍스트)
     {
-        if (Quest.note)
+        //block.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "MainField")
         {
-            if (data_Dialog[j]["scriptNumber"].ToString().Equals("8_2"))
+            if (Quest.note)
             {
-                GameObject NPC = GameObject.Find(Inter.NameNPC);
-                Vector3 targetPositionNPC;
-                targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
-                NPC.transform.LookAt(targetPositionNPC);
-                Quest.note = false;
-                GameObject[] objs = GameObject.FindGameObjectsWithTag("note");
-                for (int i = 0; i < objs.Length; i++)
-                    Destroy(objs[i]);
-                
-            }
-        }
-        spriteR = CCImage.GetComponent<Image>();
-        l = Int32.Parse(data_Dialog[j]["image"].ToString());
-        spriteR.sprite = CCImageList[l];
+                if (data_Dialog[j]["scriptNumber"].ToString().Equals("8_2"))
+                {
+                    GameObject NPC = GameObject.Find(Inter.NameNPC);
+                    Vector3 targetPositionNPC;
+                    targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+                    NPC.transform.LookAt(targetPositionNPC);
+                    Quest.note = false;
+                    GameObject[] objs = GameObject.FindGameObjectsWithTag("note");
+                    for (int i = 0; i < objs.Length; i++)
+                        Destroy(objs[i]);
 
-        if (ChatWin.activeSelf == false)
-            ChatWin.SetActive(true);
-        
-        
+                }
+            }
+            spriteR = CCImage.GetComponent<Image>();
+            l = Int32.Parse(data_Dialog[j]["image"].ToString());
+            spriteR.sprite = CCImageList[l];
+        }
+
         LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName); //로컬값 가져오긴
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))
             Name.text = PlayerName;
@@ -647,8 +663,6 @@ public class LodingTxt : MonoBehaviour
         
         StartCoroutine(_typing());
         Arrow.SetActive(false);
-        block.SetActive(true);
-
         j++;
     }
 
@@ -709,7 +723,9 @@ public class LodingTxt : MonoBehaviour
 
     IEnumerator _typing()  //타이핑 효과
     {
-        
+        if (ChatWin.activeSelf == false)
+            ChatWin.SetActive(true);
+
         Txt.text = " ";
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < LoadTxt.Length + 1; i++)

@@ -67,6 +67,8 @@ public class UIButton : MonoBehaviour
                 Debug.Log("거울");
             else if (chat.DontDestroy.QuestIndex.Equals("8_1"))
                 Debug.Log("메이 퀘스트");
+            else if (chat.DontDestroy.QuestIndex.Equals("13_1"))
+                Debug.Log("수호 퀘스트");
             else
             {
                 targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);

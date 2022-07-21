@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RunGameManager : MonoBehaviour
 {
@@ -22,8 +23,11 @@ public class RunGameManager : MonoBehaviour
     public GameObject PausePanel;
     public GameObject RunBtnPanel;
 
-    public GameObject Win_txt;
-    public GameObject Lose_txt;
+    //결과 출력
+    public Text ResultTxt;
+    public Text ResultCoinTxt;
+    public Text ResultExpTxt;
+    static bool is_win = false; //승리시 true
 
     private Vector3 markerPos;
 
@@ -63,27 +67,35 @@ public class RunGameManager : MonoBehaviour
 
             EndMove();
 
-            if (nowNPC.position.z >= Goll)
+            if (nowNPC.position.z >= Goll)  //패배
             {
+                is_win = false;
                 nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
                 RunBtnPanel.SetActive(false);
-                Lose_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
+
+                
+
                 if (!FinishSound)
                 {
+                    GameResult();   // 1번만 실행되어야 해서 이 조건문에 낑겨 넣었습니다^^;
                     SoundManager sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
                     sound.Loose();
                     FinishSound = true;
                 }
             }
-            else if (Player.position.z >= Goll)
+            else if (Player.position.z >= Goll) //승리
             {
+                is_win = true;
                 nowNPC.gameObject.GetComponent<RunNPC>().enabled = false;
                 RunBtnPanel.SetActive(false);
-                Win_txt.gameObject.SetActive(true);
                 GameOverPanel.SetActive(true);
+
+                
+
                 if (!FinishSound)
                 {
+                    GameResult();
                     SoundManager sound = GameObject.Find("SoundManager").GetComponent<SoundManager>();
                     sound.Win();
                     FinishSound = true;
@@ -124,9 +136,6 @@ public class RunGameManager : MonoBehaviour
 
         difficulty = 0;
         isPause = false;
-
-        Win_txt.SetActive(false);
-        Lose_txt.SetActive(false);
 
         GameOverPanel.SetActive(false);
         WelcomePanel.SetActive(true);
@@ -171,5 +180,65 @@ public class RunGameManager : MonoBehaviour
             EndLine.position = new Vector3(50, 0, 4298);
             EndBlock.position = new Vector3(50, 0, 4440);
         }
+    }
+
+    void GameResult()   //점수에 따른 보상 획득 메소드
+    {
+        //코인
+        //쉬움 난이도: 승리 - 10 패배 - 5
+        //보통 난이도: 승리 - 20 패배 - 7
+        //어려움 난이도: 승리 - 30 패배 - 9
+
+        float get_exp = 10f;
+        int get_coin = 0;
+        string result_txt = "";
+
+        if(difficulty == 1) //쉬움 난이도
+        {
+            if (is_win) //승리시
+            {
+                get_coin = 10;
+                result_txt = "이겼다!";
+            }
+            else
+            {
+                get_coin = 5;
+                result_txt = "졌다….";
+            }
+        }
+        else if (difficulty == 2)   //보통 난이도
+        {
+            if (is_win) //승리시
+            {
+                get_coin = 20;
+                result_txt = "이겼다!";
+            }
+            else
+            {
+                get_coin = 7;
+                result_txt = "졌다….";
+            }
+        }
+        else if(difficulty == 3)    //어려움 난이도
+        {
+            if (is_win) //승리시
+            {
+                get_coin = 30;
+                result_txt = "이겼다!";
+            }
+            else
+            {
+                get_coin = 9;
+                result_txt = "졌다….";
+            }
+        }
+
+        PlayInfoManager.GetExp(get_exp);
+        PlayInfoManager.GetCoin(get_coin);
+
+        //보상 결과를 화면에 띄움
+        ResultTxt.text = result_txt;
+        ResultCoinTxt.text = get_coin.ToString();
+        ResultExpTxt.text = get_exp.ToString();
     }
 }

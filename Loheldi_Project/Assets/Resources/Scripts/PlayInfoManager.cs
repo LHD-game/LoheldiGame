@@ -1,4 +1,5 @@
 using BackEnd;
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class PlayInfoManager : MonoBehaviour
         float over_exp = max_exp - now_exp;
 
         //if (over_exp <= 0) --> 현재 레벨 += 1, 현재 경험치 = over_exp, 최대 경험치 += 20
-        if(over_exp <= 0)
+        if (over_exp <= 0)
         {
             level += 1;
             now_exp = over_exp;
@@ -56,7 +57,7 @@ public class PlayInfoManager : MonoBehaviour
 
 
     //서버 상 play_info에 prefs저장하는 메소드
-    static void  SavePlayInfo()
+    static void SavePlayInfo()
     {
         int new_wallet = PlayerPrefs.GetInt("Wallet");
         int new_level = PlayerPrefs.GetInt("Level");
@@ -92,6 +93,7 @@ public class PlayInfoManager : MonoBehaviour
         {
             Debug.Log("SavePlayInfo 실패.");
         }
+
         
     }
 }

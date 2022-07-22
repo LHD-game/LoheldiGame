@@ -106,6 +106,43 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         {
             Debug.Log("PlayerInfoInit() Fail");
         }
+        var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
+        
+        Param param2 = new Param();
+        if (bro2.IsSuccess())
+        {
+            if (bro2.GetReturnValuetoJSON()["rows"].Count <= 0)
+            {
+                string selectedProbabilityFileId = "54787";
+
+                var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
+                JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
+                string QID = rows[0]["QID"]["S"].ToString();
+                string QName = rows[0]["QName"]["S"].ToString();
+                string From = rows[0]["From"]["S"].ToString();
+                string Content = rows[0]["Content"]["S"].ToString();
+                string Reward = rows[0]["Reward"]["S"].ToString();
+                string authorName = rows[0]["authorName"]["S"].ToString();
+
+                Debug.Log(QID);
+                Debug.Log(QName);
+                Debug.Log(From);
+                Debug.Log(Content);
+                Debug.Log(Reward);
+                Debug.Log(authorName);
+
+                param2.Add("QID", QID);
+                param2.Add("QName", QName);
+                param2.Add("From", From);
+                param2.Add("Content", Content);
+                param2.Add("Reward", Reward);
+                param2.Add("authorName", authorName);
+                Backend.GameData.Insert("QUEST_INFO", param2);
+
+
+            }
+
+        }
     }
 
     //play info 테이블 가져와 로컬에 저장하는 메소드

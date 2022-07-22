@@ -22,6 +22,11 @@ public class CardGameManager : MonoBehaviour
     public GameObject GameOverPanel;
     public GameObject PausePanel;
 
+    //결과 출력
+    public Text ResultTxt;
+    public Text ResultCoinTxt;
+    public Text ResultExpTxt;
+
     int cardCnt;
     int flipCnt = 0;
 
@@ -198,13 +203,31 @@ public class CardGameManager : MonoBehaviour
     {
         GameOverPanel.SetActive(true);
         GameStart = false;
+        GameResult();
     }
     public void StageFail()
     {
         GameStart = false;
         GameOverPanel.SetActive(true);
         DestroyAll();
+        GameResult();
     }
+
+    void GameResult()   //점수에 따른 보상 획득 메소드
+    {
+        float get_exp = 10f;
+        int get_coin = stageNum * 5;    //단계별로 * 5 (5, 10, 15, 20, 25...)
+        
+
+        PlayInfoManager.GetExp(get_exp);
+        PlayInfoManager.GetCoin(get_coin);
+
+        //보상 결과를 화면에 띄움
+        ResultTxt.text = stageNum + " 단계";
+        ResultCoinTxt.text = get_coin.ToString();
+        ResultExpTxt.text = get_exp.ToString();
+    }
+
     IEnumerator MakeStage()
     {
         state = STATE.WAIT;

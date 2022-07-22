@@ -15,51 +15,54 @@ public class QuestLoad : MonoBehaviour
         if (bro.IsSuccess())
         {
             var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
-            
+
+            string selectedProbabilityFileId = "54787";
+
+            var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
+            if (!bro3.IsSuccess())
+            {
+                Debug.LogError(bro3.ToString());
+                return;
+            }
             if (bro2.IsSuccess())
             {
-                if (bro2.GetReturnValuetoJSON()["rows"].Count <= 0)
+                /*if (bro2.GetReturnValuetoJSON()["rows"].Count <= 0)
                 {
                    
-                    /*string QID = bro2.FlattenRows()[0]["QID"].ToString();*/
+                    *//*string QID = bro2.FlattenRows()[0]["QID"].ToString();*/
                     /*string Exp = rows[0]["Reward"]["Exp"].ToString();
                     string Coin = rows[0]["Reward"]["Coin"].ToString();
                     string Gagu = rows[0]["Reward"]["1010102"].ToString();*/
 
-                    param.Add("QID", "0_1");
+                    /*param.Add("QID", "0_0");
                     param.Add("Exp", "10");
                     param.Add("Coin", "10");
                     param.Add("1010102", "3");
 
                     Backend.GameData.Insert("QUEST_INFO", param);
-                    Debug.Log(param);
-                }
-                else
+                    Debug.Log(param);*//*
+                }*/
+                
                 {
                     string QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
                     Debug.Log(QuestPreg);
-                    string newQuest = bro2.Rows()[0]["QID"]["S"].ToString();
-                    Debug.Log(newQuest);
-                    if (QuestPreg == newQuest)
+                    /*string newQuest = bro2.Rows()[0]["QID"]["S"].ToString();
+                    Debug.Log(newQuest);*/
+                    JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
+                    string QchartID = rows[0]["QID"]["S"].ToString();
+                    if (QuestPreg == QchartID)
                     {
                         Debug.Log("다음퀘스트 준비완료");
-                        string selectedProbabilityFileId = "54787";
-
-                        var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
-                        if (!bro3.IsSuccess())
-                        {
-                            Debug.LogError(bro3.ToString());
-                            return;
-                        }
-
-                        JsonData json = bro3.FlattenRows();
-                        JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
-
-                        Param param2 = new Param();
-                        /*아래 반복문은 배열 초과 오류가 나기에 수정해두었습니다. - 이민진*/
+                        
                         for (int i = 0; i < rows.Count; i++)
                         {
-                            string QID = rows[i]["QID"]["S"].ToString();
+                            
+                        
+                        string QID = rows[i]["QID"]["S"].ToString();
+                        Param param2 = new Param();
+                        /*아래 반복문은 배열 초과 오류가 나기에 수정해두었습니다. - 이민진*/
+                        
+                            
                             if (QID == QuestPreg)
                             {
                                 string QID2 = rows[i+1]["QID"]["S"].ToString();

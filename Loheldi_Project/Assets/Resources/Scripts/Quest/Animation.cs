@@ -45,4 +45,9 @@ public class Animation : MonoBehaviour
         Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
         Draw.WearOut();
     }
+    void FinishNutrient()
+    {
+        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
+        Draw.Cook();
+    }
 }

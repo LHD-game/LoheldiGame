@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.Video;
 
 public class LodingTxt : MonoBehaviour
@@ -59,6 +60,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
     public GameObject screenShot;
+    public GameObject nutrient;
 
     public GameObject Bike;
     public GameObject BikeNPC;
@@ -91,6 +93,7 @@ public class LodingTxt : MonoBehaviour
     public Sprite[] cuttoonImageList;
     static Image cuttoonspriteR;
 
+    public TMP_InputField KeyToDreamInput;
     //public Fadeln fade_in_out;
     public UIButton JumpButtons;
     tutorial tu;
@@ -342,7 +345,7 @@ public class LodingTxt : MonoBehaviour
             video.videoClip.clip = video.VideoClip[Int32.Parse(data_Dialog[j]["cuttoon"].ToString())];
             movie.SetActive(true);
             video.OnPlayVideo();
-            Chat.SetActive(false); 
+            ChatWin.SetActive(false); 
             GameObject SoundManager = GameObject.Find("SoundManager");
             SoundManager.GetComponent<AudioSource>().volume = 0f;
             j++;
@@ -355,7 +358,7 @@ public class LodingTxt : MonoBehaviour
                 videocheckTxT.text = null;
                 movie.SetActive(false);
                 video.OnFinishVideo();
-                Chat.SetActive(true);
+                ChatWin.SetActive(true);
                 GameObject SoundManager = GameObject.Find("SoundManager");
                 SoundManager.GetComponent<AudioSource>().volume = 1f;
                 scriptLine();
@@ -368,7 +371,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Bike"))
         {
             cuttoon.SetActive(false);
-            Chat.SetActive(false);
+            ChatWin.SetActive(false);
             Bike.SetActive(true);
             j++;
         }
@@ -417,7 +420,7 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("hair"))
         {
-            Chat.SetActive(false);
+            ChatWin.SetActive(false);
             hairFX(GameObject.Find("Player"));
             j++;
             Invoke("clearHair", 1f);
@@ -436,15 +439,18 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("nutrient"))        //퀘스트중간애들
         {
+            cuttoon.SetActive(false);
             j++;
             ChatWin.SetActive(false);
-            Note.SetActive(true);
+            nutrient.SetActive(true);
+            Debug.Log("nut");
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("nutrientEnd"))
         {
-            Note.SetActive(false);
-            //ChatWin.SetActive(true);
-            scriptLine();
+            j++;
+            nutrient.SetActive(false);
+            Cuttoon();
+            Invoke("scriptLine", 2f);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("train"))
         {
@@ -471,7 +477,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Screenshot"))
         {
             screenShot.SetActive(true);
-            Chat.SetActive(false);
+            ChatWin.SetActive(false);
             j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
@@ -563,31 +569,42 @@ public class LodingTxt : MonoBehaviour
         {
             //나에게 편지쓰기
             MasterOfMtLife.SetActive(true);
-            Chat.SetActive(false);
+            ChatWin.SetActive(false);
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLifeEnd"))
         {
             MasterOfMtLife.SetActive(false);
-            Chat.SetActive(true);
+            ChatWin.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("AppleTree"))
         {
             AppleTree.SetActive(true);
-            Chat.SetActive(false);
+            ChatWin.SetActive(false);
             //scriptLine();
             j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("AppleTreeEnd"))
         {
-            Chat.SetActive(true);
+            ChatWin.SetActive(true);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MakeAppleTree"))
         {
-            //사과 나무 프리펩 쩌구저꾸저
             AppleTree.SetActive(false);
             AppleTreeObj.SetActive(true);
+            scriptLine();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeyToDream"))
+        {
+            KeyToDream.SetActive(true);
+            ChatWin.SetActive(false);
+            j++;
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("KeyToDreamEnd"))
+        {
+            KeyToDreamInput.text = null;
+            KeyToDream.SetActive(false);
             scriptLine();
         }
         

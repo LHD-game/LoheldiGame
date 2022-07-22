@@ -43,70 +43,57 @@ public class QuestLoad : MonoBehaviour
                     Debug.Log(param);*//*
                 }*/
                 
+                
+                string QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
+                Debug.Log(QuestPreg);
+                /*string newQuest = bro2.Rows()[0]["QID"]["S"].ToString();
+                Debug.Log(newQuest);*/
+                JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
+                string QchartID = rows[0]["QID"]["S"].ToString();
+                if (QuestPreg == QchartID)
                 {
-                    string QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
-                    Debug.Log(QuestPreg);
-                    /*string newQuest = bro2.Rows()[0]["QID"]["S"].ToString();
-                    Debug.Log(newQuest);*/
-                    JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
-                    string QchartID = rows[0]["QID"]["S"].ToString();
-                    if (QuestPreg == QchartID)
+                    Debug.Log("다음퀘스트 준비완료");
+                        
+                    for (int i = 0; i < rows.Count; i++)
                     {
-                        Debug.Log("다음퀘스트 준비완료");
-                        
-                        for (int i = 0; i < rows.Count; i++)
-                        {
-                            
-                        
                         string QID = rows[i]["QID"]["S"].ToString();
                         Param param2 = new Param();
-                        /*아래 반복문은 배열 초과 오류가 나기에 수정해두었습니다. - 이민진*/
                         
                             
-                            if (QID == QuestPreg)
-                            {
-                                string QID2 = rows[i+1]["QID"]["S"].ToString();
-                                string QName = rows[i+1]["QName"]["S"].ToString();
-                                string From = rows[i+1]["From"]["S"].ToString();
-                                string Content = rows[i+1]["Content"]["S"].ToString();
-                                string Reward = rows[i + 1]["Reward"]["S"].ToString(); 
-                                /*string Exp = json[i + 1]["Reward"]["Exp"]["S"].ToString();
-                                string Coin = json[i + 1]["Reward"]["Coin"]["S"].ToString();
-                                string Gagu = json[i + 1]["Reward"]["1010102"]["S"].ToString();*/
-                                string authorName = rows[i+1]["authorName"]["S"].ToString();
-                                //string EXP = rows[1][0]["Reward"]["Exp"].ToString();
-                                /* string Coin = json[1]["Reward"]["Coin"]["S"].ToString();
-                                 string Gagu = json[1]["Reward"]["1010102"]["S"].ToString();*/
+                        if (QID == QuestPreg)
+                        {
+                            string QID2 = rows[i+1]["QID"]["S"].ToString();
+                            string QName = rows[i+1]["QName"]["S"].ToString();
+                            string From = rows[i+1]["From"]["S"].ToString();
+                            string Content = rows[i+1]["Content"]["S"].ToString();
+                            string Reward = rows[i + 1]["Reward"]["S"].ToString(); 
+                            string authorName = rows[i+1]["authorName"]["S"].ToString();
 
-                                Debug.Log(QID2);
-                                Debug.Log(QName);
-                                Debug.Log(From);
-                                Debug.Log(Content);
-                                Debug.Log(Reward);
-                                /*Debug.Log(Coin);
-                                Debug.Log(Gagu);*/
-                                Debug.Log(authorName);
-                                //Debug.Log(EXP);
-                                /*Debug.Log(Coin);
-                                Debug.Log(Gagu);*/
-                                param2.Add("QID", QID2);
-                                param2.Add("QName", QName);
-                                param2.Add("From", From);
-                                param2.Add("Content", Content);
-                                param2.Add("Reward", Reward);
-                                param2.Add("authorName", authorName);
-                                Backend.GameData.Insert("QUEST_INFO", param2);
+                            Debug.Log(QID2);
+                            Debug.Log(QName);
+                            Debug.Log(From);
+                            Debug.Log(Content);
+                            Debug.Log(Reward);
+                            Debug.Log(authorName);
 
-                            }
+                            param2.Add("QID", QID2);
+                            param2.Add("QName", QName);
+                            param2.Add("From", From);
+                            param2.Add("Content", Content);
+                            param2.Add("Reward", Reward);
+                            param2.Add("authorName", authorName);
+                            Backend.GameData.Insert("QUEST_INFO", param2);
+
                         }
+                    }
                         
 
-                    }
-                    else
-                    {
-                        Debug.Log("아직 완료되지 않은 퀘스트가 있습니다.");
-                    }
                 }
+                else
+                {
+                    Debug.Log("아직 완료되지 않은 퀘스트가 있습니다.");
+                }
+                
             }
             
             

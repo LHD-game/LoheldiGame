@@ -201,7 +201,7 @@ public class Register : MonoBehaviour
 
             // play_info를 서버에서 불러와 로컬에 저장
             Save_Basic.LoadPlayInfo();
-            Save_Log.instance.UpdatePlayLog();
+            Save_Log.instance.SaveLoginLog();
 
             if (AccChk())   //계정 정보 만들어져 있으면, 계정 정보를 로컬에 저장하고, 필드로
             {

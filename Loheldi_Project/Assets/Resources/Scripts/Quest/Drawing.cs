@@ -317,7 +317,7 @@ public class Drawing : MonoBehaviour
 
     private void scriptLine()
     {
-        chat.scriptLine();
+        chat.Line();
     }
 
     public void Select()
@@ -343,13 +343,13 @@ public class Drawing : MonoBehaviour
 
     //////////////////////////자전거////////////////////////////////////////////////
     public Animator[] BikeAnimator;
-    RectTransform RectTransform;
+    //RectTransform RectTransform;
     public int protect = 0;
     private int lastButton;
     public void setProtectiveGear()
     {
         GameObject click = EventSystem.current.currentSelectedGameObject;
-        RectTransform = click.GetComponent<RectTransform>();
+        //RectTransform = click.GetComponent<RectTransform>();
         //Debug.Log(click.gameObject.name);
         Destroy(click.GetComponent<Button>());
         if (click.name.Equals("ProtectiveGearRk"))
@@ -386,11 +386,67 @@ public class Drawing : MonoBehaviour
         if (protect == 5 && BikeAnimator[lastButton].GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         { 
             chat.Bike.SetActive(false);
-            chat.Chat.SetActive(true);
+            chat.ChatWin.SetActive(true);
             chat.Line();
             //Debug.Log("in"+protect);
         }
         //Debug.Log(protect);
     }
 
+    //////////////건강주스//////////////////////////////////////////////////
+
+
+    public Animator[] nutrient;
+    public int Fruit = 0;
+    private int lastFruitButton;
+    public void SetNutrient()
+    {
+        GameObject click = EventSystem.current.currentSelectedGameObject;
+        //RectTransform = click.GetComponent<RectTransform>();
+        //Debug.Log(click.gameObject.name);
+        Destroy(click.GetComponent<Button>());
+        if (click.name.Equals("Milk"))
+        {
+            nutrient[0].SetTrigger("Milk");
+            lastButton = 0;
+        }
+        else if (click.name.Equals("Carrot"))
+        {
+            nutrient[1].SetTrigger("Carrot");
+            lastButton = 1;
+        }
+        else if (click.name.Equals("Apple"))
+        {
+            nutrient[2].SetTrigger("Apple");
+            lastButton = 2;
+        }
+        else if (click.name.Equals("Broccoli"))
+        {
+            nutrient[3].SetTrigger("Broccoli");
+            lastButton = 3;
+        }
+        else if (click.name.Equals("Grape"))
+        {
+            nutrient[4].SetTrigger("Grape");
+            lastButton = 4;
+        }
+        else if (click.name.Equals("Banana"))
+        {
+            nutrient[5].SetTrigger("Banana");
+            lastButton = 5;
+        }
+    }
+
+    public void Cook()
+    {
+        ++protect;
+        if (protect == 6 && nutrient[lastFruitButton].GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            chat.Bike.SetActive(false);
+            chat.ChatWin.SetActive(true);
+            chat.Line();
+            //Debug.Log("in"+protect);
+        }
+        //Debug.Log(protect);
+    }
 }

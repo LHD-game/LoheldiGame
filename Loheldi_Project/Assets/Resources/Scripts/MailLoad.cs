@@ -291,6 +291,11 @@ public class MailLoad : MonoBehaviour
 
         TotalCount = 0;
         NewMailCheck();
+
+        for (int i = 0; i < MailList.transform.childCount; i++)
+        {
+            Destroy(MailList.transform.GetChild(i).gameObject);
+        }
     }
 
 

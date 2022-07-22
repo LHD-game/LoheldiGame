@@ -29,7 +29,7 @@ public class QuestScript : MonoBehaviour
     public QuestDontDestroy Load;
     void Start()
     {
-        /*file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(Load.ButtonPlusNpc) + Load.QuestMail);
 
@@ -39,7 +39,7 @@ public class QuestScript : MonoBehaviour
             Debug.Log("튜토리얼");
         }
         else if (Load.LastDay != Load.ToDay)
-            QuestCheck();*/
+            QuestCheck();
     }
 
     private void QuestCheck()

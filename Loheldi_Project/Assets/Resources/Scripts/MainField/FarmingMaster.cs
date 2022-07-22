@@ -1,3 +1,6 @@
+using BackEnd;
+using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +12,41 @@ public class FarmingMaster : MonoBehaviour
     public GameObject FarmContents;
     public Camera getCamera;
     private RaycastHit hit;
-    public GameObject ChosenFarm;
+    public GameObject ChosenFarm = null;
+    public GameObject Farms;
+    public static string FarmnumtoBackend;
 
-    public string ItemType = "seed";
+    [SerializeField]
+    private GameObject Crops;
+
+    JsonData myGarden_rows = new JsonData();
+    public List<GameObject> Crops_list = new List<GameObject>();
+
+    GameObject child;
+    public class GardenData
+    {
+        public string G1;
+        public DateTime G1Time;
+        public string G2;
+        public DateTime G2Time;
+        public string G3;
+        public DateTime G3Time;
+        public string G4;
+        public DateTime G4Time;
+    }
+
+    void Start()
+    {
+        var myGarden = Backend.GameData.GetMyData("USER_GARDEN", new Where(), 100);
+        myGarden_rows = myGarden.GetReturnValuetoJSON()["rows"];
+        ParsingJSON pj = new ParsingJSON();
+        GardenData data = pj.ParseBackendData<GardenData>(myGarden_rows);
+
+        if (data.G1 != null || data.G2 != null || data.G3 != null || data.G4 != null)
+        {
+            this.GetComponent<SeedSelect>().SelectedAuto(data.G1, data.G2, data.G3, data.G4, Farms);
+        }
+    }
 
     public void SeedList()
     {
@@ -35,6 +70,14 @@ public class FarmingMaster : MonoBehaviour
                 {
                     if (hit.collider.gameObject.tag == "Farm")                          //밭을 누른거라면
                     {
+                        if (ChosenFarm == Farms.transform.GetChild(0))
+                            FarmnumtoBackend = "G1";
+                        else if (ChosenFarm == Farms.transform.GetChild(1))
+                            FarmnumtoBackend = "G2";
+                        else if (ChosenFarm == Farms.transform.GetChild(2))
+                            FarmnumtoBackend = "G3";
+                        else if (ChosenFarm == Farms.transform.GetChild(3))
+                            FarmnumtoBackend = "G4";
                         ChosenFarm = hit.collider.gameObject;                      //해당 밭 선택하기
                     }
                 }

@@ -3,10 +3,21 @@ using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestLoad : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject TempObject;
+
+    string QID;
+    string QID2;
+    string QName;
+    string From;
+    string Content;
+    string Reward;
+    string authorName;
+    public MailLoad MailLoad;
+
     void Start()
     {
         var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
@@ -17,7 +28,6 @@ public class QuestLoad : MonoBehaviour
             var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
 
             string selectedProbabilityFileId = "54787";
-
             var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
             if (!bro3.IsSuccess())
             {
@@ -62,12 +72,12 @@ public class QuestLoad : MonoBehaviour
                             
                         if (QID == QuestPreg)
                         {
-                            string QID2 = rows[i+1]["QID"]["S"].ToString();
-                            string QName = rows[i+1]["QName"]["S"].ToString();
-                            string From = rows[i+1]["From"]["S"].ToString();
-                            string Content = rows[i+1]["Content"]["S"].ToString();
-                            string Reward = rows[i + 1]["Reward"]["S"].ToString(); 
-                            string authorName = rows[i+1]["authorName"]["S"].ToString();
+                            QID2 = rows[i+1]["QID"]["S"].ToString();
+                            QName = rows[i+1]["QName"]["S"].ToString();
+                            From = rows[i+1]["From"]["S"].ToString();
+                            Content = rows[i+1]["Content"]["S"].ToString();
+                            Reward = rows[i + 1]["Reward"]["S"].ToString(); 
+                            authorName = rows[i+1]["authorName"]["S"].ToString();
 
                             Debug.Log(QID2);
                             Debug.Log(QName);
@@ -111,8 +121,13 @@ public class QuestLoad : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void QuestLoadonMailPost()
     {
-        
+        Debug.Log(QName);
+        TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/QuestMail"), MailLoad.MailList);
+        TempObject.transform.GetChild(0).GetComponent<Text>().text = QName;
+        TempObject.transform.GetChild(1).GetComponent<Text>().text = From;
+        TempObject.transform.GetChild(2).GetComponent<Text>().text = Content;
+        TempObject.GetComponent<Button>().onClick.AddListener(MailLoad.MailLoading);
     }
 }

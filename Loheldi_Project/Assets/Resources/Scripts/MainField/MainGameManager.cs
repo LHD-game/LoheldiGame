@@ -16,11 +16,17 @@ public class MainGameManager : MonoBehaviour
     public Slider ExpSlider;
 
     public GameObject SoundManager;
+    public static MainGameManager SingletonInstance;
 
     void Start()
     {
         GetDailyHP();
         UpdateField();
+    }
+
+    private void Awake()
+    {
+        SingletonInstance = this;
     }
 
     public void UpdateField()

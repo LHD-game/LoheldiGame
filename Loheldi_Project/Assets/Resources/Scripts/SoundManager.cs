@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip audioBGMQuestEnd;
     public AudioClip audioBGMTutorial;
     public AudioClip audioBGMNight;
+    public AudioClip audioHaHasong;
     AudioSource audioSource;
 
     QuestDontDestroy QDD;
@@ -176,6 +177,11 @@ public class SoundManager : MonoBehaviour
                 break;
             case "BGMNight":
                 audioSource.clip = audioBGMNight;
+                audioSource.volume = 0.1f;
+                audioSource.loop = true;
+                break;
+            case "HaHasong":
+                audioSource.clip = audioHaHasong;
                 audioSource.volume = 0.1f;
                 audioSource.loop = true;
                 break;

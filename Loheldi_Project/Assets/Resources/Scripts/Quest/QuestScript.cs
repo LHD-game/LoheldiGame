@@ -27,7 +27,7 @@ public class QuestScript : MonoBehaviour
     FlieChoice file;
 
     public QuestDontDestroy Load;
-    void Start()
+    public void QuestStart()
     {
         file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();

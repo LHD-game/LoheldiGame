@@ -52,7 +52,8 @@ public class FurnitureChangeClick : MonoBehaviour
                         }
                         if (!ButtonToggle)                                                  //이때 버튼이 없다면
                         {
-                            this.GetComponent<InvenCategory>().superItem.Clear();
+                            //인벤토리 카테고리 클래스를 여기 가져오지 마시고 새 클래스를 만들어서 분리하시길 바랍니다ㅜ
+/*                            this.GetComponent<InvenCategory>().superItem.Clear();
                             this.GetComponent<InvenCategory>().gaguItem.Clear();
                             this.GetComponent<InvenCategory>().cropsItem.Clear();
                             this.GetComponent<InvenCategory>().GetChartContents("55031");
@@ -60,7 +61,7 @@ public class FurnitureChangeClick : MonoBehaviour
                             Buttons.transform.position = Input.mousePosition;                   //버튼을 클릭한 위치에 생성하기
                             Buttons.SetActive(true);
                             Bloker.SetActive(true);
-                            ButtonToggle = true;
+                            ButtonToggle = true;*/
                         }
                     }
                     else

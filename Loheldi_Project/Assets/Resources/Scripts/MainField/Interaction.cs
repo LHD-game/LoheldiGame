@@ -50,7 +50,6 @@ public class Interaction : MonoBehaviour
         }
         if (other.gameObject.name == "Field")
         {
-            FarmingMaster.GetComponent<FarmingMaster>().SeedList();
             Farm = true;
             text.text = "≥Û¿Â";
         }

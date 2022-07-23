@@ -1,57 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SeedSelect : MonoBehaviour
+public class SeedSelect : MonoBehaviour //¾¾¾Ñ ¹öÆ°¿¡ ´Þ¸®µµ·Ï ÇÕ´Ï´Ù.
 {
-    GameObject TempObject;
-    FarmingMaster FarmingMaster;
     public Text FarmNum;
 
-    public Text ItemCode;
-
-    public void Selected()
+    public void Selected()  //¾¾¾ÑÀ» ¼±ÅÃÇÑ´Ù. ¾¾¾ÑÀº ºó ÅÔ¹ç¿¡ ½É°ÜÁöµµ·Ï ÇÑ´Ù.
     {
-        if (FarmingMaster.GetComponent<FarmingMaster>().ChosenFarm != null)
-            if (FarmingMaster.GetComponent<FarmingMaster>().ChosenFarm.transform.childCount == 0)
+        for(int i=0; i< GardenControl.empty_ground.Length; i++)
+        {
+            if (GardenControl.empty_ground[i])  //ºó ÅÔ¹çÀÌ¶ó¸é
             {
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants"));
-                TempObject.transform.SetParent(FarmingMaster.GetComponent<FarmingMaster>().ChosenFarm.transform);
-                TempObject.transform.GetChild(0).GetComponent<Text>().text = ItemCode.text;
-                TempObject.transform.localPosition = new Vector3(0, 0, 0);
-                Debug.Log(FarmingMaster.GetComponent<FarmingMaster>().ChosenFarm);
+                GameObject item_code = this.transform.Find("ItemCode").gameObject;
+                Text item_code_txt = item_code.GetComponent<Text>();
+                string i_code = item_code_txt.text;
+
+                string ground_num = "G1";
+                switch (i){
+                    case 0:
+                        ground_num = "G1";
+                        break;
+                    case 1:
+                        ground_num = "G2";
+                        break;
+                    case 2:
+                        ground_num = "G3";
+                        break;
+                    case 3:
+                        ground_num = "G4";
+                        break;
+                    default:
+                        break;
+                }
+
+                PlayerPrefs.SetString(ground_num, i_code);  //ÇØ´çÇÏ´Â ÅÔ¹ç¿¡, ÇØ´çÇÏ´Â ¾¾¾Ñ ÄÚµå ÀúÀå
+                Debug.Log(ground_num);
+                Debug.Log(i_code);
+                DateTime datetime = DateTime.Now;
+                PlayerPrefs.SetString(ground_num + "Time",datetime.ToString("g"));  //ÇØ´çÇÏ´Â ÅÔ¹ç¿¡, ½ÉÀº ½Ã°¢(ÇöÀç½Ã°¢)À» ÀúÀå
+                GardenControl.instance.GroundIsUpdated();
+                break;
             }
-    }
-    public void SelectedAuto(string ItemCode1, string ItemCode2, string ItemCode3, string ItemCode4, GameObject Farm)
-    {
-        if (ItemCode1 != null)
-        {
-            TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants"));
-            TempObject.transform.SetParent(Farm.transform.GetChild(0).transform);
-            TempObject.transform.GetChild(0).GetComponent<Text>().text = ItemCode1;
-            TempObject.transform.localPosition = new Vector3(0, 0, 0);
         }
-        if (ItemCode2 != null)
-        {
-            TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants"));
-            TempObject.transform.SetParent(Farm.transform.GetChild(1).transform);
-            TempObject.transform.GetChild(0).GetComponent<Text>().text = ItemCode2;
-            TempObject.transform.localPosition = new Vector3(0, 0, 0);
-        }
-        if (ItemCode3 != null)
-        {
-            TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants"));
-            TempObject.transform.SetParent(Farm.transform.GetChild(2).transform);
-            TempObject.transform.GetChild(0).GetComponent<Text>().text = ItemCode3;
-            TempObject.transform.localPosition = new Vector3(0, 0, 0);
-        }
-        if (ItemCode4 != null)
-        {
-            TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants"));
-            TempObject.transform.SetParent(Farm.transform.GetChild(3).transform);
-            TempObject.transform.GetChild(0).GetComponent<Text>().text = ItemCode4;
-            TempObject.transform.localPosition = new Vector3(0, 0, 0);
-        }
+        
     }
 }

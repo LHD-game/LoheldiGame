@@ -138,6 +138,10 @@ public class Register : MonoBehaviour
             Backend.BMember.CreateNickname(InputName.text); //닉네임(이름) 저장
             Backend.BMember.UpdateCustomEmail(InputEmail.text); //비밀번호 찾기 용 이메일 저장
             Save_Basic.PlayerInfoInit();    //계정 기본 정보 저장(레벨, 재화 등)
+            Save_Basic.QuestInfoInit();    //초기 퀘스트 우편 저장 0_1
+            Save_Basic.UserGardenInit();    //텃밭 초기 행 저장
+
+
             UserInfoDB();
         }
     }
@@ -202,6 +206,7 @@ public class Register : MonoBehaviour
             // play_info를 서버에서 불러와 로컬에 저장
             Save_Basic.LoadPlayInfo();
             Save_Log.instance.SaveLoginLog();
+            Save_Basic.LoadUserGarden();
 
             if (AccChk())   //계정 정보 만들어져 있으면, 계정 정보를 로컬에 저장하고, 필드로
             {

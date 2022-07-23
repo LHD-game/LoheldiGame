@@ -106,12 +106,16 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         {
             Debug.Log("PlayerInfoInit() Fail");
         }
-        var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
         
-        Param param2 = new Param();
-        if (bro2.IsSuccess())
+    }
+
+    public static void QuestInfoInit()
+    {
+        var bro = Backend.GameData.GetMyData("QUEST_INFO", new Where());
+        Param param = new Param();
+        if (bro.IsSuccess())
         {
-            if (bro2.GetReturnValuetoJSON()["rows"].Count <= 0)
+            if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
             {
                 string selectedProbabilityFileId = "54787";
 
@@ -126,24 +130,35 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
 
                 Debug.Log(QID);
                 Debug.Log(QName);
-                Debug.Log(From);
                 Debug.Log(Content);
-                Debug.Log(Reward);
-                Debug.Log(authorName);
 
-                param2.Add("QID", QID);
-                param2.Add("QName", QName);
-                param2.Add("From", From);
-                param2.Add("Content", Content);
-                param2.Add("Reward", Reward);
-                param2.Add("authorName", authorName);
-                Backend.GameData.Insert("QUEST_INFO", param2);
-
-
+                param.Add("QID", QID);
+                param.Add("QName", QName);
+                param.Add("From", From);
+                param.Add("Content", Content);
+                param.Add("Reward", Reward);
+                param.Add("authorName", authorName);
+                Backend.GameData.Insert("QUEST_INFO", param);
             }
-
         }
     }
+
+    //USER_GARDEN 테이블 초기값 저장
+    public static void UserGardenInit()
+    {
+        Param param = new Param();
+        var bro = Backend.GameData.Insert("USER_GARDEN", param);
+        if (bro.IsSuccess())
+        {
+            Debug.Log("UserGardenInit() Success");
+        }
+        else
+        {
+            Debug.Log("UserGardenInit() Fail");
+        }
+    }
+
+
 
     //play info 테이블 가져와 로컬에 저장하는 메소드
     public static void LoadPlayInfo()
@@ -195,6 +210,37 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetString("Nickname", data.NICKNAME);
                 PlayerPrefs.SetString("Birth", data.BIRTH.ToString("yyyy년 M월 d일"));
                 PlayerPrefs.SetString("ParentsNo", data.PARENTSNO);
+            }
+            catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
+            {
+                Debug.Log(ex);
+            }
+        }
+    }
+
+    //user garden 테이블에서 값 가져와 로컬에 저장
+    public static void LoadUserGarden()
+    {
+        BackendReturnObject bro = Backend.GameData.GetMyData("USER_GARDEN", new Where(), 10);
+
+        if (bro.IsSuccess())
+        {
+            var json = bro.GetReturnValuetoJSON();
+
+            try
+            {
+                var json_data = json["rows"][0];
+                ParsingJSON pj = new ParsingJSON();
+                GardenData data = pj.ParseBackendData<GardenData>(json_data);
+
+                PlayerPrefs.SetString("G1", data.G1);
+                PlayerPrefs.SetString("G1Time", data.G1Time.ToString("g"));
+                PlayerPrefs.SetString("G2", data.G2);
+                PlayerPrefs.SetString("G2Time", data.G2Time.ToString("g"));
+                PlayerPrefs.SetString("G3", data.G3);
+                PlayerPrefs.SetString("G3Time", data.G3Time.ToString("g"));
+                PlayerPrefs.SetString("G4", data.G4);
+                PlayerPrefs.SetString("G4Time", data.G4Time.ToString("g"));
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

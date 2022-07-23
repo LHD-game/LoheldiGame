@@ -51,22 +51,6 @@ public class MainGameManager : MonoBehaviour
         ExpSlider.value = (now_exp / max_exp) * 100;
     }
 
-    public void GetExpBtn()    //임시 경험치 획득 버튼 메소드
-    {
-        float exp_get = 10;
-
-        PlayInfoManager.GetExp(exp_get);
-        UpdateFieldMyInfo();
-    }
-
-    public void GetCoinBtn()    //임시 코인 획득 버튼 메소드
-    {
-        int coin_get = 20;
-
-        PlayInfoManager.GetCoin(coin_get);
-        UpdateFieldMyInfo();
-    }
-
     void GetDailyHP()   //일자를 검사하여 hp를 5 제공
     {
         //if(오늘 일자 != 서버에 저장된 hp수령 일자){

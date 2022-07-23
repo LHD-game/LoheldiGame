@@ -12,6 +12,7 @@ public static class ChartNum
     public static string BasicClothesItemChart = "53497";
     public static string CustomItemChart = "53553";
     public static string ClothesItemChart = "54323";
+    public static string AllItemChart = "55031";
     public static string BadgeChart = "54754";
 
 }
@@ -81,4 +82,17 @@ public class Badge
     public string BName;
     public string Bcontent;
     public string Category;
+}
+
+//
+public class GardenData
+{
+    public string G1;
+    public DateTime G1Time;
+    public string G2;
+    public DateTime G2Time;
+    public string G3;
+    public DateTime G3Time;
+    public string G4;
+    public DateTime G4Time;
 }

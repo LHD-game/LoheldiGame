@@ -10,12 +10,16 @@ public class GardenCategory : MonoBehaviour
     List<Dictionary<string, object>> seedItem = new List<Dictionary<string, object>>();
 
     JsonData myInven_rows = new JsonData();
-    List<GameObject> seed_list = new List<GameObject>();   //인벤토리 아이템을 저장하는 변수
+    static List<GameObject> seed_list = new List<GameObject>();   //인벤토리 아이템을 저장하는 변수
 
     public void PopGarden(GameObject c_seed)
     {
         seedItem.Clear();
 
+        for(int i=0; i < seed_list.Count; i++)
+        {
+            Destroy(seed_list[i]);
+        }
         seedItem = new List<Dictionary<string, object>>();
 
         GetChartContents(ChartNum.AllItemChart);
@@ -67,23 +71,14 @@ public class GardenCategory : MonoBehaviour
 
         for (int i = 0; i < dialog.Count; i++)
         {
-            GameObject child;
+            GameObject child = Instantiate(itemBtn);    //create itemBtn instance
+            child.transform.SetParent(category.transform);  //move instance: child
+                                                            //아이템 박스 크기 재설정
+            RectTransform rt = child.GetComponent<RectTransform>();
+            rt.localScale = new Vector3(1f, 1f, 1f);
 
-            if (itemObject.Count != dialog.Count)    //만약 처음 인벤토리 여는 것이면 새 객체 생성
-            {
-                //create caltalog box
-                child = Instantiate(itemBtn);    //create itemBtn instance
-                child.transform.SetParent(category.transform);  //move instance: child
-                                                                //아이템 박스 크기 재설정
-                RectTransform rt = child.GetComponent<RectTransform>();
-                rt.localScale = new Vector3(1f, 1f, 1f);
+            itemObject.Add(child);
 
-                itemObject.Add(child);
-            }
-            else    //아니라면 기존 객체 재활용
-            {
-                child = itemObject[i];
-            }
 
             GameObject ItemBtn = child.transform.Find("ItemBtn").gameObject;
 

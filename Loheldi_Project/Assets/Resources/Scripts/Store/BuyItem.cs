@@ -132,7 +132,7 @@ public class BuyItem : MonoBehaviour
             else
             {
                 string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
-                Debug.Log(rowIndate);
+
                 int item_amount = (int)bro.FlattenRows()[0]["Amount"];
                 item_amount++;
                 Debug.Log(item_amount);
@@ -155,7 +155,6 @@ public class BuyItem : MonoBehaviour
                 }
             }
         }
-        //todo: 코인 차감한 값 서버에 저장, 팝업 띄우기
     }
     //의상 아이템 구입
     public void BuyClothesBtn()

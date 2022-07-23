@@ -36,7 +36,7 @@ public class GardenControl : MonoBehaviour
     public GameObject Farms;
     public static string FarmnumtoBackend;
 
-    static bool is_pop_garden = false;
+    public static bool is_pop_garden = false;
 
 
     private void Start()

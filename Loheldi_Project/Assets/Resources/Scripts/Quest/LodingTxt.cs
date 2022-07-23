@@ -130,6 +130,7 @@ public class LodingTxt : MonoBehaviour
     string PlayerName;
     private void Awake()
     {
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
             Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
@@ -138,9 +139,14 @@ public class LodingTxt : MonoBehaviour
             tu = GameObject.Find("chatManager").GetComponent<tutorial>();
             Inter = GameObject.Find("Player").GetComponent<Interaction>();
             Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
+
+            if (DontDestroy.weekend)
+                DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //주말
+            else
+                DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기 여기말고 다른데 놓아야될 듯
+            DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         }
         
-        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         if (SceneManager.GetActiveScene().name == "Quiz")
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
         color = block.GetComponent<Image>().color;
@@ -159,6 +165,8 @@ public class LodingTxt : MonoBehaviour
 
         parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
         PlayerName = PlayerPrefs.GetString("Nickname");
+
+        Quest.QuestStart();
     }
 
     void FixedUpdate()
@@ -488,11 +496,15 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("song"))
         {
             //웃어봐 송 틀기
-            Invoke("scriptLine", 10f);   //딜레이 후 스크립트 띄움
+            SoundManager SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+            SoundManager.Sound("HaHasong");
+            Invoke("scriptLine", 20f);   //딜레이 후 스크립트 띄움
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("songend"))
         {
             //원래 노래로 바꾸기
+            SoundManager SoundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+            SoundManager.Sound("BGMField");
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("JumpRope"))
@@ -740,7 +752,7 @@ public class LodingTxt : MonoBehaviour
 
     IEnumerator _typing()  //타이핑 효과
     {
-        if (ChatWin.activeSelf == false)
+        if (!ChatWin.activeSelf)
             ChatWin.SetActive(true);
 
         Txt.text = " ";
@@ -846,11 +858,11 @@ public class LodingTxt : MonoBehaviour
         DontDestroy.QuestIndex = data_Dialog[j+1]["scriptNumber"].ToString();
         if (DontDestroy.QuestIndex.Equals("4_1"))
             Main_UI.transform.Find("Ride").gameObject.SetActive(true);
-            if(data_Dialog[j]["dialog"].ToString().Equals("end"))
-            {
-                PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-                DontDestroy.LastDay = DontDestroy.ToDay;
-            }
+        if (data_Dialog[j]["dialog"].ToString().Equals("end"))
+        {
+            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+            DontDestroy.LastDay = DontDestroy.ToDay;
+        }
         if (DontDestroy.weekend)
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
         else

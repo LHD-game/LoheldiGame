@@ -75,6 +75,10 @@ public class NpcButtonClick : MonoBehaviour
         {
             Chat.Quest();
             CheckQuest();
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("Äù½ºÆ® ³ª¸®"))
+        {
+            Chat.Quest();
+            CheckQuest();
         }
     }
     void CheckQuest()

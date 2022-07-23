@@ -16,7 +16,7 @@ public class tutorial : MonoBehaviour
         Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
 
         if (!chat.tuto)
-            chat.ChatWin.SetActive(false);
+            chat.Chat.SetActive(false);
         if(chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_4")&& !chat.DontDestroy.tutorialLoading)
         {
             chat.Main_UI.SetActive(true);
@@ -44,6 +44,7 @@ public class tutorial : MonoBehaviour
             {
                 chat.block.transform.GetChild(3).gameObject.SetActive(false);
                 chat.tutoFinish = true;
+                chat.Chat.SetActive(true);
                 chat.Line();
             }
         }
@@ -68,6 +69,7 @@ public class tutorial : MonoBehaviour
                 tutoi++;
                 chat.block.transform.GetChild(6).gameObject.SetActive(false);
                 chat.tutoFinish = true;
+                chat.Chat.SetActive(true);
                 chat.Line();
                 chat.move = false;
                 GameObject SoundManager = GameObject.Find("SoundManager");

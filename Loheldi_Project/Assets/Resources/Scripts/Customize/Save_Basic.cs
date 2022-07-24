@@ -183,6 +183,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetInt("LastQTime", data.LastQTime);
                 PlayerPrefs.SetInt("HP", data.HP);
                 PlayerPrefs.SetInt("LastHPTime", data.LastHPTime);
+                PlayerPrefs.SetString("WeeklyQuestPreg", data.WeeklyQuestPreg);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

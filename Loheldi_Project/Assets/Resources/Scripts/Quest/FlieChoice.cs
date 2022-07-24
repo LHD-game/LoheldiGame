@@ -37,12 +37,7 @@ public class FlieChoice : MonoBehaviour
         chat.FileAdress = "Scripts/Quest/script";
         chat.move = true;
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
-        if (chat.DontDestroy.tutorialLoading)
-        {
-            chat.Num = "0_4";
-        }
-        else
-            chat.Num = "0_1";
+        chat.Num = "0_1";
         
         chat.NewChat();
     }

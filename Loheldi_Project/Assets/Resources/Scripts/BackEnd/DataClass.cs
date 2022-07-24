@@ -97,3 +97,12 @@ public class GardenData
     public string G4;
     public DateTime G4Time;
 }
+
+public class QuestInfo{
+    public string QID;
+    public string QName;
+    public string From;
+    public string Content;
+    public string Reward;
+    public string authorName;
+}

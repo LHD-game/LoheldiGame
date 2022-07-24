@@ -57,11 +57,11 @@ public class QuestScript : MonoBehaviour
             Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         }
         Debug.Log("Äù½ºÆ® ¹øÈ£" + Load.QuestIndex);
-        GiveQuest();
+        //GiveQuest();
         
     }
     int Q = 0;
-    private void GiveQuest()
+/*    private void GiveQuest()
     {
         
         for (int k = 0; k <= Quest_Mail.Count; k++)
@@ -94,7 +94,7 @@ public class QuestScript : MonoBehaviour
         Mail.ThisDetail.GetComponent<Text>().text = detail.Replace("<n>","\n");
 
         QuestChoice();
-    }
+    }*/
 
     private void CheckMail()
     {

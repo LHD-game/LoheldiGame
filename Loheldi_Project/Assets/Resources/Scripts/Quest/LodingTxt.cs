@@ -102,7 +102,7 @@ public class LodingTxt : MonoBehaviour
 
 
     int m = 0;                                  //카메라 무빙
-    int o = 1;                                  //m서포터
+    int o = 0;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
     int QBikeSpeed;
     bool BikeQ = false;
@@ -143,7 +143,7 @@ public class LodingTxt : MonoBehaviour
             if (DontDestroy.weekend)
                 DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //주말
             else
-                DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기 여기말고 다른데 놓아야될 듯
+                DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         }
         
@@ -215,10 +215,10 @@ public class LodingTxt : MonoBehaviour
 
     public void skip()
     {
-        j = 80;
-        move = false;
-        GameObject SoundManager = GameObject.Find("SoundManager");
-        SoundManager.GetComponent<SoundManager>().Sound("BGMField");
+        j = 93;
+        o = 11;
+        //GameObject SoundManager = GameObject.Find("SoundManager");
+        //SoundManager.GetComponent<SoundManager>().Sound("BGMField");
         scriptLine();
     }
     public void NewChat()
@@ -232,8 +232,8 @@ public class LodingTxt : MonoBehaviour
             if (data_Dialog[k]["scriptNumber"].ToString().Equals(Num))
             {
                 j = k; 
-                if (Num.Equals("0_4"))
-                    ++j;
+                if (DontDestroy.tutorialLoading)
+                    j=14;
                 chatCanvus.SetActive(true);
                 Line();
                 //Debug.Log("퀴즈4");
@@ -250,61 +250,59 @@ public class LodingTxt : MonoBehaviour
 
     public void changeMoment()  //플레이어 이동, 카메라 무브
     {
-        if (o != m)
+        switch (o)
         {
-            if ((o == 3 || o == 4 || o == 5 || o == 6 || o == 7 || o == 8 || o == 9 || o == 10 || o == 11 || o == 12))
-            {
-                switch (o)
-                {
-                    case 3:
-                        Player.transform.position = new Vector3(-145.300003f, 12.6158857f, -21.80023f);
-                        break;
-                    case 4:
-                        if (DontDestroy.tutorialLoading)
-                            Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        Player.transform.position = new Vector3(45f, 5f, 40f);
-                        DontDestroy.tutorialLoading = false;
-                        break;
-                    case 5:
-                        Player.transform.position = new Vector3(103.51342f, 15.7201061f, 165.103439f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 6:
-                        Player.transform.position = new Vector3(-44.7900009f, 5.319489f, 79.5400085f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 7:
-                        Player.transform.position = new Vector3(288.572632f, 5.31948948f, 98.3887405f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 8:
-                        Player.transform.position = new Vector3(255, 5.31949139f, 101.299973f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 9:
-                        Player.transform.position = new Vector3(69.9799881f, 5.67073011f, -16.2484417f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 10:
-                        Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 11:
-                        Player.transform.position = new Vector3(317.426666f, 5.67073059f, 25.669136f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    case 12:
-                        Player.transform.position = new Vector3(45f, 5f, 40f);
-                        Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
-                        break;
-                    default:
-                        break;
-                }
-                m = o;
-            }
+            case 1:
+                Player.transform.position = new Vector3(-145.300003f, 12.6158857f, -21.80023f);
+                break;
+            case 2:
+                cuttoon.SetActive(false);
+                Player.transform.position = new Vector3(45f, 5f, 40f);
+                break;
+            case 3:
+                if (DontDestroy.tutorialLoading)
+                    Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                DontDestroy.tutorialLoading = false;
+                break;
+            case 4:
+                Player.transform.position = new Vector3(103.51342f, 15.7201061f, 165.103439f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 5:
+                Player.transform.position = new Vector3(-44.7900009f, 5.319489f, 79.5400085f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 6:
+                Player.transform.position = new Vector3(288.572632f, 5.31948948f, 98.3887405f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 7:
+                Player.transform.position = new Vector3(255, 5.31949139f, 101.299973f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 8:
+                Player.transform.position = new Vector3(69.9799881f, 5.67073011f, -16.2484417f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 9:
+                Player.transform.position = new Vector3(-46f, 5.57700014f, -13.6999998f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 10:
+                Player.transform.position = new Vector3(317.426666f, 5.67073059f, 25.669136f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 11:
+                Player.transform.position = new Vector3(45f, 5f, 40f);
+                Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
+                break;
+            case 12:
+                QuestEnd();
+                SceneLoader.instance.GotoMainField();
+                break;
+            default:
+                break;
         }
-        o = Int32.Parse(data_Dialog[j]["scriptNumber"].ToString().Substring(data_Dialog[j]["scriptNumber"].ToString().IndexOf("_") + 1));
-
     } 
 
     public void QuestSubChoice()
@@ -327,6 +325,16 @@ public class LodingTxt : MonoBehaviour
         {
             j--;
             QuizCho();
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Move"))  //선택지
+        {
+            if (DontDestroy.tutorialLoading)
+                o = 3;
+            else
+                o += 1;
+            changeMoment();
+            j +=1;
+            Line();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //main으로
         {
@@ -408,6 +416,8 @@ public class LodingTxt : MonoBehaviour
                 BikeNPC.transform.LookAt(targetPositionNPC);
                 Player.transform.LookAt(targetPositionPlayer);
                 JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
+
+                Main_UI.transform.Find("Ride").gameObject.SetActive(true);
             }
             else if (BikeQ)
             {
@@ -654,8 +664,8 @@ public class LodingTxt : MonoBehaviour
                 Main_UI.SetActive(false);
 
         }
-        if (move)
-            changeMoment();
+        //if (move)
+        //    changeMoment();
     }
 
     
@@ -855,9 +865,7 @@ public class LodingTxt : MonoBehaviour
     {
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
-        DontDestroy.QuestIndex = data_Dialog[j+1]["scriptNumber"].ToString();
-        if (DontDestroy.QuestIndex.Equals("4_1"))
-            Main_UI.transform.Find("Ride").gameObject.SetActive(true);
+        DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
@@ -867,6 +875,7 @@ public class LodingTxt : MonoBehaviour
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
         else
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+        Debug.Log(PlayerPrefs.GetString("QuestPreg", DontDestroy.QuestIndex));
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클
     {

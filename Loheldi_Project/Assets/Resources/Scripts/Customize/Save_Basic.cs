@@ -117,7 +117,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         {
             if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
             {
-                string selectedProbabilityFileId = "54787";
+                string selectedProbabilityFileId = "55216";
 
                 var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
                 JsonData rows = bro3.GetReturnValuetoJSON()["rows"];

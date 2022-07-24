@@ -17,9 +17,11 @@ public class QuestLoad : MonoBehaviour
     string Reward;
     string authorName;
     public MailLoad MailLoad;
+    public QuestDontDestroy DontDestroy;
 
     void Start()
     {
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         var bro = Backend.GameData.GetMyData("PLAY_INFO", new Where());
         
         Param param = new Param();
@@ -27,7 +29,7 @@ public class QuestLoad : MonoBehaviour
         {
             var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
 
-            string selectedProbabilityFileId = "54787";
+            string selectedProbabilityFileId = "55216";
             var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
             if (!bro3.IsSuccess())
             {
@@ -40,21 +42,23 @@ public class QuestLoad : MonoBehaviour
                 {
                    
                     *//*string QID = bro2.FlattenRows()[0]["QID"].ToString();*/
-                    /*string Exp = rows[0]["Reward"]["Exp"].ToString();
-                    string Coin = rows[0]["Reward"]["Coin"].ToString();
-                    string Gagu = rows[0]["Reward"]["1010102"].ToString();*/
+                /*string Exp = rows[0]["Reward"]["Exp"].ToString();
+                string Coin = rows[0]["Reward"]["Coin"].ToString();
+                string Gagu = rows[0]["Reward"]["1010102"].ToString();*/
 
-                    /*param.Add("QID", "0_0");
-                    param.Add("Exp", "10");
-                    param.Add("Coin", "10");
-                    param.Add("1010102", "3");
+                /*param.Add("QID", "0_0");
+                param.Add("Exp", "10");
+                param.Add("Coin", "10");
+                param.Add("1010102", "3");
 
-                    Backend.GameData.Insert("QUEST_INFO", param);
-                    Debug.Log(param);*//*
-                }*/
-                
-                
-                string QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
+                Backend.GameData.Insert("QUEST_INFO", param);
+                Debug.Log(param);*//*
+            }*/
+                string QuestPreg;
+                if (DontDestroy.weekend) //주말일 때
+                    QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString(); //주말 퀘스트 번호로 바뀔 예정
+                else //주말이 아닐 떄
+                    QuestPreg = bro.Rows()[0]["QuestPreg"]["S"].ToString();
                 Debug.Log(QuestPreg);
                 /*string newQuest = bro2.Rows()[0]["QID"]["S"].ToString();
                 Debug.Log(newQuest);*/
@@ -68,17 +72,17 @@ public class QuestLoad : MonoBehaviour
                     {
                         string QID = rows[i]["QID"]["S"].ToString();
                         Param param2 = new Param();
-                        
                             
                         if (QID == QuestPreg)
                         {
                             QID2 = rows[i+1]["QID"]["S"].ToString();
                             QName = rows[i+1]["QName"]["S"].ToString();
                             From = rows[i+1]["From"]["S"].ToString();
-                            Content = rows[i+1]["Content"]["S"].ToString();
+                            Content = rows[i+1]["Content"]["S"].ToString().Replace("<n>", "\n"); ;
                             Reward = rows[i + 1]["Reward"]["S"].ToString(); 
                             authorName = rows[i+1]["authorName"]["S"].ToString();
 
+                            DontDestroy.QuestIndex = QID2;
                             Debug.Log(QID2);
                             Debug.Log(QName);
                             Debug.Log(From);

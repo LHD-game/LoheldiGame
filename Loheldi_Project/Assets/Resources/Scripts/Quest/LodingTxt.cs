@@ -117,6 +117,7 @@ public class LodingTxt : MonoBehaviour
     public VideoScript video;
     public Drawing Draw;
     public BicycleRide bicycleRide;
+    public QuestLoad QuestLoad;
     [SerializeField]
     private ParticleSystem hairPs;
 
@@ -131,22 +132,6 @@ public class LodingTxt : MonoBehaviour
     string PlayerName;
     private void Awake()
     {
-        Debug.Log(PlayerPrefs.GetString("QuestPreg"));
-        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
-        {
-            Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
-            video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
-            JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-            tu = GameObject.Find("chatManager").GetComponent<tutorial>();
-            Inter = GameObject.Find("Player").GetComponent<Interaction>();
-            Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
-
-            DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
-        }
-        
-        if (SceneManager.GetActiveScene().name == "Quiz")
-            Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
@@ -163,29 +148,58 @@ public class LodingTxt : MonoBehaviour
 
         parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
         PlayerName = PlayerPrefs.GetString("Nickname");
+
+        Debug.Log(PlayerPrefs.GetString("QuestPreg"));
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+        DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
+        if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
+        {
+            Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
+            video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
+            JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
+            tu = GameObject.Find("chatManager").GetComponent<tutorial>();
+            Inter = GameObject.Find("Player").GetComponent<Interaction>();
+            Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
+            QuestLoad = GameObject.Find("Mail").GetComponent<QuestLoad>();
+
+            DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
+            if (DontDestroy.LastDay != DontDestroy.ToDay)
+                QuestLoad.QuestLoadStart();
+        }
+        
+        if (SceneManager.GetActiveScene().name == "Quiz")
+            Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+        
+        
+    }
+    public void nextQuest()
+    {
+        PlayerPrefs.SetInt("LastQTime", 0);
+        DontDestroy.LastDay = 0;
+        QuestLoad.QuestLoadStart();
     }
 
     void Update()
     {
-        if (Quest.farm)
+        if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Quest.farm)
             {
-                GameObject click = EventSystem.current.currentSelectedGameObject;
-                if (click.name.Equals("ItemBtn"))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log(PlayerPrefs.GetString("QuestPreg"));
-                    PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-                    Debug.Log(PlayerPrefs.GetString("QuestPreg"));
-                    PlayInfoManager.GetQuestPreg();
-                    Quest.farm = false;
+                    GameObject click = EventSystem.current.currentSelectedGameObject;
+                    if (click.name.Equals("ItemBtn"))
+                    {
+                        PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                        PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+                        PlayInfoManager.GetQuestPreg();
+                        Quest.farm = false;
+                    }
+                    else
+                        Debug.Log("무시");
+                    Debug.Log(click.name);
                 }
-                else
-                    Debug.Log("무시");
-                Debug.Log(click.name);
             }
-            else;
-                
         }
         if (BikeQ)
         {
@@ -312,7 +326,8 @@ public class LodingTxt : MonoBehaviour
                 Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                 break;
             case 12:
-                QuestEnd();
+                PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                PlayInfoManager.GetQuestPreg();
                 SceneLoader.instance.GotoMainField();
                 break;
             default:
@@ -338,6 +353,7 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("choice"))  //선택지
         {
+            block.SetActive(false);
             j--;
             QuizCho();
         }
@@ -668,6 +684,7 @@ public class LodingTxt : MonoBehaviour
         {
             if (!data_Dialog[j]["scriptType"].ToString().Equals("nomal"))
             {
+                Debug.Log(data_Dialog[j]["scriptType"].ToString());
                 QuestSubChoice(); 
             }
             else
@@ -880,18 +897,22 @@ public class LodingTxt : MonoBehaviour
     {
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
+
+        if (DontDestroy.weekend)
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
+        else
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+
+        PlayInfoManager.GetQuestPreg();
+
         //DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;
         }
-        if (DontDestroy.weekend)
-            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
         else
-            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-        Debug.Log(PlayerPrefs.GetString("QuestPreg", DontDestroy.QuestIndex));
-        PlayInfoManager.GetQuestPreg();
+            QuestLoad.QuestLoadStart();
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클
     {

@@ -15,14 +15,14 @@ public class QuestLoad : MonoBehaviour
     string From;
     string Content;
     string Reward;
-    string authorName;
-    public MailLoad MailLoad;
+    string authorName; 
+    public QuestScript Quest;
     public QuestDontDestroy DontDestroy;
 
-    void Start()
+    public void QuestLoadStart()
     {
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        
+        Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         Param param = new Param();
 
         var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
@@ -112,7 +112,7 @@ public class QuestLoad : MonoBehaviour
             //{
              //   Debug.Log("아직 완료되지 않은 퀘스트가 있습니다.");
             //}
-            MailLoad.Quest.QuestStart();
+            Quest.QuestStart();
         }
             
             

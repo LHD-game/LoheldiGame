@@ -14,8 +14,10 @@ public class CropsGrow : MonoBehaviour
     private int min;
     private int sec;
     private int temp_sec;
-    private float time_Max = 10f;
+    private float time_Max = 30f;
     private bool isEnded = false;
+    private DateTime LoadedTimer;
+    private DateTime SavedTimer;
 
     private GameObject NextCrops;
 
@@ -23,7 +25,13 @@ public class CropsGrow : MonoBehaviour
 
     private void Start()
     {
-        time_start = (DateTime.Now.Hour * 3600) + (DateTime.Now.Minute * 60) + DateTime.Now.Second;
+        if (text.text == "")
+            time_start = (DateTime.Now.Hour * 3600) + (DateTime.Now.Minute * 60) + DateTime.Now.Second;
+        else
+        {
+            LoadedTimer = DateTime.Parse(text.text);
+            time_start = (LoadedTimer.Hour * 3600) + (LoadedTimer.Minute * 60) + LoadedTimer.Second;
+        }
     }
     void Update()
     {

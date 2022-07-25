@@ -28,6 +28,7 @@ public class GardenControl : MonoBehaviour
     private GameObject[] garden_ground = new GameObject[4]; //텃밭 오브젝트. 텃밭의 수: 4
     static GameObject[] garden_crops = new GameObject[4]; //심겨진 작물 오브젝트 객체.
     string[] g_seed = new string[4];    //심겨진 씨앗의 ICode
+    DateTime[] g_timer = new DateTime[4];    //심겨진 씨앗의 성장시간
     public static bool[] empty_ground = new bool[4];        //빈 텃밭의 수
 
     public GameObject Interaction;
@@ -65,10 +66,14 @@ public class GardenControl : MonoBehaviour
     {
         //1. 로컬에 저장해둔 텃밭의 정보를 가져온다.
         g_seed[0] = PlayerPrefs.GetString("G1");   //비어있다면, null이 아닌 공백이 들어있습니다. ("" != null)
+        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G1Time"));
         g_seed[1] = PlayerPrefs.GetString("G2");
+        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G2Time"));
         g_seed[2] = PlayerPrefs.GetString("G3");
+        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G3Time"));
         g_seed[3] = PlayerPrefs.GetString("G4");
-        
+        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G4Time"));
+
         for (int i = 0; i < g_seed.Length; i++)
         {
             //기존에 있던 작물 객체가 있다면 삭제한다.
@@ -83,7 +88,8 @@ public class GardenControl : MonoBehaviour
                 empty_ground[i] = false;
                 garden_crops[i] = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants")); //객체 생성: 새싹
                 garden_crops[i].transform.SetParent(garden_ground[i].transform);   //이를 텃밭 오브젝트에 하위로 넣는다
-                garden_crops[i].transform.GetChild(0).GetComponent<Text>().text = g_seed[i];    //icode를 입력해둔다?
+                garden_crops[i].transform.GetChild(0).GetComponent<Text>().text = g_seed[i];    //icode를 입력해둔다
+                garden_crops[i].transform.GetChild(1).GetComponent<Text>().text = g_timer[i].ToString();    //성장시간을 입력해둔다
                 garden_crops[i].transform.localPosition = new Vector3(0, 0, 0); //작물 객체 위치 재설정
             }
         }
@@ -97,11 +103,28 @@ public class GardenControl : MonoBehaviour
     }
 
     //todo: 수확하기 버튼을 만든다. 이를 클릭하면 1번 텃밭부터 차례로 작물 심겨짐 여부를 체크 후, 수확한다. 이후 UpdateFieldGarden() 실행 및 todo3 메소드 실행
-    public void HarvestCrops()
+    public void HarvestCrops(int i)
     {
-        //작물 심겨짐 여부 체크
-        //해당 작물 수확 가능 여부 체크
-        //수확 메소드 > 로컬을 빈값으로 바꾼 뒤, 보상을 제공
+        empty_ground[i] = true;
+        switch (i)
+        {
+            case 0:
+                PlayerPrefs.SetString("G1", "");
+                PlayerPrefs.SetString("G1Time", "");
+                break;
+            case 1:
+                PlayerPrefs.SetString("G2", "");
+                PlayerPrefs.SetString("G2Time", "");
+                break;
+            case 2:
+                PlayerPrefs.SetString("G3", "");
+                PlayerPrefs.SetString("G3Time", "");
+                break;
+            case 3:
+                PlayerPrefs.SetString("G4", "");
+                PlayerPrefs.SetString("G4Time", "");
+                break;
+        }
         UpdateFieldGarden();
         SaveUserGarden();
     }
@@ -144,8 +167,5 @@ public class GardenControl : MonoBehaviour
         {
             Debug.Log("SaveUserGarden 실패.");
         }
-
-
     }
-
 }

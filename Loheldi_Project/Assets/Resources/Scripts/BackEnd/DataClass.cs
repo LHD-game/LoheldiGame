@@ -97,6 +97,13 @@ public class GardenData
     public string G4;
     public DateTime G4Time;
 }
+public class HousingData
+{
+    public string bed;
+    public string closet;
+    public string table;
+    public string chair;
+}
 
 public class QuestInfo{
     public string QID;

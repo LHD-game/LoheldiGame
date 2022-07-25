@@ -157,6 +157,20 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
             Debug.Log("UserGardenInit() Fail");
         }
     }
+    //USER_HOUSE 테이블 초기값 저장
+    public static void UserHousingInit()
+    {
+        Param param = new Param();
+        var bro = Backend.GameData.Insert("USER_HOUSE", param);
+        if (bro.IsSuccess())
+        {
+            Debug.Log("UserHousingInit() Success");
+        }
+        else
+        {
+            Debug.Log("UserHousingInit() Fail");
+        }
+    }
 
 
 
@@ -242,6 +256,34 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetString("G3Time", data.G3Time.ToString("g"));
                 PlayerPrefs.SetString("G4", data.G4);
                 PlayerPrefs.SetString("G4Time", data.G4Time.ToString("g"));
+
+            }
+            catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
+            {
+                Debug.Log(ex);
+            }
+        }
+    }
+
+    //user house 테이블에서 값 가져와 로컬에 저장
+    public static void LoadUserHousing()
+    {
+        BackendReturnObject bro = Backend.GameData.GetMyData("USER_HOUSE", new Where(), 10);
+
+        if (bro.IsSuccess())
+        {
+            var json = bro.GetReturnValuetoJSON();
+
+            try
+            {
+                var json_data = json["rows"][0];
+                ParsingJSON pj = new ParsingJSON();
+                HousingData data = pj.ParseBackendData<HousingData>(json_data);
+
+                PlayerPrefs.SetString("bed", data.bed);
+                PlayerPrefs.SetString("closet", data.closet);
+                PlayerPrefs.SetString("table", data.table);
+                PlayerPrefs.SetString("chair", data.chair);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

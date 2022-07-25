@@ -42,6 +42,10 @@ public class GardenControl : MonoBehaviour
 
     private void Start()
     {
+        empty_ground[0] = true;
+        empty_ground[1] = true;
+        empty_ground[2] = true;
+        empty_ground[3] = true;
         UpdateFieldGarden();
     }
 
@@ -64,6 +68,10 @@ public class GardenControl : MonoBehaviour
 
     void UpdateFieldGarden()     //텃밭의 정보를 업데이트하여 필드에 반영
     {
+        Debug.Log(empty_ground[0]);
+        Debug.Log(empty_ground[1]);
+        Debug.Log(empty_ground[2]);
+        Debug.Log(empty_ground[3]);
         //1. 로컬에 저장해둔 텃밭의 정보를 가져온다.
         if (PlayerPrefs.GetString("G1") != "")
         {
@@ -97,20 +105,23 @@ public class GardenControl : MonoBehaviour
         for (int i = 0; i < g_seed.Length; i++)
         {
             //기존에 있던 작물 객체가 있다면 삭제한다.
-            Destroy(garden_crops[i]);
             //2. 빈 텃밭의 위치를 계산한다. > 새로이 심어질 텃밭의 번호를 알기 위함
             if (g_seed[i].Equals(""))
             {
+                Destroy(garden_crops[i]);
                 empty_ground[i] = true;
             }
             else    //3. 비어있지 않은 텃밭에는 해당 코드의 이름을 가진 작물 프리펩을 객체로 생성한다. "ICode_crops"
             {
-                empty_ground[i] = false;
-                garden_crops[i] = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants")); //객체 생성: 새싹
-                garden_crops[i].transform.SetParent(garden_ground[i].transform);   //이를 텃밭 오브젝트에 하위로 넣는다
-                garden_crops[i].transform.GetChild(0).GetComponent<Text>().text = g_seed[i];    //icode를 입력해둔다
-                garden_crops[i].transform.GetChild(1).GetComponent<Text>().text = g_timer[i].ToString();    //성장시간을 입력해둔다
-                garden_crops[i].transform.localPosition = new Vector3(0, 0, 0); //작물 객체 위치 재설정
+                if (Farms.transform.GetChild(i).transform.childCount == 0)
+                {
+                    empty_ground[i] = false;
+                    garden_crops[i] = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_GreenPlants")); //객체 생성: 새싹
+                    garden_crops[i].transform.SetParent(garden_ground[i].transform);   //이를 텃밭 오브젝트에 하위로 넣는다
+                    garden_crops[i].transform.GetChild(0).GetComponent<Text>().text = g_seed[i];    //icode를 입력해둔다
+                    garden_crops[i].transform.GetChild(1).GetComponent<Text>().text = g_timer[i].ToString();    //성장시간을 입력해둔다
+                    garden_crops[i].transform.localPosition = new Vector3(0, 0, 0); //작물 객체 위치 재설정
+                }
             }
         }
     }

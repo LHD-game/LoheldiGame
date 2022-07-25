@@ -13,6 +13,7 @@ public class Changing : MonoBehaviour
     public GameObject ChairPosition;
     public GameObject ClosetPosition;
     public Text ItemCode;
+    public Text TempItemCode;
 
     private string BedCode = "";
     private string ClosetCode = "";
@@ -24,151 +25,154 @@ public class Changing : MonoBehaviour
     public void Start()
     {
         Starting = true;
+        Save_Basic.LoadUserHousing();
 
         BedPosition = GameObject.Find("BedPosition");
         TablePosition = GameObject.Find("TablePosition");
         ChairPosition = GameObject.Find("ChairPosition");
         ClosetPosition = GameObject.Find("ClosetPosition");
+        TempItemCode = GameObject.Find("TempItemCodeforLoad").GetComponent<Text>();
 
-        ItemCode.text = PlayerPrefs.GetString("bed");
-        if (ItemCode.text != "")
-            ButtonClick();
-        ItemCode.text = PlayerPrefs.GetString("closet");
-        if (ItemCode.text != "")
-            ButtonClick();
-        ItemCode.text = PlayerPrefs.GetString("table");
-        if (ItemCode.text != "")
-            ButtonClick();
-        ItemCode.text = PlayerPrefs.GetString("chair");
-        if (ItemCode.text != "")
-            ButtonClick();
+        TempItemCode.text = PlayerPrefs.GetString("bed");
+        if (TempItemCode.text != "")
+            ButtonClick(TempItemCode);
+        TempItemCode.text = PlayerPrefs.GetString("closet");
+        if (TempItemCode.text != "")
+            ButtonClick(TempItemCode);
+        TempItemCode.text = PlayerPrefs.GetString("table");
+        if (TempItemCode.text != "")
+            ButtonClick(TempItemCode);
+        TempItemCode.text = PlayerPrefs.GetString("chair");
+        if (TempItemCode.text != "")
+            ButtonClick(TempItemCode);
         Starting = false;
     }
 
-    public void ButtonClick()
+    public void ButtonClick(Text ItemCodeObject)
     {
+        string ItemCode = ItemCodeObject.text;
         if (FurnitureChangeClick.CurrentFurniture == "Bed_01_Single" || FurnitureChangeClick.CurrentFurniture == "Bed_01_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_K(Clone)")
         {
-            if (ItemCode.text == "2010101")            //첫번째 옵션을 선택했다면
+            if (ItemCode == "2010101")            //첫번째 옵션을 선택했다면
             {
                 Destroy(BedPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/Bed_W"), BedPosition.transform);  //해당 주소에 오브젝트를 생성해서 물러옴.
                 TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장.
             }
-            else if (ItemCode.text == "2020101")       //두번째 옵션을 선택했다면
+            else if (ItemCode == "2020101")       //두번째 옵션을 선택했다면
             {
                 Destroy(BedPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/Bed_Single"), BedPosition.transform);  //해당 주소에 오브젝트를 생성해서 물러옴.
                 TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장.
             }
-            else if (ItemCode.text == "2030101")       //세번째 옵션을 선택했다면
+            else if (ItemCode == "2030101")       //세번째 옵션을 선택했다면
             {
                 Destroy(BedPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/Bed_K"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
                 TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장.
             }
-            else if (ItemCode.text == "2040101")       //네번째 옵션을 선택했다면
+            else if (ItemCode == "2040101")       //네번째 옵션을 선택했다면
             {
                 /*Destroy(BedPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
                 TempObject.transform.SetParent(BedPosition.transform);*/                                                                //오브젝트를 BedPosition에 Child로 저장
             }
-            BedCode = ItemCode.text;
+            BedCode = ItemCode;
         }
                                                                 //옷장
         if (FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02" || FurnitureChangeClick.CurrentFurniture == "wardrobe(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_K(Clone)")
         {
-            if (ItemCode.text == "2010102")            //첫번째 옵션을 선택했다면
+            if (ItemCode == "2010102")            //첫번째 옵션을 선택했다면
             {
                 Destroy(ClosetPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Wardrobe_W"), ClosetPosition.transform);
                 TempObject.transform.SetParent(ClosetPosition.transform);
             }
-            else if (ItemCode.text == "2020102")       //두번째 옵션을 선택했다면
+            else if (ItemCode == "2020102")       //두번째 옵션을 선택했다면
             {
                 Destroy(ClosetPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/wardrobe"), ClosetPosition.transform);
                 TempObject.transform.SetParent(ClosetPosition.transform);
             }
-            else if (ItemCode.text == "2030102")       //세번째 옵션을 선택했다면
+            else if (ItemCode == "2030102")       //세번째 옵션을 선택했다면
             {
                 Destroy(ClosetPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Wardrobe_K"), ClosetPosition.transform);
                 TempObject.transform.SetParent(ClosetPosition.transform);
             }
-            else if (ItemCode.text == "2040102")       //네번째 옵션을 선택했다면
+            else if (ItemCode == "2040102")       //네번째 옵션을 선택했다면
             {
                 /*Destroy(ClosetPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/"), ClosetPosition.transform);
                 TempObject.transform.SetParent(ClosetPosition.transform);*/
             }
-            ClosetCode = ItemCode.text;
+            ClosetCode = ItemCode;
         }
                                                                 //책상
         if (FurnitureChangeClick.CurrentFurniture == "Table_01" || FurnitureChangeClick.CurrentFurniture == "Table_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "table_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Table4_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "table2_K(Clone)")
         {
-            if (ItemCode.text == "2010204")            //첫번째 옵션을 선택했다면
+            if (ItemCode == "2010204")            //첫번째 옵션을 선택했다면
             {
                 Destroy(TablePosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/Table4_W"), TablePosition.transform);
                 TempObject.transform.SetParent(TablePosition.transform);
             }
-            else if (ItemCode.text == "2020204")       //두번째 옵션을 선택했다면
+            else if (ItemCode == "2020204")       //두번째 옵션을 선택했다면
             {
                 Destroy(TablePosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/Table_2"), TablePosition.transform);
                 TempObject.transform.SetParent(TablePosition.transform);
             }
-            else if (ItemCode.text == "2030204")       //세번째 옵션을 선택했다면
+            else if (ItemCode == "2030204")       //세번째 옵션을 선택했다면
             {
                 Destroy(TablePosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/table2_K"), TablePosition.transform);
                 TempObject.transform.SetParent(TablePosition.transform);
             }
-            else if (ItemCode.text == "2040203")       //네번째 옵션을 선택했다면
+            else if (ItemCode == "2040203")       //네번째 옵션을 선택했다면
             {
                 /*Destroy(TablePosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/"), TablePosition.transform);
                 TempObject.transform.SetParent(TablePosition.transform);*/
             }
-            TableCode = ItemCode.text;
+            TableCode = ItemCode;
         }
                                                                 //의자
         if (FurnitureChangeClick.CurrentFurniture == "Chair_01" || FurnitureChangeClick.CurrentFurniture == "Chair_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "chair_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair2_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair_K(Clone)")
         {
-            if (ItemCode.text == "2010205")            //첫번째 옵션을 선택했다면
+            if (ItemCode == "2010205")            //첫번째 옵션을 선택했다면
             {
                 Destroy(ChairPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair2_W"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);
             }
-            else if (ItemCode.text == "2020205")       //두번째 옵션을 선택했다면
+            else if (ItemCode == "2020205")       //두번째 옵션을 선택했다면
             {
                 Destroy(ChairPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/chair_2"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);
             }
-            else if (ItemCode.text == "2030205")       //세번째 옵션을 선택했다면
+            else if (ItemCode == "2030205")       //세번째 옵션을 선택했다면
             {
                 Destroy(ChairPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair_K"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);
             }
-            else if (ItemCode.text == "2040204")       //네번째 옵션을 선택했다면
+            else if (ItemCode == "2040204")       //네번째 옵션을 선택했다면
             {
                 /*Destroy(ChairPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>(""Prefabs/Furniture/Chair/"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);*/
             }
-            ChairCode = ItemCode.text;
+            ChairCode = ItemCode;
         }
         if (!Starting)
         {
             Param param = new Param();
-            param.Add("bed", ChairCode);
+            param.Add("bed", BedCode);
             param.Add("closet", ClosetCode);
             param.Add("table", TableCode);
-            param.Add("chait", ChairCode);
+            param.Add("chair", ChairCode);
 
             //유저 현재 row 검색
             var bro = Backend.GameData.Get("USER_HOUSE", new Where());

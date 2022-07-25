@@ -22,11 +22,13 @@ public class QuestScript : MonoBehaviour
     public List<Dictionary<string, object>> Quest_Mail = new List<Dictionary<string, object>>();
 
     public bool note=false;
+    public bool farm = false;
 
     private int QuestNum;
     FlieChoice file;
 
     public QuestDontDestroy Load;
+
     public void QuestStart()
     {
         file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
@@ -37,6 +39,10 @@ public class QuestScript : MonoBehaviour
         {
             file.Tutorial();
             Debug.Log("튜토리얼");
+        }
+        else if (Load.QuestIndex.Equals("0_2"))
+        {
+            farm = true;
         }
         else if (Load.LastDay != Load.ToDay)
             QuestCheck();
@@ -57,11 +63,11 @@ public class QuestScript : MonoBehaviour
             Quest_Mail = CSVReader.Read("Scripts/Quest/QuestMail");
         }
         Debug.Log("퀘스트 번호" + Load.QuestIndex);
-        //GiveQuest();
+        QuestChoice();
         
     }
     int Q = 0;
-/*    private void GiveQuest()
+private void GiveQuest()
     {
         
         for (int k = 0; k <= Quest_Mail.Count; k++)
@@ -77,24 +83,11 @@ public class QuestScript : MonoBehaviour
             }
         }
         Load.QuestMail = true;
-        string title = Quest_Mail[Q]["QName"].ToString();                      
-        string detail = Quest_Mail[Q]["Content"].ToString();
-        string sent = Quest_Mail[Q]["authorName"].ToString();
-        Load.ButtonPlusNpc = sent;
-        GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
-
-        Mail.TempObject = Instantiate(temp, Mail.MailList);                      //메일 프리펩 생성
-        Mail.ThisTitle = Mail.TempObject.transform.Find("Title").gameObject;                                              //프리펩에 속성
-        Mail.ThisSent = Mail.TempObject.transform.Find("Sent").gameObject;
-        Mail.ThisDetail = Mail.TempObject.transform.Find("Detail").gameObject;
-        Mail.TempObject.transform.GetComponent<Button>().onClick.AddListener(delegate { this.Mail.MailLoading(); });      //프리펩으로 불러온 버튼의 OnClick()을 MailLoading으로 지정
-
-        Mail.ThisTitle.GetComponent<Text>().text = title;                                                            //버튼에 속성을 서버에서 불러온 속성으로 바꿈
-        Mail.ThisSent.GetComponent<Text>().text = sent;
-        Mail.ThisDetail.GetComponent<Text>().text = detail.Replace("<n>","\n");
+        Load.ButtonPlusNpc = Quest_Mail[Q]["authorName"].ToString(); ;
+        //GameObject temp = Resources.Load<GameObject>("Prefabs/UI/QuestMail") as GameObject;
 
         QuestChoice();
-    }*/
+    }
 
     private void CheckMail()
     {

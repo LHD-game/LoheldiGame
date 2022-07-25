@@ -33,7 +33,7 @@ public class MailLoad : MonoBehaviour
     public Text MailCount;
     public int TotalCount;
 
-    QuestScript Quest;
+    public QuestScript Quest;
 
 /*    Dictionary<string, string> icode = new Dictionary<string, string>();
     Dictionary<string, string> iname = new Dictionary<string, string>();

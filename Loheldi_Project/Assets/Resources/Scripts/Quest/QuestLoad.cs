@@ -46,46 +46,46 @@ public class QuestLoad : MonoBehaviour
             Debug.Log(newQuest);*/
             JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
             string QchartID = rows[0]["QID"]["S"].ToString();
-            if (QuestPreg == QchartID)
+            //if (QuestPreg == QchartID)
+            //{
+            //Debug.Log("다음퀘스트 준비완료");
+
+            for (int i = 0; i < rows.Count; i++)
             {
-                Debug.Log("다음퀘스트 준비완료");
-                        
-                for (int i = 0; i < rows.Count; i++)
+                string QID = rows[i]["QID"]["S"].ToString();
+                Param param2 = new Param();
+
+                if (QID == QuestPreg)
                 {
-                    string QID = rows[i]["QID"]["S"].ToString();
-                    Param param2 = new Param();
-                            
-                    if (QID == QuestPreg)
-                    {
-                        QID2 = rows[i+1]["QID"]["S"].ToString();
-                        QName = rows[i+1]["QName"]["S"].ToString();
-                        From = rows[i+1]["From"]["S"].ToString();
-                        Content = rows[i + 1]["Content"]["S"].ToString();  //.Replace("<n>", "\n"); -> replace는 우편함에서 실행하니 하지 않으셔도 무방합니다.
-                        Reward = rows[i + 1]["Reward"]["S"].ToString(); 
-                        authorName = rows[i+1]["authorName"]["S"].ToString();
+                    QID2 = rows[i + 1]["QID"]["S"].ToString();
+                    QName = rows[i + 1]["QName"]["S"].ToString();
+                    From = rows[i + 1]["From"]["S"].ToString();
+                    Content = rows[i + 1]["Content"]["S"].ToString();  //replace는 우편함에서 실행하니 하지 않으셔도 무방합니다.
+                    Reward = rows[i + 1]["Reward"]["S"].ToString();
+                    authorName = rows[i + 1]["authorName"]["S"].ToString();
 
-                        DontDestroy.QuestIndex = QID2;
-                        Debug.Log(QID2);
-                        Debug.Log(QName);
+                    DontDestroy.QuestIndex = QID2;
+                    DontDestroy.ButtonPlusNpc = authorName;
+                    Debug.Log(QID2);
+                    Debug.Log(QName);
 
-                        param2.Add("QID", QID2);
-                        param2.Add("QName", QName);
-                        param2.Add("From", From);
-                        param2.Add("Content", Content);
-                        param2.Add("Reward", Reward);
-                        param2.Add("authorName", authorName);
-                        Backend.GameData.Insert("QUEST_INFO", param2);
+                    param2.Add("QID", QID2);
+                    param2.Add("QName", QName);
+                    param2.Add("From", From);
+                    param2.Add("Content", Content);
+                    param2.Add("Reward", Reward);
+                    param2.Add("authorName", authorName);
+                    Backend.GameData.Insert("QUEST_INFO", param2);
 
-                    }
                 }
-                        
+            }
 
-            }
-            else
-            {
-                Debug.Log("아직 완료되지 않은 퀘스트가 있습니다.");
-            }
-                
+            //}
+            //else
+            //{
+             //   Debug.Log("아직 완료되지 않은 퀘스트가 있습니다.");
+            //}
+            MailLoad.Quest.QuestStart();
         }
             
             

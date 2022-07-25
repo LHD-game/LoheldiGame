@@ -17,13 +17,13 @@ public class tutorial : MonoBehaviour
 
         if (!chat.tuto)
             chat.Chat.SetActive(false);
-        if(chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_4")&& !chat.DontDestroy.tutorialLoading)
+        if(chat.o ==2 && !chat.DontDestroy.tutorialLoading)
         {
             chat.Main_UI.SetActive(true);
             chat.block.transform.Find("Button8").gameObject.SetActive(true);
         }
 
-        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_6")||(tutoi<=4&&tutoi>0))
+        if (chat.o==5||(tutoi<=4&&tutoi>0))
         {
             if (tutoi < 4)
             {
@@ -49,7 +49,7 @@ public class tutorial : MonoBehaviour
             }
         }
 
-        if (chat.data_Dialog[chat.j]["scriptNumber"].ToString().Equals("0_12"))
+        if (chat.o==11)
         {
             if (tutoi < 7)
             {

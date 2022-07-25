@@ -55,6 +55,10 @@ public class PlayInfoManager : MonoBehaviour
         SavePlayInfo();
     }
 
+    public static void GetQuestPreg()
+    {
+        SavePlayInfo();
+    }
 
     //서버 상 play_info에 prefs저장하는 메소드
     static void SavePlayInfo()

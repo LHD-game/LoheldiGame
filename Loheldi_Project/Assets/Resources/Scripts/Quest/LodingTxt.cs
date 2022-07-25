@@ -131,6 +131,7 @@ public class LodingTxt : MonoBehaviour
     string PlayerName;
     private void Awake()
     {
+        Debug.Log(PlayerPrefs.GetString("QuestPreg"));
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
@@ -141,10 +142,6 @@ public class LodingTxt : MonoBehaviour
             Inter = GameObject.Find("Player").GetComponent<Interaction>();
             Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
 
-            if (DontDestroy.weekend)
-                DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //주말
-            else
-                DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");  //로컬값 가져오기
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         }
         
@@ -178,9 +175,10 @@ public class LodingTxt : MonoBehaviour
                 if (click.name.Equals("ItemBtn"))
                 {
                     Debug.Log(PlayerPrefs.GetString("QuestPreg"));
-                    Quest.farm = false;
                     PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                     Debug.Log(PlayerPrefs.GetString("QuestPreg"));
+                    PlayInfoManager.GetQuestPreg();
+                    Quest.farm = false;
                 }
                 else
                     Debug.Log("무시");
@@ -314,7 +312,6 @@ public class LodingTxt : MonoBehaviour
                 Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                 break;
             case 12:
-                DontDestroy.QuestIndex = "0_2";
                 QuestEnd();
                 SceneLoader.instance.GotoMainField();
                 break;
@@ -894,6 +891,7 @@ public class LodingTxt : MonoBehaviour
         else
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
         Debug.Log(PlayerPrefs.GetString("QuestPreg", DontDestroy.QuestIndex));
+        PlayInfoManager.GetQuestPreg();
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클
     {

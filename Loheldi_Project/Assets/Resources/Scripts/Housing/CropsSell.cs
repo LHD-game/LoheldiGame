@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CropsSell : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class CropsSell : MonoBehaviour
             {
                 if (hit.collider.gameObject == this.gameObject)                          //밭을 누른거라면
                 {
+                    GardenControl GardenControl = GameObject.Find("InventoryManager").GetComponent<GardenControl>();
+                    GardenControl.HarvestCrops(int.Parse(transform.parent.GetComponent<Text>().text));
                     TempInt = Random.Range(0, 2);
                         if (TempInt == 0)
                             PlayInfoManager.GetCoin(3);

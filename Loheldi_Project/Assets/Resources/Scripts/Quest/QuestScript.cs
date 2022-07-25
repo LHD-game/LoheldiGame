@@ -42,6 +42,7 @@ public class QuestScript : MonoBehaviour
         }
         else if (Load.QuestIndex.Equals("0_2"))
         {
+            Debug.Log("ÆÊ");
             farm = true;
         }
         else if (Load.LastDay != Load.ToDay)

@@ -65,14 +65,34 @@ public class GardenControl : MonoBehaviour
     void UpdateFieldGarden()     //텃밭의 정보를 업데이트하여 필드에 반영
     {
         //1. 로컬에 저장해둔 텃밭의 정보를 가져온다.
-        g_seed[0] = PlayerPrefs.GetString("G1");   //비어있다면, null이 아닌 공백이 들어있습니다. ("" != null)
-        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G1Time"));
-        g_seed[1] = PlayerPrefs.GetString("G2");
-        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G2Time"));
-        g_seed[2] = PlayerPrefs.GetString("G3");
-        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G3Time"));
-        g_seed[3] = PlayerPrefs.GetString("G4");
-        g_timer[0] = DateTime.Parse(PlayerPrefs.GetString("G4Time"));
+        if (PlayerPrefs.GetString("G1") != "")
+        {
+            g_seed[0] = PlayerPrefs.GetString("G1");   //비어있다면, null이 아닌 공백이 들어있습니다. ("" != null)
+            g_timer[0] = DateTime.ParseExact(PlayerPrefs.GetString("G1Time"), "yyyy-MM-dd tt h:mm", null);
+        }
+        else
+            g_seed[0] = "";
+        if (PlayerPrefs.GetString("G2") != "")
+        {
+            g_seed[1] = PlayerPrefs.GetString("G2");
+            g_timer[1] = DateTime.ParseExact(PlayerPrefs.GetString("G2Time"), "yyyy-MM-dd tt h:mm", null);
+        }
+        else
+            g_seed[1] = "";
+        if (PlayerPrefs.GetString("G3") != "")
+        {
+            g_seed[2] = PlayerPrefs.GetString("G3");
+            g_timer[2] = DateTime.ParseExact(PlayerPrefs.GetString("G3Time"), "yyyy-MM-dd tt h:mm", null);
+        }
+        else
+            g_seed[2] = "";
+        if (PlayerPrefs.GetString("G4") != "")
+        {
+            g_seed[3] = PlayerPrefs.GetString("G4");
+            g_timer[3] = DateTime.ParseExact(PlayerPrefs.GetString("G4Time"), "yyyy-MM-dd tt h:mm", null);
+        }
+        else
+            g_seed[3] = "";
 
         for (int i = 0; i < g_seed.Length; i++)
         {
@@ -133,24 +153,56 @@ public class GardenControl : MonoBehaviour
     //서버 상 play_info에 prefs저장하는 메소드
     void SaveUserGarden()
     {
-        string G1 = PlayerPrefs.GetString("G1");
-        DateTime G1Time = DateTime.Parse(PlayerPrefs.GetString("G1Time"));
-        string G2 = PlayerPrefs.GetString("G2");
-        DateTime G2Time = DateTime.Parse(PlayerPrefs.GetString("G2Time"));
-        string G3 = PlayerPrefs.GetString("G3");
-        DateTime G3Time = DateTime.Parse(PlayerPrefs.GetString("G3Time"));
-        string G4 = PlayerPrefs.GetString("G4");
-        DateTime G4Time = DateTime.Parse(PlayerPrefs.GetString("G4Time"));
-
         Param param = new Param();
-        param.Add("G1", G1);
-        param.Add("G1Time", G1Time);
-        param.Add("G2", G2);
-        param.Add("G2Time", G2Time);
-        param.Add("G3", G3);
-        param.Add("G3Time", G3Time);
-        param.Add("G4", G4);
-        param.Add("G4Time", G4Time);
+        if (PlayerPrefs.GetString("G1") != "")
+        {
+            string G1 = PlayerPrefs.GetString("G1");
+            DateTime G1Time = DateTime.Parse(PlayerPrefs.GetString("G1Time"));
+            param.Add("G1", G1);
+            param.Add("G1Time", G1Time);
+        }
+        else
+        {
+            param.Add("G1", "");
+            param.Add("G1Time", "");
+        }
+        if (PlayerPrefs.GetString("G2") != "")
+        {
+            string G2 = PlayerPrefs.GetString("G2");
+            DateTime G2Time = DateTime.Parse(PlayerPrefs.GetString("G2Time"));
+            param.Add("G2", G2);
+            param.Add("G2Time", G2Time);
+        }
+        else
+        {
+            param.Add("G2", "");
+            param.Add("G2Time", "");
+        }
+        if (PlayerPrefs.GetString("G3") != "")
+        {
+            string G3 = PlayerPrefs.GetString("G3");
+            DateTime G3Time = DateTime.Parse(PlayerPrefs.GetString("G3Time"));
+            param.Add("G3", G3);
+            param.Add("G3Time", G3Time);
+        }
+        else
+        {
+            param.Add("G3", "");
+            param.Add("G3Time", "");
+        }
+        if (PlayerPrefs.GetString("G4") != "")
+        {
+            string G4 = PlayerPrefs.GetString("G4");
+            DateTime G4Time = DateTime.Parse(PlayerPrefs.GetString("G4Time"));
+            param.Add("G4", G4);
+            param.Add("G4Time", G4Time);
+        }
+        else
+        {
+            param.Add("G4", "");
+            param.Add("G4Time", "");
+        }
+
 
         //유저 현재 row 검색
         var bro = Backend.GameData.Get("USER_GARDEN", new Where());

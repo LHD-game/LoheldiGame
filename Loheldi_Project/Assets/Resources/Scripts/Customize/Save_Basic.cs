@@ -91,7 +91,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("Level", 1);
         param.Add("NowExp", 0);
         param.Add("MaxExp", 10);
-        param.Add("QuestPreg", "0_1");
+        param.Add("QuestPreg", "0_0");
         param.Add("LastQTime", today.Day);
         param.Add("HP", 5);
         param.Add("LastHPTime", today.Day);
@@ -107,40 +107,6 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
             Debug.Log("PlayerInfoInit() Fail");
         }
         
-    }
-
-    public static void QuestInfoInit()
-    {
-        var bro = Backend.GameData.GetMyData("QUEST_INFO", new Where());
-        Param param = new Param();
-        if (bro.IsSuccess())
-        {
-            if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
-            {
-                string selectedProbabilityFileId = "55216";
-
-                var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
-                JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
-                string QID = rows[0]["QID"]["S"].ToString();
-                string QName = rows[0]["QName"]["S"].ToString();
-                string From = rows[0]["From"]["S"].ToString();
-                string Content = rows[0]["Content"]["S"].ToString();
-                string Reward = rows[0]["Reward"]["S"].ToString();
-                string authorName = rows[0]["authorName"]["S"].ToString();
-
-                Debug.Log(QID);
-                Debug.Log(QName);
-                Debug.Log(Content);
-
-                param.Add("QID", QID);
-                param.Add("QName", QName);
-                param.Add("From", From);
-                param.Add("Content", Content);
-                param.Add("Reward", Reward);
-                param.Add("authorName", authorName);
-                Backend.GameData.Insert("QUEST_INFO", param);
-            }
-        }
     }
 
     //USER_GARDEN 테이블 초기값 저장

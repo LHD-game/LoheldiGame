@@ -55,17 +55,17 @@ public class QuestLoad : MonoBehaviour
                 string QID = rows[i]["QID"]["S"].ToString();
                 Param param2 = new Param();
 
-                if (QID == QuestPreg)
-                {
-                    QID2 = rows[i + 1]["QID"]["S"].ToString();
-                    QName = rows[i + 1]["QName"]["S"].ToString();
-                    From = rows[i + 1]["From"]["S"].ToString();
-                    Content = rows[i + 1]["Content"]["S"].ToString();  //replace는 우편함에서 실행하니 하지 않으셔도 무방합니다.
-                    Reward = rows[i + 1]["Reward"]["S"].ToString();
-                    authorName = rows[i + 1]["authorName"]["S"].ToString();
+                if (QuestPreg.Equals("0_0")){
+                    QID2 = rows[0]["QID"]["S"].ToString();
+                    QName = rows[0]["QName"]["S"].ToString();
+                    From = rows[0]["From"]["S"].ToString();
+                    Content = rows[0]["Content"]["S"].ToString();
+                    Reward = rows[0]["Reward"]["S"].ToString();
+                    authorName = rows[0]["authorName"]["S"].ToString();
 
                     DontDestroy.QuestIndex = QID2;
                     DontDestroy.ButtonPlusNpc = authorName;
+
                     Debug.Log(QID2);
                     Debug.Log(QName);
 
@@ -76,8 +76,35 @@ public class QuestLoad : MonoBehaviour
                     param2.Add("Reward", Reward);
                     param2.Add("authorName", authorName);
                     Backend.GameData.Insert("QUEST_INFO", param2);
-
+                    break;
                 }
+                else
+                {
+                    if (QID == QuestPreg)   //0_0은 아닌 상태에서 퀘스트 진행도와 일치
+                    {
+                        QID2 = rows[i + 1]["QID"]["S"].ToString();
+                        QName = rows[i + 1]["QName"]["S"].ToString();
+                        From = rows[i + 1]["From"]["S"].ToString();
+                        Content = rows[i + 1]["Content"]["S"].ToString();  //replace는 우편함에서 실행하니 하지 않으셔도 무방합니다.
+                        Reward = rows[i + 1]["Reward"]["S"].ToString();
+                        authorName = rows[i + 1]["authorName"]["S"].ToString();
+
+                        DontDestroy.QuestIndex = QID2;
+                        DontDestroy.ButtonPlusNpc = authorName;
+                        Debug.Log(QID2);
+                        Debug.Log(QName);
+
+                        param2.Add("QID", QID2);
+                        param2.Add("QName", QName);
+                        param2.Add("From", From);
+                        param2.Add("Content", Content);
+                        param2.Add("Reward", Reward);
+                        param2.Add("authorName", authorName);
+                        Backend.GameData.Insert("QUEST_INFO", param2);
+                        break;
+                    }
+                }
+                
             }
 
             //}
@@ -101,14 +128,4 @@ public class QuestLoad : MonoBehaviour
             return;
         }*/
     }
-
-/*    public void QuestLoadonMailPost()
-    {
-        Debug.Log(QName);
-        TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/QuestMail"), MailLoad.MailList);
-        TempObject.transform.GetChild(0).GetComponent<Text>().text = QName;
-        TempObject.transform.GetChild(1).GetComponent<Text>().text = From;
-        TempObject.transform.GetChild(2).GetComponent<Text>().text = Content;
-        TempObject.GetComponent<Button>().onClick.AddListener(MailLoad.MailLoading);
-    }*/
 }

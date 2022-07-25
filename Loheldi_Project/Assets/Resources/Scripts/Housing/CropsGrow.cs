@@ -77,7 +77,7 @@ public class CropsGrow : MonoBehaviour
         }
         else
         {
-            Debug.Log("작물 모델이 없어서 GreenPlants로 대체");
+            //Debug.Log("작물 모델이 없어서 GreenPlants로 대체");
         }
     }
 }

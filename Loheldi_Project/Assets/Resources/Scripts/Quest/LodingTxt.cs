@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 using UnityEngine.Video;
 
 public class LodingTxt : MonoBehaviour
@@ -102,7 +103,7 @@ public class LodingTxt : MonoBehaviour
 
 
     int m = 0;                                  //카메라 무빙
-    int o = 0;                                  //m서포터
+    public int o = 0;                                  //m서포터
     int MataNum = 0;                        //메터리얼 번호
     int QBikeSpeed;
     bool BikeQ = false;
@@ -165,13 +166,29 @@ public class LodingTxt : MonoBehaviour
 
         parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
         PlayerName = PlayerPrefs.GetString("Nickname");
-
-        Quest.QuestStart();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        
+        if (Quest.farm)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject click = EventSystem.current.currentSelectedGameObject;
+                if (click.name.Equals("ItemBtn"))
+                {
+                    Debug.Log(PlayerPrefs.GetString("QuestPreg"));
+                    Quest.farm = false;
+                    PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                    Debug.Log(PlayerPrefs.GetString("QuestPreg"));
+                }
+                else
+                    Debug.Log("무시");
+                Debug.Log(click.name);
+            }
+            else;
+                
+        }
         if (BikeQ)
         {
             if (JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
@@ -297,6 +314,7 @@ public class LodingTxt : MonoBehaviour
                 Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                 break;
             case 12:
+                DontDestroy.QuestIndex = "0_2";
                 QuestEnd();
                 SceneLoader.instance.GotoMainField();
                 break;
@@ -861,11 +879,11 @@ public class LodingTxt : MonoBehaviour
     }
 
     int Questbadge;
-    private void QuestEnd()
+    public void QuestEnd()
     {
         DontDestroy.ButtonPlusNpc = "";
         Quest.Load.QuestMail = false;
-        DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
+        //DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);

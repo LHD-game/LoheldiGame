@@ -60,6 +60,7 @@ public class FurnitureChangeClick : MonoBehaviour
                             Buttons.SetActive(true);
                             Bloker.SetActive(true);
                             ButtonToggle = true;
+                            
                         }
                     }
                     else

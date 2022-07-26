@@ -13,7 +13,7 @@ public class RunPlayerRun : MonoBehaviour
     public GameObject FXpo;
 
     public Rigidbody player;
-    public bool Close;       //NPC와의 거리 (소리 풀력을 위함)
+    public bool Close = true;       //NPC와의 거리 (소리 풀력을 위함)
 
     private float warntime = 1.0f;
     private float nexttime = 0.0f;
@@ -25,21 +25,23 @@ public class RunPlayerRun : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Vector3.Distance(NPC_.position, transform.position));
         if (RunCountDown.CountEnd == true)
         {
             if (Time.time > nexttime)
             {
                 nexttime = Time.time + warntime;
 
-                if (Vector3.Distance(NPC_.position, transform.position) <= 400f)
+                if (Vector3.Distance(NPC_.position, transform.position) < 400f)
                 {
                     if (Close == true)
                     {
                         Close = false;
                         SoundManager.GetComponent<SoundEffect>().Sound("RunClose");
+                        ExclamationMark.SetActive(true);
+                        ExclamationMark.transform.localScale = new Vector3(2f, 2f, 2f);
+                        ExclamationMark.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     }
-                    ExclamationMark.SetActive(true);
-                    ExclamationMark.transform.localScale = new Vector3(2f, 2f, 2f);
                     //Hurry();
                 }
                 else
@@ -47,8 +49,6 @@ public class RunPlayerRun : MonoBehaviour
                     ExclamationMark.SetActive(false);
             }
         }
-        
-    
     }
 
     public void PlayerRun()

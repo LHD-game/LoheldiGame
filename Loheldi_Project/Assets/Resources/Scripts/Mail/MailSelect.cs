@@ -1,3 +1,6 @@
+using BackEnd;
+using LitJson;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +9,8 @@ using UnityEngine.UI;
 
 public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 {
+    public static List<GameObject> reward_list = new List<GameObject>();
+
     //리스트 중 우편 선택시 -> 해당 버튼에 있는 제목 등등을 모두 가져와 오른쪽 화면에 띄운다.
     public void SelectMail()
     {
@@ -21,6 +26,9 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 
         GameObject content = this.transform.Find("Content").gameObject;
         Text content_txt = content.GetComponent<Text>();
+
+        GameObject reward = this.transform.Find("Reward").gameObject;
+        Text reward_txt = reward.GetComponent<Text>();
 
         //세부 정보를 띄울 ui 공간(오브젝트)을 가져온다.
         GameObject QuestDetail = GameObject.Find("RightDetail");
@@ -42,6 +50,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         content_detail_txt.text = content_txt.text;
 
         //todo: reward
+        MakeRewardList(reward_txt.text);
 
         //보상 받기 버튼 활성화: 퀘스트 진행도가 퀘스트 아이디보다 크거나 같아야 한다.
         //1. 현재 qid와 퀘스트의 qid를 가져와 _를 기준으로 앞부분 슬라이스
@@ -67,4 +76,90 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
             }
         }
     }
+
+    //보상 리스트를 만든다.
+    void MakeRewardList(string reward_txt)
+    {
+        for (int k = 0; k < reward_list.Count; k++)
+        {
+            Destroy(reward_list[k]);
+        }
+        reward_list.Clear();
+
+        //Reward에 저장된 보상들(string)을 json 타입으로 변환
+        JObject reward_json = JObject.Parse(reward_txt);
+        Debug.Log("보상: "+reward_json["Exp"]);
+        //json 키값 추출
+        string[] key = new string[reward_json.Count];
+        int i = 0;
+        foreach (var j in reward_json){
+            key[i] = j.Key;
+            i++;
+        }
+
+        //reward box 오브젝트 객체를 생성
+
+        GameObject rewardBox = (GameObject)Resources.Load("Prefabs/UI/MailRewardBox");
+        for (int j=0; j<reward_json.Count; j++)
+        {
+            GameObject parents = GameObject.Find("RewardContent");
+            
+            GameObject child = Instantiate(rewardBox);
+            child.transform.SetParent(parents.transform);
+
+            RectTransform rt = child.GetComponent<RectTransform>(); //아이템 박스 크기 재설정
+            rt.localScale = new Vector3(1f, 1f, 1f);
+
+            reward_list.Add(child);
+
+            //todo: exp, coin, badge, item에 따라 i_code 다르게
+            GameObject i_code = child.transform.Find("ICode").gameObject;
+            Text i_code_txt = i_code.GetComponent<Text>();
+            i_code_txt.text = key[j];
+
+            GameObject name = child.transform.Find("Name").gameObject;
+            Text name_txt = name.GetComponent<Text>();
+
+            GameObject amount = child.transform.Find("Amount").gameObject;
+            Text amount_txt = amount.GetComponent<Text>();
+            amount_txt.text = reward_json[key[j]].ToString();
+
+            GameObject img = child.transform.Find("Img").gameObject;
+            Image img_img = img.GetComponent<Image>();
+
+            if (key[j].Equals("Exp"))
+            {
+                img_img.sprite = Resources.Load<Sprite>("Sprites/FieldUI/exp_sprite");
+                name_txt.text = "경험치";
+            }
+            else if (key[j].Equals("Coin"))
+            {
+                img_img.sprite = Resources.Load<Sprite>("Sprites/FieldUI/coin_sprite");
+                name_txt.text = "코인";
+            }
+            else if (key[j].Contains("B"))  //배지
+            {
+                img_img.sprite = Resources.Load<Sprite>("Sprites/badgeList/" + key[j] + "_catalog");
+                name_txt.text = "배지";
+            }
+            else    //기타 아이템
+            {
+                img_img.sprite = Resources.Load<Sprite>("Sprites/Catalog_Images/Store/" + key[j] + "_catalog");
+                name_txt.text = "아이템";  //todo: 수정 요망! 챁트 내 검색 필요
+            }
+        }
+    }
+
+/*    void GetChartData(string item_type, string item_code)
+    {
+        string item_chart = "";
+        item_chart = ChartNum.AllItemChart;
+        //의상 아이템인지, 일반 아이템인지 모든 차트 뒤져야 한다. 
+        
+        BackendReturnObject bro = Backend.Chart.GetChartContents(item_chart);
+        if (bro.IsSuccess())
+        {
+
+        }
+    }*/
 }

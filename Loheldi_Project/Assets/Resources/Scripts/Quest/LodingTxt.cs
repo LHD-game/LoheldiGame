@@ -166,10 +166,17 @@ public class LodingTxt : MonoBehaviour
             if (DontDestroy.LastDay != DontDestroy.ToDay)
                 QuestLoad.QuestLoadStart();
         }
-        
+
         if (SceneManager.GetActiveScene().name == "Quiz")
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
-        
+        else if (SceneManager.GetActiveScene().name == "Game_Tooth")
+        {
+            GameObject.Find("Canvas").SetActive(false);
+            GameObject.Find("Player").SetActive(false);
+            GameObject.Find("mouth").SetActive(false);
+            Num = "22_2";
+            NewChat();
+        }
         
     }
     public void nextQuest()
@@ -382,6 +389,10 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Dcuttoon"))
         {
             scriptLine();
+        } //ÄÆÅ÷ º¸ÀÌ±â
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Panorama"))
+        {
+            InvokeRepeating("Panorama", 0f, 1f);
         } //ÄÆÅ÷ º¸ÀÌ±â
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//Æ©Åä¸®¾ó
         { 
@@ -660,6 +671,25 @@ public class LodingTxt : MonoBehaviour
             KeyToDream.SetActive(false);
             scriptLine();
         }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Tooth"))
+        {
+            if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString())==0)
+            {
+                GameObject canvus = GameObject.Find("Canvas");
+                DontDestroyOnLoad(canvus);
+                SceneLoader.instance.GotoToothGame();
+            }
+            else if (SceneManager.GetActiveScene().name == "Game_Tooth")
+            {
+                Animator ToothAnimator;
+                ToothAnimator = GameObject.Find("Player").transform.Find("toohtgame_Standing_toothbrush").gameObject.GetComponent<Animator>();
+                if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 1)
+                {
+                    ToothAnimator.SetBool("BikeWalk", true);
+                }
+            }
+            
+        }
         
     }
     public void Line()  //ÁÙ³Ñ±è (scriptTypeÀÌ ¹ºÁö °É·¯³¿)
@@ -721,10 +751,11 @@ public class LodingTxt : MonoBehaviour
 
                 }
             }
-            spriteR = CCImage.GetComponent<Image>();
-            l = Int32.Parse(data_Dialog[j]["image"].ToString());
-            spriteR.sprite = CCImageList[l];
+            
         }
+        spriteR = CCImage.GetComponent<Image>();
+        l = Int32.Parse(data_Dialog[j]["image"].ToString());
+        spriteR.sprite = CCImageList[l];
 
         LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName); //·ÎÄÃ°ª °¡Á®¿À±ä
         if (data_Dialog[j]["name"].ToString().Equals("ÁÖÀÎ°ø"))
@@ -924,10 +955,24 @@ public class LodingTxt : MonoBehaviour
         newfx.Play();
     }
 
+    
     void clearHair()
     {
         Chat.SetActive(true);
         scriptLine();
+    }
+
+    void Panorama()
+    {
+        cuttoon.SetActive(true);
+        cuttoonspriteR = cuttoon.GetComponent<Image>();
+        cuttoonspriteR.sprite = cuttoonImageList[c];
+        if(c == 2)
+        {
+            Line();
+            CancelInvoke("Panorama");
+        }
+        c++;
     }
 
 }

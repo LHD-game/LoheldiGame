@@ -126,216 +126,12 @@ public class MailLoad : MonoBehaviour
             GameObject mail_content = child.transform.Find("Content").gameObject;
             Text content_txt = mail_content.GetComponent<Text>();
             content_txt.text = content_edit;
+
+            GameObject mail_reward = child.transform.Find("Reward").gameObject;
+            Text reward_txt = mail_reward.GetComponent<Text>();
+            reward_txt.text = dialog[i]["Reward"].ToString();
         }
     }
-
-/*
-    public void UpdateList()
-    {
-*//*        BackendReturnObject bro = Backend.UPost.GetPostList(PostType.Admin, 4);  //서버에서 메일 리스트 불러오기     (한번에 4개씩 보이므로 4의 배수가 좋을듯)
-        JsonData json = bro.GetReturnValuetoJSON()["postList"];                  //Json으로 지정*//*
-
-        BackendReturnObject bro1 = Backend.Notice.NoticeList(4);                 //서버에서 공지사항 불러오기
-        JsonData json1 = bro1.FlattenRows();                                     //Json1으로 지정
-
-        ReceiveMailButton.SetActive(false);
-
-        if (MailorAnnou)
-        {
-            Transform[] childList = MailList.GetComponentsInChildren<Transform>(); //과거에 불러왔던 이력 파괴
-            if (childList != null)
-            {
-                for (int i = 1; i < childList.Length; i++)
-                {
-                    if (childList[i] != transform)
-                        Destroy(childList[i].gameObject);
-                }
-            }
-
-            for (int i = 0; i < json.Count; i++)
-            {
-                string title = json[i]["title"].ToString();                      //서버에서 불러온 메일에 속성
-                string sent = json[i]["author"].ToString();
-                string detail = json[i]["content"].ToString();
-
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), MailList);                      //메일 프리펩 생성
-                ThisTitle = TempObject.transform.Find("Title").gameObject;                                              //프리펩에 속성
-                ThisSent = TempObject.transform.Find("Sent").gameObject;
-                ThisDetail = TempObject.transform.Find("Detail").gameObject;
-                TempObject.transform.GetComponent<Button>().onClick.AddListener(delegate { this.MailLoading(); });      //프리펩으로 불러온 버튼의 OnClick()을 MailLoading으로 지정
-
-                ThisTitle.GetComponent<Text>().text = title;                                                            //프리펩에 속성을 서버에서 불러온 속성으로 바꿈
-                ThisSent.GetComponent<Text>().text = sent;
-                ThisDetail.GetComponent<Text>().text = detail;
-            }
-        }
-        else if (!MailorAnnou)
-        {
-            Transform[] childList = NoticeList.GetComponentsInChildren<Transform>(); //과거에 불러왔던 이력 파괴
-            if (childList != null)
-            {
-                for (int i = 1; i < childList.Length; i++)
-                {
-                    if (childList[i] != transform)
-                        Destroy(childList[i].gameObject);
-                }
-            } 
-
-            for (int i = 0; i < json1.Count; i++)
-            {
-                string noticetitle = json1[i]["title"].ToString();              //서버에서 불러온 공지사항 속성
-                string noticesent = json1[i]["author"].ToString();
-                string noticedetail = json1[i]["content"].ToString();
-
-                NoticeTempObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Mail"), NoticeList);                  //메일 프리펩 생성(위에 메일과 같은 프리펩 공유)
-                NoticeTitle = NoticeTempObject.transform.Find("Title").gameObject;                                          //프리펩에 속성
-                NoticeSent = NoticeTempObject.transform.Find("Sent").gameObject;
-                NoticeDetail = NoticeTempObject.transform.Find("Detail").gameObject;
-                NoticeTempObject.transform.GetComponent<Button>().onClick.AddListener(delegate { this.NoticeLoading(); });  //프리펩으로 불러온 버튼의 OnClick()을 NoticeLoading으로 지정
-
-                NoticeTitle.GetComponent<Text>().text = noticetitle;                                                        //프리펩에 속성을 서버에서 불러온 속성으로 바꿈
-                NoticeSent.GetComponent<Text>().text = noticesent;
-                NoticeDetail.GetComponent<Text>().text = noticedetail;
-
-                List<MailLoad> noticeList = new List<MailLoad>();
-            }
-        }
-        *//*if (Quest.Load.QuestMail)
-            Quest.MainQuestLoding();*//*
-    }
-
-    public void MailLoading()
-    {
-        TempObject = EventSystem.current.currentSelectedGameObject;             //선택한 메일을 TempObject에 저장
-
-        ThisTitle = TempObject.transform.Find("Title").gameObject;              //선택한 프리팹의 제목을 지정
-        ThisDetail = TempObject.transform.Find("Detail").gameObject;            //(     ''     )내용을 지정
-        RTitleText.text = ThisTitle.GetComponent<Text>().text;                  //우측에 표시되는 제목을 선택한 제목과 같게 함
-        RDetailText.text = ThisDetail.GetComponent<Text>().text;                //내용을 프리펩에 속성인 Detail로 바꿈
-        ReceiveMailButton.SetActive(true);
-    }
-
-    public void NoticeLoading()
-    {
-        NoticeTempObject = EventSystem.current.currentSelectedGameObject;       //선택한 프리팹을 NoticeTempObject에 저장
-
-        NoticeTitle = NoticeTempObject.transform.Find("Title").gameObject;      //선택한 프리팹의 제목을 지정
-        NoticeDetail = NoticeTempObject.transform.Find("Detail").gameObject;    //(      ''     )내용을 지정
-        NoticeTitleText.text = NoticeTitle.GetComponent<Text>().text;           //우측에 표시되는 제목을 선택한 제목과 같게 함
-        NoticeDetailText.text = NoticeDetail.GetComponent<Text>().text;         //내용을 프리펩에 속성인 Detail로 바꿈
-
-    }
-
-    public void Type_classification()
-    {
-        ThisType = TempObject.transform.Find("Type").gameObject;            //타입 지정
-        Transform type = ThisType.transform.GetChild(0);
-        Debug.Log(type.name);
-        if (type.name.Equals("Quest")) //퀘스트 메일 받기 수정부분
-        {
-            Quest.QuestChoice();
-            Quest.Quest = false;
-        }
-        else
-            ReceiveMail();
-        UpdateList();
-    }
-    public void ReceiveMail()
-    {
-        var BRO = Backend.Chart.GetChartContents("46292"); //서버의 엑셀파일을 불러온다.
-
-        var bro = Backend.UPost.ReceivePostItemAll(PostType.Admin);
-
-        if (bro.IsSuccess())
-        {
-
-            foreach (LitJson.JsonData postItems in bro.GetReturnValuetoJSON()["postItems"])
-            {
-                if (postItems.Count <= 0)
-                {
-                    Debug.Log("아이템이 없는 우편 수령");
-                    continue;
-                }
-                else
-                {
-                    if (BRO.IsSuccess())
-                    {
-                        Debug.Log("Mailgood");
-
-                    }
-
-
-                }
-
-            }
-        }
-        else
-        {
-            if (bro.GetErrorCode() == "NotFoundException")
-            {
-                Debug.LogError("더이상 수령할 우편이 존재하지 않습니다.");
-            }
-        }
-
-        //Inventory 테이블 불러와서, 여기에 해당하는 아이템과 일치하는 코드가 있을 경우 개수를 1증가시켜서 업데이트
-
-        Where where = new Where();
-        where.Equal("ICode", iCode);
-        var bro2 = Backend.GameData.GetMyData("INVENTORY", where);
-
-        if (bro2.IsSuccess() == false)
-        {
-            Debug.Log("요청 실패");
-        }
-        else
-        {
-            JsonData rows = bro2.GetReturnValuetoJSON()["rows"];
-            //없을 경우 아이템 행 추가
-            if (rows.Count <= 0)
-            {
-                Param param = new Param();
-                param.Add("ICode", iCode);
-                param.Add("Amount", 1);
-
-                var insert_bro = Backend.GameData.Insert("INVENTORY", param);
-
-                if (insert_bro.IsSuccess())
-                {
-                    Debug.Log("아이템 수령 완료: " + iCode);
-                }
-                else
-                {
-                    Debug.Log("아이템 수령 오류");
-                }
-            }
-            //있을 경우 해당 아이템 indate찾고, 개수 수정
-            else
-            {
-                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
-                Debug.Log(rowIndate);
-                int item_amount = (int)bro.FlattenRows()[0]["Amount"];
-                item_amount++;
-                Debug.Log(item_amount);
-
-                Param param = new Param();
-                param.Add("ICode", iCode);
-                param.Add("Amount", item_amount);
-
-                var update_bro = Backend.GameData.UpdateV2("INVENTORY", rowIndate, Backend.UserInDate, param);
-                if (update_bro.IsSuccess())
-                {
-                    Debug.Log("아이템 구입 완료: " + iCode);
-                }
-                else
-                {
-                    Debug.Log("아이템 구입 오류");
-                }
-            }
-        }
-        //todo: 코인 차감한 값 서버에 저장, 팝업 띄우기
-
-    }*/
-    
 
     public void NewMailCheck()
     {
@@ -362,19 +158,18 @@ public class MailLoad : MonoBehaviour
         }
     }
 
-    /*public void MailReset()
+    public void RecieveMailBtn()
     {
-        RTitleText.text = " ";
-        RDetailText.text = " ";
-        NoticeTitleText.text = " ";
-        NoticeDetailText.text = " ";
+        //보상 수령
+        List<GameObject> reward = MailSelect.reward_list;
 
-        TotalCount = 0;
-        NewMailCheck();
 
-        for (int i = 0; i < MailList.transform.childCount; i++)
-        {
-            Destroy(MailList.transform.GetChild(i).gameObject);
-        }
-    }*/
+        //퀘스트 테이블 삭제
+        DeleteQuestInfo();
+    }
+
+    void DeleteQuestInfo()
+    {
+
+    }
 }

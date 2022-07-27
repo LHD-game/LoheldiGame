@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GachaMachineMovement : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GachaMachineMovement : MonoBehaviour
         Capsule.transform.position = new Vector3(-0.2544488f, 1.7f, 0.3488888f);
         SpinAnimator = Lever.GetComponent<Animator>();   //애니메이터 컴포넌트 불러오기
         MachinePopup.SetActive(true);
+        MachinePopup.GetComponent<Button>().enabled = false;
         SpinAnimator.SetBool("Spin", true);
     }
     public void TimeLineEvent()
@@ -38,7 +40,7 @@ public class GachaMachineMovement : MonoBehaviour
         Machine.SetActive(true);
         MachinePopup.SetActive(false);
         BackGround.SetActive(true);
-        ButtonPanel.SetActive(true);
+        MachinePopup.GetComponent<Button>().enabled = true;
         Debug.Log("애니메이션 초기화 완료");
     }
 }

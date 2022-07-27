@@ -9,6 +9,7 @@ public class tutorial : MonoBehaviour
     public LodingTxt chat;
     private FlieChoice Chat;
     public int tutoi;                            //튜토리얼 하이라이트 이미지용
+    public string tutoButtonName;
 
     public void Tutorial()
     {
@@ -54,7 +55,10 @@ public class tutorial : MonoBehaviour
             if (tutoi < 7)
             {
                 if (tutoi == 4)
+                {
                     chat.Main_UI.SetActive(true);
+                    chat.tutoclick = true;
+                }
                 else
                     chat.Main_UI.SetActive(false);
                 chat.block.transform.GetChild(tutoi).gameObject.SetActive(true);
@@ -71,7 +75,6 @@ public class tutorial : MonoBehaviour
                 chat.tutoFinish = true;
                 chat.Chat.SetActive(true);
                 chat.Line();
-                chat.move = false;
                 GameObject SoundManager = GameObject.Find("SoundManager");
                 SoundManager.GetComponent<SoundManager>().Sound("BGMField");
                 chat.DontDestroy.tutorialLoading = false;

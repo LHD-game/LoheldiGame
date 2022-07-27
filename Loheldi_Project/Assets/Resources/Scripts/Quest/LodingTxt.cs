@@ -47,7 +47,6 @@ public class LodingTxt : MonoBehaviour
     public Color color;
     public GameObject Chat;
     public GameObject ChatWin;
-    public GameObject QuizeWin;
     public GameObject chatCanvus;
     public GameObject shopCanvus;
     public GameObject MailCanvus;
@@ -82,10 +81,10 @@ public class LodingTxt : MonoBehaviour
     public int l;                            //뜨는 이미지 번호
     string Answer;               //누른 버튼 인식
 
-    public bool tutoEnd = false;  //튜토리얼 완전 끝
     public bool tutoFinish = false;
     public bool tuto;
-    public bool move = false; //캐릭터 순간이동
+    public bool tutoclick;
+
     public static GameObject CCImage;     //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
@@ -144,7 +143,6 @@ public class LodingTxt : MonoBehaviour
         cuttoon = GameObject.Find("chatUI").transform.Find("Cuttoon").gameObject;
         cuttoon.SetActive(false);
         ChatWin.SetActive(false);
-        QuizeWin.SetActive(false);
 
         parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
         PlayerName = PlayerPrefs.GetString("Nickname");
@@ -190,22 +188,40 @@ public class LodingTxt : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
-            if (Quest.farm)
+            if (Quest.farm || tutoclick)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameObject click = EventSystem.current.currentSelectedGameObject;
-                    if (click.name.Equals("ItemBtn"))
+                    if (Quest.farm)
                     {
-                        PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-                        PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-                        PlayInfoManager.GetQuestPreg();
-                        Quest.farm = false;
+                        if (click.name.Equals("ItemBtn"))
+                        {
+                            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+                            PlayInfoManager.GetQuestPreg();
+                            Quest.farm = false;
+                        }
+                        else
+                            Debug.Log("무시");
+                        Debug.Log(click.name);
                     }
-                    else
-                        Debug.Log("무시");
-                    Debug.Log(click.name);
+                    else if (tutoclick)
+                    {
+                        if (click.name.Equals("ItemBtn"))
+                        {
+                            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+                            PlayInfoManager.GetQuestPreg();
+                            Quest.farm = false;
+                        }
+                        else
+                            Debug.Log("무시");
+                        Debug.Log(click.name);
+                    }
                 }
+                if (Input.GetMouseButton(0))
+                    Debug.Log("무시");
             }
         }
         if (BikeQ)
@@ -781,7 +797,6 @@ public class LodingTxt : MonoBehaviour
     {
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
-        QuizeWin.SetActive(false);
         Arrow.SetActive(false);
         NPCButtons.SetActive(false);
         Name.text = " ";

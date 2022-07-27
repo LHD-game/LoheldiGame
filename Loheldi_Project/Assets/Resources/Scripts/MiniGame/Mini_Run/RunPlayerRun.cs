@@ -25,7 +25,6 @@ public class RunPlayerRun : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Vector3.Distance(NPC_.position, transform.position));
         if (RunCountDown.CountEnd == true)
         {
             if (Time.time > nexttime)
@@ -45,8 +44,10 @@ public class RunPlayerRun : MonoBehaviour
                     //Hurry();
                 }
                 else
+                {
                     Close = true;
                     ExclamationMark.SetActive(false);
+                }
             }
         }
     }

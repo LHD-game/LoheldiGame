@@ -259,4 +259,29 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         }
     }
 
+    public static void Save0_0Quest()
+    {
+        Param param = new Param();
+        string selectedProbabilityFileId = "55216";
+        var bro = Backend.Chart.GetChartContents(selectedProbabilityFileId);
+
+        JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+
+        string QID2 = rows[0]["QID"]["S"].ToString();
+        string QName = rows[0]["QName"]["S"].ToString();
+        string From = rows[0]["From"]["S"].ToString();
+        string Content = rows[0]["Content"]["S"].ToString();
+        string Reward = rows[0]["Reward"]["S"].ToString();
+        string authorName = rows[0]["authorName"]["S"].ToString();
+
+        param.Add("QID", QID2);
+        param.Add("QName", QName);
+        param.Add("From", From);
+        param.Add("Content", Content);
+        param.Add("Reward", Reward);
+        param.Add("authorName", authorName);
+        Backend.GameData.Insert("QUEST_INFO", param);
+        Debug.Log("param 입력완료");
+    }
+
 }

@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4759512519263870843}
+  - component: {fileID: 2124824878267664678}
   - component: {fileID: 8476606820703555806}
   - component: {fileID: 5928430048198566932}
   - component: {fileID: 2019785931127479318}
+  - component: {fileID: 2529303409728582832}
   m_Layer: 0
   m_Name: FurnitureSet_08_v_05
   m_TagString: Untagged
@@ -19,8 +20,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4759512519263870843
-Transform:
+--- !u!224 &2124824878267664678
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -33,6 +34,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &8476606820703555806
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,3 +102,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2638642567929694270, guid: b2f1f8e6f4f397441a37040b214c54c1, type: 3}
+--- !u!222 &2529303409728582832
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280188846725596609}
+  m_CullTransparentMesh: 1

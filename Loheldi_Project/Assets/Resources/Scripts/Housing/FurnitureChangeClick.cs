@@ -12,13 +12,15 @@ public class FurnitureChangeClick : MonoBehaviour
     public Camera getCamera;
     private bool ButtonToggle = false;
     private RaycastHit hit;
-    public static string CurrentFurniture = "None";
+    public static GameObject CurrentFurniture;
 
     public string ItemType = "aa";
 
     public bool housing=false;
     private void Start()
     {
+        CurrentFurniture = GameObject.Find("TempObjectforLoad");
+        this.GetComponent<Changing>().FirstSetting();
     }
     void Update()
     {
@@ -33,20 +35,20 @@ public class FurnitureChangeClick : MonoBehaviour
                     if (hit.collider.gameObject.tag == "ChangeableFurniture")           //가구를 누른거라면
                     {
                         Debug.Log(hit.collider.gameObject.name);
-                        CurrentFurniture = hit.collider.gameObject.name;                      //해당 가구 선택하기
-                        if (CurrentFurniture == "Bed_01_Single" || CurrentFurniture == "Bed_01_Single(Clone)" || CurrentFurniture == "Bed_Single(Clone)" || CurrentFurniture == "Bed_W(Clone)" || CurrentFurniture == "Bed_K(Clone)")
+                        CurrentFurniture = hit.collider.gameObject;                      //해당 가구 선택하기
+                        if (CurrentFurniture.GetComponent<Text>().text == "bed")
                         {
                             ItemType = "bed";
                         }
-                        if (CurrentFurniture == "FurnitureSet_10_v_02" || CurrentFurniture == "wardrobe(Clone)" || CurrentFurniture == "Wardrobe_W(Clone)" || CurrentFurniture == "FurnitureSet_10_v_02(Clone)" || CurrentFurniture == "Wardrobe_K(Clone)")
+                        if (CurrentFurniture.GetComponent<Text>().text == "closet")
                         {
                             ItemType = "closet";
                         }
-                        if (CurrentFurniture == "Table_01" || CurrentFurniture == "Table_01(Clone)" || CurrentFurniture == "table_2(Clone)" || CurrentFurniture == "Table4_W(Clone)" || CurrentFurniture == "table2_K(Clone)")
+                        if (CurrentFurniture.GetComponent<Text>().text == "table")
                         {
                             ItemType = "desk";
                         }
-                        if (CurrentFurniture == "Chair_01" || CurrentFurniture == "Chair_01(Clone)" || CurrentFurniture == "chair_2(Clone)" || CurrentFurniture == "Chair2_W(Clone)" || CurrentFurniture == "Chair_K(Clone)")
+                        if (CurrentFurniture.GetComponent<Text>().text == "chair")
                         {
                             ItemType = "chair";
                         }
@@ -60,7 +62,6 @@ public class FurnitureChangeClick : MonoBehaviour
                             Buttons.SetActive(true);
                             Bloker.SetActive(true);
                             ButtonToggle = true;
-                            
                         }
                     }
                     else
@@ -72,6 +73,7 @@ public class FurnitureChangeClick : MonoBehaviour
                         Buttons.SetActive(false);
                         Bloker.SetActive(false);
                         ButtonToggle = false;
+                        Reset();
                     }
                 }
             }
@@ -83,7 +85,7 @@ public class FurnitureChangeClick : MonoBehaviour
         Buttons.SetActive(false);
         Bloker.SetActive(false);//버튼 치우기
         ButtonToggle = false;
-        CurrentFurniture = "None";
+        CurrentFurniture = null;
     }
     
     private bool IsPointerOverUIObject()

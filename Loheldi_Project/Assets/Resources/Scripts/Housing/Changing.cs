@@ -12,25 +12,22 @@ public class Changing : MonoBehaviour
     public GameObject TablePosition;
     public GameObject ChairPosition;
     public GameObject ClosetPosition;
-    public Text ItemCode;
     public Text TempItemCode;
-
-    private string BedCode = "";
-    private string ClosetCode = "";
-    private string TableCode = "";
-    private string ChairCode = "";
 
     private bool Starting;
 
     public void Start()
     {
-        Starting = true;
-        Save_Basic.LoadUserHousing();
-
         BedPosition = GameObject.Find("BedPosition");
         TablePosition = GameObject.Find("TablePosition");
         ChairPosition = GameObject.Find("ChairPosition");
         ClosetPosition = GameObject.Find("ClosetPosition");
+    }
+    public void FirstSetting()
+    {
+        Starting = true;
+        Save_Basic.LoadUserHousing();
+
         TempItemCode = GameObject.Find("TempItemCodeforLoad").GetComponent<Text>();
 
         TempItemCode.text = PlayerPrefs.GetString("bed");
@@ -46,12 +43,13 @@ public class Changing : MonoBehaviour
         if (TempItemCode.text != "")
             ButtonClick(TempItemCode);
         Starting = false;
+        Debug.Log("처음 가구 셋팅 완료");
     }
 
     public void ButtonClick(Text ItemCodeObject)
     {
         string ItemCode = ItemCodeObject.text;
-        if (FurnitureChangeClick.CurrentFurniture == "Bed_01_Single" || FurnitureChangeClick.CurrentFurniture == "Bed_01_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_Single(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "Bed_K(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture.GetComponent<Text>().text == "bed" || Starting)
         {
             if (ItemCode == "2010101")            //첫번째 옵션을 선택했다면
             {
@@ -77,10 +75,32 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
                 TempObject.transform.SetParent(BedPosition.transform);*/                                                                //오브젝트를 BedPosition에 Child로 저장
             }
-            BedCode = ItemCode;
+            Debug.Log("가구 변경 완료");
+            if (!Starting)
+            {
+                Param param = new Param();
+                param.Add("bed", ItemCode);
+
+                //유저 현재 row 검색
+                var bro = Backend.GameData.Get("USER_HOUSE", new Where());
+                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+                //해당 row의 값을 update
+                var bro2 = Backend.GameData.UpdateV2("USER_HOUSE", rowIndate, Backend.UserInDate, param);
+
+                if (bro2.IsSuccess())
+                {
+                    Debug.Log(ItemCode);
+                    Debug.Log("SaveUserHousing 성공. USER_HOUSE 업데이트 되었습니다.");
+                }
+                else
+                {
+                    Debug.Log("SaveUserHousing 실패.");
+                }
+            }
         }
                                                                 //옷장
-        if (FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02" || FurnitureChangeClick.CurrentFurniture == "wardrobe(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "FurnitureSet_10_v_02(Clone)" || FurnitureChangeClick.CurrentFurniture == "Wardrobe_K(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture.GetComponent<Text>().text == "closet" || Starting)
         {
             if (ItemCode == "2010102")            //첫번째 옵션을 선택했다면
             {
@@ -106,10 +126,32 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/"), ClosetPosition.transform);
                 TempObject.transform.SetParent(ClosetPosition.transform);*/
             }
-            ClosetCode = ItemCode;
+            Debug.Log("가구 변경 완료");
+            if (!Starting)
+            {
+                Param param = new Param();
+                param.Add("closet", ItemCode);
+
+                //유저 현재 row 검색
+                var bro = Backend.GameData.Get("USER_HOUSE", new Where());
+                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+                //해당 row의 값을 update
+                var bro2 = Backend.GameData.UpdateV2("USER_HOUSE", rowIndate, Backend.UserInDate, param);
+
+                if (bro2.IsSuccess())
+                {
+                    Debug.Log(ItemCode);
+                    Debug.Log("SaveUserHousing 성공. USER_HOUSE 업데이트 되었습니다.");
+                }
+                else
+                {
+                    Debug.Log("SaveUserHousing 실패.");
+                }
+            }
         }
                                                                 //책상
-        if (FurnitureChangeClick.CurrentFurniture == "Table_01" || FurnitureChangeClick.CurrentFurniture == "Table_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "table_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Table4_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "table2_K(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture.GetComponent<Text>().text == "table" || Starting)
         {
             if (ItemCode == "2010204")            //첫번째 옵션을 선택했다면
             {
@@ -135,10 +177,32 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/"), TablePosition.transform);
                 TempObject.transform.SetParent(TablePosition.transform);*/
             }
-            TableCode = ItemCode;
+            Debug.Log("가구 변경 완료");
+            if (!Starting)
+            {
+                Param param = new Param();
+                param.Add("table", ItemCode);
+
+                //유저 현재 row 검색
+                var bro = Backend.GameData.Get("USER_HOUSE", new Where());
+                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+                //해당 row의 값을 update
+                var bro2 = Backend.GameData.UpdateV2("USER_HOUSE", rowIndate, Backend.UserInDate, param);
+
+                if (bro2.IsSuccess())
+                {
+                    Debug.Log(ItemCode);
+                    Debug.Log("SaveUserHousing 성공. USER_HOUSE 업데이트 되었습니다.");
+                }
+                else
+                {
+                    Debug.Log("SaveUserHousing 실패.");
+                }
+            }
         }
                                                                 //의자
-        if (FurnitureChangeClick.CurrentFurniture == "Chair_01" || FurnitureChangeClick.CurrentFurniture == "Chair_01(Clone)" || FurnitureChangeClick.CurrentFurniture == "chair_2(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair2_W(Clone)" || FurnitureChangeClick.CurrentFurniture == "Chair_K(Clone)")
+        if (FurnitureChangeClick.CurrentFurniture.GetComponent<Text>().text == "chair" || Starting)
         {
             if (ItemCode == "2010205")            //첫번째 옵션을 선택했다면
             {
@@ -164,30 +228,28 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>(""Prefabs/Furniture/Chair/"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);*/
             }
-            ChairCode = ItemCode;
-        }
-        if (!Starting)
-        {
-            Param param = new Param();
-            param.Add("bed", BedCode);
-            param.Add("closet", ClosetCode);
-            param.Add("table", TableCode);
-            param.Add("chair", ChairCode);
-
-            //유저 현재 row 검색
-            var bro = Backend.GameData.Get("USER_HOUSE", new Where());
-            string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
-
-            //해당 row의 값을 update
-            var bro2 = Backend.GameData.UpdateV2("USER_HOUSE", rowIndate, Backend.UserInDate, param);
-
-            if (bro2.IsSuccess())
+            Debug.Log("가구 변경 완료");
+            if (!Starting)
             {
-                Debug.Log("SaveUserHousing 성공. USER_HOUSE 업데이트 되었습니다.");
-            }
-            else
-            {
-                Debug.Log("SaveUserHousing 실패.");
+                Param param = new Param();
+                param.Add("chair", ItemCode);
+
+                //유저 현재 row 검색
+                var bro = Backend.GameData.Get("USER_HOUSE", new Where());
+                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+                //해당 row의 값을 update
+                var bro2 = Backend.GameData.UpdateV2("USER_HOUSE", rowIndate, Backend.UserInDate, param);
+
+                if (bro2.IsSuccess())
+                {
+                    Debug.Log(ItemCode);
+                    Debug.Log("SaveUserHousing 성공. USER_HOUSE 업데이트 되었습니다.");
+                }
+                else
+                {
+                    Debug.Log("SaveUserHousing 실패.");
+                }
             }
         }
     }

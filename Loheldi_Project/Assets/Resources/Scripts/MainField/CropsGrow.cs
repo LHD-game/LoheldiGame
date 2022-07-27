@@ -14,7 +14,7 @@ public class CropsGrow : MonoBehaviour
     private int min;
     private int sec;
     private int temp_sec;
-    private float time_Max = 30f;
+    private float time_Max = 120f;
     private bool isEnded = false;
     private DateTime LoadedTimer;
     private DateTime SavedTimer;
@@ -77,6 +77,7 @@ public class CropsGrow : MonoBehaviour
         }
         else
         {
+            this.GetComponent<BoxCollider>().enabled = true;
             //Debug.Log("작물 모델이 없어서 GreenPlants로 대체");
         }
     }

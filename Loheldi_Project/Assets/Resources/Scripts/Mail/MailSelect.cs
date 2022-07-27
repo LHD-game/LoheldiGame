@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 {
     public static List<GameObject> reward_list = new List<GameObject>();
+    public static string this_qid = "null";
 
     //리스트 중 우편 선택시 -> 해당 버튼에 있는 제목 등등을 모두 가져와 오른쪽 화면에 띄운다.
     public void SelectMail()
@@ -17,6 +18,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         //버튼에 달려있던 정보를 가져온다.
         GameObject qid = this.transform.Find("QID").gameObject;
         Text qid_txt = qid.GetComponent<Text>();
+        this_qid = qid_txt.text;
 
         GameObject title = this.transform.Find("Title").gameObject;
         Text title_txt = title.GetComponent<Text>();
@@ -59,6 +61,9 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         //4. -->if (퀘스트 qid <= 현재 qid 뒷부분 값)
         //5.    -->disable 버튼 비활성화
         GameObject reward_disable_btn = QuestDetail.transform.Find("ReceiveMailDisable").gameObject;
+        GameObject already_recieve_btn = QuestDetail.transform.Find("ReceiveMailAlready").gameObject;
+
+        already_recieve_btn.SetActive(false);
         reward_disable_btn.SetActive(true);
 
         string[] q_qid = qid_txt.text.Split('_');

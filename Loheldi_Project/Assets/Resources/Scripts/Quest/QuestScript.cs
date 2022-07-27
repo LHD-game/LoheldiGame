@@ -31,7 +31,7 @@ public class QuestScript : MonoBehaviour
 
     public void QuestStart()
     {
-        /*file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(Load.ButtonPlusNpc) + Load.QuestMail);
 
@@ -40,13 +40,13 @@ public class QuestScript : MonoBehaviour
             file.Tutorial();
             Debug.Log("튜토리얼");
         }
-        else if (Load.QuestIndex.Equals("0_2"))
+        if (Load.QuestIndex.Equals("0_2"))
         {
             Debug.Log("팜");
             farm = true;
         }
         else if (Load.LastDay != Load.ToDay)
-            QuestCheck();*/
+            QuestChoice();
     }
 
     private void QuestCheck()

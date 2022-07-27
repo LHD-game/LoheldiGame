@@ -57,7 +57,6 @@ public class EatingPBehaviour : MonoBehaviour
                 AnimationTrigger.GetComponent<AnimationTriggerforMinigame>().GetButtonDown = true;
             }
         }
-           
         else
         {
             rMove = 0;

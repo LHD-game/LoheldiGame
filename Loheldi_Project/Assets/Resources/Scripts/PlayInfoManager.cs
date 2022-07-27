@@ -25,6 +25,7 @@ public class PlayInfoManager : MonoBehaviour
             level += 1;
             now_exp = over_exp;
             max_exp += 20;      // 레벨이 오르면 최대 경험치가 20 증가한다.
+            //todo: 레벨업 시 이펙트 효과 팝업 실행되도록
         }
         //prefs 갱신
         PlayerPrefs.SetInt("Level", level);

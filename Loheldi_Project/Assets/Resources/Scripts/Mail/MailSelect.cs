@@ -71,15 +71,21 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 
         int q_front = int.Parse(q_qid[0]);
         int my_front = int.Parse(my_qid[0]);
-        if(q_front <= my_front)
+        if(q_front < my_front) //0_2, 1_1 -> 0<1
+        {
+
+            reward_disable_btn.SetActive(false);
+        }
+        else if(q_front == my_front) //1_1, 1_2
         {
             int q_back = int.Parse(q_qid[1]);
             int my_back = int.Parse(my_qid[1]);
-            if(q_back <= my_back)
+            if (q_back <= my_back)
             {
                 reward_disable_btn.SetActive(false);
             }
         }
+
     }
 
     //보상 리스트를 만든다.

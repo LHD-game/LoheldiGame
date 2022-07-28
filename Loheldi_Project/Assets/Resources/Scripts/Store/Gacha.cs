@@ -27,7 +27,7 @@ public class Gacha : MonoBehaviour
     private void Start()
     {
         GetChartContents("55031", gachaItem);
-        GetChartContents("54323", gachaClothes);
+        GetChartContents("55438", gachaClothes);
         gachaTable.AddRange(gachaItem);
         gachaTable.AddRange(gachaClothes);
     }

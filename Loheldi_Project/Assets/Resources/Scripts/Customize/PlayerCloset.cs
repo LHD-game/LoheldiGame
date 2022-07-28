@@ -17,6 +17,8 @@ public class PlayerCloset : MonoBehaviour
     protected Mesh meLower_L;
     protected Mesh meLower_R;
 
+    protected Mesh meShoes_L;
+    protected Mesh meShoes_R;
 
     //player's material
     protected Material p_mUpper;
@@ -26,6 +28,9 @@ public class PlayerCloset : MonoBehaviour
 
     public GameObject p_Lower_L;
     public GameObject p_Lower_R;
+
+    public GameObject p_Shoes_L;
+    public GameObject p_Shoes_R;
 
     public BackendReturnObject closet_chart = null;
 
@@ -104,6 +109,9 @@ public class PlayerCloset : MonoBehaviour
         meLower_L = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_id + "_L_mesh"));
         meLower_R = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_lower_id + "_R_mesh"));
 
+        meShoes_L = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_shoes_id + "_L_mesh"));
+        meShoes_R = Resources.Load<Mesh>(("Customize/Mesh/" + NowSettings.u_shoes_id + "_R_mesh"));
+
         //플레이어 모델링 메시
         p_mUpper = Resources.Load<Material>("Customize/Materials/Upper");
         p_mLower = Resources.Load<Material>("Customize/Materials/Lower");
@@ -121,10 +129,16 @@ public class PlayerCloset : MonoBehaviour
         l_mesh_L.sharedMesh = meLower_L;
         l_mesh_R.sharedMesh = meLower_R;
 
+        SkinnedMeshRenderer sh_mesh_L = p_Shoes_L.GetComponent<SkinnedMeshRenderer>();
+        SkinnedMeshRenderer sh_mesh_R = p_Shoes_R.GetComponent<SkinnedMeshRenderer>();
+
+        sh_mesh_L.sharedMesh = meShoes_L;
+        sh_mesh_R.sharedMesh = meShoes_R;
+
         //todo: 악세서리
         playerPrefab = GameObject.Find("Player");
         Transform parents_folder = playerPrefab.transform.Find("player_body");
-        Debug.Log(NowSettings.u_hat_id);
+
         //hat init
         Transform hat_folder = parents_folder.transform.Find("Hat");
         int hat_cnt = hat_folder.childCount;
@@ -162,8 +176,6 @@ public class PlayerCloset : MonoBehaviour
         }
         if (!NowSettings.u_bag_id.Equals("null"))
         {
-            Debug.Log("bag");
-
             Transform active_bag = bag_folder.Find(NowSettings.u_bag_id + "_bag");
             active_bag.gameObject.SetActive(true);
         }

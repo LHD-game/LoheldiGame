@@ -16,6 +16,7 @@ public class QuestDontDestroy : MonoBehaviour
     public int ToDay=0;      //오늘 날짜
     public List<int> badgeList = new List<int>();  //획득한 벳지 
 
+    public bool ToothQ = false;
     public bool weekend = false;
     public bool tutorialLoading=false; //튜토리얼 진행 중인지(하우징갔다가 메인왔을 때 진행 시키는 용)
     //public bool RiciveQuest = false; //퀘스트를 받았는지 확인하는 bool값
@@ -30,6 +31,7 @@ public class QuestDontDestroy : MonoBehaviour
     }
     public void Dontdestroy()
     {
+        Debug.Log("돈디");
         LastPlayerTransform = this.gameObject;
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Quest");
         if (objs.Length > 1)
@@ -38,6 +40,15 @@ public class QuestDontDestroy : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Welcome")
             LastPlayerTransform.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
+        else if (SceneManager.GetActiveScene().name == "Game_Tooth")
+        {
+            Debug.Log("양치");
+            Instantiate(Resources.Load<GameObject>("Prefabs/Tooth/QTooth/Canvas"), new Vector3(0, 0, -0), Quaternion.Euler(0, 0, 0));
+            Instantiate(Resources.Load<GameObject>("Prefabs/Tooth/QTooth/QToothBrush"), new Vector3(0, 0, -0), Quaternion.Euler(0, 0, 0));
+            GameObject.Find("Canvas").SetActive(false);
+            GameObject.Find("Player").SetActive(false);
+            GameObject.Find("mouth").SetActive(false);
+        }
         DontDestroyOnLoad(this.gameObject);
     }
     public void OnEnable()

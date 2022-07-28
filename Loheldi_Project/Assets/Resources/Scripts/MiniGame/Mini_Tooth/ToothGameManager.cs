@@ -65,7 +65,7 @@ public class ToothGameManager : MonoBehaviour
     void Start()
     {
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        if(DontDestroy.QuestIndex == "22_2")  //그 양치퀘스트 용
+        if(DontDestroy.QuestIndex == "22")  //그 양치퀘스트 용
         {
             Debug.Log("양치");
             GameObject.Find("Canvas").SetActive(false);

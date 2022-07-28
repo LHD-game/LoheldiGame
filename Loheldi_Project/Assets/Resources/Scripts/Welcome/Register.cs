@@ -128,6 +128,7 @@ public class Register : MonoBehaviour
 
     private void UserRegister()  //유저 정보 id, pw, nickname, email 서버에 저장
     {
+        Debug.Log(InputID.text + InputPW.text);
         BackendReturnObject BRO = Backend.BMember.CustomSignUp(InputID.text, InputPW.text);
 
         ShowStatus(BRO);
@@ -152,10 +153,7 @@ public class Register : MonoBehaviour
     {
         Param param = new Param();
         param.Add("id", InputID.text);
-        //param.Add("pw", InputPW.text);
         param.Add("name", InputName.text);
-        //param.Add("email", InputEmail.text);
-        //param.Add("age", InputAge.text);
 
         var bro = Backend.GameData.Insert("user", param);
 

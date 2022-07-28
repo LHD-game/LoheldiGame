@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
@@ -11,20 +11,14 @@ public class BackEndInit : MonoBehaviour
         var bro = Backend.Initialize(true);
         if (bro.IsSuccess())
         {
-            //ÃÊ±âÈ­ ¼º°ø ½Ã ·ÎÁ÷
-            Debug.Log("ÃÊ±âÈ­ ¼º°ø!");
+            //ì´ˆê¸°í™” ì„±ê³µ ì‹œ ë¡œì§
+            Debug.Log("ì´ˆê¸°í™” ì„±ê³µ!");
             //CustomSignUp();
         }
         else
         {
-            // ÃÊ±âÈ­ ½ÇÆĞ ½Ã ·ÎÁ÷
-            Debug.LogError("ÃÊ±âÈ­ ½ÇÆĞ!");
+            // ì´ˆê¸°í™” ì‹¤íŒ¨ ì‹œ ë¡œì§
+            Debug.LogError("ì´ˆê¸°í™” ì‹¤íŒ¨!");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

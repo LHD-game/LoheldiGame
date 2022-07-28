@@ -26,14 +26,7 @@ public class QuestLoad : MonoBehaviour
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         string selectedProbabilityFileId = "55216";
         var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
-        Param param = new Param();
-        Where where = new Where();
-        where.Equal("QuestPreg", "0_0");
         JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
-
-        var bro4 = Backend.GameData.GetMyData("PLAY_INFO", where);
-        JsonData rows2 = bro4.GetReturnValuetoJSON()["rows"]; //bro4 JSON
-        
 
         var bro2 = Backend.GameData.GetMyData("QUEST_INFO", new Where());
         
@@ -68,15 +61,29 @@ public class QuestLoad : MonoBehaviour
                 Debug.Log(QID2);
                 Debug.Log(QName);
 
-                param.Add("QID", QID2);
-                param.Add("QName", QName);
-                param.Add("From", From);
-                param.Add("Content", Content);
-                param.Add("Reward", Reward);
-                param.Add("authorName", authorName);
-                Backend.GameData.Insert("QUEST_INFO", param);
-                Debug.Log("param 입력완료");
-
+                //이미 퀘스트가 들어가있는지 검사
+                Where where = new Where();
+                where.Equal("QID", QID2);
+                var chk_bro = Backend.GameData.GetMyData("QUEST_INFO", where);
+                JsonData chk_rows = chk_bro.GetReturnValuetoJSON()["rows"];
+                
+                if (chk_rows.Count <= 0)
+                {
+                    Param param = new Param();
+                    param.Add("QID", QID2);
+                    param.Add("QName", QName);
+                    param.Add("From", From);
+                    param.Add("Content", Content);
+                    param.Add("Reward", Reward);
+                    param.Add("authorName", authorName);
+                    Backend.GameData.Insert("QUEST_INFO", param);
+                    Debug.Log("퀘스트 수령 완료");
+                }
+                else
+                {
+                    Debug.Log("이미 해당 퀘스트를 수령했습니다.");
+                    return;
+                }
             }
             else
             {
@@ -97,15 +104,30 @@ public class QuestLoad : MonoBehaviour
                         Debug.Log(QID3);
                         Debug.Log(QName);
 
-                        param2.Add("QID", QID3);
-                        param2.Add("QName", QName);
-                        param2.Add("From", From);
-                        param2.Add("Content", Content);
-                        param2.Add("Reward", Reward);
-                        param2.Add("authorName", authorName);
-                        Backend.GameData.Insert("QUEST_INFO", param2);
-                        Debug.Log("param2 입력완료");
-                        break;
+                        //이미 퀘스트가 들어가있는지 검사
+                        Where where = new Where();
+                        where.Equal("QID", QID3);
+                        var chk_bro = Backend.GameData.GetMyData("QUEST_INFO", where);
+                        JsonData chk_rows = chk_bro.GetReturnValuetoJSON()["rows"];
+
+                        if(chk_rows.Count <= 0)
+                        {
+                            param2.Add("QID", QID3);
+                            param2.Add("QName", QName);
+                            param2.Add("From", From);
+                            param2.Add("Content", Content);
+                            param2.Add("Reward", Reward);
+                            param2.Add("authorName", authorName);
+                            Backend.GameData.Insert("QUEST_INFO", param2);
+                            Debug.Log("퀘스트 수령 완료");
+                            break;
+                        }
+                        else
+                        {
+                            Debug.Log("이미 해당 퀘스트를 수령했습니다.");
+                            return;
+                        }
+                        
 
                     }
                 }

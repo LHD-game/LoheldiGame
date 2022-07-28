@@ -403,9 +403,15 @@ public class LodingTxt : MonoBehaviour
                 Line();
             }
         }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("ReloadEnd"))  //main으로
+        {
+            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+            PlayInfoManager.GetQuestPreg();
+            SceneLoader.instance.GotoMainField();
+        }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //main으로
         {
-            DontDestroy.QuestIndex = data_Dialog[j + 1]["scriptNumber"].ToString();
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
             SceneLoader.instance.GotoMainField();
         }
@@ -1032,7 +1038,7 @@ public class LodingTxt : MonoBehaviour
     public void QuestEnd()
     {
         DontDestroy.ButtonPlusNpc = "";
-        Quest.Load.QuestMail = false;
+        //Quest.Load.QuestMail = false;
 
         if (DontDestroy.weekend)
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
@@ -1072,6 +1078,7 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(true);
         cuttoonspriteR = cuttoon.GetComponent<Image>();
         cuttoonspriteR.sprite = cuttoonImageList[c];
+        Debug.Log("c=" + c);
         if(c == Int32.Parse(data_Dialog[j]["cuttoon"].ToString()))
         {
             CancelInvoke("Panorama");

@@ -109,8 +109,8 @@ public class QuestLoad : MonoBehaviour
                         where.Equal("QID", QID3);
                         var chk_bro = Backend.GameData.GetMyData("QUEST_INFO", where);
                         JsonData chk_rows = chk_bro.GetReturnValuetoJSON()["rows"];
-
-                        if(chk_rows.Count <= 0)
+                        Quest.QuestStart();
+                        if (chk_rows.Count <= 0)
                         {
                             param2.Add("QID", QID3);
                             param2.Add("QName", QName);
@@ -132,8 +132,6 @@ public class QuestLoad : MonoBehaviour
                     }
                 }
             }
-            
-            Quest.QuestStart();
         }
         
     }

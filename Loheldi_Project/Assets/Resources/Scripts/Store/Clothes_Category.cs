@@ -74,7 +74,7 @@ public class Clothes_Category : StoreCategoryControl
                 initItem(lowerItem[g], data);
                 g++;
             }
-            else if (data.Category.Equals("shoes"))
+            else if (data.Category.Equals("shoes") || data.Category.Equals("socks"))
             {
                 shoesItem.Add(new Dictionary<string, object>());
 

@@ -37,7 +37,6 @@ public class CustomControl : PlayerCustom
 
     void NextScene()
     {
-        Debug.Log(newAcc);
         if (newAcc)
         {
             SceneLoader.instance.GotoPlayerCloset();

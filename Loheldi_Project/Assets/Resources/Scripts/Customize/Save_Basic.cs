@@ -65,13 +65,13 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
     static void PlayerClothesInit()  //유저의 초기 의상 정보를 서버에 저장
     {
         Param param = new Param();
-        param.Add("Upper", "4010202");
+        param.Add("Upper", "4010102");
         param.Add("UColor", "white");
-        param.Add("Lower", "4020103");
+        param.Add("Lower", "4020104");
         param.Add("LColor", "white");
         param.Add("Socks", "4030101");
         param.Add("SColor", "white");
-        param.Add("Shoes", "4030106");
+        param.Add("Shoes", "4030105");
         param.Add("ShColor", "white");
         param.Add("Hat", "null");
         param.Add("Glasses", "null");

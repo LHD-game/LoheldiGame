@@ -163,7 +163,8 @@ public class LodingTxt : MonoBehaviour
             QuestLoad = GameObject.Find("Mail").GetComponent<QuestLoad>();
 
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
-            QuestLoad.QuestLoadStart();
+            if (DontDestroy.ToDay != DontDestroy.LastDay)
+                QuestLoad.QuestLoadStart();
         }
         else if (SceneManager.GetActiveScene().name == "Quiz")
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
@@ -177,13 +178,17 @@ public class LodingTxt : MonoBehaviour
     }
     public void ToothQ()
     {
-        SceneLoader.instance.GotoToothGame();
+        PlayerPrefs.SetInt("LastQTime", 0);
+        DontDestroy.LastDay = 0;
+        PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+        QuestLoad.QuestLoadStart();
+        PlayInfoManager.GetQuestPreg();
     }
     public void ToothQuest()
     {
         Debug.Log("¾çÄù");
         ToothAnimator = GameObject.Find("ToothBrush").transform.Find("Armature").gameObject.GetComponent<Animator>();
-        Num = DontDestroy.QuestIndex;
+        Num = "22_2";
         FileAdress = "Scripts/Quest/script";
         NewChat();
     }
@@ -206,6 +211,7 @@ public class LodingTxt : MonoBehaviour
                         else if (click.name.Equals("ItemBtn"))
                         {
                             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                            DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
                             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
                             PlayInfoManager.GetQuestPreg();
                             Quest.farm = false;
@@ -353,8 +359,6 @@ public class LodingTxt : MonoBehaviour
                 break;
             case 12:
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-                PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-                DontDestroy.LastDay = DontDestroy.ToDay;
                 SceneLoader.instance.GotoMainField();
                 break;
             default:
@@ -391,8 +395,13 @@ public class LodingTxt : MonoBehaviour
             else
                 o += 1;
             changeMoment();
-            j +=1;
-            Line();
+            if (o == 12)
+                return;
+            else
+            {
+                j += 1;
+                Line();
+            }
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //mainÀ¸·Î
         {
@@ -412,7 +421,9 @@ public class LodingTxt : MonoBehaviour
         } //ÄÆÅ÷ º¸ÀÌ±â
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Panorama"))
         {
-            InvokeRepeating("Panorama", 0f, 1f);
+            c = 0;
+            ChatWin.SetActive(false);
+            InvokeRepeating("Panorama", 0f, 2f);
         } //ÄÆÅ÷ º¸ÀÌ±â
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//Æ©Åä¸®¾ó
         { 
@@ -654,6 +665,7 @@ public class LodingTxt : MonoBehaviour
             //³ª¿¡°Ô ÆíÁö¾²±â
             MasterOfMtLife.SetActive(true);
             ChatWin.SetActive(false);
+            j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("MasterOfMtLifeEnd"))
         {
@@ -695,7 +707,7 @@ public class LodingTxt : MonoBehaviour
         {
             if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString())==0)
             {
-                DontDestroy.QuestIndex = "22_2";
+                DontDestroy.QuestIndex = "22";
                 SceneLoader.instance.GotoToothGame();
             }
             else if (SceneManager.GetActiveScene().name == "Game_Tooth")
@@ -1060,10 +1072,10 @@ public class LodingTxt : MonoBehaviour
         cuttoon.SetActive(true);
         cuttoonspriteR = cuttoon.GetComponent<Image>();
         cuttoonspriteR.sprite = cuttoonImageList[c];
-        if(c == 2)
+        if(c == Int32.Parse(data_Dialog[j]["cuttoon"].ToString()))
         {
-            Line();
             CancelInvoke("Panorama");
+            Invoke("scriptLine", 2f);
         }
         c++;
     }

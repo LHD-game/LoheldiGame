@@ -119,6 +119,10 @@ private void GiveQuest()
         {
             chat.NPCRope.SetActive(true);
         }
+        else if (Load.QuestIndex.Equals("21_1"))
+        {
+            Instantiate(Resources.Load<GameObject>("Models/NPC/parents"), new Vector3(30, 5, 33), Quaternion.Euler(new Vector3(0, 133, 0)));
+        }
         if (SceneManager.GetActiveScene().name == "MainField")
             ExclamationMarkCreate();
     }

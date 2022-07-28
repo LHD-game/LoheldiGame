@@ -9,9 +9,15 @@ public class ToothStartButton : MonoBehaviour
     public GameObject WelcomePanel;     //시작화면 패널 오브젝트
     public GameObject DifficultyPanel;  // 난이도 선택 화면 패널 오브젝트
     public GameObject HPDisablePanel;   //hp 부족으로 인한 팝업 패널 오브젝트
-
+    QuestDontDestroy DontDestroy;
     public void GameStart()
     {
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+        if(DontDestroy.ToothQ)
+        {
+            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+            DontDestroy.ToothQ = false;
+        }
         int now_hp = PlayerPrefs.GetInt("HP");
 
         if(now_hp > 0)  //현재 hp가 0보다 크다면

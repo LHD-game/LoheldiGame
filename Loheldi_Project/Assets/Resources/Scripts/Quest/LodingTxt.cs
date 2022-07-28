@@ -129,6 +129,8 @@ public class LodingTxt : MonoBehaviour
 
     public Animator CleanT;
     string PlayerName;
+
+    Animator ToothAnimator;
     private void Awake()
     {
         color = block.GetComponent<Image>().color;
@@ -161,20 +163,10 @@ public class LodingTxt : MonoBehaviour
             QuestLoad = GameObject.Find("Mail").GetComponent<QuestLoad>();
 
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
-            if (DontDestroy.LastDay != DontDestroy.ToDay)
-                QuestLoad.QuestLoadStart();
+            QuestLoad.QuestLoadStart();
         }
-
-        if (SceneManager.GetActiveScene().name == "Quiz")
+        else if (SceneManager.GetActiveScene().name == "Quiz")
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
-        else if (SceneManager.GetActiveScene().name == "Game_Tooth")
-        {
-            GameObject.Find("Canvas").SetActive(false);
-            GameObject.Find("Player").SetActive(false);
-            GameObject.Find("mouth").SetActive(false);
-            Num = "22_2";
-            NewChat();
-        }
         
     }
     public void nextQuest()
@@ -182,6 +174,18 @@ public class LodingTxt : MonoBehaviour
         PlayerPrefs.SetInt("LastQTime", 0);
         DontDestroy.LastDay = 0;
         QuestLoad.QuestLoadStart();
+    }
+    public void ToothQ()
+    {
+        SceneLoader.instance.GotoToothGame();
+    }
+    public void ToothQuest()
+    {
+        Debug.Log("¾çÄù");
+        ToothAnimator = GameObject.Find("ToothBrush").transform.Find("Armature").gameObject.GetComponent<Animator>();
+        Num = DontDestroy.QuestIndex;
+        FileAdress = "Scripts/Quest/script";
+        NewChat();
     }
 
     void Update()
@@ -195,16 +199,19 @@ public class LodingTxt : MonoBehaviour
                     GameObject click = EventSystem.current.currentSelectedGameObject;
                     if (Quest.farm)
                     {
-                        if (click.name.Equals("ItemBtn"))
+                        if(click == null)
+                        {
+                            return;
+                        }
+                        else if (click.name.Equals("ItemBtn"))
                         {
                             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
                             PlayInfoManager.GetQuestPreg();
                             Quest.farm = false;
                         }
-                        else
-                            Debug.Log("¹«½Ã");
-                        Debug.Log(click.name);
+
+                        
                     }
                     else if (tutoclick)
                     {
@@ -215,13 +222,9 @@ public class LodingTxt : MonoBehaviour
                             PlayInfoManager.GetQuestPreg();
                             Quest.farm = false;
                         }
-                        else
-                            Debug.Log("¹«½Ã");
                         Debug.Log(click.name);
                     }
                 }
-                if (Input.GetMouseButton(0))
-                    Debug.Log("¹«½Ã");
             }
         }
         if (BikeQ)
@@ -350,14 +353,15 @@ public class LodingTxt : MonoBehaviour
                 break;
             case 12:
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-                PlayInfoManager.GetQuestPreg();
+                PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+                DontDestroy.LastDay = DontDestroy.ToDay;
                 SceneLoader.instance.GotoMainField();
                 break;
             default:
                 break;
         }
-    } 
-
+    }
+    GameObject mouth; //¾çÄ¡°× ÀÔ
     public void QuestSubChoice()
     {
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //ÄûÁî½ÃÀÛ
@@ -691,22 +695,97 @@ public class LodingTxt : MonoBehaviour
         {
             if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString())==0)
             {
-                GameObject canvus = GameObject.Find("Canvas");
-                DontDestroyOnLoad(canvus);
+                DontDestroy.QuestIndex = "22_2";
                 SceneLoader.instance.GotoToothGame();
             }
             else if (SceneManager.GetActiveScene().name == "Game_Tooth")
             {
-                Animator ToothAnimator;
-                ToothAnimator = GameObject.Find("Player").transform.Find("toohtgame_Standing_toothbrush").gameObject.GetComponent<Animator>();
+                ChatWin.SetActive(false);
+                GameObject QToothBrush = GameObject.Find("QToothBrush(Clone)");
+                GameObject Maincam = GameObject.Find("Main Camera");
                 if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 1)
                 {
-                    ToothAnimator.SetBool("BikeWalk", true);
+                    mouth = GameObject.Find("mouth");
+                    mouth.SetActive(false);
+                    Instantiate(Resources.Load<GameObject>("Prefabs/Tooth/QTooth/AH"), new Vector3(0, -13, 17), Quaternion.Euler(new Vector3(0, 90, 0)));
+                    QToothBrush.transform.position = new Vector3(15, 8, 10);
+                    QToothBrush.transform.rotation = Quaternion.Euler(new Vector3(1, 294, 272));
+                    Maincam.transform.position = new Vector3(26, 25, 0);
+                    Maincam.transform.rotation = Quaternion.Euler(new Vector3(36, 332, 356));
+
+
+                    ToothAnimator.SetBool("1", true);
                 }
+                else if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 2)
+                {
+                    mouth.SetActive(true);
+                    GameObject.Find("AH(Clone)").SetActive(false);
+                    QToothBrush.transform.position = new Vector3(-13, -10, 18);
+                    QToothBrush.transform.rotation = Quaternion.Euler(new Vector3(52, 176, 89));
+                    Maincam.transform.position = new Vector3(2, 6, 29);
+                    Maincam.transform.rotation = Quaternion.Euler(new Vector3(63, 180, 0));
+                    ToothAnimator.SetBool("1", true);
+                }
+                else if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 3)
+                {
+                    QToothBrush.transform.position = new Vector3(16, -6, 15);
+                    QToothBrush.transform.rotation = Quaternion.Euler(new Vector3(63, -9, 347));
+                    Maincam.transform.position = new Vector3(15, 4, 4);
+                    Maincam.transform.rotation = Quaternion.Euler(new Vector3(16, 0, 0));
+                    ToothAnimator.SetBool("2", true);
+                    ToothAnimator.SetBool("1", false);
+                }
+                else if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 4)
+                {
+                    QToothBrush.transform.position = new Vector3(20, 0, 26);
+                    QToothBrush.transform.rotation = Quaternion.Euler(new Vector3(63, -3, 84));
+                    Maincam.transform.position = new Vector3(0, 5, 2);
+                    Maincam.transform.rotation = Quaternion.Euler(new Vector3(20, 0, 0));
+                    ToothAnimator.SetBool("1", true);
+                    ToothAnimator.SetBool("2", false);
+                }
+                else if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 5)
+                {
+                    QToothBrush.transform.position = new Vector3(13.3f, -11, 19.7f);
+                    QToothBrush.transform.rotation = Quaternion.Euler(new Vector3(350, 299, 4));
+                    Maincam.transform.position = new Vector3(11.5f, -3, -1);
+                    GameObject.Find("QToothBrush(Clone)").transform.Find("Dentalfloss").gameObject.SetActive(true);
+                    GameObject.Find("ToothBrush").SetActive(false);
+                    ToothAnimator.SetBool("finish", true);
+                    ToothAnimator.SetBool("2", false);
+                }
+                else if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 6)
+                {
+                    QToothBrush.SetActive(false);
+                    Maincam.transform.position = new Vector3(0, 16.6f, -27);
+                    Maincam.transform.rotation = Quaternion.Euler(new Vector3(7.7f, 0, 0));
+                    scriptLine();
+                    return;
+                }
+                else if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 7)
+                {
+                    DontDestroy.ToothQ = true;
+                    DontDestroy.QuestIndex = "22_1";
+                    PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //ÁÖ¸»
+                    SceneLoader.instance.GotoMainField();
+                    return;
+                }
+
+                Invoke("scriptLine", 3f);   //µô·¹ÀÌ ÈÄ ½ºÅ©¸³Æ® ¶ç¿ò
             }
-            
         }
-        
+    }
+
+    public void TQ()
+    {
+        GameObject ToothBrush = GameObject.Find("ToothBrush");
+        GameObject QToothBrush = GameObject.Find("QToothBrush(Clone)");
+        if (c == 0)
+        {
+            QToothBrush.transform.position = new Vector3(19, 1, 19);
+            QToothBrush.transform.rotation = Quaternion.Euler(0, -16, 0);
+            ToothBrush.transform.rotation = Quaternion.Euler(350, 301, 272);
+        }
     }
     public void Line()  //ÁÙ³Ñ±è (scriptTypeÀÌ ¹ºÁö °É·¯³¿)
     {
@@ -730,7 +809,7 @@ public class LodingTxt : MonoBehaviour
         {
             if (!data_Dialog[j]["scriptType"].ToString().Equals("nomal"))
             {
-                Debug.Log(data_Dialog[j]["scriptType"].ToString());
+                //Debug.Log(data_Dialog[j]["scriptType"].ToString());
                 QuestSubChoice(); 
             }
             else
@@ -938,7 +1017,6 @@ public class LodingTxt : MonoBehaviour
         Button.SetActive(true);
     }
 
-    int Questbadge;
     public void QuestEnd()
     {
         DontDestroy.ButtonPlusNpc = "";

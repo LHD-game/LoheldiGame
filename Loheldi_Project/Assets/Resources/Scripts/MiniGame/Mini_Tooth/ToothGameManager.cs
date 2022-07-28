@@ -61,8 +61,23 @@ public class ToothGameManager : MonoBehaviour
     public GameObject SoundManager;
     public Animator PlayerAnimation;
 
+    public QuestDontDestroy DontDestroy;
     void Start()
     {
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+        if(DontDestroy.QuestIndex == "22_2")  //그 양치퀘스트 용
+        {
+            Debug.Log("양치");
+            GameObject.Find("Canvas").SetActive(false);
+            GameObject.Find("Player").SetActive(false);
+            GameObject.Find("toohtgame_Standing_toothbrush").SetActive(false);
+            Instantiate(Resources.Load<Canvas>("Prefabs/Tooth/QTooth/Canvas"), new Vector3(0, 0, -0), Quaternion.Euler(0, 0, 0));
+            Instantiate(Resources.Load<GameObject>("Prefabs/Tooth/QTooth/QToothBrush"), new Vector3(0, 0, -0), Quaternion.Euler(0, 0, 0));
+
+            GameObject.Find("Dentalfloss").SetActive(false);
+            LodingTxt chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
+            chat.ToothQuest();
+        }
         //자식오브젝트들을 전부 배열에 저장한다.
         blackTooth = blackToothP.gameObject.GetComponentsInChildren<Transform>();
         blackTooth = blackTooth.Where(child => child.tag == "BTooth").ToArray();

@@ -31,22 +31,26 @@ public class QuestScript : MonoBehaviour
 
     public void QuestStart()
     {
-        /*file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
+        file = GameObject.Find("chatManager").GetComponent<FlieChoice>();
         Load = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(Load.ButtonPlusNpc) + Load.QuestMail);
 
-        if (Load.QuestIndex.Equals("0_1"))
+        if (PlayerPrefs.GetString("QuestPreg").Equals("0_0"))
         {
             file.Tutorial();
+            Load.QuestIndex = "0_1";
             Debug.Log("튜토리얼");
         }
-        if (Load.QuestIndex.Equals("0_2"))
+        else if (PlayerPrefs.GetString("QuestPreg").Equals("0_1"))
         {
             Debug.Log("팜");
             farm = true;
         }
         else if (Load.LastDay != Load.ToDay)
-            QuestChoice();*/
+        {
+            QuestChoice();
+        }
+
     }
 
     private void QuestCheck()
@@ -98,20 +102,20 @@ private void GiveQuest()
     public void QuestChoice()
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        if (Quest_Mail[Q]["QID"].ToString().Equals("4_1"))
+        if (Load.QuestIndex.Equals("4_1"))
                 Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
-        else if (Quest_Mail[Q]["QID"].ToString().Equals("8_1"))
+        else if (Load.QuestIndex.Equals("8_1"))
         {
             note = true;
-            GameObject.Find("Mei").transform.rotation = Quaternion.Euler(0, 0, 0);
+            GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (Quest_Mail[Q]["QID"].ToString().Equals("13_1"))
+        else if (Load.QuestIndex.Equals("13_1"))
         {
             note = true;
-            GameObject.Find("Suho").transform.position = new Vector3(170, 15, -122);
-            GameObject.Find("Suho").transform.rotation = Quaternion.Euler(0, 180, 0);
+            GameObject.Find(Load.ButtonPlusNpc).transform.position = new Vector3(170, 15, -122);
+            GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (Quest_Mail[Q]["QID"].ToString().Equals("14_1"))
+        else if (Load.QuestIndex.Equals("14_1"))
         {
             chat.NPCRope.SetActive(true);
         }

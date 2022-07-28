@@ -163,8 +163,11 @@ public class Drawing : MonoBehaviour
     private GameObject Destroyed;
     int Length;
 
+    public Text Ntext;
+
     public void FinishWrite()
     {
+        Ntext.text = "쪽지를 클릭해 쓰레기통에 버리세요";
         for (int i = 0; i < notes.Length; i++)
         {
             Destroy(notes[i].GetComponent<InputField>());
@@ -214,6 +217,7 @@ public class Drawing : MonoBehaviour
     static Image spriteR;
     public Sprite ValueCardBackImage;
     public GameObject ValueButton;
+    public Text Vtext;
     public void NextLevel()
     {
         j = 0;
@@ -234,6 +238,8 @@ public class Drawing : MonoBehaviour
             RectTransform RectTransform;
             MaxValueLength = 5;
             GameObject parentsObject = GameObject.Find("ValueCards").gameObject;
+
+            Vtext.text = MaxValueLength + "개의 카드를 선택하세요";
             for (int i = 0; i < parentsObject.transform.childCount; i++)
             {
                 GameObject gameObject = GameObject.Find("ValueCards").transform.GetChild(i).gameObject;
@@ -305,6 +311,7 @@ public class Drawing : MonoBehaviour
                             case 5:
                                 RectTransform.anchoredPosition = new Vector2(1157f, -215f);
                                 //Debug.Log("끝!");
+                                Vtext.gameObject.SetActive(false);
                                 Invoke("scriptLine", 1f);   //딜레이 후 스크립트 띄움
                                 break;
                         }

@@ -104,6 +104,10 @@ public class FlieChoice : MonoBehaviour
                 chat.Num = "10";
                 chat.NPCButton += 2;
                 break;
+            case "parents(Clone)":
+                chat.Num = "13";
+                chat.NPCButton += 2;
+                break;
         }
         // CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"+chat.Inter.NameNPC); //이미지 경로
         chat.NewChat();

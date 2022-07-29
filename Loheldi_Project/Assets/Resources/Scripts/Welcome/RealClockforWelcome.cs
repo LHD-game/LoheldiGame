@@ -43,8 +43,7 @@ public class RealClockforWelcome : MonoBehaviour
 
     public void GetCurrentDate()
     {
-        Time = 12;
-        //Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
+        Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
     }
 
     public void TimeSetting(float Time)

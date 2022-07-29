@@ -29,8 +29,10 @@ public class LodingTxt : MonoBehaviour
     public Text[] SelecButtonTxt = new Text[5];
 
     public InputField videocheckTxT;
+    public InputField ParentscheckTxt;
     public string parentscheckTxTNum;
     public GameObject ErrorWin;
+    public GameObject ParentsErrorWin;
 
     public GameObject Main_UI;
     public GameObject Button;
@@ -208,22 +210,10 @@ public class LodingTxt : MonoBehaviour
                         {
                             return;
                         }
-                        else if (click.name.Equals("ItemBtn"))
+                        else if (click.name.Equals("ItemBtn_"))
                         {
                             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                             DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
-                            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-                            PlayInfoManager.GetQuestPreg();
-                            Quest.farm = false;
-                        }
-
-                        
-                    }
-                    else if (tutoclick)
-                    {
-                        if (click.name.Equals("ItemBtn"))
-                        {
-                            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
                             PlayInfoManager.GetQuestPreg();
                             Quest.farm = false;
@@ -1048,13 +1038,37 @@ public class LodingTxt : MonoBehaviour
         PlayInfoManager.GetQuestPreg();
 
         //DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
-        if (data_Dialog[j]["dialog"].ToString().Equals("end"))
+            QuestLoad.QuestLoadStart();
+    }
+
+    public void ParentsCheck()
+    {
+        if (ParentscheckTxt.text.Equals(parentscheckTxTNum))
         {
+            if (DontDestroy.weekend)
+                PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex); //주말
+            else
+                PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;
+            DontDestroy.From = " ";
+            GameObject.Find("ParentscheckUI").SetActive(false);
+            ParentscheckTxt.text = null;
+            movie.SetActive(false);
+            video.OnFinishVideo();
+            ChatWin.SetActive(true);
+            GameObject SoundManager = GameObject.Find("SoundManager");
+            SoundManager.GetComponent<AudioSource>().volume = 1f;
+            scriptLine();
+            NpcButtonClick NPCB = GameObject.Find("chatManager").GetComponent<NpcButtonClick>();
+            NPCB.CheckQuest();
+            DontDestroy.ButtonPlusNpc = "";
+            PlayInfoManager.GetQuestPreg();
         }
         else
-            QuestLoad.QuestLoadStart();
+        {
+            ParentsErrorWin.SetActive(true);
+        }
     }
     public void hairFX(GameObject go)    //머리 반짝!하는 파티클
     {

@@ -9,6 +9,7 @@ public class QuestDontDestroy : MonoBehaviour
     //public string[] ButtonPlusNpc = new string[2]{"",""};
 
     public string ButtonPlusNpc;  //버튼 추가되는 NPC이름(퀘스트)
+    public string From;  //실천해보기 구분 용
     //public int QuestSubNum;         //퀘스트 스크립트 앞번호
     public string QuestIndex;   //몇번째 퀘스트차례인지 (서버저장)
    // public bool QuestMail = false; //퀘스트 메일이 왔는지 확인하는 bool값

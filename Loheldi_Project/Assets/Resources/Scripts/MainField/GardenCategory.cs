@@ -80,7 +80,7 @@ public class GardenCategory : MonoBehaviour
             itemObject.Add(child);
 
 
-            GameObject ItemBtn = child.transform.Find("ItemBtn").gameObject;
+            GameObject ItemBtn = child.transform.Find("ItemBtn_").gameObject;
 
             //change catalog box img
             GameObject item_img = ItemBtn.transform.Find("ItemImg").gameObject;

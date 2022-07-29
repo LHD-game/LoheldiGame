@@ -67,8 +67,15 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         reward_disable_btn.SetActive(true);
 
         string[] q_qid = qid_txt.text.Split('_');
-        string[] my_qid = PlayerPrefs.GetString("QuestPreg").Split('_');
-
+        string QuestType = null;
+        Debug.Log(Int32.Parse(q_qid[0]));
+        if (Int32.Parse(q_qid[0]) < 22)
+        {
+            QuestType = "QuestPreg";
+        }
+        else
+            QuestType = "WeeklyQuestPreg";
+        string[] my_qid = PlayerPrefs.GetString(QuestType).Split('_');
         int q_front = int.Parse(q_qid[0]);
         int my_front = int.Parse(my_qid[0]);
         if(q_front < my_front) //0_2, 1_1 -> 0<1

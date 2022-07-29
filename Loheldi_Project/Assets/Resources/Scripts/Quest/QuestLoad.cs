@@ -24,7 +24,7 @@ public class QuestLoad : MonoBehaviour
     {
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
-        string selectedProbabilityFileId = "55440";
+        string selectedProbabilityFileId = "55472";
         var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
         JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
 
@@ -42,7 +42,7 @@ public class QuestLoad : MonoBehaviour
             
             string QuestPreg;
             if (DontDestroy.weekend) //주말일 때
-                QuestPreg = PlayerPrefs.GetString("QuestPreg"); //주말 퀘스트 번호로 바뀔 예정
+                QuestPreg = PlayerPrefs.GetString("WeeklyQuestPreg"); //주말 퀘스트 번호로 바뀔 예정
             else //주말이 아닐 떄
                 QuestPreg = PlayerPrefs.GetString("QuestPreg");
 

@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 {
     public static List<GameObject> reward_list = new List<GameObject>();
+    public static List<GameObject> right_detail_text = new List<GameObject>();
     public static string this_qid = "null";
 
     //리스트 중 우편 선택시 -> 해당 버튼에 있는 제목 등등을 모두 가져와 오른쪽 화면에 띄운다.
@@ -50,6 +51,15 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         GameObject content_detail = QuestDetail.transform.Find("RContent").gameObject;
         Text content_detail_txt = content_detail.GetComponent<Text>();
         content_detail_txt.text = content_txt.text;
+
+        if(right_detail_text.Count <= 0)
+        {
+            right_detail_text.Add(qid_detail);
+            right_detail_text.Add(title_detail);
+            right_detail_text.Add(from_detail);
+            right_detail_text.Add(content_detail);
+        }
+
 
         //todo: reward
         MakeRewardList(reward_txt.text);
@@ -155,9 +165,9 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
                 img_img.sprite = Resources.Load<Sprite>("Sprites/FieldUI/coin_sprite");
                 name_txt.text = "코인";
             }
-            else if (key[j].Contains("B"))  //배지
+            else if (key[j].Equals("Badge"))  //배지
             {
-                img_img.sprite = Resources.Load<Sprite>("Sprites/badgeList/" + key[j] + "_catalog");
+                img_img.sprite = Resources.Load<Sprite>("Sprites/badgeList/" + reward_json[key[j]].ToString() + "_catalog");
                 name_txt.text = "배지";
             }
             else    //기타 아이템

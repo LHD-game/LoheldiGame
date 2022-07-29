@@ -12,7 +12,6 @@ public class CategoryControl : MonoBehaviour
     //---init list---//
     protected void initCustomItem(Dictionary<string, object> item, CustomStoreItem data)
     {
-        print("initCustomItem");
         item.Add("ICode", data.ICode);
         item.Add("IName", data.IName);
         item.Add("Category", data.Category);

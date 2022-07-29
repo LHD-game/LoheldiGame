@@ -190,6 +190,7 @@ public class NewAccSave : MonoBehaviour
 
                 Save_Basic.LoadAccInfo();   //계정정보를 로컬에 저장
                 Save_Basic.SaveBasicClothes(); //기본 의상 아이템 저장 
+                
             }
             else
             {

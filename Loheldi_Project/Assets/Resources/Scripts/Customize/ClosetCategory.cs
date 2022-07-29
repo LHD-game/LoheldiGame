@@ -42,90 +42,87 @@ public class ClosetCategory : CategoryControl
         if (myClothes.IsSuccess() == false)
         {
             Debug.Log("요청 실패");
+            SceneLoader.instance.GotoPlayerCloset();
             return;
         }
-        if (myClothes.GetReturnValuetoJSON()["rows"].Count <= 0)
+        else
         {
-            // 요청이 성공해도 where 조건에 부합하는 데이터가 없을 수 있기 때문에
-            // 데이터가 존재하는지 확인
-            // 위와 같은 new Where() 조건의 경우 테이블에 row가 하나도 없으면 Count가 0 이하 일 수 있다.
-            Debug.Log("요청 성공했지만 테이블에 row가 하나도 없음");
-            return;
-        }
+            JsonData allClothes_rows = allClothesChart.GetReturnValuetoJSON()["rows"];
+            JsonData myClothes_rows = myClothes.GetReturnValuetoJSON()["rows"];
+            ParsingJSON pj = new ParsingJSON();
+            ParsingJSON pj2 = new ParsingJSON();
 
-        JsonData allClothes_rows = allClothesChart.GetReturnValuetoJSON()["rows"];
-        JsonData myClothes_rows = myClothes.GetReturnValuetoJSON()["rows"];
-        ParsingJSON pj = new ParsingJSON();
-        ParsingJSON pj2 = new ParsingJSON();
-
-        int u = 0, l = 0, so = 0, sh = 0, h=0, g=0, b=0;
-        for (int i = 0; i < allClothes_rows.Count ; i++)
-        {
-            CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allClothes_rows[i]);
-            for(int j = 0; j < myClothes_rows.Count; j++)
+            int u = 0, l = 0, so = 0, sh = 0, h = 0, g = 0, b = 0;
+            for (int i = 0; i < allClothes_rows.Count; i++)
             {
-                CustomStoreItem mydata = pj2.ParseBackendData<CustomStoreItem>(myClothes_rows[j]);
-                if (data.ICode.Equals(mydata.ICode))
+                CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allClothes_rows[i]);
+                for (int j = 0; j < myClothes_rows.Count; j++)
                 {
-                    CommonField.SetDataDialog(data);
-                    if (data.Category.Equals(CommonField.m_upper))
+                    CustomStoreItem mydata = pj2.ParseBackendData<CustomStoreItem>(myClothes_rows[j]);
+                    if (data.ICode.Equals(mydata.ICode))
                     {
-                        upper_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(upper_Dialog[u], data);
-                        u++;
+                        CommonField.SetDataDialog(data);
+                        if (data.Category.Equals(CommonField.m_upper))
+                        {
+                            upper_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(upper_Dialog[u], data);
+                            u++;
+                        }
+                        else if (data.Category.Equals(CommonField.m_lower))
+                        {
+                            lower_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(lower_Dialog[l], data);
+                            l++;
+                        }
+                        else if (data.Category.Equals(CommonField.m_socks))
+                        {
+                            socks_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(socks_Dialog[so], data);
+                            so++;
+                        }
+                        else if (data.Category.Equals(CommonField.m_shoes))
+                        {
+                            shoes_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(shoes_Dialog[sh], data);
+                            sh++;
+                        }
+                        else if (data.ItemType.Equals(CommonField.it_hat))
+                        {
+                            hat_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(hat_Dialog[h], data);
+                            h++;
+                        }
+                        else if (data.ItemType.Equals(CommonField.it_glasses))
+                        {
+                            glasses_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(glasses_Dialog[g], data);
+                            g++;
+                        }
+                        else if (data.ItemType.Equals(CommonField.it_bag))
+                        {
+                            bag_Dialog.Add(new Dictionary<string, object>());
+                            initCustomItem(bag_Dialog[b], data);
+                            b++;
+                        }
                     }
-                    else if (data.Category.Equals(CommonField.m_lower))
-                    {
-                        lower_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(lower_Dialog[l], data);
-                        l++;
-                    }
-                    else if (data.Category.Equals(CommonField.m_socks))
-                    {
-                        socks_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(socks_Dialog[so], data);
-                        so++;
-                    }
-                    else if (data.Category.Equals(CommonField.m_shoes))
-                    {
-                        shoes_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(shoes_Dialog[sh], data);
-                        sh++;
-                    }
-                    else if (data.ItemType.Equals(CommonField.it_hat))
-                    {
-                        hat_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(hat_Dialog[h], data);
-                        h++;
-                    }
-                    else if (data.ItemType.Equals(CommonField.it_glasses))
-                    {
-                        glasses_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(glasses_Dialog[g], data);
-                        g++;
-                    }
-                    else if (data.ItemType.Equals(CommonField.it_bag))
-                    {
-                        bag_Dialog.Add(new Dictionary<string, object>());
-                        initCustomItem(bag_Dialog[b], data);
-                        b++;
-                    }
+
                 }
-
             }
+
+            string scene = "Closet";
+
+            MakeCategory(c_upper, upper_Dialog, scene);
+            MakeCategory(c_lower, lower_Dialog, scene);
+            MakeCategory(c_socks, socks_Dialog, scene);
+            MakeCategory(c_shoes, shoes_Dialog, scene);
+            MakeCategory(c_hat, hat_Dialog, scene);
+            MakeCategory(c_glasses, glasses_Dialog, scene);
+            MakeCategory(c_bag, bag_Dialog, scene);
+
         }
-
-        string scene = "Closet";
-
-        MakeCategory(c_upper, upper_Dialog, scene);
-        MakeCategory(c_lower, lower_Dialog, scene);
-        MakeCategory(c_socks, socks_Dialog, scene);
-        MakeCategory(c_shoes, shoes_Dialog, scene);
-        MakeCategory(c_hat, hat_Dialog, scene);
-        MakeCategory(c_glasses, glasses_Dialog, scene);
-        MakeCategory(c_bag, bag_Dialog, scene);
 
     }
+
 
     //todo: 선택된 커스텀(nowsettings)에는 선택된 표시를 해줄 것 --> setActive이용
 }

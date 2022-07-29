@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BadgeManager : MonoBehaviour
 {
-    //재화 갱신 메소드
+    //배지 갱신 메소드
     public static void GetBadge(string b_code)  //상점에서 아이템 구매시, coin은 음수. 미니게임/퀘스트 등으로 코인을 얻는 경우 coin은 양수
     {
         SaveAccBadge(b_code);

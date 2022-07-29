@@ -46,7 +46,10 @@ public class SceneLoader : MonoBehaviour
     public void GotoPlayerCustom()
     {
         if (SceneManager.GetActiveScene().name == "MainField")
+        {
             PlayerTransForm();
+        }
+            
         LoadingSceneManager.LoadScene("PlayerCustom");
     }
     public void GotoPlayerCloset()

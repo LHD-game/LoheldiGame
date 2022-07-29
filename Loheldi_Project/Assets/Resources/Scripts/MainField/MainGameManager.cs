@@ -18,15 +18,39 @@ public class MainGameManager : MonoBehaviour
     public GameObject SoundManager;
     public static MainGameManager SingletonInstance;
 
+    [SerializeField]
+    GameObject BikeBtn;
+    [SerializeField]
+    GameObject NineOClockPanel;
     void Start()
     {
         GetDailyHP();
         UpdateField();
+        StartCoroutine(NowTimeChk());
     }
 
     private void Awake()
     {
         SingletonInstance = this;
+    }
+
+    IEnumerator NowTimeChk()    //9 to 6 시간 체크 메소드
+    {
+        while (true)
+        {
+            DateTime now = DateTime.Now;
+            Debug.Log(now.Hour);
+            if (now.Hour >= 21 || now.Hour < 6)
+            {
+                NineOClockPanel.SetActive(true);
+            }
+            else
+            {
+                NineOClockPanel.SetActive(false);
+            }
+            yield return new WaitForSecondsRealtime(60.0f); //1min 대기
+        }
+
     }
 
     public void UpdateField()
@@ -49,6 +73,17 @@ public class MainGameManager : MonoBehaviour
         FieldExpTxt.text = now_exp + " / " + max_exp;
         //경험치 슬라이드 value - (현재 경험치 / 최대 경험치) * 100 : 백분율
         ExpSlider.value = (now_exp / max_exp) * 100;
+
+        string[] q_preg = PlayerPrefs.GetString("QuestPreg").Split('_');
+        int front_q_preg = int.Parse(q_preg[0]);
+        if(front_q_preg > 4)
+        {
+            BikeBtn.SetActive(true);
+        }
+        else
+        {
+            BikeBtn.SetActive(false);
+        }
     }
 
     void GetDailyHP()   //일자를 검사하여 hp를 5 제공
@@ -74,5 +109,10 @@ public class MainGameManager : MonoBehaviour
                 Debug.Log("날짜가 바뀌어 hp가 회복되었습니다.");
             }
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

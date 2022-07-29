@@ -61,6 +61,15 @@ public class MailLoad : MonoBehaviour
         {
             Destroy(quest_list[i]);
         }
+        for (int i=0; i< MailSelect.right_detail_text.Count; i++)
+        {
+            Text txt = MailSelect.right_detail_text[i].GetComponent<Text>();
+            txt.text = "";
+        }
+        for (int i=0;i<MailSelect.reward_list.Count; i++)
+        {
+            Destroy(MailSelect.reward_list[i]);
+        }
         GetQuestMail();
         MakeCategory(c_mail, quest, quest_list);
     }
@@ -203,7 +212,7 @@ public class MailLoad : MonoBehaviour
             }
             else if (item_type.Contains("B"))    //뱃지
             {
-                BadgeManager.GetBadge(i_code_txt.text);
+                BadgeManager.GetBadge(amount_txt.text);
             }
             else if (item_type.Contains("C"))    //의상, coin은 앞에서 이미 검사했으므로 걸리지 않을 것이다..!
             {

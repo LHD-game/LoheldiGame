@@ -19,6 +19,7 @@ public class ToothStartButton : MonoBehaviour
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;
             DontDestroy.ToothQ = false;
+            PlayInfoManager.GetQuestPreg();
         }
         int now_hp = PlayerPrefs.GetInt("HP");
 

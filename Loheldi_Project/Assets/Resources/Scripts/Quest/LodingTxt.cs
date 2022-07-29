@@ -165,8 +165,16 @@ public class LodingTxt : MonoBehaviour
             QuestLoad = GameObject.Find("Mail").GetComponent<QuestLoad>();
 
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
-            if (DontDestroy.ToDay != DontDestroy.LastDay)
-                QuestLoad.QuestLoadStart();
+            if (DontDestroy.SDA)
+                return;
+            else
+            {
+                if (Int32.Parse(PlayerPrefs.GetString("QuestPreg").Substring(0, PlayerPrefs.GetString("QuestPreg").IndexOf("_"))) < 22)
+                {
+                    if (DontDestroy.ToDay != DontDestroy.LastDay)
+                        QuestLoad.QuestLoadStart();
+                }
+            }
         }
         else if (SceneManager.GetActiveScene().name == "Quiz")
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;

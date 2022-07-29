@@ -46,6 +46,11 @@ public class QuestScript : MonoBehaviour
             Debug.Log("ÆÊ");
             farm = true;
         }
+        else if (PlayerPrefs.GetString("QuestPreg").Equals("22_1"))
+        {
+            Debug.Log("¾çÄ¡");
+            Load.ToothQ = true;
+        }
         else if (Load.LastDay != Load.ToDay)
         {
             QuestChoice();
@@ -75,7 +80,6 @@ public class QuestScript : MonoBehaviour
         }
         else if (Load.QuestIndex.Equals("21_1"))
         {
-            Debug.Log("À½..?!");
             Instantiate(Resources.Load<GameObject>("Models/NPC/npc/parents"), new Vector3(30, 5, 33), Quaternion.Euler(new Vector3(0, 133, 0)));
         }
         if (SceneManager.GetActiveScene().name == "MainField")

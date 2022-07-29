@@ -13,6 +13,7 @@ public class NpcButtonClick : MonoBehaviour
     Text SecondButtonTxt;
     private UIButton UIB;
     private FlieChoice Chat;
+    public GameObject ParentscheckUI;
 
 
     public void SecondButtonClick()
@@ -83,13 +84,19 @@ public class NpcButtonClick : MonoBehaviour
         {
             Chat.Quest();
             CheckQuest();
+        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미션 인증하기"))
+        {
+            Chat.chat.Main_UI.SetActive(true);
+            ParentscheckUI.SetActive(true);
+            UIB.chat.ChatEnd();
         }
     }
-    void CheckQuest()
+    public void CheckQuest()
     {
+        Transform Parent = GameObject.Find(Chat.chat.DontDestroy.ButtonPlusNpc).GetComponent<Transform>();
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
-        Chat.EPin.SetActive(false);
 
+        Chat.EPin.SetActive(true);
 
         for (int i = 0; i < clone.Length; i++)
         {

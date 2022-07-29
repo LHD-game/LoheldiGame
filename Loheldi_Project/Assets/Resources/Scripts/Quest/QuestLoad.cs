@@ -24,7 +24,7 @@ public class QuestLoad : MonoBehaviour
     {
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
-        string selectedProbabilityFileId = "55216";
+        string selectedProbabilityFileId = "55440";
         var bro3 = Backend.Chart.GetChartContents(selectedProbabilityFileId);
         JsonData rows = bro3.GetReturnValuetoJSON()["rows"];
 
@@ -57,6 +57,7 @@ public class QuestLoad : MonoBehaviour
 
                 DontDestroy.QuestIndex = QID2;
                 DontDestroy.ButtonPlusNpc = authorName;
+                DontDestroy.From = From;
 
                 Debug.Log(QID2);
                 Debug.Log(QName);
@@ -82,7 +83,6 @@ public class QuestLoad : MonoBehaviour
                 else
                 {
                     Debug.Log("이미 해당 퀘스트를 수령했습니다.");
-                    return;
                 }
             }
             else
@@ -101,6 +101,7 @@ public class QuestLoad : MonoBehaviour
 
                         DontDestroy.QuestIndex = QID3;
                         DontDestroy.ButtonPlusNpc = authorName;
+                        DontDestroy.From = From;
                         Debug.Log(QID3);
                         Debug.Log(QName);
 
@@ -109,7 +110,6 @@ public class QuestLoad : MonoBehaviour
                         where.Equal("QID", QID3);
                         var chk_bro = Backend.GameData.GetMyData("QUEST_INFO", where);
                         JsonData chk_rows = chk_bro.GetReturnValuetoJSON()["rows"];
-                        Quest.QuestStart();
                         if (chk_rows.Count <= 0)
                         {
                             param2.Add("QID", QID3);
@@ -125,13 +125,11 @@ public class QuestLoad : MonoBehaviour
                         else
                         {
                             Debug.Log("이미 해당 퀘스트를 수령했습니다.");
-                            return;
                         }
-                        
-
                     }
                 }
             }
+            Quest.QuestStart();
         }
         
     }

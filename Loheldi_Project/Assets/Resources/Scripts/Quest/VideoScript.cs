@@ -8,13 +8,20 @@ public class VideoScript : MonoBehaviour
     public GameObject myVideo;
     public VideoPlayer videoClip;
     public VideoClip[] VideoClip = new VideoClip[2];
+    bool play = false;
+
     public void OnPlayVideo()
     {
+        videoClip.loopPointReached += CheckOver;
         myVideo.SetActive(true);
         videoClip.Play();
-        Invoke("finishButtonActive", 30f);
+        play = true;
     }
 
+    void CheckOver(VideoPlayer vp)
+    {
+        finishButtonActive();
+    }
     public void OnFinishVideo()
     {
         myVideo.SetActive(false);

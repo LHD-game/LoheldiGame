@@ -24,7 +24,9 @@ public class RealClockforWelcome : MonoBehaviour
         PreTime = Time;                 //변경 함수 초기화
 
         DateTime nowDT = DateTime.Now;
-        if (nowDT.DayOfWeek == DayOfWeek.Sunday || nowDT.DayOfWeek == DayOfWeek.Saturday)
+        if (nowDT.DayOfWeek == DayOfWeek.Saturday)
+            QDD.SDA = true;
+        else if(nowDT.DayOfWeek == DayOfWeek.Sunday)
             QDD.weekend = true;
         else
             QDD.weekend = false;

@@ -19,6 +19,7 @@ public class QuestDontDestroy : MonoBehaviour
 
     public bool ToothQ = false;
     public bool weekend = false;
+    public bool SDA = false;
     public bool tutorialLoading=false; //튜토리얼 진행 중인지(하우징갔다가 메인왔을 때 진행 시키는 용)
     //public bool RiciveQuest = false; //퀘스트를 받았는지 확인하는 bool값
 

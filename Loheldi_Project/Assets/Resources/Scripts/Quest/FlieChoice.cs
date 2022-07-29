@@ -56,7 +56,8 @@ public class FlieChoice : MonoBehaviour
     {
         chat.FileAdress = "Scripts/Quest/DialogNPC";
 
-        switch (chat.Inter.NameNPC)
+        string[] QuestF = chat.DontDestroy.QuestIndex.Split('_');
+            switch (chat.Inter.NameNPC)
         {
             case "Himchan":
                 if (chat.DontDestroy.From.Equals("실천해보기")&& chat.DontDestroy.ButtonPlusNpc.Equals("Himchan"))
@@ -70,7 +71,7 @@ public class FlieChoice : MonoBehaviour
                 chat.NPCButton += 2;
                 break;
             case "Hami":
-                if (chat.DontDestroy.QuestIndex.Substring(chat.DontDestroy.QuestIndex.IndexOf("_")+1).Equals("2"))
+                if (QuestF[1].Equals("2"))
                     chat.Num = "11";
                 else if (chat.DontDestroy.From.Equals("실천해보기") && chat.DontDestroy.ButtonPlusNpc.Equals("Hami"))
                     chat.Num = "15";
@@ -79,8 +80,10 @@ public class FlieChoice : MonoBehaviour
                 chat.NPCButton += 1;
                 break;
             case "Suho":
-                if (chat.DontDestroy.QuestIndex.Substring(chat.DontDestroy.QuestIndex.IndexOf("_") + 1).Equals("2"))
+                if (QuestF[1].Equals("2"))
                     chat.Num = "12";
+                else if (chat.DontDestroy.QuestIndex.Equals("13_1"))
+                    chat.Num = "18";
                 else if (chat.DontDestroy.From.Equals("실천해보기") && chat.DontDestroy.ButtonPlusNpc.Equals("Suho"))
                     chat.Num = "16";
                 else
@@ -94,6 +97,8 @@ public class FlieChoice : MonoBehaviour
             case "Mei":
                 if (chat.DontDestroy.From.Equals("실천해보기") && chat.DontDestroy.ButtonPlusNpc.Equals("Mei"))
                     chat.Num = "17";
+                else if (chat.DontDestroy.QuestIndex.Equals("8_1"))
+                    chat.Num = "19";
                 else
                 chat.Num = "6";
                 chat.NPCButton += 1;

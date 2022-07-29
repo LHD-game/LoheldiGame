@@ -68,17 +68,26 @@ public class QuestScript : MonoBehaviour
             note = true;
             GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(0, 0, 0);
         }
+        else if (Load.QuestIndex.Equals("6_1")|| Load.QuestIndex.Equals("7_1")|| Load.QuestIndex.Equals("11_1")|| Load.QuestIndex.Equals("18_1")|| Load.QuestIndex.Equals("20_1")|| Load.QuestIndex.Equals("22_1")|| Load.QuestIndex.Equals("25_1"))
+        {
+            GameObject.Find(Load.ButtonPlusNpc).transform.position = new Vector3(54, 5, 37);
+        }
         else if (Load.QuestIndex.Equals("13_1"))
         {
             note = true;
-            GameObject.Find(Load.ButtonPlusNpc).transform.position = new Vector3(170, 15, -122);
-            GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(0, 180, 0);
+            GameObject.Find(Load.ButtonPlusNpc).transform.position = new Vector3(125, 15, 170);
+            GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(new Vector3(0, 77, 0));
         }
         else if (Load.QuestIndex.Equals("14_1"))
         {
             chat.NPCRope.SetActive(true);
         }
-        else if (Load.QuestIndex.Equals("21_1"))
+        else if (Load.QuestIndex.Equals("19_1"))
+        {
+            GameObject.Find("Nari").transform.position = new Vector3(68, 5, -20);
+            GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(new Vector3(0, 30, 0));
+        }
+        else if (Load.QuestIndex.Equals("21_1")|| Load.QuestIndex.Equals("23_1")|| Load.QuestIndex.Equals("24_1"))
         {
             Instantiate(Resources.Load<GameObject>("Models/NPC/npc/parents"), new Vector3(30, 5, 33), Quaternion.Euler(new Vector3(0, 133, 0)));
         }

@@ -25,6 +25,12 @@ public class SoundEffect : MonoBehaviour
     public AudioClip audioClickBack;
     public AudioClip audioJump;
     public AudioClip audioOpenDoor;
+
+
+    public AudioClip QaudioWind;
+    public AudioClip QaudioWater;
+    public AudioClip QaudioBird;
+
     AudioSource audioSource;
 
     private void Awake()
@@ -121,6 +127,18 @@ public class SoundEffect : MonoBehaviour
                 break;
             case "Jump":
                 audioSource.clip = audioJump;
+                audioSource.loop = false;
+                break;
+            case "QWind":
+                audioSource.clip = QaudioWind;
+                audioSource.loop = false;
+                break;
+            case "QWater":
+                audioSource.clip = QaudioWater;
+                audioSource.loop = false;
+                break;
+            case "QBird":
+                audioSource.clip = QaudioBird;
                 audioSource.loop = false;
                 break;
             default:

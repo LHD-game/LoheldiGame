@@ -96,7 +96,7 @@ public class NpcButtonClick : MonoBehaviour
         Transform Parent = GameObject.Find(Chat.chat.DontDestroy.ButtonPlusNpc).GetComponent<Transform>();
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
 
-        Chat.EPin.SetActive(true);
+        Chat.EPin.SetActive(false);
 
         for (int i = 0; i < clone.Length; i++)
         {

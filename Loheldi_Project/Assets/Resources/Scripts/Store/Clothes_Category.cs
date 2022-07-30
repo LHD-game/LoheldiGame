@@ -8,6 +8,19 @@ using UnityEngine.UI;
 
 public class Clothes_Category : StoreCategoryControl
 {
+    private static Clothes_Category _instance;
+    public static Clothes_Category instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Clothes_Category>();
+            }
+            return _instance;
+        }
+    }
+
     //category
     [SerializeField]
     private GameObject c_upper;
@@ -37,6 +50,27 @@ public class Clothes_Category : StoreCategoryControl
 
     public void PopClothesStore()
     {
+        upperItem.Clear();
+        lowerItem.Clear();
+        shoesItem.Clear();
+        acceItem.Clear();
+        for (int i = 0; i < upper_list.Count; i++)
+        {
+            Destroy(upper_list[i]);
+        }
+        for (int i = 0; i < lower_list.Count; i++)
+        {
+            Destroy(lower_list[i]);
+        }
+        for (int i = 0; i < shoes_list.Count; i++)
+        {
+            Destroy(shoes_list[i]);
+        }
+        for (int i = 0; i < acce_list.Count; i++)
+        {
+            Destroy(acce_list[i]);
+        }
+
         GetChartContents(ChartNum.ClothesItemChart);
         MakeCategory(c_upper, upperItem, upper_list);
         MakeCategory(c_lower, lowerItem, lower_list);
@@ -103,21 +137,15 @@ public class Clothes_Category : StoreCategoryControl
         {
             GameObject child;
 
-            if (itemObject.Count != dialog.Count)    //만약 처음 여는 것이면 새 객체 생성
-            {
-                //create caltalog box
-                child = Instantiate(itemBtn);    //create itemBtn instance
-                child.transform.SetParent(category.transform);  //move instance: child
-                //아이템 박스 크기 재설정
-                RectTransform rt = child.GetComponent<RectTransform>();
-                rt.localScale = new Vector3(1f, 1f, 1f);
+            //create caltalog box
+            child = Instantiate(itemBtn);    //create itemBtn instance
+            child.transform.SetParent(category.transform);  //move instance: child
+            //아이템 박스 크기 재설정
+            RectTransform rt = child.GetComponent<RectTransform>();
+            rt.localScale = new Vector3(1f, 1f, 1f);
 
-                itemObject.Add(child);
-            }
-            else    //아니라면 기존 객체 재활용
-            {
-                child = itemObject[i];
-            }
+            itemObject.Add(child);
+
 
             GameObject ItemBtn = child.transform.Find("ItemBtn2").gameObject;
 

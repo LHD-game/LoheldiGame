@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HouseFollowPlayer : MonoBehaviour
-{
+{ 
+    //안쓰는 거라 삭제할 거
     public GameObject Player;
     public Transform Camera;
     private Vector3 vec3;

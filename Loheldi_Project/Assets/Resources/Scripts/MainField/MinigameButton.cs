@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MinigameButton : MonoBehaviour
 {
+    //삭제할 거
     // Start is called before the first frame update
     void Start()
     {

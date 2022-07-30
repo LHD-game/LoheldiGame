@@ -13,13 +13,19 @@ public class CameraFollowPlayer : MonoBehaviour
     private void Awake()
     {
         vec3 = Camera.position - Player.transform.position;                                                     //카메라와 플레이어 사이에 거리를 Vector3형태로 구함
+        StartCoroutine("CameraPlayerFollow");
     }
 
-    private void FixedUpdate()
+    
+    IEnumerator CameraPlayerFollow()
     {
-        Vector3 PlayerPosition = Player.transform.position + vec3;                                              //플레이어와 Vector3만큼 떨어진 위치를 구함
-        Camera.position = Vector3.SmoothDamp(transform.position, PlayerPosition, ref velocity, SmoothTime);     //해당위치로 카메라를 옮김
+        while (true)
+        {
+            Vector3 PlayerPosition = Player.transform.position + vec3;                                              //플레이어와 Vector3만큼 떨어진 위치를 구함
+            Camera.position = Vector3.SmoothDamp(transform.position, PlayerPosition, ref velocity, SmoothTime);     //해당위치로 카메라를 옮김
 
-        transform.LookAt(Player.transform);                                                                     //카메라가 플레이어를 향함
+            transform.LookAt(Player.transform);
+            yield return null;
+        }//카메라가 플레이어를 향함
     }
 }

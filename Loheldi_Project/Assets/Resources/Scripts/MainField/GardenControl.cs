@@ -49,8 +49,9 @@ public class GardenControl : MonoBehaviour
         UpdateFieldGarden();
     }
 
-    void Update()
+    /*void Update()
     {
+        Debug.Log("두번째 밭도 작동 중");
         if (Interaction.GetComponent<Interaction>().Farm)   //jump 버튼으로 farm에 진입 시 
         {
             if (!is_pop_garden)
@@ -64,7 +65,7 @@ public class GardenControl : MonoBehaviour
         {
             is_pop_garden = false;
         }
-    }
+    }*/
 
     void UpdateFieldGarden()     //텃밭의 정보를 업데이트하여 필드에 반영
     {

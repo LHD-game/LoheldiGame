@@ -15,14 +15,4 @@ public class LoadSprite2 : MonoBehaviour
             Debug.Log(sprite[i].name);
         }
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

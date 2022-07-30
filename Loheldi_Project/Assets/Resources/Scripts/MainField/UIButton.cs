@@ -30,6 +30,11 @@ public class UIButton : MonoBehaviour
 
     public GameObject SoundEffectManager;
 
+    public static bool is_pop_garden = false;
+
+    [SerializeField]
+    private GameObject c_seed;          //¾¾¾Ñ Ä«Å×°í¸®
+
     private void Awake()
     {
         if (SceneManager.GetActiveScene().name == "MainField")
@@ -94,12 +99,16 @@ public class UIButton : MonoBehaviour
         }
         else if (Inter.Farm)
         {
+
             if (Camera1.enabled == true)
             {
                 Camera1.enabled = false;
                 Camera2.enabled = true;
                 JoyStick.SetActive(false);
                 FarmUI.SetActive(true);
+
+                GardenCategory gc = new GardenCategory();
+                gc.PopGarden(c_seed);
             }
             else
             {

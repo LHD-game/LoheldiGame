@@ -41,49 +41,56 @@ public class CustomCategory : CategoryControl
             ParsingJSON pj = new ParsingJSON();
             ParsingJSON pj2 = new ParsingJSON();
 
-            int s = 0, e = 0, m = 0, h = 0;
-            for (int i = myCustom_rows.Count - 1; i >= 0; i--)
+            if(myCustom_rows.Count <= 0)
             {
-                CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allCustom_rows[i]);
-
-                for (int j = 0; j < myCustom_rows.Count; j++)
+                SceneLoader.instance.GotoPlayerCustom();
+            }
+            else
+            {
+                int s = 0, e = 0, m = 0, h = 0;
+                for (int i = myCustom_rows.Count - 1; i >= 0; i--)
                 {
-                    CustomStoreItem mydata = pj2.ParseBackendData<CustomStoreItem>(myCustom_rows[j]);
-                    if (data.ICode.Equals(mydata.ICode))
+                    CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allCustom_rows[i]);
+
+                    for (int j = 0; j < myCustom_rows.Count; j++)
                     {
-                        CommonField.SetDataDialog(data);
-                        if (data.Category.Equals(CommonField.m_skin))
+                        CustomStoreItem mydata = pj2.ParseBackendData<CustomStoreItem>(myCustom_rows[j]);
+                        if (data.ICode.Equals(mydata.ICode))
                         {
-                            skin_Dialog.Add(new Dictionary<string, object>());
-                            initCustomItem(skin_Dialog[s], data);
-                            s++;
-                        }
-                        else if (data.Category.Equals(CommonField.m_eyes))
-                        {
-                            eyes_Dialog.Add(new Dictionary<string, object>());
-                            initCustomItem(eyes_Dialog[e], data);
-                            e++;
-                        }
-                        else if (data.Category.Equals(CommonField.m_mouth))
-                        {
-                            mouth_Dialog.Add(new Dictionary<string, object>());
-                            initCustomItem(mouth_Dialog[m], data);
-                            m++;
-                        }
-                        else if (data.Category.Equals(CommonField.m_hair))
-                        {
-                            hair_Dialog.Add(new Dictionary<string, object>());
-                            initCustomItem(hair_Dialog[h], data);
-                            h++;
+                            CommonField.SetDataDialog(data);
+                            if (data.Category.Equals(CommonField.m_skin))
+                            {
+                                skin_Dialog.Add(new Dictionary<string, object>());
+                                initCustomItem(skin_Dialog[s], data);
+                                s++;
+                            }
+                            else if (data.Category.Equals(CommonField.m_eyes))
+                            {
+                                eyes_Dialog.Add(new Dictionary<string, object>());
+                                initCustomItem(eyes_Dialog[e], data);
+                                e++;
+                            }
+                            else if (data.Category.Equals(CommonField.m_mouth))
+                            {
+                                mouth_Dialog.Add(new Dictionary<string, object>());
+                                initCustomItem(mouth_Dialog[m], data);
+                                m++;
+                            }
+                            else if (data.Category.Equals(CommonField.m_hair))
+                            {
+                                hair_Dialog.Add(new Dictionary<string, object>());
+                                initCustomItem(hair_Dialog[h], data);
+                                h++;
+                            }
                         }
                     }
                 }
-            }
 
-            MakeCategory(c_skin, skin_Dialog);
-            MakeCategory(c_eyes, eyes_Dialog);
-            MakeCategory(c_mouth, mouth_Dialog);
-            MakeCategory(c_hair, hair_Dialog);
+                MakeCategory(c_skin, skin_Dialog);
+                MakeCategory(c_eyes, eyes_Dialog);
+                MakeCategory(c_mouth, mouth_Dialog);
+                MakeCategory(c_hair, hair_Dialog);
+            }
 
         }
     }

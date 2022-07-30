@@ -11,6 +11,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 {
     public static List<GameObject> reward_list = new List<GameObject>();
     public static List<GameObject> right_detail_text = new List<GameObject>();
+    
     public static string this_qid = "null";
 
     //리스트 중 우편 선택시 -> 해당 버튼에 있는 제목 등등을 모두 가져와 오른쪽 화면에 띄운다.

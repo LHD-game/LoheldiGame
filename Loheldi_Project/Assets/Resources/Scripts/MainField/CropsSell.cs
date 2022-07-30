@@ -11,6 +11,7 @@ public class CropsSell : MonoBehaviour
 
     void Update()
     {
+        //Debug.Log("밭 업데이트 돌아가는 중");
         if (Input.GetMouseButtonUp(0))
         {
             getCamera = GameObject.Find("FarmCamera");

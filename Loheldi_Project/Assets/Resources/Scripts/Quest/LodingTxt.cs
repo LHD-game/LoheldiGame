@@ -14,15 +14,13 @@ public class LodingTxt : MonoBehaviour
     public Transform Player;
     public Transform Nari;
 
-    public Camera MainCamera;
-    public Camera QuizCamera;
+    //public Camera MainCamera;
+    //public Camera QuizCamera;
 
-    private Text Txt;
-    public Text Name;
     public Text chatName;
-    public Text QuizName;
+    //public Text QuizName;
     public Text chatTxt;
-    public Text QuizTxt;
+    //public Text QuizTxt;
     public Text[] QuizButton = new Text[3];
 
     public GameObject[] SelecButton = new GameObject[5];
@@ -57,7 +55,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject DrawUI;
     public GameObject Note;
     public GameObject Value;
-    public GameObject IMessage;
+    //public GameObject IMessage;
     public GameObject KeyToDream;
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
@@ -100,7 +98,7 @@ public class LodingTxt : MonoBehaviour
     public TMP_InputField KeyToDreamInput;
     //public Fadeln fade_in_out;
     public UIButton JumpButtons;
-    tutorial tu;
+    public tutorial tu;
     public Interaction Inter;
 
 
@@ -116,7 +114,7 @@ public class LodingTxt : MonoBehaviour
     Vector3 NPCBike;
 
     public QuestDontDestroy DontDestroy;
-    private QuestScript Quest;
+    public QuestScript Quest;
     public VideoScript video;
     public Drawing Draw;
     public BicycleRide bicycleRide;
@@ -131,7 +129,6 @@ public class LodingTxt : MonoBehaviour
     public GameObject PlayerRope;
     public GameObject NPCRope;
 
-    public Animator CleanT;
     string PlayerName;
 
     Animator ToothAnimator;
@@ -158,14 +155,6 @@ public class LodingTxt : MonoBehaviour
         DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
-            Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
-            video = GameObject.Find("QuestManager").GetComponent<VideoScript>();
-            JumpButtons = GameObject.Find("EventSystem").GetComponent<UIButton>();
-            tu = GameObject.Find("chatManager").GetComponent<tutorial>();
-            Inter = GameObject.Find("Player").GetComponent<Interaction>();
-            Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
-            QuestLoad = GameObject.Find("Mail").GetComponent<QuestLoad>();
-
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
 
             string[] QQ = PlayerPrefs.GetString("QuestPreg").Split('_');
@@ -226,35 +215,10 @@ public class LodingTxt : MonoBehaviour
         NewChat();
     }
 
-    void Update()
+
+    IEnumerator QBikeLoop()
     {
-        if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
-        {
-            if (Quest.farm || tutoclick)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    GameObject click = EventSystem.current.currentSelectedGameObject;
-                    if (Quest.farm)
-                    {
-                        if(click == null)
-                        {
-                            return;
-                        }
-                        else if (click.name.Equals("ItemBtn_"))
-                        {
-                            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-                            DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
-                            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-                            PlayInfoManager.GetQuestPreg();
-                            Quest.farm = false;
-                        }
-                        Debug.Log(click.name);
-                    }
-                }
-            }
-        }
-        if (BikeQ)
+        while (true)
         {
             if (JumpButtons.Playerrb.velocity.magnitude > QBikeSpeed)
             {
@@ -292,9 +256,11 @@ public class LodingTxt : MonoBehaviour
             }
             timer += Time.deltaTime;
             JumpButtons.Playerrb.AddRelativeForce(Vector3.forward * 1000f); //앞 방향으로 밀기 (방향 * 힘)
+
+            yield return null;
         }
     }
-
+    
     public void skip()
     {
         j = 93;
@@ -306,8 +272,6 @@ public class LodingTxt : MonoBehaviour
     public void NewChat()
     {
         //Debug.Log("퀴즈3");
-        Txt = chatTxt;
-        Name = chatName;
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
         {
@@ -507,13 +471,13 @@ public class LodingTxt : MonoBehaviour
             {
                 NPCBike = new Vector3(-4, 0, 0);
                 bicycleRide.RideOn();
-                BikeNPC = GameObject.Find(Inter.NameNPC);
                 Destroy(GameObject.Find("Qbicycle(Clone)"));
                 Player.position = new Vector3(36, 5, -23);
                 Player.rotation = Quaternion.Euler(0, 90, 0);
                 QBikeSpeed = 3;
                 Maxtime = 8;
                 BikeQ = true;
+                StartCoroutine("QBikeLoop");
                 NPCJumpAnimator.SetBool("BikeWalk", true);
             }
             else if (QBikeSpeed == 12)
@@ -526,7 +490,7 @@ public class LodingTxt : MonoBehaviour
                 BikeNPC.transform.LookAt(targetPositionNPC);
                 Player.transform.LookAt(targetPositionPlayer);
                 JumpButtons.Playerrb.velocity = JumpButtons.Playerrb.velocity.normalized * 0;
-
+                StopCoroutine("QBikeLoop");
                 Ride.SetActive(true);
             }
             else if (BikeQ)
@@ -606,7 +570,6 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
-            Draw.ForDraw = false;
             GameObject.Find("DrawUI").transform.Find("Button").gameObject.SetActive(false);
             scriptLine();
         }
@@ -964,9 +927,9 @@ public class LodingTxt : MonoBehaviour
 
         LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName); //로컬값 가져오긴
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))
-            Name.text = PlayerName;
+            chatName.text = PlayerName;
         else
-            Name.text = data_Dialog[j]["name"].ToString();
+            chatName.text = data_Dialog[j]["name"].ToString();
         
         StartCoroutine(_typing());
         Arrow.SetActive(false);
@@ -988,7 +951,7 @@ public class LodingTxt : MonoBehaviour
         ChatWin.SetActive(false);
         Arrow.SetActive(false);
         NPCButtons.SetActive(false);
-        Name.text = " ";
+        chatName.text = " ";
         Main_UI.SetActive(true);
         c = 0;
         for (int i = 0; i < NPCButton; i++)
@@ -1021,22 +984,17 @@ public class LodingTxt : MonoBehaviour
 
     }
 
-    public void ChatTime() //시작에 합체시킴
-    {
-        Txt = chatTxt;
-        Name=chatName;
-    }
 
     IEnumerator _typing()  //타이핑 효과
     {
         if (!ChatWin.activeSelf)
             ChatWin.SetActive(true);
 
-        Txt.text = " ";
+        chatTxt.text = " ";
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < LoadTxt.Length + 1; i++)
         {
-            Txt.text = LoadTxt.Substring(0, i);
+            chatTxt.text = LoadTxt.Substring(0, i);
             yield return new WaitForSeconds(0.01f);
         }
 
@@ -1141,7 +1099,11 @@ public class LodingTxt : MonoBehaviour
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
             PlayInfoManager.GetQuestPreg();
-        //DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
+        if(data_Dialog[j]["dialog"].ToString().Equals("end)"))
+        {
+            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+            DontDestroy.LastDay = DontDestroy.ToDay;
+        }
         if (SceneManager.GetActiveScene().name == "MainField")
             QuestLoad.QuestLoadStart();
     }
@@ -1159,14 +1121,6 @@ public class LodingTxt : MonoBehaviour
             DontDestroy.From = " ";
             GameObject.Find("ParentscheckUI").SetActive(false);
             ParentscheckTxt.text = null;
-            movie.SetActive(false);
-            video.OnFinishVideo();
-            ChatWin.SetActive(true);
-            GameObject SoundManager = GameObject.Find("SoundManager");
-            SoundManager.GetComponent<AudioSource>().volume = 1f;
-            scriptLine();
-            NpcButtonClick NPCB = GameObject.Find("chatManager").GetComponent<NpcButtonClick>();
-            NPCB.CheckQuest();
             DontDestroy.ButtonPlusNpc = "";
             PlayInfoManager.GetQuestPreg();
         }

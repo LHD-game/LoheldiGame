@@ -32,37 +32,4 @@ public class Inv : MonoBehaviour
             }
         }
     }
-
-    /*public bool AddItem(Inv_Item itemToAdd)
-    {
-        for(int i = 0; i < items.Length; i++)
-        {
-            if(items[i] != null && items[i].itemType == itemToAdd.itemType && itemToAdd.stackable == true)
-            {
-                items[i].quantity = items[i].quantity + 1;
-                Slot slotScript = slots[i].gameObject.GetComponent<Slot>();
-                Text quantityText = slotScript.qtyText;
-                quantityText.enabled = true;
-                quantityText.text = items[i].quantity.ToString();
-                return true;
-            }
-
-            if(items[i] == null)
-            {
-                items[i] = Instantiate(itemToAdd);
-                items[i].quantity = 1;
-                itemImages[i].sprite = itemToAdd.sprite;
-                itemImages[i].enabled = true;
-                return true;
-
-            }
-        }
-        return false;
-    }*/
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

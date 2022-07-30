@@ -13,47 +13,54 @@ public class AnimationTrigger : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();   //애니메이터 컴포넌트 불러오기
+        StartCoroutine("PlayerMove");
     }
-    void Update()
+
+    IEnumerator PlayerMove()
     {
-        if (JoyStick.GetComponent<VirtualJoystick>().MoveFlag)      //Player가 움직이고 있다면
+        while (true)
         {
-            animator.SetBool("JoyStickMove", true);                 //JoyStickMove 파라미터 조절 (애니메이션 컴포넌트에 있음, Animator 탭을 열어야 보임)
-            if (JoyStick.GetComponent<VirtualJoystick>().Playerrb.velocity.magnitude >= JoyStick.GetComponent<VirtualJoystick>().speed1 * 1.428f&&running)    //Player가 최대속도 라면
+            if (JoyStick.GetComponent<VirtualJoystick>().MoveFlag)      //Player가 움직이고 있다면
             {
-                animator.SetBool("JoyStickMove2", true);            //JoyStickMove2 파라미터 조절
+                animator.SetBool("JoyStickMove", true);                 //JoyStickMove 파라미터 조절 (애니메이션 컴포넌트에 있음, Animator 탭을 열어야 보임)
+                if (JoyStick.GetComponent<VirtualJoystick>().Playerrb.velocity.magnitude >= JoyStick.GetComponent<VirtualJoystick>().speed1 * 1.428f && running)    //Player가 최대속도 라면
+                {
+                    animator.SetBool("JoyStickMove2", true);            //JoyStickMove2 파라미터 조절
+                }
             }
-        }
-        else                                                        //둘다 아니면 (안 움직이고 있다면)
-        {
-            animator.SetBool("JoyStickMove", false);                //두 파라미터 조절
-            animator.SetBool("JoyStickMove2", false);
-        }
+            else                                                        //둘다 아니면 (안 움직이고 있다면)
+            {
+                animator.SetBool("JoyStickMove", false);                //두 파라미터 조절
+                animator.SetBool("JoyStickMove2", false);
+            }
 
-        if (UIButton.OnLand == false)
-        {
-            if (Jumping == false)
+            if (UIButton.OnLand == false)
             {
-                animator.SetBool("JumpUp", true);
-                animator.SetBool("JumpDown", false);
-                Jumping = true;
+                if (Jumping == false)
+                {
+                    animator.SetBool("JumpUp", true);
+                    animator.SetBool("JumpDown", false);
+                    Jumping = true;
+                }
             }
-        }
 
-        if (UIButton.OnLand == true)
-        {
-            animator.SetBool("JumpUp", false);
-            if (Jumping)
+            if (UIButton.OnLand == true)
             {
-                animator.SetBool("JumpDown", true);
-                Jumping = false;
+                animator.SetBool("JumpUp", false);
+                if (Jumping)
+                {
+                    animator.SetBool("JumpDown", true);
+                    Jumping = false;
+                }
+                else
+                {
+                    animator.SetBool("JumpDown", true);
+                }
             }
-            else
-            {
-                animator.SetBool("JumpDown", true);
-            }
+            yield return null;
         }
     }
+    
 
     public void JumpUpEvent()
     {

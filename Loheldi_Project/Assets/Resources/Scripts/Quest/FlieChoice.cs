@@ -11,7 +11,6 @@ public class FlieChoice : MonoBehaviour
 
     private void Awake()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (SceneManager.GetActiveScene().name == "Quiz")
         {
             Quest(); 

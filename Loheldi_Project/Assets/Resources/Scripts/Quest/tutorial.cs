@@ -13,9 +13,6 @@ public class tutorial : MonoBehaviour
 
     public void Tutorial()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
-        Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
-
         if (!chat.tuto)
             chat.Chat.SetActive(false);
         if(chat.o ==2 && !chat.DontDestroy.tutorialLoading)

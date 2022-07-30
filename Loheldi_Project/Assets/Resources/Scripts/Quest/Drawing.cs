@@ -19,7 +19,6 @@ public class Drawing : MonoBehaviour
     private Vector3 PrevPos = Vector3.zero; // 0,0,0 position variable
     private Transform ForErase;
     int layerMask;
-    public bool ForDraw = false;
     private bool Erase = false;
 
     int i=0;  //메테리얼 번호
@@ -28,13 +27,13 @@ public class Drawing : MonoBehaviour
     {
         chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
     }
-    void Update()
+    IEnumerator ForDraw()
     {
-        if (ForDraw)
+        while (true)
         {
             DrawMouse();
+            yield return null;
         }
-        
     }
     void DrawMouse()
     {
@@ -134,7 +133,7 @@ public class Drawing : MonoBehaviour
         {
             mainUI.SetActive(false);
             SkechBook.SetActive(true);
-            ForDraw = true;
+            StartCoroutine("ForDraw");
             cam.enabled=false;
             Dcam.enabled = true;
         }
@@ -142,7 +141,7 @@ public class Drawing : MonoBehaviour
         {
             mainUI.SetActive(true);
             SkechBook.SetActive(false);
-            ForDraw = false;
+            StopCoroutine("ForDraw");
             Dcam.enabled = false;
             cam.enabled = true;
         }

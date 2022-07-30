@@ -121,26 +121,4 @@ public class LoadSprite : MonoBehaviour
         myImage6 = imageObj6.GetComponent<Image>();
         myImage2.sprite = Resources.Load<Sprite>("Sprites/Image/cubboard");
     }
-
-
-    /* public void OnClickBox1()
-     {
-         print("Å¬¸¯");
-         foreach (var t in sprites)
-         {
-             Debug.Log(t);
-         }
-     }*/
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-        
-    }
-    /*void Func()
-    {
-        sprites = Resources.LoadAll<Sprite>("Sprites/Image") as Sprite;
-    }*/
 }

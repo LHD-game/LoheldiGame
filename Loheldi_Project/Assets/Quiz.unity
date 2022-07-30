@@ -4512,7 +4512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11244042d3653a0478825cdee40b0d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QMailList: {fileID: 0}
   Quest: 0
   Mail: {fileID: 0}
   Draw: 0
@@ -4524,7 +4523,8 @@ MonoBehaviour:
   - {fileID: 324761251073083072, guid: 18796a71dec01974399e3deae80c37a6, type: 3}
   note: 0
   farm: 0
-  Load: {fileID: 0}
+  file: {fileID: 4578157345972647823}
+  DontDestroy: {fileID: 0}
 --- !u!4 &4578157345972647820
 Transform:
   m_ObjectHideFlags: 0
@@ -4553,13 +4553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Nari: {fileID: 0}
-  MainCamera: {fileID: 0}
-  QuizCamera: {fileID: 6053680502385346557}
-  Name: {fileID: 0}
   chatName: {fileID: 4578157347405030646}
-  QuizName: {fileID: 0}
   chatTxt: {fileID: 4578157346213389555}
-  QuizTxt: {fileID: 0}
   QuizButton:
   - {fileID: 543825164584681232}
   - {fileID: 543825165479270396}
@@ -4613,7 +4608,6 @@ MonoBehaviour:
   DrawUI: {fileID: 0}
   Note: {fileID: 0}
   Value: {fileID: 0}
-  IMessage: {fileID: 0}
   KeyToDream: {fileID: 0}
   AppleTree: {fileID: 0}
   MasterOfMtLife: {fileID: 0}
@@ -4639,6 +4633,7 @@ MonoBehaviour:
   cuttoonImageList: []
   KeyToDreamInput: {fileID: 0}
   JumpButtons: {fileID: 0}
+  tu: {fileID: 0}
   Inter: {fileID: 0}
   o: 0
   DontDestroy: {fileID: 0}
@@ -4653,7 +4648,6 @@ MonoBehaviour:
   NPCJumpAnimatorRope: {fileID: 0}
   PlayerRope: {fileID: 0}
   NPCRope: {fileID: 0}
-  CleanT: {fileID: 0}
 --- !u!114 &4578157345972647823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4666,7 +4660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812b13bcc54cb6843be019ec0f6d9502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chat: {fileID: 0}
+  chat: {fileID: 4578157345972647821}
   EPin: {fileID: 0}
 --- !u!224 &4578157346213389552
 RectTransform:

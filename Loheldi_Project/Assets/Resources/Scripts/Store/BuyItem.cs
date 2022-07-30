@@ -170,13 +170,12 @@ public class BuyItem : MonoBehaviour
             PlayInfoManager.GetCoin(-this_cost);
             CancleClothesBtn();
             buy_suc_panel.SetActive(true);
+            Clothes_Category.instance.PopClothesStore();
         }
         else
         {
             Debug.Log("아이템 구입 오류");
         }
-            
-        //todo: 코인 차감한 값 서버에 저장, 팝업 띄우기
     }
 
 

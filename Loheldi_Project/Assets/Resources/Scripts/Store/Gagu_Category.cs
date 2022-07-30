@@ -8,6 +8,18 @@ using UnityEngine.UI;
 
 public class Gagu_Category : StoreCategoryControl
 {
+    private static Gagu_Category _instance;
+    public static Gagu_Category instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Gagu_Category>();
+            }
+            return _instance;
+        }
+    }
 
     //category
     [SerializeField]

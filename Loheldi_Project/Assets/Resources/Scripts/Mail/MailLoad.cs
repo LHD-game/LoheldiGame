@@ -61,15 +61,19 @@ public class MailLoad : MonoBehaviour
         {
             Destroy(quest_list[i]);
         }
-        for (int i=0; i< MailSelect.right_detail_text.Count; i++)
+        if (!MailSelect.right_detail_text.Equals(null))
         {
-            Text txt = MailSelect.right_detail_text[i].GetComponent<Text>();
-            txt.text = "";
+            for (int i = 0; i < MailSelect.right_detail_text.Count; i++)
+            {
+                Text txt = MailSelect.right_detail_text[i].GetComponent<Text>();
+                txt.text = "";
+            }
+            for (int i = 0; i < MailSelect.reward_list.Count; i++)
+            {
+                Destroy(MailSelect.reward_list[i]);
+            }
         }
-        for (int i=0;i<MailSelect.reward_list.Count; i++)
-        {
-            Destroy(MailSelect.reward_list[i]);
-        }
+        
         GetQuestMail();
         MakeCategory(c_mail, quest, quest_list);
     }

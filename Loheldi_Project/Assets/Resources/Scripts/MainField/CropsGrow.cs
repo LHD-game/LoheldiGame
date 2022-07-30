@@ -32,14 +32,24 @@ public class CropsGrow : MonoBehaviour
             LoadedTimer = DateTime.Parse(text.text);
             time_start = (LoadedTimer.Hour * 3600) + (LoadedTimer.Minute * 60) + LoadedTimer.Second;
         }
+
     }
-    void Update()
+
+    IEnumerator TimeCheck()
+    {
+        while (true)
+        {
+            Check_Timer();
+            yield return new WaitForSecondsRealtime(30f);
+        }
+    }
+    /*void Update()
     {
         if (isEnded)
             return;
 
         Check_Timer();
-    }
+    }*/
     private void Check_Timer()
     {
         time_current = (DateTime.Now.Hour * 3600) + (DateTime.Now.Minute * 60) + DateTime.Now.Second - time_start;

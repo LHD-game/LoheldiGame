@@ -188,10 +188,18 @@ public class LodingTxt : MonoBehaviour
     {
         PlayerPrefs.SetInt("LastQTime", 0);
         DontDestroy.LastDay = 0;
+        PlayInfoManager.GetQuestPreg();
+
         QuestLoad.QuestLoadStart();
     }
     public void ToothQ()
     {
+        if (DontDestroy.weekend) //주말일 때
+            DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg"); //주말 퀘스트 번호로 바뀔 예정
+        else //주말이 아닐 떄
+            DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");
+        //QDD.weekend = true;
+
         PlayerPrefs.SetInt("LastQTime", 0);
         DontDestroy.LastDay = 0;
         string[] q_qid = DontDestroy.QuestIndex.Split('_');
@@ -203,8 +211,8 @@ public class LodingTxt : MonoBehaviour
         else
             QuestType = "WeeklyQuestPreg";
         PlayerPrefs.SetString(QuestType, DontDestroy.QuestIndex);
-        QuestLoad.QuestLoadStart();
         PlayInfoManager.GetQuestPreg();
+        QuestLoad.QuestLoadStart();
     }
     public void ToothQuest()
     {
@@ -991,11 +999,11 @@ public class LodingTxt : MonoBehaviour
             ChatWin.SetActive(true);
 
         chatTxt.text = " ";
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         for (int i = 0; i < LoadTxt.Length + 1; i++)
         {
             chatTxt.text = LoadTxt.Substring(0, i);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
 
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)

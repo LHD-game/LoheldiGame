@@ -26,8 +26,8 @@ public class RealClockforWelcome : MonoBehaviour
         DateTime nowDT = DateTime.Now;
         if (nowDT.DayOfWeek == DayOfWeek.Saturday) Debug.Log("ÂS");
         //QDD.SDA = true;
-        else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
-            QDD.weekend = true;
+        else if (nowDT.DayOfWeek == DayOfWeek.Sunday) Debug.Log("ÂS");
+        //QDD.weekend = true;
         else
             QDD.weekend = false;
         QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //Äù½ºÆ®¿ë ¿À´Ã³¯Â¥ ÀúÀå 

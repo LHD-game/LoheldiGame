@@ -40,7 +40,7 @@ public class FlieChoice : MonoBehaviour
         
         chat.NewChat();
     }
-    public void Quest()  //컷툰 등장하는 퀘스트일 때, 컷툰 이미지 불러오기
+    public void Quest() 
     {
         if (SceneManager.GetActiveScene().name == "MainField")
         {

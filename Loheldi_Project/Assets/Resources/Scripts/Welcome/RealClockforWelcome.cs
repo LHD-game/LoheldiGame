@@ -24,11 +24,11 @@ public class RealClockforWelcome : MonoBehaviour
         PreTime = Time;                 //변경 함수 초기화
 
         DateTime nowDT = DateTime.Now;
-        //if (nowDT.DayOfWeek == DayOfWeek.Saturday)
-            //QDD.SDA = true;
-        //else if(nowDT.DayOfWeek == DayOfWeek.Sunday)
-            //QDD.weekend = true;
-        //else
+        if (nowDT.DayOfWeek == DayOfWeek.Saturday) return; //리턴 지워야 함
+        //QDD.SDA = true;
+        else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
+            QDD.weekend = true;
+        else
             QDD.weekend = false;
         QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
     }
@@ -39,7 +39,7 @@ public class RealClockforWelcome : MonoBehaviour
         if (PreTime != Time)            //시간이 변경 될 때마다
         {
             PreTime = Time;             //변경 함수 초기화
-            TimeSetting(Time);          //시간에 따른 변경 함수
+            TimeSetting(Time);          //시간에 따른 변경 함수git 
         }
     }
 

@@ -144,7 +144,7 @@ public class LodingTxt : MonoBehaviour
         //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
         Debug.Log("이미지=" + CCImage);
-        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"); //이미지 경로
+        CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/CImage"); //이미지 경로
 
         cuttoon = GameObject.Find("chatUI").transform.Find("Cuttoon").gameObject;
         cuttoon.SetActive(false);
@@ -176,10 +176,15 @@ public class LodingTxt : MonoBehaviour
             if (Int32.Parse(QQ[0]) > 12)
                 AppleTreeObj.SetActive(true);
             if (DontDestroy.SDA)
-                return;
+            {
+                if (Int32.Parse(QQ[0]) == 0)
+                    QuestLoad.QuestLoadStart();
+                else
+                    return;
+            }
             else
             {
-                if (Int32.Parse(q_qid[0]) < 22||Int32.Parse(q_qid[0]) < 25)
+                if (Int32.Parse(q_qid[0]) < 22 || Int32.Parse(q_qid[0]) < 25)
                 {
                     if (DontDestroy.ToDay != DontDestroy.LastDay)
                         QuestLoad.QuestLoadStart();
@@ -372,10 +377,6 @@ public class LodingTxt : MonoBehaviour
                 Player.transform.position = new Vector3(45f, 5f, 40f);
                 Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                 break;
-            case 12:
-                PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-                SceneLoader.instance.GotoMainField();
-                break;
             case 13:
                 Player.transform.position = new Vector3(-145.300003f, 12.6158857f, -21.80023f);
                 Player.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
@@ -412,13 +413,12 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Move"))  //선택지
         {
-            if (Int32.Parse(data_Dialog[j]["cuttoon"].ToString()) == 0)
+            if (data_Dialog[j]["scriptNumber"].ToString().Equals("24_1"))
                 o = 13;
             else if (DontDestroy.tutorialLoading)
                 o = 3;
             else
                 o += 1;
-            changeMoment();
             if (o == 12)
                 return;
             else
@@ -426,12 +426,12 @@ public class LodingTxt : MonoBehaviour
                 j += 1;
                 Line();
             }
+
+            changeMoment();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("ReloadEnd"))  //main으로
         {
-            PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
-            PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
-            PlayInfoManager.GetQuestPreg();
+            QuestEnd();
             SceneLoader.instance.GotoMainField();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //main으로
@@ -691,6 +691,19 @@ public class LodingTxt : MonoBehaviour
             else if (data_Dialog[j]["cuttoon"].ToString().Equals("7"))
             {
                 PlayerRope.SetActive(true);
+
+                GameObject NPC = GameObject.Find(Inter.NameNPC);
+
+                Player.transform.position = new Vector3(54, 5, -15);
+                NPC.transform.position = Player.transform.position+ new Vector3(5, 0, 0);
+                NPCRope.SetActive(true);
+
+                Vector3 targetPositionNPC;
+                Vector3 targetPositionPlayer;
+                targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+                NPC.transform.LookAt(targetPositionNPC);
+                targetPositionPlayer = new Vector3(NPC.transform.position.x, Player.transform.position.y, NPC.transform.position.z);
+                Player.transform.LookAt(targetPositionPlayer);
             }
             Invoke("scriptLine", 2f);
         }
@@ -1026,14 +1039,17 @@ public class LodingTxt : MonoBehaviour
             Txt.text = LoadTxt.Substring(0, i);
             yield return new WaitForSeconds(0.01f);
         }
-        
+
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
             Debug.Log("튜토리얼 실핻ㅇ");
             Invoke("Tutorial_", 2f);
         }
         else
+        {
             block.SetActive(false);
+            Arrow.SetActive(true);
+        }
     }
 
     void QuizCho()
@@ -1124,9 +1140,9 @@ public class LodingTxt : MonoBehaviour
         else
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
-        PlayInfoManager.GetQuestPreg();
-
+            PlayInfoManager.GetQuestPreg();
         //DontDestroy.QuestIndex = data_Dialog[j]["scriptNumber"].ToString();
+        if (SceneManager.GetActiveScene().name == "MainField")
             QuestLoad.QuestLoadStart();
     }
 

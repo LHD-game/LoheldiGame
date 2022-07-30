@@ -140,7 +140,6 @@ public class LodingTxt : MonoBehaviour
 
         //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
-        Debug.Log("이미지=" + CCImage);
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/CImage"); //이미지 경로
 
         cuttoon = GameObject.Find("chatUI").transform.Find("Cuttoon").gameObject;
@@ -150,7 +149,6 @@ public class LodingTxt : MonoBehaviour
         parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
         PlayerName = PlayerPrefs.GetString("Nickname");
 
-        Debug.Log(PlayerPrefs.GetString("QuestPreg"));
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
@@ -271,11 +269,11 @@ public class LodingTxt : MonoBehaviour
     
     public void skip()
     {
-        j = 93;
+        Num = "0_2";
         o = 11;
         //GameObject SoundManager = GameObject.Find("SoundManager");
         //SoundManager.GetComponent<SoundManager>().Sound("BGMField");
-        scriptLine();
+        NewChat();
     }
     public void NewChat()
     {

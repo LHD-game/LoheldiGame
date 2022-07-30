@@ -58,10 +58,10 @@ public class QuestLoad : MonoBehaviour
                 DontDestroy.QuestIndex = QID2;
                 DontDestroy.ButtonPlusNpc = authorName;
                 DontDestroy.From = From;
-                Debug.Log(DontDestroy.QuestIndex);
 
-                Debug.Log(QID2);
-                Debug.Log(QName);
+                //Debug.Log(DontDestroy.QuestIndex);
+                //Debug.Log(QID2);
+                //Debug.Log(QName);
 
                 //이미 퀘스트가 들어가있는지 검사
                 Where where = new Where();
@@ -103,9 +103,9 @@ public class QuestLoad : MonoBehaviour
                         DontDestroy.QuestIndex = QID3;
                         DontDestroy.ButtonPlusNpc = authorName;
                         DontDestroy.From = From;
-                        Debug.Log(QID3);
-                        Debug.Log(QName);
-                        Debug.Log(DontDestroy.QuestIndex);
+                        //Debug.Log(QID3);
+                        //Debug.Log(QName);
+                        //Debug.Log(DontDestroy.QuestIndex);
 
                         //이미 퀘스트가 들어가있는지 검사
                         Where where = new Where();
@@ -131,7 +131,6 @@ public class QuestLoad : MonoBehaviour
                     }
                 }
             }
-            Debug.Log(DontDestroy.QuestIndex);
             Quest.QuestStart();
         }
         

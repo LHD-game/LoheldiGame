@@ -42,7 +42,6 @@ public class QuestScript : MonoBehaviour
         }
         else if (PlayerPrefs.GetString("QuestPreg").Equals("0_1"))
         {
-            Debug.Log("ÆÊ");
             StartCoroutine("QFarmLoop");
         }
         else if (PlayerPrefs.GetString("QuestPreg").Equals("22_1"))

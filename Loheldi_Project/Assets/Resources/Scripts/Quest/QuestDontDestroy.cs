@@ -33,7 +33,7 @@ public class QuestDontDestroy : MonoBehaviour
     }
     public void Dontdestroy()
     {
-        Debug.Log("µ·µð");
+        //Debug.Log("µ·µð");
         LastPlayerTransform = this.gameObject;
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Quest");
         if (objs.Length > 1)
@@ -52,9 +52,5 @@ public class QuestDontDestroy : MonoBehaviour
             GameObject.Find("mouth").SetActive(false);
         }
         DontDestroyOnLoad(this.gameObject);
-    }
-    public void OnEnable()
-    {
-        Debug.Log("onEnable");
     }
 }

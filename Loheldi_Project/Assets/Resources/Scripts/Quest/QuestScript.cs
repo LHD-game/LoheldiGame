@@ -68,7 +68,7 @@ public class QuestScript : MonoBehaviour
             note = true;
             GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (Load.QuestIndex.Equals("6_1")|| Load.QuestIndex.Equals("7_1")|| Load.QuestIndex.Equals("11_1")|| Load.QuestIndex.Equals("18_1")|| Load.QuestIndex.Equals("20_1")|| Load.QuestIndex.Equals("22_1")|| Load.QuestIndex.Equals("25_1"))
+        else if (Load.QuestIndex.Equals("6_1")|| Load.QuestIndex.Equals("7_1")|| Load.QuestIndex.Equals("11_1")|| Load.QuestIndex.Equals("14_1")|| Load.QuestIndex.Equals("18_1")|| Load.QuestIndex.Equals("20_1")|| Load.QuestIndex.Equals("22_1")|| Load.QuestIndex.Equals("25_1"))
         {
             GameObject.Find(Load.ButtonPlusNpc).transform.position = new Vector3(54, 5, 37);
         }
@@ -77,10 +77,6 @@ public class QuestScript : MonoBehaviour
             note = true;
             GameObject.Find(Load.ButtonPlusNpc).transform.position = new Vector3(125, 15, 170);
             GameObject.Find(Load.ButtonPlusNpc).transform.rotation = Quaternion.Euler(new Vector3(0, 77, 0));
-        }
-        else if (Load.QuestIndex.Equals("14_1"))
-        {
-            chat.NPCRope.SetActive(true);
         }
         else if (Load.QuestIndex.Equals("19_1"))
         {

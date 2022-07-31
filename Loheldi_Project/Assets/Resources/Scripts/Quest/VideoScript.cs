@@ -8,14 +8,14 @@ public class VideoScript : MonoBehaviour
     public GameObject myVideo;
     public VideoPlayer videoClip;
     public VideoClip[] VideoClip = new VideoClip[2];
-    bool play = false;
+    //bool play = false;
 
     public void OnPlayVideo()
     {
         videoClip.loopPointReached += CheckOver;
         myVideo.SetActive(true);
         videoClip.Play();
-        play = true;
+        //play = true;
     }
 
     void CheckOver(VideoPlayer vp)
@@ -32,6 +32,7 @@ public class VideoScript : MonoBehaviour
     {
         videoClip.time = 0f;
         videoClip.playbackSpeed = 1f;
+        videoClip.Play();
     }
 
     public GameObject finishButton;

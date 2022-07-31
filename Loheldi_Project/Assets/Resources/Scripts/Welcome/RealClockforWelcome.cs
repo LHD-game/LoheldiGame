@@ -24,10 +24,10 @@ public class RealClockforWelcome : MonoBehaviour
         PreTime = Time;                 //변경 함수 초기화
 
         DateTime nowDT = DateTime.Now;
-        if (nowDT.DayOfWeek == DayOfWeek.Saturday) Debug.Log("주말");
-        //QDD.SDA = true;
-        else if (nowDT.DayOfWeek == DayOfWeek.Sunday) Debug.Log("막아둔거");
-        //QDD.weekend = true;
+        if (nowDT.DayOfWeek == DayOfWeek.Saturday)
+        QDD.SDA = true;
+        else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
+        QDD.weekend = true;
         else
             QDD.weekend = false;
         QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 

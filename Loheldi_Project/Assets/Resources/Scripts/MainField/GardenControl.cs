@@ -52,7 +52,7 @@ public class GardenControl : MonoBehaviour
     /*void Update()
     {
         Debug.Log("두번째 밭도 작동 중");
-        if (Interaction.GetComponent<Interaction>().Farm)   //jump 버튼으로 farm에 진입 시 
+        if (Interaction.GetComponent<Interaction>().Farm)   //jump 버튼으로 farm에 진입 시 //이거 UIButton에 옮겨뒀습니다
         {
             if (!is_pop_garden)
             {

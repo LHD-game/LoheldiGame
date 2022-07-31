@@ -31,7 +31,6 @@ public class RealClock : MonoBehaviour
         TimeSetting(Time);
         PreTime = Time;                 //변경 함수 초기화
 
-        //QDD.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 (주석 풀어야 함)
     }
 
     private void Update()

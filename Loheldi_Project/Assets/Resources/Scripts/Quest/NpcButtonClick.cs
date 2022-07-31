@@ -93,7 +93,6 @@ public class NpcButtonClick : MonoBehaviour
     }
     public void CheckQuest()
     {
-        Transform Parent = GameObject.Find(Chat.chat.DontDestroy.ButtonPlusNpc).GetComponent<Transform>();
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
 
         Chat.EPin.SetActive(false);

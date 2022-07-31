@@ -26,7 +26,7 @@ public class GardenControl : MonoBehaviour
     private GameObject c_seed;          //씨앗 카테고리
     [SerializeField]
     private GameObject[] garden_ground = new GameObject[4]; //텃밭 오브젝트. 텃밭의 수: 4
-    static GameObject[] garden_crops = new GameObject[4]; //심겨진 작물 오브젝트 객체.
+    public GameObject[] garden_crops = new GameObject[4]; //심겨진 작물 오브젝트 객체.
     string[] g_seed = new string[4];    //심겨진 씨앗의 ICode
     DateTime[] g_timer = new DateTime[4];    //심겨진 씨앗의 성장시간
     public static bool[] empty_ground = new bool[4];        //빈 텃밭의 수
@@ -48,24 +48,6 @@ public class GardenControl : MonoBehaviour
         empty_ground[3] = true;
         UpdateFieldGarden();
     }
-
-    /*void Update()
-    {
-        Debug.Log("두번째 밭도 작동 중");
-        if (Interaction.GetComponent<Interaction>().Farm)   //jump 버튼으로 farm에 진입 시 //이거 UIButton에 옮겨뒀습니다
-        {
-            if (!is_pop_garden)
-            {
-                GardenCategory gc = new GardenCategory();
-                gc.PopGarden(c_seed);
-                is_pop_garden = true;
-            }
-        }
-        else
-        {
-            is_pop_garden = false;
-        }
-    }*/
 
     void UpdateFieldGarden()     //텃밭의 정보를 업데이트하여 필드에 반영
     {

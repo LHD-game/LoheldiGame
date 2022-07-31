@@ -34,7 +34,7 @@ public class Save_Log : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(300.0f); //5min 대기
+            yield return new WaitForSecondsRealtime(180.0f); //3min 대기
 
             DateTime now_time = DateTime.Now;
             last_play_date = now_time.ToString("F");    //자세한 날짜, 시간
@@ -67,11 +67,11 @@ public class Save_Log : MonoBehaviour
             var update_bro = Backend.GameData.UpdateV2("PLAY_LOG", rowIndate, Backend.UserInDate, param);
             if (update_bro.IsSuccess())
             {
-                Debug.Log("SaveLoginLog() Success");
+                Debug.Log("UpdatePlayLog() Success");
             }
             else
             {
-                Debug.Log("SaveLoginLog() Fail");
+                Debug.Log("UpdatePlayLog() Fail");
             }
         } 
     }
@@ -92,14 +92,75 @@ public class Save_Log : MonoBehaviour
 
         if (insert_bro.IsSuccess())
         {
-            Debug.Log("UpdatePlayLog() Success");
+            Debug.Log("SaveLoginLog() Success");
             PlayerPrefs.DeleteKey("LastPlayDate");  //키를 삭제해줌으로써 20초 안지났을 때의 중복 방지
             StartCoroutine(PlayTimeChk());
         }
         else
         {
-            Debug.Log("UpdatePlayLog() Fail");
+            Debug.Log("SaveLoginLog() Fail");
             return;
+        }
+    }
+
+    //퀘스트 시작시, QuestLog에 초기행 삽입
+    public void SaveQStartLog()
+    {
+        DateTime now_time = DateTime.Now;
+        string q_start_date = now_time.ToString("F");
+
+        PlayerPrefs.SetString("QStartDate", q_start_date);
+        Debug.Log("퀘스트 시작 날짜: " + q_start_date);
+
+        Param param = new Param();
+        param.Add("QID", PlayerPrefs.GetString("NowQID"));
+        param.Add("StartTime", PlayerPrefs.GetString("QStartDate"));
+        param.Add("EndTime", "null");
+
+        var insert_bro = Backend.GameData.Insert("QUEST_LOG", param);
+
+        if (insert_bro.IsSuccess())
+        {
+            Debug.Log("SaveQStartLog() Success");
+        }
+        else
+        {
+            Debug.Log("SaveQStartLog() Fail");
+        }
+        return;
+    }
+    // 퀘스트 종료 시 종료시간 업데이트
+    public void SaveQEndLog()
+    {
+        DateTime now_time = DateTime.Now;
+        string q_end_date = now_time.ToString("F");
+
+        Where where = new Where();
+        where.Equal("StartTime", PlayerPrefs.GetString("QStartDate"));
+        var bro = Backend.GameData.GetMyData("QUEST_LOG", where);
+
+        if (bro.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+        }
+        else
+        {
+            string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+            Param param = new Param();
+            param.Add("QID", bro.FlattenRows()[0]["QID"].ToString());
+            param.Add("StartTime", PlayerPrefs.GetString("QStartDate"));
+            param.Add("EndTime", q_end_date);
+
+            var update_bro = Backend.GameData.UpdateV2("QUEST_LOG", rowIndate, Backend.UserInDate, param);
+            if (update_bro.IsSuccess())
+            {
+                Debug.Log("SaveQEndLog() Success");
+            }
+            else
+            {
+                Debug.Log("SaveQEndLog() Fail");
+            }
         }
     }
 }

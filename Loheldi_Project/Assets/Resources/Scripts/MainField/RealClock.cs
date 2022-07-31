@@ -33,7 +33,7 @@ public class RealClock : MonoBehaviour
 
     }
 
-    private void Update()
+/*    private void Update()
     {
         GetCurrentDate();               //매 프레임마다 시간을 불러옴
         if (PreTime != Time)            //시간이 변경 될 때마다
@@ -41,7 +41,7 @@ public class RealClock : MonoBehaviour
             PreTime = Time;             //변경 함수 초기화
             TimeSetting(Time);          //시간에 따른 변경 함수
         }
-    }
+    }*/
 
     public void GetCurrentDate()
     {

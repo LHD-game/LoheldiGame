@@ -61,7 +61,7 @@ public class MailLoad : MonoBehaviour
         {
             Destroy(quest_list[i]);
         }
-        if (MailSelect.right_detail_text.Count <= 0)
+        if (MailSelect.right_detail_text.Count > 0)
         {
             for (int i = 0; i < MailSelect.right_detail_text.Count; i++)
             {

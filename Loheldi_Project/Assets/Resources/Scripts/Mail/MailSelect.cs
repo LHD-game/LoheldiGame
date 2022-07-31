@@ -79,7 +79,6 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 
         string[] q_qid = qid_txt.text.Split('_');
         string QuestType = null;
-        Debug.Log(Int32.Parse(q_qid[0]));
         if (Int32.Parse(q_qid[0]) < 22)
         {
             QuestType = "QuestPreg";
@@ -117,7 +116,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
 
         //Reward에 저장된 보상들(string)을 json 타입으로 변환
         JObject reward_json = JObject.Parse(reward_txt);
-        Debug.Log("보상: "+reward_json["Exp"]);
+
         //json 키값 추출
         string[] key = new string[reward_json.Count];
         int i = 0;

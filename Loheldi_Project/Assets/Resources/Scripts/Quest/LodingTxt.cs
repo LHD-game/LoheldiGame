@@ -135,6 +135,7 @@ public class LodingTxt : MonoBehaviour
     Animator ToothAnimator;
     private void Awake()
     {
+        Input.multiTouchEnabled = false;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
         //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용

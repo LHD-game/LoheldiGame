@@ -119,6 +119,7 @@ public class LodingTxt : MonoBehaviour
     public Drawing Draw;
     public BicycleRide bicycleRide;
     public QuestLoad QuestLoad;
+    public NpcButtonClick NpcButton;
     [SerializeField]
     private ParticleSystem hairPs;
 
@@ -193,7 +194,7 @@ public class LodingTxt : MonoBehaviour
     public void ToothQ()
     {
         if (DontDestroy.weekend) //주말일 때
-            DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg"); //주말 퀘스트 번호로 바뀔 예정
+            DontDestroy.QuestIndex = PlayerPrefs.GetString("WeeklyQuestPreg"); //주말 퀘스트 번호로 바뀔 예정
         else //주말이 아닐 떄
             DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");
         //QDD.weekend = true;
@@ -1129,6 +1130,7 @@ public class LodingTxt : MonoBehaviour
             ParentscheckTxt.text = null;
             DontDestroy.ButtonPlusNpc = "";
             PlayInfoManager.GetQuestPreg();
+            NpcButton.CheckQuest();
         }
         else
         {

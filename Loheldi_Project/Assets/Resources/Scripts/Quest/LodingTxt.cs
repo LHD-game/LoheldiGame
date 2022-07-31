@@ -135,6 +135,8 @@ public class LodingTxt : MonoBehaviour
     Animator ToothAnimator;
     private void Awake()
     {
+        
+
         Input.multiTouchEnabled = false;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
@@ -152,6 +154,14 @@ public class LodingTxt : MonoBehaviour
         PlayerName = PlayerPrefs.GetString("Nickname");
 
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+        DateTime nowDT = DateTime.Now;
+        if (nowDT.DayOfWeek == DayOfWeek.Saturday)
+            DontDestroy.SDA = true;
+        else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
+            DontDestroy.weekend = true;
+        else
+            DontDestroy.weekend = false;
+        DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
         DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
@@ -164,12 +174,15 @@ public class LodingTxt : MonoBehaviour
                 Ride.SetActive(true);
             if (Int32.Parse(QQ[0]) > 12)
                 AppleTreeObj.SetActive(true);
-            if (DontDestroy.SDA)
+
+            if (Int32.Parse(QQ[0]) == 0)
             {
-                if (Int32.Parse(QQ[0]) == 0)
-                    QuestLoad.QuestLoadStart();
-                else
-                    return;
+                DontDestroy.weekend = false;
+                QuestLoad.QuestLoadStart();
+            }
+            else if (DontDestroy.SDA)
+            {
+                return;
             }
             else
             {
@@ -349,6 +362,11 @@ public class LodingTxt : MonoBehaviour
                 Player.transform.position = new Vector3(45f, 5f, 40f);
                 Nari.transform.position = Player.transform.position + new Vector3(5, 0, 0);
                 break;
+            case 12:
+                PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
+                PlayInfoManager.GetQuestPreg();
+                SceneLoader.instance.GotoMainField();
+                break;
             case 13:
                 Player.transform.position = new Vector3(-145.300003f, 12.6158857f, -21.80023f);
                 Player.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
@@ -391,6 +409,8 @@ public class LodingTxt : MonoBehaviour
                 o = 3;
             else
                 o += 1;
+
+            changeMoment();
             if (o == 12)
                 return;
             else
@@ -399,7 +419,6 @@ public class LodingTxt : MonoBehaviour
                 Line();
             }
 
-            changeMoment();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("ReloadEnd"))  //main으로
         {
@@ -1107,7 +1126,7 @@ public class LodingTxt : MonoBehaviour
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
             PlayInfoManager.GetQuestPreg();
-        if(data_Dialog[j]["dialog"].ToString().Equals("end)"))
+        if(data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;

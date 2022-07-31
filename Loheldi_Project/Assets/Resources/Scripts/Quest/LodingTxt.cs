@@ -365,6 +365,7 @@ public class LodingTxt : MonoBehaviour
             case 12:
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                 PlayInfoManager.GetQuestPreg();
+                Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
                 SceneLoader.instance.GotoMainField();
                 break;
             case 13:

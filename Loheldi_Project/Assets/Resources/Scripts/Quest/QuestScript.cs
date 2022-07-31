@@ -13,7 +13,7 @@ public class QuestScript : MonoBehaviour
     [SerializeField]
 
     public MailLoad Mail;
-    private LodingTxt chat;
+    public LodingTxt chat;
 
     public bool Draw=false;
     public Camera MainCamera;
@@ -58,7 +58,6 @@ public class QuestScript : MonoBehaviour
 
     public void QuestChoice()
     {
-        chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
         if (DontDestroy.QuestIndex.Equals("4_1"))
                 Instantiate(Resources.Load<GameObject>("Prefabs/Q/Qbicycle"), new Vector3(65.1100006f, 5.41002083f, -17.799999f), Quaternion.Euler(0, 51.4773521f, 0));
         else if (DontDestroy.QuestIndex.Equals("8_1"))
@@ -100,9 +99,9 @@ public class QuestScript : MonoBehaviour
             {
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                 DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
-                PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
                 PlayInfoManager.GetQuestPreg();
                 farm = false;
+                chat.QuestLoad.QuestLoadStart();
                 StopCoroutine("QFarmLoop");
             }
             yield return null;

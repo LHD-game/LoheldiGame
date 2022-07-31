@@ -8,6 +8,7 @@ public class CropsGrow : MonoBehaviour
 {
     public Text text;
 
+    private int FarmNum;
     private float time_current;
     private float time_start;
     private int hour;
@@ -69,6 +70,7 @@ public class CropsGrow : MonoBehaviour
 
     private void End_Timer()
     {
+        GardenControl gcl = new GardenControl();
         if (ICode.text == "1010101")
         {
             NextCrops = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Crops_Wheat"));
@@ -90,5 +92,7 @@ public class CropsGrow : MonoBehaviour
             this.GetComponent<BoxCollider>().enabled = true;
             //Debug.Log("작물 모델이 없어서 GreenPlants로 대체");
         }
+        FarmNum = int.Parse(this.transform.parent.GetComponent<Text>().text);
+        gcl.garden_crops[FarmNum] = NextCrops.gameObject;
     }
 }

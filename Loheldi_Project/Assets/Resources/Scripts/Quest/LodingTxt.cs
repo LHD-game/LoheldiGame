@@ -365,6 +365,7 @@ public class LodingTxt : MonoBehaviour
             case 12:
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                 PlayInfoManager.GetQuestPreg();
+                Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
                 SceneLoader.instance.GotoMainField();
                 break;
             case 13:
@@ -1027,7 +1028,7 @@ public class LodingTxt : MonoBehaviour
 
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
-            Debug.Log("튜토리얼 실핻ㅇ");
+            Debug.Log("튜토리얼 실행ㅇ");
             Invoke("Tutorial_", 2f);
         }
         else
@@ -1117,6 +1118,8 @@ public class LodingTxt : MonoBehaviour
 
     public void QuestEnd()
     {
+        Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
+
         DontDestroy.ButtonPlusNpc = "";
         //Quest.Load.QuestMail = false;
 

@@ -32,6 +32,7 @@ public class FlieChoice : MonoBehaviour
     }
     public void Tutorial()
     {
+        Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
         chat.Main_UI.SetActive(false);
         chat.FileAdress = "Scripts/Quest/script";
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");

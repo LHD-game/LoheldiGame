@@ -25,6 +25,9 @@ public class MailLoad : MonoBehaviour
     [SerializeField]
     GameObject AlreadyRecieveBtn;
 
+    [SerializeField]
+    GameObject[] RightDetail = new GameObject[4];
+
     //공지사항
     public Text NoticeTitleText;
     public Text NoticeDetailText;
@@ -61,18 +64,25 @@ public class MailLoad : MonoBehaviour
         {
             Destroy(quest_list[i]);
         }
-        if (MailSelect.right_detail_text.Count > 0)
+
+        for (int i = 0; i < RightDetail.Length; i++)
         {
-            for (int i = 0; i < MailSelect.right_detail_text.Count; i++)
+            Text txt = RightDetail[i].GetComponent<Text>();
+            
+            if (i == 2)
             {
-                Text txt = MailSelect.right_detail_text[i].GetComponent<Text>();
+                txt.text = "왼쪽 목록에서 읽고 싶은 편지를 선택하세요.";
+            }
+            else
+            {
                 txt.text = "";
             }
-            for (int i = 0; i < MailSelect.reward_list.Count; i++)
-            {
-                Destroy(MailSelect.reward_list[i]);
-            }
         }
+        for (int i = 0; i < MailSelect.reward_list.Count; i++)
+        {
+            Destroy(MailSelect.reward_list[i]);
+        }
+        
         
         GetQuestMail();
         MakeCategory(c_mail, quest, quest_list);

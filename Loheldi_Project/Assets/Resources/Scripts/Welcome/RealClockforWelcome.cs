@@ -32,7 +32,7 @@ public class RealClockforWelcome : MonoBehaviour
             QDD.weekend = false;
         QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
     }
-
+/*
     private void Update()
     {
         GetCurrentDate();               //매 프레임마다 시간을 불러옴
@@ -41,7 +41,7 @@ public class RealClockforWelcome : MonoBehaviour
             PreTime = Time;             //변경 함수 초기화
             TimeSetting(Time);          //시간에 따른 변경 함수git 
         }
-    }
+    }*/
 
     public void GetCurrentDate()
     {

@@ -56,6 +56,7 @@ public class QuestLoad : MonoBehaviour
                 authorName = rows[0]["authorName"]["S"].ToString();
 
                 DontDestroy.QuestIndex = QID2;
+                PlayerPrefs.SetString("NowQID", QID2);
                 DontDestroy.ButtonPlusNpc = authorName;
                 DontDestroy.From = From;
 
@@ -101,6 +102,7 @@ public class QuestLoad : MonoBehaviour
                         authorName = rows[i + 1]["authorName"]["S"].ToString();
 
                         DontDestroy.QuestIndex = QID3;
+                        PlayerPrefs.SetString("NowQID", QID3);
                         DontDestroy.ButtonPlusNpc = authorName;
                         DontDestroy.From = From;
                         //Debug.Log(QID3);

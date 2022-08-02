@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationTriggerforMinigame : MonoBehaviour
 {
-    private Animator animator;
+    public Animator animator;
     private bool Running;
     public bool GetButtonDown;
 

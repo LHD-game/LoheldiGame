@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     private VirtualJoystick joystic;
     private static SceneLoader _instance;
     private QuestDontDestroy QDD;
+    public GameObject Player;
     public static SceneLoader instance
     {
         get
@@ -28,10 +29,6 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoMainField()
     {
-        //DontDestroy.Dontdestroy();*/
-        /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
-        joystic.speed1 = 8f;
-        joystic.speed2 = 10f;*/
         LoadingSceneManager.LoadScene("MainField");
     }
     public void GotoGameMove()  // 테스트 용 - 이민진 5/3
@@ -45,17 +42,12 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoPlayerCustom()
     {
-        if (SceneManager.GetActiveScene().name == "MainField")
-        {
-            PlayerTransForm();
-        }
-            
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("PlayerCustom");
     }
     public void GotoPlayerCloset()
     {
-        if (SceneManager.GetActiveScene().name == "MainField")
-            PlayerTransForm();
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("PlayerCloset");
     }
 
@@ -91,9 +83,7 @@ public class SceneLoader : MonoBehaviour
 
     public void GotoHouse()
     {
-        /*joystic = GameObject.Find("Joystick").GetComponent<VirtualJoystick>();
-        joystic.speed1 = 2f;
-        joystic.speed2 = 3f;*/
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("Housing");
     }
     public void GotoMail()
@@ -107,13 +97,16 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoQuizGame()
     {
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("Quiz");
     }
 
     private void PlayerTransForm()
-    {
-        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        QDD.LastPlayerTransform.transform.position = GameObject.Find("Player").transform.position;
-        Debug.Log(QDD.LastPlayerTransform);
+    {if (SceneManager.GetActiveScene().name == "MainField")
+        {
+            QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+            QDD.LastPlayerTransform.transform.position = Player.transform.position;
+            Debug.Log(QDD.LastPlayerTransform);
+        }
     }
 }

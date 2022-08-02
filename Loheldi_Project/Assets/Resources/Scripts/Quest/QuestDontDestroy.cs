@@ -40,8 +40,6 @@ public class QuestDontDestroy : MonoBehaviour
         {
             Destroy(objs[0]);
         }
-        if (SceneManager.GetActiveScene().name == "Welcome")
-            LastPlayerTransform.transform.position = new Vector3(45.1500015f, 5.31948805f, 50.0898895f);
         else if (SceneManager.GetActiveScene().name == "Game_Tooth")
         {
             Debug.Log("¾çÄ¡");

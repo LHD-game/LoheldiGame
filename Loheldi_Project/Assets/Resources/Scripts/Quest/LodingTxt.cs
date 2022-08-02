@@ -140,7 +140,7 @@ public class LodingTxt : MonoBehaviour
         Input.multiTouchEnabled = false;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
-        //if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
+        
 
         //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
         CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
@@ -154,6 +154,10 @@ public class LodingTxt : MonoBehaviour
         PlayerName = PlayerPrefs.GetString("Nickname");
 
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+
+        if (SceneManager.GetActiveScene().name == "MainField")
+            Player.position = DontDestroy.gameObject.transform.position;
+
         DateTime nowDT = DateTime.Now;
         if (nowDT.DayOfWeek == DayOfWeek.Saturday)
             DontDestroy.SDA = true;
@@ -949,7 +953,13 @@ public class LodingTxt : MonoBehaviour
         }
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());
-        spriteR.sprite = CCImageList[l];
+        if (l == 9)
+            CCImage.SetActive(false);
+        else
+        {
+            CCImage.SetActive(true);
+            spriteR.sprite = CCImageList[l];
+        }
 
         LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName); //로컬값 가져오긴
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))

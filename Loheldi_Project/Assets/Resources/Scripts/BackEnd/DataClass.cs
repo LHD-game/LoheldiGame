@@ -10,7 +10,7 @@ public static class ChartNum
 {
     public static string BasicCustomItemChart = "53501";
     public static string BasicClothesItemChart = "53497";
-    public static string CustomItemChart = "53553";
+    public static string CustomItemChart = "55694";
     public static string ClothesItemChart = "55438";
     public static string AllItemChart = "55031";
     public static string BadgeChart = "54754";
@@ -65,15 +65,6 @@ public class CustomStoreItem
     public string Price;
     public string Category;
     public string ItemType;
-    public string Texture;
-}
-
-public class CustomItem
-{
-    public string ICode;
-    public string IName;
-    public string Model;
-    public string Material;
     public string Texture;
 }
 

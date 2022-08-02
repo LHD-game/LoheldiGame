@@ -178,17 +178,42 @@ public class BuyItem : MonoBehaviour
         }
     }
 
+    //의상 아이템 구입
+    public void BuyCustomBtn()
+    {
+        Param param = new Param();
+        param.Add("ICode", iCode);
+
+        var insert_bro = Backend.GameData.Insert("ACC_CUSTOM", param);
+
+        if (insert_bro.IsSuccess())
+        {
+            Debug.Log("아이템 구입 완료: " + iCode);
+            PlayInfoManager.GetCoin(-this_cost);
+            CancleCustomBtn();
+            buy_suc_panel.SetActive(true);
+            Custom_Category.instance.PopCustomStore();
+        }
+        else
+        {
+            Debug.Log("아이템 구입 오류");
+        }
+    }
+
 
     public void CancleBtn()
     {
         GameObject panel = main_ui.transform.Find("StoreBuyPanel(Clone)").gameObject;
-        print("삭제");
         Destroy(panel);
     }
     public void CancleClothesBtn()
     {
         GameObject panel = main_ui.transform.Find("ClothesBuyPanel(Clone)").gameObject;
-        print("삭제");
+        Destroy(panel);
+    }
+    public void CancleCustomBtn()
+    {
+        GameObject panel = main_ui.transform.Find("CustomBuyPanel(Clone)").gameObject;
         Destroy(panel);
     }
 }

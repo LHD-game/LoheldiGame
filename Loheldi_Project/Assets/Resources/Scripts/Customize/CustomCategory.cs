@@ -27,7 +27,7 @@ public class CustomCategory : CategoryControl
     private void Start()
     {
         var allCustomChart = Backend.Chart.GetChartContents(ChartNum.CustomItemChart); //서버의 엑셀파일을 불러온다.
-        var myCustom = Backend.GameData.GetMyData("ACC_CUSTOM", new Where(), 100);
+        var myCustom = Backend.GameData.GetMyData("ACC_CUSTOM", new Where(),100);
         if (!myCustom.IsSuccess())
         {
             Debug.Log("요청 실패");
@@ -47,8 +47,9 @@ public class CustomCategory : CategoryControl
             }
             else
             {
+                Debug.Log(myCustom_rows.Count);
                 int s = 0, e = 0, m = 0, h = 0;
-                for (int i = myCustom_rows.Count - 1; i >= 0; i--)
+                for (int i = allCustom_rows.Count - 1; i >= 0; i--)
                 {
                     CustomStoreItem data = pj.ParseBackendData<CustomStoreItem>(allCustom_rows[i]);
 
@@ -81,9 +82,11 @@ public class CustomCategory : CategoryControl
                                 hair_Dialog.Add(new Dictionary<string, object>());
                                 initCustomItem(hair_Dialog[h], data);
                                 h++;
+                                
                             }
                         }
                     }
+                    
                 }
 
                 MakeCategory(c_skin, skin_Dialog);

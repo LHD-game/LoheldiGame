@@ -549,8 +549,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaf2dad212be4040a22c196575a2704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1701297580831703793}
   GetButtonDown: 0
-  Playerrb: {fileID: 0}
+  Playerrb: {fileID: 1701297580831703792}
 --- !u!1001 &427741690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3759,6 +3760,9 @@ MonoBehaviour:
   audioClickBack: {fileID: 0}
   audioJump: {fileID: 8300000, guid: a54667d119f5fd6428d37cdd3207894d, type: 3}
   audioOpenDoor: {fileID: 8300000, guid: a2345da820d59a145b738328c4cb7e1d, type: 3}
+  QaudioWind: {fileID: 0}
+  QaudioWater: {fileID: 0}
+  QaudioBird: {fileID: 0}
 --- !u!114 &1892346178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4757,6 +4761,16 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2385248373750773591, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+--- !u!54 &1701297580831703792 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1701297580994259705, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+  m_PrefabInstance: {fileID: 1701297580831703791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1701297580831703793 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1885645352583969342, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+  m_PrefabInstance: {fileID: 1701297580831703791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2162969089402773274
 PrefabInstance:
   m_ObjectHideFlags: 0

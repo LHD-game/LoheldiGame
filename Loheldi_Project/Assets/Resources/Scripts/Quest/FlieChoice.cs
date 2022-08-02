@@ -9,6 +9,7 @@ public class FlieChoice : MonoBehaviour
     public LodingTxt chat;
     public GameObject EPin;
 
+    public Interaction Inter;
     private void Awake()
     {
         if (SceneManager.GetActiveScene().name == "Quiz")
@@ -40,8 +41,9 @@ public class FlieChoice : MonoBehaviour
         
         chat.NewChat();
     }
-    public void Quest() 
+    public void Quest()
     {
+        Inter.NpcNameTF = false;
         if (SceneManager.GetActiveScene().name == "MainField")
         {
             //Debug.Log(chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));

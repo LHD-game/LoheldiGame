@@ -177,7 +177,6 @@ public class LodingTxt : MonoBehaviour
 
             if (Int32.Parse(QQ[0]) == 0)
             {
-                DontDestroy.weekend = false;
                 QuestLoad.QuestLoadStart();
             }
             else if (DontDestroy.SDA)
@@ -229,7 +228,6 @@ public class LodingTxt : MonoBehaviour
     }
     public void ToothQuest()
     {
-        Debug.Log("¾çÄù");
         ToothAnimator = GameObject.Find("ToothBrush").transform.Find("Armature").gameObject.GetComponent<Animator>();
         Num = "22_2";
         FileAdress = "Scripts/Quest/script";
@@ -1012,20 +1010,37 @@ public class LodingTxt : MonoBehaviour
 
     }
 
-
+    public bool typingSkip = true;
+    public void typingSkip_()
+    {
+        if (chatTxt.text.Length > 3)
+        {
+            Debug.Log("½ºÅµÇÔ");
+            typingSkip = false;
+        }
+        Debug.Log("½ºÅµ");
+    }
     IEnumerator _typing()  //Å¸ÀÌÇÎ È¿°ú
     {
+        typingSkip = true;
         if (!ChatWin.activeSelf)
             ChatWin.SetActive(true);
 
         chatTxt.text = " ";
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.1f);
         for (int i = 0; i < LoadTxt.Length + 1; i++)
         {
-            chatTxt.text = LoadTxt.Substring(0, i);
-            yield return new WaitForSecondsRealtime(0.01f);
+            if (typingSkip)
+            {
+                chatTxt.text = LoadTxt.Substring(0, i);
+                yield return new WaitForSecondsRealtime(0.05f);
+            }
+            else
+                break;
         }
+        chatTxt.text = LoadTxt;
 
+        yield return new WaitForSecondsRealtime(0.5f);
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
             Debug.Log("Æ©Åä¸®¾ó ½ÇÇà¤·");

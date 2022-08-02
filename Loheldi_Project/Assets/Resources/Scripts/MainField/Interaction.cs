@@ -13,6 +13,11 @@ public class Interaction : MonoBehaviour
     public bool Gacha;
     public bool Farm = false;
 
+    public bool NpcNameTF = false;
+    public List<string> Npcs = new List<string>();
+    //public GameObject[] Npcs;
+    public GameObject[] NpcNames;
+
     public GameObject FarmingMaster;
 
     private ChangeMode change;
@@ -23,6 +28,7 @@ public class Interaction : MonoBehaviour
             NearNPC = true;
             text.text = "대화";
             NameNPC = other.gameObject.name.ToString();
+            NpcNameActive(other.gameObject,"in");
             Debug.Log("NPC이름="+NameNPC);
         }
         if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
@@ -84,6 +90,10 @@ public class Interaction : MonoBehaviour
     {
         if (other.gameObject.tag == "NPC" || other.gameObject.name == "InDoor" || other.gameObject.name == "GachaMachine" || other.gameObject.name == "Field")          //콜리더의 Tag가 NPC라면
         {
+            if (other.gameObject.tag == "NPC")
+            {
+                NpcNameTF = false;
+            }
             Door = false;
             Gacha = false;
             Farm = false;
@@ -99,5 +109,25 @@ public class Interaction : MonoBehaviour
         {
             change.changeCamera();
         }
+    }
+    public void NpcNameActive(GameObject other, string status)
+    {
+        int NpcNum = Npcs.IndexOf(NameNPC);
+        if (status.Equals("in"))
+        {
+            NpcNameTF = true;
+            NpcNames[NpcNum].SetActive(true);
+            StartCoroutine(NpcNameFollow(other, NpcNum));
+        }
+    }
+    IEnumerator NpcNameFollow(GameObject Npc, int NpcNum)
+    {
+        while (NpcNameTF)
+        {
+            NpcNames[NpcNum].transform.position = Camera.main.WorldToScreenPoint(Npc.transform.position + new Vector3(0, 7f, 0));
+            yield return null;
+        }
+        NpcNames[NpcNum].SetActive(false);
+        yield break;
     }
 }

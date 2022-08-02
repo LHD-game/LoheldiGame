@@ -35,20 +35,10 @@ public class UIButton : MonoBehaviour
     [SerializeField]
     private GameObject c_seed;          //¾¾¾Ñ Ä«Å×°í¸®
 
-    private void Awake()
-    {
-        if (SceneManager.GetActiveScene().name == "MainField")
-        {
-            chat = GameObject.Find("chatManager").GetComponent<LodingTxt>(); 
-        }
-    }
 
     void Start()
     {
         map = false;
-        Inter = GameObject.Find("Player").GetComponent<Interaction>();
-        if (SceneManager.GetActiveScene().name == "MainField")
-            Chat = GameObject.Find("chatManager").GetComponent<FlieChoice>();
     }
 
     public void JumpButton()                //Á¡ÇÁ¹öÆ°

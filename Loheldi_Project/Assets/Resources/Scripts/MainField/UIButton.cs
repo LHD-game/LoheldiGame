@@ -97,8 +97,7 @@ public class UIButton : MonoBehaviour
                 JoyStick.SetActive(false);
                 FarmUI.SetActive(true);
 
-                GardenCategory gc = new GardenCategory();
-                gc.PopGarden(c_seed);
+                GardenCategory.instance.PopGarden();
             }
             else
             {

@@ -21,13 +21,14 @@ public class GardenControl : MonoBehaviour
         }
     }
 
-
     [SerializeField]
-    private GameObject c_seed;          //¾¾¾Ñ Ä«Å×°í¸®
+    GameObject FarmUI;          
+    [SerializeField]
+    GameObject c_seed;          //¾¾¾Ñ Ä«Å×°í¸®
     [SerializeField]
     GameObject crops_sell_panel;    //ÀÛ¹° ÆÇ¸Å º¸»ó ÆÐ³Î
     [SerializeField]
-    private GameObject[] garden_ground = new GameObject[4]; //ÅÔ¹ç ¿ÀºêÁ§Æ®. ÅÔ¹çÀÇ ¼ö: 4
+    GameObject[] garden_ground = new GameObject[4]; //ÅÔ¹ç ¿ÀºêÁ§Æ®. ÅÔ¹çÀÇ ¼ö: 4
     public GameObject[] garden_crops = new GameObject[4]; //½É°ÜÁø ÀÛ¹° ¿ÀºêÁ§Æ® °´Ã¼.
     string[] g_seed = new string[4];    //½É°ÜÁø ¾¾¾ÑÀÇ ICode
     DateTime[] g_timer = new DateTime[4];    //½É°ÜÁø ¾¾¾ÑÀÇ ¼ºÀå½Ã°£
@@ -37,8 +38,6 @@ public class GardenControl : MonoBehaviour
     public GameObject Interaction;
     public Camera getCamera;
     public GameObject Farms;
-
-    public static bool is_pop_garden = false;
 
 
 
@@ -167,23 +166,26 @@ public class GardenControl : MonoBehaviour
                 empty_ground[i] = true;
                 is_grown[i] = false;
 
+                DateTime now = DateTime.Now;
+                string now_t = now.ToString("g");
+
                 switch (i)
                 {
                     case 0:
                         PlayerPrefs.SetString("G1", "");
-                        PlayerPrefs.SetString("G1Time", "");
+                        PlayerPrefs.SetString("G1Time", now_t);
                         break;
                     case 1:
                         PlayerPrefs.SetString("G2", "");
-                        PlayerPrefs.SetString("G2Time", "");
+                        PlayerPrefs.SetString("G2Time", now_t);
                         break;
                     case 2:
                         PlayerPrefs.SetString("G3", "");
-                        PlayerPrefs.SetString("G3Time", "");
+                        PlayerPrefs.SetString("G3Time", now_t);
                         break;
                     case 3:
                         PlayerPrefs.SetString("G4", "");
-                        PlayerPrefs.SetString("G4Time", "");
+                        PlayerPrefs.SetString("G4Time", now_t);
                         break;
                     default:
                         break;
@@ -215,8 +217,9 @@ public class GardenControl : MonoBehaviour
         }
         else
         {
+            DateTime G1Time = DateTime.Parse(PlayerPrefs.GetString("G1Time"));
             param.Add("G1", "");
-            param.Add("G1Time", "");
+            param.Add("G1Time", G1Time);
         }
         if (PlayerPrefs.GetString("G2") != "")
         {
@@ -227,8 +230,9 @@ public class GardenControl : MonoBehaviour
         }
         else
         {
+            DateTime G2Time = DateTime.Parse(PlayerPrefs.GetString("G2Time"));
             param.Add("G2", "");
-            param.Add("G2Time", "");
+            param.Add("G2Time", G2Time);
         }
         if (PlayerPrefs.GetString("G3") != "")
         {
@@ -239,8 +243,9 @@ public class GardenControl : MonoBehaviour
         }
         else
         {
+            DateTime G3Time = DateTime.Parse(PlayerPrefs.GetString("G3Time"));
             param.Add("G3", "");
-            param.Add("G3Time", "");
+            param.Add("G3Time", G3Time);
         }
         if (PlayerPrefs.GetString("G4") != "")
         {
@@ -251,8 +256,9 @@ public class GardenControl : MonoBehaviour
         }
         else
         {
+            DateTime G4Time = DateTime.Parse(PlayerPrefs.GetString("G4Time"));
             param.Add("G4", "");
-            param.Add("G4Time", "");
+            param.Add("G4Time", G4Time);
         }
 
 
@@ -275,9 +281,8 @@ public class GardenControl : MonoBehaviour
 
     void PopSellPanel(int get_coin)
     {
-        GameObject sell_panel = Instantiate(crops_sell_panel);
-        
-        GameObject parent = sell_panel.transform.Find("Asset_StorePopup").gameObject;
+        crops_sell_panel.SetActive(true);
+        GameObject parent = crops_sell_panel.transform.Find("Asset_StorePopup").gameObject;
         GameObject coin = parent.transform.Find("Coin").gameObject;
         Text coin_txt = coin.GetComponent<Text>();
         coin_txt.text = get_coin.ToString();

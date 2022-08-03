@@ -7,12 +7,26 @@ using UnityEngine.UI;
 
 public class GardenCategory : MonoBehaviour
 {
+    private static GardenCategory _instance;
+    public static GardenCategory instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GardenCategory>();
+            }
+            return _instance;
+        }
+    }
+    [SerializeField]
+    GameObject c_seed;
     List<Dictionary<string, object>> seedItem = new List<Dictionary<string, object>>();
 
     JsonData myInven_rows = new JsonData();
     static List<GameObject> seed_list = new List<GameObject>();   //인벤토리 아이템을 저장하는 변수
 
-    public void PopGarden(GameObject c_seed)
+    public void PopGarden()
     {
         seedItem.Clear();
 

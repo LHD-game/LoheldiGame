@@ -73,7 +73,7 @@ public class FlieChoice : MonoBehaviour
                 chat.NPCButton += 2;
                 break;
             case "Hami":
-                if (QuestF[1].Equals("2"))
+                if (!QuestF[0].Equals("3") && QuestF[1].Equals("2"))
                     chat.Num = "11";
                 else if (chat.DontDestroy.From.Equals("실천해보기") && chat.DontDestroy.ButtonPlusNpc.Equals("Hami"))
                     chat.Num = "15";
@@ -82,7 +82,7 @@ public class FlieChoice : MonoBehaviour
                 chat.NPCButton += 1;
                 break;
             case "Suho":
-                if (QuestF[1].Equals("2"))
+                if (QuestF[0].Equals("3") && QuestF[1].Equals("2"))
                     chat.Num = "12";
                 else if (chat.DontDestroy.QuestIndex.Equals("13_1"))
                     chat.Num = "18";

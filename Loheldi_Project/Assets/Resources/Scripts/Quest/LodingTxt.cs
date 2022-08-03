@@ -135,9 +135,6 @@ public class LodingTxt : MonoBehaviour
     Animator ToothAnimator;
     private void Awake()
     {
-        
-
-        Input.multiTouchEnabled = false;
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
         
@@ -1025,10 +1022,8 @@ public class LodingTxt : MonoBehaviour
     {
         if (chatTxt.text.Length > 3)
         {
-            Debug.Log("½ºÅµÇÔ");
             typingSkip = false;
         }
-        Debug.Log("½ºÅµ");
     }
     IEnumerator _typing()  //Å¸ÀÌÇÎ È¿°ú
     {
@@ -1043,7 +1038,7 @@ public class LodingTxt : MonoBehaviour
             if (typingSkip)
             {
                 chatTxt.text = LoadTxt.Substring(0, i);
-                yield return new WaitForSecondsRealtime(0.05f);
+                yield return new WaitForSecondsRealtime(0.03f);
             }
             else
                 break;

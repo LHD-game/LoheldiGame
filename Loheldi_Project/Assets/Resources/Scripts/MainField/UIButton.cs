@@ -51,6 +51,7 @@ public class UIButton : MonoBehaviour
         }*/
         if (OnLand && Inter.NearNPC)     //NPC주변에 있다면
         {
+            Inter.NpcNameTF = false;
             if (chat.bicycleRide.Ride)
                 chat.bicycleRide.RideOn();
             

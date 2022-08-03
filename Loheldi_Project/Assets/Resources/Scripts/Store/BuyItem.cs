@@ -19,10 +19,6 @@ public class BuyItem : MonoBehaviour
 
     public void PopBuyBtn()
     {
-        //todo: 해당버튼에서 아이템 이름, 사진, 가격 가져오기
-        //GameObject item_img = this.transform.Find("ItemImg").gameObject;
-        //Image img = item_img.GetComponent<Image>();
-
         //아이템 코드 가져와서 iCode 변수에 저장
         GameObject item_code = this.transform.Find("ItemCode").gameObject;
         Text item_code_txt = item_code.GetComponent<Text>();
@@ -44,13 +40,7 @@ public class BuyItem : MonoBehaviour
 
         buy_suc_panel = canvas.transform.Find("StoreBuySucPanel").gameObject;
 
-
-
         GameObject Asset_StorePopup = child.transform.Find("Asset_StorePopup").gameObject;
-
-        //GameObject buy_item_img = BuyBg.transform.Find("ItemImg").gameObject;
-        //Image buy_img = buy_item_img.GetComponent<Image>();
-        //buy_img.sprite = img.sprite;
 
         //아이템 이름 띄우기
         GameObject buy_item_name = Asset_StorePopup.transform.Find("ItemName").gameObject;

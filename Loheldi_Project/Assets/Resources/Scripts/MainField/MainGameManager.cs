@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour
 {
-
     public Text FieldWalletTxt;
     public Text FieldHPTxt;
     public Text FieldLevelTxt;

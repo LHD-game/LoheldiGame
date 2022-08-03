@@ -90,7 +90,6 @@ public class UIButton : MonoBehaviour
         }
         else if (Inter.Farm)
         {
-            GardenControl gcl = new GardenControl();
             if (Camera1.enabled == true)
             {
                 Camera1.enabled = false;
@@ -100,9 +99,6 @@ public class UIButton : MonoBehaviour
 
                 GardenCategory gc = new GardenCategory();
                 gc.PopGarden(c_seed);
-                for (int i = 0; i < 4; i++)
-                    if (gcl.garden_crops[i].GetComponent<CropsSell>())
-                        gcl.garden_crops[i].GetComponent<CropsSell>().enabled = true;
             }
             else
             {
@@ -110,9 +106,6 @@ public class UIButton : MonoBehaviour
                 Camera1.enabled = true;
                 JoyStick.SetActive(true);
                 FarmUI.SetActive(false);
-                for (int i = 0; i < 4; i++)
-                    if (gcl.garden_crops[i].GetComponent<CropsSell>())
-                        gcl.garden_crops[i].GetComponent<CropsSell>().enabled = false;
             }
         }
         else                                                //NPC주변에 있지 않다면

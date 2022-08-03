@@ -215,14 +215,19 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 ParsingJSON pj = new ParsingJSON();
                 GardenData data = pj.ParseBackendData<GardenData>(json_data);
 
+                string g1_t = data.G1Time.ToString("g");
+                string g2_t = data.G2Time.ToString("g");
+                string g3_t = data.G3Time.ToString("g");
+                string g4_t = data.G4Time.ToString("g");
+
                 PlayerPrefs.SetString("G1", data.G1);
-                PlayerPrefs.SetString("G1Time", data.G1Time.ToString("g"));
+                PlayerPrefs.SetString("G1Time", g1_t);
                 PlayerPrefs.SetString("G2", data.G2);
-                PlayerPrefs.SetString("G2Time", data.G2Time.ToString("g"));
+                PlayerPrefs.SetString("G2Time", g2_t);
                 PlayerPrefs.SetString("G3", data.G3);
-                PlayerPrefs.SetString("G3Time", data.G3Time.ToString("g"));
+                PlayerPrefs.SetString("G3Time", g3_t);
                 PlayerPrefs.SetString("G4", data.G4);
-                PlayerPrefs.SetString("G4Time", data.G4Time.ToString("g"));
+                PlayerPrefs.SetString("G4Time", g4_t);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

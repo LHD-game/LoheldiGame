@@ -98,7 +98,7 @@ public class SeedSelect : MonoBehaviour //씨앗 버튼에 달리도록 합니다.
                 if (update_bro.IsSuccess())
                 {
                     Debug.Log("INVENTORY 테이블 업데이트 성공.");
-                    GardenControl.is_pop_garden = false; //씨앗 리스트를 업데이트 시켜 화면에 새로이 출력하도록
+                    GardenCategory.instance.PopGarden();
                 }
                 else
                 {

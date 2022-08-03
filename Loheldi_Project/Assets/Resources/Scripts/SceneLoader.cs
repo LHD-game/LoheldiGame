@@ -29,6 +29,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoMainField()
     {
+        Input.multiTouchEnabled = false;
         LoadingSceneManager.LoadScene("MainField");
     }
     public void GotoGameMove()  // 테스트 용 - 이민진 5/3
@@ -55,6 +56,7 @@ public class SceneLoader : MonoBehaviour
     //Mini Game
     public void GotoLobby()
     {
+        Input.multiTouchEnabled = true;
         if (SceneManager.GetActiveScene().name == "MainField")
             PlayerTransForm();
         LoadingSceneManager.LoadScene("Game_Lobby");
@@ -102,7 +104,8 @@ public class SceneLoader : MonoBehaviour
     }
 
     private void PlayerTransForm()
-    {if (SceneManager.GetActiveScene().name == "MainField")
+    {
+        if (SceneManager.GetActiveScene().name == "MainField")
         {
             QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
             QDD.LastPlayerTransform.transform.position = Player.transform.position;

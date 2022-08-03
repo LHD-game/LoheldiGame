@@ -25,45 +25,47 @@ public class Interaction : MonoBehaviour
     {
         if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
         {
+            if (other.gameObject.name == "WallMirror")
+            {
+                text.text = "거울";
+            }
+            else
+                text.text = "대화";
             NearNPC = true;
-            text.text = "대화";
             NameNPC = other.gameObject.name.ToString();
-            NpcNameActive(other.gameObject,"in");
-            Debug.Log("NPC이름="+NameNPC);
+            NpcNameActive(other.gameObject, "in");
+            Debug.Log("NPC이름=" + NameNPC);
+            
         }
-        if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
+        else if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
         {
             change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
             change.changeCamera();
         }
-        if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 InDoor라면
+        else if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 InDoor라면
         {
             Door = true;
             text.text = "들어가기";
             NameNPC = other.gameObject.name.ToString();
         }
-        if (other.gameObject.name == "ExitDoor")
+        else if (other.gameObject.name == "ExitDoor")
         {
             JumpButton.SetActive(true);
             Door = true;
             text.text = "나가기";
             NameNPC = other.gameObject.name.ToString();
         }
-        /*if (other.gameObject.name == "GachaMachine")
+        /*else if (other.gameObject.name == "GachaMachine")
         {
             Gacha = true;
             text.text = "뽑기";
         }*/
-        if (other.gameObject.name == "Field")
+        else if (other.gameObject.name == "Field")
         {
             Farm = true;
             text.text = "농장";
         }
-        if (other.gameObject.name == "WallMirror")
-        {
-            Farm = true;
-            text.text = "거울";
-        }
+        
     }
     /*private void Start()
     {

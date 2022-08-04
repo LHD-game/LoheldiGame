@@ -161,8 +161,6 @@ public class PlayerCloset : MonoBehaviour
         }
         if (!NowSettings.u_glasses_id.Equals("null"))
         {
-            Debug.Log("glasses");
-
             Transform active_glasses = glasses_folder.Find(NowSettings.u_glasses_id + "_glasses");
             active_glasses.gameObject.SetActive(true);
         }

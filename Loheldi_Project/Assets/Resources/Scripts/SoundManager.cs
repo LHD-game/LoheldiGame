@@ -117,72 +117,72 @@ public class SoundManager : MonoBehaviour
                 break;
             case "BGMOpening":
                 audioSource.clip = audioBGMOpening;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMField":
                 audioSource.clip = audioBGMField;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMHouse":
                 audioSource.clip = audioBGMHouse;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMLobby":
                 audioSource.clip = audioBGMLobby;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMFood":
                 audioSource.clip = audioBGMFood;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMTooth":
                 audioSource.clip = audioBGMTooth;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMCard":
                 audioSource.clip = audioBGMCard;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMGacha":
                 audioSource.clip = audioBGMGacha;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMRun":
                 audioSource.clip = audioBGMRun;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMQuest":
                 audioSource.clip = audioBGMQuest;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMQuestEnd":
                 audioSource.clip = audioBGMQuestEnd;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMTutorial":
                 audioSource.clip = audioBGMTutorial;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "BGMNight":
                 audioSource.clip = audioBGMNight;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             case "HaHasong":
                 audioSource.clip = audioHaHasong;
-                audioSource.volume = 0.1f;
+                audioSource.volume = 0.4f;
                 audioSource.loop = true;
                 break;
             default:

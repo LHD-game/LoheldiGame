@@ -146,7 +146,7 @@ public class SignupCheck : MonoBehaviour
 
     public bool ChkEmail(string uEmail = "")  //e-mail 양식 확인
     {
-        Regex regex = new Regex(@"[a-zA-Z0-9]{1,20}@[a-zA-Z0-9]{1,20}\.[a-zA-Z]{1,5}$"); //이메일 정규식
+        Regex regex = new Regex(@"[a-zA-Z0-9]{1,25}@[a-zA-Z0-9]{1,20}\.[a-zA-Z]{1,5}$"); //이메일 정규식
         bool isCorrect = true; //정규식 만족 시, true
 
         if ((regex.IsMatch(uEmail)))    //정규식 불일치 시

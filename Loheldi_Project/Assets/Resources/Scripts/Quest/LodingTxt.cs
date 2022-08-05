@@ -27,10 +27,11 @@ public class LodingTxt : MonoBehaviour
     public Text[] SelecButtonTxt = new Text[5];
 
     public InputField videocheckTxT;
-    public InputField ParentscheckTxt;
+    public InputField ParentscheckTxt;     
     public string parentscheckTxTNum;
-    public GameObject ErrorWin;
-    public GameObject ParentsErrorWin;
+    public GameObject ErrorWin;      //홈트인증실패
+    public GameObject ClearWin;     //인증클리어
+    public GameObject ParentsErrorWin;  //인증실패
 
     public GameObject Main_UI;
     public GameObject Button;
@@ -194,7 +195,9 @@ public class LodingTxt : MonoBehaviour
             }
         }
         else if (SceneManager.GetActiveScene().name == "Quiz")
+        {
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+        }
         
     }
     public void nextQuest()
@@ -1149,13 +1152,16 @@ public class LodingTxt : MonoBehaviour
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
             PlayInfoManager.GetQuestPreg();
-        if(data_Dialog[j]["dialog"].ToString().Equals("end"))
+        if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;
         }
-        if (SceneManager.GetActiveScene().name == "MainField")
-            QuestLoad.QuestLoadStart();
+        else
+        {
+            if (SceneManager.GetActiveScene().name == "MainField")
+                QuestLoad.QuestLoadStart();
+        }
     }
 
     public void ParentsCheck()
@@ -1174,6 +1180,7 @@ public class LodingTxt : MonoBehaviour
             DontDestroy.ButtonPlusNpc = "";
             PlayInfoManager.GetQuestPreg();
             NpcButton.CheckQuest();
+            ClearWin.SetActive(true);
         }
         else
         {

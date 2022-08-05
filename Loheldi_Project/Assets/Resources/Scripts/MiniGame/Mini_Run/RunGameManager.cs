@@ -74,7 +74,9 @@ public class RunGameManager : MonoBehaviour
                 RunBtnPanel.SetActive(false);
                 GameOverPanel.SetActive(true);
 
-                
+                NPC[1].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", false);
+                NPC[2].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", false);
+                NPC[3].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", false);
 
                 if (!FinishSound)
                 {
@@ -91,7 +93,9 @@ public class RunGameManager : MonoBehaviour
                 RunBtnPanel.SetActive(false);
                 GameOverPanel.SetActive(true);
 
-                
+                NPC[1].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", false);
+                NPC[2].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", false);
+                NPC[3].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", false);
 
                 if (!FinishSound)
                 {
@@ -141,10 +145,6 @@ public class RunGameManager : MonoBehaviour
         WelcomePanel.SetActive(true);
         PausePanel.SetActive(false);
         RunBtnPanel.SetActive(false);
-
-        NPC[1].gameObject.GetComponent<RunNPC>().enabled = true;
-        NPC[2].gameObject.GetComponent<RunNPC>().enabled = true;
-        NPC[3].gameObject.GetComponent<RunNPC>().enabled = true;
 
         player.velocity = new Vector3(0, 0, 0);
 

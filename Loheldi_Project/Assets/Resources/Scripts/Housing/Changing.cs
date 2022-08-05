@@ -21,6 +21,7 @@ public class Changing : MonoBehaviour
     public GameObject TablePosition;
     public GameObject ChairPosition;
     public GameObject ClosetPosition;
+    public GameObject KitchenPosition;
     public Text TempItemCode;
 
     private bool Starting;
@@ -34,9 +35,9 @@ public class Changing : MonoBehaviour
         //F4 = GameObject.Find("4F");
         //F5 = GameObject.Find("5F");
 
-        NowFloor = 0;  //집 확장 단계, 나중에 서버와 연결
+        NowFloor = PlayerPrefs.GetInt("HouseLv");  //집 확장 단계, 나중에 서버와 연결
 
-        if (NowFloor == 0)
+        if (NowFloor == 1)
         {
             Camera.transform.position = new Vector3(-21f, 5.5f, -4f);
             BedPosition = F1.transform.Find("BedPosition").gameObject;
@@ -44,23 +45,24 @@ public class Changing : MonoBehaviour
             ChairPosition = F1.transform.Find("ChairPosition").gameObject;
             ClosetPosition = F1.transform.Find("ClosetPosition").gameObject;
         }
-        else if (NowFloor == 1)
+        else if (NowFloor == 2)
         {
             Camera.transform.position = new Vector3(-18.5f, 8.5f, -70f);
             BedPosition = F2.transform.Find("BedPosition").gameObject;
             TablePosition = F2.transform.Find("TablePosition").gameObject;
             ChairPosition = F2.transform.Find("ChairPosition").gameObject;
             ClosetPosition = F2.transform.Find("ClosetPosition").gameObject;
-        }
-        else if (NowFloor == 2)
-        {
-            //2층 가구
+            KitchenPosition = F2.transform.Find("KitchenPosition").gameObject;
         }
         else if (NowFloor == 3)
         {
-            //3층 가구
+            //2층 가구
         }
         else if (NowFloor == 4)
+        {
+            //3층 가구
+        }
+        else if (NowFloor == 5)
         {
             //4층 가구
         }
@@ -82,6 +84,9 @@ public class Changing : MonoBehaviour
         if (TempItemCode.text != "")
             ButtonClick(TempItemCode);
         TempItemCode.text = PlayerPrefs.GetString("chair");
+        if (TempItemCode.text != "")
+            ButtonClick(TempItemCode);
+        TempItemCode.text = PlayerPrefs.GetString("kitchen");
         if (TempItemCode.text != "")
             ButtonClick(TempItemCode);
         //2~4층 가구
@@ -112,7 +117,7 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/Bed_K"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
                 TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장.
             }
-            else if (ItemCode == "2040101")       //네번째 옵션을 선택했다면
+            else if (ItemCode == "8020401")       //네번째 옵션을 선택했다면
             {
                 /*Destroy(BedPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
@@ -163,7 +168,7 @@ public class Changing : MonoBehaviour
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Wardrobe_K"), ClosetPosition.transform);
                 TempObject.transform.SetParent(ClosetPosition.transform);
             }
-            else if (ItemCode == "2040102")       //네번째 옵션을 선택했다면
+            else if (ItemCode == "2040101")       //네번째 옵션을 선택했다면
             {
                 /*Destroy(ClosetPosition.transform.GetChild(0).gameObject);
                 TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/"), ClosetPosition.transform);
@@ -254,9 +259,10 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(ChairPosition.transform);
                 if (NowFloor >= 1)
                 {
-                    Destroy(ChairPosition.transform.GetChild(1).gameObject);
+                    Destroy(ChairPosition.transform.GetChild(0).gameObject);
                     TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair2_W"), ChairPosition.transform);
                     TempObject.transform.SetParent(ChairPosition.transform);
+                    TempObject.transform.localPosition = new Vector3(0.8f, 0f, 1f);
                 }
 
             }
@@ -267,9 +273,10 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(ChairPosition.transform);
                 if (NowFloor >= 1)
                 {
-                    Destroy(ChairPosition.transform.GetChild(1).gameObject);
+                    Destroy(ChairPosition.transform.GetChild(0).gameObject);
                     TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/chair_2"), ChairPosition.transform);
                     TempObject.transform.SetParent(ChairPosition.transform);
+                    TempObject.transform.localPosition = new Vector3(0.8f, 0f, 1f);
                 }
             }
             else if (ItemCode == "2030205")       //세번째 옵션을 선택했다면
@@ -279,9 +286,10 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(ChairPosition.transform);
                 if (NowFloor >= 1)
                 {
-                    Destroy(ChairPosition.transform.GetChild(1).gameObject);
+                    Destroy(ChairPosition.transform.GetChild(0).gameObject);
                     TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair_K"), ChairPosition.transform);
                     TempObject.transform.SetParent(ChairPosition.transform);
+                    TempObject.transform.localPosition = new Vector3(0.8f, 0f, 1f);
                 }
             }
             else if (ItemCode == "2040204")       //네번째 옵션을 선택했다면
@@ -291,16 +299,68 @@ public class Changing : MonoBehaviour
                 TempObject.transform.SetParent(ChairPosition.transform);
                 if (NowFloor >= 1)
                 {
-                    Destroy(ChairPosition.transform.GetChild(1).gameObject);
+                    Destroy(ChairPosition.transform.GetChild(0).gameObject);
                     TempObject = Instantiate(Resources.Load<GameObject>(""Prefabs/Furniture/Chair/"), ChairPosition.transform);
                     TempObject.transform.SetParent(ChairPosition.transform);
+                    TempObject.transform.localPosition = new Vector3(0.8f, 0f, 1f);
                 }*/
             }
-                Debug.Log("가구 변경 완료");
+            Debug.Log("가구 변경 완료");
             if (!Starting)
             {
                 Param param = new Param();
                 param.Add("chair", ItemCode);
+
+                //유저 현재 row 검색
+                var bro = Backend.GameData.Get("USER_HOUSE", new Where());
+                string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+                //해당 row의 값을 update
+                var bro2 = Backend.GameData.UpdateV2("USER_HOUSE", rowIndate, Backend.UserInDate, param);
+
+                if (bro2.IsSuccess())
+                {
+                    Debug.Log(ItemCode);
+                    Debug.Log("SaveUserHousing 성공. USER_HOUSE 업데이트 되었습니다.");
+                }
+                else
+                {
+                    Debug.Log("SaveUserHousing 실패.");
+                }
+            }
+        }
+                    //부엌
+        if (FurnitureChangeClick.CurrentFurniture.GetComponent<Text>().text == "kitchen" || Starting)
+        {
+            if (ItemCode == "2010105")            //첫번째 옵션을 선택했다면
+            {
+                Destroy(KitchenPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_W"), KitchenPosition.transform);
+                TempObject.transform.SetParent(KitchenPosition.transform);
+            }
+            else if (ItemCode == "2020105")       //두번째 옵션을 선택했다면
+            {
+                Destroy(KitchenPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_WB"), KitchenPosition.transform);
+                TempObject.transform.SetParent(KitchenPosition.transform);
+            }
+            else if (ItemCode == "2030105")       //세번째 옵션을 선택했다면
+            {
+                Destroy(KitchenPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_K"), KitchenPosition.transform);
+                TempObject.transform.SetParent(KitchenPosition.transform);
+            }
+            else if (ItemCode == "2040104")       //네번째 옵션을 선택했다면
+            {
+                /*Destroy(KitchenPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/"), KitchenPosition.transform);
+                TempObject.transform.SetParent(KitchenPosition.transform);*/
+            }
+            Debug.Log("가구 변경 완료");
+            if (!Starting)
+            {
+                Param param = new Param();
+                param.Add("kitchen", ItemCode);
 
                 //유저 현재 row 검색
                 var bro = Backend.GameData.Get("USER_HOUSE", new Where());

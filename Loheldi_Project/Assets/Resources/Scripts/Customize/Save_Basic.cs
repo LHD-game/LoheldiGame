@@ -252,10 +252,13 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 ParsingJSON pj = new ParsingJSON();
                 HousingData data = pj.ParseBackendData<HousingData>(json_data);
 
+                PlayerPrefs.SetInt("HouseLv", data.HouseLv);
+
                 PlayerPrefs.SetString("bed", data.bed);
                 PlayerPrefs.SetString("closet", data.closet);
                 PlayerPrefs.SetString("table", data.table);
                 PlayerPrefs.SetString("chair", data.chair);
+                PlayerPrefs.SetString("kitchen", data.kitchen);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

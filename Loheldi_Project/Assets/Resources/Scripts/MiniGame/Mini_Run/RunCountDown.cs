@@ -83,8 +83,9 @@ public class RunCountDown : MonoBehaviour
             CancelInvoke("NumAppear");
 
             TrafficLight.gameObject.SetActive(false);
-            Debug.Log(SoundManager.GetComponent<RunGameManager>().nowNPC.GetChild(0).GetChild(2));
-            SoundManager.GetComponent<RunGameManager>().nowNPC.GetChild(0).GetChild(2).GetComponent<Animator>().SetBool("NPCRunBool", true);
+            SoundManager.GetComponent<RunGameManager>().NPC[1].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", true);
+            SoundManager.GetComponent<RunGameManager>().NPC[2].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", true);
+            SoundManager.GetComponent<RunGameManager>().NPC[3].GetComponent<RunNPC>().Animator.SetBool("NPCRunBool", true);
         }
         timer--;
     }

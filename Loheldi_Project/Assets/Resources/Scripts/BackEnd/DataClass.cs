@@ -90,10 +90,13 @@ public class GardenData
 }
 public class HousingData
 {
+    public int HouseLv;
+
     public string bed;
     public string closet;
     public string table;
     public string chair;
+    public string kitchen;
 }
 
 public class QuestInfo{

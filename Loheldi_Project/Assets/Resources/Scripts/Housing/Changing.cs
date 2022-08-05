@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Changing : MonoBehaviour
 {
     public int NowFloor;
+    public GameObject Player;
     public GameObject Camera;
 
     public GameObject F1;
@@ -35,6 +36,7 @@ public class Changing : MonoBehaviour
         //F4 = GameObject.Find("4F");
         //F5 = GameObject.Find("5F");
 
+        Debug.Log(PlayerPrefs.GetInt("HouseLv"));
         NowFloor = PlayerPrefs.GetInt("HouseLv");  //집 확장 단계, 나중에 서버와 연결
 
         if (NowFloor == 1)
@@ -44,6 +46,10 @@ public class Changing : MonoBehaviour
             TablePosition = F1.transform.Find("TablePosition").gameObject;
             ChairPosition = F1.transform.Find("ChairPosition").gameObject;
             ClosetPosition = F1.transform.Find("ClosetPosition").gameObject;
+            if (this.name == "HousingSystem")
+            {
+                Player.transform.position = new Vector3(-23.3f, -1.9f, -1f);
+            }
         }
         else if (NowFloor == 2)
         {
@@ -53,6 +59,10 @@ public class Changing : MonoBehaviour
             ChairPosition = F2.transform.Find("ChairPosition").gameObject;
             ClosetPosition = F2.transform.Find("ClosetPosition").gameObject;
             KitchenPosition = F2.transform.Find("KitchenPosition").gameObject;
+            if (this.name == "HousingSystem")
+            {
+                Player.transform.position = new Vector3(-22.5f, -1.8f, -67.5f);
+            }
         }
         else if (NowFloor == 3)
         {

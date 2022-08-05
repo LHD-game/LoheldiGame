@@ -36,6 +36,7 @@ public class PlayInfo
     public int HP;
     public int LastHPTime;
     public string WeeklyQuestPreg;
+    public int HouseLv;
 }
 
 public class MyItem
@@ -90,8 +91,6 @@ public class GardenData
 }
 public class HousingData
 {
-    public int HouseLv;
-
     public string bed;
     public string closet;
     public string table;

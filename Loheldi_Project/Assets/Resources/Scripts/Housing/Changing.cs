@@ -129,9 +129,9 @@ public class Changing : MonoBehaviour
             }
             else if (ItemCode == "8020401")       //네번째 옵션을 선택했다면
             {
-                /*Destroy(BedPosition.transform.GetChild(0).gameObject);
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
-                TempObject.transform.SetParent(BedPosition.transform);*/                                                                //오브젝트를 BedPosition에 Child로 저장
+                Destroy(BedPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Beds/Bed_A"), BedPosition.transform);      //해당 주소에 오브젝트를 생성해서 물러옴.
+                TempObject.transform.SetParent(BedPosition.transform);                                                                //오브젝트를 BedPosition에 Child로 저장
             }
             Debug.Log("가구 변경 완료");
             if (!Starting)
@@ -180,9 +180,9 @@ public class Changing : MonoBehaviour
             }
             else if (ItemCode == "2040101")       //네번째 옵션을 선택했다면
             {
-                /*Destroy(ClosetPosition.transform.GetChild(0).gameObject);
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/"), ClosetPosition.transform);
-                TempObject.transform.SetParent(ClosetPosition.transform);*/
+                Destroy(ClosetPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Wardrobe_A"), ClosetPosition.transform);
+                TempObject.transform.SetParent(ClosetPosition.transform);
             }
             Debug.Log("가구 변경 완료");
             if (!Starting)
@@ -231,9 +231,9 @@ public class Changing : MonoBehaviour
             }
             else if (ItemCode == "2040203")       //네번째 옵션을 선택했다면
             {
-                /*Destroy(TablePosition.transform.GetChild(0).gameObject);
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/"), TablePosition.transform);
-                TempObject.transform.SetParent(TablePosition.transform);*/
+                Destroy(TablePosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Table/Table_A"), TablePosition.transform);
+                TempObject.transform.SetParent(TablePosition.transform);
             }
             Debug.Log("가구 변경 완료");
             if (!Starting)
@@ -304,16 +304,16 @@ public class Changing : MonoBehaviour
             }
             else if (ItemCode == "2040204")       //네번째 옵션을 선택했다면
             {
-                /*Destroy(ChairPosition.transform.GetChild(0).gameObject);
-                TempObject = Instantiate(Resources.Load<GameObject>(""Prefabs/Furniture/Chair/"), ChairPosition.transform);
+                Destroy(ChairPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair_A"), ChairPosition.transform);
                 TempObject.transform.SetParent(ChairPosition.transform);
                 if (NowFloor >= 1)
                 {
                     Destroy(ChairPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>(""Prefabs/Furniture/Chair/"), ChairPosition.transform);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Chair/Chair_A"), ChairPosition.transform);
                     TempObject.transform.SetParent(ChairPosition.transform);
                     TempObject.transform.localPosition = new Vector3(0.8f, 0f, 1f);
-                }*/
+                }
             }
             Debug.Log("가구 변경 완료");
             if (!Starting)
@@ -362,9 +362,9 @@ public class Changing : MonoBehaviour
             }
             else if (ItemCode == "2040104")       //네번째 옵션을 선택했다면
             {
-                /*Destroy(KitchenPosition.transform.GetChild(0).gameObject);
-                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/"), KitchenPosition.transform);
-                TempObject.transform.SetParent(KitchenPosition.transform);*/
+                Destroy(KitchenPosition.transform.GetChild(0).gameObject);
+                TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Kitchen_A"), KitchenPosition.transform);
+                TempObject.transform.SetParent(KitchenPosition.transform);
             }
             Debug.Log("가구 변경 완료");
             if (!Starting)

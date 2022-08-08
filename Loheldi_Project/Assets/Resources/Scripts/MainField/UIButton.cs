@@ -44,11 +44,11 @@ public class UIButton : MonoBehaviour
     public void JumpButton()                //점프버튼
     {
         GameObject SoundManager = GameObject.Find("SoundManager");
-        /*if (Inter.Gacha)  가챠 다시 적용
+        if (Inter.Gacha)
         {
             SoundManager.GetComponent<SoundManager>().Sound("BGMGacha");
             GachaUI.SetActive(true);
-        }*/
+        }
         if (OnLand && Inter.NearNPC)     //NPC주변에 있다면
         {
             Inter.NpcNameTF = false;
@@ -109,13 +109,10 @@ public class UIButton : MonoBehaviour
         }
         else                                                //NPC주변에 있지 않다면
         {
-            Camera2.enabled = false;
-            Camera1.enabled = true;
             if (OnLand && (SceneManager.GetActiveScene().name == "MainField"))                                         //Player가 바닥에 있다면
             {
                 SoundEffectManager.GetComponent<SoundEffect>().Sound("Jump");
                 Playerrb.AddForce(transform.up * 15000);
-                //MainGameManager.NowExp = MainGameManager.NowExp + 100;
             }
         }
     }

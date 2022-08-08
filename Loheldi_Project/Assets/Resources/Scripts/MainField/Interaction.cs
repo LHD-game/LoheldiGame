@@ -55,11 +55,11 @@ public class Interaction : MonoBehaviour
             text.text = "³ª°¡±â";
             NameNPC = other.gameObject.name.ToString();
         }
-        /*else if (other.gameObject.name == "GachaMachine")
+        else if (other.gameObject.name == "GachaMachine")
         {
             Gacha = true;
             text.text = "»Ì±â";
-        }*/
+        }
         else if (other.gameObject.name == "Field")
         {
             Farm = true;

@@ -69,10 +69,11 @@ public class ToothGameManager : MonoBehaviour
         {
             Debug.Log("양치");
             GameObject.Find("Canvas").SetActive(false);
-            GameObject.Find("Player").SetActive(false);
+            GameObject.Find("Player").transform.position = new Vector3(105, 6, -28);
             GameObject.Find("toohtgame_Standing_toothbrush").SetActive(false);
             Instantiate(Resources.Load<Canvas>("Prefabs/Tooth/QTooth/Canvas"), new Vector3(0, 0, -0), Quaternion.Euler(0, 0, 0));
             Instantiate(Resources.Load<GameObject>("Prefabs/Tooth/QTooth/QToothBrush"), new Vector3(0, 0, -0), Quaternion.Euler(0, 0, 0));
+            Instantiate(Resources.Load<GameObject>("Scripts/Quest/PlayerCamera"), new Vector3(104.8f, 13.2f, -16.1f), Quaternion.Euler(0, 180, 0));
 
             GameObject.Find("Dentalfloss").SetActive(false);
             LodingTxt chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();

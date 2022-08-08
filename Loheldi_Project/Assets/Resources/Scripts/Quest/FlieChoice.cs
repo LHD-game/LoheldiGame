@@ -43,9 +43,9 @@ public class FlieChoice : MonoBehaviour
     }
     public void Quest()
     {
-        Inter.NpcNameTF = false;
         if (SceneManager.GetActiveScene().name == "MainField")
         {
+            Inter.NpcNameTF = false;
             //Debug.Log(chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
             chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
         }
@@ -119,7 +119,7 @@ public class FlieChoice : MonoBehaviour
                 break;
             case "WallMirror":
                 chat.Num = "10";
-                chat.NPCButton += 2;
+                chat.NPCButton += 3;
                 break;
             case "parents(Clone)":
                 chat.Num = "13";

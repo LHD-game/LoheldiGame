@@ -11,7 +11,8 @@ public class UIButton : MonoBehaviour
     public GameObject Map;                //Map선언                
     public GameObject GaguShop;           //가구점             
     public GameObject Market;           //슈퍼         
-    public GameObject clothesShop;           //슈퍼
+    public GameObject clothesShop;        
+    public GameObject HairShop;       
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public GameObject JoyStick;
     public GameObject Main_UI;

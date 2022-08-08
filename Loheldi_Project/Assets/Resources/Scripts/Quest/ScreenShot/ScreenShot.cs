@@ -84,6 +84,8 @@ public class ScreenShot : MonoBehaviour
 #endif
     }
 
+
+
     /// <summary> UI 미포함, 현재 카메라가 렌더링하는 화면만 캡쳐 </summary>
     private void TakeScreenShotWithoutUI()
     {
@@ -142,7 +144,7 @@ public class ScreenShot : MonoBehaviour
             pCallbacks.PermissionDenied += str => AndroidToast.I.ShowToastMessage($"{str} 권한을 거절하셨습니다.");
 
             pCallbacks.PermissionDeniedAndDontAskAgain += str => Debug.Log($"{str} 거절 및 다시는 보기 싫음");
-            pCallbacks.PermissionDeniedAndDontAskAgain += str => AndroidToast.I.ShowToastMessage($"{str} 권한을 격하게 거절하셨습니다.");
+            pCallbacks.PermissionDeniedAndDontAskAgain += str => AndroidToast.I.ShowToastMessage($"{str} 권한이 승인되어있지 않습니다.");
 
             Permission.RequestUserPermission(permission, pCallbacks);
         }

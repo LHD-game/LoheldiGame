@@ -13,7 +13,7 @@ public class LodingTxt : MonoBehaviour
 {
     public Transform Player;
     public Transform Nari;
-
+    public GameObject PlayerCamera;
     //public Camera MainCamera;
     //public Camera QuizCamera;
 
@@ -27,10 +27,11 @@ public class LodingTxt : MonoBehaviour
     public Text[] SelecButtonTxt = new Text[5];
 
     public InputField videocheckTxT;
-    public InputField ParentscheckTxt;
+    public InputField ParentscheckTxt;     
     public string parentscheckTxTNum;
-    public GameObject ErrorWin;
-    public GameObject ParentsErrorWin;
+    public GameObject ErrorWin;      //홈트인증실패
+    public GameObject ClearWin;     //인증클리어
+    public GameObject ParentsErrorWin;  //인증실패
 
     public GameObject Main_UI;
     public GameObject Button;
@@ -194,7 +195,9 @@ public class LodingTxt : MonoBehaviour
             }
         }
         else if (SceneManager.GetActiveScene().name == "Quiz")
+        {
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
+        }
         
     }
     public void nextQuest()
@@ -285,12 +288,11 @@ public class LodingTxt : MonoBehaviour
     {
         Num = "0_2";
         o = 11;
-        //GameObject SoundManager = GameObject.Find("SoundManager");
-        //SoundManager.GetComponent<SoundManager>().Sound("BGMField");
         NewChat();
     }
     public void NewChat()
     {
+        PlayerCamera.SetActive(true);
         //Debug.Log("퀴즈3");
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
@@ -987,6 +989,7 @@ public class LodingTxt : MonoBehaviour
         chatName.text = " ";
         Main_UI.SetActive(true);
         c = 0;
+        PlayerCamera.SetActive(false);
         for (int i = 0; i < NPCButton; i++)
         {
             string selecNumber = "select" + (i + 1).ToString();
@@ -1044,6 +1047,7 @@ public class LodingTxt : MonoBehaviour
                 break;
         }
         chatTxt.text = LoadTxt;
+        Arrow.SetActive(true);
 
         yield return new WaitForSecondsRealtime(0.5f);
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
@@ -1054,7 +1058,6 @@ public class LodingTxt : MonoBehaviour
         else
         {
             block.SetActive(false);
-            Arrow.SetActive(true);
         }
     }
 
@@ -1149,13 +1152,16 @@ public class LodingTxt : MonoBehaviour
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
             PlayInfoManager.GetQuestPreg();
-        if(data_Dialog[j]["dialog"].ToString().Equals("end"))
+        if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;
         }
-        if (SceneManager.GetActiveScene().name == "MainField")
-            QuestLoad.QuestLoadStart();
+        else
+        {
+            if (SceneManager.GetActiveScene().name == "MainField")
+                QuestLoad.QuestLoadStart();
+        }
     }
 
     public void ParentsCheck()
@@ -1174,6 +1180,7 @@ public class LodingTxt : MonoBehaviour
             DontDestroy.ButtonPlusNpc = "";
             PlayInfoManager.GetQuestPreg();
             NpcButton.CheckQuest();
+            ClearWin.SetActive(true);
         }
         else
         {

@@ -25,7 +25,11 @@ public class NpcButtonClick : MonoBehaviour
         if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미니게임 하기"))
             SceneLoader.instance.GotoLobby();
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미용실 이용하기"))
-            SceneLoader.instance.GotoPlayerCustom();
+        {
+            Chat.chat.Main_UI.SetActive(true);
+            UIB.HairShop.SetActive(true);
+            UIB.chat.ChatEnd();
+        }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("의상실 이용하기"))
         {
             Chat.chat.Main_UI.SetActive(true);
@@ -48,11 +52,16 @@ public class NpcButtonClick : MonoBehaviour
         {
             SceneLoader.instance.GotoPlayerCloset();
         }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("머리 다시하기"))
+        {
+            SceneLoader.instance.GotoPlayerCustom();
+        }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 하미"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어!")||click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어요!"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어!") || click.transform.GetChild(0).GetComponent<Text>().text.Equals("준비됐어요!"))
         {
             SceneLoader.instance.GotoQuizGame();
         }
@@ -60,31 +69,38 @@ public class NpcButtonClick : MonoBehaviour
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 수호"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 수호"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 여미"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 여미"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 요미"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 요미"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 메이"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 메이"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 나리"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("퀘스트 나리"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("어서오세요!"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("어서오세요!"))
         {
             Chat.Quest();
             CheckQuest();
-        }else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미션 인증하기"))
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미션 인증하기"))
         {
             Chat.chat.Main_UI.SetActive(true);
             ParentscheckUI.SetActive(true);

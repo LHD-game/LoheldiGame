@@ -16,7 +16,7 @@ public class Gacha : MonoBehaviour
     public GameObject Machine;
     public GameObject BackGround;
 
-    public int GachaPrice = 100;
+    public int GachaPrice = 100; //1회 100원
 
     List<Dictionary<string, object>> gachaItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> gachaClothes = new List<Dictionary<string, object>>();
@@ -46,9 +46,6 @@ public class Gacha : MonoBehaviour
                     if (childList[i] != transform) Destroy(childList[i].gameObject);
                 }
             }
-
-            int x = 745;
-            int y = 570;
 
             for (int i = 0; i < GachaTime; i++)  //아이템 이름들의 위치 지정
             {
@@ -169,19 +166,6 @@ public class Gacha : MonoBehaviour
             item_code_txt.text = dialog[i]["ICode"].ToString();
 
             Debug.Log(dialog.Count);
-            for (int j = 0; j < dialog.Count; j++)
-            {
-                MyItem data = pj.ParseBackendData<MyItem>(myInven_rows[j]);
-                if (data.ICode.Equals(dialog[i]["ICode"].ToString()))
-                {
-                    //change catalog box price
-                    GameObject amount_parent = child.transform.Find("Amount").gameObject;
-                    GameObject amount_text = amount_parent.transform.Find("Text").gameObject;
-                    Text a_txt = amount_text.GetComponent<Text>();
-                    a_txt.text = data.Amount.ToString();
-                    break;
-                }
-            }
         }
     }
 }

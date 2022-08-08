@@ -40,106 +40,102 @@ public class SoundEffect : MonoBehaviour
 
     public void Sound(string action)
     {
+        audioSource.loop = false;
         switch (action)
         {
             case "Idle":
                 break;
             case "FoodGood":
                 audioSource.clip = audioFoodGood;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "FoodNotGood":
                 audioSource.clip = audioFoodNotGood;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "LevelUp":
                 audioSource.clip = audioLevelUp;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "RunCount":
                 audioSource.clip = audioRunCount;
-                audioSource.volume = 0.05f;
-                audioSource.loop = false;
+                audioSource.volume = 0.1f * PlayerSett.SEValue;
                 break;
             case "RunCountFinish":
                 audioSource.clip = audioRunCountFinish;
-                audioSource.volume = 0.05f;
-                audioSource.loop = false;
+                audioSource.volume = 0.1f * PlayerSett.SEValue;
                 break;
             case "RunFootSteps1":
                 audioSource.clip = audioRunFootSteps1;
-                audioSource.volume = 0.5f;
-                audioSource.loop = false;
+                audioSource.volume = 0.1f * PlayerSett.SEValue;
                 break;
             case "RunFootSteps2":
                 audioSource.clip = audioRunFootSteps2;
-                audioSource.volume = 0.5f;
-                audioSource.loop = false;
+                audioSource.volume = 1f * PlayerSett.SEValue;
                 break;
             case "RunFootSteps3":
                 audioSource.clip = audioRunFootSteps3;
-                audioSource.volume = 0.5f;
-                audioSource.loop = false;
+                audioSource.volume = 1f * PlayerSett.SEValue;
                 break;
             case "RunClose":
                 audioSource.clip = audioRunClose;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "CardFlip":
                 audioSource.clip = audioCardFlip;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "CardCurrect":
                 audioSource.clip = audioCardCurrect;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "CardWrong":
                 audioSource.clip = audioCardWrong;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "ToothBrushing":
                 audioSource.clip = ToothBrush;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "audioGameTimeless":
                 audioSource.clip = audioGameTimeless;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "GameSuccess":
                 audioSource.clip = audioGameSuccess;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "GameFail":
                 audioSource.clip = audioGameFail;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "Reward":
                 audioSource.clip = audioReward;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "ClickIcon":
                 audioSource.clip = audioClickIcon;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "ClickBack":
                 audioSource.clip = audioClickBack;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "Jump":
                 audioSource.clip = audioJump;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "QWind":
                 audioSource.clip = QaudioWind;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "QWater":
                 audioSource.clip = QaudioWater;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             case "QBird":
                 audioSource.clip = QaudioBird;
-                audioSource.loop = false;
+                audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             default:
                 break;

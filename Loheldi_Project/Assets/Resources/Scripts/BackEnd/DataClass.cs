@@ -95,6 +95,7 @@ public class HousingData
     public string closet;
     public string table;
     public string chair;
+    public string chair2;
     public string kitchen;
 }
 

@@ -52,6 +52,10 @@ public class FurnitureChangeClick : MonoBehaviour
                         {
                             ItemType = "chair";
                         }
+                        if (CurrentFurniture.GetComponent<Text>().text == "chair2")
+                        {
+                            ItemType = "chair";
+                        }
                         if (CurrentFurniture.GetComponent<Text>().text == "kitchen")
                         {
                             ItemType = "sink";

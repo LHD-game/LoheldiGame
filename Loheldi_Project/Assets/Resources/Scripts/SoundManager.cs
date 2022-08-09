@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip audioBGMTutorial;
     public AudioClip audioBGMNight;
     public AudioClip audioHaHasong;
-    AudioSource audioSource;
+    public static AudioSource audioSource;
 
     QuestDontDestroy QDD;
 
@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-        this.audioSource = GetComponent<AudioSource>();
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     void OnEnable()

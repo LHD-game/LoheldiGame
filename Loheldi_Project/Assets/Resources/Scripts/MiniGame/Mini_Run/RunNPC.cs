@@ -7,7 +7,7 @@ public class RunNPC : MonoBehaviour
     public GameObject block;
     public Transform upup;
     public Animator Animator;
-    private float[] NPCSpeed = { 0, 100, 140, 200 };
+    private float[] NPCSpeed = { 0, 130, 160, 200 }; //그래프 상 1 = 20 ex) 힘찬 10 : NPCSpeed = 200
     private bool up = false;
     int fxnum=0; //npc이펙트 적당히 뜨게하기 용
     void FixedUpdate()

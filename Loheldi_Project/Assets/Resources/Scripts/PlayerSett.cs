@@ -8,7 +8,6 @@ public class PlayerSett : MonoBehaviour
     public static float SEValue;
     void Start()
     {
-        BGMValue = PlayerSetting.BGMValueforSetting;
-        SEValue = PlayerSetting.SEValueforSetting;
+        //로컬 설정을 불러오는 함수
     }
 }

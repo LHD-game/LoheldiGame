@@ -257,6 +257,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetString("closet", data.closet);
                 PlayerPrefs.SetString("table", data.table);
                 PlayerPrefs.SetString("chair", data.chair);
+                PlayerPrefs.SetString("chair2", data.chair2);
                 PlayerPrefs.SetString("kitchen", data.kitchen);
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

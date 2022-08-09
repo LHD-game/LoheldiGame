@@ -548,9 +548,15 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {
-            j++;
-            ChatWin.SetActive(false);
-            Note.SetActive(true);
+            if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon").Equals("0"))
+            {
+                j++;
+                ChatWin.SetActive(false);
+                Note.SetActive(true);
+            }if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon").Equals("1"))
+            {
+                Draw.FinishWrite();
+            }
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("noteFinish"))        //퀘스트중간애들
         {
@@ -600,6 +606,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawFinish"))
         {
             GameObject.Find("DrawUI").transform.Find("Button").gameObject.SetActive(false);
+            Draw.Draw = false;
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Screenshot"))

@@ -20,6 +20,7 @@ public class Drawing : MonoBehaviour
     private Transform ForErase;
     int layerMask;
     private bool Erase = false;
+    public bool Draw = false;
 
     int i=0;  //메테리얼 번호
     private LodingTxt chat;
@@ -29,11 +30,12 @@ public class Drawing : MonoBehaviour
     }
     IEnumerator ForDraw()
     {
-        while (true)
+        while (Draw)
         {
             DrawMouse();
             yield return null;
         }
+        yield break;
     }
     void DrawMouse()
     {
@@ -133,15 +135,16 @@ public class Drawing : MonoBehaviour
         {
             mainUI.SetActive(false);
             SkechBook.SetActive(true);
+            Draw = true;
             StartCoroutine("ForDraw");
             cam.enabled=false;
             Dcam.enabled = true;
         }
         else
         {
+            Draw = false;
             mainUI.SetActive(true);
             SkechBook.SetActive(false);
-            StopCoroutine("ForDraw");
             Dcam.enabled = false;
             cam.enabled = true;
         }

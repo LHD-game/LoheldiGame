@@ -229,6 +229,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetString("G3Time", g3_t);
                 PlayerPrefs.SetString("G4", data.G4);
                 PlayerPrefs.SetString("G4Time", g4_t);
+                PlayerPrefs.SetString("Tree", data.Tree);
 
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)

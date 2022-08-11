@@ -9,6 +9,7 @@ public class PlayerSett : MonoBehaviour
     void Start()
     {
         GetSound(); //로컬 설정을 불러오는 함수
+        SoundManager.audioSource.volume = 0.8f * PlayerSett.BGMValue;
     }
 
     //로컬에서 사운드 설정을 불러옵니다.

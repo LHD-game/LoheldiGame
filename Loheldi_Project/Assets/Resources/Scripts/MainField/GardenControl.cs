@@ -34,10 +34,12 @@ public class GardenControl : MonoBehaviour
     DateTime[] g_timer = new DateTime[4];    //심겨진 씨앗의 성장시간
     public static bool[] empty_ground = new bool[4];        //빈 텃밭의 수
     public static bool[] is_grown = new bool[4];        //수확 가능한 텃밭인지 여부
+    public String Tree;
 
     public GameObject Interaction;
     public Camera getCamera;
     public GameObject Farms;
+    public GameObject TreePlace;
 
 
 
@@ -123,6 +125,12 @@ public class GardenControl : MonoBehaviour
         }
         else
             g_seed[3] = "";
+        if (PlayerPrefs.GetString("Tree") != "")
+        {
+            Tree = PlayerPrefs.GetString("G4");
+        }
+        else
+            Tree = "";
 
         for (int i = 0; i < g_seed.Length; i++)
         {
@@ -147,6 +155,7 @@ public class GardenControl : MonoBehaviour
                 }
             }
         }
+        TreePlace = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Spring"));        //일단 서버에서 블러와 생성하는것만 만듬.
     }
 
     //todo: 심기 위해 씨앗 버튼을 클릭하면, 로컬에 씨앗과 날짜를 저장한다. 이후 UpdateFieldGarden() 실행 및 todo3 메소드 실행

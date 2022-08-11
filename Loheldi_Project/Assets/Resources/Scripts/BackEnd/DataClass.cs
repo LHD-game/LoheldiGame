@@ -88,6 +88,7 @@ public class GardenData
     public DateTime G3Time;
     public string G4;
     public DateTime G4Time;
+    public string Tree;
 }
 public class HousingData
 {

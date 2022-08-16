@@ -17,6 +17,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
     //리스트 중 우편 선택시 -> 해당 버튼에 있는 제목 등등을 모두 가져와 오른쪽 화면에 띄운다.
     public void SelectMail()
     {
+        QuestDontDestroy QDD;
         //버튼에 달려있던 정보를 가져온다.
         GameObject qid = this.transform.Find("QID").gameObject;
         Text qid_txt = qid.GetComponent<Text>();
@@ -73,10 +74,9 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         //5.    -->disable 버튼 비활성화
         GameObject reward_disable_btn = QuestDetail.transform.Find("ReceiveMailDisable").gameObject;
         GameObject already_recieve_btn = QuestDetail.transform.Find("ReceiveMailAlready").gameObject;
-
+        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         already_recieve_btn.SetActive(false);
         reward_disable_btn.SetActive(true);
-
         string[] q_qid = qid_txt.text.Split('_');
         string QuestType = null;
         if (Int32.Parse(q_qid[0]) < 22)
@@ -90,7 +90,6 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         int my_front = int.Parse(my_qid[0]);
         if(q_front < my_front) //0_2, 1_1 -> 0<1
         {
-
             reward_disable_btn.SetActive(false);
         }
         else if(q_front == my_front) //1_1, 1_2
@@ -101,6 +100,16 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
             {
                 reward_disable_btn.SetActive(false);
             }
+            else if (QDD.SDA)
+            {
+                content_detail_txt.text = "토요일은 퀘스트 진행이 불가합니다";
+            }
+            else if (!QDD.weekend && QuestType.Equals("WeeklyQuestPreg"))
+            {
+                content_detail_txt.text = "해당 퀘스트는 일요일에만 진행이 가능합니다";
+            }
+            else if(QDD.weekend && QuestType.Equals("QuestPreg"))
+                content_detail_txt.text = "해당 퀘스트는 평일에만 진행이 가능합니다";
         }
 
     }

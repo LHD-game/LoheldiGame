@@ -31,6 +31,20 @@ public class SoundEffect : MonoBehaviour
     public AudioClip QaudioWater;
     public AudioClip QaudioBird;
 
+    public AudioClip SoundHami;
+    public AudioClip WhatThat;
+    public AudioClip Hing;
+    public AudioClip BikeRing;
+    public AudioClip SkechBook;
+    public AudioClip Shararang;
+    public AudioClip ShuttleCock;
+    public AudioClip ValueCard;
+    public AudioClip Juice;
+    public AudioClip Drink;
+    public AudioClip TTiririring;
+    public AudioClip Stone;
+    public AudioClip Chikachika;
+    public AudioClip Chararang;
     AudioSource audioSource;
 
     private void Awake()
@@ -137,7 +151,64 @@ public class SoundEffect : MonoBehaviour
                 audioSource.clip = QaudioBird;
                 audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
+            case "SoundHami":
+                audioSource.clip = SoundHami;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "WhatThat":
+                audioSource.clip = WhatThat;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Hing":
+                audioSource.clip = Hing;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "BikeRing":
+                audioSource.clip = BikeRing;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "SkechBook":
+                audioSource.clip = SkechBook;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Shararang":
+                audioSource.clip = Shararang;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "ShuttleCock":
+                audioSource.clip = ShuttleCock;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "ValueCard":
+                audioSource.clip = ValueCard;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Juice":
+                audioSource.clip = Juice;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Drink":
+                audioSource.clip = Drink;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "TTiririring":
+                audioSource.clip = TTiririring;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Stone":
+                audioSource.clip = Stone;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Chikachika":
+                audioSource.clip = Chikachika;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Chararang":
+                audioSource.clip = Chararang;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
             default:
+                audioSource.clip = null;
                 break;
                 
         }

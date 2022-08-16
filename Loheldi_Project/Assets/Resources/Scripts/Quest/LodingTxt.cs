@@ -70,6 +70,8 @@ public class LodingTxt : MonoBehaviour
 
     public GameObject AppleTreeObj;
 
+    public GameObject SoundEffectManager;
+
     public int NPCButton = 0;
     public string LoadTxt;
     private string[] Xdialog = {"다시 한번 생각해봐.","아쉽지만 틀렸어.","땡!","다시 도전해봐"};
@@ -158,7 +160,7 @@ public class LodingTxt : MonoBehaviour
 
         DateTime nowDT = DateTime.Now;
         if (nowDT.DayOfWeek == DayOfWeek.Saturday)
-            DontDestroy.SDA = true;
+            DontDestroy.SDA = false;
         else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
             DontDestroy.weekend = true;
         else
@@ -200,22 +202,8 @@ public class LodingTxt : MonoBehaviour
         }
         
     }
-    public void nextQuest()
+    public void QuestTest()
     {
-        PlayerPrefs.SetInt("LastQTime", 0);
-        DontDestroy.LastDay = 0;
-        PlayInfoManager.GetQuestPreg();
-
-        QuestLoad.QuestLoadStart();
-    }
-    public void ToothQ()
-    {
-        if (DontDestroy.weekend) //주말일 때
-            DontDestroy.QuestIndex = PlayerPrefs.GetString("WeeklyQuestPreg"); //주말 퀘스트 번호로 바뀔 예정
-        else //주말이 아닐 떄
-            DontDestroy.QuestIndex = PlayerPrefs.GetString("QuestPreg");
-        //QDD.weekend = true;
-
         PlayerPrefs.SetInt("LastQTime", 0);
         DontDestroy.LastDay = 0;
         string[] q_qid = DontDestroy.QuestIndex.Split('_');
@@ -883,7 +871,6 @@ public class LodingTxt : MonoBehaviour
             CancelInvoke("QSound");
             return;
         }
-        GameObject SoundEffectManager = GameObject.Find("EventSystem");
         SoundEffectManager.GetComponent<SoundEffect>().Sound(SoundName);
         c++;
     }
@@ -898,6 +885,14 @@ public class LodingTxt : MonoBehaviour
     }
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
+        if (data_Dialog[j]["SoundEffect"].ToString().Equals("Null"))
+            Debug.Log("사운드 없음");
+        else
+        {
+            string SoundName = data_Dialog[j]["SoundEffect"].ToString();
+            SoundEffectManager.GetComponent<SoundEffect>().Sound(SoundName);
+
+        }
         block.SetActive(true);
         //Debug.Log(data_Dialog[j]["scriptNumber"].ToString());
         if (tuto && tutoFinish)

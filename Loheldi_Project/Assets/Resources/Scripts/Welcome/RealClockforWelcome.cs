@@ -23,14 +23,14 @@ public class RealClockforWelcome : MonoBehaviour
         TimeSetting(Time);
         PreTime = Time;                 //변경 함수 초기화
 
-        /*DateTime nowDT = DateTime.Now;
+        DateTime nowDT = DateTime.Now;
         if (nowDT.DayOfWeek == DayOfWeek.Saturday)
-        QDD.SDA = true;
+            QDD.SDA = true;
         else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
-        QDD.weekend = true;
+            QDD.weekend = true;
         else
             QDD.weekend = false;
-        QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 */
+        QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
     }
 /*
     private void Update()

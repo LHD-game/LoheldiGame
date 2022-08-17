@@ -36,6 +36,15 @@ public class ScreenShot : MonoBehaviour
         Texture2D texture = ScreenCapture.CaptureScreenshotAsTexture();
         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         // do something with texture
+        NativeGallery.Permission permission = NativeGallery.CheckPermission(NativeGallery.PermissionType.Write);
+        if (permission == NativeGallery.Permission.Denied)
+        {
+            if (NativeGallery.CanOpenSettings())
+            {
+                NativeGallery.OpenSettings();
+            }
+        }
+
         string albumName = "Çï½Ãºô¸®Áö";
         NativeGallery.SaveImageToGallery(texture, albumName, FileName, (success, path) =>
         {

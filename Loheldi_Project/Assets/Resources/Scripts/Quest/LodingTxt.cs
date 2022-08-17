@@ -13,7 +13,7 @@ public class LodingTxt : MonoBehaviour
 {
     public Transform Player;
     public Transform Nari;
-    public GameObject PlayerCamera;
+    //public GameObject PlayerCamera;
     //public Camera MainCamera;
     //public Camera QuizCamera;
 
@@ -61,6 +61,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject AppleTree;
     public GameObject MasterOfMtLife;
     public GameObject screenShot;
+    public GameObject screenShotExit;
     public GameObject nutrient;
     public GameObject LoveNature;
 
@@ -158,14 +159,6 @@ public class LodingTxt : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MainField")
             Player.position = DontDestroy.gameObject.transform.position;
 
-        DateTime nowDT = DateTime.Now;
-        if (nowDT.DayOfWeek == DayOfWeek.Saturday)
-            DontDestroy.SDA = false;
-        else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
-            DontDestroy.weekend = true;
-        else
-            DontDestroy.weekend = false;
-        DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
         DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
@@ -280,7 +273,8 @@ public class LodingTxt : MonoBehaviour
     }
     public void NewChat()
     {
-        PlayerCamera.SetActive(true);
+        Input.multiTouchEnabled = false;
+        //PlayerCamera.SetActive(true);
         //Debug.Log("퀴즈3");
         data_Dialog = CSVReader.Read(FileAdress);
         for (int k = 0; k <= data_Dialog.Count; k++)
@@ -600,6 +594,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("Screenshot"))
         {
             screenShot.SetActive(true);
+            screenShotExit.SetActive(true);
             ChatWin.SetActive(false);
             j++;
         }
@@ -984,6 +979,7 @@ public class LodingTxt : MonoBehaviour
 
     public void ChatEnd() //리셋
     {
+        Input.multiTouchEnabled = true;
         chatCanvus.SetActive(false);
         ChatWin.SetActive(false);
         Arrow.SetActive(false);
@@ -991,7 +987,7 @@ public class LodingTxt : MonoBehaviour
         chatName.text = " ";
         Main_UI.SetActive(true);
         c = 0;
-        PlayerCamera.SetActive(false);
+        //PlayerCamera.SetActive(false);
         for (int i = 0; i < NPCButton; i++)
         {
             string selecNumber = "select" + (i + 1).ToString();

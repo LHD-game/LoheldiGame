@@ -88,19 +88,24 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         string[] my_qid = PlayerPrefs.GetString(QuestType).Split('_');
         int q_front = int.Parse(q_qid[0]);
         int my_front = int.Parse(my_qid[0]);
-        if(q_front < my_front) //0_2, 1_1 -> 0<1
+        int q_back = int.Parse(q_qid[1]);
+        int my_back = int.Parse(my_qid[1]);
+        if (q_front < my_front) //0_2, 1_1 -> 0<1
         {
             reward_disable_btn.SetActive(false);
         }
-        else if(q_front == my_front) //1_1, 1_2
+        else if(q_front == my_front && q_back <= my_back) //1_1, 1_2
         {
-            int q_back = int.Parse(q_qid[1]);
-            int my_back = int.Parse(my_qid[1]);
-            if (q_back <= my_back)
-            {
+            //int q_back = int.Parse(q_qid[1]);
+            //int my_back = int.Parse(my_qid[1]);
+            //if (q_back <= my_back)
+            //{
                 reward_disable_btn.SetActive(false);
-            }
-            else if (QDD.SDA)
+            //}
+        }
+        else
+        {
+            if (QDD.SDA)
             {
                 content_detail_txt.text = "토요일은 퀘스트 진행이 불가합니다";
             }
@@ -108,7 +113,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
             {
                 content_detail_txt.text = "해당 퀘스트는 일요일에만 진행이 가능합니다";
             }
-            else if(QDD.weekend && QuestType.Equals("QuestPreg"))
+            else if (QDD.weekend && QuestType.Equals("QuestPreg"))
                 content_detail_txt.text = "해당 퀘스트는 평일에만 진행이 가능합니다";
         }
 

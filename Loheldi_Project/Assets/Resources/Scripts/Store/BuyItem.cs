@@ -112,6 +112,7 @@ public class BuyItem : MonoBehaviour
                     PlayInfoManager.GetCoin(-this_cost);
                     CancleBtn();
                     buy_suc_panel.SetActive(true);
+                    Gagu_Category.instance.PopGaguStore();  //목공방이었을 경우 업데이트 필요
                 }
                 else
                 {
@@ -138,6 +139,7 @@ public class BuyItem : MonoBehaviour
                     PlayInfoManager.GetCoin(-this_cost);
                     CancleBtn();
                     buy_suc_panel.SetActive(true);
+                    
                 }
                 else
                 {

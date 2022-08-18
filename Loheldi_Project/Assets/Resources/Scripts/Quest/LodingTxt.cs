@@ -886,7 +886,6 @@ public class LodingTxt : MonoBehaviour
         {
             string SoundName = data_Dialog[j]["SoundEffect"].ToString();
             SoundEffectManager.GetComponent<SoundEffect>().Sound(SoundName);
-
         }
         block.SetActive(true);
         //Debug.Log(data_Dialog[j]["scriptNumber"].ToString());

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gagu_CategorySelect : MonoBehaviour
 {
+    public GameObject UpgradePanel;
     public GameObject WoodPanel;
     public GameObject ModernPanel;
     public GameObject KitschPanel;
@@ -22,7 +23,7 @@ public class Gagu_CategorySelect : MonoBehaviour
         KitschPanel.SetActive(false);
         ClassicPanel.SetActive(false);
         WallPaperPanel.SetActive(false);
-
+        UpgradePanel.SetActive(false);
     }
 
     public void PopWood()
@@ -32,6 +33,7 @@ public class Gagu_CategorySelect : MonoBehaviour
         KitschPanel.SetActive(false);
         ClassicPanel.SetActive(false);
         WallPaperPanel.SetActive(false);
+        UpgradePanel.SetActive(false);
     }
 
     public void PopModern()
@@ -41,6 +43,7 @@ public class Gagu_CategorySelect : MonoBehaviour
         KitschPanel.SetActive(false);
         ClassicPanel.SetActive(false);
         WallPaperPanel.SetActive(false);
+        UpgradePanel.SetActive(false);
     }
 
     public void PopKitsch()
@@ -50,6 +53,7 @@ public class Gagu_CategorySelect : MonoBehaviour
         KitschPanel.SetActive(true);
         ClassicPanel.SetActive(false);
         WallPaperPanel.SetActive(false);
+        UpgradePanel.SetActive(false);
     }
 
     public void PopClassic()
@@ -59,6 +63,7 @@ public class Gagu_CategorySelect : MonoBehaviour
         KitschPanel.SetActive(false);
         ClassicPanel.SetActive(true);
         WallPaperPanel.SetActive(false);
+        UpgradePanel.SetActive(false);
     }
 
     public void PopWallPaper()
@@ -68,5 +73,16 @@ public class Gagu_CategorySelect : MonoBehaviour
         KitschPanel.SetActive(false);
         ClassicPanel.SetActive(false);
         WallPaperPanel.SetActive(true);
+        UpgradePanel.SetActive(false);
+    }
+
+    public void PopUpgrade()
+    {
+        WoodPanel.SetActive(false);
+        ModernPanel.SetActive(false);
+        KitschPanel.SetActive(false);
+        ClassicPanel.SetActive(false);
+        WallPaperPanel.SetActive(false);
+        UpgradePanel.SetActive(true);
     }
 }

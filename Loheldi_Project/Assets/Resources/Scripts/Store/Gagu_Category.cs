@@ -32,6 +32,8 @@ public class Gagu_Category : StoreCategoryControl
     private GameObject c_classic;
     [SerializeField]
     private GameObject c_wallpaper;
+    [SerializeField]
+    GameObject[] UpgradeDisable = new GameObject[3];
 
     List<Dictionary<string, object>> woodItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> modernItem = new List<Dictionary<string, object>>();
@@ -51,11 +53,13 @@ public class Gagu_Category : StoreCategoryControl
 
     private void Start()
     {
+        ChkUpgrade();
         PopGaguStore();
     }
 
     public void PopGaguStore()
     {
+        
         woodItem.Clear();
         modernItem.Clear();
         kitschItem.Clear();
@@ -154,11 +158,6 @@ public class Gagu_Category : StoreCategoryControl
             }
         }
         all_gagu_cnt = w + m + k + c + wa;
-        /*print("wood: " + woodItem.Count);
-        print("modern: " + modernItem.Count);
-        print("kitsch: " + kitschItem.Count);
-        print("classic: " + classicItem.Count);
-        print("wallpaper: " + wallpaperItem.Count);*/
     }
     //make category item list on game//
     //전체 아이템을 띄우되, 보유 아이템일 경우와 미보유 아이템일 경우 다른 처리를 합니다.
@@ -227,7 +226,14 @@ public class Gagu_Category : StoreCategoryControl
                 }
             }
         }
+    }
 
-
+    public void ChkUpgrade()   //집 확장 정도를 검사하여 상점 탭에 반영
+    {
+        for(int i =0; i< UpgradeDisable.Length; i++)
+        {
+            UpgradeDisable[i].SetActive(true);
+        }
+        UpgradeDisable[PlayerPrefs.GetInt("HouseLv")-1].SetActive(false);
     }
 }

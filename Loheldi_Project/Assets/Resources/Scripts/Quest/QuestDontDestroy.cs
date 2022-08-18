@@ -39,7 +39,7 @@ public class QuestDontDestroy : MonoBehaviour
         if (objs.Length > 1)
         {
             Destroy(objs[0]);
-        }
+        }/*
         else if (SceneManager.GetActiveScene().name == "Game_Tooth")
         {
             Debug.Log("¾çÄ¡");
@@ -48,7 +48,7 @@ public class QuestDontDestroy : MonoBehaviour
             GameObject.Find("Canvas").SetActive(false);
             GameObject.Find("Player").SetActive(false);
             GameObject.Find("mouth").SetActive(false);
-        }
+        }*/
         DontDestroyOnLoad(this.gameObject);
     }
 }

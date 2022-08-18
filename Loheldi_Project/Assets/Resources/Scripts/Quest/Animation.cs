@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class Animation : MonoBehaviour
 {
     public Drawing Draw;
-    private LodingTxt chat;
+    private LodingTxt chat; 
+    public GameObject SoundEffectManager;
     /// 노트 애니메이션
     int dest=0;
     void destroy(string DestryedObject)
     {
         ++dest;
-        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
         if(dest == Draw.notes.Length)
         {
             chat = GameObject.Find("chatManager").GetComponent<LodingTxt>();
@@ -26,6 +26,7 @@ public class Animation : MonoBehaviour
     static Image noteImage;
     void noteGone1(string Object)
     {
+        SoundEffectManager.GetComponent<SoundEffect>().Sound("Paper");
         noteImageSprite = Resources.Load<Sprite>("Sprites/Quest/Note/note1");
         noteImage = GameObject.Find(Object).GetComponent<Image>();
         noteImage.sprite = noteImageSprite;
@@ -35,19 +36,17 @@ public class Animation : MonoBehaviour
         GameObject notea = GameObject.Find(Object);
         notea.transform.GetChild(2).gameObject.SetActive(false);
         noteImageSprite = Resources.Load<Sprite>("Sprites/Quest/Note/note2");
-        noteImage = GameObject.Find(Object).GetComponent<Image>();
+        noteImage = notea.GetComponent<Image>();
         noteImage.sprite = noteImageSprite;
     }
     /// 자전거 애니메이션
 
     void SetPosition()
     {
-        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
         Draw.WearOut();
     }
     void FinishNutrient()
     {
-        Draw = GameObject.Find("QuestManager").GetComponent<Drawing>();
         Draw.Cook();
     }
 }

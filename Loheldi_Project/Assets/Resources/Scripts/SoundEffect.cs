@@ -45,6 +45,7 @@ public class SoundEffect : MonoBehaviour
     public AudioClip Stone;
     public AudioClip Chikachika;
     public AudioClip Chararang;
+    public AudioClip Paper;
     AudioSource audioSource;
 
     private void Awake()
@@ -205,6 +206,10 @@ public class SoundEffect : MonoBehaviour
                 break;
             case "Chararang":
                 audioSource.clip = Chararang;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "Paper":
+                audioSource.clip = Paper;
                 audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             default:

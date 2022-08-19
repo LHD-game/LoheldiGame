@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class Changing : MonoBehaviour
 {
     public int NowFloor;
-    public GameObject Player;
-    public GameObject Camera;
 
     public GameObject F1;
     public GameObject F2;
@@ -45,7 +43,6 @@ public class Changing : MonoBehaviour
 
     public void Start()
     {
-        Camera = GameObject.Find("housingCamera");
         F1 = GameObject.Find("1F");
         F2 = GameObject.Find("2F");
         F3 = GameObject.Find("3F");
@@ -57,66 +54,41 @@ public class Changing : MonoBehaviour
 
         if (NowFloor == 1)
         {
-            Camera.transform.position = new Vector3(-21f, 5.5f, -4f);
             BedPosition = F1.transform.Find("BedPosition").gameObject;
             DeskPosition = F1.transform.Find("DeskPosition").gameObject;
             ChairPosition = F1.transform.Find("ChairPosition").gameObject;
             ClosetPosition = F1.transform.Find("ClosetPosition").gameObject;
-            if (this.name == "HousingSystem")
-            {
-                Player.transform.position = new Vector3(-23.3f, -1.9f, -1f);
-            }
         }
-        else if (NowFloor == 2)
+        else if (NowFloor >= 2)
         {
-            Camera.transform.position = new Vector3(-18.5f, 8.5f, -70f);
             BedPosition = F2.transform.Find("BedPosition").gameObject;
             DeskPosition = F2.transform.Find("DeskPosition").gameObject;
             ChairPosition = F2.transform.Find("ChairPosition").gameObject;
             ChairPosition2 = F2.transform.Find("ChairPosition2").gameObject;
             ClosetPosition = F2.transform.Find("ClosetPosition").gameObject;
             KitchenPosition = F2.transform.Find("KitchenPosition").gameObject;
-            if (this.name == "HousingSystem")
-            {
-                Player.transform.position = new Vector3(-22.5f, -1.8f, -67.5f);
-            }
         }
         if (NowFloor >= 3)
         {
-            Camera.transform.position = new Vector3(-20f, 6f, -169f);
             DeskPosition2 = F3.transform.Find("DeskPosition2").gameObject;
             DeskPosition3 = F3.transform.Find("DeskPosition3").gameObject;
             TablePosition = F3.transform.Find("TablePosition").gameObject;
             SunbedPosition = F3.transform.Find("SunbedPosition").gameObject;
             SunbedPosition2 = F3.transform.Find("SunbedPosition2").gameObject;
-            if (this.name == "HousingSystem")
-            {
-                Player.transform.position = new Vector3(-22.5f, -1.8f, -95.2f);
-            }
         }
         if (NowFloor >= 4)
         {
-            Camera.transform.position = new Vector3(-20f, 6.5f, -243.5f);
             BedPosition2 = F4.transform.Find("BedPosition2").gameObject;
             SidetablePosition = F4.transform.Find("SidetablePosition").gameObject;
             DeskPosition4 = F4.transform.Find("DeskPosition4").gameObject;
             CchairPosition = F4.transform.Find("CChairPosition").gameObject;
             BookshelfPosition = F4.transform.Find("BookshelfPosition").gameObject;
-            if (this.name == "HousingSystem")
-            {
-                Player.transform.position = new Vector3(-22.5f, -1.8f, -165f);
-            }
         }
         if (NowFloor >= 5)
         {
-            Camera.transform.position = new Vector3(-20f, 6.5f, -307f);
             SunbedPosition3 = F5.transform.Find("SunbedPosition3").gameObject;
             SunbedPosition4 = F5.transform.Find("SunbedPosition4").gameObject;
             ChairPosition = F2.transform.Find("ChairPosition").gameObject;
-            if (this.name == "HousingSystem")
-            {
-                Player.transform.position = new Vector3(-22.5f, -1.8f, -300f);
-            }
         }
     }
     public void FirstSetting()

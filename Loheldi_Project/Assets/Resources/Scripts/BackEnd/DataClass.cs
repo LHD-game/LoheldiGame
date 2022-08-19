@@ -93,10 +93,23 @@ public class GardenData
 public class HousingData
 {
     public string bed;
+    public string bed2;
     public string closet;
+    public string bookshelf;
+    public string desk;
+    public string desk2;
+    public string desk3;
+    public string desk4;
     public string table;
+    public string table2;
+    public string sidetable;
     public string chair;
     public string chair2;
+    public string cchair;
+    public string sunbed;
+    public string sunbed2;
+    public string sunbed3;
+    public string sunbed4;
     public string kitchen;
 }
 

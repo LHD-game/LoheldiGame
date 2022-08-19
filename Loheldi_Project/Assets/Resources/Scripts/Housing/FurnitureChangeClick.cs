@@ -36,7 +36,7 @@ public class FurnitureChangeClick : MonoBehaviour
                     {
                         Debug.Log(hit.collider.gameObject.name);
                         CurrentFurniture = hit.collider.gameObject;                      //해당 가구 선택하기
-                        if (CurrentFurniture.GetComponent<Text>().text == "bed")
+                        if (CurrentFurniture.GetComponent<Text>().text == "bed" || CurrentFurniture.GetComponent<Text>().text == "bed2")
                         {
                             ItemType = "bed";
                         }
@@ -44,17 +44,33 @@ public class FurnitureChangeClick : MonoBehaviour
                         {
                             ItemType = "closet";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "table")
+                        if (CurrentFurniture.GetComponent<Text>().text == "bookshelf")
+                        {
+                            ItemType = "bookshelf";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "desk" || CurrentFurniture.GetComponent<Text>().text == "desk2" || CurrentFurniture.GetComponent<Text>().text == "desk3" || CurrentFurniture.GetComponent<Text>().text == "desk4")
                         {
                             ItemType = "desk";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "chair")
+                        if (CurrentFurniture.GetComponent<Text>().text == "table" || CurrentFurniture.GetComponent<Text>().text == "table2")
+                        {
+                            ItemType = "table";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "sidetable")
+                        {
+                            ItemType = "sidetable";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "chair" || CurrentFurniture.GetComponent<Text>().text == "chair2")
                         {
                             ItemType = "chair";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "chair2")
+                        if (CurrentFurniture.GetComponent<Text>().text == "cchair")
                         {
-                            ItemType = "chair";
+                            ItemType = "cchair";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "sunbed" || CurrentFurniture.GetComponent<Text>().text == "sunbed2" || CurrentFurniture.GetComponent<Text>().text == "sunbed3" || CurrentFurniture.GetComponent<Text>().text == "sunbed4")
+                        {
+                            ItemType = "sunbed";
                         }
                         if (CurrentFurniture.GetComponent<Text>().text == "kitchen")
                         {

@@ -142,6 +142,7 @@ public class SoundManager : MonoBehaviour
                 break;
             case "BGMGacha":
                 audioSource.clip = audioBGMGacha;
+                audioSource.volume = 0.5f * PlayerSett.BGMValue;
                 break;
             case "BGMRun":
                 audioSource.clip = audioBGMRun;

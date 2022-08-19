@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4297483124712326075}
   - component: {fileID: 3218153558855285496}
   - component: {fileID: 729212927219009207}
+  - component: {fileID: 4171311427382624224}
   m_Layer: 0
   m_Name: FurnitureSet_10_v_02_Door_L
-  m_TagString: ChangeableFurniture
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_LocalPosition: {x: 0.4019451, y: 0.9532447, z: 0.2957908}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6077908311558454924}
+  m_Father: {fileID: 3907975477323024278}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3218153558855285496
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4171311427382624224
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292047931396953784}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2704508429244154030, guid: 4702e838e945c0b4288c5125844686c6, type: 3}
 --- !u!1 &7241754518939254723
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,9 +107,10 @@ GameObject:
   - component: {fileID: 6737679525644282189}
   - component: {fileID: 2750514926831948103}
   - component: {fileID: 1429469343443220095}
+  - component: {fileID: 7778168802958752106}
   m_Layer: 0
   m_Name: FurnitureSet_10_v_02_Door_R
-  m_TagString: ChangeableFurniture
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +126,7 @@ Transform:
   m_LocalPosition: {x: -0.40194702, y: 0.9532447, z: 0.29578984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6077908311558454924}
+  m_Father: {fileID: 3907975477323024278}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2750514926831948103
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7778168802958752106
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7241754518939254723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5430781053725724230, guid: 4702e838e945c0b4288c5125844686c6, type: 3}
 --- !u!1 &9179933408846324929
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,12 +200,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6077908311558454924}
+  - component: {fileID: 3907975477323024278}
   - component: {fileID: 4864353745740886494}
   - component: {fileID: 7234277146949649684}
-  - component: {fileID: 7177856181122823456}
-  - component: {fileID: 8364088539330373707}
-  - component: {fileID: 3241867584052447209}
+  - component: {fileID: 1061760050889374535}
+  - component: {fileID: 5324882717361390132}
+  - component: {fileID: 2266473987900750874}
   m_Layer: 0
   m_Name: FurnitureSet_10_v_02
   m_TagString: ChangeableFurniture
@@ -183,14 +213,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6077908311558454924
+--- !u!224 &3907975477323024278
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9179933408846324929}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.00000001545431, y: 0.70710677, z: 0.000000015454313, w: 0.7071069}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -253,8 +283,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7177856181122823456
-BoxCollider:
+--- !u!64 &1061760050889374535
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -263,10 +293,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0020885, y: 2.0358944, z: 0.6695764}
-  m_Center: {x: -0.0000011622908, y: 1.0179472, z: -0.00000005960466}
---- !u!222 &8364088539330373707
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6632542808568357251, guid: 4702e838e945c0b4288c5125844686c6, type: 3}
+--- !u!222 &5324882717361390132
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,7 +305,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9179933408846324929}
   m_CullTransparentMesh: 1
---- !u!114 &3241867584052447209
+--- !u!114 &2266473987900750874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -9,28 +9,9 @@ public class ChangeMode : MonoBehaviour
     public GameObject Canvas2;
     public GameObject Button;
     public GameObject Player;
-    public Camera Camera1;
-    public Camera Camera2;
 
     private FurnitureChangeClick HousingMode;
 
-    public void changeCamera()
-    {
-        Debug.Log("함수실행");
-        if (Camera1.enabled == true)
-        {
-            Debug.Log("변경 두두둔");
-            Camera1.enabled = false;
-            Camera2.enabled = true;
-        }
-        else
-        {
-
-            Debug.Log("변경 두두둔2");
-            Camera2.enabled = false;
-            Camera1.enabled = true;
-        }
-    }
     public void Housing()
     {
         HousingMode = GameObject.Find("HousingSystem").GetComponent<FurnitureChangeClick>();
@@ -40,13 +21,6 @@ public class ChangeMode : MonoBehaviour
         Button.SetActive(true);
         Player.SetActive(false);
         HousingMode.housing = true;
-
-        if (Camera1.enabled == true) //부엌에 있을 때
-            ;
-        else
-            changeCamera();
-        //Camera2.enabled = false;
-        //Camera1.enabled = true;
     }
     public void ExitHousing()
     {
@@ -58,8 +32,5 @@ public class ChangeMode : MonoBehaviour
         Button.SetActive(false);
         Player.SetActive(true);
         HousingMode.housing = false;
-        //Camera2.enabled = true;
-        //Camera1.enabled = false;
     }
-
 }

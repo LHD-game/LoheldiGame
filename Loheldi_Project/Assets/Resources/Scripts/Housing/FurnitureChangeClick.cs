@@ -58,7 +58,7 @@ public class FurnitureChangeClick : MonoBehaviour
                         }
                         if (CurrentFurniture.GetComponent<Text>().text == "sidetable")
                         {
-                            ItemType = "sidetable";
+                            ItemType = "side table";
                         }
                         if (CurrentFurniture.GetComponent<Text>().text == "chair" || CurrentFurniture.GetComponent<Text>().text == "chair2")
                         {

@@ -40,7 +40,6 @@ public class Interaction : MonoBehaviour
         else if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
         {
             change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
-            change.changeCamera();
         }
         else if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 InDoor라면
         {
@@ -106,10 +105,6 @@ public class Interaction : MonoBehaviour
         if (other.gameObject.name == "ExitDoor")
         {
             JumpButton.SetActive(false);
-        }
-        if (other.gameObject.name == "change")          //콜리더의 name가 change라면 (하우징)
-        {
-            change.changeCamera();
         }
     }
     public void NpcNameActive(GameObject other, string status)

@@ -38,7 +38,7 @@ public class PMCap : MonoBehaviour
         screenShot.Apply();
 
         byte[] bytes = screenShot.EncodeToPNG();
-        File.WriteAllBytes(name, bytes);
+        //File.WriteAllBytes(name, bytes);
         Sprite sprite = Sprite.Create(screenShot, new Rect(0, 0, screenShot.width, screenShot.height), new Vector2(0.5f, 0.5f));
         ScreenshotImg.sprite = sprite;
         if (SceneManager.GetActiveScene().name == "MainField")

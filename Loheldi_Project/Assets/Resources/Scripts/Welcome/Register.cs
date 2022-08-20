@@ -141,6 +141,7 @@ public class Register : MonoBehaviour
             Save_Basic.PlayerInfoInit();    //계정 기본 정보 저장(레벨, 재화 등)
             Save_Basic.UserGardenInit();    //텃밭 초기 행 저장
             Save_Basic.UserHousingInit();    //하우징 초기 행 저장
+            Save_Basic.UserHousingInit2();    //하우징 초기 행 2 저장
             //Save_Basic.Save0_0Quest();
 
 

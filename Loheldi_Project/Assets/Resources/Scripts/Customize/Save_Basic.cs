@@ -138,6 +138,19 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
             Debug.Log("UserHousingInit() Fail");
         }
     }
+    public static void UserHousingInit2()
+    {
+        Param param = new Param();
+        var bro = Backend.GameData.Insert("USER_HOUSE2F", param);
+        if (bro.IsSuccess())
+        {
+            Debug.Log("UserHousingInit() Success");
+        }
+        else
+        {
+            Debug.Log("UserHousingInit() Fail");
+        }
+    }
 
 
 
@@ -253,26 +266,45 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 var json_data = json["rows"][0];
                 ParsingJSON pj = new ParsingJSON();
                 HousingData data = pj.ParseBackendData<HousingData>(json_data);
-                                                                    //<3f 5개, 4f 5개, 5f 3개>
+
                 PlayerPrefs.SetString("bed", data.bed);
-                PlayerPrefs.SetString("bed2", data.bed2);           //4f
                 PlayerPrefs.SetString("closet", data.closet);
-                PlayerPrefs.SetString("bookshelf", data.bookshelf); //4f
-                PlayerPrefs.SetString("desk", data.desk);
-                PlayerPrefs.SetString("desk2", data.desk2);         //3f
-                PlayerPrefs.SetString("desk3", data.desk3);         //3f
-                PlayerPrefs.SetString("desk4", data.desk4);         //4f(미구현)
-                PlayerPrefs.SetString("table", data.table);         //3f
-                PlayerPrefs.SetString("table2", data.table2);       //5f
-                PlayerPrefs.SetString("sidetable", data.sidetable); //4f
+                PlayerPrefs.SetString("table", data.table);
                 PlayerPrefs.SetString("chair", data.chair);
                 PlayerPrefs.SetString("chair2", data.chair2);
-                PlayerPrefs.SetString("cchair", data.cchair);       //4f(미구현)
-                PlayerPrefs.SetString("sunbed", data.sunbed);       //3f
-                PlayerPrefs.SetString("sunbed2", data.sunbed2);     //3f
-                PlayerPrefs.SetString("sunbed3", data.sunbed3);     //5f
-                PlayerPrefs.SetString("sunbed4", data.sunbed4);     //5f
+                PlayerPrefs.SetString("side table", data.sidetable);
                 PlayerPrefs.SetString("kitchen", data.kitchen);
+                PlayerPrefs.SetString("fridge", data.fridge);
+                PlayerPrefs.SetString("standsink", data.standsink);
+                PlayerPrefs.SetString("wallshelf", data.wallshelf);
+            }
+            catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
+            {
+                Debug.Log(ex);
+            }
+        }
+    }
+    public static void LoadUserHousing2()
+    {
+        BackendReturnObject bro = Backend.GameData.GetMyData("USER_HOUSE2F", new Where(), 10);
+
+        if (bro.IsSuccess())
+        {
+            var json = bro.GetReturnValuetoJSON();
+
+            try
+            {
+                var json_data = json["rows"][0];
+                ParsingJSON pj = new ParsingJSON();
+                HousingData data = pj.ParseBackendData<HousingData>(json_data);
+
+                PlayerPrefs.SetString("bookshelf", data.bookshelf);
+                PlayerPrefs.SetString("desk", data.desk);
+                PlayerPrefs.SetString("coffee table", data.coffeetable);
+                PlayerPrefs.SetString("chair3", data.chair3);
+                PlayerPrefs.SetString("sunbed", data.sunbed);
+                PlayerPrefs.SetString("sunbed2", data.sunbed2);
+                PlayerPrefs.SetString("sofa", data.sofa);
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
             {

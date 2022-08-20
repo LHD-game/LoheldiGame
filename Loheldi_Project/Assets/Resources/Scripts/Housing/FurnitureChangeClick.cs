@@ -31,12 +31,11 @@ public class FurnitureChangeClick : MonoBehaviour
                 Ray ray = getCamera.ScreenPointToRay(Input.mousePosition);         //마우스 위치에 RayCast사용하기
                 if (Physics.Raycast(ray, out hit))                                      //만약 무언가를 눌랐다면
                 {
-                    Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.tag == "ChangeableFurniture")           //가구를 누른거라면
                     {
-                        Debug.Log(hit.collider.gameObject.name);
                         CurrentFurniture = hit.collider.gameObject;                      //해당 가구 선택하기
-                        if (CurrentFurniture.GetComponent<Text>().text == "bed" || CurrentFurniture.GetComponent<Text>().text == "bed2")
+                        Debug.Log(CurrentFurniture.name);
+                        if (CurrentFurniture.GetComponent<Text>().text == "bed")
                         {
                             ItemType = "bed";
                         }
@@ -48,27 +47,23 @@ public class FurnitureChangeClick : MonoBehaviour
                         {
                             ItemType = "bookshelf";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "desk" || CurrentFurniture.GetComponent<Text>().text == "desk2" || CurrentFurniture.GetComponent<Text>().text == "desk3" || CurrentFurniture.GetComponent<Text>().text == "desk4")
+                        if (CurrentFurniture.GetComponent<Text>().text == "desk")
                         {
                             ItemType = "desk";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "table" || CurrentFurniture.GetComponent<Text>().text == "table2")
+                        if (CurrentFurniture.GetComponent<Text>().text == "table")
                         {
-                            ItemType = "table";
+                            ItemType = "meal table";
                         }
                         if (CurrentFurniture.GetComponent<Text>().text == "sidetable")
                         {
                             ItemType = "side table";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "chair" || CurrentFurniture.GetComponent<Text>().text == "chair2")
+                        if (CurrentFurniture.GetComponent<Text>().text == "chair" || CurrentFurniture.GetComponent<Text>().text == "chair2" || CurrentFurniture.GetComponent<Text>().text == "chair3")
                         {
                             ItemType = "chair";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "cchair")
-                        {
-                            ItemType = "cchair";
-                        }
-                        if (CurrentFurniture.GetComponent<Text>().text == "sunbed" || CurrentFurniture.GetComponent<Text>().text == "sunbed2" || CurrentFurniture.GetComponent<Text>().text == "sunbed3" || CurrentFurniture.GetComponent<Text>().text == "sunbed4")
+                        if (CurrentFurniture.GetComponent<Text>().text == "sunbed" || CurrentFurniture.GetComponent<Text>().text == "sunbed2")
                         {
                             ItemType = "sunbed";
                         }
@@ -76,11 +71,33 @@ public class FurnitureChangeClick : MonoBehaviour
                         {
                             ItemType = "sink";
                         }
+                        if (CurrentFurniture.GetComponent<Text>().text == "wallshelf")
+                        {
+                            ItemType = "cupboard";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "fridge")
+                        {
+                            ItemType = "refrigerator";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "standingsink")
+                        {
+                            ItemType = "washstand";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "coffeeTable")
+                        {
+                            ItemType = "table";
+                        }
+                        if (CurrentFurniture.GetComponent<Text>().text == "sofa")
+                        {
+                            ItemType = "sofa";
+                        }
+                        Debug.Log(CurrentFurniture.GetComponent<Text>().text);
                         if (!ButtonToggle)                                                  //이때 버튼이 없다면
                         {
 
                             this.GetComponent<HousingCategory>().gaguItem.Clear();
                             this.GetComponent<HousingCategory>().GetChartContents("55031");
+                            Debug.Log(ItemType);
                             this.GetComponent<HousingCategory>().MakeCategory(Contents, this.GetComponent<HousingCategory>().gaguItem, this.GetComponent<HousingCategory>().gagu_list, ItemType);
                             Buttons.transform.position = Input.mousePosition;                   //버튼을 클릭한 위치에 생성하기
                             Buttons.SetActive(true);

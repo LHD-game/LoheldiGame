@@ -4,78 +4,83 @@ using UnityEngine;
 
 public class HousingElevator : MonoBehaviour
 {
-    public int NowF = 2;
+    public bool upstair = true;
 
     public GameObject Player;
     public GameObject Camera;
     public GameObject UpButton;
     public GameObject DownButton;
+
+    int a;
+
     public void Start()
     {
-        if (NowF == 1)
+        a = PlayerPrefs.GetInt("HouseLv");
+        if (a == 1)
         {
+            this.GetComponent<Changing>().F1.SetActive(true);
+            this.GetComponent<Changing>().F11.SetActive(true);
+            this.GetComponent<Changing>().F2.SetActive(false);
+            this.GetComponent<Changing>().F3.SetActive(false);
+            this.GetComponent<Changing>().F31.SetActive(false);
+            this.GetComponent<Changing>().F4.SetActive(false);
             Camera.transform.position = new Vector3(-21f, 5.5f, -4f);
-            Player.transform.position = new Vector3(-23.3f, -1.9f, -1f);
         }
-        else if (NowF >= 2)
+        else if (a >= 2)
         {
-            Camera.transform.position = new Vector3(-19f, 6.6f, -97.23f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -95f);
+            this.GetComponent<Changing>().F1.SetActive(true);
+            this.GetComponent<Changing>().F11.SetActive(false);
+            this.GetComponent<Changing>().F2.SetActive(true);
+            this.GetComponent<Changing>().F3.SetActive(false);
+            this.GetComponent<Changing>().F31.SetActive(false);
+            this.GetComponent<Changing>().F4.SetActive(false);
+            Camera.transform.position = new Vector3(-20f, 6f, -2f);
         }
-        CheckF(NowF);
+        Player.transform.position = new Vector3(-23.5f, -2f, -1f);
+        if (a >= 3)
+            CheckF();
+        upstair = false;
     }
     public void GoUp()
     {
-        NowF++;
-        if (NowF == 3)
+        Debug.Log(a);
+        upstair = true;
+        this.GetComponent<Changing>().F3.SetActive(true);
+        if (a == 3)
         {
-            Camera.transform.position = new Vector3(-20f, 6f, -169f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -166.2f);
+            this.GetComponent<Changing>().F31.SetActive(true);
+            this.GetComponent<Changing>().F4.SetActive(false);
+            Camera.transform.position = new Vector3(-22f, 8f, -3f);
         }
-        else if (NowF == 4)
+        else if (a == 4)
         {
-            Camera.transform.position = new Vector3(-20f, 6.5f, -243.5f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -241.3f);
+            this.GetComponent<Changing>().F31.SetActive(false);
+            this.GetComponent<Changing>().F4.SetActive(true);
+            Camera.transform.position = new Vector3(-20.5f, 9f, -2f);
         }
-        else if (NowF == 5)
-        {
-            Camera.transform.position = new Vector3(-20f, 6.5f, -307f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -300f);
-        }
-        CheckF(NowF);
+        Player.transform.position = new Vector3(-23.5f, 3f, -1f);
+        CheckF();
     }
     public void GoDown()
     {
-        NowF--;
-        if (NowF == 2)
-        {
-            Camera.transform.position = new Vector3(-19f, 6.6f, -97.23f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -95f);
-        }
-        else if (NowF == 3)
-        {
-            Camera.transform.position = new Vector3(-20f, 6f, -169f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -166.2f);
-        }
-        else if (NowF == 4)
-        {
-            Camera.transform.position = new Vector3(-20f, 6.5f, -243.5f);
-            Player.transform.position = new Vector3(-22.5f, -1.8f, -241.3f);
-        }
-        CheckF(NowF);
-    }
-    public void CheckF(int NowF)
-    {
-        Debug.Log(NowF);
-        int a = PlayerPrefs.GetInt("HouseLv");
         Debug.Log(a);
-        if (a <= NowF)
+        upstair = false;
+        this.GetComponent<Changing>().F3.SetActive(false);
+        this.GetComponent<Changing>().F31.SetActive(false);
+        this.GetComponent<Changing>().F4.SetActive(false);
+        Camera.transform.position = new Vector3(-20f, 6f, -2f);
+        Player.transform.position = new Vector3(-23.5f, -2f, -1f);
+        CheckF();
+    }
+    public void CheckF()
+    {
+        if (upstair) {
             UpButton.SetActive(false);
-        else
-            UpButton.SetActive(true);
-        if (NowF <= 2)
-            DownButton.SetActive(false);
-        else
             DownButton.SetActive(true);
+        }
+        else {
+            UpButton.SetActive(true);
+            DownButton.SetActive(false);
+        }
     }
 }

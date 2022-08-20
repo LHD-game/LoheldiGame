@@ -18,18 +18,17 @@ public class ChangeMode : MonoBehaviour
         ExitButton.SetActive(true);
         Canvas1.SetActive(true);
         Canvas2.SetActive(false);
-        Button.SetActive(true);
+        Button.SetActive(false);
         Player.SetActive(false);
         HousingMode.housing = true;
     }
     public void ExitHousing()
     {
-        Button.transform.position = new Vector3(5000, 5000);
         HousingMode = GameObject.Find("HousingSystem").GetComponent<FurnitureChangeClick>();
         ExitButton.SetActive(false);
         Canvas1.SetActive(false);
         Canvas2.SetActive(true);
-        Button.SetActive(false);
+        Button.SetActive(true);
         Player.SetActive(true);
         HousingMode.housing = false;
     }

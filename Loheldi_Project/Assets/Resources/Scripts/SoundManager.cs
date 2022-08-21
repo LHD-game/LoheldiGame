@@ -45,6 +45,7 @@ public class SoundManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        audioSource = this.GetComponent<AudioSource>();
         //Debug.Log("OnSceneLoaded: " + scene.name);
         if (scene.name == "Welcome")
         {

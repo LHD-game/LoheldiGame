@@ -94,7 +94,8 @@ public class QuestScript : MonoBehaviour
         while (true)
         {
             GameObject click = EventSystem.current.currentSelectedGameObject;
-            if (click == null) ;
+            if (click == null)
+            { }
             else if (click.name.Equals("ItemBtn_"))
             {
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);

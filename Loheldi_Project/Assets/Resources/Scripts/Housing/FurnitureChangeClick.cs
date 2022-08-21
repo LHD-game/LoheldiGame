@@ -94,7 +94,6 @@ public class FurnitureChangeClick : MonoBehaviour
                         Debug.Log(CurrentFurniture.GetComponent<Text>().text);
                         if (!ButtonToggle)                                                  //이때 버튼이 없다면
                         {
-
                             this.GetComponent<HousingCategory>().gaguItem.Clear();
                             this.GetComponent<HousingCategory>().GetChartContents("55031");
                             Debug.Log(ItemType);

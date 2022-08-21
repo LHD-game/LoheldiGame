@@ -32,6 +32,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject ErrorWin;      //홈트인증실패
     public GameObject ClearWin;     //인증클리어
     public GameObject ParentsErrorWin;  //인증실패
+    public GameObject ParentscheckUI;  //인증창
 
     public GameObject Main_UI;
     public GameObject Button;
@@ -169,6 +170,8 @@ public class LodingTxt : MonoBehaviour
             string[] q_qid = DontDestroy.QuestIndex.Split('_');
             if (Int32.Parse(QQ[0]) > 3)
                 Ride.SetActive(true);
+            else
+                Ride.SetActive(false);
             if (Int32.Parse(QQ[0]) > 12)
                 AppleTreeObj.SetActive(true);
 
@@ -904,7 +907,7 @@ public class LodingTxt : MonoBehaviour
     public void Line()  //줄넘김 (scriptType이 뭔지 걸러냄)
     {
         if (data_Dialog[j]["SoundEffect"].ToString().Equals("Null"))
-            Debug.Log("사운드 없음");
+        { }
         else
         {
             string SoundName = data_Dialog[j]["SoundEffect"].ToString();
@@ -1069,7 +1072,7 @@ public class LodingTxt : MonoBehaviour
         chatTxt.text = LoadTxt;
         Arrow.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.3f);
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
             Debug.Log("튜토리얼 실행ㅇ");
@@ -1195,7 +1198,7 @@ public class LodingTxt : MonoBehaviour
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
             DontDestroy.LastDay = DontDestroy.ToDay;
             DontDestroy.From = " ";
-            GameObject.Find("ParentscheckUI").SetActive(false);
+            ParentscheckUI.SetActive(false);
             ParentscheckTxt.text = null;
             DontDestroy.ButtonPlusNpc = "";
             PlayInfoManager.GetQuestPreg();

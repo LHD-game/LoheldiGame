@@ -25,7 +25,7 @@ public class MainGameManager : MonoBehaviour
     {
         GetDailyHP();
         UpdateField();
-        //StartCoroutine(NowTimeChk());
+        StartCoroutine(NowTimeChk());
     }
 
     private void Awake()

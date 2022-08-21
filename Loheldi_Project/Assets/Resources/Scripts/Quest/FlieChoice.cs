@@ -52,6 +52,7 @@ public class FlieChoice : MonoBehaviour
         chat.FileAdress = "Scripts/Quest/script";
         chat.Num = chat.DontDestroy.QuestIndex;
         chat.NewChat();
+        Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
     }
 
     public void NpcChoice() //npc와 대화 선택하는 함수

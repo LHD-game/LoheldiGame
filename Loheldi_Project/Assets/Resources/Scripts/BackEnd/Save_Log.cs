@@ -137,7 +137,7 @@ public class Save_Log : MonoBehaviour
 
         Where where = new Where();
         where.Equal("StartTime", PlayerPrefs.GetString("QStartDate"));
-        var bro = Backend.GameData.GetMyData("QUEST_LOG", where);
+        var bro = Backend.GameData.Get("QUEST_LOG", where);
 
         if (bro.IsSuccess() == false)
         {

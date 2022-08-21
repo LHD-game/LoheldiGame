@@ -60,9 +60,12 @@ public class UIButton : MonoBehaviour
             NPC = GameObject.Find(Inter.NameNPC);
             Vector3 targetPositionNPC;
             Vector3 targetPositionPlayer;
-            if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine")) ;
-            else if (chat.DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei")) ;
-            else if (chat.DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho")) ;
+            if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine"))
+            { }
+            else if (chat.DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei"))
+            { }
+            else if (chat.DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho"))
+            { }
             else
             {
                 targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);

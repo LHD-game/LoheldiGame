@@ -26,13 +26,14 @@ public class HouseTutorial : MonoBehaviour
         QDD.tutorialLoading = true;
 
         GameObject tutoblack = tutogameobject.transform.GetChild(0).gameObject;
-        tutoblack.SetActive(true);
         //color.a = 0f;
         //tutoblack.GetComponent<Image>().color = color;
         if (button == 0)
         {
             //cuttoonImageList = Resources.Load<Sprite>("Sprites/Quest/cuttoon/tutorial/tuto8");
             //tutoblack.GetComponent<Image>().sprite = cuttoonImageList;
+            
+            tutoblack.SetActive(true);
             tutoblack.transform.GetChild(0).gameObject.SetActive(true);
         }
         else if (button == 1)

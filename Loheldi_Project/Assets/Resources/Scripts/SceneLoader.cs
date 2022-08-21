@@ -31,10 +31,6 @@ public class SceneLoader : MonoBehaviour
     {
         LoadingSceneManager.LoadScene("MainField");
     }
-    public void GotoGameMove()  // 테스트 용 - 이민진 5/3
-    {
-        LoadingSceneManager.LoadScene("GameMove");
-    }
 
     public void GotoCreateAcc()
     {
@@ -91,7 +87,7 @@ public class SceneLoader : MonoBehaviour
         LoadingSceneManager.LoadScene("Mail");
     }
 
-    public void GotoTestGacha()
+    public void GotoGacha()
     {
         LoadingSceneManager.LoadScene("Gacha");
     }

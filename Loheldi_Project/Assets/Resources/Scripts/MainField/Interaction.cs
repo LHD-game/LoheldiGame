@@ -29,11 +29,16 @@ public class Interaction : MonoBehaviour
             {
                 text.text = "거울";
             }
+            else if (other.gameObject.name == "GachaMachine")
+            {
+                Gacha = true;
+                text.text = "뽑기";
+            }
             else
                 text.text = "대화";
             NearNPC = true;
             NameNPC = other.gameObject.name.ToString();
-            NpcNameActive(other.gameObject, "in");
+            NpcNameActive(other.gameObject);
             Debug.Log("NPC이름=" + NameNPC);
             
         }
@@ -54,11 +59,13 @@ public class Interaction : MonoBehaviour
             text.text = "나가기";
             NameNPC = other.gameObject.name.ToString();
         }
-        else if (other.gameObject.name == "GachaMachine")
+        /*else if (other.gameObject.name == "GachaMachine")
         {
             Gacha = true;
             text.text = "뽑기";
-        }
+            NameNPC = other.gameObject.name.ToString();
+            NpcNameActive(other.gameObject);
+        }*/
         else if (other.gameObject.name == "Field")
         {
             Farm = true;
@@ -107,24 +114,22 @@ public class Interaction : MonoBehaviour
             JumpButton.SetActive(false);
         }
     }
-    public void NpcNameActive(GameObject other, string status)
+    public void NpcNameActive(GameObject other)
     {
         int NpcNum = Npcs.IndexOf(NameNPC);
-        if (status.Equals("in"))
-        {
             NpcNameTF = true;
             NpcNames[NpcNum].SetActive(true);
             StartCoroutine(NpcNameFollow(other, NpcNum));
-        }
     }
     IEnumerator NpcNameFollow(GameObject Npc, int NpcNum)
     {
+        GameObject NPCName_ = NpcNames[NpcNum];
         while (NpcNameTF)
         {
-            NpcNames[NpcNum].transform.position = Camera.main.WorldToScreenPoint(Npc.transform.position + new Vector3(0, 7f, 0));
+            NPCName_.transform.position = Camera.main.WorldToScreenPoint(Npc.transform.position + new Vector3(0, 7f, 0));
             yield return null;
         }
-        NpcNames[NpcNum].SetActive(false);
+        NPCName_.SetActive(false);
         yield break;
     }
 }

@@ -45,11 +45,11 @@ public class UIButton : MonoBehaviour
     public void JumpButton()                //점프버튼
     {
         GameObject SoundManager = GameObject.Find("SoundManager");
-        if (Inter.Gacha)
+        /*if (Inter.Gacha)
         {
             SoundManager.GetComponent<SoundManager>().Sound("BGMGacha");
             GachaUI.SetActive(true);
-        }
+        }*/
         if (OnLand && Inter.NearNPC)     //NPC주변에 있다면
         {
             Inter.NpcNameTF = false;
@@ -60,12 +60,9 @@ public class UIButton : MonoBehaviour
             NPC = GameObject.Find(Inter.NameNPC);
             Vector3 targetPositionNPC;
             Vector3 targetPositionPlayer;
-            if (Inter.NameNPC.Equals("WallMirror"))
-                Debug.Log("거울");
-            else if (chat.DontDestroy.QuestIndex.Equals("8_1"))
-                Debug.Log("메이 퀘스트");
-            else if (chat.DontDestroy.QuestIndex.Equals("13_1"))
-                Debug.Log("수호 퀘스트");
+            if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine")) ;
+            else if (chat.DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei")) ;
+            else if (chat.DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho")) ;
             else
             {
                 targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);

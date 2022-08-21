@@ -9,7 +9,6 @@ public class NpcName : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)             //다른 콜리더와 부딛혔을때
     {
-        Debug.Log("이름표");
         if (other.gameObject.name.ToString() == Npc.name)
         {
             StartCoroutine("NpcNameFollow");

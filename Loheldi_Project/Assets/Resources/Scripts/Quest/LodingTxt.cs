@@ -203,6 +203,20 @@ public class LodingTxt : MonoBehaviour
     {
         PlayerPrefs.SetInt("LastQTime", 0);
         DontDestroy.LastDay = 0;
+        string QuestType = null;
+        if (!DontDestroy.weekend)
+        {
+            QuestType = "QuestPreg";
+        }
+        else
+            QuestType = "WeeklyQuestPreg";
+        DontDestroy.QuestIndex = QuestType;
+        QuestLoad.QuestLoadStart();
+    }
+    public void QuestMoveTest()
+    {
+        PlayerPrefs.SetInt("LastQTime", 0);
+        DontDestroy.LastDay = 0;
         string[] q_qid = DontDestroy.QuestIndex.Split('_');
         string QuestType = null;
         if (Int32.Parse(q_qid[0]) < 22)

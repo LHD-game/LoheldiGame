@@ -159,7 +159,7 @@ public class Changing : MonoBehaviour
     public void ButtonClick(Text ItemCodeObject)
     {
         string ItemCode = ItemCodeObject.text;
-        if (Starting || AmountCheck(ItemCode))
+        /*if (Starting || AmountCheck(ItemCode))
         {
             Where where = new Where();
             if (FurnitureChangeClick.CurrentFurniture.transform.Find("ItemCode"))
@@ -182,6 +182,7 @@ public class Changing : MonoBehaviour
                 var update_bro = Backend.GameData.UpdateV2("INVENTORY", rowIndateA, Backend.UserInDate, paramA);
             }
             else { }
+        */
             if (FurnitureChangeClick.CurrentFurniture.GetComponent<Text>().text == "bed" || (Starting))
             {
                 if (ItemCode == "2010101")            //첫번째 옵션을 선택했다면
@@ -1019,7 +1020,7 @@ public class Changing : MonoBehaviour
                     }
                 }
             }
-        }
+        //}
     }
     bool AmountCheck(string icode)
     {

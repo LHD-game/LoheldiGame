@@ -64,7 +64,7 @@ public class NewAccSave : MonoBehaviour
 
     public void SaveNickName()  //´Ð³×ÀÓ ÀÔ·Â ÈÄ ¹öÆ°À» ´­·¶À» °æ¿ì ½ÇÇà
     {
-        Regex regex = new Regex(@"[a-zA-Z°¡-ÆR¤¡-¤¾0-9]{2,5}$"); //´Ð³×ÀÓ Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ÇÑ±Û 2~8ÀÚ °¡´É
+        Regex regex = new Regex(@"[a-zA-Z°¡-ÆR¤¡-¤¾0-9]{2,8}$"); //´Ð³×ÀÓ Á¤±Ô½Ä. ¿µ´ë¼Ò¹®ÀÚ, ÇÑ±Û 2~8ÀÚ °¡´É
 
         if ((regex.IsMatch(InputNickName.text))) //Á¤±Ô½Ä ÀÏÄ¡½Ã,
         {

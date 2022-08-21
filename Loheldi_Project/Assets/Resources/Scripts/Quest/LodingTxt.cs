@@ -193,6 +193,10 @@ public class LodingTxt : MonoBehaviour
         {
             Quiz_material = Quiz.GetComponent<MeshRenderer>().materials;
         }
+        else if (SceneManager.GetActiveScene().name == "Game_Tooth")
+        {
+            SoundEffectManager = GameObject.Find("GameManager");
+        }
         
     }
     public void QuestTest()
@@ -210,6 +214,11 @@ public class LodingTxt : MonoBehaviour
         PlayerPrefs.SetString(QuestType, DontDestroy.QuestIndex);
         PlayInfoManager.GetQuestPreg();
         QuestLoad.QuestLoadStart();
+    }
+
+    public void NotWeekend()
+    {
+        DontDestroy.weekend = false;
     }
     public void ToothQuest()
     {

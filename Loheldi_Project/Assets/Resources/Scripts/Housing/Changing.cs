@@ -33,6 +33,7 @@ public class Changing : MonoBehaviour
     public GameObject KitchenPosition;
     public GameObject StandSinkPosition;
     public GameObject FridgePosition;
+    public GameObject SofaPosition;
 
     public Text TempItemCode;
 
@@ -334,27 +335,27 @@ public class Changing : MonoBehaviour
             {
                 if (ItemCode == "2010301")            //첫번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/table_W"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(CoffeeTablePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/table_W"), CoffeeTablePosition.transform);
+                    TempObject.transform.SetParent(CoffeeTablePosition.transform);
                 }
                 else if (ItemCode == "2020301")       //두번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/table"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(CoffeeTablePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/table"), CoffeeTablePosition.transform);
+                    TempObject.transform.SetParent(CoffeeTablePosition.transform);
                 }
                 else if (ItemCode == "8020302")       //세번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/table_k"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(CoffeeTablePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/table_k"), CoffeeTablePosition.transform);
+                    TempObject.transform.SetParent(CoffeeTablePosition.transform);
                 }
                 else if (ItemCode == "8020403")       //네번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/Table_A"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(CoffeeTablePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Coffeetable/Table_A"), CoffeeTablePosition.transform);
+                    TempObject.transform.SetParent(CoffeeTablePosition.transform);
                 }
                 if (!Starting)
                 {
@@ -432,27 +433,27 @@ public class Changing : MonoBehaviour
             {
                 if (ItemCode == "2010201")            //첫번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/Fridge_01"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(FridgePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/Fridge_01"), FridgePosition.transform);
+                    TempObject.transform.SetParent(FridgePosition.transform);
                 }
                 else if (ItemCode == "2020201")       //두번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/fridge_bw"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(FridgePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/fridge_bw"), FridgePosition.transform);
+                    TempObject.transform.SetParent(FridgePosition.transform);
                 }
                 else if (ItemCode == "2030201")       //세번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/Fridge_K"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(FridgePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/Fridge_K"), FridgePosition.transform);
+                    TempObject.transform.SetParent(FridgePosition.transform);
                 }
                 else if (ItemCode == "2040106")       //네번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/Fridge_A"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(FridgePosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Fridge/Fridge_A"), FridgePosition.transform);
+                    TempObject.transform.SetParent(FridgePosition.transform);
                 }
                 if (!Starting)
                 {
@@ -481,27 +482,27 @@ public class Changing : MonoBehaviour
             {
                 if (ItemCode == "2010106")            //첫번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/Wallshelf_05"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(WallshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/Wallshelf_05"), WallshelfPosition.transform);
+                    TempObject.transform.SetParent(WallshelfPosition.transform);
                 }
                 else if (ItemCode == "2020106")       //두번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/WallShelf_BW"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(WallshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/WallShelf_BW"), WallshelfPosition.transform);
+                    TempObject.transform.SetParent(WallshelfPosition.transform);
                 }
                 else if (ItemCode == "2030106")       //세번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/WallShelf_K"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(WallshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/WallShelf_K"), WallshelfPosition.transform);
+                    TempObject.transform.SetParent(WallshelfPosition.transform);
                 }
                 else if (ItemCode == "2040105")       //네번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/WallShelf_A"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(WallshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Wallshelf/WallShelf_A"), WallshelfPosition.transform);
+                    TempObject.transform.SetParent(WallshelfPosition.transform);
                 }
                 if (!Starting)
                 {
@@ -530,27 +531,27 @@ public class Changing : MonoBehaviour
             {
                 if (ItemCode == "2010203")            //첫번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/bookshelf_W"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(BookshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/bookshelf_W"), BookshelfPosition.transform);
+                    TempObject.transform.SetParent(BookshelfPosition.transform);
                 }
                 else if (ItemCode == "2020203")       //두번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/bookshelf"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(BookshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/bookshelf"), BookshelfPosition.transform);
+                    TempObject.transform.SetParent(BookshelfPosition.transform);
                 }
                 else if (ItemCode == "2030203")       //세번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/bookshelf_K"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(BookshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/bookshelf_K"), BookshelfPosition.transform);
+                    TempObject.transform.SetParent(BookshelfPosition.transform);
                 }
                 else if (ItemCode == "2040202")       //네번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/Bookcase_A"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(BookshelfPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Bookshelf/Bookcase_A"), BookshelfPosition.transform);
+                    TempObject.transform.SetParent(BookshelfPosition.transform);
                 }
                 if (!Starting)
                 {
@@ -579,27 +580,27 @@ public class Changing : MonoBehaviour
             {
                 if (ItemCode == "2010103")            //첫번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand_W"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(StandSinkPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand_W"), StandSinkPosition.transform);
+                    TempObject.transform.SetParent(StandSinkPosition.transform);
                 }
                 else if (ItemCode == "2020103")       //두번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(StandSinkPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand"), StandSinkPosition.transform);
+                    TempObject.transform.SetParent(StandSinkPosition.transform);
                 }
                 else if (ItemCode == "2030103")       //세번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand_K"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(StandSinkPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand_K"), StandSinkPosition.transform);
+                    TempObject.transform.SetParent(StandSinkPosition.transform);
                 }
                 else if (ItemCode == "2040102")       //네번째 옵션을 선택했다면
                 {
-                    Destroy(SidetablePosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand_A"), SidetablePosition.transform);
-                    TempObject.transform.SetParent(SidetablePosition.transform);
+                    Destroy(StandSinkPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Standingsink/washstand_A"), StandSinkPosition.transform);
+                    TempObject.transform.SetParent(StandSinkPosition.transform);
                 }
                 if (!Starting)
                 {
@@ -630,13 +631,13 @@ public class Changing : MonoBehaviour
                 if (ItemCode == "2010204")            //첫번째 옵션을 선택했다면
                 {
                     Destroy(DeskPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Desk/Desk4_W"), DeskPosition.transform);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Desk/Desk2_W"), DeskPosition.transform);
                     TempObject.transform.SetParent(DeskPosition.transform);
                 }
                 else if (ItemCode == "2020204")       //두번째 옵션을 선택했다면
                 {
                     Destroy(DeskPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Desk/Desk_4"), DeskPosition.transform);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Desk/desk_2"), DeskPosition.transform);
                     TempObject.transform.SetParent(DeskPosition.transform);
                 }
                 else if (ItemCode == "2030204")       //세번째 옵션을 선택했다면
@@ -975,27 +976,27 @@ public class Changing : MonoBehaviour
             {
                 if (ItemCode == "2010206")            //첫번째 옵션을 선택했다면
                 {
-                    Destroy(KitchenPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_W"), KitchenPosition.transform);
-                    TempObject.transform.SetParent(KitchenPosition.transform);
+                    Destroy(SofaPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_W"), SofaPosition.transform);
+                    TempObject.transform.SetParent(SofaPosition.transform);
                 }
                 else if (ItemCode == "2020206")       //두번째 옵션을 선택했다면
                 {
-                    Destroy(KitchenPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_WB"), KitchenPosition.transform);
-                    TempObject.transform.SetParent(KitchenPosition.transform);
+                    Destroy(SofaPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_WB"), SofaPosition.transform);
+                    TempObject.transform.SetParent(SofaPosition.transform);
                 }
                 else if (ItemCode == "8020301")       //세번째 옵션을 선택했다면
                 {
-                    Destroy(KitchenPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_K"), KitchenPosition.transform);
-                    TempObject.transform.SetParent(KitchenPosition.transform);
+                    Destroy(SofaPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/Kitchen/Kitchen_K"), SofaPosition.transform);
+                    TempObject.transform.SetParent(SofaPosition.transform);
                 }
                 else if (ItemCode == "8020402")       //네번째 옵션을 선택했다면
                 {
-                    Destroy(KitchenPosition.transform.GetChild(0).gameObject);
-                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Kitchen_A"), KitchenPosition.transform);
-                    TempObject.transform.SetParent(KitchenPosition.transform);
+                    Destroy(SofaPosition.transform.GetChild(0).gameObject);
+                    TempObject = Instantiate(Resources.Load<GameObject>("Prefabs/Furniture/FurnitureSets/Kitchen_A"), SofaPosition.transform);
+                    TempObject.transform.SetParent(SofaPosition.transform);
                 }
                 if (!Starting)
                 {

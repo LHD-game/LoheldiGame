@@ -113,7 +113,6 @@ public class NpcButtonClick : MonoBehaviour
     }
     public void CheckQuest()
     {
-        Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
 
         GameObject[] clone = GameObject.FindGameObjectsWithTag("ExclamationMark");
 

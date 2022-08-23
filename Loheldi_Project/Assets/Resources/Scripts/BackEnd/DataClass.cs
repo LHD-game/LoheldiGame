@@ -14,6 +14,7 @@ public static class ChartNum
     public static string ClothesItemChart = "55438";
     public static string AllItemChart = "55031";
     public static string BadgeChart = "54754";
+    public static string GachaClothesChart = "56858";
 
 }
 
@@ -67,6 +68,15 @@ public class CustomStoreItem
     public string Category;
     public string ItemType;
     public string Texture;
+}
+
+public class GachaItem
+{
+    public string ICode;
+    public string ItemType;
+    public string Amount;
+    public string Percent;
+
 }
 
 public class Badge

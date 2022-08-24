@@ -166,6 +166,7 @@ public class LodingTxt : MonoBehaviour
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
 
             string[] QQ = PlayerPrefs.GetString("QuestPreg").Split('_');
+            string[] qq = PlayerPrefs.GetString("WeeklyQuestPreg").Split('_');
 
             string[] q_qid = DontDestroy.QuestIndex.Split('_');
             if (Int32.Parse(QQ[0]) > 3)
@@ -185,10 +186,21 @@ public class LodingTxt : MonoBehaviour
             }
             else
             {
-                if (Int32.Parse(q_qid[0]) < 22 || Int32.Parse(q_qid[0]) < 25)
+                if (!DontDestroy.weekend)
                 {
-                    if (DontDestroy.ToDay != DontDestroy.LastDay)
-                        QuestLoad.QuestLoadStart();
+                    if (Int32.Parse(QQ[0]) < 22)
+                    {
+                        if (DontDestroy.ToDay != DontDestroy.LastDay)
+                            QuestLoad.QuestLoadStart();
+                    }
+                }
+                else if(DontDestroy.weekend)
+                {
+                    if (Int32.Parse(qq[0]) < 26)
+                    {
+                        if (DontDestroy.ToDay != DontDestroy.LastDay)
+                            QuestLoad.QuestLoadStart();
+                    }
                 }
             }
         }
@@ -235,7 +247,10 @@ public class LodingTxt : MonoBehaviour
 
     public void NotWeekend()
     {
-        DontDestroy.weekend = false;
+        if (DontDestroy.weekend)
+            DontDestroy.weekend = false;
+        else
+            DontDestroy.weekend = true;
     }
     public void ToothQuest()
     {
@@ -378,10 +393,10 @@ public class LodingTxt : MonoBehaviour
                 SceneLoader.instance.GotoMainField();
                 break;
             case 13:
-                Player.transform.position = new Vector3(-145.300003f, 12.6158857f, -21.80023f);
+                Player.transform.position = new Vector3(-139.300003f, 12.6158857f, -21.80023f);
                 Player.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
                 GameObject Parents = GameObject.Find("parents(Clone)");
-                Parents.transform.position = Player.transform.position + new Vector3(-10, 0, 0);
+                Parents.transform.position = Player.transform.position + new Vector3(-6, 0, 0);
                 Parents.transform.rotation = Quaternion.Euler(new Vector3(0, 150, 0));
                 break;
             default:
@@ -391,6 +406,8 @@ public class LodingTxt : MonoBehaviour
     GameObject mouth; //양치겜 입
     public void QuestSubChoice()
     {
+        Debug.Log("퀘이벤");
+        Debug.Log("타입"+data_Dialog[j]["scriptType"].ToString());
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
             MataNum = Int32.Parse(data_Dialog[j]["QuizNumber"].ToString());
@@ -433,7 +450,7 @@ public class LodingTxt : MonoBehaviour
         else if (data_Dialog[j]["scriptType"].ToString().Equals("ReloadEnd"))  //main으로
         {
             QuestEnd();
-            SceneLoader.instance.GotoMainField();
+            StartCoroutine(reload());
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("over"))  //main으로
         {
@@ -444,8 +461,8 @@ public class LodingTxt : MonoBehaviour
         {
             Cuttoon();
             ChatWin.SetActive(false);
-            j += 1;
-            Invoke("Line", 2f);
+            Invoke("ChatEnd", 2f);
+            Invoke("QuestEnd", 2f);
         } //컷툰 보이기
         else if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon"))
         {
@@ -556,14 +573,16 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("note"))        //퀘스트중간애들
         {
-            if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon").Equals("0"))
+            if (data_Dialog[j]["cuttoon"].ToString().Equals("0"))
             {
                 j++;
                 ChatWin.SetActive(false);
                 Note.SetActive(true);
-            }if (data_Dialog[j]["scriptType"].ToString().Equals("cuttoon").Equals("1"))
+            }
+            else
             {
-                Draw.FinishWrite();
+                j++;
+                ChatWin.SetActive(false);
             }
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("noteFinish"))        //퀘스트중간애들
@@ -591,7 +610,8 @@ public class LodingTxt : MonoBehaviour
             j++;
             nutrient.SetActive(false);
             Cuttoon();
-            Invoke("scriptLine", 2f);
+            ChatWin.SetActive(false);
+            Invoke("scriptLine", 2f);   //딜레이 후 스크립트 띄움
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("train"))
         {
@@ -869,6 +889,28 @@ public class LodingTxt : MonoBehaviour
                 Invoke("scriptLine", 3f);   //딜레이 후 스크립트 띄움
             }
         }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("LookAt"))
+        {
+            GameObject NPC = GameObject.Find(Inter.NameNPC);
+            Vector3 targetPositionNPC;
+            targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+            NPC.transform.LookAt(targetPositionNPC);
+            if (Quest.note)
+            {
+                    Quest.note = false;
+                    GameObject[] objs = GameObject.FindGameObjectsWithTag("note");
+                    for (int i = 0; i < objs.Length; i++)
+                        Destroy(objs[i]);
+            }
+            else if(data_Dialog[j]["scriptNumber"].ToString().Equals("19_1"))
+            {
+                GameObject NPC2 = GameObject.Find("Nari");
+                Vector3 targetPositionNPC2;
+                targetPositionNPC2 = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
+                NPC2.transform.LookAt(targetPositionNPC);
+            }
+            scriptLine();   //딜레이 후 스크립트 띄움
+        }
     }
 
     public void QSound()
@@ -952,26 +994,6 @@ public class LodingTxt : MonoBehaviour
     
     public void scriptLine()  //스크립트 띄우는 거 (어굴 이미지+ 이름+ 뜨는 텍스트)
     {
-        //block.SetActive(true);
-        if (SceneManager.GetActiveScene().name == "MainField")
-        {
-            if (Quest.note)
-            {
-                if (data_Dialog[j]["scriptNumber"].ToString().Equals("8_2")|| data_Dialog[j]["scriptNumber"].ToString().Equals("13_2") )
-                {
-                    GameObject NPC = GameObject.Find(Inter.NameNPC);
-                    Vector3 targetPositionNPC;
-                    targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
-                    NPC.transform.LookAt(targetPositionNPC);
-                    Quest.note = false;
-                    GameObject[] objs = GameObject.FindGameObjectsWithTag("note");
-                    for (int i = 0; i < objs.Length; i++)
-                        Destroy(objs[i]);
-
-                }
-            }
-            
-        }
         spriteR = CCImage.GetComponent<Image>();
         l = Int32.Parse(data_Dialog[j]["image"].ToString());
         if (l == 9)
@@ -1070,13 +1092,14 @@ public class LodingTxt : MonoBehaviour
                 break;
         }
         chatTxt.text = LoadTxt;
-        Arrow.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(0.2f);
+        Arrow.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.1f);
         if (data_Dialog[j - 1]["scriptType"].ToString().Equals("tutorial") || tuto)
         {
             Debug.Log("튜토리얼 실행ㅇ");
-            Invoke("Tutorial_", 2f);
+            Invoke("Tutorial_", 1f);
         }
         else
         {
@@ -1162,6 +1185,11 @@ public class LodingTxt : MonoBehaviour
         Button.SetActive(true);
     }
 
+    private IEnumerator reload()
+    {
+        yield return new WaitForEndOfFrame();
+        SceneLoader.instance.GotoMainField();
+    }
     public void QuestEnd()
     {
         Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록

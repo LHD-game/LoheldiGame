@@ -9,9 +9,10 @@ public class Animation : MonoBehaviour
     public Drawing Draw;
     private LodingTxt chat; 
     public GameObject SoundEffectManager;
+    public GameObject[] notes;
     /// 노트 애니메이션
     int dest=0;
-    void destroy(string DestryedObject)
+    void destroy(int DestryedObject)
     {
         ++dest;
         if(dest == Draw.notes.Length)
@@ -20,21 +21,28 @@ public class Animation : MonoBehaviour
             chat.scriptLine();
             //Debug.Log("다버림");
         }
-        Destroy(GameObject.Find(DestryedObject));
+        Destroy(notes[DestryedObject]);
     }
     public Sprite noteImageSprite;
     static Image noteImage;
-    void noteGone1(string Object)
+    void noteGone1(int Object)
     {
         SoundEffectManager.GetComponent<SoundEffect>().Sound("Paper");
         noteImageSprite = Resources.Load<Sprite>("Sprites/Quest/Note/note1");
-        noteImage = GameObject.Find(Object).GetComponent<Image>();
+        noteImage = notes[Object].GetComponent<Image>();
         noteImage.sprite = noteImageSprite;
     }
-    void noteGone2(string Object)
+    void noteGone2(int Object)
     {
-        GameObject notea = GameObject.Find(Object);
-        notea.transform.GetChild(2).gameObject.SetActive(false);
+        GameObject notea = notes[Object];
+        Transform[] allChildren = notea.GetComponentsInChildren<Transform>();
+        foreach (Transform child in allChildren)
+        {
+            if (child.name == notea.name)
+                return;
+            else
+                child.gameObject.SetActive(false);
+        }
         noteImageSprite = Resources.Load<Sprite>("Sprites/Quest/Note/note2");
         noteImage = notea.GetComponent<Image>();
         noteImage.sprite = noteImageSprite;

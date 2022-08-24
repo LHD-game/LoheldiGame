@@ -29,6 +29,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void GotoMainField()
     {
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("MainField");
     }
 

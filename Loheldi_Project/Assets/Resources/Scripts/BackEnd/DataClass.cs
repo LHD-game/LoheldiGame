@@ -15,6 +15,7 @@ public static class ChartNum
     public static string AllItemChart = "55031";
     public static string BadgeChart = "54754";
     public static string GachaClothesChart = "56858";
+    public static string GachaGaguChart = "56925";
 
 }
 

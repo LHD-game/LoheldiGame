@@ -27,10 +27,11 @@ public class Gacha : MonoBehaviour
     int try_num = 0;    //뽑기 연속 실행 횟수
     int need_coin = 0;
     string[] clothes_icode_percent = new string[100];  //아이템 코드를 확률 개수 별로 삽입한다.
-    
-    
+    string[] gagu_icode_percent = new string[100];
 
-    List<Dictionary<string, object>> gachaGagu = new List<Dictionary<string, object>>();
+    Coroutine cor;
+
+    List<Dictionary<string, object>> gachaGaguItem = new List<Dictionary<string, object>>();
     List<Dictionary<string, object>> gachaClothesItem = new List<Dictionary<string, object>>();
 
     List<GameObject> gachaResultList = new List<GameObject>();   //뽑기 결과 오브젝트 객체를 저장하는 변수
@@ -41,6 +42,7 @@ public class Gacha : MonoBehaviour
 
         //GetChartContents(ChartNum.AllItemChart, gachaGagu);
         GetChartContents(ChartNum.GachaClothesChart, gachaClothesItem);
+        GetChartContents(ChartNum.GachaGaguChart, gachaGaguItem);
 
         //예: Percent값이 5였다면 Icode가 5번 들어간다.
         int k = 0;
@@ -51,6 +53,17 @@ public class Gacha : MonoBehaviour
             {
                 clothes_icode_percent[k] = gachaClothesItem[i]["ICode"].ToString();
                 k++;
+            }
+        }
+
+        int h = 0;
+        for (int i = 0; i < gachaGaguItem.Count; i++)
+        {
+            int per_num = int.Parse(gachaGaguItem[i]["Percent"].ToString());
+            for (int j = 0; j < per_num; j++)
+            {
+                gagu_icode_percent[h] = gachaGaguItem[i]["ICode"].ToString();
+                h++;
             }
         }
     }
@@ -139,17 +152,17 @@ public class Gacha : MonoBehaviour
 
         if (gacha_type.Equals("clothes"))
         {
-            ClothesGachaResult();
+            cor = StartCoroutine(ClothesGachaResult());
         }
         else
         {
-            Debug.Log("가구뽑기실행");
+            cor = StartCoroutine(GaguGachaResult());
         }
         
         SceneUpdate();
     }
 
-    void ClothesGachaResult()
+    IEnumerator ClothesGachaResult()
     {
         for(int i=0; i<try_num; i++)
         {
@@ -173,7 +186,37 @@ public class Gacha : MonoBehaviour
                         SaveItemInven(icode, amount);
                         ResultCategory(icode, amount, "Item");
                     }
-                    
+                    yield return new WaitForSeconds(0.3f);
+                }
+            }
+        }
+    }
+
+    IEnumerator GaguGachaResult()
+    {
+        for (int i = 0; i < try_num; i++)
+        {
+            int r_num = Random.Range(0, 100);
+            //Debug.Log(clothes_icode_percent[r_num]);
+            string icode = gagu_icode_percent[r_num];
+            for (int j = 0; j < gachaGaguItem.Count; j++)
+            {
+                if (gachaGaguItem[j]["ICode"].ToString().Equals(icode))
+                {
+                    int amount = int.Parse(gachaGaguItem[j]["Amount"].ToString());
+                    //서버에 저장(중복은 40코인으로 대체)
+                    //결과 화면에 띄우기
+                    if (gachaGaguItem[j]["ItemType"].ToString().Equals("Gagu"))   //의상 아이템
+                    {
+                        SaveItemGagu(icode);
+                        ResultCategory(icode, amount, "Gagu");
+                    }
+                    else    //인벤토리 아이템
+                    {
+                        SaveItemInven(icode, amount);
+                        ResultCategory(icode, amount, "Item");
+                    }
+                    yield return new WaitForSeconds(0.3f);
                 }
             }
         }
@@ -303,6 +346,45 @@ public class Gacha : MonoBehaviour
         }
     }
 
+    //가구 아이템을 옷장 테이블에 저장
+    void SaveItemGagu(string icode)
+    {
+        Where where = new Where();
+        where.Equal("ICode", icode);
+        var bro = Backend.GameData.GetMyData("INVENTORY", where);
+
+        if (bro.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+        }
+        else
+        {
+            JsonData rows = bro.GetReturnValuetoJSON()["rows"];
+            //없을 경우 아이템 행 추가
+            if (rows.Count <= 0)
+            {
+                Param param = new Param();
+                param.Add("ICode", icode);
+
+                var insert_bro = Backend.GameData.Insert("INVENTORY", param);
+
+                if (insert_bro.IsSuccess())
+                {
+                    Debug.Log("가구 획득 완료: " + icode);
+                }
+                else
+                {
+                    Debug.Log("가구 획득 오류");
+                }
+            }
+            //있을 경우 40 코인으로 대체
+            else
+            {
+                PlayInfoManager.GetCoin(40);
+            }
+        }
+    }
+
     void ResultCategory(string icode, int amount, string item_type)
     {
         GameObject itemBtn = (GameObject)Resources.Load("Prefabs/UI/GachaItem");
@@ -317,6 +399,9 @@ public class Gacha : MonoBehaviour
         //아이템 박스 크기 재설정
         RectTransform rt = child.GetComponent<RectTransform>();
         rt.localScale = new Vector3(1f, 1f, 1f);
+        Vector3 position = rt.localPosition;
+        position.z = 0;
+        rt.localPosition = position;
 
         gachaResultList.Add(child);
 
@@ -331,7 +416,7 @@ public class Gacha : MonoBehaviour
         {
             img.sprite = Resources.Load<Sprite>("Sprites/Catalog_Images/Customize/" + icode + "_catalog");
         }
-        else
+        else //Gagu, Item
         {
             img.sprite = Resources.Load<Sprite>("Sprites/Catalog_Images/Store/" + icode + "_catalog");
         }

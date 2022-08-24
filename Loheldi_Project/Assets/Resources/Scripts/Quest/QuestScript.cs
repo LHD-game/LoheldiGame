@@ -65,8 +65,9 @@ public class QuestScript : MonoBehaviour
             note = true;
             GameObject.Find(DontDestroy.ButtonPlusNpc).transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if (DontDestroy.QuestIndex.Equals("6_1")|| DontDestroy.QuestIndex.Equals("7_1")|| DontDestroy.QuestIndex.Equals("11_1")|| DontDestroy.QuestIndex.Equals("14_1")|| DontDestroy.QuestIndex.Equals("18_1")|| DontDestroy.QuestIndex.Equals("20_1")|| DontDestroy.QuestIndex.Equals("22_1")|| DontDestroy.QuestIndex.Equals("25_1"))
+        else if (DontDestroy.QuestIndex.Equals("6_1")|| DontDestroy.QuestIndex.Equals("7_1")|| DontDestroy.QuestIndex.Equals("11_1")|| DontDestroy.QuestIndex.Equals("14_1")|| DontDestroy.QuestIndex.Equals("18_1")|| DontDestroy.QuestIndex.Equals("20_1")|| DontDestroy.QuestIndex.Equals("22_1"))
         {
+            //6_1 하미 3대 영양소 ,7_1 힘찬이 홈트2주차
             GameObject.Find(DontDestroy.ButtonPlusNpc).transform.position = new Vector3(54, 5, 37);
         }
         else if (DontDestroy.QuestIndex.Equals("13_1"))
@@ -77,8 +78,12 @@ public class QuestScript : MonoBehaviour
         }
         else if (DontDestroy.QuestIndex.Equals("19_1"))
         {
-            GameObject.Find("Nari").transform.position = new Vector3(68, 5, -20);
-            GameObject.Find(DontDestroy.ButtonPlusNpc).transform.rotation = Quaternion.Euler(new Vector3(0, 30, 0));
+            //GameObject.Find(DontDestroy.ButtonPlusNpc).transform.position = new Vector3(125, 15, 170);
+            GameObject.Find(DontDestroy.ButtonPlusNpc).transform.rotation = Quaternion.Euler(new Vector3(0, 157, 0));
+
+            GameObject NariIm = GameObject.Find("Nari");
+            NariIm.transform.position = new Vector3(68, 5, -16);
+            NariIm.transform.rotation = Quaternion.Euler(new Vector3(0, 207, 0));
         }
         else if (DontDestroy.QuestIndex.Equals("21_1")|| DontDestroy.QuestIndex.Equals("23_1")|| DontDestroy.QuestIndex.Equals("24_1"))
         {

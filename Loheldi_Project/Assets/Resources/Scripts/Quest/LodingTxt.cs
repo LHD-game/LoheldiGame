@@ -157,12 +157,12 @@ public class LodingTxt : MonoBehaviour
 
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
 
-        if (SceneManager.GetActiveScene().name == "MainField")
-            Player.position = DontDestroy.gameObject.transform.position;
 
         DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
+
         if (SceneManager.GetActiveScene().name == "MainField")     //메인 필드에 있을 떄만 사용
         {
+            Player.position = DontDestroy.gameObject.transform.position;
             DontDestroy.LastDay = PlayerPrefs.GetInt("LastQTime");
 
             string[] QQ = PlayerPrefs.GetString("QuestPreg").Split('_');

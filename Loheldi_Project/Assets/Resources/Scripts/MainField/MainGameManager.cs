@@ -25,7 +25,7 @@ public class MainGameManager : MonoBehaviour
     {
         GetDailyHP();
         UpdateField();
-        StartCoroutine(NowTimeChk());
+        //StartCoroutine(NowTimeChk());
     }
 
     private void Awake()
@@ -72,17 +72,6 @@ public class MainGameManager : MonoBehaviour
         FieldExpTxt.text = now_exp + " / " + max_exp;
         //경험치 슬라이드 value - (현재 경험치 / 최대 경험치) * 100 : 백분율
         ExpSlider.value = (now_exp / max_exp) * 100;
-
-        string[] q_preg = PlayerPrefs.GetString("QuestPreg").Split('_');
-        int front_q_preg = int.Parse(q_preg[0]);
-        if(front_q_preg > 4)
-        {
-            BikeBtn.SetActive(true);
-        }
-        else
-        {
-            BikeBtn.SetActive(false);
-        }
     }
 
     void GetDailyHP()   //일자를 검사하여 hp를 5 제공

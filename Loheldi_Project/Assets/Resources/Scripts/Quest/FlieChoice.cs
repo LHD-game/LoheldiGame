@@ -45,6 +45,7 @@ public class FlieChoice : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "MainField")
         {
+            EPin.SetActive(false);
             Inter.NpcNameTF = false;
             //Debug.Log(chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));
             chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/Quest" + chat.DontDestroy.QuestIndex.Substring(0, chat.DontDestroy.QuestIndex.IndexOf("_")));

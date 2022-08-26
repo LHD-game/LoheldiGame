@@ -14,6 +14,9 @@ public class MainGameManager : MonoBehaviour
     public Text FieldExpTxt;
     public Slider ExpSlider;
 
+    public GameObject HousePlace;
+    public int HouseLv;
+
     public GameObject SoundManager;
     public static MainGameManager SingletonInstance;
 
@@ -72,6 +75,8 @@ public class MainGameManager : MonoBehaviour
         FieldExpTxt.text = now_exp + " / " + max_exp;
         //경험치 슬라이드 value - (현재 경험치 / 최대 경험치) * 100 : 백분율
         ExpSlider.value = (now_exp / max_exp) * 100;
+        HouseLv = PlayerPrefs.GetInt("HouseLv");
+        HouseChange();
     }
 
     void GetDailyHP()   //일자를 검사하여 hp를 5 제공
@@ -96,6 +101,29 @@ public class MainGameManager : MonoBehaviour
                 
                 Debug.Log("날짜가 바뀌어 hp가 회복되었습니다.");
             }
+        }
+    }
+
+    void HouseChange()
+    {
+        HousePlace.transform.GetChild(0).gameObject.SetActive(false);
+        HousePlace.transform.GetChild(1).gameObject.SetActive(false);
+        HousePlace.transform.GetChild(2).gameObject.SetActive(false);
+        HousePlace.transform.GetChild(3).gameObject.SetActive(false);
+        switch (HouseLv)
+        {
+            case 1:
+                HousePlace.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case 2:
+                HousePlace.transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 3:
+                HousePlace.transform.GetChild(2).gameObject.SetActive(true);
+                break;
+            case 4:
+                HousePlace.transform.GetChild(3).gameObject.SetActive(true);
+                break;
         }
     }
 

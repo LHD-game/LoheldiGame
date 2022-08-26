@@ -31,17 +31,13 @@ public class RealClockforWelcome : MonoBehaviour
         else
             QDD.weekend = false;
         QDD.ToDay= Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
+
+        StartCoroutine(TimeCheckCorutine()); //시간 검사하는 메소드 (코루틴으로 1분마다 반복)
     }
-/*
+
     private void Update()
     {
-        GetCurrentDate();               //매 프레임마다 시간을 불러옴
-        if (PreTime != Time)            //시간이 변경 될 때마다
-        {
-            PreTime = Time;             //변경 함수 초기화
-            TimeSetting(Time);          //시간에 따른 변경 함수git 
-        }
-    }*/
+    }
 
     public void GetCurrentDate()
     {
@@ -95,5 +91,15 @@ public class RealClockforWelcome : MonoBehaviour
                 NightLight.SetActive(true);
             }
         }
+    }
+    IEnumerator TimeCheckCorutine()
+    {
+        GetCurrentDate();               //매 프레임마다 시간을 불러옴
+        if (PreTime != Time)            //시간이 변경 될 때마다
+        {
+            PreTime = Time;             //변경 함수 초기화
+            TimeSetting(Time);          //시간에 따른 변경 함수git 
+        }
+        yield return new WaitForSecondsRealtime(30f);
     }
 }

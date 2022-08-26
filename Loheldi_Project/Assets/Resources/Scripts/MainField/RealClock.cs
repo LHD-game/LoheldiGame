@@ -31,25 +31,16 @@ public class RealClock : MonoBehaviour
         TimeSetting(Time);
         PreTime = Time;                 //변경 함수 초기화
 
+        StartCoroutine(TimeCheckCorutine()); //시간 검사하는 메소드 (코루틴으로 1분마다 반복)
     }
-
-/*    private void Update()
-    {
-        GetCurrentDate();               //매 프레임마다 시간을 불러옴
-        if (PreTime != Time)            //시간이 변경 될 때마다
-        {
-            PreTime = Time;             //변경 함수 초기화
-            TimeSetting(Time);          //시간에 따른 변경 함수
-        }
-    }*/
 
     public void GetCurrentDate()
     {
-        string MonthAndDay = DateTime.Now.ToString(("MM월 dd일"));        //날짜 불러오기
+        /*string MonthAndDay = DateTime.Now.ToString(("MM월 dd일"));        //날짜 불러오기
         DayTxt.text = "날짜 : " + MonthAndDay;
 
         string DayTime = DateTime.Now.ToString("t");                      //시간 불러오기
-        TimeTxT.text = "시간 : " + DayTime;
+        TimeTxT.text = "시간 : " + DayTime;*/
 
         Time = 12;
         //Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
@@ -108,5 +99,15 @@ public class RealClock : MonoBehaviour
                 }
             }
         }
+    }
+    IEnumerator TimeCheckCorutine()
+    {
+        GetCurrentDate();               //매 프레임마다 시간을 불러옴
+        if (PreTime != Time)            //시간이 변경 될 때마다
+        {
+            PreTime = Time;             //변경 함수 초기화
+            TimeSetting(Time);          //시간에 따른 변경 함수git 
+        }
+        yield return new WaitForSecondsRealtime(30f);
     }
 }

@@ -64,6 +64,25 @@ public class SeedSelect : MonoBehaviour //씨앗 버튼에 달리도록 합니다.
         
     }
 
+    public void TreeSelected()  //씨앗을 선택한다. 씨앗은 빈 텃밭에 심겨지도록 한다.
+    {
+        GameObject item_code = this.transform.Find("ItemCode").gameObject;
+        Text item_code_txt = item_code.GetComponent<Text>();
+        string i_code = item_code_txt.text;
+
+        if (SeedAmount(i_code)) //씨앗 수가 0 이상인지 체크 및 씨앗 개수 1 감소
+        {
+            PlayerPrefs.SetString("Tree", i_code);  //해당하는 텃밭에, 해당하는 씨앗 코드 저장
+            Debug.Log(i_code);
+
+            GardenControl.instance.GroundIsUpdated();
+        }
+        else    //씨앗 개수가 0 이하입니다. todo: 팝업을 띄우거나 하기
+        {
+            Debug.Log("씨앗 개수가 0 이하입니다.");
+        }
+    }
+
     bool SeedAmount(string icode)
     {
         //Inventory 테이블 불러와서, 여기에 해당하는 아이템과 일치하는 코드가 있을 경우 개수를 1감소시켜서 업데이트

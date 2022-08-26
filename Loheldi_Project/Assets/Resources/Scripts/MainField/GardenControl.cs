@@ -38,7 +38,6 @@ public class GardenControl : MonoBehaviour
 
     public GameObject Interaction;
     public Camera getCamera;
-    public string TreeCode;
     public GameObject Farms;
     public GameObject TreePlace;
     public GameObject TreeObject;
@@ -54,6 +53,7 @@ public class GardenControl : MonoBehaviour
         }
         UpdateFieldGarden();    //1. 로컬에서 심은 시간과 심은 작물의 정보를 가져온다.(*4)
         StartCoroutine(GrowTimeCorutine()); //2. 시간 검사하는 메소드 4번 실행(을 코루틴으로 1분마다 반복)
+        TreeInstantiate();
     }
 
     IEnumerator GrowTimeCorutine()
@@ -95,7 +95,6 @@ public class GardenControl : MonoBehaviour
         return;
     }
     
-
     void UpdateFieldGarden()     //텃밭의 정보를 업데이트하여 필드에 반영
     {
         //1. 로컬에 저장해둔 텃밭의 정보를 가져온다.
@@ -128,9 +127,7 @@ public class GardenControl : MonoBehaviour
         else
             g_seed[3] = "";
         if (PlayerPrefs.GetString("Tree") != "")
-        {
             Tree = PlayerPrefs.GetString("Tree");
-        }
         else
             Tree = "";
 
@@ -157,18 +154,7 @@ public class GardenControl : MonoBehaviour
                 }
             }
         }
-
-        if (TreeCode.Equals(""))
-        {
-            Destroy(TreeObject);
-        }
-        else
-        {
-            TreeObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Spring"));        //일단 서버에서 블러와 생성하는것만 만듬.
-            TreeObject.transform.SetParent(TreeObject.transform);
-            TreeObject.transform.GetChild(0).GetComponent<Text>().text = TreeCode;               //icode를 입력해둔다
-            TreeObject.transform.localPosition = new Vector3(0, 0, 0);                           //객체 위치 재설정
-        }
+        TreeInstantiate();
     }
 
     //todo: 심기 위해 씨앗 버튼을 클릭하면, 로컬에 씨앗과 날짜를 저장한다. 이후 UpdateFieldGarden() 실행 및 todo3 메소드 실행
@@ -317,5 +303,17 @@ public class GardenControl : MonoBehaviour
         GameObject coin = parent.transform.Find("Coin").gameObject;
         Text coin_txt = coin.GetComponent<Text>();
         coin_txt.text = get_coin.ToString();
+    }
+
+    void TreeInstantiate()
+    {
+        if (Tree != "")
+        {
+            if(TreePlace.transform.childCount != 0)
+                Destroy(TreePlace.transform.GetChild(0).gameObject);
+            TreeObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/" + Tree + "_crops"));
+            TreeObject.transform.SetParent(TreePlace.transform);
+            TreeObject.transform.localPosition = new Vector3(0, 0, 0);                           //객체 위치 재설정
+        }
     }
 }

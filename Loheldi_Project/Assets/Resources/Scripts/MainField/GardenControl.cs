@@ -38,8 +38,10 @@ public class GardenControl : MonoBehaviour
 
     public GameObject Interaction;
     public Camera getCamera;
+    public string TreeCode;
     public GameObject Farms;
     public GameObject TreePlace;
+    public GameObject TreeObject;
 
 
 
@@ -127,7 +129,7 @@ public class GardenControl : MonoBehaviour
             g_seed[3] = "";
         if (PlayerPrefs.GetString("Tree") != "")
         {
-            Tree = PlayerPrefs.GetString("G4");
+            Tree = PlayerPrefs.GetString("Tree");
         }
         else
             Tree = "";
@@ -155,7 +157,18 @@ public class GardenControl : MonoBehaviour
                 }
             }
         }
-        TreePlace = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Spring"));        //일단 서버에서 블러와 생성하는것만 만듬.
+
+        if (TreeCode.Equals(""))
+        {
+            Destroy(TreeObject);
+        }
+        else
+        {
+            TreeObject = Instantiate(Resources.Load<GameObject>("Prefabs/Crops/Spring"));        //일단 서버에서 블러와 생성하는것만 만듬.
+            TreeObject.transform.SetParent(TreeObject.transform);
+            TreeObject.transform.GetChild(0).GetComponent<Text>().text = TreeCode;               //icode를 입력해둔다
+            TreeObject.transform.localPosition = new Vector3(0, 0, 0);                           //객체 위치 재설정
+        }
     }
 
     //todo: 심기 위해 씨앗 버튼을 클릭하면, 로컬에 씨앗과 날짜를 저장한다. 이후 UpdateFieldGarden() 실행 및 todo3 메소드 실행
@@ -268,6 +281,15 @@ public class GardenControl : MonoBehaviour
             DateTime G4Time = DateTime.Parse(PlayerPrefs.GetString("G4Time"));
             param.Add("G4", "");
             param.Add("G4Time", G4Time);
+        }
+        if (PlayerPrefs.GetString("Tree") != "")
+        {
+            string Tree = PlayerPrefs.GetString("Tree");
+            param.Add("Tree", Tree);
+        }
+        else
+        {
+            param.Add("Tree", "");
         }
 
 

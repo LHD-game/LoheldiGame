@@ -12,7 +12,7 @@ public class Animation : MonoBehaviour
     public GameObject[] notes;
     /// 노트 애니메이션
     int dest=0;
-    void destroy(int DestryedObject)
+    public void Destroy(int DestryedObject)
     {
         ++dest;
         if(dest == Draw.notes.Length)
@@ -25,21 +25,21 @@ public class Animation : MonoBehaviour
     }
     public Sprite noteImageSprite;
     static Image noteImage;
-    void noteGone1(int Object)
+    public void NoteGone1(int Object)
     {
         SoundEffectManager.GetComponent<SoundEffect>().Sound("Paper");
         noteImageSprite = Resources.Load<Sprite>("Sprites/Quest/Note/note1");
         noteImage = notes[Object].GetComponent<Image>();
         noteImage.sprite = noteImageSprite;
     }
-    void noteGone2(int Object)
+    public void NoteGone2(int Object)
     {
         GameObject notea = notes[Object];
         Transform[] allChildren = notea.GetComponentsInChildren<Transform>();
         foreach (Transform child in allChildren)
         {
             if (child.name == notea.name)
-                return;
+            { }
             else
                 child.gameObject.SetActive(false);
         }
@@ -49,11 +49,11 @@ public class Animation : MonoBehaviour
     }
     /// 자전거 애니메이션
 
-    void SetPosition()
+    public void SetPosition()
     {
         Draw.WearOut();
     }
-    void FinishNutrient()
+    public void FinishNutrient()
     {
         Draw.Cook();
     }

@@ -67,6 +67,7 @@ public class PlayInfoManager : MonoBehaviour
 
     public static void GetQuestPreg()
     {
+        Debug.Log("퀘스트 완료" + PlayerPrefs.GetString("QuestPreg"));
         SavePlayInfo();
     }
 

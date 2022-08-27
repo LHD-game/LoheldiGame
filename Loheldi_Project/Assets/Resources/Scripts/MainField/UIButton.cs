@@ -16,8 +16,9 @@ public class UIButton : MonoBehaviour
     public Rigidbody Playerrb;            //Player의 Rigidbody선언
     public GameObject JoyStick;
     public GameObject Main_UI;
-    public GameObject GachaUI;
     public GameObject FarmUI;
+    public GameObject chatBlock;
+
 
     public Camera Camera1;
     public Camera Camera2;
@@ -41,41 +42,36 @@ public class UIButton : MonoBehaviour
     {
         map = false;
     }
-
+    string NPCName=null;
+    public Transform NPC;
     public void JumpButton()                //점프버튼
     {
         GameObject SoundManager = GameObject.Find("SoundManager");
-        /*if (Inter.Gacha)
-        {
-            SoundManager.GetComponent<SoundManager>().Sound("BGMGacha");
-            GachaUI.SetActive(true);
-        }*/
         if (OnLand && Inter.NearNPC)     //NPC주변에 있다면
         {
+            NPCName = Inter.NameNPC;
             Inter.NpcNameTF = false;
             if (chat.bicycleRide.Ride)
                 chat.bicycleRide.RideOn();
-            
-            GameObject NPC;
-            NPC = GameObject.Find(Inter.NameNPC);
+
             Vector3 targetPositionNPC;
-            Vector3 targetPositionPlayer;
+            NPC = GameObject.Find(Inter.NameNPC).transform;
+            targetPositionNPC = new Vector3(Player.transform.position.x, NPC.position.y, Player.transform.position.z);
             if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine"))
-            { }
+            { stopCorou(); }
             else if (chat.DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei"))
-            { }
+            { stopCorou(); }
             else if (chat.DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho"))
-            { }
+            { stopCorou(); }
             else
             {
-                targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
-                NPC.transform.LookAt(targetPositionNPC);
+                StartCoroutine(NPCturn(NPC, targetPositionNPC));
+                //NPC.transform.LookAt(targetPositionNPC);
             }
-            targetPositionPlayer = new Vector3(NPC.transform.position.x, Player.transform.position.y, NPC.transform.position.z);
-            Main_UI.SetActive(false);
-            Chat.NpcChoice();
-            Player.transform.LookAt(targetPositionPlayer);
-             
+            chatBlock.SetActive(true);
+            StartCoroutine(Playerturn(NPC));
+            //Player.transform.LookAt(targetPositionPlayer);
+
         }
         else if (Inter.Door)
         {
@@ -115,6 +111,74 @@ public class UIButton : MonoBehaviour
                 SoundEffectManager.GetComponent<SoundEffect>().Sound("Jump");
                 Playerrb.AddForce(transform.up * 15000);
             }
+        }
+
+        Invoke("ChatStart", 1f);
+    }
+    void stopCorou()
+    {
+        if (Pstop)
+            Pstop = false;
+        if (Nstop)
+            Nstop = false;
+    }
+    void ChatStart()
+    {
+        Main_UI.SetActive(false);
+        Chat.NpcChoice(NPCName);
+        chatBlock.SetActive(false);
+    }
+    public bool Pstop = true;
+    public bool Nstop = true;
+    public Transform Ptransform=null;
+    public Transform Ntransform=null;
+    public IEnumerator Playerturn(Transform NPC)
+    {
+        Invoke("stopCorou", 1f);
+        Animator PA = Player.transform.GetChild(0).GetChild(3).Find("Armature").gameObject.GetComponent<Animator>();
+        PA.SetBool("ChatMove", true);
+        yield return new WaitForEndOfFrame();
+        Pstop = true;
+        Vector3 targetPositionPlayer;
+        targetPositionPlayer = new Vector3(NPC.transform.position.x, Player.transform.position.y, NPC.position.z);
+        Ptransform = Player.transform;
+        while (Pstop)
+        {
+            if (Player.transform.rotation == Quaternion.LookRotation(targetPositionPlayer - Ptransform.position))
+            {
+                Debug.Log("NPC스탑");
+                Pstop = false;
+            }
+            Player.transform.rotation = Quaternion.Lerp(Ptransform.rotation, Quaternion.LookRotation(targetPositionPlayer - Player.transform.position), Time.deltaTime * 5f);
+            yield return null;
+        }
+        PA.SetBool("ChatMove", false);
+    }
+    public IEnumerator NPCturn(Transform NPC, Vector3 targetPositionNPC)
+    {
+        if (NPC.gameObject.name.Equals("WallMirror"))
+        { }
+        else
+        {
+            Animator NA = NPC.GetChild(0).Find("Armature_").gameObject.GetComponent<Animator>();
+            NA.SetBool("NpcMove", true);
+
+            yield return new WaitForEndOfFrame();
+            Nstop = true;
+            //Vector3 targetPositionNPC;
+            //targetPositionNPC = new Vector3(Player.transform.position.x, NPC.position.y, Player.transform.position.z);
+            Ntransform = NPC.transform;
+            while (Nstop)
+            {
+                if (NPC.rotation == Quaternion.LookRotation(targetPositionNPC - NPC.transform.position))
+                {
+                    Debug.Log("NPC스탑");
+                    Nstop = false;
+                }
+                NPC.rotation = Quaternion.Lerp(NPC.rotation, Quaternion.LookRotation(targetPositionNPC - NPC.position), Time.deltaTime * 5f);
+                yield return null;
+            }
+            NA.SetBool("NpcMove", false);
         }
     }
 }

@@ -406,7 +406,6 @@ public class LodingTxt : MonoBehaviour
     GameObject mouth; //양치겜 입
     public void QuestSubChoice()
     {
-        Debug.Log("퀘이벤");
         Debug.Log("타입"+data_Dialog[j]["scriptType"].ToString());
         if (data_Dialog[j]["scriptType"].ToString().Equals("quiz"))  //퀴즈시작
         {
@@ -891,10 +890,10 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("LookAt"))
         {
-            GameObject NPC = GameObject.Find(Inter.NameNPC);
+            Transform NPC = GameObject.Find(Inter.NameNPC).transform;
             Vector3 targetPositionNPC;
-            targetPositionNPC = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
-            NPC.transform.LookAt(targetPositionNPC);
+            targetPositionNPC = new Vector3(Player.transform.position.x, NPC.position.y, Player.transform.position.z);
+            StartCoroutine(JumpButtons.NPCturn(NPC, targetPositionNPC));
             if (Quest.note)
             {
                     Quest.note = false;
@@ -904,13 +903,21 @@ public class LodingTxt : MonoBehaviour
             }
             else if(data_Dialog[j]["scriptNumber"].ToString().Equals("19_1"))
             {
-                GameObject NPC2 = GameObject.Find("Nari");
-                Vector3 targetPositionNPC2;
-                targetPositionNPC2 = new Vector3(Player.transform.position.x, NPC.transform.position.y, Player.transform.position.z);
-                NPC2.transform.LookAt(targetPositionNPC);
+                Transform NPC2 = GameObject.Find("Nari").transform;
+                StartCoroutine(JumpButtons.NPCturn(NPC2, targetPositionNPC));
             }
-            scriptLine();   //딜레이 후 스크립트 띄움
+            Invoke("stopCorou", 1f);
+               //딜레이 후 스크립트 띄움
         }
+    }
+    void stopCorou()
+    {
+        JumpButtons.Nstop = false;
+        scriptLine();
+    }
+    void stopCorout()
+    {
+        JumpButtons.Nstop = false;
     }
 
     public void QSound()
@@ -967,9 +974,12 @@ public class LodingTxt : MonoBehaviour
         }
         if (data_Dialog[j]["scriptType"].ToString().Equals("end")) //대화 끝
         {
-            ChatEnd();
             if (data_Dialog[j]["name"].ToString().Equals("end"))
-            { QuestEnd(); }
+            {
+                QuestEnd();
+            }
+            ChatEnd();
+            
         }
         else
         {
@@ -1035,14 +1045,24 @@ public class LodingTxt : MonoBehaviour
         Main_UI.SetActive(true);
         c = 0;
         //PlayerCamera.SetActive(false);
-        for (int i = 0; i < NPCButton; i++)
-        {
-            string selecNumber = "select" + (i + 1).ToString();
-            SelecButton[i].SetActive(false);
-            SelecButtonTxt[i].text = data_Dialog[j - 1][selecNumber].ToString();
-        }
         NPCButton = 0;
+        ButtonsFalse();
+        if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine"))
+        { stopCorou(); }
+        else if (DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei"))
+        { stopCorou(); }
+        else if (DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho"))
+        { stopCorou(); }
+        else
+        {
+            Vector3 targetPositionNPC;
+            targetPositionNPC = new Vector3(JumpButtons.Ntransform.transform.position.x, JumpButtons.NPC.position.y, JumpButtons.Ntransform.transform.position.z - 1);
+
+            StartCoroutine(JumpButtons.NPCturn(JumpButtons.NPC, targetPositionNPC));
+            Invoke("stopCorout",1f);
+        }
     }
+
 
     public void Buttons()      //npc대화 상호작용 선택지 수
     {
@@ -1055,6 +1075,15 @@ public class LodingTxt : MonoBehaviour
             string selecNumber = "select"+(i+1).ToString();
             SelecButton[i].SetActive(true);
             SelecButtonTxt[i].text = data_Dialog[j-1][selecNumber].ToString();
+        }
+    }
+    public void ButtonsFalse()      //npc대화 상호작용 선택지 수
+    {
+        NPCButtons.SetActive(true);
+        for (int i= 0; i < SelecButton.Length; i++)
+        {
+            string selecNumber = "select"+(i+1).ToString();
+            SelecButton[i].SetActive(false);
         }
     }
 
@@ -1202,7 +1231,8 @@ public class LodingTxt : MonoBehaviour
         else
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
-            PlayInfoManager.GetQuestPreg();
+        PlayInfoManager.GetQuestPreg();
+
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);

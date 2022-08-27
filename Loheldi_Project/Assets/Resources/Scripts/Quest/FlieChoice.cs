@@ -56,12 +56,12 @@ public class FlieChoice : MonoBehaviour
         Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
     }
 
-    public void NpcChoice() //npc와 대화 선택하는 함수
+    public void NpcChoice(string NameNPC) //npc와 대화 선택하는 함수
     {
         chat.FileAdress = "Scripts/Quest/DialogNPC";
 
         string[] QuestF = chat.DontDestroy.QuestIndex.Split('_');
-            switch (chat.Inter.NameNPC)
+            switch (NameNPC)
         {
             case "Himchan":
                 if (chat.DontDestroy.From.Equals("실천해보기")&& chat.DontDestroy.ButtonPlusNpc.Equals("Himchan"))

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Interaction : MonoBehaviour
 {
@@ -15,12 +16,21 @@ public class Interaction : MonoBehaviour
 
     public bool NpcNameTF = false;
     public List<string> Npcs = new List<string>();
-    //public GameObject[] Npcs;
     public GameObject[] NpcNames;
 
     public GameObject FarmingMaster;
 
+    public Camera MainCam;
+    public Camera TCam;
+
+
     private ChangeMode change;
+
+    void Start()
+    {
+        MainCam.enabled = true;
+        TCam.enabled = false;
+    }
     void OnTriggerEnter(Collider other)             //다른 콜리더와 부딛혔을때
     {
         if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
@@ -59,13 +69,6 @@ public class Interaction : MonoBehaviour
             text.text = "나가기";
             NameNPC = other.gameObject.name.ToString();
         }
-        /*else if (other.gameObject.name == "GachaMachine")
-        {
-            Gacha = true;
-            text.text = "뽑기";
-            NameNPC = other.gameObject.name.ToString();
-            NpcNameActive(other.gameObject);
-        }*/
         else if (other.gameObject.name == "Field")
         {
             Farm = true;
@@ -73,29 +76,31 @@ public class Interaction : MonoBehaviour
         }
         
     }
-    /*private void Start()
-    {
-        change = GameObject.Find("HousingSystem").GetComponent<ChangeMode>();
-    }*/
-
-    /*void OnTriggerStay(Collider other)              //다른 콜리더와 겹쳐있을때
-    {
-        if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 InDoor라면
-        {
-            Door = true;
-            text.text = "들어가기";
-            NameNPC = other.gameObject.name.ToString();
-        }
-        else if (other.gameObject.name == "ExitDoor")
-        {
-            Door = true;
-            text.text = "나가기";
-            NameNPC = other.gameObject.name.ToString();
-        }
-    }*/
 
     void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때
     {
+        Debug.Log(this.transform.position.z);
+        Debug.Log(other.name);
+        if (SceneManager.GetActiveScene().name == "Housing")
+        {
+            if (other.gameObject.name == "ExitDoor")
+            {
+                JumpButton.SetActive(false);
+            }
+            else if(other.gameObject.name == "Line")
+            {
+                if(this.transform.position.z<4.5f)
+                {
+                    MainCam.enabled = true;
+                    TCam.enabled = false;
+                }
+                else
+                {
+                    MainCam.enabled = false;
+                    TCam.enabled = true;
+                }
+            }
+        }
         if (other.gameObject.tag == "NPC" || other.gameObject.name == "InDoor" || other.gameObject.name == "GachaMachine" || other.gameObject.name == "Field")          //콜리더의 Tag가 NPC라면
         {
             if (other.gameObject.tag == "NPC")
@@ -109,10 +114,7 @@ public class Interaction : MonoBehaviour
             text.text = "점프";
             NameNPC = " ";
         }
-        if (other.gameObject.name == "ExitDoor")
-        {
-            JumpButton.SetActive(false);
-        }
+        
     }
     public void NpcNameActive(GameObject other)
     {

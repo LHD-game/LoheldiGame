@@ -71,7 +71,7 @@ public class UIButton : MonoBehaviour
             chatBlock.SetActive(true);
             StartCoroutine(Playerturn(NPC));
             //Player.transform.LookAt(targetPositionPlayer);
-
+            Invoke("ChatStart", 1f);
         }
         else if (Inter.Door)
         {
@@ -113,7 +113,7 @@ public class UIButton : MonoBehaviour
             }
         }
 
-        Invoke("ChatStart", 1f);
+        
     }
     void stopCorou()
     {

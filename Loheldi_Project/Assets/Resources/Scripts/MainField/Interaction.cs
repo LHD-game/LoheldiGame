@@ -28,8 +28,11 @@ public class Interaction : MonoBehaviour
 
     void Start()
     {
-        MainCam.enabled = true;
-        TCam.enabled = false;
+        if (SceneManager.GetActiveScene().name == "Housing")
+        {
+            MainCam.enabled = true;
+            TCam.enabled = false;
+        }
     }
     void OnTriggerEnter(Collider other)             //다른 콜리더와 부딛혔을때
     {
@@ -79,8 +82,6 @@ public class Interaction : MonoBehaviour
 
     void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때
     {
-        Debug.Log(this.transform.position.z);
-        Debug.Log(other.name);
         if (SceneManager.GetActiveScene().name == "Housing")
         {
             if (other.gameObject.name == "ExitDoor")

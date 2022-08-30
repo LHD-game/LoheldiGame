@@ -6,7 +6,6 @@ public class Super_CategorySelect : MonoBehaviour
 {
     public GameObject SeedPanel;
     public GameObject TreePanel;
-    public GameObject GachaPanel;
 
 
     void Start()

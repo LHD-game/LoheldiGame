@@ -104,6 +104,21 @@ public class ClosetCategory : CategoryControl
                             initCustomItem(bag_Dialog[b], data);
                             b++;
                         }
+                        else //뽑기 아이템
+                        {
+                            if(data.ItemType.Equals("upper"))
+                            {
+                                upper_Dialog.Add(new Dictionary<string, object>());
+                                initCustomItem(upper_Dialog[u], data);
+                                u++;
+                            }
+                            else if (data.ItemType.Equals("shoes"))
+                            {
+                                shoes_Dialog.Add(new Dictionary<string, object>());
+                                initCustomItem(shoes_Dialog[sh], data);
+                                sh++;
+                            }
+                        }
                     }
 
                 }

@@ -69,7 +69,7 @@ public class ClosetControl : PlayerCloset
                 {
                     NowSettings.u_socks_id = d_dialog[i][CommonField.nCID].ToString();
                 }
-                else if (d_dialog[i][CommonField.nCategory].ToString().Equals(CommonField.m_shoes))    //shoes일 경우
+                else if (d_dialog[i][CommonField.nItemType].ToString().Equals("shoes"))    //shoes일 경우
                 {
                     NowSettings.u_shoes_id = d_dialog[i][CommonField.nCID].ToString();
                 }
@@ -85,7 +85,13 @@ public class ClosetControl : PlayerCloset
                 {
                     NowSettings.u_bag_id = d_dialog[i][CommonField.nCID].ToString();
                 }
-
+                else //뽑기 아이템: 상의
+                {
+                    if (d_dialog[i][CommonField.nItemType].ToString().Equals("upper"))
+                    {
+                        NowSettings.u_upper_id = d_dialog[i][CommonField.nCID].ToString();
+                    }
+                }
             }
         }
     }

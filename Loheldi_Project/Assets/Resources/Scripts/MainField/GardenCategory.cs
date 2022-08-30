@@ -39,12 +39,18 @@ public class GardenCategory : MonoBehaviour
     public void PopGarden()
     {
         seedItem.Clear();
+        treeItem.Clear();
 
         for(int i=0; i < seed_list.Count; i++)
         {
             Destroy(seed_list[i]);
         }
+        for (int i = 0; i < tree_list.Count; i++)
+        {
+            Destroy(tree_list[i]);
+        }
         seedItem = new List<Dictionary<string, object>>();
+        treeItem = new List<Dictionary<string, object>>();
 
         GetChartContents(ChartNum.AllItemChart);
         MakeCategory(c_seed, seedItem, seed_list);

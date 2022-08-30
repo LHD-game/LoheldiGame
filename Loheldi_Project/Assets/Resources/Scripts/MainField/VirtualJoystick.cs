@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class VirtualJoystick : MonoBehaviour
 {
@@ -19,8 +20,16 @@ public class VirtualJoystick : MonoBehaviour
     private Vector3 JoyVec;
     private float Radius;
 
+    public int TempInt = 0;
+
     void Start()
     {
+        Scene scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "MainField")
+            TempInt = 0;
+        else if (scene.name == "Housing")
+            TempInt = 1;
         Radius = GetComponent<RectTransform>().sizeDelta.y* 1.5f;
         StickFirstPos = Stick.transform.position;
 
@@ -55,6 +64,7 @@ public class VirtualJoystick : MonoBehaviour
                 }
             }
         }
+
         else
         {
             if (SceneManager.GetActiveScene().name == "MainField")
@@ -83,7 +93,18 @@ public class VirtualJoystick : MonoBehaviour
         else
             Stick.position = StickFirstPos + JoyVec * Radius;
 
-        Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
+        if (TempInt == 1)
+        {
+            Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg - 45, 0);
+        }
+        else if(TempInt == 2)
+        {
+            Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg - 115, 0);
+        }
+        else 
+        {
+            Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
+        }
         PlayerAnimator.GetComponent<Animator>().SetBool("JoyStickMove", true);
     }
 

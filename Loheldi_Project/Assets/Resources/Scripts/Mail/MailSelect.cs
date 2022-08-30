@@ -62,61 +62,62 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
             right_detail_text.Add(content_detail);
         }
 
+        if (this_qid != "")
+        {
+            //todo: reward
+            MakeRewardList(reward_txt.text);
 
-        //todo: reward
-        MakeRewardList(reward_txt.text);
-
-        //보상 받기 버튼 활성화: 퀘스트 진행도가 퀘스트 아이디보다 크거나 같아야 한다.
-        //1. 현재 qid와 퀘스트의 qid를 가져와 _를 기준으로 앞부분 슬라이스
-        //2. if (퀘스트 qid <= 현재 qid 앞부분 값)
-        //3. -->뒷부분 슬라이스
-        //4. -->if (퀘스트 qid <= 현재 qid 뒷부분 값)
-        //5.    -->disable 버튼 비활성화
-        GameObject reward_disable_btn = QuestDetail.transform.Find("ReceiveMailDisable").gameObject;
-        GameObject already_recieve_btn = QuestDetail.transform.Find("ReceiveMailAlready").gameObject;
-        QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        already_recieve_btn.SetActive(false);
-        reward_disable_btn.SetActive(true);
-        string[] q_qid = qid_txt.text.Split('_');
-        string QuestType = null;
-        if (Int32.Parse(q_qid[0]) < 22)
-        {
-            QuestType = "QuestPreg";
-        }
-        else
-            QuestType = "WeeklyQuestPreg";
-        string[] my_qid = PlayerPrefs.GetString(QuestType).Split('_');
-        int q_front = int.Parse(q_qid[0]);
-        int my_front = int.Parse(my_qid[0]);
-        int q_back = int.Parse(q_qid[1]);
-        int my_back = int.Parse(my_qid[1]);
-        if (q_front < my_front) //0_2, 1_1 -> 0<1
-        {
-            reward_disable_btn.SetActive(false);
-        }
-        else if(q_front == my_front && q_back <= my_back) //1_1, 1_2
-        {
-            //int q_back = int.Parse(q_qid[1]);
-            //int my_back = int.Parse(my_qid[1]);
-            //if (q_back <= my_back)
-            //{
+            //보상 받기 버튼 활성화: 퀘스트 진행도가 퀘스트 아이디보다 크거나 같아야 한다.
+            //1. 현재 qid와 퀘스트의 qid를 가져와 _를 기준으로 앞부분 슬라이스
+            //2. if (퀘스트 qid <= 현재 qid 앞부분 값)
+            //3. -->뒷부분 슬라이스
+            //4. -->if (퀘스트 qid <= 현재 qid 뒷부분 값)
+            //5.    -->disable 버튼 비활성화
+            GameObject reward_disable_btn = QuestDetail.transform.Find("ReceiveMailDisable").gameObject;
+            GameObject already_recieve_btn = QuestDetail.transform.Find("ReceiveMailAlready").gameObject;
+            QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
+            already_recieve_btn.SetActive(false);
+            reward_disable_btn.SetActive(true);
+            string[] q_qid = qid_txt.text.Split('_');
+            string QuestType = null;
+            if (Int32.Parse(q_qid[0]) < 22)
+            {
+                QuestType = "QuestPreg";
+            }
+            else
+                QuestType = "WeeklyQuestPreg";
+            string[] my_qid = PlayerPrefs.GetString(QuestType).Split('_');
+            int q_front = int.Parse(q_qid[0]);
+            int my_front = int.Parse(my_qid[0]);
+            int q_back = int.Parse(q_qid[1]);
+            int my_back = int.Parse(my_qid[1]);
+            if (q_front < my_front) //0_2, 1_1 -> 0<1
+            {
                 reward_disable_btn.SetActive(false);
-            //}
-        }
-        else
-        {
-            if (QDD.SDA)
-            {
-                content_detail_txt.text = "토요일은 퀘스트 진행이 불가합니다";
             }
-            else if (!QDD.weekend && QuestType.Equals("WeeklyQuestPreg"))
+            else if (q_front == my_front && q_back <= my_back) //1_1, 1_2
             {
-                content_detail_txt.text = "해당 퀘스트는 일요일에만 진행이 가능합니다";
+                //int q_back = int.Parse(q_qid[1]);
+                //int my_back = int.Parse(my_qid[1]);
+                //if (q_back <= my_back)
+                //{
+                reward_disable_btn.SetActive(false);
+                //}
             }
-            else if (QDD.weekend && QuestType.Equals("QuestPreg"))
-                content_detail_txt.text = "해당 퀘스트는 평일에만 진행이 가능합니다";
+            else
+            {
+                if (QDD.SDA)
+                {
+                    content_detail_txt.text = "토요일은 퀘스트 진행이 불가합니다";
+                }
+                else if (!QDD.weekend && QuestType.Equals("WeeklyQuestPreg"))
+                {
+                    content_detail_txt.text = "해당 퀘스트는 일요일에만 진행이 가능합니다";
+                }
+                else if (QDD.weekend && QuestType.Equals("QuestPreg"))
+                    content_detail_txt.text = "해당 퀘스트는 평일에만 진행이 가능합니다";
+            }
         }
-
     }
 
     //보상 리스트를 만든다.

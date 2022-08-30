@@ -29,13 +29,11 @@ public class MailLoad : MonoBehaviour
     GameObject[] RightDetail = new GameObject[4];
 
     //공지사항
-    public Text NoticeTitleText;
-    public Text NoticeDetailText;
-    public Transform NoticeList;
+    public Transform NoticeContent;
     public GameObject NoticeTitle;
-    public GameObject NoticeSent;
     public GameObject NoticeDetail;
     public GameObject NoticeTempObject;
+    public List<GameObject> NoticeObjectList;
 
     public GameObject MailCountImage;
     public Text MailCount;
@@ -50,9 +48,8 @@ public class MailLoad : MonoBehaviour
     {
         Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
         MailorAnnou = true;
-        
+
         NewMailCheck();
-        //UpdateList();
     }
 
     public void PopMail()
@@ -326,6 +323,65 @@ public class MailLoad : MonoBehaviour
             else
             {
                 Debug.Log("퀘스트 삭제 실패: " + bro.GetMessage());
+            }
+        }
+
+    }
+
+    public void NoticeLoad()
+    {
+        BackendReturnObject bro = Backend.Notice.NoticeList(4);
+
+        itemBtn = (GameObject)Resources.Load("Prefabs/UI/Mail");
+        if (bro.IsSuccess())
+        {
+            string offset = bro.LastEvaluatedKeyString();
+            if (!string.IsNullOrEmpty(offset))
+            {
+                Backend.Notice.NoticeList(4, offset);
+            }
+            JsonData jsonList = bro.FlattenRows();
+
+            NoticeObjectList.Clear();
+            Transform[] childList = NoticeContent.GetComponentsInChildren<Transform>();
+            if (childList != null)
+            {
+                for (int i = 1; i <childList.Length; i++)
+                {
+                    if (childList[i] != transform)
+                        Destroy(childList[i].gameObject);
+                }
+            }
+
+            for (int i = 0; i < jsonList.Count; i++)
+            {
+                GameObject child = Instantiate(itemBtn);    //create itemBtn instance
+                child.transform.SetParent(NoticeContent.transform);  //move instance: child
+                                                                //아이템 박스 크기 재설정
+                RectTransform rt = child.GetComponent<RectTransform>();
+                rt.localScale = new Vector3(1f, 1f, 1f);
+
+                NoticeObjectList.Add(child);
+
+                //change catalog box qid - 꼬리표 QID
+                GameObject mail_qid = child.transform.Find("QID").gameObject;
+                Text qid_txt = mail_qid.GetComponent<Text>();
+                qid_txt.text = "";
+
+                //change catalog box title
+                GameObject mail_title = child.transform.Find("Title").gameObject;
+                Text title_txt = mail_title.GetComponent<Text>();
+                title_txt.text = jsonList[i]["title"].ToString();
+
+                //change catalog box from
+                GameObject mail_from = child.transform.Find("From").gameObject;
+                Text from_txt = mail_from.GetComponent<Text>();
+                from_txt.text = "";
+
+                //change catalog box content
+                GameObject mail_content = child.transform.Find("Content").gameObject;
+                Text content_txt = mail_content.GetComponent<Text>();
+                content_txt.text = jsonList[i]["content"].ToString();
             }
         }
 

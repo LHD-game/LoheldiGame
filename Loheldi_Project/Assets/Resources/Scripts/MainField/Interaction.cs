@@ -22,6 +22,7 @@ public class Interaction : MonoBehaviour
 
     public Camera MainCam;
     public Camera TCam;
+    public VirtualJoystick VJS;
 
 
     private ChangeMode change;
@@ -94,11 +95,13 @@ public class Interaction : MonoBehaviour
                 {
                     MainCam.enabled = true;
                     TCam.enabled = false;
+                    VJS.TempInt = 1;
                 }
                 else
                 {
                     MainCam.enabled = false;
                     TCam.enabled = true;
+                    VJS.TempInt = 2;
                 }
             }
         }

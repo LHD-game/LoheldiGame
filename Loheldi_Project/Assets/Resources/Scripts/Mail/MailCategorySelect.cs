@@ -11,13 +11,12 @@ public class MailCategorySelect : MonoBehaviour
         MailPost.SetActive(true);
         Announcement.SetActive(false);
         MailLoad.MailorAnnou = true;
-        //this.gameObject.GetComponent<MailLoad>().UpdateList();
     }
     public void Annou() //공지사항 탭 클릭
     {
         MailPost.SetActive(false);
         Announcement.SetActive(true);
         MailLoad.MailorAnnou = false;
-        //this.gameObject.GetComponent<MailLoad>().UpdateList();
+        this.gameObject.GetComponent<MailLoad>().NoticeLoad();
     }
 }

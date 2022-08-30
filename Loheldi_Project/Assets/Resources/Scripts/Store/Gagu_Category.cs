@@ -234,6 +234,12 @@ public class Gagu_Category : StoreCategoryControl
         {
             UpgradeDisable[i].SetActive(true);
         }
-        UpgradeDisable[PlayerPrefs.GetInt("HouseLv")-1].SetActive(false);
+        int my_house_lv = PlayerPrefs.GetInt("HouseLv");
+        if (my_house_lv != 4)
+        {
+            UpgradeDisable[my_house_lv-1].SetActive(false);
+        }
+        
+        
     }
 }

@@ -432,7 +432,6 @@ GameObject:
   - component: {fileID: 8199675010553757977}
   - component: {fileID: 8199675010553757976}
   - component: {fileID: 8199675010553757979}
-  - component: {fileID: 1174477694697895238}
   m_Layer: 5
   m_Name: ItemBtn
   m_TagString: Untagged
@@ -545,32 +544,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8199675010553757976}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1174477694697895238}
-        m_TargetAssemblyTypeName: BuyItem, Assembly-CSharp
-        m_MethodName: PopBuyBtn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1174477694697895238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199675010553757957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3727596116d482a4a986bdfe0ff8bda3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StoreBuyPanel: {fileID: 8900221212779909639, guid: 0e466210e00d8e14e8e6f246068189b8, type: 3}
+      m_Calls: []
 --- !u!1 &8872360434625758482
 GameObject:
   m_ObjectHideFlags: 0

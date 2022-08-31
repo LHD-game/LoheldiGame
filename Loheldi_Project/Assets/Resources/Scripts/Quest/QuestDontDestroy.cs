@@ -51,4 +51,12 @@ public class QuestDontDestroy : MonoBehaviour
         }*/
         DontDestroyOnLoad(this.gameObject);
     }
+
+    public void WeekChange()
+    {
+        if(weekend)
+            weekend=false;
+        else
+            weekend=true;
+    }
 }

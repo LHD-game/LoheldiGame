@@ -199,7 +199,6 @@ public class Register : MonoBehaviour
         {
             ErrorLine.gameObject.SetActive(false);
             ErrorTxt.gameObject.SetActive(false);
-            //자동로그인 함수 실행
             AutoLogin();
             Debug.Log("동기방식 로그인 성공");
 
@@ -270,13 +269,13 @@ public class Register : MonoBehaviour
     }
 
 
-    public void AutoLogin()    //로컬에 저장해둔다 --> 변경필요! todo
+    public void AutoLogin()    //로컬에 저장해둔다
     {
         isAutoChk = AutoBtn.GetComponent<Toggle>().isOn;
         if (isAutoChk)  //자동로그인 체크 시
         {
-            PlayerPrefs.SetString("ID", InputID.text);
-            PlayerPrefs.SetString("PW", InputPW.text);
+            PlayerPrefs.SetString("ID", InputLID.text);
+            PlayerPrefs.SetString("PW", InputLPW.text);
         }
 
     }

@@ -55,15 +55,29 @@ public class WelcomeManager : MonoBehaviour
     public void WelcomePop()
     {
         Destroy(BeforePanel);   //이제 쓸모 없어진 건 삭제한다.
-        if (!isLogin)   //자동로그인x
+        if (PlayerPrefs.HasKey("ID"))   //자동로그인o
+        {
+            Debug.Log("자동로그인 실행");
+            Debug.Log(PlayerPrefs.GetString("ID"));
+            Debug.Log(PlayerPrefs.GetString("PW"));
+
+            BackendReturnObject BRO = Backend.BMember.CustomLogin(PlayerPrefs.GetString("ID"), PlayerPrefs.GetString("PW"));
+            if (BRO.IsSuccess())
+            {
+                SceneLoader.instance.GotoMainField();
+            }
+            else
+            {
+                Debug.Log(BRO.GetMessage());
+                StartBtn.SetActive(false);
+                WelcomePanel.SetActive(true);
+            }
+            
+        }
+        else    //자동로그인x
         {
             StartBtn.SetActive(false);
             WelcomePanel.SetActive(true);
-        }
-        else    //자동로그인o
-        {
-            BackendReturnObject BRO = Backend.BMember.CustomLogin(PlayerPrefs.GetString("ID"), PlayerPrefs.GetString("PW"));
-            SceneLoader.instance.GotoMainField();
         }
 
     }
@@ -148,22 +162,5 @@ public class WelcomeManager : MonoBehaviour
     public void Restart()   //회원가입 완료 후 재시작
     {
         SceneManager.LoadScene("Scenes/Welcome");
-    }
-
-    //로그인 여부 판별 함수
-    void LoginChk()
-    {
-        if (PlayerPrefs.HasKey("ID"))
-        {
-            if (PlayerPrefs.HasKey("PW"))
-            {
-                isLogin = true;
-            }
-        }
-        else
-        {
-            isLogin = false;
-        }
-
     }
 }

@@ -92,7 +92,7 @@ public class LodingTxt : MonoBehaviour
     public bool tuto;
     public bool tutoclick;
 
-    public static GameObject CCImage;     //캐릭터 이미지
+    public GameObject CCImage;     //캐릭터 이미지
     public static Sprite[] CCImageList;
     static Image spriteR;
 
@@ -143,14 +143,8 @@ public class LodingTxt : MonoBehaviour
         color = block.GetComponent<Image>().color;
         ChatWin.SetActive(true);
         
-
         //fade_in_out = GameObject.Find("EventSystem").GetComponent<Fadeln>();
-        CCImage = GameObject.Find("CCImage"); //이미지 띄울 곳
         CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/CImage"); //이미지 경로
-
-        cuttoon = GameObject.Find("chatUI").transform.Find("Cuttoon").gameObject;
-        cuttoon.SetActive(false);
-        ChatWin.SetActive(false);
 
         parentscheckTxTNum = PlayerPrefs.GetString("ParentsNo");
         PlayerName = PlayerPrefs.GetString("Nickname");
@@ -175,6 +169,8 @@ public class LodingTxt : MonoBehaviour
                 Ride.SetActive(false);
             if (Int32.Parse(QQ[0]) > 12)
                 AppleTreeObj.SetActive(true);
+            else
+                AppleTreeObj.SetActive(false);
 
             if (Int32.Parse(QQ[0]) == 0)
             {
@@ -188,7 +184,7 @@ public class LodingTxt : MonoBehaviour
             {
                 if (!DontDestroy.weekend)
                 {
-                    if (Int32.Parse(QQ[0]) < 22)
+                    if (Int32.Parse(QQ[0]) < 21)
                     {
                         if (DontDestroy.ToDay != DontDestroy.LastDay)
                             QuestLoad.QuestLoadStart();
@@ -196,7 +192,7 @@ public class LodingTxt : MonoBehaviour
                 }
                 else if(DontDestroy.weekend)
                 {
-                    if (Int32.Parse(qq[0]) < 26)
+                    if (Int32.Parse(qq[0]) < 25)
                     {
                         if (DontDestroy.ToDay != DontDestroy.LastDay)
                             QuestLoad.QuestLoadStart();
@@ -210,6 +206,7 @@ public class LodingTxt : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Game_Tooth")
         {
+            CCImage = GameObject.Find("CCImage");
             SoundEffectManager = GameObject.Find("GameManager");
         }
         
@@ -478,6 +475,12 @@ public class LodingTxt : MonoBehaviour
             c = 0;
             ChatWin.SetActive(false);
             InvokeRepeating("Panorama", 0f, 2f);
+        }
+        else if (data_Dialog[j]["scriptType"].ToString().Equals("Panoramas"))
+        {
+            c = 0;
+            ChatWin.SetActive(false);
+            InvokeRepeating("Panorama", 0f, 1f);
         } //컷툰 보이기
         else if (data_Dialog[j]["scriptType"].ToString().Equals("tutorial"))//튜토리얼
         { 
@@ -645,7 +648,9 @@ public class LodingTxt : MonoBehaviour
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("drawEnd"))
         {
+            screenShot.SetActive(false);
             Draw.ChangeDrawCamera();
+            Main_UI.SetActive(false);
             scriptLine();
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("listen"))
@@ -1079,7 +1084,7 @@ public class LodingTxt : MonoBehaviour
     }
     public void ButtonsFalse()      //npc대화 상호작용 선택지 수
     {
-        NPCButtons.SetActive(true);
+        NPCButtons.SetActive(false);
         for (int i= 0; i < SelecButton.Length; i++)
         {
             string selecNumber = "select"+(i+1).ToString();

@@ -16,6 +16,7 @@ public class MainGameManager : MonoBehaviour
 
     public GameObject HousePlace;
     public int HouseLv;
+    public string HouseShape;
 
     public GameObject SoundManager;
     public static MainGameManager SingletonInstance;
@@ -76,6 +77,7 @@ public class MainGameManager : MonoBehaviour
         //경험치 슬라이드 value - (현재 경험치 / 최대 경험치) * 100 : 백분율
         ExpSlider.value = (now_exp / max_exp) * 100;
         HouseLv = PlayerPrefs.GetInt("HouseLv");
+        HouseShape = PlayerPrefs.GetString("HouseShape");
         HouseChange();
     }
 
@@ -106,23 +108,80 @@ public class MainGameManager : MonoBehaviour
 
     void HouseChange()
     {
-        HousePlace.transform.GetChild(0).gameObject.SetActive(false);
-        HousePlace.transform.GetChild(1).gameObject.SetActive(false);
-        HousePlace.transform.GetChild(2).gameObject.SetActive(false);
-        HousePlace.transform.GetChild(3).gameObject.SetActive(false);
+        Destroy(HousePlace.transform.GetChild(0).gameObject);
+        if (HouseShape == "")
+            HouseShape = "Plane";
+        Debug.Log(HouseLv);
+        Debug.Log(HouseShape);
         switch (HouseLv)
         {
             case 1:
-                HousePlace.transform.GetChild(0).gameObject.SetActive(true);
+                switch (HouseShape)
+                {
+                    case "Plane":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/h0"), HousePlace.transform);
+                        break;
+                    case "Hanok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/HANOK_01"), HousePlace.transform);
+                        break;
+                    case "RRok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/R_HOME_01"), HousePlace.transform);
+                        break;
+                    case "Wood":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/th000"), HousePlace.transform);
+                        break;
+                }
                 break;
             case 2:
-                HousePlace.transform.GetChild(1).gameObject.SetActive(true);
+                switch (HouseShape)
+                {
+                    case "Plane":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/h1"), HousePlace.transform);
+                        break;
+                    case "Hanok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/HANOK_02"), HousePlace.transform);
+                        break;
+                    case "RRok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/R_HOME_02"), HousePlace.transform);
+                        break;
+                    case "Wood":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/th001"), HousePlace.transform);
+                        break;
+                }
                 break;
             case 3:
-                HousePlace.transform.GetChild(2).gameObject.SetActive(true);
+                switch (HouseShape)
+                {
+                    case "Plane":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/h2"), HousePlace.transform);
+                        break;
+                    case "Hanok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/HANOK_03"), HousePlace.transform);
+                        break;
+                    case "RRok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/R_HOME_03"), HousePlace.transform);
+                        break;
+                    case "Wood":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/th002"), HousePlace.transform);
+                        break;
+                }
                 break;
             case 4:
-                HousePlace.transform.GetChild(3).gameObject.SetActive(true);
+                switch (HouseShape)
+                {
+                    case "Plane":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/h3"), HousePlace.transform);
+                        break;
+                    case "Hanok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/HANOK_04"), HousePlace.transform);
+                        break;
+                    case "RRok":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/R_HOME_04"), HousePlace.transform);
+                        break;
+                    case "Wood":
+                        Instantiate(Resources.Load<GameObject>("Prefabs/House/th003"), HousePlace.transform);
+                        break;
+                }
                 break;
         }
     }

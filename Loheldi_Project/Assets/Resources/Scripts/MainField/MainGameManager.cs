@@ -190,4 +190,23 @@ public class MainGameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Logout()
+    {
+        //로컬 로그인 정보 삭제
+        PlayerPrefs.DeleteKey("ID");
+        PlayerPrefs.DeleteKey("PW");
+        //서버 로그아웃
+        var bro = Backend.BMember.Logout();
+        if (bro.IsSuccess())
+        {
+            //로그아웃 성공, 시작 화면으로 이동
+            SceneLoader.instance.GotoWelcome();
+        }
+        else
+        {
+            Debug.Log("로그아웃 실패");
+        }
+        
+    }
 }

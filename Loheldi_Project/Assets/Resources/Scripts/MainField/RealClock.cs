@@ -27,7 +27,7 @@ public class RealClock : MonoBehaviour
         QDD = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         if (SceneManager.GetActiveScene().name == "MainField")
             Quest = GameObject.Find("EventSystem").GetComponent<QuestScript>();
-        GetCurrentDate();               //시간 불러는 함수
+        GetCurrentDate();               //시간 불러오는 함수
         TimeSetting(Time);
         PreTime = Time;                 //변경 함수 초기화
 
@@ -42,8 +42,7 @@ public class RealClock : MonoBehaviour
         string DayTime = DateTime.Now.ToString("t");                      //시간 불러오기
         TimeTxT.text = "시간 : " + DayTime;*/
 
-        Time = 12;
-        //Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
+        Time = int.Parse(DateTime.Now.ToString("H"));                    //String을 Int로 변경 (HH는 24시간 개념)
     }
 
     public void TimeSetting(float Time)

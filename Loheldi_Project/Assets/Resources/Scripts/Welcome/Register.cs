@@ -228,7 +228,7 @@ public class Register : MonoBehaviour
     }
 
     //계정 정보 존재 여부 체크 메소드
-    private bool AccChk()
+    public static bool AccChk()
     {
         bool isOK = false;
         BackendReturnObject bro = Backend.GameData.GetMyData("ACC_INFO", new Where(), 100);

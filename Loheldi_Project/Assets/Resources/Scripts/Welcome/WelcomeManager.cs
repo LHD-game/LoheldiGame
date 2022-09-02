@@ -64,7 +64,20 @@ public class WelcomeManager : MonoBehaviour
             BackendReturnObject BRO = Backend.BMember.CustomLogin(PlayerPrefs.GetString("ID"), PlayerPrefs.GetString("PW"));
             if (BRO.IsSuccess())
             {
-                SceneLoader.instance.GotoMainField();
+                // play_info를 서버에서 불러와 로컬에 저장
+                Save_Basic.LoadPlayInfo();
+                Save_Log.instance.SaveLoginLog();
+                Save_Basic.LoadUserGarden();
+
+                if (Register.AccChk())   //계정 정보 만들어져 있으면, 계정 정보를 로컬에 저장하고, 필드로
+                {
+                    Save_Basic.LoadAccInfo();  //계정 정보를 로컬에 저장
+                    SceneLoader.instance.GotoMainField();
+                }
+                else    //없으면 계정 정보 생성
+                {
+                    SceneLoader.instance.GotoCreateAcc();
+                }
             }
             else
             {

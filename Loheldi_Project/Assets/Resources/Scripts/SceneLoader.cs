@@ -23,6 +23,10 @@ public class SceneLoader : MonoBehaviour
         }
     }
     //Login
+    public void GotoWelcome()
+    {
+        LoadingSceneManager.LoadScene("Welcome");
+    }
     public void GotoUserInfo()
     {
         LoadingSceneManager.LoadScene("UserInfo");

@@ -88,7 +88,7 @@ public class Gagu_Category : StoreCategoryControl
         }
         cnt_my_gagu = 0;
 
-        GetChartContents("55031");
+        GetChartContents(ChartNum.AllItemChart);
         MakeCategory(c_wood, woodItem, wood_list);
         MakeCategory(c_modern, modernItem, modern_list);
         MakeCategory(c_kitsch, kitschItem, kitsch_list);

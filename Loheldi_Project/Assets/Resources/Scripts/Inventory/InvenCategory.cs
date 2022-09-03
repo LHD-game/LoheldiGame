@@ -38,7 +38,7 @@ public class InvenCategory : MonoBehaviour
         gaguItem = new List<Dictionary<string, object>>();
         cropsItem = new List<Dictionary<string, object>>();
 
-        GetChartContents("55031");
+        GetChartContents(ChartNum.AllItemChart);
         MakeCategory(c_super, superItem, super_list);
         MakeCategory(c_gagu, gaguItem, gagu_list);
         MakeCategory(c_crops, cropsItem, crop_list);

@@ -10,6 +10,8 @@ public class HousingElevator : MonoBehaviour
     public GameObject Camera;
     public GameObject UpButton;
     public GameObject DownButton;
+    public Camera TCam;
+    public VirtualJoystick VJS;
 
     int a;
 
@@ -68,6 +70,9 @@ public class HousingElevator : MonoBehaviour
         this.GetComponent<Changing>().F3.SetActive(false);
         this.GetComponent<Changing>().F31.SetActive(false);
         this.GetComponent<Changing>().F4.SetActive(false);
+        Camera.GetComponent<Camera>().enabled = true;
+        VJS.TempInt = 1;
+        TCam.enabled = false;
         Camera.transform.position = new Vector3(-20f, 6f, -2f);
         Player.transform.position = new Vector3(-23.5f, -2f, -1f);
         CheckF();

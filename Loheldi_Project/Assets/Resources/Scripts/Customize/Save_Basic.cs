@@ -96,6 +96,8 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
         param.Add("LastQTime", today.Day);
         param.Add("HP", 5);
         param.Add("LastHPTime", today.Day);
+        param.Add("HouseLv", 1);
+        param.Add("HouseShape", "Plane");
 
         var bro = Backend.GameData.Insert("PLAY_INFO", param);
 
@@ -179,7 +181,7 @@ public class Save_Basic //초기값을 서버에 저장해주는 클래스
                 PlayerPrefs.SetInt("LastHPTime", data.LastHPTime);
                 PlayerPrefs.SetString("WeeklyQuestPreg", data.WeeklyQuestPreg);
                 PlayerPrefs.SetInt("HouseLv", data.HouseLv);
-
+                PlayerPrefs.SetString("HouseShape", data.HouseShape);
             }
             catch (Exception ex) //조회에는 성공했으나, 해당 값이 없음(NullPointException)
             {

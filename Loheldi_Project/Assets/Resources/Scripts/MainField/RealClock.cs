@@ -42,7 +42,7 @@ public class RealClock : MonoBehaviour
         string DayTime = DateTime.Now.ToString("t");                      //시간 불러오기
         TimeTxT.text = "시간 : " + DayTime;*/
 
-        Time = int.Parse(DateTime.Now.ToString("H"));                    //String을 Int로 변경 (HH는 24시간 개념)
+        Time = int.Parse(DateTime.Now.ToString("HH"));                    //String을 Int로 변경 (HH는 24시간 개념)
     }
 
     public void TimeSetting(float Time)
@@ -51,10 +51,10 @@ public class RealClock : MonoBehaviour
         {
             switch (Time)
             {
-                case 6:
-                case 7:
-                case 8:
-                case 9:
+                case 06:
+                case 07:
+                case 08:
+                case 09:
                 case 10:
                 case 11:
                 case 12:
@@ -67,11 +67,11 @@ public class RealClock : MonoBehaviour
                     NightLight.SetActive(false);                                                              //광원은 아침에 꺼짐
                     Light.transform.eulerAngles = new Vector3(50, (Time - 11) * 15, 0);                       //빛을 15도씩 돌림
                     break;
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                case 4:
+                case 00:
+                case 01:
+                case 02:
+                case 03:
+                case 04:
                 case 18:
                 case 19:
                 case 20:

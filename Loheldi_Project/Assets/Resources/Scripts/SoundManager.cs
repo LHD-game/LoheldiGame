@@ -53,7 +53,7 @@ public class SoundManager : MonoBehaviour
         }
         else if (scene.name == "Housing")
         {
-            Sound("BGMNight");
+            Sound("BGMHouse");
         }
         else if (scene.name == "Game_Lobby")
         {

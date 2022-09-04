@@ -83,7 +83,7 @@ public class FurnitureChangeClick : MonoBehaviour
                         {
                             ItemType = "washstand";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "coffeeTable")
+                        if (CurrentFurniture.GetComponent<Text>().text == "coffeetable")
                         {
                             ItemType = "table";
                         }

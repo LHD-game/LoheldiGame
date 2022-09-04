@@ -41,7 +41,7 @@ public class HousingCategory : MonoBehaviour
 
             //아이템 테마에 따라 다른 리스트에 저장.
 
-            if (data.Category.Equals("wood") || data.Category.Equals("modern") || data.Category.Equals("kitsch") || data.Category.Equals("classic") || data.Category.Equals("wallpaper"))
+            if (data.Category.Equals("wood") || data.Category.Equals("modern") || data.Category.Equals("kitsch") || data.Category.Equals("classic") || data.Category.Equals("wallpaper") || data.Category.Equals("gacha"))
             {
                 gaguItem.Add(new Dictionary<string, object>());
                 initItem(gaguItem[s], data);

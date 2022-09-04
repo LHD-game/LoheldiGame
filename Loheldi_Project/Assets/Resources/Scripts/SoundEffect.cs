@@ -46,6 +46,15 @@ public class SoundEffect : MonoBehaviour
     public AudioClip Chikachika;
     public AudioClip Chararang;
     public AudioClip Paper;
+
+    public AudioClip heimang;
+    public AudioClip dung;
+    public AudioClip hami;
+    public AudioClip nari;
+    public AudioClip himchan;
+    public AudioClip yeomi;
+    public AudioClip yomi;
+
     AudioSource audioSource;
 
     private void Awake()
@@ -210,6 +219,34 @@ public class SoundEffect : MonoBehaviour
                 break;
             case "Paper":
                 audioSource.clip = Paper;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "heimang":
+                audioSource.clip = heimang;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "dung":
+                audioSource.clip = dung;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "hami":
+                audioSource.clip = hami;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "nari":
+                audioSource.clip = nari;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "himchan":
+                audioSource.clip = himchan;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "yeomi":
+                audioSource.clip = yeomi;
+                audioSource.volume = 2 * PlayerSett.SEValue;
+                break;
+            case "yomi":
+                audioSource.clip = yomi;
                 audioSource.volume = 2 * PlayerSett.SEValue;
                 break;
             default:

@@ -9,7 +9,7 @@ public class PlayerSett : MonoBehaviour
     void Start()
     {
         GetSound(); //로컬 설정을 불러오는 함수
-        SoundManager.audioSource.volume = 0.8f * PlayerSett.BGMValue;
+        SoundManager.audioSource.volume = 0.5f * PlayerSett.BGMValue;
     }
 
     //로컬에서 사운드 설정을 불러옵니다.
@@ -32,13 +32,5 @@ public class PlayerSett : MonoBehaviour
         {
             SEValue = 0.5f;
         }
-    }
-
-
-    //로컬에 사운드 설정을 저장합니다.
-    void SetSound(float bgm, float se)
-    {
-        PlayerPrefs.SetFloat("BGMValue", bgm);
-        PlayerPrefs.SetFloat("SEValue", se);
     }
 }

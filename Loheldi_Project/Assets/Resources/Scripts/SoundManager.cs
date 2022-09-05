@@ -36,6 +36,8 @@ public class SoundManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
         audioSource = this.GetComponent<AudioSource>();
+
+        Sound("BGMOpening");
     }
 
     void OnEnable()
@@ -86,6 +88,10 @@ public class SoundManager : MonoBehaviour
             else
                 Sound("BGMField");
         }
+        if (scene.name == "Gacha")
+        {
+            Sound("BGMGacha");
+        }
     }
 
     public void Win()
@@ -105,7 +111,6 @@ public class SoundManager : MonoBehaviour
     public void Sound(string action)
     {
         audioSource.loop = true;
-        audioSource.volume = 0.8f * PlayerSett.BGMValue;
         switch (action)
         {
             case "Idle":
@@ -122,24 +127,31 @@ public class SoundManager : MonoBehaviour
                 break;
             case "BGMOpening":
                 audioSource.clip = audioBGMOpening;
+                audioSource.volume = 0.5f * PlayerSett.BGMValue;
                 break;
             case "BGMField":
                 audioSource.clip = audioBGMField;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMHouse":
                 audioSource.clip = audioBGMHouse;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMLobby":
                 audioSource.clip = audioBGMLobby;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMFood":
                 audioSource.clip = audioBGMFood;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMTooth":
                 audioSource.clip = audioBGMTooth;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMCard":
                 audioSource.clip = audioBGMCard;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMGacha":
                 audioSource.clip = audioBGMGacha;
@@ -147,21 +159,27 @@ public class SoundManager : MonoBehaviour
                 break;
             case "BGMRun":
                 audioSource.clip = audioBGMRun;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMQuest":
                 audioSource.clip = audioBGMQuest;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMQuestEnd":
                 audioSource.clip = audioBGMQuestEnd;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMTutorial":
                 audioSource.clip = audioBGMTutorial;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "BGMNight":
                 audioSource.clip = audioBGMNight;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             case "HaHasong":
                 audioSource.clip = audioHaHasong;
+                audioSource.volume = 0.8f * PlayerSett.BGMValue;
                 break;
             default:
                 break;

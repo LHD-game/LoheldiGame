@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class PlayerSetting : MonoBehaviour
 {
     public GameObject SettingContent;
-    public static float BGMValueforSetting;
-    public static float SEValueforSetting;
+    public float BGMValueforSetting;
+    public float SEValueforSetting;
 
     public int BGMValueforString;
     public int SEValueforString;
@@ -30,5 +30,9 @@ public class PlayerSetting : MonoBehaviour
         SEValueforString = (int)Math.Round(SEValueforSetting * 100);
         SettingContent.transform.Find("SESlider").Find("SEValue").gameObject.GetComponent<Text>().text = SEValueforString.ToString();
         PlayerSett.SEValue = SEValueforSetting;
+
+        //로컬에 저장
+        PlayerPrefs.SetFloat("BGMValue", BGMValueforSetting);
+        PlayerPrefs.SetFloat("SEValue", SEValueforSetting);
     }
 }

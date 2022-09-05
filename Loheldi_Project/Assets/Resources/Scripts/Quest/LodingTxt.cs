@@ -493,7 +493,7 @@ public class LodingTxt : MonoBehaviour
             video.OnPlayVideo();
             ChatWin.SetActive(false); 
             GameObject SoundManager = GameObject.Find("SoundManager");
-            SoundManager.GetComponent<AudioSource>().volume = 0f;
+            SoundManager.SetActive(false);
             j++;
         }
         else if (data_Dialog[j]["scriptType"].ToString().Equals("videoEnd")) //동영상 실행 중지       영상에 몇초 뒤 버튼을 추가시켜 그걸 누르면 확인창으로 넘어가게끔
@@ -506,7 +506,7 @@ public class LodingTxt : MonoBehaviour
                 video.OnFinishVideo();
                 ChatWin.SetActive(true);
                 GameObject SoundManager = GameObject.Find("SoundManager");
-                SoundManager.GetComponent<AudioSource>().volume = 1f;
+                SoundManager.SetActive(true);
                 scriptLine();
             }
             else

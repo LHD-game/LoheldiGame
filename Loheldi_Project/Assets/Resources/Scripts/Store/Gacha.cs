@@ -346,7 +346,7 @@ public class Gacha : MonoBehaviour
         }
     }
 
-    //가구 아이템을 옷장 테이블에 저장
+    //가구 아이템을 테이블에 저장
     void SaveItemGagu(string icode)
     {
         Where where = new Where();
@@ -365,6 +365,7 @@ public class Gacha : MonoBehaviour
             {
                 Param param = new Param();
                 param.Add("ICode", icode);
+                param.Add("Amount", 1);
 
                 var insert_bro = Backend.GameData.Insert("INVENTORY", param);
 

@@ -56,8 +56,7 @@ public class SceneLoader : MonoBehaviour
     //Mini Game
     public void GotoLobby()
     {
-        if (SceneManager.GetActiveScene().name == "MainField")
-            PlayerTransForm();
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("Game_Lobby");
     }
     public void GotoEatingGame()
@@ -94,6 +93,7 @@ public class SceneLoader : MonoBehaviour
 
     public void GotoGacha()
     {
+        PlayerTransForm();
         LoadingSceneManager.LoadScene("Gacha");
     }
     public void GotoQuizGame()

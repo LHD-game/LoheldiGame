@@ -12,7 +12,7 @@ public static class ChartNum
     public static string BasicClothesItemChart = "53497";
     public static string CustomItemChart = "55694";
     public static string ClothesItemChart = "55438";
-    public static string AllItemChart = "55031";
+    public static string AllItemChart = "57488";
     public static string BadgeChart = "54754";
     public static string GachaClothesChart = "56858";
     public static string GachaGaguChart = "56925";
@@ -39,6 +39,7 @@ public class PlayInfo
     public int LastHPTime;
     public string WeeklyQuestPreg;
     public int HouseLv;
+    public string HouseShape;
 }
 
 public class MyItem

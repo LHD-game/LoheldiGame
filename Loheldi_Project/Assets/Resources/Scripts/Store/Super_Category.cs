@@ -25,7 +25,7 @@ public class Super_Category : StoreCategoryControl
 
     public void PopSuperStore()
     {
-        GetChartContents("55031");
+        GetChartContents(ChartNum.AllItemChart);
         MakeCategory(c_seed, seedItem);
         MakeCategory(c_tree, treeItem);
     }

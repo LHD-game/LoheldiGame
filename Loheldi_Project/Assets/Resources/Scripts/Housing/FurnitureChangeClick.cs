@@ -83,7 +83,7 @@ public class FurnitureChangeClick : MonoBehaviour
                         {
                             ItemType = "washstand";
                         }
-                        if (CurrentFurniture.GetComponent<Text>().text == "coffeeTable")
+                        if (CurrentFurniture.GetComponent<Text>().text == "coffeetable")
                         {
                             ItemType = "table";
                         }
@@ -95,7 +95,7 @@ public class FurnitureChangeClick : MonoBehaviour
                         if (!ButtonToggle)                                                  //이때 버튼이 없다면
                         {
                             this.GetComponent<HousingCategory>().gaguItem.Clear();
-                            this.GetComponent<HousingCategory>().GetChartContents("55031");
+                            this.GetComponent<HousingCategory>().GetChartContents(ChartNum.AllItemChart);
                             Debug.Log(ItemType);
                             this.GetComponent<HousingCategory>().MakeCategory(Contents, this.GetComponent<HousingCategory>().gaguItem, this.GetComponent<HousingCategory>().gagu_list, ItemType);
                             Buttons.transform.position = Input.mousePosition;                   //버튼을 클릭한 위치에 생성하기

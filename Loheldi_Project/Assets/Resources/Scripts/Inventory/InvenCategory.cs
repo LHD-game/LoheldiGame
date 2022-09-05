@@ -62,7 +62,7 @@ public class InvenCategory : MonoBehaviour
 
             //아이템 테마에 따라 다른 리스트에 저장.
 
-            if (data.Category.Equals("seed") || data.Category.Equals("tree"))   //슈퍼 아이템
+            if (data.Category.Equals("seed") || data.Category.Equals("tree") || data.Category.Equals("interior"))   //슈퍼 아이템
             {
                 superItem.Add(new Dictionary<string, object>()); // list에 공간을 만들어줍니다.
                 initItem(superItem[s], data);

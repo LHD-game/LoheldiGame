@@ -73,6 +73,7 @@ public class LodingTxt : MonoBehaviour
     public GameObject AppleTreeObj;
 
     public GameObject SoundEffectManager;
+    GameObject SoundManager;
 
     public int NPCButton = 0;
     public string LoadTxt;
@@ -492,7 +493,7 @@ public class LodingTxt : MonoBehaviour
             movie.SetActive(true);
             video.OnPlayVideo();
             ChatWin.SetActive(false); 
-            GameObject SoundManager = GameObject.Find("SoundManager");
+            SoundManager = GameObject.Find("SoundManager");
             SoundManager.SetActive(false);
             j++;
         }
@@ -505,7 +506,6 @@ public class LodingTxt : MonoBehaviour
                 movie.SetActive(false);
                 video.OnFinishVideo();
                 ChatWin.SetActive(true);
-                GameObject SoundManager = GameObject.Find("SoundManager");
                 SoundManager.SetActive(true);
                 scriptLine();
             }

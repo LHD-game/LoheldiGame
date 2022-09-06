@@ -14,9 +14,9 @@ public class PMCap : MonoBehaviour
 
 
     public Image ScreenshotImg;
-    public Image PlayerstatusImg;
+    public GameObject PlayerstatusImg;
     public Image MyInfoImg;
-    public Material MapIcon;
+    public Material PlayerImage;
     void Start()
     {
         if (SceneManager.GetActiveScene().name == "Game_Tooth")
@@ -42,15 +42,17 @@ public class PMCap : MonoBehaviour
         //ffbyte[] bytes = screenShot.EncodeToPNG();
         //File.WriteAllBytes(name, bytes);
         Sprite sprite = Sprite.Create(screenShot, new Rect(0, 0, screenShot.width, screenShot.height), new Vector2(0.5f, 0.5f));
-        ScreenshotImg.sprite = sprite;
+        //ScreenshotImg.sprite = sprite;
 
         this.transform.position = this.transform.position + new Vector3(0, -1, 2);
 
         if (SceneManager.GetActiveScene().name == "MainField")
         {
-            PlayerstatusImg.sprite = sprite;
-            MyInfoImg.sprite = sprite;
+            PlayerstatusImg.SetActive(true);
+            //MyInfoImg.sprite = sprite;
+            PlayerImage.SetTexture("_MainTex", screenShot);
         }
+        
         camera.gameObject.SetActive(false);
     }
 }

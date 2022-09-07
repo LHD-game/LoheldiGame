@@ -12,7 +12,7 @@ public class NpcButtonClick : MonoBehaviour
     [SerializeField]
     Text SecondButtonTxt;
     private UIButton UIB;
-    private FlieChoice Chat;
+    public FlieChoice Chat;
     public GameObject ParentscheckUI;
 
 

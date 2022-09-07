@@ -12,7 +12,8 @@ public class FlieChoice : MonoBehaviour
     public Interaction Inter;
     private void Awake()
     {
-        EPin.SetActive(false);
+        if (SceneManager.GetActiveScene().name == "MainField")
+            EPin.SetActive(false);
         if (SceneManager.GetActiveScene().name == "Quiz")
         {
             Quest(); 

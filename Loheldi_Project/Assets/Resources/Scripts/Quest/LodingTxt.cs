@@ -1241,6 +1241,7 @@ public class LodingTxt : MonoBehaviour
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
             PlayerPrefs.SetInt("LastQTime", DontDestroy.ToDay);
+            NpcButton.Chat.EPin.SetActive(false);
             DontDestroy.LastDay = DontDestroy.ToDay;
         }
         else
@@ -1267,6 +1268,7 @@ public class LodingTxt : MonoBehaviour
             PlayInfoManager.GetQuestPreg();
             NpcButton.CheckQuest();
             ClearWin.SetActive(true);
+            NpcButton.Chat.EPin.SetActive(false);
         }
         else
         {

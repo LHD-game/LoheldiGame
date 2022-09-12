@@ -32,7 +32,7 @@ public class QuestScript : MonoBehaviour
     public void QuestStart()
     {
         DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
-        //Debug.Log("퀘스트스크립트스타트실행" + String.IsNullOrEmpty(DontDestroy.ButtonPlusNpc) + DontDestroy.QuestMail);
+        Debug.Log("퀘스트스크립트스타트실행" + PlayerPrefs.GetString("QuestPreg"));
 
         if (PlayerPrefs.GetString("QuestPreg").Equals("0_0"))
         {
@@ -44,7 +44,7 @@ public class QuestScript : MonoBehaviour
         {
             StartCoroutine("QFarmLoop");
         }
-        else if (PlayerPrefs.GetString("QuestPreg").Equals("22_1"))
+        else if (PlayerPrefs.GetString("WeeklyQuestPreg").Equals("22_1"))
         {
             Debug.Log("양치");
             DontDestroy.ToothQ = true;

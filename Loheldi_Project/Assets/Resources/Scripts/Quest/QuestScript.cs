@@ -44,7 +44,7 @@ public class QuestScript : MonoBehaviour
         {
             StartCoroutine("QFarmLoop");
         }
-        else if (PlayerPrefs.GetString("QuestPreg").Equals("22_1"))
+        else if (PlayerPrefs.GetString("WeeklyQuestPreg").Equals("22_1"))
         {
             Debug.Log("¾çÄ¡");
             DontDestroy.ToothQ = true;

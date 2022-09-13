@@ -17,6 +17,7 @@ public class PMCap : MonoBehaviour
     public GameObject PlayerstatusImg;
     public Image MyInfoImg;
     public Material PlayerImage;
+    public Texture PlayerImageTexture;
     void Start()
     {
         if (SceneManager.GetActiveScene().name == "Game_Tooth")
@@ -50,7 +51,7 @@ public class PMCap : MonoBehaviour
         {
             PlayerstatusImg.SetActive(true);
             //MyInfoImg.sprite = sprite;
-            PlayerImage.SetTexture("_MainTex", screenShot);
+            //PlayerImage.SetTexture("_MainTex", screenShot);
         }
         
         camera.gameObject.SetActive(false);

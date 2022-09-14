@@ -24,6 +24,23 @@ public class VirtualJoystick : MonoBehaviour
 
     void Start()
     {
+        //레벨에 따른 속도 조절
+        int my_lev = PlayerPrefs.GetInt("Level");
+        if (my_lev >= 5)
+        {
+            if (my_lev >= 10)   //레벨이 10 이상
+            {
+                speed1 = 10f;
+                speed2 = 13f;
+            }
+            else //레벨이 5 이상 10 미만
+            {
+                speed1 = 9f;
+                speed2 = 12f;
+            }
+        }
+        Debug.Log("속도: " + speed1);
+
         Scene scene = SceneManager.GetActiveScene();
 
         if (scene.name == "MainField")

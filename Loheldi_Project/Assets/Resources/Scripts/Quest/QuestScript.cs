@@ -44,7 +44,11 @@ public class QuestScript : MonoBehaviour
         {
             StartCoroutine("QFarmLoop");
         }
+<<<<<<< HEAD
         else if (PlayerPrefs.GetString("WeeklyQuestPreg").Equals("22_1"))
+=======
+        else if (DontDestroy.weekend&&PlayerPrefs.GetString("WeeklyQuestPreg").Equals("22_1"))
+>>>>>>> aa9594490f3769cdc7556ac17d86e852e1524323
         {
             Debug.Log("¾çÄ¡");
             DontDestroy.ToothQ = true;
@@ -88,6 +92,7 @@ public class QuestScript : MonoBehaviour
         {
             Instantiate(Resources.Load<GameObject>("Models/NPC/npc/parents"), new Vector3(30, 5, 33), Quaternion.Euler(new Vector3(0, 133, 0)));
         }
+
         if (SceneManager.GetActiveScene().name == "MainField")
             ExclamationMarkCreate();
     }
@@ -114,6 +119,7 @@ public class QuestScript : MonoBehaviour
     }
     private void ExclamationMarkCreate()
     {
+        Debug.Log("Äù½ºÆ® ´À³¦Ç¥ »ý¼º");
         Transform Parent = GameObject.Find(DontDestroy.ButtonPlusNpc).GetComponent<Transform>();
         GameObject child;
         child = Instantiate(ExclamationMark[1], GameObject.Find(DontDestroy.ButtonPlusNpc).transform.position+new Vector3(0,6,0), GameObject.Find(DontDestroy.ButtonPlusNpc).transform.rotation);

@@ -20,6 +20,8 @@ public class LodingTxt : MonoBehaviour
     public Text chatName;
     //public Text QuizName;
     public Text chatTxt;
+    //메일 내용 뜨는거
+    public Text Mailcontent;
     //public Text QuizTxt;
     public Text[] QuizButton = new Text[3];
 
@@ -173,14 +175,14 @@ public class LodingTxt : MonoBehaviour
             else
                 AppleTreeObj.SetActive(false);
             //주말체크
-            DateTime nowDT = DateTime.Now;
+            /*DateTime nowDT = DateTime.Now;
             if (nowDT.DayOfWeek == DayOfWeek.Saturday)
                 DontDestroy.SDA = true;
             else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
                 DontDestroy.weekend = true;
             else
                 DontDestroy.weekend = false;
-            DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 
+            DontDestroy.ToDay = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));   //퀘스트용 오늘날짜 저장 */
 
             if (Int32.Parse(QQ[0]) == 0)
             {

@@ -39,14 +39,15 @@ public class MailLoad : MonoBehaviour
     public Text MailCount;
     public int TotalCount;
 
-    public QuestScript Quest;
 
-    List<Dictionary<string, object>> quest = new List<Dictionary<string, object>>();
+    public QuestDontDestroy DontDestroy;
+
+        List<Dictionary<string, object>> quest = new List<Dictionary<string, object>>();
     static List<GameObject> quest_list = new List<GameObject>();   //우편 오브젝트 객체를 저장하는 변수
 
     void Start()
     {
-        Quest = GameObject.Find("chatManager").GetComponent<QuestScript>();
+        DontDestroy = GameObject.Find("DontDestroyQuest").GetComponent<QuestDontDestroy>();
         MailorAnnou = true;
 
         NewMailCheck();
@@ -68,7 +69,14 @@ public class MailLoad : MonoBehaviour
             
             if (i == 2)
             {
-                txt.text = "왼쪽 목록에서 읽고 싶은 편지를 선택하세요.";
+                if (DontDestroy.SDA)
+                {
+                    txt.text = "토요일은 희망둥둥섬의 주민들이 쉬는날이라 퀘스트 진행을 할 수 없습니다.";
+                }
+                else
+                {
+                    txt.text = "왼쪽 목록에서 읽고 싶은 편지를 선택하세요.";
+                }
             }
             else
             {

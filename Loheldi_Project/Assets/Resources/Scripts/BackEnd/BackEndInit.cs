@@ -5,6 +5,9 @@ using BackEnd;
 
 public class BackEndInit : MonoBehaviour
 {
+
+    [SerializeField]
+    GameObject VersionUpdatePanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,18 +43,16 @@ public class BackEndInit : MonoBehaviour
 
         if (forceUpdate == "1") //업데이트 방식: 선택
         {
-            Debug.Log("업데이트를 하시겠습니까? y/n");
+            //Debug.Log("업데이트를 하시겠습니까? y/n");
         }
         else if (forceUpdate == "2") //업데이트 방식: 강제
         {
-            Debug.Log("업데이트가 필요합니다. 스토어에서 업데이트를 진행해주시기 바랍니다");
+            //Debug.Log("업데이트가 필요합니다. 스토어에서 업데이트를 진행해주시기 바랍니다");
 
-            //해당 앱의 스토어로 가게 해주는 유니티 함수
-            #if UNITY_ANDROID
-                    Application.OpenURL("market://details?id=" + Application.identifier);
-            #elif UNITY_IOS
-                    Application.OpenURL("https://itunes.apple.com/kr/app/apple-store/" + "id1461432877");
-            #endif
+
         }
+
+        //우선은 모두 같은 팝업을 띄우도록 제작함.
+        VersionUpdatePanel.SetActive(true);
     }
 }

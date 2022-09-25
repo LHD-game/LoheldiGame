@@ -146,7 +146,7 @@ public class Changing : MonoBehaviour
         TempItemCode.text = PlayerPrefs.GetString("fridge");
         if (TempItemCode.text != "")
             ButtonClick(TempItemCode);
-        TempItemCode.text = PlayerPrefs.GetString("standsink");
+        TempItemCode.text = PlayerPrefs.GetString("standingsink");
         if (TempItemCode.text != "")
             ButtonClick(TempItemCode);
         TempItemCode.text = PlayerPrefs.GetString("sofa");

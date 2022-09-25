@@ -50,7 +50,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
         Text from_detail_txt = from_detail.GetComponent<Text>();
         from_detail_txt.text = from_txt.text;
 
-        GameObject content_detail = QuestDetail.transform.Find("RContent").gameObject;
+        GameObject content_detail = QuestDetail.transform.Find("RContentsViewport").transform.Find("RContent").gameObject;
         Text content_detail_txt = content_detail.GetComponent<Text>();
         content_detail_txt.text = content_txt.text;
 

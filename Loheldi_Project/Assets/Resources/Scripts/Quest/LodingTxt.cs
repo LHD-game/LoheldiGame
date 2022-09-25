@@ -175,7 +175,7 @@ public class LodingTxt : MonoBehaviour
             else
                 AppleTreeObj.SetActive(false);
             //주말체크
-            /*DateTime nowDT = DateTime.Now;
+            DateTime nowDT = DateTime.Now;
             if (nowDT.DayOfWeek == DayOfWeek.Saturday)
                 DontDestroy.SDA = true;
             else if (nowDT.DayOfWeek == DayOfWeek.Sunday)

@@ -35,7 +35,7 @@ public class FlieChoice : MonoBehaviour
     }
     public void Tutorial()
     {
-        Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
+        //Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
         chat.Main_UI.SetActive(false);
         chat.FileAdress = "Scripts/Quest/script";
         chat.cuttoonImageList = Resources.LoadAll<Sprite>("Sprites/Quest/cuttoon/tutorial");
@@ -55,7 +55,9 @@ public class FlieChoice : MonoBehaviour
         chat.FileAdress = "Scripts/Quest/script";
         chat.Num = chat.DontDestroy.QuestIndex;
         chat.NewChat();
-        Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
+        if (SceneManager.GetActiveScene().name == "Quiz") ;
+        else
+            Save_Log.instance.SaveQStartLog();  //퀘스트 시작 시간 로그
     }
 
     public void NpcChoice(string NameNPC) //npc와 대화 선택하는 함수

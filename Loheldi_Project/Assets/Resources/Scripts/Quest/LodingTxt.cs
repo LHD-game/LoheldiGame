@@ -175,7 +175,7 @@ public class LodingTxt : MonoBehaviour
             else
                 AppleTreeObj.SetActive(false);
             //주말체크
-            /*DateTime nowDT = DateTime.Now;
+            DateTime nowDT = DateTime.Now;
             if (nowDT.DayOfWeek == DayOfWeek.Saturday)
                 DontDestroy.SDA = true;
             else if (nowDT.DayOfWeek == DayOfWeek.Sunday)
@@ -398,7 +398,7 @@ public class LodingTxt : MonoBehaviour
             case 12:
                 PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
                 PlayInfoManager.GetQuestPreg();
-                Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
+                //Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
                 SceneLoader.instance.GotoMainField();
                 break;
             case 13:
@@ -1237,7 +1237,9 @@ public class LodingTxt : MonoBehaviour
     }
     public void QuestEnd()
     {
-        Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
+        if (SceneManager.GetActiveScene().name == "Quiz") ;
+        else
+            Save_Log.instance.SaveQEndLog();    //퀘스트 종료 로그 기록
 
         DontDestroy.ButtonPlusNpc = "";
         //Quest.Load.QuestMail = false;
@@ -1247,7 +1249,6 @@ public class LodingTxt : MonoBehaviour
         else
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
-        PlayInfoManager.GetQuestPreg();
 
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
@@ -1260,6 +1261,8 @@ public class LodingTxt : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "MainField")
                 QuestLoad.QuestLoadStart();
         }
+
+        PlayInfoManager.GetQuestPreg();
     }
 
     public void ParentsCheck()

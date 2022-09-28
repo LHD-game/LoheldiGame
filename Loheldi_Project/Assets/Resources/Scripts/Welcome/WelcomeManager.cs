@@ -176,4 +176,19 @@ public class WelcomeManager : MonoBehaviour
     {
         SceneManager.LoadScene("Scenes/Welcome");
     }
+
+    public void GoGoogleStoreBtn()
+    {
+        //해당 앱의 스토어로 가게 해주는 유니티 함수
+        #if UNITY_ANDROID
+                Application.OpenURL("market://details?id=" + Application.identifier);
+        #elif UNITY_IOS
+                Application.OpenURL("https://itunes.apple.com/kr/app/apple-store/" + "id1461432877");
+        #endif
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

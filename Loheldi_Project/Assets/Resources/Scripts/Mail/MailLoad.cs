@@ -73,6 +73,10 @@ public class MailLoad : MonoBehaviour
                 {
                     txt.text = "토요일은 희망둥둥섬의 주민들이 쉬는날이라 퀘스트 진행을 할 수 없습니다.";
                 }
+                else if(DontDestroy.LastDay == DontDestroy.ToDay)
+                {
+                    txt.text = "왼쪽 목록에서 읽고 싶은 편지를 선택하세요.\n\n<오늘의 일일 퀘스트를 모두 완료했습니다.>";
+                }
                 else
                 {
                     txt.text = "왼쪽 목록에서 읽고 싶은 편지를 선택하세요.";

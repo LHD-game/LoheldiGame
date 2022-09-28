@@ -13,6 +13,7 @@ public class Interaction : MonoBehaviour
     public bool Door;
     public bool Gacha;
     public bool Farm = false;
+    public bool ThankTree = false;
 
     public bool NpcNameTF = false;
     public List<string> Npcs = new List<string>();
@@ -50,6 +51,11 @@ public class Interaction : MonoBehaviour
                 Gacha = true;
                 text.text = "뽑기";
             }
+            else if (other.gameObject.name == "ThankApplesTree")
+            {
+                ThankTree = true;
+                text.text = "감사나무";
+            }
             else
                 text.text = "대화";
             NearNPC = true;
@@ -80,7 +86,6 @@ public class Interaction : MonoBehaviour
             Farm = true;
             text.text = "농장";
         }
-        
     }
 
     void OnTriggerExit(Collider other)              //다른 콜리더와 떨어졌을때
@@ -118,6 +123,7 @@ public class Interaction : MonoBehaviour
             Door = false;
             Gacha = false;
             Farm = false;
+            ThankTree = false;
             NearNPC = false;
             text.text = "점프";
             NameNPC = " ";
@@ -127,9 +133,9 @@ public class Interaction : MonoBehaviour
     public void NpcNameActive(GameObject other)
     {
         int NpcNum = Npcs.IndexOf(NameNPC);
-            NpcNameTF = true;
-            NpcNames[NpcNum].SetActive(true);
-            StartCoroutine(NpcNameFollow(other, NpcNum));
+        NpcNameTF = true;
+        NpcNames[NpcNum].SetActive(true);
+        StartCoroutine(NpcNameFollow(other, NpcNum));
     }
     IEnumerator NpcNameFollow(GameObject Npc, int NpcNum)
     {

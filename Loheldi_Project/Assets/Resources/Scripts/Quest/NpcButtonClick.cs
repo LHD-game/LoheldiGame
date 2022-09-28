@@ -14,6 +14,7 @@ public class NpcButtonClick : MonoBehaviour
     private UIButton UIB;
     public FlieChoice Chat;
     public GameObject ParentscheckUI;
+    public GameObject ThankTreeUI;
 
 
     public void SecondButtonClick()
@@ -106,8 +107,12 @@ public class NpcButtonClick : MonoBehaviour
         }
         else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("미션 인증하기"))
         {
-            Chat.chat.Main_UI.SetActive(true);
+            UIB.chat.ChatEnd();
             ParentscheckUI.SetActive(true);
+        }
+        else if (click.transform.GetChild(0).GetComponent<Text>().text.Equals("감사나무 가꾸기"))
+        {
+            ThankTreeUI.SetActive(true);
             UIB.chat.ChatEnd();
         }
     }

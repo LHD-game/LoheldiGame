@@ -1249,7 +1249,6 @@ public class LodingTxt : MonoBehaviour
         else
             PlayerPrefs.SetString("QuestPreg", DontDestroy.QuestIndex);
 
-        PlayInfoManager.GetQuestPreg();
 
         if (data_Dialog[j]["dialog"].ToString().Equals("end"))
         {
@@ -1262,6 +1261,8 @@ public class LodingTxt : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "MainField")
                 QuestLoad.QuestLoadStart();
         }
+
+        PlayInfoManager.GetQuestPreg();
     }
 
     public void ParentsCheck()

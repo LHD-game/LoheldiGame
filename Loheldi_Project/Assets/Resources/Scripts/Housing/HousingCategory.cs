@@ -89,7 +89,6 @@ public class HousingCategory : MonoBehaviour
 
                 GameObject disable_img = child.transform.Find("Disable").gameObject;
                 disable_img.SetActive(true);
-                Debug.Log(myInven_rows.Count);
                 for (int j = 0; j < myInven_rows.Count; j++)
                 {
                     MyItem data = pj.ParseBackendData<MyItem>(myInven_rows[j]);
@@ -97,11 +96,6 @@ public class HousingCategory : MonoBehaviour
                     {
                         //비활성 창 오브젝트(Disable)를 비활성화
                         disable_img.SetActive(false);
-                        //change catalog box price
-                        GameObject amount_parent = ItemBtn.transform.Find("Amount").gameObject;
-                        GameObject amount_text = amount_parent.transform.Find("Text").gameObject;
-                        Text a_txt = amount_text.GetComponent<Text>();
-                        a_txt.text = data.Amount.ToString();
                         break;
                     }
                 }

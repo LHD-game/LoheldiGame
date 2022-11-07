@@ -26,6 +26,8 @@ public class SubQuest : MonoBehaviour
 
     private void AppleTreeSave()
     {
+        PlayInfoManager.GetExp(10);
+        PlayInfoManager.GetCoin(10);
         AppleTree.SetActive(false);
         Main_UI.SetActive(true);
     }

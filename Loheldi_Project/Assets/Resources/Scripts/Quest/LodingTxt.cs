@@ -1063,7 +1063,7 @@ public class LodingTxt : MonoBehaviour
         //PlayerCamera.SetActive(false);
         NPCButton = 0;
         ButtonsFalse();
-        if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine"))
+        if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine")|| Inter.NameNPC.Equals("ThankApplesTree"))
         { stopCorou(); }
         else if (DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei"))
         { stopCorou(); }

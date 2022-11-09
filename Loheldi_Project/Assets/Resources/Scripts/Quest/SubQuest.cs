@@ -37,14 +37,14 @@ public class SubQuest : MonoBehaviour
         MainUI.UpdateField();
         AppleTree.SetActive(false);
         Main_UI.SetActive(true);
-        HeartFX(AppleTreeOBJ);
+        Invoke("HeartFX", 0.15f);
     }
 
-    public void HeartFX(GameObject go)    //머리 반짝!하는 파티클
+    public void HeartFX()    //나무 하트 파티클
     {
         Debug.Log("반짝");
         ParticleSystem newfx = Instantiate(HeartFx);
-        newfx.transform.position = go.transform.position + new Vector3(0, 7, -3);
+        newfx.transform.position = AppleTreeOBJ.transform.position + new Vector3(0, 7, -3);
 
         newfx.Play();
     }

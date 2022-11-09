@@ -148,6 +148,10 @@ public class RunGameManager : MonoBehaviour
 
         player.velocity = new Vector3(0, 0, 0);
 
+        NPC[1].gameObject.GetComponent<RunNPC>().enabled = true;
+        NPC[2].gameObject.GetComponent<RunNPC>().enabled = true;
+        NPC[3].gameObject.GetComponent<RunNPC>().enabled = true;
+
         FinishSound = false;
         //Count.ResetTimer();
     }

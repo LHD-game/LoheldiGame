@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material 1
   m_Shader: {fileID: 4800000, guid: b617493ba5316084f9500a0fc55509dd, type: 3}
-  m_ShaderKeywords: _ENABLESLOPECORRECTION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8295923f76b625547b19b23929589567, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -71,20 +71,20 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EnableSlopeCorrection: 1
+    - _EnableSlopeCorrection: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MBAmplitude: 1.5
-    - _MBAmplitudeOffset: 2
+    - _MBAmplitude: 10
+    - _MBAmplitudeOffset: 4
     - _MBDefaultBending: 0
-    - _MBFrequency: 1.11
-    - _MBFrequencyOffset: 0
-    - _MBMaxHeight: 1
-    - _MBPhase: 3
+    - _MBFrequency: 0.4
+    - _MBFrequencyOffset: 0.5
+    - _MBMaxHeight: 0.4
+    - _MBPhase: 10
     - _MBWindDir: 0
     - _MBWindDirBlend: 0
-    - _MBWindDirOffset: 20
+    - _MBWindDirOffset: 93
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

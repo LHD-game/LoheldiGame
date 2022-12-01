@@ -132,10 +132,15 @@ public class Interaction : MonoBehaviour
     }
     public void NpcNameActive(GameObject other)
     {
-        int NpcNum = Npcs.IndexOf(NameNPC);
-        NpcNameTF = true;
-        NpcNames[NpcNum].SetActive(true);
-        StartCoroutine(NpcNameFollow(other, NpcNum));
+        if (NameNPC == "ThankApplesTree") ;
+        else
+        {
+            int NpcNum = Npcs.IndexOf(NameNPC);
+            NpcNameTF = true;
+
+            NpcNames[NpcNum].SetActive(true);
+            StartCoroutine(NpcNameFollow(other, NpcNum));
+        }
     }
     IEnumerator NpcNameFollow(GameObject Npc, int NpcNum)
     {

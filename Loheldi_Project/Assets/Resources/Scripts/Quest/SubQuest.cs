@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using BackEnd;
+using System;
 
 public class SubQuest : MonoBehaviour
 {
@@ -17,6 +19,38 @@ public class SubQuest : MonoBehaviour
     [SerializeField]
     private ParticleSystem HeartFx;
 
+
+    public void TimeCheck()
+    {
+        var bro = Backend.GameData.GetMyData("USER_SUBQUEST", new Where());
+
+        if (bro.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+            return;
+        }
+        int time = 0;
+        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            Param param = new Param();  // 새 객체 생성
+
+            param.Add("LastThankTreeTime", time);    //객체에 값 추가
+
+            Backend.GameData.Insert("USER_SUBQUEST", param);   //객체를 서버에 업로드
+        }
+        else
+        {
+            var json = bro.GetReturnValuetoJSON();
+            var json_data = json["rows"][0];
+            ParsingJSON pj = new ParsingJSON();
+            MySubQuest data = pj.ParseBackendData<MySubQuest>(json_data);
+            time = data.ThankTreeLastTime;
+        }
+        int nowTime = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
+        if (time == nowTime);
+        
+
+    }
     public void AppleTreeQ()
     {
         if(AppleTreeTxt.text.Length<10)

@@ -4,6 +4,8 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
+
 public class PMCap : MonoBehaviour
 {
     public Camera camera;       //보여지는 카메라.
@@ -18,8 +20,17 @@ public class PMCap : MonoBehaviour
     public Image MyInfoImg;
     public Material PlayerImage;
     public Texture PlayerImageTexture;
+
+    public GameObject PCamLight;
     void Start()
     {
+        int Time;
+        Time = int.Parse(DateTime.Now.ToString("HH"));
+        if (Time < 5 || Time > 17) ;
+        else
+        {
+            PCamLight.GetComponent<Light>().intensity = 0.5f;
+        }
         if (SceneManager.GetActiveScene().name == "Game_Tooth")
             ScreenshotImg = GameObject.Find("PlayerImage").GetComponent<Image>(); //이미지 띄울 곳;
         resWidth = 2400;
@@ -27,6 +38,7 @@ public class PMCap : MonoBehaviour
         path = Application.dataPath + "/ScreenShot/";
         Debug.Log(path);
         StartCoroutine(ClickScreenShot());
+
     }
 
     public IEnumerator ClickScreenShot()

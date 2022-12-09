@@ -26,7 +26,7 @@ public class PMCap : MonoBehaviour
     {
         int Time;
         Time = int.Parse(DateTime.Now.ToString("HH"));
-        if (Time < 5 || Time > 17) ;
+        if (Time < 4 || Time > 16) ;
         else
         {
             PCamLight.GetComponent<Light>().intensity = 0.5f;

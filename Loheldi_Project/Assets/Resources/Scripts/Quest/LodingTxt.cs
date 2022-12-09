@@ -1030,7 +1030,8 @@ public class LodingTxt : MonoBehaviour
             spriteR.sprite = CCImageList[l];
         }
 
-        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName); //로컬값 가져오긴
+        LoadTxt = data_Dialog[j]["dialog"].ToString().Replace("P_name",PlayerName);//로컬값 가져오긴
+        LoadTxt = LoadTxt.Replace("<n>", "\n");
         if (data_Dialog[j]["name"].ToString().Equals("주인공"))
             chatName.text = PlayerName;
         else

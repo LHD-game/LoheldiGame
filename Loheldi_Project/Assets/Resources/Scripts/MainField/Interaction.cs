@@ -42,6 +42,8 @@ public class Interaction : MonoBehaviour
     {
         if (other.gameObject.tag == "NPC")          //콜리더의 Tag가 NPC라면
         {
+            Door = false;
+            Farm = false;
             if (other.gameObject.name == "WallMirror")
             {
                 text.text = "거울";
@@ -57,7 +59,10 @@ public class Interaction : MonoBehaviour
                 text.text = "감사나무";
             }
             else
+            {
+                ThankTree = false;
                 text.text = "대화";
+            }
             NearNPC = true;
             NameNPC = other.gameObject.name.ToString();
             NpcNameActive(other.gameObject);
@@ -70,6 +75,7 @@ public class Interaction : MonoBehaviour
         }
         else if (other.gameObject.name == "InDoor")          //콜리더의 Tag가 InDoor라면
         {
+            ThankTree = false;
             Door = true;
             text.text = "들어가기";
             NameNPC = other.gameObject.name.ToString();
@@ -83,6 +89,8 @@ public class Interaction : MonoBehaviour
         }
         else if (other.gameObject.name == "Field")
         {
+            NearNPC = false;
+            ThankTree = false;
             Farm = true;
             text.text = "농장";
         }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using BackEnd;
 using System;
-
+using LitJson;
 public class SubQuest : MonoBehaviour
 {
     public GameObject Main_UI;
@@ -15,12 +15,13 @@ public class SubQuest : MonoBehaviour
     public GameObject ErrorWin;
     public Text ErrorWinTxt;
     public MainGameManager MainUI;
+    public UIButton UI;
 
     [SerializeField]
     private ParticleSystem HeartFx;
 
 
-    public void TimeCheck()
+    /*public void TimeCheck()
     {
         var bro = Backend.GameData.GetMyData("USER_SUBQUEST", new Where());
 
@@ -44,13 +45,11 @@ public class SubQuest : MonoBehaviour
             var json_data = json["rows"][0];
             ParsingJSON pj = new ParsingJSON();
             MySubQuest data = pj.ParseBackendData<MySubQuest>(json_data);
-            time = data.ThankTreeLastTime;
+            time = data.LastThankTreeTime;
         }
-        int nowTime = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
-        if (time == nowTime);
         
 
-    }
+    }*/
     public void AppleTreeQ()
     {
         if(AppleTreeTxt.text.Length<10)
@@ -71,6 +70,31 @@ public class SubQuest : MonoBehaviour
         MainUI.UpdateField();
         AppleTree.SetActive(false);
         Main_UI.SetActive(true);
+        string BasicCSV = ChartNum.BasicCustomItemChart;
+
+        BackendReturnObject BRO = Backend.Chart.GetChartContents(BasicCSV);
+
+        UI.time = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
+        if (BRO.IsSuccess())
+        {
+            Param param = new Param();  // 새 객체 생성
+
+            param.Add("LastThankTreeTime", UI.time);    //객체에 값 추가
+
+            var bro = Backend.GameData.Get("USER_SUBQUEST", new Where());
+            string rowIndate = bro.FlattenRows()[0]["inDate"].ToString();
+
+            //해당 row의 값을 update
+            var bro2 = Backend.GameData.UpdateV2("USER_SUBQUEST", rowIndate, Backend.UserInDate, param);
+            if (bro2.IsSuccess())
+            {
+                Debug.Log("SAVESUBQUEST 성공. PLAY_INFO가 업데이트 되었습니다.");
+            }
+            else
+            {
+                Debug.Log("SAVESUBQUEST 실패.");
+            }
+        }
         Invoke("HeartFX", 0.15f);
     }
 

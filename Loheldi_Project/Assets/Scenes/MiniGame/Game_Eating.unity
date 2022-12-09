@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.16791052, g: 0.21077314, b: 0.28996465, a: 1}
+  m_IndirectSpecularColor: {r: 0.44661236, g: 0.49645334, b: 0.574839, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -537,21 +537,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6653426005932863580, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
   m_PrefabInstance: {fileID: 1701297580831703791}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &392051585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392051584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eaf2dad212be4040a22c196575a2704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1701297580831703793}
-  GetButtonDown: 0
-  Playerrb: {fileID: 1701297580831703792}
 --- !u!1001 &427741690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3763,6 +3748,28 @@ MonoBehaviour:
   QaudioWind: {fileID: 0}
   QaudioWater: {fileID: 0}
   QaudioBird: {fileID: 0}
+  SoundHami: {fileID: 0}
+  WhatThat: {fileID: 0}
+  Hing: {fileID: 0}
+  BikeRing: {fileID: 0}
+  SkechBook: {fileID: 0}
+  Shararang: {fileID: 0}
+  ShuttleCock: {fileID: 0}
+  ValueCard: {fileID: 0}
+  Juice: {fileID: 0}
+  Drink: {fileID: 0}
+  TTiririring: {fileID: 0}
+  Stone: {fileID: 0}
+  Chikachika: {fileID: 0}
+  Chararang: {fileID: 0}
+  Paper: {fileID: 0}
+  heimang: {fileID: 0}
+  dung: {fileID: 0}
+  hami: {fileID: 0}
+  nari: {fileID: 0}
+  himchan: {fileID: 0}
+  yeomi: {fileID: 0}
+  yomi: {fileID: 0}
 --- !u!114 &1892346178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3791,6 +3798,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundEffectManager: {fileID: 1892346173}
+  JoyStick: {fileID: 0}
+  Inter: {fileID: 0}
+  Camera: {fileID: 0}
+  FarmCamera: {fileID: 0}
 --- !u!1001 &1895206301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4693,7 +4704,7 @@ PrefabInstance:
     - target: {fileID: 1701297580994259704, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: AnimationTrigger
       value: 
-      objectReference: {fileID: 392051584}
+      objectReference: {fileID: 1701297580831703794}
     - target: {fileID: 5075700830378204139, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4768,9 +4779,29 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1701297580831703793 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 1885645352583969342, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5910528443583625578, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
   m_PrefabInstance: {fileID: 1701297580831703791}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1701297580831703794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3417585456633781586, guid: 4e175717c02a8f74d91c180b85593321, type: 3}
+  m_PrefabInstance: {fileID: 1701297580831703791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1701297580831703795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701297580831703794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaf2dad212be4040a22c196575a2704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1701297580831703793}
+  GetButtonDown: 0
+  Playerrb: {fileID: 1701297580831703792}
 --- !u!1001 &2162969089402773274
 PrefabInstance:
   m_ObjectHideFlags: 0

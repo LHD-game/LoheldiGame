@@ -37,8 +37,7 @@ public class UIButton : MonoBehaviour
     public int time=0;
 
     [SerializeField]
-    private GameObject c_seed;          //¾¾¾Ñ Ä«Å×°í¸®
-
+    private Animator PA;
 
     void Start()
     {
@@ -61,18 +60,6 @@ public class UIButton : MonoBehaviour
             targetPositionNPC = new Vector3(Player.transform.position.x, NPC.position.y, Player.transform.position.z);
             if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine"))
             { stopCorou(); }
-            else if (Inter.Door)
-            {
-                if (Inter.NameNPC.Equals("InDoor"))
-                {
-                    SoundEffectManager.GetComponent<SoundEffect>().Sound("OpenDoor");
-                    SceneLoader.instance.GotoHouse();
-                }
-
-                else if (Inter.NameNPC.Equals("ExitDoor"))
-                    SceneLoader.instance.GotoMainField();
-                Inter.Door = false;
-            }
             else if (chat.DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei"))
             { stopCorou(); }
             else if (chat.DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho"))
@@ -91,6 +78,17 @@ public class UIButton : MonoBehaviour
             StartCoroutine(Playerturn(NPC));
             //Player.transform.LookAt(targetPositionPlayer);
             Invoke("ChatStart", 1f);
+        }
+        else if (Inter.Door)
+        {
+            if (Inter.NameNPC.Equals("InDoor"))
+            {
+                SoundEffectManager.GetComponent<SoundEffect>().Sound("OpenDoor");
+                SceneLoader.instance.GotoHouse();
+            }
+            else if (Inter.NameNPC.Equals("ExitDoor"))
+                SceneLoader.instance.GotoMainField();
+            Inter.Door = false;
         }
         else if (Inter.Farm)
         {
@@ -142,7 +140,6 @@ public class UIButton : MonoBehaviour
     public IEnumerator Playerturn(Transform NPC)
     {
         Invoke("stopCorou", 1f);
-        Animator PA = Player.transform.GetChild(0).GetChild(3).Find("Armature").gameObject.GetComponent<Animator>();
         PA.SetBool("ChatMove", true);
         yield return new WaitForEndOfFrame();
         Pstop = true;

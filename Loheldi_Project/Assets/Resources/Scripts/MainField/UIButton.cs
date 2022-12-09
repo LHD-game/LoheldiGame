@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using BackEnd;
 public class UIButton : MonoBehaviour
 {
     public static bool OnLand = false;    //Player가 바닥에 있는지 확인
@@ -34,6 +34,8 @@ public class UIButton : MonoBehaviour
 
     public static bool is_pop_garden = false;
 
+    public int time=0;
+
     [SerializeField]
     private GameObject c_seed;          //씨앗 카테고리
 
@@ -57,33 +59,38 @@ public class UIButton : MonoBehaviour
             Vector3 targetPositionNPC;
             NPC = GameObject.Find(Inter.NameNPC).transform;
             targetPositionNPC = new Vector3(Player.transform.position.x, NPC.position.y, Player.transform.position.z);
-            if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine")|| Inter.NameNPC.Equals("ThankApplesTree"))
+            if (Inter.NameNPC.Equals("WallMirror") || Inter.NameNPC.Equals("GachaMachine"))
             { stopCorou(); }
+            else if (Inter.Door)
+            {
+                if (Inter.NameNPC.Equals("InDoor"))
+                {
+                    SoundEffectManager.GetComponent<SoundEffect>().Sound("OpenDoor");
+                    SceneLoader.instance.GotoHouse();
+                }
+
+                else if (Inter.NameNPC.Equals("ExitDoor"))
+                    SceneLoader.instance.GotoMainField();
+                Inter.Door = false;
+            }
             else if (chat.DontDestroy.QuestIndex.Equals("8_1") && Inter.NameNPC.Equals("Mei"))
             { stopCorou(); }
             else if (chat.DontDestroy.QuestIndex.Equals("13_1") && Inter.NameNPC.Equals("Suho"))
             { stopCorou(); }
+            else if (Inter.NameNPC.Equals("ThankApplesTree"))
+            {
+                TimeCheck();
+            }
             else
             {
                 StartCoroutine(NPCturn(NPC, targetPositionNPC));
                 //NPC.transform.LookAt(targetPositionNPC);
             }
+            
             chatBlock.SetActive(true);
             StartCoroutine(Playerturn(NPC));
             //Player.transform.LookAt(targetPositionPlayer);
             Invoke("ChatStart", 1f);
-        }
-        else if (Inter.Door)
-        {
-            if (Inter.NameNPC.Equals("InDoor"))
-            {
-                SoundEffectManager.GetComponent<SoundEffect>().Sound("OpenDoor");
-                SceneLoader.instance.GotoHouse();
-            }
-
-            else if (Inter.NameNPC.Equals("ExitDoor"))
-                SceneLoader.instance.GotoMainField();
-            Inter.Door = false;
         }
         else if (Inter.Farm)
         {
@@ -179,6 +186,33 @@ public class UIButton : MonoBehaviour
                 yield return null;
             }
             NA.SetBool("NpcMove", false);
+        }
+    }
+
+    public void TimeCheck()
+    {
+        var bro = Backend.GameData.GetMyData("USER_SUBQUEST", new Where());
+
+        if (bro.IsSuccess() == false)
+        {
+            Debug.Log("요청 실패");
+            return;
+        }
+        if (bro.GetReturnValuetoJSON()["rows"].Count <= 0)
+        {
+            Param param = new Param();  // 새 객체 생성
+
+            param.Add("LastThankTreeTime", time);    //객체에 값 추가
+
+            Backend.GameData.Insert("USER_SUBQUEST", param);   //객체를 서버에 업로드
+        }
+        else
+        {
+            var json = bro.GetReturnValuetoJSON();
+            var json_data = json["rows"][0];
+            ParsingJSON pj = new ParsingJSON();
+            MySubQuest data = pj.ParseBackendData<MySubQuest>(json_data);
+            time = data.LastThankTreeTime;
         }
     }
 }

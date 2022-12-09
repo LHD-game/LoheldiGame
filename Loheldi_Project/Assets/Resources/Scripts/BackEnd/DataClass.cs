@@ -43,7 +43,7 @@ public class PlayInfo
 }
 public class MySubQuest
 {
-    public int ThankTreeLastTime;
+    public int LastThankTreeTime;
 }
 
 public class MyItem

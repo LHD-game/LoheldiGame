@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System;
 
 public class FlieChoice : MonoBehaviour
 {
     public LodingTxt chat;
     public GameObject EPin;
+
+    [SerializeField]
+    private UIButton UI;
 
     public Interaction Inter;
     private void Awake()
@@ -136,8 +140,17 @@ public class FlieChoice : MonoBehaviour
                 chat.NPCButton += 2;
                 break;
             case "ThankApplesTree":
-                chat.Num = "21";
-                chat.NPCButton += 2;
+                int nowTime = Int32.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                if (UI.time == nowTime)
+                { 
+                    chat.Num = "22";
+                    chat.NPCButton += 1;
+                }
+                else
+                {
+                    chat.Num = "21";
+                    chat.NPCButton += 2;
+                }
                 break;
         }
         // CCImageList = Resources.LoadAll<Sprite>("Sprites/CCImage/"+chat.Inter.NameNPC); //이미지 경로

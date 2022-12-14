@@ -140,12 +140,11 @@ public class Interaction : MonoBehaviour
     }
     public void NpcNameActive(GameObject other)
     {
-        if (NameNPC == "ThankApplesTree") ;
+        if (NameNPC == "ThankApplesTree" || NameNPC == "parents(Clone)") ;
         else
         {
             int NpcNum = Npcs.IndexOf(NameNPC);
             NpcNameTF = true;
-
             NpcNames[NpcNum].SetActive(true);
             StartCoroutine(NpcNameFollow(other, NpcNum));
         }

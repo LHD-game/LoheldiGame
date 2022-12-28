@@ -106,7 +106,7 @@ public class MailSelect : MonoBehaviour //우편 프리펩에 붙는 스크립트.
             }
             else
             {
-                if (QDD.SDA)
+                if (QDD.SDA && (q_front !=0&& q_back !=2))
                 {
                     content_detail_txt.text = "토요일은 퀘스트 진행이 불가합니다";
                 }

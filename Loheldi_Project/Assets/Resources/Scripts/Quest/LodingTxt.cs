@@ -166,8 +166,7 @@ public class LodingTxt : MonoBehaviour
             string[] qq = PlayerPrefs.GetString("WeeklyQuestPreg").Split('_');
 
             string[] q_qid = DontDestroy.QuestIndex.Split('_');
-            if (Int32.Parse(QQ[0]) > 3)
-                Ride.SetActive(true);
+            if (Int32.Parse(QQ[0]) > 3);
             else
                 Ride.SetActive(false);
             if (Int32.Parse(QQ[0]) > 12)

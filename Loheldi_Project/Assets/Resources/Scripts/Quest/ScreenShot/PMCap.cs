@@ -29,6 +29,7 @@ public class PMCap : MonoBehaviour
         if (Time < 4 || Time > 16) ;
         else
         {
+            if (SceneManager.GetActiveScene().name == "Game_Tooth") ;
             PCamLight.GetComponent<Light>().intensity = 0.5f;
         }
         if (SceneManager.GetActiveScene().name == "Game_Tooth")

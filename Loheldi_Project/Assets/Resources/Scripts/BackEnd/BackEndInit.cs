@@ -31,16 +31,25 @@ public class BackEndInit : MonoBehaviour
         //Example(비동기 및 SendQueue에서도 동일한 로직으로 사용할 수 있습니다.)
         var bro = Backend.Utils.GetLatestVersion();
         string version = bro.GetReturnValuetoJSON()["version"].ToString();
+        string appversion = Application.version.ToString();
         //최신 버전일 경우
+        Debug.Log("서버버전: "+ version+"\n"+"앱 버전: "+ appversion);
+        Debug.Log("서버버전int: "+ float.Parse(version));
+        Debug.Log("앱버전int: "+ float.Parse(appversion));
         if (version == Application.version)
         {
             Debug.Log("최신버전입니다.");
             return;
         }
-        else if (Int32.Parse(version) < Int32.Parse(Application.version))
+
+        else if (float.Parse(version) < float.Parse(appversion))
         {
             Debug.Log("스토어 업데이트");
             return;
+        }
+        else
+        {
+            Debug.Log("업데이트 보냄");
         }
 
         //현재 앱의 버전과 버전관리에서 설정한 버전이 맞지 않을 경우

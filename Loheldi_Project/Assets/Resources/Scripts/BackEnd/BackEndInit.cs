@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
-
+using System;
 public class BackEndInit : MonoBehaviour
 {
 
@@ -37,6 +37,11 @@ public class BackEndInit : MonoBehaviour
             Debug.Log("최신버전입니다.");
             return;
         }
+        else if (Int32.Parse(version) < Int32.Parse(Application.version))
+        {
+            Debug.Log("스토어 업데이트");
+            return;
+        }
 
         //현재 앱의 버전과 버전관리에서 설정한 버전이 맞지 않을 경우
         string forceUpdate = bro.GetReturnValuetoJSON()["type"].ToString();
@@ -48,8 +53,6 @@ public class BackEndInit : MonoBehaviour
         else if (forceUpdate == "2") //업데이트 방식: 강제
         {
             //Debug.Log("업데이트가 필요합니다. 스토어에서 업데이트를 진행해주시기 바랍니다");
-
-
         }
 
         //우선은 모두 같은 팝업을 띄우도록 제작함.

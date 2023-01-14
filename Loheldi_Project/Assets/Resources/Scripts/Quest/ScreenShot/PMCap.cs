@@ -30,7 +30,8 @@ public class PMCap : MonoBehaviour
         else
         {
             if (SceneManager.GetActiveScene().name == "Game_Tooth") ;
-            PCamLight.GetComponent<Light>().intensity = 0.5f;
+            else
+                PCamLight.GetComponent<Light>().intensity = 0.5f;
         }
         if (SceneManager.GetActiveScene().name == "Game_Tooth")
             ScreenshotImg = GameObject.Find("PlayerImage").GetComponent<Image>(); //이미지 띄울 곳;
